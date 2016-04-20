@@ -1,0 +1,58 @@
+<apex:page docType="html-5.0" applyHtmlTag="false" applyBodyTag="false"
+           showHeader="false" sidebar="false" standardStylesheets="false"
+           title="Form_DS0" action="{!embedDocuSignOpen}" controller="SendToDocuSignController" >
+<!-- <apex:page standardcontroller="Transaction__c" showHeader="false" sidebar="false" 
+    action="{!embedDocuSignOpen}" extensions="SendToDocuSignController">
+ -->    
+   
+<html>
+    
+<head>
+
+
+<c:head />
+</head>
+
+<body>
+<c:bodyScript />
+
+<div id="body" class="entire-wrapper">
+    <c:header />
+
+    <main id="page-container" class="search" role="main">
+        <c:phaseBanner />
+        <div class="grid-row">
+            <br/>
+            <div class="column-two-thirds">
+                <div id="doculoader"></div>
+             <!-- <apex:iframe id="DocuSign" src="{!tokenURL}" /> -->
+                <apex:form >
+               <script>
+             var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
+               
+               if(screen !=null && screen.length > 1){window.open('{!tokenURL}','_self'); console.log('mobile');} 
+               else { 
+           
+            document.getElementById("doculoader").innerHTML='<object height="1450" width="1200" id="999" data="{!tokenURL}" ></object>';
+            console.log('not mobile');
+            }
+            
+            //window.open('{!tokenURL}','_self')
+
+               </script>
+               </apex:form>
+    </div>
+            <div class="column-third features_column">
+            </div>
+        </div>
+    </main>
+</div>
+
+<c:footer />
+
+</body>
+
+
+</html>
+
+</apex:page>

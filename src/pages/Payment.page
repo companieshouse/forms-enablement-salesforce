@@ -1,0 +1,56 @@
+<apex:page controller="PaymentController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<!--  Author: eliot.stock@methodsdigitial.co.uk -->
+<!--[if lt IE 9]>
+<html class="lte-ie8" lang="en">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html lang="en" class="js svg cookies">
+<!--<![endif]-->
+
+<head>
+<c:head />
+</head>
+
+<body>
+<c:bodyScript />
+    
+<div class="entire-wrapper">
+    
+	<c:header />
+
+    <main id="page-container" class="search" role="main">
+        <c:phaseBanner />
+        <h1 class="heading-xlarge">
+            Make a payment
+        </h1>
+        <div class="grid-row">
+            <br/>
+            <!-- TODO: How do we do a full width column? -->
+            <div id="payment" class="column-two-thirds"></div>
+                <apex:form >
+                   <script>
+                 var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
+                   
+                   if(screen !=null && screen.length > 1){window.open('{!externalURL}','_self'); console.log('mobile');} 
+                   else { 
+               
+                document.getElementById("payment").innerHTML='<object  height="510" width="950" id="999" data="{!externalURL}" ></object>';
+                console.log('not mobile');
+                }
+                
+
+                   </script>
+               </apex:form>
+
+            <div class="column-third">
+            </div>
+        </div>
+    </main>
+    
+</div>
+
+<c:footer />
+</body>
+</html>
+</apex:page>

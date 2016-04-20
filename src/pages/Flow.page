@@ -1,0 +1,43 @@
+<apex:page controller="FlowController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<!--  Author: eliot.stock@methodsdigitial.co.uk -->
+<!--[if lt IE 9]>
+<html class="lte-ie8" lang="en">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="js svg cookies">
+<!--<![endif]-->
+
+<head>
+<c:head />
+</head>
+    
+<body>
+<c:bodyScript />
+
+<div class="entire-wrapper">
+
+	<c:header />
+
+    <main id="page-container" class="search" role="main">
+        <c:phaseBanner />
+        <div class="grid-row">
+            <br/>
+            <div class="column-two-thirds">
+                <apex:pageMessages escape="false"/>
+                <div class="FlowDiv">
+                    <flow:interview name="Dissolution" buttonLocation="bottom" finishLocation="{!EndPage}" />
+                    <apex:param name="flowOutput" assignTo="{!output}" value="{!$CurrentPage.parameters.Output}" />
+                </div>
+            </div>
+            <div class="column-third features_column">
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<c:footer />
+
+</body>
+</html>
+</apex:page>
