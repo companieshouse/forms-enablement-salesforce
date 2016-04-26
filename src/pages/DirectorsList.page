@@ -1,0 +1,35 @@
+<!-- 
+Name: DirectorsList.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Todo : required functionality.
+
+1. Get Company Number from Transaction Submission
+2. Make callout to the CHS API for Directors list (using an Apex Continuation to avoid synchronous limits)
+3. Render Directors list for confirmation.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page title="TODO" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false">
+
+  <apex:composition template="TransactionPageTemplate">
+  
+      <apex:define name="content">
+      
+      </apex:define>
+  
+  </apex:composition>
+
+</apex:page>

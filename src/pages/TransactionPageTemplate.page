@@ -1,0 +1,59 @@
+<!-- 
+Name: TransactionPageTemplate.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+All form pages must use this composition via this template.
+
+Todo - 
+further refinement of markup.
+Move stylesheets/image assets etc. to Static Resource (named as per the current version of the GDS front end toolkit).
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+2.0  SylvainP      2016-04-20  Extension to GDS/Gov style
+-->
+<apex:page standardStyleSheets="false">
+
+<html>
+    
+<head>
+
+
+<c:head />
+</head>
+
+<body>
+<c:bodyScript />
+
+<div id="body" class="entire-wrapper">
+    <c:header />
+
+    <main id="page-container" class="search" role="main">
+        <c:phaseBanner />
+        <div class="grid-row">
+            <br/>
+            <div class="column-two-thirds">
+                <apex:insert name="content"/>
+            </div>
+            <div class="column-third features_column">
+            </div>
+        </div>
+    </main>
+</div>
+
+<c:footer />
+
+</body>
+
+
+</html>
+
+</apex:page>

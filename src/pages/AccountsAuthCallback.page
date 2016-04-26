@@ -1,0 +1,23 @@
+<!-- 
+Name: AccountsAuthCallback.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Endpoint registered for callback by the Accounts OAuth Service.
+Handles User and Company authentication scenarios.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page showHeader="false"
+    sidebar="false"
+    standardStylesheets="false"
+    controller="AccountsAuthCallbackController"
+    action="{!initialiseAction}"></apex:page>

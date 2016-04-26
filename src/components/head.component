@@ -2,7 +2,9 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     
     <title>Companies House</title>
-    
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+        integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+        crossorigin="anonymous"></script>
     <script type="text/javascript">
         (function(){if(navigator.userAgent.match(/IEMobile\/10\.0/)){var d=document,c="appendChild",a=d.createElement("style");a[c](d.createTextNode("@-ms-viewport{width:auto!important}"));d.getElementsByTagName("head")[0][c](a);}})();
     </script>
@@ -25,6 +27,7 @@
     <![endif]-->
 
     <style type="text/css">
+    
             @media (min-width: 641px){
         .heading-xlarge {
             font-size: 48px !important;
@@ -167,7 +170,42 @@
 	<meta property="og:image" content="///assets/images/opengraph-image.png"/>
 	<meta name="chromesniffer" id="chromesniffer_meta" content="{&quot;jQuery&quot;:&quot;1.11.3&quot;}"/>
 
-	<script src="https://code.jquery.com/jquery-2.2.1.min.js"
-		integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-		crossorigin="anonymous"></script>
+     <script src="https://govuk-elements.herokuapp.com/public/javascripts/govuk-template.js?0.17.0" type="text/javascript"></script>
+
+
+  <!-- govuk_frontend_toolkit js -->
+  <script src="https://govuk-elements.herokuapp.com/public/javascripts/vendor/polyfills/bind.js"></script>
+  <script src="https://govuk-elements.herokuapp.com/public/javascripts/govuk/selection-buttons.js"></script>
+
+  <!-- govuk_elements js -->
+  <script src="https://govuk-elements.herokuapp.com/public/javascripts/vendor/details.polyfill.js"></script>
+  <script src="https://govuk-elements.herokuapp.com/public/javascripts/application.js"></script>
+  <script>
+
+    // Toggle grid background colours
+
+    $(document).ready(function () {
+
+      var $html = $('html');
+      var $toggle = $('.js-highlight-grid')
+
+      $toggle.on( "click", function(e) {
+
+        e.preventDefault();
+
+        $html.toggleClass('example-highlight-grid');
+
+        if ($('.column-highlight').length>0) {
+          // Don't add more than once
+        } else {
+          $('.grid-row div').wrapInner('<div class="column-highlight"></div>');
+        }
+
+      });
+
+    });
+
+    </script>
+
+	
 </apex:component>

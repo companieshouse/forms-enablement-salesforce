@@ -1,0 +1,50 @@
+<!-- 
+Name: Summary.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Example summary page.
+
+Should show submission number option to preview form etc.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Summary_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="SummaryController"
+    action="{!initialiseAction}">
+        
+	<apex:composition template="TransactionPageTemplate">
+  
+		<apex:define name="content">
+			
+			<apex:form >
+				<h1 class="heading-xlarge">
+        			<span class="heading-secondary">{!$Label.UI_Text_Digital_Forms}</span>
+        			{!pageTitle}
+      			</h1>			
+			
+				<p>{!pageText}</p>			
+			
+				<br /><br />
+				
+				&nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />			
+				&nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />			
+				
+			</apex:form>
+				
+      	</apex:define>
+
+	</apex:composition>
+
+</apex:page>

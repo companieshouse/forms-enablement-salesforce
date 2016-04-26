@@ -1,0 +1,50 @@
+<!-- 
+Name: StartFramework.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Renders the display text defined for the transaction type
+defined by the QueryString parameter t. 
+
+e.g. /?t=DS01.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Start}" 
+    showHeader="false"
+    sidebar="false"
+    standardStylesheets="false"
+    controller="StartFrameworkController"
+    action="{!initialiseAction}">
+    
+    
+    <apex:composition template="TransactionPageTemplate">
+  
+        <apex:define name="content">
+            
+            <apex:form >
+            
+                <h1 class="heading-xlarge">
+                    <span class="heading-secondary">{!$Label.UI_Text_Digital_Forms}</span>
+                    {!pageTitle}
+                </h1>           
+            
+                <p>{!pageText}</p>
+
+                &nbsp;<apex:commandButton styleClass="button button-start" action="{!startAction}" value="{!$Label.UI_Text_Start}" />                            
+
+            </apex:form>
+                
+        </apex:define>
+  
+    </apex:composition>
+
+</apex:page>
