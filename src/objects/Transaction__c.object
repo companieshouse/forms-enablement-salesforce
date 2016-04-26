@@ -361,8 +361,9 @@
         <label>All</label>
     </listViews>
     <nameField>
+        <displayFormat>SUB{0000}</displayFormat>
         <label>Transaction Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Transactions</pluralLabel>
     <searchLayouts/>
@@ -376,6 +377,17 @@
         <masterLabel>Create PDF</masterLabel>
         <openType>sidebar</openType>
         <page>PDFGeneration</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_pdf</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send pdf</masterLabel>
+        <openType>sidebar</openType>
+        <page>PaymentPage</page>
         <protected>false</protected>
     </webLinks>
     <webLinks>

@@ -9,6 +9,7 @@
  * Author: antonio.bravo@golligo.co.uk
  * ab
  **/
+
 @isTest(SeeAllData=false)
 public class OfficersQueryAction_Test {
 

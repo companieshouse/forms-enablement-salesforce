@@ -1,7 +1,7 @@
 @isTest
 global class MockWebServiceResponseGenerator implements WebServiceMock {
   
-  private static String TOKEN_URL = SendToDocuSignControllerTest.TOKEN_URL;
+  private static String TOKEN_URL = SendToDocuSignTest.TOKEN_URL;
 
   // Implement this interface method  
   global void doInvoke(

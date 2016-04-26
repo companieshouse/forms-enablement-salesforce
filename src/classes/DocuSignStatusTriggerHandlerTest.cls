@@ -10,14 +10,10 @@
  **/
 @isTest
 public class DocuSignStatusTriggerHandlerTest {
-    static String DRAFTSTATUS = DocuSignStatusTriggerHandler.DRAFTSTATUS;
-    static String SIGNEDSTATUS = DocuSignStatusTriggerHandler.SIGNEDSTATUS;
-    static String COMPLETEDSTATUS = DocuSignStatusTriggerHandler.COMPLETEDSTATUS;
 
 
 	static Transaction__c createTransaction(){
 		Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
-		tx.Status__c = DRAFTSTATUS;
 		insert tx;
 		
 		return tx;
@@ -41,7 +37,7 @@ public class DocuSignStatusTriggerHandlerTest {
     	dsfs__DocuSign_Status__c dss = createDocSignStatus(tx);
     	
     	test.startTest();
-        dss.dsfs__Envelope_Status__c = COMPLETEDSTATUS;
+        dss.dsfs__Envelope_Status__c = AppConstants.DOCUSIGN_STATUS_COMPLETED;
     	update dss;
     	test.stopTest();
 
@@ -49,7 +45,7 @@ public class DocuSignStatusTriggerHandlerTest {
         Transaction__c txAfter = [Select Id, Status__c from Transaction__c where Id = :tx.Id];
     	
         System.assertEquals(dss.Transaction__c, txAfter.Id);
-    	System.assertEquals(SIGNEDSTATUS, txAfter.Status__c);
+    	System.assertEquals(AppConstants.REQUEST_STATUS_SIGNED, txAfter.Status__c);
     }
 
     @IsTest(SeeAllData=false)
@@ -63,7 +59,7 @@ public class DocuSignStatusTriggerHandlerTest {
         dsfs__DocuSign_Status__c dss = createDocSignStatus(tx);
         
         test.startTest();
-        dss.dsfs__Envelope_Status__c = DRAFTSTATUS;
+        dss.dsfs__Envelope_Status__c = AppConstants.REQUEST_STATUS_DRAFT;
         update dss;
         test.stopTest();
 
@@ -71,6 +67,6 @@ public class DocuSignStatusTriggerHandlerTest {
         Transaction__c txAfter = [Select Id, Status__c from Transaction__c where Id = :tx.Id];
         
         System.assertEquals(dss.Transaction__c, txAfter.Id);
-        System.assertnotEquals(SIGNEDSTATUS, txAfter.Status__c);
+        System.assertnotEquals(AppConstants.REQUEST_STATUS_SIGNED, txAfter.Status__c);
     }
 }

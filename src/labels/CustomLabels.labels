@@ -81,6 +81,14 @@
         <value>Digital Forms</value>
     </labels>
     <labels>
+        <fullName>UI_Text_DocuSign</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text DocuSign</shortDescription>
+        <value>Signing Page</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Dynamic_Test</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>

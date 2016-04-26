@@ -1,12 +1,15 @@
-<apex:page docType="html-5.0" applyHtmlTag="false" applyBodyTag="false"
-           showHeader="false" sidebar="false" standardStylesheets="false"
-           title="Form_DS0" action="{!embedDocuSignOpen}" controller="SendToDocuSignController" >
-<!-- <apex:page standardcontroller="Transaction__c" showHeader="false" sidebar="false" 
-    action="{!embedDocuSignOpen}" extensions="SendToDocuSignController">
- -->    
-   
-<html>
+<apex:page title="{!$Label.UI_Text_DocuSign}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="EmbedDocuSignController"
+    action="{!actionFunction}"
+    docType="html-5.0" >
     
+     <!--  <script>
+          window.open('{!tokenURL}','_self');
+       </script> -->
+<html>    
 <head>
 
 
