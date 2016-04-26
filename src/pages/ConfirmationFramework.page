@@ -1,0 +1,61 @@
+<!-- 
+Name: Confirmation.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Confirmation page - displays Confirmation message 
+and captures boolean state (Yes/No) via Checkbox input.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Confirmation_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="ConfirmationFrameworkController"
+    action="{!initialiseAction}">
+        
+	<apex:composition template="TransactionPageTemplate">
+  
+		<apex:define name="content">
+			
+			<apex:form >
+			
+				<br /><br />
+				
+				<h1 class="heading-xlarge">
+        			<span class="heading-secondary">{!$Label.UI_Text_Digital_Forms}</span>
+        			{!confirmationTitle}
+      			</h1>
+								
+				<p>{!confirmationText}</p>
+				
+			  	<fieldset>
+				
+			      <label class="block-label" for="confirmation-checkbox">
+			      	<span class="form-hint">User assistance text - hints etc.</span>
+			      	<apex:inputCheckBox value="{!confirmationFlag}" id="confirmation-checkbox" />
+			        <!--  <input id="waste-type-1" name="waste-types" type="checkbox" value="waste-animal">-->
+			        {!$Label.UI_Text_Please_Confirm}
+			      </label>
+			      				
+				</fieldset>
+				
+				<br /><br />
+				&nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />			
+				&nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />			
+			</apex:form>
+				
+      	</apex:define>
+  
+	</apex:composition>
+
+</apex:page>

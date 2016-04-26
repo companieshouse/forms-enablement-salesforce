@@ -443,7 +443,7 @@
         <searchResultsAdditionalFields>CASES.CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ReadWriteTransfer</sharingModel>
     <webLinks>
         <fullName>dsfs__Send_with_DocuSign</fullName>
         <availability>online</availability>
