@@ -18,9 +18,12 @@ Ver. Author            Date        Detail
 public with sharing class EmbedDocuSignController extends TransactionStepControllerBase {
     
     // Public properties.
+    public Boolean hasPageErrors { get; set; }
+    public String externalURL {get; set;}
+
     public String pageTitle { get; private set; }
     public String pageText  { get; private set; }  
-    public String tokenURL  { get; private set; }
+    
     public String temp  { get; private set; } //debug
 
     private Transaction__c tx;   
@@ -54,6 +57,24 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     public PageReference actionFunction(){
         initialiseAction();
 
+        
+        // Transaction context.
+        if (!ApexPages.currentPage().getParameters().containsKey('c') || 
+            String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
+
+        String paramInput = ApexPages.currentPage().getParameters().get('c');
+
+        if(paramInput.contains(' '))
+        {
+            paramInput = paramInput.replace(' ', '+');
+
+            ApexPages.currentPage().getParameters().put('c',paramInput);
+
+            ApexPages.currentPage().setRedirect(true);
+
+            return ApexPages.currentPage();
+        }
+
         tx = [Select Id, Name, CompanyName__c, Status__c,
                     (Select Id, Name, Email__c from Officers__r),
                     (Select Id, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c from DocuSign_Status__r)
@@ -81,9 +102,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         } else {
         
             SendToDocuSign sendToDS = new SendToDocuSign();
-            tokenURL = sendToDS.embedDocuSignOpen(tx);
-            //PageReference pr = new PageReference('/EmbedDocuSign');
-            //pr.getParameters().putAll(friendlyUrl.getParameters());
+            externalURL = sendToDS.embedDocuSignOpen(tx);
             return null;
 
         }        
