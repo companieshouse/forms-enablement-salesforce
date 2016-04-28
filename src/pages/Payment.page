@@ -25,13 +25,8 @@
         <h1 class="heading-xlarge">
               {!$Label.UI_Text_Payment_page_Title}
         </h1> 
-      
-      
-        <br/>
-        <div class="grid-row">
-            <br/>
+    
             <!-- TODO: How do we do a full width column? -->
-            <div id="payment" class="column-two-thirds"></div>
                    <script>
                 //  var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
                    
@@ -41,14 +36,31 @@
                 // document.getElementById("payment").innerHTML='<object  height="510" width="950" id="999" data="{!externalURL}" ></object>';
                 // console.log('not mobile');
 
-                //}
-                            window.open('{!externalURL}','_self');
+                //}         
+                            if(!{!hasPaid})
+                              window.open('{!externalURL}','_self');
 
 
                    </script>
-            <div class="column-third">
+
+            <apex:outputPanel rendered="{!hasPaid}">
+            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+        
+              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  The payment already processed!
+              </h1>
+        
+              <p>
+                  The payment has been succesful.
+              </p>
+        
+              
+        
             </div>
-        </div>
+        </apex:outputPanel>
+
+            &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />          
+            &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
      </apex:form>
                 
         </apex:define>

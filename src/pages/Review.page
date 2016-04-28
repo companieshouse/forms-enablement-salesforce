@@ -1,73 +1,47 @@
-<apex:page docType="html-5.0" applyHtmlTag="false" applyBodyTag="false"
-           showHeader="false" sidebar="false" standardStylesheets="false"
-           title="Form_DS0" controller="ReviewController" >
-           <!-- standardController="Transaction__c" extensions="ReviewController, PaymentController"> -->
+<apex:page title="{!$Label.UI_Text_Review}" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
 <script>
 if (window.frameElement){parent.location.href = window.location; console.log("found iframe and reloading")} else {console.log('not finding iframe probably on mobile');}
 </script>
+<apex:composition template="TransactionPageTemplate">
+  
+        <apex:define name="content">
+        <apex:form >
+            
+              <apex:outputPanel rendered="{!hasPageErrors}">
+            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+        
+              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  An error has occurred.
+              </h1>
+        
+              <p>
+                  Optional description of the errors and how to correct them
+              </p>
+        
+              <ul class="error-summary-list">
+                  <li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
+              </ul>
+        
+            </div>
+        </apex:outputPanel>
 
-<html>
-    
-<head>
-
-
-<c:head />
-</head>
-
-<body>
-<c:bodyScript />
-
-<div id="body" class="entire-wrapper">
-    <c:header />
-
-    <main id="page-container" class="search" role="main">
-        <c:phaseBanner />
         <h1 class="heading-xlarge">
-            Review strike off request
-        </h1>
-        <p class="lede">
-    Your signed request is shown below and should be checked by you to ensure all information is correct. <span class="bold-medium">Your request has not been submitted</span> until you have reviewed this document and the associated fee has been paid on the following page.
-        </p>
-        <div class="grid-row">
-            <br/>
-            <div class="column-two-thirds">
-                <apex:pageMessages escape="false"/>
-                <apex:outputPanel id="pageR" layout="block" >
-                    <apex:pageblock id="sectionR" mode="maindetail">
-                        
-                        <div class="form-group">
-                            <object data="/servlet/servlet.FileDownload?file={!attachmentId}" type="application/pdf" width="800" height="1000">
-                            </object>
-                            <!--<apex:inputField value="{!Transaction__c.CompanyNumber__c}" label="Next" styleClass="form-control"/>-->
-                        </div>
-                            <!-- <p>Download the Document:
-                                <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a>    PDF, {!size}B
-                            </p> -->
-                        
-                        <input onclick="clickSubmit();" class="button" type="submit" value="Confirm the request"></input>
-                            <p>
-                                <a href="#" onclick="clickStartOver();">Start Over</a>
-                            </p>
-<!--                         <input onclick="clickStartOver();" class="button" type="submit" value="Start Over"></input>
- -->                        <!--<apex:commandButton styleClass="button" value="Next" action="{!save}"/>-->
-                        </apex:pageblock>
-                </apex:outputPanel>
-            <apex:form >
-            <apex:actionFunction action="{!submit}" name="clickSubmit" reRender="section1"/>
-            <apex:actionFunction action="{!startOver}" name="clickStartOver" reRender="section1"/>
-            </apex:form>    
-            </div>
-            <div class="column-third features_column">
-            </div>
-        </div>
-    </main>
-</div>
-
-<c:footer />
-
-</body>
-
-
-</html>
+              {!$Label.UI_Text_Review_page_Title}
+        </h1> 
+      
+      
+        
+                   <p class="lede">{!displayText1}
+                    <span class="bold-medium">{!displayText2}</span> {!displayText3}
+                   </p>
+            <br /><br />
+            &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />          
+            &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+            
+     </apex:form>
+                
+        </apex:define>
+  
+    </apex:composition>
 
 </apex:page>

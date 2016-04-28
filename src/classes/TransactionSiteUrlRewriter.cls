@@ -20,13 +20,14 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
   	
 	public String START = '/start';
 	public String COMPANY = '/company';
-	public String CONFIRMATION = '/confirmation';
+	public String CONFIRMATION = '/Confirmation';
 	public String DYNAMIC_TEST = '/dynamic';
 	public String DIRECTORS_LIST = '/directors';
 	public String SUMMARY = '/final-confirmation';
 	public String CALLBACK = '/authcallback';
 	public String ERROR = '/error';
-	public String SYLVAINTEST = '/Payment';
+	public String PAYMENT = '/Payment';
+	public String REVIEW = '/review';
 	
 	public String VF_PAGE_START = '/StartFramework';
 	public String VF_PAGE_COMPANY = '/Company';
@@ -36,7 +37,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String VF_PAGE_SUMMARY = '/Summary';
 	public String VF_PAGE_CALLBACK = '/AccountsAuthCallback';
 	public String VF_PAGE_ERROR = '/transactionexception';	
-	public String VF_PAGE_SYLVAINTEST = '/Payment';
+	public String VF_PAGE_PAYMENT = '/Payment';
+	public String VF_PAGE_REVIEW = '/Review';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -56,7 +58,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	    else if(url.startsWith(SUMMARY)){ pr = new PageReference(VF_PAGE_SUMMARY); }
 	    else if(url.startsWith(CALLBACK)){ pr = new PageReference(VF_PAGE_CALLBACK); }
 	    else if(url.startsWith(ERROR)){ pr = new PageReference(VF_PAGE_ERROR); }
-	   	else if(url.startsWith(SYLVAINTEST)){ pr = new PageReference(VF_PAGE_SYLVAINTEST); }
+	   	else if(url.startsWith(PAYMENT)){ pr = new PageReference(VF_PAGE_PAYMENT); }
+	   	else if(url.startsWith(REVIEW)){ pr = new PageReference(VF_PAGE_REVIEW); }
+
 	   		
     
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
@@ -85,8 +89,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 			else if(url.startsWith(VF_PAGE_SUMMARY)){ friendlyPageReference = new PageReference(SUMMARY); }
 			else if(url.startsWith(VF_PAGE_CALLBACK)){ friendlyPageReference = new PageReference(CALLBACK); }
 	    	else if(url.startsWith(VF_PAGE_ERROR)){ friendlyPageReference = new PageReference(ERROR); }
-	    	else if(url.startsWith(VF_PAGE_SYLVAINTEST)){ friendlyPageReference = new PageReference(SYLVAINTEST); }
-	    	
+	    	else if(url.startsWith(VF_PAGE_PAYMENT)){ friendlyPageReference = new PageReference(PAYMENT); }
+	        else if(url.startsWith(VF_PAGE_REVIEW)){ friendlyPageReference = new PageReference(REVIEW); }
+
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	
 	    	friendlyUrls.add(friendlyPageReference);

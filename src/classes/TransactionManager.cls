@@ -63,7 +63,7 @@ public with sharing class TransactionManager {
 			td = recs[0];
 			
 			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
-																		Header_Text_1__c, Display_Text_1__c, Is_Active__c, Document_Template_Name__c, SObject_Type__c 
+																		Header_Text_1__c, Display_Text_1__c,Display_Text_2__c,Display_Text_3__c, Is_Active__c, Document_Template_Name__c, SObject_Type__c 
 																	from Transaction_Type_Step__mdt 
 																	where Transaction_Type__c=:td.DeveloperName and Is_Active__c=true order by Step_Number__c asc]);
 									

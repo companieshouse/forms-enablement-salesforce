@@ -190,6 +190,7 @@ public class SmartPayUrl {
 
         url += '&';
         url += 'merchantSig=' + sigEncoded;
+
         return url;
     }
     
@@ -205,7 +206,6 @@ public class SmartPayUrl {
         pageUrl = pageUrl.substringAfter('/apex');
 
         String url = 'https://' + hostname + pageUrl;
-        
         return url;
     }
     
