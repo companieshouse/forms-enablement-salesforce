@@ -15,6 +15,19 @@
     <apex:define name="content">
       <apex:form >
 
+        <apex:outputPanel rendered="{!showButtons}">
+            <h1 class="heading-xlarge">
+              {!$Label.UI_Text_DocuSign}
+            </h1> 
+            <h3 >
+              Document has been signed sucessul. 
+            </h3> 
+            &nbsp;
+            <apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />      
+            &nbsp;
+            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />  
+        </apex:outputPanel>
+
         <apex:outputPanel rendered="{!hasPageErrors}">
           <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
 
@@ -55,6 +68,7 @@
             }
 
           </script>
+          
         
       </apex:form>
 

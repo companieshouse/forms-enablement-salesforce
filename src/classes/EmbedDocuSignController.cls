@@ -20,6 +20,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     // Public properties.
     public Boolean hasPageErrors { get; set; }
     public String externalURL {get; set;}
+    public Boolean showButtons {get; set;}
 
     public String pageTitle { get; private set; }
     public String pageText  { get; private set; }  
@@ -57,7 +58,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     public PageReference actionFunction(){
         initialiseAction();
 
-        
+
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || 
             String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -90,13 +91,14 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         if (ApexPages.currentPage().getParameters().containsKey('event') && 
                     !String.isBlank(ApexPages.currentPage().getParameters().get('event'))
                     && ApexPages.currentPage().getParameters().get('event')=='OnSigningComplete') {
-            
+            tx.Status__c = 'Signed';
+            update tx;
             return nextAction();
 
         // Transaction is signed
         } else if(tx.Status__c == 'Signed') {
-
-            return nextAction();
+            showButtons=true;
+            return null;
         
         // Else create a new evelope
         } else {
