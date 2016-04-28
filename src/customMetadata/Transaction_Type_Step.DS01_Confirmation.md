@@ -14,6 +14,10 @@
         <value xsi:type="xsd:string">The Registrar will strike the company off the register unless there is reasonable cause not to do so. Guidance is available on grounds for objection. If in doubt, seek professional advice.</value>
     </values>
     <values>
+        <field>Display_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Document_Template_Name__c</field>
         <value xsi:nil="true"/>
     </values>

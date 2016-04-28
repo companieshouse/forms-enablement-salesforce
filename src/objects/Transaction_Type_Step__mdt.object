@@ -26,6 +26,13 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Display_Text_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Display Text 3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Document_Template_Name__c</fullName>
         <externalId>false</externalId>
         <label>Document Template Name</label>

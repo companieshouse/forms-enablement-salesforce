@@ -161,6 +161,22 @@
         <value>Previous</value>
     </labels>
     <labels>
+        <fullName>UI_Text_Review</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI_Text_Review</shortDescription>
+        <value>Review Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Review_page_Title</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI_Text_Review_page_Title</shortDescription>
+        <value>Review strike off request</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Start</fullName>
         <categories>Ui Text</categories>
         <language>en_US</language>
