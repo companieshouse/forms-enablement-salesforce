@@ -23,7 +23,13 @@ Ver. Author        Date        Detail
     standardStylesheets="false"
     controller="SummaryController"
     action="{!initialiseAction}">
-        
+    
+    <!-- ab function to close iframes. TO DO: move to Transaction Page Template -->
+    <script type="text/javascript">
+		if (window.frameElement){parent.location.href = window.location; console.log("found iframe and reloading")} 
+		else {console.log('not finding iframe probably on mobile');}
+	</script>
+		    
 	<apex:composition template="TransactionPageTemplate">
   
 		<apex:define name="content">

@@ -77,7 +77,7 @@ public with sharing class AccountsAuthCallbackController {
         // 5. Update the company authorisation record, possibly in a @Future, only after we're done calling out.
         // 6. Drop a cookie (company_auth) - value equal to the encrypted value of the Company Auth record Id.
         // 7. Create a Submission record for the user/company/transaction type if required
-        // 8. Drop a cookie (submission) - value equal to the encrypted value of the Transaction_Submission__c record Id.
+        // 8. Drop a cookie (submission) - value equal to the encrypted value of the Transaction__c record Id.
 		// 9. Redirect to the first step for the transaction type as held on the company auth record (using encrypted 'c' querystring parameter).
 
         return null;

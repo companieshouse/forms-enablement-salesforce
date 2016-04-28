@@ -15,6 +15,7 @@ History
 ------- 
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-02  Initial development.
+1.1  Antonio Bravo 2016-04-26  Update Constants
 */
 public with sharing class SubmissionManager {
     
@@ -64,7 +65,8 @@ public with sharing class SubmissionManager {
                                                     where Presenter__c=:presenterId 
                                                             and Company__c=:companyId 
                                                             and Transaction_Type__c=:transactionType
-                                                            and Status__c=:AppConstants.SUBMISSION_STATUS_PENDING]; // should factor in status.
+                                                            and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
+                                                                or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
         if (recs.size()==1) return recs[0].Id;                  
         
         submission = new Transaction__c(Presenter__c=presenterId, Amount__c = amount, Company__c=companyId, Transaction_Type__c=transactionType);

@@ -24,8 +24,7 @@ public with sharing class DynamicField {
 	
 	public String fieldValue { 
 		get {
-			System.debug(LoggingLevel.ERROR,'SYLVAIN');
-			System.debug(LoggingLevel.ERROR,yearValue);
+			
 			if (displayType==Schema.Displaytype.Date){
 				return Date.newInstance(yearValue,monthValue,dayValue).format();
 			} else return fieldValue;
