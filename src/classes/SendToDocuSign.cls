@@ -66,7 +66,7 @@
         DocuSignAPI.Document document = new DocuSignAPI.Document();
         document.ID = 1;
         document.pdfBytes = EncodingUtil.base64Encode(pdfBlob);
-        document.Name = 'Transaction';
+        document.Name = tx.Form_Name__c;
         document.FileExtension = 'pdf';
         envelope.Documents = new DocuSignAPI.ArrayOfDocument();
         envelope.Documents.Document = new DocuSignAPI.Document[1];
