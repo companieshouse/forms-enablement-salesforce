@@ -26,7 +26,7 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id, Name,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments) from Transaction__c where Id=:submissionId];
+        List<Transaction__c> recs = [select Id, Name,CompanyNumber__c,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments) from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
         System.debug(LoggingLevel.ERROR, submission);   
@@ -61,7 +61,7 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String companyId, Decimal amount){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,CompanyName__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments) from Transaction__c 
+        List<Transaction__c> recs = [select Id,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments) from Transaction__c 
                                                     where Presenter__c=:presenterId 
                                                             and Company__c=:companyId 
                                                             and Transaction_Type__c=:transactionType

@@ -116,11 +116,10 @@ public class PaymentController extends TransactionStepControllerBase {
                 //pageReference.setRedirect(true);
                 //return pageReference;
                 initialiseAction();
+                submissionMgr.submission.Status__c = 'Paid';
                 PageReference nextPage = nextAction();
                 nextPage.setRedirect(true);
                 //We need to update the status to awaiting submission when the payment is success
-                submissionMgr.submission.Status__c = 'Paid'; 
-                persistStep();
                 return nextPage;
             }
             else if(authResult == AUTH_RESULT_REFUSED) {

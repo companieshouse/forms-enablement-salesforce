@@ -1,35 +1,65 @@
 <!-- 
-Name: DirectorsList.page
-Copyright © 2016  Methods Digital
-======================================================
-======================================================
-Purpose:
--------
-
-Todo : required functionality.
-
-1. Get Company Number from Transaction Submission
-2. Make callout to the CHS API for Directors list (using an Apex Continuation to avoid synchronous limits)
-3. Render Directors list for confirmation.
-
-======================================================
-======================================================
-History
-------- 
-Ver. Author        Date        Detail
-1.0  Mark Cane&    2016-04-11  Initial development.
--->
-<apex:page title="TODO" 
-    showHeader="false" 
-    sidebar="false" 
-    standardStylesheets="false">
-
-  <apex:composition template="TransactionPageTemplate">
-  
+   Name: DirectorsList.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+   Todo : required functionality.
+   
+   1. Get Company Number from Transaction Submission
+   2. Make callout to the CHS API for Directors list (using an Apex Continuation to avoid synchronous limits)
+   3. Render Directors list for confirmation.
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Mark Cane&    2016-04-11  Initial development.
+   -->
+<apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+   <apex:composition template="TransactionPageTemplate">
       <apex:define name="content">
-      
-      </apex:define>
-  
-  </apex:composition>
+      <apex:form >
+         <div class="form-group">
+         <h1 class="heading-xlarge">Request approval from company directors</h1>
+         <p class="lede">
+            {!companyName} has the following director listed on the public register.
+         </p>
+         <ul class="list list-bullet">
+            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+               <li>{!director}</li>
+            </apex:repeat>
+         </ul>
 
+
+        <p class="heading-medium">
+          Are you the sole director listed above?
+        </p>
+
+        <fieldset class="inline">
+          <legend class="visuallyhidden">Are you the sole director listed above?</legend>
+          <div class="form-group">
+            <label class="block-label" for="radio-indent-1">
+              <input id="radio-inline-1" type="radio" name="presenter" value="Yes" aria-expanded="false">
+              Yes
+              </input>
+            </label>
+            <label class="block-label selected" data-target="example-ni-no" for="radio-indent-2">
+              <input id="radio-inline-2" type="radio" name="presenter" value="No" aria-controls="example-ni-no" aria-expanded="true">
+              No
+              </input>
+            </label>
+            
+          </div>
+        </fieldset>
+         </div>
+         <br /><br />
+         &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />          
+         &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+      </apex:form>	
+      </apex:define>
+   </apex:composition>
 </apex:page>

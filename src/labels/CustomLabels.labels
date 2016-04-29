@@ -81,6 +81,14 @@
         <value>Digital Forms</value>
     </labels>
     <labels>
+        <fullName>UI_Text_Directors</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Directors List</shortDescription>
+        <value>Directors</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_DocuSign</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
