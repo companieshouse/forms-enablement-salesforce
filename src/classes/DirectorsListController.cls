@@ -18,6 +18,7 @@ Ver. Author        Date        Detail
 public with sharing class DirectorsListController extends TransactionStepControllerBase {
 
     public Boolean hasPageErrors { get; set; }
+    public Boolean hasAlreadyLoadedOfficers {get; set;}
 
 	public String companyName {get; set;}
 	public String companyNumber {get; set;}
@@ -26,16 +27,29 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
 	public DirectorsListController(){
     	super();
+        hasAlreadyLoadedOfficers = false;
         if (isPageInitialised) initialiseStep();
 
     }
     
     public void initialiseStep() {
+        
     	//Set up the company name 
     	companyName = submissionMgr.submission.CompanyName__c;
     	companyNumber = submissionMgr.submission.CompanyNumber__c;
     	listOfDirectors = new List<String>();
-
+        if(isPageAlreadyValidStep)
+        {
+            hasAlreadyLoadedOfficers = true;
+        }
+        //Get the list officer already created
+        if(submissionMgr.submission.Officers__r != null)
+        {
+            if(submissionMgr.submission.Officers__r.size() == 0)
+            {
+                hasAlreadyLoadedOfficers = false;
+            }
+        }
     	return;
        
     }
@@ -67,24 +81,41 @@ public with sharing class DirectorsListController extends TransactionStepControl
     		listOfDirectors.add('Sylvain Picory');
     		return;
     	}
-
-    	//Make the call to the list of directors
-        List<CompaniesHouse.OfficerDetails> directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
-
-        List<Officer__c> officerList = new List<Officer__c>();
-
-        //We want only director that haven't resign and or will resign in futur 
-        for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
-            if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
+        if(hasAlreadyLoadedOfficers)
+        {
+            //Get the list officer already created
+            if(submissionMgr.submission.Officers__r != null)
             {
-                listOfDirectors.add(officer.name);
-                //Temporary save an address email against each officer and save officer to the transaction
-                officerList.add(new Officer__c(Name= officer.name, Email__c = 'sylvain.picory@methodsdigital.co.uk' , Transaction__c =submissionMgr.submission.Id ));
-
+                if(submissionMgr.submission.Officers__r.size() > 0)
+                {
+                    for(Officer__c off :submissionMgr.submission.Officers__r)
+                    {
+                        listOfDirectors.add(off.Name);
+                    }
+                }
             }
         }
+        else
+        {
+            //Make the call to the list of directors
+            List<CompaniesHouse.OfficerDetails> directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
 
-        //Insert the officer
-        insert officerList;
+            List<Officer__c> officerList = new List<Officer__c>();
+
+            //We want only director that haven't resign and or will resign in futur 
+            for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
+                if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
+                {
+                    listOfDirectors.add(officer.name);
+                    //Temporary save an address email against each officer and save officer to the transaction
+                    officerList.add(new Officer__c(Name= officer.name, Email__c = 'sylvain.picory@methodsdigital.co.uk' , Transaction__c =submissionMgr.submission.Id ));
+
+                }
+            }
+
+            //Insert the officer
+            insert officerList;
+        }
+    	
     }
 }

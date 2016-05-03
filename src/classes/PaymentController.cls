@@ -52,7 +52,9 @@ public class PaymentController extends TransactionStepControllerBase {
     public void initialiseStep() {
         hasPaid = false;
 
+        //if(isPageAlreadyValidStep)
         if(submissionMgr.submission.Status__c == 'Paid' || submissionMgr.submission.Status__c == 'Awaiting Submission' )
+
         {
             hasPaid = true;
             return;

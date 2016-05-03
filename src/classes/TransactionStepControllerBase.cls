@@ -24,6 +24,7 @@ public virtual class TransactionStepControllerBase {
 	// Public class members.        
 	public Boolean isPageAuthenticated=false;
 	public Boolean isPageInitialised=false;
+	public Boolean isPageAlreadyValidStep=false;
     
     public SecurityManager securityMgr;
     public SubmissionManager submissionMgr;    
@@ -87,6 +88,8 @@ public virtual class TransactionStepControllerBase {
 			isLastPage = transactionMgr.isLastPage();
 
 			isPageInitialised=loadStepSubmissionState();
+
+			
     	
     	} catch (Exception e){ return; }
     	return;

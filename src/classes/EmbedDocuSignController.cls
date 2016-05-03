@@ -76,7 +76,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             return ApexPages.currentPage();
         }
 
-        tx = [Select Id, Name, CompanyName__c, Status__c,
+        tx = [Select Id, Name, CompanyName__c, Status__c,Form_Name__c,
                     (Select Id, Name, Email__c from Officers__r),
                     (Select Id, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c from DocuSign_Status__r)
                 from Transaction__c where id = :submissionId];
@@ -96,7 +96,9 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             return nextAction();
 
         // Transaction is signed
+        //} else if(isPageAlreadyValidStep) {
         } else if(tx.Status__c == 'Signed') {
+
             showButtons=true;
             return null;
         

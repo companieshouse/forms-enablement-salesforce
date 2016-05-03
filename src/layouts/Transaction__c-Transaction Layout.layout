@@ -26,6 +26,10 @@
                 <behavior>Edit</behavior>
                 <field>CompanyNumber__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Historical_Valid_Step_Ids__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

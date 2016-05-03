@@ -1729,6 +1729,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.Historical_Valid_Step_Ids__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Transaction__c.Number_1__c</field>
         <readable>false</readable>

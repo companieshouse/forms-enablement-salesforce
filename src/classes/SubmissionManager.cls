@@ -26,7 +26,7 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id, Name,CompanyNumber__c,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments) from Transaction__c where Id=:submissionId];
+        List<Transaction__c> recs = [select Id, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c From Officers__r) from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
         System.debug(LoggingLevel.ERROR, submission);   
@@ -61,7 +61,7 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String companyId, Decimal amount){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments) from Transaction__c 
+        List<Transaction__c> recs = [select Id,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c From Officers__r) from Transaction__c 
                                                     where Presenter__c=:presenterId 
                                                             and Company__c=:companyId 
                                                             and Transaction_Type__c=:transactionType
@@ -105,7 +105,7 @@ public with sharing class SubmissionManager {
                 
         // todo - validation, error handling etc.
         
-        Map<Id, Transaction__c> idToSubmission = new Map<Id, Transaction__c>( [select Id, Valid_Step_Ids__c from Transaction__c where Id=:submissionId ] );
+        Map<Id, Transaction__c> idToSubmission = new Map<Id, Transaction__c>( [select Id, Valid_Step_Ids__c,Historical_Valid_Step_Ids__c from Transaction__c where Id=:submissionId ] );
         
         Transaction__c s = idToSubmission.values()[0];
         
@@ -129,7 +129,7 @@ public with sharing class SubmissionManager {
             }           
             newValidStepIdPath = newValidStepIdPath.removeStart(AppConstants.ID_DELIM_CHAR)+(nextStepId!=null ? AppConstants.ID_DELIM_CHAR+nextStepId : '');        
         }
-                        
+
         s.Valid_Step_Ids__c=newValidStepIdPath;     
         update s;
     }
