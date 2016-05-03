@@ -56,8 +56,8 @@ public with sharing class TransactionManager {
     
     // Instance methods.
     private void retrieveTransactionType(String transactionType){
-    	
-		List<Transaction_Type__mdt> recs = [select Id, DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
+
+		List<Transaction_Type__mdt> recs = [select Id,Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
 		if (recs.size()==1){
 			
 			td = recs[0];

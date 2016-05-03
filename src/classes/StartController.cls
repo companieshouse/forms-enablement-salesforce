@@ -1,123 +1,140 @@
-/**
- * May well end up being a short term thing.
- * 
- * Author: eliot.stock@methods.co.uk
- */
-public class StartController {
+/*
+Name:  StartController.cls
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
 
-    public String userAuthUrl {
+Controller class for the Visualforce Page: Start
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-02  Initial development.
+*/
+public with sharing class StartController {
+
+    // Public properties.
+    public String pageTitle {
         get;
         private set;
     }
-    public String companyAuthUrl {
+    public String pageText {
         get;
         private set;
     }
-    public String expectedRedirectUrl {
+    public String pageText2 {
         get;
         private set;
     }
-    public String sessionCounter {
+    public String pageText3 {
         get;
         private set;
     }
-    public Boolean userAuthenticated {
+    public String pageText4 {
+        get;
+        private set;
+    }
+    public String pageText5 {
+        get;
+        private set;
+    }
+    public String pageText6 {
+        get;
+        private set;
+    }
+    public String abovebuttontext {
+        get;
+        private set;
+    }
+    public String belowbuttontitle {
+        get;
+        private set;
+    }
+    public String belowbuttontext {
+        get;
+        private set;
+    }
+    public String belowbuttontext2 {
+        get;
+        private set;
+    }
+    public String belowbuttontext3 {
         get;
         private set;
     }
 
-    public class StartException extends Exception {
 
-    }
+    // Private class members.
+    Boolean isPageInitialised = false;
+    SecurityManager securityMgr;
+    TransactionManager transactionMgr;
+    TrackUserClass userTracker;
 
-    private AccountApiClient accountApiClient;
-    private String nonce;
+    String transactionType;
 
+    // Constructors.
     public StartController() {
-        accountApiClient = new AccountApiClient();
+        initialise();
     }
 
-    public PageReference init() {
-        // Experimentation with cookie handling on Sites.
-        /*
-        Cookie sessionCookie = ApexPages.currentPage().getCookies().get('session');
-
-        if (sessionCookie == null) {
-            sessionCookie = new Cookie('session', // name
-                    '1',    // value
-                    null,   // path
-                    -1,     // maxAge
-                    false); // isSecure
-        }
-        else {
-            // If this isn't the first time the user is accessing the page
-            // create a new cookie, incrementing the value of the original count by 1
-            Integer count = Integer.valueOf(sessionCookie.getValue());
-            sessionCookie = new Cookie('session', String.valueOf(count+1),null,-1,false);
-            sessionCookie = new Cookie('session', // name
-                    String.valueOf(count + 1),    // value
-                    null,                         // path
-                    -1,                           // maxAge
-                    false);                       // isSecure
-        }
+    private void initialise() {
         
-        List<Cookie> cookies = new List<Cookie>();
-        cookies.add(sessionCookie);
-        ApexPages.currentPage().setCookies(cookies);
-        
-        sessionCounter = sessionCookie.getValue();
-        */
+            securityMgr = new SecurityManager();
 
-        nonce = accountApiClient.getNonce();
-        System.debug('start controller nonce = ' + nonce);
-        userAuthUrl = accountApiClient.getUserAuthUrl(nonce);
-        companyAuthUrl = accountApiClient.getCompanyAuthUrl(nonce, '08906750');
+            try {
 
-        // LB    hardocoded value - perhaps we can pull from api custom settings for the ?code, etc. with Account_Api_Settings__c customsettings = getSettings();
-        // LB then set customsettings.Client_Id as value as these may be subject to changes in the future
-        expectedRedirectUrl = accountApiClient.getRedirectUrl() + '?code=dNVI1yHNhIx32YfRx4EMzeru7kT9NFTnQ54MABxZ&state=' + nonce;
+                if (!ApexPages.currentPage().getParameters().containsKey('t') ||
+                    String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
+                    !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
 
-        //  LB expectedRedirectUrl = accountApiClient.getRedirectUrl() + '?code=' + customsettings.Client_Id +'&state=' + nonce;
+                transactionType = ApexPages.currentPage().getParameters().get('t');
+                transactionMgr = new TransactionManager(transactionType);
 
-        // Before we can redirect to the auth URL, we need to store a nonce. On the
-        // redirect back to us, we're going to check this exists.
-        // TODO: Coming this far and not completing auth will leave an access token
-        // record with just the nonce on it in the database. Clean up old access
-        // tokens in a scheduled job.
-        // Old approach:
+                // this is not efficient unless start pages follow this format consistently
+                pageTitle = transactionMgr.td.Landing_Page_Title__c;
+                pageText = transactionMgr.td.Landing_Page_Text__c;
+                pageText2 = transactionMgr.td.Landing_Page_Text2__c;
+                pageText3 = transactionMgr.td.Landing_Page_Text3__c;
+                pageText4 = transactionMgr.td.Landing_Page_Text4__c;
+                pageText5 = transactionMgr.td.Landing_Page_Text5__c;
+                pageText6 = transactionMgr.td.Landing_Page_Text6__c;
+                abovebuttontext = transactionMgr.td.above_button_text__c;
+                belowbuttontitle = transactionMgr.td.Below_Button_Title__c;
+                belowbuttontext = transactionMgr.td.Below_Button_Text__c;
+                belowbuttontext2 = transactionMgr.td.Below_Button_Text2__c;
+                belowbuttontext3 = transactionMgr.td.Below_Button_Text3__c;
 
-        Access_Token__c accessToken = new Access_Token__c();
-        //  Nonce__c = nonce
-       // System.debug('start controller nonce is ' + nonce);
-
-        accessToken.Nonce__c = nonce;
-
-        try {
-            insert accessToken;
-        } catch (QueryException e) {
-
-            throw new StartException('DML exception at ' + e);
-
+                isPageInitialised = true;
+            } catch (Exception e) {
+                return;
+            }
+            return;
         }
+        // End Constructors.    
 
-
-        System.debug('token is ' + accessToken);
-        // New approach:
-        Session__c s = Session.get(true);
-        s.Nonce__c = nonce;
-        try {
-
-            update s;
-        } catch (QueryException e) {
-
-            throw new StartException('DML exception at ' + e);
-
-        }
-
-
-        userAuthenticated = Session.isUserAuthenticated();
-
+    // Instance methods.
+    public PageReference initialiseAction() {
+        if (!isPageInitialised) return Page.TransactionException;
         return null;
     }
 
+    public PageReference startAction() {
+
+            userTracker = new TrackUserClass();
+
+            // todo - the code below forces reauthentication.
+            // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
+
+            userTracker.getUserDocument();
+
+           
+            // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
+            return securityMgr.getUserAuthRedirect();
+            
+        }
+        // End Instance methods.
 }

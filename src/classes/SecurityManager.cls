@@ -20,6 +20,7 @@ public with sharing class SecurityManager {
     // Public properties.
     
     // Private class members.
+    private String nonce;
     final static String DEFAULT_PRIVATE_KEY_TEXT = '12345678901234567890123456789012'; 
     
     // Constructors.
@@ -32,17 +33,24 @@ public with sharing class SecurityManager {
     	return false;
     } 
     
-    public PageReference getUserAuthRedirect(){
-		AccountsAPIHelper h = new AccountsAPIHelper();
-		
-		return new PageReference(h.getUserAuthUrl());
-    }
+    public PageReference getUserAuthRedirect() {
+       AccountsAPIHelper h = new AccountsAPIHelper();
+
+       nonce = getNonce();
+
+       return new PageReference(h.getUserAuthUrl(nonce));
+   }
     
-    public PageReference getCompanyAuthRedirect(String companyNumber, String transactionType){    	
-		AccountsAPIHelper h = new AccountsAPIHelper();
-		
-		return new PageReference(h.getCompanyAuthUrl(companyNumber,transactionType));
-    }
+    public PageReference getCompanyAuthRedirect(String companyNumber, String transactionType) {
+       AccountsAPIHelper h = new AccountsAPIHelper();
+
+       // String tempcompanyinformation =  TrackUserClass.getSearchedCompany(companyNumber);
+       // always create/update a cookie when new company search is called
+
+       nonce = getNonce();
+
+       return new PageReference(h.getCompanyAuthUrl(companyNumber, transactionType, nonce));
+   }
 
     private String getNonce() {
     	

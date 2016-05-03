@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
+        <fullName>Below_Button_Text2__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Text2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Below_Button_Text3__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Text3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Below_Button_Text__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Text</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Below_Button_Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Title</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Family__c</fullName>
         <externalId>false</externalId>
         <label>Family</label>
@@ -25,6 +53,41 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Landing_Page_Text2__c</fullName>
+        <externalId>false</externalId>
+        <label>Landing Page Text2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Landing_Page_Text3__c</fullName>
+        <externalId>false</externalId>
+        <label>Landing Page Text3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Landing_Page_Text4__c</fullName>
+        <externalId>false</externalId>
+        <label>Landing Page Text4</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Landing_Page_Text5__c</fullName>
+        <externalId>false</externalId>
+        <label>Landing Page Text5</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Landing_Page_Text6__c</fullName>
+        <externalId>false</externalId>
+        <label>Landing Page Text6</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Landing_Page_Text__c</fullName>
         <externalId>false</externalId>
         <label>Landing Page Text</label>
@@ -46,6 +109,13 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>above_button_text__c</fullName>
+        <externalId>false</externalId>
+        <label>above button text</label>
+        <required>false</required>
+        <type>TextArea</type>
     </fields>
     <label>Transaction Type</label>
     <pluralLabel>Transaction Type</pluralLabel>

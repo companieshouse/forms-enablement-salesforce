@@ -1,45 +1,60 @@
-<apex:page controller="StartController" action="{!init}" showHeader="false" id="SiteTemplate" docType="html-5.0" applyHtmlTag="false" applyBodyTag="false" title="START" standardStylesheets="false">
-    <html>
+<!-- 
+Name: Start.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
 
-    <head>
-        <c:head />
-    </head>
+Renders the display text defined for the transaction type
+defined by the QueryString parameter t. 
 
-    <body>
-        <c:bodyScript />
-        <div id="body" class="entire-wrapper">
-            <c:header />
-            <main id="page-container" class="search" role="main">
-                <c:phaseBanner />
+e.g. /?t=DS01.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Start}" showHeader="false" sidebar="false" standardStylesheets="false" controller="StartController" action="{!initialiseAction}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <style>
+            /*                  ul {
+                    margin-left: .9em;
+                    padding-left: 0;
+                    */
+            }
+                </style>
                 <div class="grid-row">
-                    <br/>
                     <div class="column-two-thirds">
-                        <apex:pageMessages escape="false" />
-                        <apex:outputPanel rendered="true" id="page0" layout="block">
-                            <apex:pageblock id="section1" mode="maindetail">
-                                <div class="form-group">
-                                    <!--
- <label class="form-label" for="USER">Start User AUTH </label> -->
-                                    <a href="{!userAuthUrl}" class="button">Start User Authentication <b>></b> </a>
-                                                                        <p>Company Auth: {!userAuthUrl}</p>
+                        <h1 class="heading-xlarge">
+                    {!pageTitle}
+                </h1>
+                        <p class="lede">
+                            {!pageText}
+                        </p>
+                        <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
 
-                                    <!--
- <label class="form-label" for="Company">Start Company AUTH (Methods)</label> -->
-                                    <a href="{!companyAuthUrl}" class="button">Start Company Authentication <b>></b> </a>
-                                    <p>Company Auth: {!companyAuthUrl}</p>
-                                </div>
-                                <p>Session counter: {!sessionCounter}</p>
-                                <p>User authenticated: {!userAuthenticated}</p>
-                            </apex:pageblock>
-                        </apex:outputPanel>
-                    </div>
-                    <div class="column-third features_column">
+                         <apex:outputText escape="false" value="{!pageText3}"></apex:outputText>
+
+                         <apex:outputText escape="false" value="{!pageText4}"></apex:outputText>
+
+                        <p>{!abovebuttontext}</p>
+                        &nbsp;
+                        <p>
+                            <apex:commandButton styleClass="button button-start" action="{!startAction}" value="{!$Label.UI_Text_Start}" />
+                        </p>
+                        <apex:outputText escape="false" value="{!belowbuttontext}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!belowbuttontext2}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!belowbuttontext3}"></apex:outputText>
+                        <h1 class="heading-large">{!belowbuttontitle}</h1>
                     </div>
                 </div>
-            </main>
-        </div>
-        <c:footer />
-    </body>
-
-    </html>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>
