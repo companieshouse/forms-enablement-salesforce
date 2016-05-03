@@ -28,6 +28,7 @@ public with sharing class CompanyController {
     SubmissionManager submissionMgr;    
 	TransactionManager transactionMgr;
 	String transactionType;
+    TrackUserClass trackuser;
 	    
     // Constructors.
     public CompanyController(){
@@ -71,15 +72,17 @@ public with sharing class CompanyController {
 		
     	hasPageErrors=!validateStep();
     	if (hasPageErrors) return null;
-
+        trackuser = new TrackUserClass();
 		// todo - the code below forces reauthentication.
     	// todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).
 		// todo - reinstate company authentication
-    	//return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
     	
-		// TEMP CODE FROM HERE
-    	Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );       	 	    	 	
-    	return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
+    	
+		//Merged From Leo 03 May 2016
+        trackuser.getSearchedCompany(companyNumber);
+        return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
+    	//Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );       	 	    	 	
+    	//return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }
     
     public PageReference previousAction(){    	
