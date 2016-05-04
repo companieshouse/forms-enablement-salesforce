@@ -1,0 +1,47 @@
+<apex:page title="{!$Label.UI_Text_Review}" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<script>
+if (window.frameElement){parent.location.href = window.location; console.log("found iframe and reloading")} else {console.log('not finding iframe probably on mobile');}
+</script>
+<apex:composition template="TransactionPageTemplate">
+  
+        <apex:define name="content">
+        <apex:form >
+            
+              <apex:outputPanel rendered="{!hasPageErrors}">
+            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+        
+              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  An error has occurred.
+              </h1>
+        
+              <p>
+                  Optional description of the errors and how to correct them
+              </p>
+        
+              <ul class="error-summary-list">
+                  <li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
+              </ul>
+        
+            </div>
+        </apex:outputPanel>
+
+        <h1 class="heading-xlarge">
+              {!$Label.UI_Text_Review_page_Title}
+        </h1> 
+      
+      
+        
+                   <p class="lede">{!displayText1}
+                    <span class="bold-medium">{!displayText2}</span> {!displayText3}
+                   </p>
+            <br /><br />
+            &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />          
+            &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+            
+     </apex:form>
+                
+        </apex:define>
+  
+    </apex:composition>
+
+</apex:page>

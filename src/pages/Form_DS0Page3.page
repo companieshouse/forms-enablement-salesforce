@@ -1,0 +1,59 @@
+<apex:page docType="html-5.0" applyHtmlTag="false" applyBodyTag="false"
+           showHeader="false" sidebar="false" standardStylesheets="false"
+           title="Form_DS0" action="{!extractURLParameters}" controller="Form_DS0Controller">
+
+
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+
+
+<html>
+    
+<head>
+
+
+
+<c:head />
+</head>
+
+<body>
+<c:bodyScript />
+
+<div id="body" class="entire-wrapper">
+	<c:header />
+
+    <main id="page-container" class="search" role="main">
+        <c:phaseBanner />
+        <div class="grid-row">
+            <br/>
+            <div class="column-two-thirds">
+            	<apex:outputPanel rendered="{!AND(currentPage == 3,directorsValidationBox == 1)}" id="page3" layout="block" >
+    				<apex:pageblock id="section4" mode="maindetail">
+						<p>
+					    Incorrect directors.
+					    </p>
+					    <div class="panel panel-border-wide">
+							<p>
+							Please contact Companies House.
+							</p>
+						</div>
+                        <input onclick="clickPrevious();" class="button" type="submit" value="Previous"></input>
+    				</apex:pageblock>
+				</apex:outputPanel>
+            </div>
+            <apex:form >
+			<apex:actionFunction action="{!previousPage}" name="clickPrevious" />
+			</apex:form>
+            <div class="column-third features_column">
+            </div>
+        </div>
+    </main>
+</div>
+
+<c:footer />
+
+</body>
+
+
+</html>
+
+</apex:page>

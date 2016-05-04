@@ -1,0 +1,23 @@
+{
+    "username": "lbitoy@companieshouse.com.lbdev2", 
+    "environment": "sandbox", 
+    "project_name": "LiveDEVBOX-Merged", 
+    "workspace": "/Users/leobitoy/Dev/mavensmate/workspace", 
+    "org_url": "", 
+    "namespace": "", 
+    "id": "POGLI0QK5KFMX4W2V8U3NBISXAK0197E", 
+    "metadata_container": "1dc4E0000000xtXQAQ", 
+    "subscription": [
+        "ApexClass", 
+        "ApexComponent", 
+        "ApexPage", 
+        "ApexTrigger", 
+        "CustomLabels", 
+        "CustomMetadata", 
+        "CustomObject", 
+        "Profile", 
+        "RemoteSiteSetting", 
+        "Settings", 
+        "StaticResource"
+    ]
+}

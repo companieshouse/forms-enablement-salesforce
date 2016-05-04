@@ -1,0 +1,412 @@
+{
+    "properties": [
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "nonce", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 20, 
+                "line": 30
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "authCode", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 20, 
+                "line": 31
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "accessTokenApiResponse", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 37, 
+                "line": 33
+            }, 
+            "type": "Token"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "userProfileApiResponse", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 43, 
+                "line": 34
+            }, 
+            "type": "UserProfile"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "userAuth", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 35, 
+                "line": 36
+            }, 
+            "type": "User_Authorisation__c"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "companyAuth", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 38, 
+                "line": 37
+            }, 
+            "type": "Company_Authorisation__c"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "transactionType", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 12, 
+                "line": 39
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "presenterID", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 8, 
+                "line": 40
+            }, 
+            "type": "Id"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "companyNumberId", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 13, 
+                "line": 41
+            }, 
+            "type": "SObject"
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "constants", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 25, 
+                "line": 43
+            }, 
+            "type": "AppConstants"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "h", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 31, 
+                "line": 45
+            }, 
+            "type": "AccountsAPIHelper"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "u", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 28, 
+                "line": 50
+            }, 
+            "type": "TrackUserClass"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "submissionMgr", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 31, 
+                "line": 55
+            }, 
+            "type": "SubmissionManager"
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "transactionMgr", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 32, 
+                "line": 60
+            }, 
+            "type": "TransactionManager"
+        }, 
+        {
+            "modifiers": [
+                "private", 
+                "static", 
+                "final"
+            ], 
+            "name": "QUERY_STRING_PARAM_NONCE", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 33, 
+                "line": 27
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "private", 
+                "static", 
+                "final"
+            ], 
+            "name": "QUERY_STRING_PARAM_AUTH_CODE", 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 33, 
+                "line": 28
+            }, 
+            "type": "String"
+        }
+    ], 
+    "externalReferences": [], 
+    "innerClasses": [
+        {
+            "properties": [], 
+            "externalReferences": [], 
+            "innerClasses": [], 
+            "interfaces": [], 
+            "constructors": [], 
+            "namespace": null, 
+            "name": "AccountsAuthCallbackException", 
+            "tableDeclaration": {
+                "type": "AccountsAuthCallbackException", 
+                "modifiers": [
+                    "public"
+                ], 
+                "references": [], 
+                "location": {
+                    "column": 18, 
+                    "line": 65
+                }, 
+                "name": "AccountsAuthCallbackException"
+            }, 
+            "key": null, 
+            "variables": [], 
+            "id": null, 
+            "methods": []
+        }
+    ], 
+    "interfaces": [], 
+    "constructors": [
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "AccountsAuthCallbackController", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 12, 
+                "line": 68
+            }, 
+            "type": null
+        }
+    ], 
+    "namespace": null, 
+    "name": "AccountsAuthCallbackController", 
+    "tableDeclaration": {
+        "type": "AccountsAuthCallbackController", 
+        "modifiers": [
+            "public", 
+            "with sharing"
+        ], 
+        "references": [], 
+        "location": {
+            "column": 27, 
+            "line": 24
+        }, 
+        "name": "AccountsAuthCallbackController"
+    }, 
+    "key": "01p4E0000008xc2QAA", 
+    "variables": [
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 113
+            }, 
+            "name": "userProfileName"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 119
+            }, 
+            "name": "hostname"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 120
+            }, 
+            "name": "startjourneyURL"
+        }, 
+        {
+            "type": "PageReference", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 23, 
+                "line": 121
+            }, 
+            "name": "startjourney"
+        }, 
+        {
+            "type": "Id", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 153
+            }, 
+            "name": "submissionId"
+        }, 
+        {
+            "type": "LIST", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 41, 
+                "line": 190
+            }, 
+            "name": "userAuthorisations"
+        }, 
+        {
+            "type": "LIST", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 44, 
+                "line": 204
+            }, 
+            "name": "companyAuthorisations"
+        }
+    ], 
+    "id": "01p4E0000008xc2QAA", 
+    "methods": [
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "initialiseAction", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 80
+            }, 
+            "returnType": "PageReference", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "parseQueryString", 
+            "parameters": [], 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 18, 
+                "line": 178
+            }, 
+            "returnType": "void", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "findUserAuthByNonce", 
+            "parameters": [], 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 18, 
+                "line": 187
+            }, 
+            "returnType": "void", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "private"
+            ], 
+            "name": "findCompanyAuthByNonce", 
+            "parameters": [], 
+            "visibility": "PRIVATE", 
+            "references": [], 
+            "location": {
+                "column": 20, 
+                "line": 201
+            }, 
+            "returnType": "void", 
+            "type": null
+        }
+    ]
+}
