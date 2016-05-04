@@ -141,7 +141,6 @@
     </fields>
     <fields>
         <fullName>CompanyName__c</fullName>
-        <defaultValue>&quot;FLUFFYLOGIC UK LIMITED&quot;</defaultValue>
         <externalId>false</externalId>
         <label>Company Name</label>
         <length>255</length>

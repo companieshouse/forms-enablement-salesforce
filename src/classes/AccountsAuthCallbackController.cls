@@ -113,7 +113,7 @@ public with sharing class AccountsAuthCallbackController {
         String userProfileName = userProfileApiResponse.email;
         u.getCurrentUser(userProfileName);
                 
-        insert new Account(Name=userProfileName);
+        upsert new Account(Name=userProfileName);
 
         transactionType = u.getUserDocument();
         String hostname = ApexPages.currentPage().getHeaders().get('Host');

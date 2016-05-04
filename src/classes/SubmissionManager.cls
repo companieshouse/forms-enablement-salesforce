@@ -130,6 +130,70 @@ public with sharing class SubmissionManager {
             newValidStepIdPath = newValidStepIdPath.removeStart(AppConstants.ID_DELIM_CHAR)+(nextStepId!=null ? AppConstants.ID_DELIM_CHAR+nextStepId : '');        
         }
 
+        //AS predicted we need to push a number as well with the step id to be able to read
+        //How many time we loaded the page
+        //How do we save the data: StepID1| => next step Id, X being the number of time we loaded, | the separator
+        //We need as well to rebuilt the key at the end for next iterations...
+        Integer reloadsNumber = 0;
+        
+        String historicalSteps = s.Historical_Valid_Step_Ids__c;
+        if(historicalSteps != null && nextStepId != null)
+        {   
+            //Second step and other step first time
+            if(!historicalSteps.contains(nextStepId))
+            {
+                historicalSteps += '' + nextStepId + reloadsNumber + '|';
+                s.Historical_Valid_Step_Ids__c = historicalSteps;
+            }
+            //Here handle the previous Step => always rewrite the key
+            else{
+                //We need to split the value
+                String[] splitedHistoricalSteps = historicalSteps.split('|');
+                
+                Integer indexMem = 0;
+
+                //Reset the key as we have the splited values
+                historicalSteps = '';
+
+                //Iterate each value until we find the right one
+                for(Integer i = 0; i>=splitedHistoricalSteps.size() ;i++)
+                {
+                    if(splitedHistoricalSteps[i] == previousStepId)
+                    {
+                        //The next indice will be the number of time we loaded the page
+                        reloadsNumber = Integer.valueOf(splitedHistoricalSteps[i+1]);
+                        indexMem = i++;
+                        reloadsNumber++;
+                    }
+                    else
+                    {
+                        historicalSteps += splitedHistoricalSteps[i];
+                    }
+
+                    //This is stupid as it is 'most likely' => LOL always be i++ but we need to mark the index
+                    if(i == indexMem)
+                    {
+                        historicalSteps +=reloadsNumber;
+                    }
+                }
+
+                s.Historical_Valid_Step_Ids__c = historicalSteps;
+
+
+            }
+            
+            
+        }
+        else
+        {
+            //First STEP
+            if( nextStepId != null)
+            {   
+                historicalSteps = '' + nextStepId + reloadsNumber + '|';
+                s.Historical_Valid_Step_Ids__c = historicalSteps;
+            }
+        }
+        
         s.Valid_Step_Ids__c=newValidStepIdPath;     
         update s;
     }
