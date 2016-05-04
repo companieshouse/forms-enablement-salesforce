@@ -149,10 +149,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ConfirmationController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>ConfirmationFrameworkController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -338,10 +334,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SmartPayUrlTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>StartController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -2151,10 +2143,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>Confirmation</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>ConfirmationFramework</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -2256,10 +2244,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>SmartPayNotification</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>Start</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

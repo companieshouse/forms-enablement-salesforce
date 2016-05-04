@@ -80,9 +80,9 @@ public with sharing class CompanyController {
         
         //Merged From Leo 03 May 2016
         trackuser.getSearchedCompany(companyNumber);
-        return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
-        //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );                         
-        //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
+       // return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
+        Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN',trackuser.returnCurrentCompanyObject() ,transactionMgr.td);                         
+        return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }
     
     public PageReference previousAction(){      
