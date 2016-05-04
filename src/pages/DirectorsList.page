@@ -57,9 +57,11 @@
         </fieldset>
          </div>
          <br /><br />
-         &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />          
+          &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+
+         <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
          &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-      </apex:form>	
+      </apex:form>  
       </apex:define>
    </apex:composition>
 </apex:page>

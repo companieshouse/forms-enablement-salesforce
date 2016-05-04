@@ -36,14 +36,14 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             
     // Constructors.
     public ConfirmationFrameworkController(){
-    	super();
-    	if (isPageInitialised) initialiseStep();
+      super();
+      if (isPageInitialised) initialiseStep();
     }
     // End Constructors.
     
     // Instance methods.
     private void initialiseStep(){
-    	//try {
+      //try {
 
             if(submissionMgr.submission.SubmissionId__c == null)
             {
@@ -96,27 +96,27 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' +  system.today().year();
 
 
-    	//} catch (Exception e){ return; } 
+      //} catch (Exception e){ return; } 
 
         
 
-    	return;
+      return;
     }
 
     public void saveTransaction(){
         persistStep();      
     }
-	
-	private void persistStep(){
-		submissionMgr.persist();    
-	}
-	// End Instance methods.	
-	
+  
+  private void persistStep(){
+    submissionMgr.persist();    
+  }
+  // End Instance methods.  
+  
     
     public PageReference previousAction(){
-    	if (!validatePageState()) return Page.TransactionException;
-    	    	
-    	return previousStep();
+      if (!validatePageState()) return Page.TransactionException;
+            
+      return previousStep();
     }
     // End Action methods.    
 }

@@ -193,6 +193,14 @@
         <value>Review strike off request</value>
     </labels>
     <labels>
+        <fullName>UI_Text_Search</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Start</fullName>
         <categories>Ui Text</categories>
         <language>en_US</language>

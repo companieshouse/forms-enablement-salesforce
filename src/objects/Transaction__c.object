@@ -141,6 +141,7 @@
     </fields>
     <fields>
         <fullName>CompanyName__c</fullName>
+        <defaultValue>&quot;FLUFFYLOGIC UK LIMITED&quot;</defaultValue>
         <externalId>false</externalId>
         <label>Company Name</label>
         <length>255</length>
@@ -360,7 +361,7 @@
         <columns>CompanyName__c</columns>
         <columns>CompanyNumber__c</columns>
         <columns>Status__c</columns>
-        <columns>LAST_UPDATE</columns>
+        <columns>Transaction_Type__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

@@ -110,6 +110,15 @@ public with sharing class TrackUserClass {
         return recs[0].Id;
 
     }
+    
+    Public SObject returnCurrentCompanyObject(){
+        Cookie current_searchedCompany = ApexPages.currentPage().getCookies().get('searched_company');
+        String searchedCompany = SecurityManager.decryptText(current_searchedCompany.getValue());
+        List < Account > recs = [select Id, Name from Account where Name = : searchedCompany];
+
+        return recs[0];
+
+    }
 
     Public Id returnCurrentUser() {
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');

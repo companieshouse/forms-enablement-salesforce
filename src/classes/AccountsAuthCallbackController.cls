@@ -38,7 +38,7 @@ public with sharing class AccountsAuthCallbackController {
         
     String transactionType;
     Id presenterID;
-    Id companyNumberId;
+    Sobject companyNumberId;
 
     public AppConstants constants;
 
@@ -62,10 +62,10 @@ public with sharing class AccountsAuthCallbackController {
         set;
     }
 
-    public class AccountsAuthCallbackException extends Exception {}	
+    public class AccountsAuthCallbackException extends Exception {} 
 
-	// Constructors.
-	public AccountsAuthCallbackController(){
+    // Constructors.
+    public AccountsAuthCallbackController(){
 
     h = new AccountsAPIHelper();
 
@@ -74,14 +74,14 @@ public with sharing class AccountsAuthCallbackController {
     submissionMgr = new SubmissionManager();
 
     }
-	// End Constructors.
+    // End Constructors.
 
-	// Instance methods.
-	public PageReference initialiseAction(){
-		
-		//return null;
-		
-		parseQueryString();
+    // Instance methods.
+    public PageReference initialiseAction(){
+        
+        //return null;
+        
+        parseQueryString();
         
         findUserAuthByNonce();
         
@@ -148,9 +148,9 @@ public with sharing class AccountsAuthCallbackController {
 
             presenterID = u.returnCurrentUser(); // will get from cookie
 
-            companyNumberId = u.returnCurrentCompany(); //will get from cookie
+            companyNumberId = u.returnCurrentCompanyObject(); //will get from cookie
 
-            Id submissionId = submissionMgr.initialise( transactionType, presenterID, companyNumberId,transactionMgr.td.Fee__c );   
+            Id submissionId = submissionMgr.initialise( transactionType, presenterID, companyNumberId,transactionMgr.td );   
             System.debug('submission ID is  ' + submissionId);
             
             //PageReference transactioninformation =  TransactionManager.firstStep(submissionId); // firstStep(submissionId);
@@ -170,7 +170,7 @@ public with sharing class AccountsAuthCallbackController {
         // 6. Drop a cookie (company_auth) - value equal to the encrypted value of the Company Auth record Id.
         // 7. Create a Submission record for the user/company/transaction type if required
         // 8. Drop a cookie (submission) - value equal to the encrypted value of the Transaction_Submission__c record Id.
-		// 9. Redirect to the first step for the transaction type as held on the company auth record (using encrypted 'c' querystring parameter).
+        // 9. Redirect to the first step for the transaction type as held on the company auth record (using encrypted 'c' querystring parameter).
 
         return null;
     }
@@ -186,13 +186,13 @@ public with sharing class AccountsAuthCallbackController {
     
     private void findUserAuthByNonce() {
         try {
-        	
-			List<User_Authorisation__c> userAuthorisations = [select Id from User_Authorisation__c where Nonce__c=:nonce];
-			if (userAuthorisations.size()==1){
-				userAuth = userAuthorisations[0];
+            
+            List<User_Authorisation__c> userAuthorisations = [select Id from User_Authorisation__c where Nonce__c=:nonce];
+            if (userAuthorisations.size()==1){
+                userAuth = userAuthorisations[0];
 
                 return;
-			}
+            }
            
         }
         catch (QueryException e) { throw new AccountsAuthCallbackException('Invalid state ' + nonce); }
@@ -213,5 +213,5 @@ public with sharing class AccountsAuthCallbackController {
 
 
 
-	// End Instance methods.
+    // End Instance methods.
 }

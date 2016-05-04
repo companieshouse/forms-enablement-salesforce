@@ -52,9 +52,7 @@ public class PaymentController extends TransactionStepControllerBase {
     public void initialiseStep() {
         hasPaid = false;
 
-        //if(isPageAlreadyValidStep)
         if(submissionMgr.submission.Status__c == 'Paid' || submissionMgr.submission.Status__c == 'Awaiting Submission' )
-
         {
             hasPaid = true;
             return;
@@ -178,10 +176,10 @@ public class PaymentController extends TransactionStepControllerBase {
         // driven by the active custom setting record.
 
         //CODE FOR PRODUCTION WHEN Submission manager will be in sync with Transaction Object
-		SmartPayUrl url = new SmartPayUrl.Builder()
-            	.merchantReference(submissionMgr.submission.Id)
-            	.paymentAmount(submissionMgr.submission.Amount__c)
-            	.build();
+        SmartPayUrl url = new SmartPayUrl.Builder()
+                .merchantReference(submissionMgr.submission.Id)
+                .paymentAmount(submissionMgr.submission.Amount__c)
+                .build();
         String redirectUrl = url.toString();
         externalURL = redirectUrl;
 

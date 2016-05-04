@@ -20,13 +20,13 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean hasPageErrors { get; set; }
     public Boolean hasAlreadyLoadedOfficers {get; set;}
 
-	public String companyName {get; set;}
-	public String companyNumber {get; set;}
-	public Boolean validationDirector {get; set;}
-	public List<String> listOfDirectors {get; set;}
+    public String companyName {get; set;}
+    public String companyNumber {get; set;}
+    public Boolean validationDirector {get; set;}
+    public List<String> listOfDirectors {get; set;}
 
-	public DirectorsListController(){
-    	super();
+    public DirectorsListController(){
+        super();
         hasAlreadyLoadedOfficers = false;
         if (isPageInitialised) initialiseStep();
 
@@ -34,10 +34,10 @@ public with sharing class DirectorsListController extends TransactionStepControl
     
     public void initialiseStep() {
         
-    	//Set up the company name 
-    	companyName = submissionMgr.submission.CompanyName__c;
-    	companyNumber = submissionMgr.submission.CompanyNumber__c;
-    	listOfDirectors = new List<String>();
+        //Set up the company name
+        companyName = submissionMgr.submission.CompanyName__c;
+        companyNumber = submissionMgr.submission.CompanyNumber__c;
+        listOfDirectors = new List<String>();
         if(isPageAlreadyValidStep)
         {
             hasAlreadyLoadedOfficers = true;
@@ -50,7 +50,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 hasAlreadyLoadedOfficers = false;
             }
         }
-    	return;
+        return;
        
     }
 
@@ -75,12 +75,15 @@ public with sharing class DirectorsListController extends TransactionStepControl
     }
 
     public void populateDirectorList(){
-    	initialiseAction();
-    	if(companyNumber == null)
-    	{
-    		listOfDirectors.add('Sylvain Picory');
-    		return;
-    	}
+        initialiseAction();
+        if(companyNumber == null)
+        {
+            listOfDirectors.add('Sylvain Picory');
+            return;
+        }
+        
+        
+        
         if(hasAlreadyLoadedOfficers)
         {
             //Get the list officer already created
@@ -97,6 +100,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         }
         else
         {
+
             //Make the call to the list of directors
             List<CompaniesHouse.OfficerDetails> directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
 
@@ -116,6 +120,6 @@ public with sharing class DirectorsListController extends TransactionStepControl
             //Insert the officer
             insert officerList;
         }
-    	
+        
     }
 }

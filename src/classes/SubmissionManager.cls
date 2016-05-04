@@ -58,18 +58,18 @@ public with sharing class SubmissionManager {
     // End Constructors.
     
     // Instance methods.
-    public Id initialise(String transactionType, String presenterId, String companyId, Decimal amount){
+    public Id initialise(String transactionType, String presenterId, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
         List<Transaction__c> recs = [select Id,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c From Officers__r) from Transaction__c 
                                                     where Presenter__c=:presenterId 
-                                                            and Company__c=:companyId 
+                                                            and Company__c=:companyId.Id
                                                             and Transaction_Type__c=:transactionType
                                                             and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
                                                                 or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
         if (recs.size()==1) return recs[0].Id;                  
         
-        submission = new Transaction__c(Presenter__c=presenterId, Amount__c = amount, Company__c=companyId, Transaction_Type__c=transactionType);
+        submission = new Transaction__c(Presenter__c=presenterId, Amount__c = td.Fee__c, Form_Name__c = td.DeveloperName, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
         insert submission;
         return submission.Id;       
     }
