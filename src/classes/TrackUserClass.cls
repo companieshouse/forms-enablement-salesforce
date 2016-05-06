@@ -62,14 +62,14 @@ public with sharing class TrackUserClass {
             Cookie t_value = ApexPages.currentPage().getCookies().get('t_value');
 
         // note remove if/else statement and uncomment cookie reset parameter
-       if (t_value == null) {
+      // if (t_value == null) {
             // note may need to test for a newly passed t_value and compare to old one. if new is different set this as the value
             // so that users can go back and forth and pass and change documents themselves
             // note this may not be necessary if we pass encryption through the form type.
             String tvalueparameter = ApexPages.currentPage().getParameters().get('t');
             // note may use session cookie:-1 value unless specific time is given, also must test whether this is for https: only 
             // also encrypt
-           // t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, 1, true);
+            t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, 1, true);
 
             t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, -1, true);
             // set time to 0 instead of -1 to remove cookie
@@ -78,13 +78,13 @@ public with sharing class TrackUserClass {
 
             System.debug('your newly created tvalue is' + t_value + ' should say DS01');
 
-        } else {
+        //} else {
 
 
-            System.debug('your tvalue from your cookie is' + t_value + ' should say DS01');
+         //   System.debug('your tvalue from your cookie is' + t_value + ' should say DS01');
 
             // increment time of cookie from -1 to 600s seconds/etc. 
-        }
+        //}
 
         // always decrypt
 
@@ -100,7 +100,7 @@ public with sharing class TrackUserClass {
 
                 // note remove if/else statement and uncomment cookie reset parameter
 
-        if (searched_company == null) {
+        //if (searched_company == null) {
 
             insert new Account(Name = companyNumber);
 
@@ -109,7 +109,7 @@ public with sharing class TrackUserClass {
             // this will be initialized on  the company controller
             String companysearchparameter = companyNumber; // this should be the searched company//ApexPages.currentPage().getParameters().get('t');
 
-           // searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, 1, true);
+            searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, 1, true);
 
             searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, -1, true);
             // set time to 0 instead of -1 to remove cookie
@@ -118,13 +118,13 @@ public with sharing class TrackUserClass {
 
             System.debug('your newly created searched company is is' + searched_company);
 
-        } else {
+       // } else {
             // perhaps validate the value before returning cookie
 
-            System.debug('your searched_company from your cookie is' + searched_company);
+         //   System.debug('your searched_company from your cookie is' + searched_company);
 
             // increment time of cookie from -1 to 600s seconds/etc. 
-        }
+        //}
 
         String s = SecurityManager.decryptText(searched_company.getValue());
 

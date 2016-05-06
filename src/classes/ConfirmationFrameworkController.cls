@@ -43,7 +43,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     
     // Instance methods.
     private void initialiseStep(){
-      //try {
+      try {
 
             if(submissionMgr.submission.SubmissionId__c == null)
             {
@@ -96,7 +96,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' +  system.today().year();
 
 
-      //} catch (Exception e){ return; } 
+      } catch (Exception e){ return; } 
 
         
 
