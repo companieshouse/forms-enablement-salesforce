@@ -18,6 +18,8 @@ Ver. Author        Date        Detail
 public with sharing class StartFrameworkController {
 
     // Public properties.
+        public Cookie t_value {get; set;}
+
     public String pageTitle {
         get;
         private set;
@@ -66,6 +68,7 @@ public with sharing class StartFrameworkController {
         get;
         private set;
     }
+    public String transactionType {get; set;}
 
 
     // Private class members.
@@ -74,7 +77,7 @@ public with sharing class StartFrameworkController {
     TransactionManager transactionMgr;
     TrackUserClass userTracker;
 
-    String transactionType;
+    //String transactionType;
 
     // Constructors.
     public StartFrameworkController() {
@@ -84,13 +87,16 @@ public with sharing class StartFrameworkController {
     private void initialise() {
         
             securityMgr = new SecurityManager();
+                      //  userTracker = new TrackUserClass();
+
+           // userTracker.getUserDocument();
 
             try {
-
+                
                 if (!ApexPages.currentPage().getParameters().containsKey('t') ||
                     String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
                     !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
-
+                    
                 transactionType = ApexPages.currentPage().getParameters().get('t');
                 transactionMgr = new TransactionManager(transactionType);
 
@@ -133,12 +139,11 @@ public with sharing class StartFrameworkController {
 
            
             // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
-            //return securityMgr.getUserAuthRedirect();
-
-            PageReference pr = new PageReference('/Company');
-            pr.getParameters().put('t',transactionType);
-            return pr;
-            
+            return securityMgr.getUserAuthRedirect();
+            //Hack to bypass auth
+			//PageReference pr = new PageReference('/Company');
+            //pr.getParameters().put('t',transactionType);
+            //return pr;
         }
         // End Instance methods.
 }

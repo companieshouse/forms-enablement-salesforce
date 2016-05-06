@@ -20,14 +20,15 @@ public with sharing class CompanyController {
     // Public properties.
     public String companyNumber { get; set; }
     public Boolean hasPageErrors { get; set; }
-    
+      public String transactionType {get; set;}
+
     // Private class members.
     Boolean isPageInitialised=false;
     Boolean isUserAuthenticated=false;
     SecurityManager securityMgr;
     SubmissionManager submissionMgr;    
     TransactionManager transactionMgr;
-    String transactionType;
+    //String transactionType;
     TrackUserClass trackuser;
         
     // Constructors.
@@ -40,16 +41,19 @@ public with sharing class CompanyController {
     private void initialise(){
         securityMgr = new SecurityManager();        
         submissionMgr = new SubmissionManager();
+              //  trackuser = new TrackUserClass();
+            //trackuser.getUserDocument();
+
         
         try {
             
             // todo - check for valid user auth cookie. 
             isUserAuthenticated=true;
-
+        
             if (!ApexPages.currentPage().getParameters().containsKey('t') || 
                     String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
                     !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
-        
+                
             transactionType = ApexPages.currentPage().getParameters().get('t');
             transactionMgr = new TransactionManager(transactionType);
                 
@@ -80,9 +84,12 @@ public with sharing class CompanyController {
         
         //Merged From Leo 03 May 2016
         trackuser.getSearchedCompany(companyNumber);
-       // return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
-        Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN',trackuser.returnCurrentCompanyObject() ,transactionMgr.td);                         
-        return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
+        return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
+        //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );                         
+        //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
+		//Hack to bypass auth
+		//Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN',trackuser.returnCurrentCompanyObject() ,transactionMgr.td);                         
+        //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }
     
     public PageReference previousAction(){      

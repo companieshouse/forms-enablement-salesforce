@@ -23,20 +23,19 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:type="xsd:double">100.0</value>
+        <value xsi:type="xsd:double">0.0</value>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;To close a company you will need:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;To complete this transaction you will need:&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
         <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-        &lt;li&gt;the company number&lt;/li&gt;
-        &lt;li&gt;the company authentication code&lt;/li&gt;
-        &lt;li&gt;an email address for each director&lt;/li&gt;
-        &lt;li&gt;a credit or debit card&lt;/li&gt;
-      &lt;/ul&gt;</value>
+&lt;li&gt;the company number&lt;/li&gt;
+&lt;li&gt;the company authentication code&lt;/li&gt;
+&lt;li&gt;one directors email address&lt;/li&gt;
+&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
@@ -52,11 +51,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">Here is the actions need it</value>
+        <value xsi:type="xsd:string">This service is used to withdraw a company&apos;s striking off application</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">This is my new form</value>
+        <value xsi:type="xsd:string">Withdrawal of striking off application by company</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -67,3 +66,4 @@
         <value xsi:nil="true"/>
     </values>
 </CustomMetadata>
+

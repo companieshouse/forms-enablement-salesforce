@@ -29,10 +29,13 @@ Ver. Author        Date        Detail
                     */
             }
                 </style>
-              
-                        <h1 class="heading-xlarge">
+                 <h1 class="heading-xlarge">
                     {!pageTitle}
                 </h1>
+                <!--
+                <div class="grid-row">
+                    <div class="column-two-thirds">
+                       -->
                         <p class="lede">
                             {!pageText}
                         </p>
@@ -51,7 +54,11 @@ Ver. Author        Date        Detail
                         <apex:outputText escape="false" value="{!belowbuttontext2}"></apex:outputText>
                         <apex:outputText escape="false" value="{!belowbuttontext3}"></apex:outputText>
                         <h1 class="heading-large">{!belowbuttontitle}</h1>
-                   
+                        <!--
+                    </div>
+                </div>
+                -->
+
             </apex:form>
         </apex:define>
     </apex:composition>

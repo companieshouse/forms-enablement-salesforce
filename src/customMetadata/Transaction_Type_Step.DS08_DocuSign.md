@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - Confirmation</label>
+    <label>DS08 - DocuSign</label>
     <values>
         <field>Apex_Class_Name__c</field>
-        <value xsi:type="xsd:string">ConfirmationFrameworkController</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">This is an important notice and should not be ignored. The company named has applied to the Registrar to be struck off the Register and dissolved. Please note that on dissolution any remaining assets will be passed to the Crown.</value>
+        <value xsi:type="xsd:string">Sign</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -15,9 +15,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;span class=&quot;bold-medium&quot;&gt;
-We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
-&lt;/span&gt; &lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -25,7 +23,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Warning to all interested parties</value>
+        <value xsi:type="xsd:string">DS01 DocuSign</value>
     </values>
     <values>
         <field>Is_Active__c</field>
@@ -45,7 +43,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">5.0</value>
+        <value xsi:type="xsd:double">2.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -53,11 +51,10 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS01</value>
+        <value xsi:type="xsd:string">DS08</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">ConfirmationFramework</value>
+        <value xsi:type="xsd:string">EmbedDocuSign</value>
     </values>
 </CustomMetadata>
-

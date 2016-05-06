@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - Confirmation</label>
+    <label>DS08 - Confirmation</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:type="xsd:string">ConfirmationFrameworkController</value>
@@ -53,11 +53,10 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS01</value>
+        <value xsi:type="xsd:string">DS08</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">ConfirmationFramework</value>
     </values>
 </CustomMetadata>
-

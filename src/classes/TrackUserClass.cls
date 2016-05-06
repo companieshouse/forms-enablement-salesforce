@@ -4,6 +4,9 @@ public with sharing class TrackUserClass {
 
     public String userEmail;
     public String companySearched;
+    public Cookie t_value { get;
+        set; }
+        
 
     public TrackUserClass() {
 
@@ -34,18 +37,39 @@ public with sharing class TrackUserClass {
 
         // method will be accessible throughout the application to reset, set the t value if needed for different forms 
         // method will also be accessible to change the company number dynamically.
+          //      Cookie t_value = ApexPages.currentPage().getCookies().get('t_value');
 
-        Cookie t_value = ApexPages.currentPage().getCookies().get('t_value');
+        //Cookie t_value = ApexPages.currentPage().getParameters().get('t');
+
+        //String oldercookievalue = SecurityManager.decryptText(oldt_value.getValue());
         // note this is subject to change during the journey and is only used to keep partial state.
+        /*
+        if (currentTvalue == oldercookievalue) {
+            System.debug('your tvalue from your cookie is' + t_value + ' should say DS01');
+        } else {
+            String tvalueparameter = ApexPages.currentPage().getParameters().get('t');
+            // note may use session cookie:-1 value unless specific time is given, also must test whether this is for https: only 
+            // also encrypt
+            t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, -1, true);
+            // set time to 0 instead of -1 to remove cookie
 
-        //if (t_value == null) {
+            ApexPages.currentPage().setCookies(new Cookie[] { t_value });
+
+            System.debug('your newly created tvalue is' + t_value + ' should say DS01');
+        }
+        */
+
+            Cookie t_value = ApexPages.currentPage().getCookies().get('t_value');
+
+        // note remove if/else statement and uncomment cookie reset parameter
+       if (t_value == null) {
             // note may need to test for a newly passed t_value and compare to old one. if new is different set this as the value
             // so that users can go back and forth and pass and change documents themselves
             // note this may not be necessary if we pass encryption through the form type.
             String tvalueparameter = ApexPages.currentPage().getParameters().get('t');
             // note may use session cookie:-1 value unless specific time is given, also must test whether this is for https: only 
             // also encrypt
-            t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, 1, true);
+           // t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, 1, true);
 
             t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, -1, true);
             // set time to 0 instead of -1 to remove cookie
@@ -54,14 +78,13 @@ public with sharing class TrackUserClass {
 
             System.debug('your newly created tvalue is' + t_value + ' should say DS01');
 
-       // } else {
+        } else {
 
 
             System.debug('your tvalue from your cookie is' + t_value + ' should say DS01');
 
             // increment time of cookie from -1 to 600s seconds/etc. 
-       // }
-
+        }
 
         // always decrypt
 
@@ -75,35 +98,40 @@ public with sharing class TrackUserClass {
 
         Cookie searched_company = ApexPages.currentPage().getCookies().get('searched_company');
 
-        
+                // note remove if/else statement and uncomment cookie reset parameter
 
-        upsert new Account(Name=companyNumber);
+        if (searched_company == null) {
 
-        // for testing
-         //companyNumber = null;
-        // this will be initialized on  the company controller
-        String companysearchparameter = companyNumber; // this should be the searched company//ApexPages.currentPage().getParameters().get('t');
-        searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, 1, true);
+            insert new Account(Name = companyNumber);
 
-        searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, -1, true);
+            // for testing
+            //companyNumber = null;
+            // this will be initialized on  the company controller
+            String companysearchparameter = companyNumber; // this should be the searched company//ApexPages.currentPage().getParameters().get('t');
 
-        // set time to 0 instead of -1 to remove cookie
+           // searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, 1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[] { searched_company });
+            searched_company = new Cookie('searched_company', SecurityManager.encryptText(companysearchparameter), null, -1, true);
+            // set time to 0 instead of -1 to remove cookie
 
-        System.debug('your newly created searched company is is' + searched_company);
+            ApexPages.currentPage().setCookies(new Cookie[] { searched_company });
 
-        // perhaps validate the value before returning cookie
+            System.debug('your newly created searched company is is' + searched_company);
 
+        } else {
+            // perhaps validate the value before returning cookie
 
-        // increment time of cookie from -1 to 600s seconds/etc. 
+            System.debug('your searched_company from your cookie is' + searched_company);
+
+            // increment time of cookie from -1 to 600s seconds/etc. 
+        }
 
         String s = SecurityManager.decryptText(searched_company.getValue());
 
         return s;
     }
 
-    Public Id returnCurrentCompany(){
+    Public Id returnCurrentCompany() {
         Cookie current_searchedCompany = ApexPages.currentPage().getCookies().get('searched_company');
         String searchedCompany = SecurityManager.decryptText(current_searchedCompany.getValue());
         List < Account > recs = [select Id, Name from Account where Name = : searchedCompany];
@@ -111,8 +139,8 @@ public with sharing class TrackUserClass {
         return recs[0].Id;
 
     }
-    
-    Public SObject returnCurrentCompanyObject(){
+
+    Public SObject returnCurrentCompanyObject() {
         Cookie current_searchedCompany = ApexPages.currentPage().getCookies().get('searched_company');
         String searchedCompany = SecurityManager.decryptText(current_searchedCompany.getValue());
         List < Account > recs = [select Id, Name from Account where Name = : searchedCompany];

@@ -102,7 +102,7 @@ public with sharing class TransactionManager {
 	private PageReference getNextStepPageReference(Integer currentStepNumber, Id submissionId){  
 		System.debug(LoggingLevel.ERROR,'in getNextStepPageReference:'+currentStepNumber+':'+td+':'+stepsById);
 		  
-		//try {
+		try {
 			
 	    	if (td==null || stepsById==null || stepsById.isEmpty()) return null;
 	    	    
@@ -136,10 +136,9 @@ public with sharing class TransactionManager {
 			SubmissionManager.setValidSteps(submissionId,(currentStep==null ? null : currentStep.Id), nextStep.Id);
 			
 			return pr;
-		//} catch (Exception e){
-
-		//	System.debug(LoggingLevel.ERROR,'in getNextStepApex:'+e.getMessage()+':'+e.getStacktraceString());
-		//}
+		} catch (Exception e){
+			System.debug(LoggingLevel.ERROR,'in getNextStepApex:'+e.getMessage()+':'+e.getStacktraceString());
+		}
 		return null;		
 	}
 	
