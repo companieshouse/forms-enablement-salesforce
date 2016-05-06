@@ -89,7 +89,32 @@ public virtual class TransactionStepControllerBase {
 
 			isPageInitialised=loadStepSubmissionState();
 
-			
+			//We need to detect if the page has been loaded more than 1 time
+            String historicalValidStepId = submissionMgr.submission.Historical_Valid_Step_Ids__c;
+            String stepIdTXT = stepId;
+            if(historicalValidStepId.contains(stepIdTXT))
+            {
+            	//We need to check if the value associated is 0 if not 0 then it is true
+            	List<String> histStep = historicalValidStepId.split(AppConstants.DELIM_HISTORICAL_STEP);
+            	for(Integer i = 0; i <= histStep.size()-1; i++)
+            	{
+            		if(histStep[i] == stepIdTXT)
+            		{
+            			if(Integer.valueOf(histStep[i+1]) == 0)
+            			{
+            				isPageAlreadyValidStep = false;
+            				break;
+            			}
+            			else
+            			{
+            				isPageAlreadyValidStep = true;
+            				break;
+            			}
+            		}
+            	}
+            }
+            else
+                isPageAlreadyValidStep = false;
     	
     	} catch (Exception e){ return; }
     	return;

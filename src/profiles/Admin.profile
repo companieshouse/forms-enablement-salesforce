@@ -345,6 +345,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SubmissionManagerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SummaryController</apexClass>
         <enabled>true</enabled>
     </classAccesses>

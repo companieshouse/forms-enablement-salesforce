@@ -130,74 +130,101 @@ public with sharing class SubmissionManager {
             newValidStepIdPath = newValidStepIdPath.removeStart(AppConstants.ID_DELIM_CHAR)+(nextStepId!=null ? AppConstants.ID_DELIM_CHAR+nextStepId : '');        
         }
 
-        //AS predicted we need to push a number as well with the step id to be able to read
-        //How many time we loaded the page
-        //How do we save the data: StepID1| => next step Id, X being the number of time we loaded, | the separator
-        //We need as well to rebuilt the key at the end for next iterations...
-        Integer reloadsNumber = 0;
-        
         String historicalSteps = s.Historical_Valid_Step_Ids__c;
-        if(historicalSteps != null && nextStepId != null)
-        {   
-            //Second step and other step first time
-            if(!historicalSteps.contains(nextStepId))
+        String result = '';
+        String previousStepIdTXT = previousStepId;
+        String nextStepIdTXT = nextStepId;
+        if(historicalSteps != null)
+        {
+            Boolean previousButton = false;
+            if(nextStepIdTXT == null)
             {
-                historicalSteps += '' + nextStepId + reloadsNumber + '|';
-                s.Historical_Valid_Step_Ids__c = historicalSteps;
+                previousButton = true;
             }
-            //Here handle the previous Step => always rewrite the key
-            else{
-                //We need to split the value
-                String[] splitedHistoricalSteps = historicalSteps.split('|');
-                
-                Integer indexMem = 0;
-
-                //Reset the key as we have the splited values
-                historicalSteps = '';
-
-                //Iterate each value until we find the right one
-                for(Integer i = 0; i>=splitedHistoricalSteps.size() ;i++)
+            //throw new Form_CustomException(previousStepIdTXT + 'NEXT' + nextStepIdTXT + 'HISTO' + historicalSteps);
+            if(previousStepIdTXT != null)
+            {
+                if(!previousButton)
                 {
-                    if(splitedHistoricalSteps[i] == previousStepId)
+                    if(historicalSteps.contains(previousStepIdTXT))
                     {
-                        //The next indice will be the number of time we loaded the page
-                        reloadsNumber = Integer.valueOf(splitedHistoricalSteps[i+1]);
-                        indexMem = i++;
-                        reloadsNumber++;
+                        List<String> lHist = historicalSteps.split(AppConstants.DELIM_HISTORICAL_STEP);
+                        
+                        for(Integer i = 0; i <= lHist.size()-1; i++)
+                        {
+                            if(lHist[i] == previousStepIdTXT)
+                            {
+                                 result +=  lHist[i] + AppConstants.DELIM_HISTORICAL_STEP + (Integer.valueOf(lHist[i+1])+1 ) + AppConstants.DELIM_HISTORICAL_STEP ;
+                                 i = i + 1;
+                            }
+                            else{
+                                result += lHist[i] + AppConstants.DELIM_HISTORICAL_STEP;
+                            }   
+                        }
+                        historicalSteps = result;
+                        result = '';
                     }
                     else
                     {
-                        historicalSteps += splitedHistoricalSteps[i];
-                    }
-
-                    //This is stupid as it is 'most likely' => LOL always be i++ but we need to mark the index
-                    if(i == indexMem)
+                        historicalSteps += ''+ previousStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
+                    } 
+                    if(historicalSteps.contains(nextStepIdTXT))
                     {
-                        historicalSteps +=reloadsNumber;
+                        List<String> lHist = historicalSteps.split(AppConstants.DELIM_HISTORICAL_STEP);
+                        
+
+                        for(Integer i = 0; i <= lHist.size()-1; i++)
+                        {
+                            if(lHist[i] == nextStepIdTXT)
+                            {
+
+                                if(Integer.valueOf(lHist[i+1]) != 0)
+                                {
+                                    result +=  lHist[i] + AppConstants.DELIM_HISTORICAL_STEP + (Integer.valueOf(lHist[i+1])+1 ) + AppConstants.DELIM_HISTORICAL_STEP ;
+                                    i = i + 1;
+                                }
+                                else{
+                                    result += lHist[i] + AppConstants.DELIM_HISTORICAL_STEP;
+                                }
+                            }
+                            else{
+                                result += lHist[i] + AppConstants.DELIM_HISTORICAL_STEP;
+                            }   
+                        }
+                        historicalSteps = result;
                     }
+                    else{
+                        historicalSteps += ''+ nextStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+                    }
+
                 }
-
-                s.Historical_Valid_Step_Ids__c = historicalSteps;
-
-
             }
-            
-            
         }
-        else
-        {
-            //First STEP
-            if( nextStepId != null)
-            {   
-                historicalSteps = '' + nextStepId + reloadsNumber + '|';
-                s.Historical_Valid_Step_Ids__c = historicalSteps;
+        else{
+            if(previousStepIdTXT != null)
+            {
+                historicalSteps = '' + previousStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
             }
+
+            if(nextStepIdTXT != null)
+            {
+                if(historicalSteps == null)
+                {
+                    historicalSteps = '' + nextStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+                }
+                else{
+                    historicalSteps += '' + nextStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+                }
+            }
+
         }
         
+        s.Historical_Valid_Step_Ids__c = historicalSteps;
         s.Valid_Step_Ids__c=newValidStepIdPath;     
         update s;
     }
-    
+
+
     public static Id getPreviousStepId(Id submissionId, Id currentStepId){
         
         // todo - validation, error handling etc.
