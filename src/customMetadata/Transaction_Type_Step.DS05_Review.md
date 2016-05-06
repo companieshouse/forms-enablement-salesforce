@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - DynamicTest2</label>
+    <label>DS05 - Review</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">This page displays fields from the [Transaction_Submission__c] object - as listed by the Query FieldSet 2 defined on the Step record.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Display_Text_3__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
@@ -19,11 +23,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">DS01 Dynamic Data Test Page 2</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -31,11 +35,11 @@
     </values>
     <values>
         <field>Query_FieldSet_1_Name__c</field>
-        <value xsi:type="xsd:string">DS01_Query_Dynamic2</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction_Submission__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Step_Number__c</field>
@@ -47,10 +51,10 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS01</value>
+        <value xsi:type="xsd:string">DS05</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">DynamicTest</value>
+        <value xsi:type="xsd:string">Review</value>
     </values>
 </CustomMetadata>

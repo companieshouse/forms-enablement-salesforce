@@ -18,51 +18,105 @@ Ver. Author        Date        Detail
 public with sharing class ConfirmationFrameworkController extends TransactionStepControllerBase {
     
     // Public properties.
-    public String confirmationTitle { get; private set; }
-    public String confirmationText { get; private set; }    			    
-    public Boolean confirmationFlag { get; set; }
+
+    public String title {get; private set;}
+
+    public String size {get; private set;}
+
+    public String todayThreeMonths {get; set;}
+
+    public Id attachmentId {get; private set;}
+
+    public String submissionId {get; private set;}
+    public String companyName {get; set;}
+
+    public Boolean showDoc {get; private set;}
+    public String displayText3 {get; set;}
+
             
     // Constructors.
     public ConfirmationFrameworkController(){
-    	super();
-    	
-    	if (isPageInitialised) initialiseStep();
+      super();
+      if (isPageInitialised) initialiseStep();
     }
     // End Constructors.
     
     // Instance methods.
     private void initialiseStep(){
-    	try {
+      try {
 
-    		System.debug(LoggingLevel.ERROR, submissionMgr.submission); 
-    		confirmationFlag = submissionMgr.submission.Warning_Confirmation_Flag__c;
-    		System.debug(LoggingLevel.ERROR, confirmationFlag);
-			
-			confirmationTitle = transactionMgr.currentStep.Header_Text_1__c;
-			confirmationText = transactionMgr.currentStep.Display_Text_1__c;
+            if(submissionMgr.submission.SubmissionId__c == null)
+            {
+                // we need to submit the transaction to chips..... or change the status 
+                Blob b = Crypto.GenerateAESKey(128);
+                String h = EncodingUtil.ConvertTohex(b);
+                String guid = h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
+                submissionMgr.submission.SubmissionId__c =  guid;
+                submissionMgr.submission.Status__c = 'Awaiting Submission';
+            }
 
-    	} catch (Exception e){ return; }    	
-    	return;
+            submissionId = submissionMgr.submission.SubmissionId__c;
+            companyName = submissionMgr.submission.CompanyName__c;
+            displayText3 = transactionMgr.currentStep.Display_Text_3__c;
+
+            if(displayText3.contains('COMPANYNAME'))
+            {
+                displayText3 = displayText3.replace('COMPANYNAME', companyName);
+            }
+
+            if(submissionMgr.submission.attachments != null)
+            {
+                if(submissionMgr.submission.attachments.size() > 0)
+                {
+                    showDoc = true;
+                    attachmentId = submissionMgr.submission.attachments[0].Id;
+                    title = submissionMgr.submission.attachments[0].Name;
+                    Integer sizeInt = submissionMgr.submission.attachments[0].BodyLength;
+                    String tempSize = String.valueOf(sizeInt);
+                    size = tempSize.left(3);
+                    //MB
+                    if(tempSize.length() >= 9)
+                    {   
+                        size += 'M';
+                    }
+                    //KB
+                    else if(tempSize.length() >= 6 && tempSize.length() < 9)
+                    {   
+                        size += 'K';
+                    }
+                }
+            }
+            else
+            {
+                title = 'NA';
+                size = 'NA';
+                attachmentId = null;
+            }
+
+            todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' +  system.today().year();
+
+
+      } catch (Exception e){ return; } 
+
+        
+
+      return;
     }
-	
-	private void persistStep(){
-		submissionMgr.submission.Warning_Confirmation_Flag__c = confirmationFlag;
-		submissionMgr.persist();    
-	}
-	// End Instance methods.	
-	
-	// Action methods.     
-    public PageReference nextAction(){ 
-    	if (!validatePageState()) return Page.TransactionException;
-    	
-    	persistStep();    	
-		return nextStep();    	
+
+    public void saveTransaction(){
+        persistStep();      
     }
+  
+  private void persistStep(){
+    submissionMgr.persist();    
+  }
+  // End Instance methods.  
+  
     
     public PageReference previousAction(){
-    	if (!validatePageState()) return Page.TransactionException;
-    	    	
-    	return previousStep();
+      if (!validatePageState()) return Page.TransactionException;
+            
+      return previousStep();
     }
     // End Action methods.    
 }

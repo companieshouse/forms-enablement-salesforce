@@ -14,6 +14,12 @@
         <value xsi:type="xsd:string">Test Sylvain Display text 2</value>
     </values>
     <values>
+        <field>Display_Text_3__c</field>
+        <value xsi:type="xsd:string">&lt;p&gt;&lt;span class=&quot;bold-medium&quot;&gt;
+	            We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
+	       &lt;/span&gt;  &lt;/p&gt;</value>
+    </values>
+    <values>
         <field>Document_Template_Name__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -39,7 +45,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">2.0</value>
+        <value xsi:type="xsd:double">3.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

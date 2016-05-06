@@ -14,6 +14,10 @@
         <value xsi:type="xsd:string">Test Sylvain Display text 2</value>
     </values>
     <values>
+        <field>Display_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Document_Template_Name__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -39,7 +43,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">1.0</value>
+        <value xsi:type="xsd:double">2.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

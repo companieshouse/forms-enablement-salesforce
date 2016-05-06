@@ -198,6 +198,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Historical_Valid_Step_Ids__c</fullName>
+        <externalId>false</externalId>
+        <label>Historical Valid Step Ids</label>
+        <length>1000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>2</visibleLines>
+    </fields>
+    <fields>
         <fullName>Number_1__c</fullName>
         <externalId>false</externalId>
         <label>Number 1</label>
@@ -241,31 +250,31 @@
                 <default>true</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>In Progress</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Signed</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Awaiting Submission</fullName>
+                <fullName>Payment pending</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Failure</fullName>
+                <fullName>Paid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submission pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -351,7 +360,7 @@
         <columns>CompanyName__c</columns>
         <columns>CompanyNumber__c</columns>
         <columns>Status__c</columns>
-        <columns>LAST_UPDATE</columns>
+        <columns>Transaction_Type__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

@@ -32,4 +32,5 @@ public with sharing class AppConstants {
     public final static String ID_DELIM_CHAR = '|';
     public final static String ID_DELIM_SPLIT_CHAR = '\\|';	
 	
+	public final static String DELIM_HISTORICAL_STEP = '_-_';
 }

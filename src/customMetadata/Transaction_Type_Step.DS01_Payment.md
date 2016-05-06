@@ -3,14 +3,18 @@
     <label>DS01 - Payment</label>
     <values>
         <field>Apex_Class_Name__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">PaymentController</value>
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Test</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
+        <value xsi:type="xsd:string">Test</value>
+    </values>
+    <values>
+        <field>Display_Text_3__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
@@ -19,11 +23,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Test</value>
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -35,11 +39,11 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Transaction__c</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">6.0</value>
+        <value xsi:type="xsd:double">4.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
