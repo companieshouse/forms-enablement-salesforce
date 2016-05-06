@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:type="xsd:double">8.0</value>
+        <value xsi:type="xsd:double">100.0</value>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>

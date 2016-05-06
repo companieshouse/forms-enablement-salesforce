@@ -55,6 +55,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
     }
 
     private void persistStep(){
+        submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -82,7 +83,11 @@ public with sharing class DirectorsListController extends TransactionStepControl
             return;
         }
         
-        
+        if(companyName == null)
+        {
+            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+            companyName = compProf.company_name;
+        }
         
         if(hasAlreadyLoadedOfficers)
         {

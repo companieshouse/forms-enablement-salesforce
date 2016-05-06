@@ -7,6 +7,7 @@ public with sharing class TrackUserClass {
     public Cookie t_value { get;
         set; }
         
+
     public TrackUserClass() {
 
     }

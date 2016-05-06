@@ -140,7 +140,10 @@ public with sharing class StartFrameworkController {
            
             // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
             return securityMgr.getUserAuthRedirect();
-            
+            //Hack to bypass auth
+			//PageReference pr = new PageReference('/Company');
+            //pr.getParameters().put('t',transactionType);
+            //return pr;
         }
         // End Instance methods.
 }

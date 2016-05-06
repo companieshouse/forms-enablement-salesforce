@@ -23,6 +23,7 @@
    <apex:composition template="TransactionPageTemplate">
       <apex:define name="content">
       <apex:form >
+
          <div class="form-group">
          <h1 class="heading-xlarge">Request approval from company directors</h1>
          <p class="lede">
@@ -38,17 +39,16 @@
         <p class="heading-medium">
           Are you the sole director listed above?
         </p>
-
         <fieldset class="inline">
           <legend class="visuallyhidden">Are you the sole director listed above?</legend>
           <div class="form-group">
             <label class="block-label" for="radio-indent-1">
-              <input id="radio-inline-1" type="radio" name="presenter" value="Yes" aria-expanded="false">
+              <input id="radio-indent-1" type="radio" name="presenter" value="Yes" >
               Yes
               </input>
             </label>
-            <label class="block-label selected" data-target="example-ni-no" for="radio-indent-2">
-              <input id="radio-inline-2" type="radio" name="presenter" value="No" aria-controls="example-ni-no" aria-expanded="true">
+            <label class="block-label" for="radio-indent-2">
+              <input id="radio-indent-2" type="radio" name="presenter" value="No" >
               No
               </input>
             </label>
@@ -57,10 +57,12 @@
         </fieldset>
          </div>
          <br /><br />
+          <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
          <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
-         &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" /><br/>
-         &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+         &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+		 &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+
 
       </apex:form>  
       </apex:define>

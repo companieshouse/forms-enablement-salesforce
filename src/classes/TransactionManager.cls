@@ -187,7 +187,7 @@ public with sharing class TransactionManager {
 		System.debug(LoggingLevel.ERROR,'in getPrevStepPageReference:pr:'+pr);
 		return pr;
 		*/
-		return null;
+		//return null;
 	} 
 	
 	private Id getNextStepIdByApex(String navigableClassName, Id submissionId){

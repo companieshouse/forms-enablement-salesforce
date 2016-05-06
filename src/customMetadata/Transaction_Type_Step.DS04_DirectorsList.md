@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Request approval from company director</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Is_Active__c</field>

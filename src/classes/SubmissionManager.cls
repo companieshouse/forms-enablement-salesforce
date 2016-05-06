@@ -130,10 +130,101 @@ public with sharing class SubmissionManager {
             newValidStepIdPath = newValidStepIdPath.removeStart(AppConstants.ID_DELIM_CHAR)+(nextStepId!=null ? AppConstants.ID_DELIM_CHAR+nextStepId : '');        
         }
 
+        String historicalSteps = s.Historical_Valid_Step_Ids__c;
+        String result = '';
+        String previousStepIdTXT = previousStepId;
+        String nextStepIdTXT = nextStepId;
+        if(historicalSteps != null)
+        {
+            Boolean previousButton = false;
+            if(nextStepIdTXT == null)
+            {
+                previousButton = true;
+            }
+            //throw new Form_CustomException(previousStepIdTXT + 'NEXT' + nextStepIdTXT + 'HISTO' + historicalSteps);
+            if(previousStepIdTXT != null)
+            {
+                if(!previousButton)
+                {
+                    if(historicalSteps.contains(previousStepIdTXT))
+                    {
+                        List<String> lHist = historicalSteps.split(AppConstants.DELIM_HISTORICAL_STEP);
+                        
+                        for(Integer i = 0; i <= lHist.size()-1; i++)
+                        {
+                            if(lHist[i] == previousStepIdTXT)
+                            {
+                                 result +=  lHist[i] + AppConstants.DELIM_HISTORICAL_STEP + (Integer.valueOf(lHist[i+1])+1 ) + AppConstants.DELIM_HISTORICAL_STEP ;
+                                 i = i + 1;
+                            }
+                            else{
+                                result += lHist[i] + AppConstants.DELIM_HISTORICAL_STEP;
+                            }   
+                        }
+                        historicalSteps = result;
+                        result = '';
+                    }
+                    else
+                    {
+                        historicalSteps += ''+ previousStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
+                    } 
+                    if(historicalSteps.contains(nextStepIdTXT))
+                    {
+                        List<String> lHist = historicalSteps.split(AppConstants.DELIM_HISTORICAL_STEP);
+                        
+
+                        for(Integer i = 0; i <= lHist.size()-1; i++)
+                        {
+                            if(lHist[i] == nextStepIdTXT)
+                            {
+
+                                if(Integer.valueOf(lHist[i+1]) != 0)
+                                {
+                                    result +=  lHist[i] + AppConstants.DELIM_HISTORICAL_STEP + (Integer.valueOf(lHist[i+1])+1 ) + AppConstants.DELIM_HISTORICAL_STEP ;
+                                    i = i + 1;
+                                }
+                                else{
+                                    result += lHist[i] + AppConstants.DELIM_HISTORICAL_STEP;
+                                }
+                            }
+                            else{
+                                result += lHist[i] + AppConstants.DELIM_HISTORICAL_STEP;
+                            }   
+                        }
+                        historicalSteps = result;
+                    }
+                    else{
+                        historicalSteps += ''+ nextStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+                    }
+
+                }
+            }
+        }
+        else{
+            if(previousStepIdTXT != null)
+            {
+                historicalSteps = '' + previousStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
+            }
+
+            if(nextStepIdTXT != null)
+            {
+                if(historicalSteps == null)
+                {
+                    historicalSteps = '' + nextStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+                }
+                else{
+                    historicalSteps += '' + nextStepIdTXT + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+                }
+            }
+
+        }
+        
+        s.Historical_Valid_Step_Ids__c = historicalSteps;
         s.Valid_Step_Ids__c=newValidStepIdPath;     
         update s;
     }
-    
+
+
     public static Id getPreviousStepId(Id submissionId, Id currentStepId){
         
         // todo - validation, error handling etc.
