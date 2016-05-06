@@ -60,4 +60,3 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
         <value xsi:type="xsd:string">ConfirmationFramework</value>
     </values>
 </CustomMetadata>
-
