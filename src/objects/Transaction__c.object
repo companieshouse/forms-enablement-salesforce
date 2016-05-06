@@ -188,6 +188,15 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>ErrorDescription__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>API call errors will be presented here</inlineHelpText>
+        <label>Error Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Form_Name__c</fullName>
         <externalId>false</externalId>
         <label>Form Name</label>
