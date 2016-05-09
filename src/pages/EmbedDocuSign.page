@@ -28,6 +28,15 @@
             <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />  
         </apex:outputPanel>
 
+        <apex:outputPanel rendered="{!requestedSignatures}">
+            <h1 class="heading-xlarge">
+              {!$Label.UI_Text_DocuSign}
+            </h1> 
+            <h3 >
+              Document sent to Directors. You will be notified when all signatures are completed 
+            </h3> 
+        </apex:outputPanel>
+
         <apex:outputPanel rendered="{!hasPageErrors}">
           <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
 

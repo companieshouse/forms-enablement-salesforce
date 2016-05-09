@@ -21,6 +21,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     public Boolean hasPageErrors { get; set; }
     public String externalURL {get; set;}
     public Boolean showButtons {get; set;}
+    public Boolean requestedSignatures {get; set;}
 
     public String pageTitle { get; private set; }
     public String pageText  { get; private set; }  
@@ -77,7 +78,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         }
 
         tx = [Select Id, Name, CompanyName__c, Status__c, Form_Name__c,
-                    (Select Id, Name, Email__c from Officers__r),
+                    (Select Id, Name, Email__c, isPresenter__c from Officers__r),
                     (Select Id, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c from DocuSign_Status__r)
                 from Transaction__c where id = :submissionId];
         
@@ -91,9 +92,16 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         if (ApexPages.currentPage().getParameters().containsKey('event') && 
                     !String.isBlank(ApexPages.currentPage().getParameters().get('event'))
                     && ApexPages.currentPage().getParameters().get('event')=='OnSigningComplete') {
-            tx.Status__c = 'Signed';
-            update tx;
-            return nextAction();
+            
+            if(tx.Status__c == 'Pending Signatures') { //there are more officers
+                requestedSignatures = true;
+                return null;
+            } else { // There is only the presenter as officer
+                tx.Status__c = 'Signed';
+                update tx;
+                return nextAction();
+            }
+            
 
         // Transaction is signed
         //} else if(isPageAlreadyValidStep) {
@@ -101,12 +109,26 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
 
             showButtons=true;
             return null;
-        
+
+        // Transaction is pending signatures    
+        } else if (tx.Status__c == 'Pending Signatures') {
+            requestedSignatures = true;
+            return null;
+         
         // Else create a new evelope
         } else {
         
             SendToDocuSign sendToDS = new SendToDocuSign();
             externalURL = sendToDS.embedDocuSignOpen(tx);
+
+            if(tx.Officers__r.size() > 1) { //there are more officers
+                tx.Status__c = 'Pending Signatures';
+                update tx;   
+            }
+
+            if(externalURL == null) //presenter is not a director
+                requestedSignatures = true;
+            
             return null;
 
         }        
