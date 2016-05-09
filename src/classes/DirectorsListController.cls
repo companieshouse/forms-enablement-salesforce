@@ -92,7 +92,6 @@ public with sharing class DirectorsListController extends TransactionStepControl
             CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
             companyName = compProf.company_name;
         }
-        
         if(hasAlreadyLoadedOfficers)
         {
             //Get the list officer already created

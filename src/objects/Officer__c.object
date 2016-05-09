@@ -62,6 +62,15 @@
         <type>Email</type>
         <unique>false</unique>
     </fields>
+        <fields>
+        <fullName>isPresenter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Presenter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+
     <fields>
         <fullName>Transaction__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>

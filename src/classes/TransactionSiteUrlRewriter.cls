@@ -29,6 +29,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String ERROR 			= '/error';
 	public String PAYMENT 			= '/Payment';
 	public String REVIEW 			= '/review';
+	public String DIRECTORINPUT 	= '/SignatureInput';
 	
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -42,6 +43,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String VF_PAGE_PDFGENERATION = '/PDFGeneration';	
 	public String VF_PAGE_PAYMENT 		= '/Payment';	
 	public String VF_PAGE_REVIEW 		= '/Review';
+	public String VF_PAGE_DIRECTORINPUT	= '/DirectorsInputList';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -65,6 +67,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 		else if(url.startsWith(VF_PAGE_PDFGENERATION))	{ pr = new PageReference(VF_PAGE_PDFGENERATION); }
 		else if(url.startsWith(PAYMENT))				{ pr = new PageReference(VF_PAGE_PAYMENT); }
 	   	else if(url.startsWith(REVIEW))					{ pr = new PageReference(VF_PAGE_REVIEW); }
+	   	else if(url.startsWith(DIRECTORINPUT))			{ pr = new PageReference(VF_PAGE_DIRECTORINPUT); }
 
 		
 
@@ -98,6 +101,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	    	else if(url.startsWith(VF_PAGE_PDFGENERATION))	{ friendlyPageReference = new PageReference(VF_PAGE_PDFGENERATION); }
 	    	else if(url.startsWith(VF_PAGE_PAYMENT))		{ friendlyPageReference = new PageReference(PAYMENT); }
 	        else if(url.startsWith(VF_PAGE_REVIEW))			{ friendlyPageReference = new PageReference(REVIEW); }
+	        else if(url.startsWith(VF_PAGE_DIRECTORINPUT))	{ friendlyPageReference = new PageReference(DIRECTORINPUT); }
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	

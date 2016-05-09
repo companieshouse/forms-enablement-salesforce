@@ -19,7 +19,7 @@
    Ver. Author        Date        Detail
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorInputListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
    <apex:composition template="TransactionPageTemplate">
       <apex:define name="content">
       <apex:form >
@@ -29,29 +29,45 @@
          <p class="lede">
             {!companyName} has the following director listed on the public register.
          </p>
-         <ul class="list list-bullet">
+         <div class="panel panel-border-wide">
+		    <p>
+		      Please select the directors to be signatory. <br/>
+		      You will need to select {!requiredSignature} Directors to sign
+		    </p>
+		  </div>
+         <ul style="display:{!if(!editList,"block","none")};" class="list list-bullet">
             <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-               <li>{!director}</li>
+               <li>{!director.officerTXT}, {!director.isSignatory}, {!director.email}</li>
             </apex:repeat>
          </ul>
 
+         <table style="display:{!if(editList,"block","none")};">
+		    <thead>
+		      <tr>
+		        <th>Name</th>
+		        <th>Are you the presenter?</th>
+		        <th>Signatory?</th>
+		        <th>Email</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat2">
+               <tr>
+		        <td >{!director.officerTXT}</td>
+		        <td ><label class="block-label" for="{!director.officer.Id}">
+			        <input id="{!director.officer.Id}" name="Check {!director.officer.Id}" type="radio" value="{!director.isPresenter}"></input>
+			      </label>
+			      </td>
+		        <td >
+		        <label class="block-label" for="{!director.officer.Id} 2">
+			        <input id="{!director.officer.Id} 2" name="Check {!director.officer.Id}2" type="checkbox" value="{!director.isSignatory}"></input>
+			      </label></td>
+		        <td ><input type="text"  value="{!director.email}" /></td>
+		      </tr>
+            </apex:repeat>
+		    </tbody>
+		  </table>
 
-        <fieldset class="inline">
-
-              <legend>Is this information correct?</legend>
-
-              <label class="block-label" for="radio-inline-1">
-                <input id="radio-inline-1" type="radio"  name="radio-inline-group" value="Yes">
-                Yes
-                </input>
-              </label>
-              <label class="block-label" for="radio-inline-2">
-                <input id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
-                No
-                </input>
-              </label>
-
-              </fieldset>
          </div>
          <br /><br />
           <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   

@@ -1,0 +1,144 @@
+/*
+Name:  DirectorsInputListController.cls
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Controller class for the Visualforce Page: DirectorsInputList
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Sylvain Picory&    2016-02-04  Initial development.
+*/
+public with sharing class DirectorInputListController extends TransactionStepControllerBase {
+
+    public Boolean hasPageErrors { get; set; }
+
+    public String companyName {get; set;}
+    public String companyNumber {get; set;}
+    public List<officerContainer> listOfDirectors {get; set;}
+    public Integer nbOfOfficers {get; set;}
+    public Boolean editList {get; set;}
+    public Integer requiredSignature {get; set;}
+
+    public DirectorInputListController(){
+        super();
+        if (isPageInitialised) initialiseStep();
+
+    }
+    
+    public void initialiseStep() {
+        
+        //Set up the company name
+        companyName = submissionMgr.submission.CompanyName__c;
+        companyNumber = submissionMgr.submission.CompanyNumber__c;
+        requiredSignature = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
+        listOfDirectors = new List<officerContainer>();
+        editList = true;
+
+        if(isPageAlreadyValidStep)
+        {
+            editList = false;
+        }
+
+        return;
+       
+    }
+
+    private void persistStep(){
+        for(Officer__c off :submissionMgr.submission.Officers__r)
+        {
+            for(officerContainer offCont :listOfDirectors)
+            {
+                if(off.Id == offCont.officer.Id)
+                {
+                    off.Email__c = offCont.email;
+                    off.isPresenter__c = offCont.isPresenter;
+                }
+            }
+        }
+        submissionMgr.persist();    
+    }
+    // End Instance methods.    
+    
+    public Boolean isSignatureNumberOK()
+    {   
+        Integer i = 0;
+
+        for(officerContainer offCont  :listOfDirectors ) 
+        {
+            if(offCont.isSignatory)
+                i++;
+        }
+
+        if(requiredSignature > i)
+            return false;
+
+        return false;
+    }
+
+    // Action methods.     
+    public PageReference nextAction(){
+
+        
+        if (!validatePageState()) return Page.TransactionException;
+
+        if(!isSignatureNumberOK())
+        {
+            //TODO: Show an error?
+
+            return null;
+        }
+        
+        persistStep();      
+
+        return nextStep();      
+    }
+    
+    public PageReference previousAction(){
+        if (!validatePageState()) return Page.TransactionException;
+                
+        return previousStep();
+    }
+
+    public void populateDirectorList(){
+        initialiseAction();
+        
+        
+        //Get the list officer already created
+        if(submissionMgr.submission.Officers__r != null)
+        {
+            if(submissionMgr.submission.Officers__r.size() > 0)
+            {
+                for(Officer__c off :submissionMgr.submission.Officers__r)
+                {
+                    listOfDirectors.add(new officerContainer(off));
+                }
+            }
+        }
+        
+    }
+
+    public with sharing class officerContainer{
+
+        public Officer__c officer {get; set;}
+        public String officerTXT {get; set;}
+        public Boolean isPresenter {get; set;}
+        public String email {get; set;}
+        public Boolean isSignatory {get; set;}
+
+        public officerContainer(Officer__c off)
+        {
+            officer = off;
+            officerTXT = off.Name;
+            email = off.Email__c;
+            isPresenter = off.isPresenter__c;
+            isSignatory = false; 
+        }
+    }
+}
