@@ -7,37 +7,53 @@
  * ab
  **/
  public with sharing class SendToDocuSign {
-    public Transaction__c tx;
-    public String tokenURL;
-    public String envelopeId;
-
+    private Boolean isEmbedSignature;
+    private String tokenURL; 
+    private String envelopeId;
     private String nextStepURL;
+    private Transaction__c tx;
+
+    private DocuSignAPI.Recipient embedRecipient;
+    private DocuSignAPI.APIServiceSoap dsApiSend;
     
 
-    
     public String embedDocuSignOpen(Transaction__c trans) {
+        isEmbedSignature = false;
+        tokenURL = null;
         envelopeId = 'Not sent yet';
-        tx = trans;
+        embedRecipient = null;
         
-        System.debug('EmbedDocuSign transaction: ' + tx);
+        //set
+        tx = trans;
+        dsApiSend = new DocuSignAPI.APIServiceSoap();
 
-        tokenURL = SendNow();
+        System.debug('EmbedDocuSign transaction: ' + tx);
+        
+        //Create and send Envelope
+        SendNow();
+
+        //If is Presenter is a Director get token to embedDocuSign
+        if(embedRecipient != null)
+            tokenURL = getToken();
 
         return tokenURL;
     }
+
     
-    private String SendNow() {
-        String token = '';
+    private void SendNow() {
         Blob pdfBlob;
+        Integer count;
+
+        Integer offListSize = tx.Officers__r.size();
 
         DocuSignSetting__c dsSetting = getDocuSignSettings();
 
-        DocuSignAPI.APIServiceSoap dsApiSend = new DocuSignAPI.APIServiceSoap();
+        //Set Endpoint
         dsApiSend.endpoint_x = dsSetting.URL__c;
 
         //Set Authentication
         String auth = '<DocuSignCredentials><Username>'+ dsSetting.Username__c 
-                +'</Username><Password>' + dsSetting.Password__c 
+                + '</Username><Password>' + dsSetting.Password__c 
                 + '</Password><IntegratorKey>' + dsSetting.IntegratorKey__c
                 + '</IntegratorKey></DocuSignCredentials>';
         System.debug('Setting authentication to: ' + auth);
@@ -45,6 +61,9 @@
         dsApiSend.inputHttpHeaders_x = new Map<String, String>();
         dsApiSend.inputHttpHeaders_x.put('X-DocuSign-Authentication', auth);
  
+        // To do:
+        // - update subject
+        // - update message
         DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
         envelope.Subject = 'DS01 - Striking off application for ' + tx.CompanyName__c ;
         envelope.EmailBlurb = 'This is Companies House new eSignature service,'+ 
@@ -54,6 +73,7 @@
 
         // Render the contract
         // Use PDFGeneration to render DS01
+        // To do update PDFGeneration to be generic
         System.debug('Rendering the PDF');
         PageReference pageRef = new PageReference('/apex/PDFGeneration');
         pageRef.getParameters().put('id',tx.Id);
@@ -93,34 +113,39 @@
         envelope.CustomFields.CustomField[1].Value = tx.Officers__r[0].Id + '~Officer__c'; 
         envelope.CustomFields.CustomField[1].CustomFieldType = 'Text';
 
+        
         // Recipient
         System.debug('getting the Recipients');
+        
         envelope.Recipients = new DocuSignAPI.ArrayOfRecipient();
-        // Set Recipient
-        Officer__c off = tx.Officers__r[0];
-        envelope.Recipients.Recipient = new DocuSignAPI.Recipient[1];
-        DocuSignAPI.Recipient recipient = getRecipient(off, 1);
-        envelope.Recipients.Recipient[0] = recipient;
+        envelope.Recipients.Recipient = new DocuSignAPI.Recipient[offListSize];
         
-        // Tab
-        DocuSignAPI.Tab tab1 = new DocuSignAPI.Tab();
-        tab1.Type_x = 'SignHere';
-        tab1.RecipientID = 1;
-        tab1.DocumentID = 1;
-        tab1.AnchorTabItem = new DocuSignAPI.AnchorTab();
-        tab1.AnchorTabItem.AnchorTabString = '/s1/';
+        count=0;
+        for(Officer__c off : tx.Officers__r){
+            DocuSignAPI.Recipient recipient = getRecipient(off, count+1);
+            envelope.Recipients.Recipient[count] = recipient;
+            count++;
+        }
 
-        DocuSignAPI.Tab tab2 = new DocuSignAPI.Tab();
-        tab2.Type_x = 'DateSigned';
-        tab2.RecipientID = 1;
-        tab2.DocumentID = 1;
-        tab2.AnchorTabItem = new DocuSignAPI.AnchorTab();
-        tab2.AnchorTabItem.AnchorTabString = '/sd1/';
-        
+
+       
+        // Tab
         envelope.Tabs = new DocuSignAPI.ArrayOfTab();
-        envelope.Tabs.Tab = new DocuSignAPI.Tab[2];
-        envelope.Tabs.Tab[0] = tab1;        
-        envelope.Tabs.Tab[1] = tab2;        
+        envelope.Tabs.Tab = new DocuSignAPI.Tab[offListSize*2]; //for each Officer we will create 2 tabs
+        
+        count=0;
+        for(Integer recipientId=1; recipientId <= offListSize; recipientId++){
+            //create a tab for signing 
+            DocuSignAPI.Tab tab1 = createTab('SignHere', recipientId, 1);
+            envelope.Tabs.Tab[count] = tab1;
+            count++;
+            
+            //create a tab for date
+            DocuSignAPI.Tab tab2 = createTab('DateSigned', recipientId, 1);
+            envelope.Tabs.Tab[count] = tab2;
+            count++;
+        }
+
         
         System.debug('Calling the API');
         try {
@@ -134,7 +159,12 @@
             envelopeId = 'Exception - ' + e;
         
         }
-        
+    }
+     
+
+    private String getToken() { 
+        String token = '';
+
         /**
         * To do - set correct values
         */
@@ -166,7 +196,7 @@
         
         // assumes apiService = preconfigured api proxy
         try {
-            token = dsApiSend.RequestRecipientToken(envelopeId,recipient.captiveinfo.ClientUserId,recipient.UserName,recipient.Email,assert,clientURLs);
+            token = dsApiSend.RequestRecipientToken(envelopeId,embedRecipient.captiveinfo.ClientUserId,embedRecipient.UserName,embedRecipient.Email,assert,clientURLs);
         }  catch ( CalloutException e) {
                 System.debug('Exception - ' + e );
                 envelopeId = 'Exception - ' + e;
@@ -174,6 +204,7 @@
         
         return token;
     }
+
 
     // returns URL of POP page that redirects callbacks to correct URL
     // Strips off end of path and replaces with ndaPOP
@@ -224,19 +255,22 @@
 
 
     /********************* Aux *********************/
-    public DocuSignAPI.Recipient getRecipient(Officer__c off, Integer order) {
+    private DocuSignAPI.Recipient getRecipient(Officer__c off, Integer recipientId) {
         DocuSignAPI.Recipient recipient = new DocuSignAPI.Recipient();
-        recipient.ID = order;
+        recipient.ID = recipientId;
         recipient.Type_x = 'Signer';
-        recipient.RoutingOrder = order;
+        //Change this field if signing order is different, e.g. sign2 wait for sign1 completion
+        recipient.RoutingOrder = 1; 
         recipient.Email = off.Email__c;
         recipient.UserName = convertName(off.Name);
         
-        // If 1 set embedded signature
-        // to do compare with user authenticate 
-        if(order == 1) {
+        // If Officer is Presenter set embedded signature
+        if(off.isPresenter__c) { 
+            isEmbedSignature = true;
             recipient.CaptiveInfo = new DocuSignAPI.RecipientCaptiveInfo();
             recipient.CaptiveInfo.ClientUserId = off.Email__c;
+
+            embedRecipient = recipient;
         }
             
         // This setting seems required or you see the error:
@@ -247,9 +281,23 @@
         return recipient;
     }
 
+    private DocuSignAPI.Tab createTab(String type, Integer recipientId, Integer documentId) {
+        DocuSignAPI.Tab tab = new DocuSignAPI.Tab();
+        tab.Type_x = type; //'SignHere'
+        tab.RecipientID = recipientId;
+        tab.DocumentID = documentId;
+        tab.AnchorTabItem = new DocuSignAPI.AnchorTab();
+        if(type == 'SignHere')
+            tab.AnchorTabItem.AnchorTabString = '/s' + recipientId + '/';
+        else if(type == 'DateSigned')
+            tab.AnchorTabItem.AnchorTabString = '/sd' + recipientId + '/';
+
+        return tab;
+    }
+
     // API is returning last name + first Name
     // This function set name in the correct order
-    public String convertName(String name) {
+    private String convertName(String name) {
         String firstName;
         String lastName;
 
