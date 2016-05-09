@@ -24,6 +24,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public String companyNumber {get; set;}
     public Boolean validationDirector {get; set;}
     public List<String> listOfDirectors {get; set;}
+    public Integer nbOfOfficers {get; set;}
 
     public DirectorsListController(){
         super();
@@ -50,12 +51,15 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 hasAlreadyLoadedOfficers = false;
             }
         }
+
+        nbOfOfficers = 0;
         return;
        
     }
 
     private void persistStep(){
         submissionMgr.submission.CompanyName__c = companyName;
+        submissionMgr.submission.OfficerCount__c = nbOfOfficers;
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -121,6 +125,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
                 }
             }
+
+            nbOfOfficers = listOfDirectors.size();
 
             //Insert the officer
             insert officerList;

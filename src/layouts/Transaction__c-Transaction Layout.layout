@@ -30,6 +30,14 @@
                 <behavior>Edit</behavior>
                 <field>Historical_Valid_Step_Ids__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>OfficerCount__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>RequiredOfficerSign__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

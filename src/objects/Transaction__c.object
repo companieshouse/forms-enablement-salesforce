@@ -229,6 +229,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>OfficerCount__c</fullName>
+        <externalId>false</externalId>
+        <label>OfficerCount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Presenter__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -239,6 +250,19 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RequiredOfficerSign__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>RequiredOfficerSign</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
