@@ -165,6 +165,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DirectorInputListController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DirectorsListController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1274,6 +1278,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Officer__c.isPresenter__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Opportunity.AccountId</field>
         <readable>true</readable>
@@ -2306,6 +2315,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DeveloperTools</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DirectorsInputList</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

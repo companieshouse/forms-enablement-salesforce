@@ -3,7 +3,7 @@
     <label>DS01 - DirectorsList</label>
     <values>
         <field>Apex_Class_Name__c</field>
-        <value xsi:type="xsd:string">DirectorsListController</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_1__c</field>

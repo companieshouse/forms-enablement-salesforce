@@ -12,11 +12,11 @@
     private String envelopeId;
     private String nextStepURL;
     private Transaction__c tx;
-
+    
     private DocuSignAPI.Recipient embedRecipient;
     private DocuSignAPI.APIServiceSoap dsApiSend;
-    
 
+    
     public String embedDocuSignOpen(Transaction__c trans) {
         isEmbedSignature = false;
         tokenURL = null;
@@ -26,9 +26,9 @@
         //set
         tx = trans;
         dsApiSend = new DocuSignAPI.APIServiceSoap();
-
-        System.debug('EmbedDocuSign transaction: ' + tx);
         
+        System.debug('EmbedDocuSign transaction: ' + tx);
+
         //Create and send Envelope
         SendNow();
 
@@ -38,7 +38,7 @@
 
         return tokenURL;
     }
-
+    
     
     private void SendNow() {
         Blob pdfBlob;
@@ -53,7 +53,7 @@
 
         //Set Authentication
         String auth = '<DocuSignCredentials><Username>'+ dsSetting.Username__c 
-                + '</Username><Password>' + dsSetting.Password__c 
+                +'</Username><Password>' + dsSetting.Password__c 
                 + '</Password><IntegratorKey>' + dsSetting.IntegratorKey__c
                 + '</IntegratorKey></DocuSignCredentials>';
         System.debug('Setting authentication to: ' + auth);
@@ -128,7 +128,7 @@
         }
 
 
-       
+        
         // Tab
         envelope.Tabs = new DocuSignAPI.ArrayOfTab();
         envelope.Tabs.Tab = new DocuSignAPI.Tab[offListSize*2]; //for each Officer we will create 2 tabs
@@ -145,7 +145,7 @@
             envelope.Tabs.Tab[count] = tab2;
             count++;
         }
-
+        
         
         System.debug('Calling the API');
         try {
@@ -164,7 +164,7 @@
 
     private String getToken() { 
         String token = '';
-
+        
         /**
         * To do - set correct values
         */

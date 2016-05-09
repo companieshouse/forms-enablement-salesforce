@@ -3,7 +3,7 @@
     <label>DS01 - Confirmation</label>
     <values>
         <field>Apex_Class_Name__c</field>
-        <value xsi:type="xsd:string">ConfirmationFrameworkController</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_1__c</field>
@@ -45,7 +45,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">5.0</value>
+        <value xsi:type="xsd:double">6.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

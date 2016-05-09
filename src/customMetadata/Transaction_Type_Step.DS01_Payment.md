@@ -3,7 +3,7 @@
     <label>DS01 - Payment</label>
     <values>
         <field>Apex_Class_Name__c</field>
-        <value xsi:type="xsd:string">PaymentController</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_1__c</field>
@@ -43,7 +43,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">4.0</value>
+        <value xsi:type="xsd:double">5.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
