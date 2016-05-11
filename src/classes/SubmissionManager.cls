@@ -26,7 +26,12 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id,RequiredOfficerSign__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c,isPresenter__c From Officers__r) from Transaction__c where Id=:submissionId];
+        List<Transaction__c> recs = [select Id, Name, RequiredOfficerSign__c, Historical_Valid_Step_Ids__c, CompanyNumber__c,
+                                            Form_Name__c, Status__c, CompanyName__c, SubmissionId__c, 
+                                            Warning_Confirmation_Flag__c, Amount__c, 
+                                            (select Id, BodyLength, Name from Attachments),
+                                            (select Id, Name, Email__c, isPresenter__c, isSignatory__c from Officers__r) 
+                                        from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
         System.debug(LoggingLevel.ERROR, submission);   
@@ -61,12 +66,14 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,RequiredOfficerSign__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c,isPresenter__c From Officers__r) from Transaction__c 
-                                                    where Presenter__c=:presenterId 
-                                                            and Company__c=:companyId.Id
-                                                            and Transaction_Type__c=:transactionType
-                                                            and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
-                                                                or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
+        List<Transaction__c> recs = [select Id, RequiredOfficerSign__c, Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,
+                                        (select Id,BodyLength, Name from Attachments),
+                                        (select Id,Name, Email__c, isPresenter__c, isSignatory__c from Officers__r) from Transaction__c 
+                                    where Presenter__c=:presenterId 
+                                        and Company__c=:companyId.Id
+                                        and Transaction_Type__c=:transactionType
+                                        and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
+                                            or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
         if (recs.size()==1) return recs[0].Id;                  
         
         submission = new Transaction__c(Presenter__c=presenterId, Amount__c = td.Fee__c, Form_Name__c = td.DeveloperName, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
