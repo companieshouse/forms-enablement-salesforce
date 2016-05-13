@@ -28,6 +28,7 @@ public with sharing class AppConstants {
 	
 	//DocuSign Status
     public static final String DOCUSIGN_STATUS_COMPLETED = 'Completed';   
+    public static final String DOCUSIGN_STATUS_REJECTED = 'Rejected';   
 	
 	public final static String TRANSACTION_TYPE_VISUALFORCE_PAGE = 'VF Page';
 	public final static String TRANSACTION_TYPE_APEX_CODE = 'Apex Code';

@@ -1,140 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-	<types>
-		<members>*</members>
-		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexPage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTrigger</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomLabels</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomMetadata</name>
-	</types>
-	<types>
-		<members>API_Org_Settings__c</members>
-		<members>Access_Token__c</members>
-		<members>Account</members>
-		<members>AccountContactRole</members>
-		<members>Account_API_Settings__c</members>
-		<members>Activity</members>
-		<members>Asset</members>
-		<members>AssistantProgress</members>
-		<members>CH_USER_Profile__c</members>
-		<members>Campaign</members>
-		<members>CampaignMember</members>
-		<members>Case</members>
-		<members>CaseContactRole</members>
-		<members>CaseMilestone</members>
-		<members>Company_Authorisation__c</members>
-		<members>Contact</members>
-		<members>ContentVersion</members>
-		<members>Contract</members>
-		<members>ContractContactRole</members>
-		<members>ContractLineItem</members>
-		<members>CryptoSettings__c</members>
-		<members>DocuSignSetting__c</members>
-		<members>DuplicateRecordItem</members>
-		<members>DuplicateRecordSet</members>
-		<members>FeedItem</members>
-		<members>ForecastingCategoryMapping</members>
-		<members>Forms_API_Service__c</members>
-		<members>Macro</members>
-		<members>MacroAction</members>
-		<members>MacroInstruction</members>
-		<members>Officer__c</members>
-		<members>Opportunity</members>
-		<members>OpportunityCompetitor</members>
-		<members>OpportunityContactRole</members>
-		<members>OpportunityLineItem</members>
-		<members>Order</members>
-		<members>OrderItem</members>
-		<members>PartnerRole</members>
-		<members>Presenter__c</members>
-		<members>Pricebook2</members>
-		<members>PricebookEntry</members>
-		<members>Product2</members>
-		<members>Question</members>
-		<members>Reply</members>
-		<members>Session__c</members>
-		<members>Site</members>
-		<members>SmartPay_Settings__c</members>
-		<members>Solution</members>
-		<members>StreamingChannel</members>
-		<members>Task</members>
-		<members>Transaction_Submission__c</members>
-		<members>Transaction_Type_Step__mdt</members>
-		<members>Transaction_Type__mdt</members>
-		<members>Transaction__c</members>
-		<members>User</members>
-		<members>UserProvisioningRequest</members>
-		<members>User_Authorisation__c</members>
-		<name>CustomObject</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomTab</name>
-	</types>
-	<types>
-		<members>Access_Token__c-Access Token Layout</members>
-		<members>Account-Account %28Marketing%29 Layout</members>
-		<members>Account-Account %28Sales%29 Layout</members>
-		<members>Account-Account %28Support%29 Layout</members>
-		<members>Account-Account Layout</members>
-		<members>Asset-Asset Layout</members>
-		<members>CH_USER_Profile__c-CH User Profile Layout</members>
-		<members>Company_Authorisation__c-Company Authorisation Layout</members>
-		<members>Contact-Contact %28Marketing%29 Layout</members>
-		<members>Contact-Contact %28Sales%29 Layout</members>
-		<members>Contact-Contact %28Support%29 Layout</members>
-		<members>Contact-Contact Layout</members>
-		<members>ContentVersion-Content Version Layout</members>
-		<members>DuplicateRecordSet-Duplicate Record Set Layout</members>
-		<members>FAQ__kav-How To Layout</members>
-		<members>Global-Global Layout</members>
-		<members>Officer__c-Officer Layout</members>
-		<members>Presenter__c-Presenter Layout</members>
-		<members>Pricebook2-Price Book Layout</members>
-		<members>PricebookEntry-Price Book Entry Layout</members>
-		<members>Product2-Product Layout</members>
-		<members>Question-Question Layout</members>
-		<members>Reply-Reply Layout</members>
-		<members>ServiceContract-Service Contract Layout</members>
-		<members>Session__c-Session Layout</members>
-		<members>Solution-Solution Layout</members>
-		<members>Task-Task Layout</members>
-		<members>Transaction_Submission__c-Transaction Submission Layout</members>
-		<members>Transaction_Type_Step__mdt-Transaction Type Step Layout</members>
-		<members>Transaction_Type__mdt-Transaction Type Layout</members>
-		<members>Transaction__c-Transaction Layout</members>
-		<members>User-User Layout</members>
-		<members>UserProvAccount-User Provisioning Account Layout</members>
-		<members>UserProvisioningLog-User Provisioning Log Layout</members>
-		<members>UserProvisioningRequest-User Provisioning Request Layout</members>
-		<members>User_Authorisation__c-User Authorisation Layout</members>
-		<name>Layout</name>
-	</types>
-	<types>
-		<members>Admin</members>
-		<members>Default Profile</members>
-		<name>Profile</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>StaticResource</name>
-	</types>
-	<version>31.0</version>
+    <types>
+        <members>*</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexComponent</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>API_Org_Settings__c</members>
+        <members>Access_Token__c</members>
+        <members>Account</members>
+        <members>AccountContactRole</members>
+        <members>Account_API_Settings__c</members>
+        <members>Activity</members>
+        <members>Asset</members>
+        <members>AssistantProgress</members>
+        <members>CH_USER_Profile__c</members>
+        <members>Campaign</members>
+        <members>CampaignMember</members>
+        <members>Case</members>
+        <members>CaseContactRole</members>
+        <members>CaseMilestone</members>
+        <members>Company_Authorisation__c</members>
+        <members>Contact</members>
+        <members>ContentVersion</members>
+        <members>Contract</members>
+        <members>ContractContactRole</members>
+        <members>ContractLineItem</members>
+        <members>CryptoSettings__c</members>
+        <members>DocuSignSetting__c</members>
+        <members>DuplicateRecordItem</members>
+        <members>DuplicateRecordSet</members>
+        <members>EmailMessage</members>
+        <members>FeedItem</members>
+        <members>ForecastingCategoryMapping</members>
+        <members>Forms_API_Service__c</members>
+        <members>Macro</members>
+        <members>MacroAction</members>
+        <members>MacroInstruction</members>
+        <members>Officer__c</members>
+        <members>Opportunity</members>
+        <members>OpportunityCompetitor</members>
+        <members>OpportunityContactRole</members>
+        <members>OpportunityLineItem</members>
+        <members>Order</members>
+        <members>OrderItem</members>
+        <members>PartnerRole</members>
+        <members>Presenter__c</members>
+        <members>Pricebook2</members>
+        <members>PricebookEntry</members>
+        <members>Product2</members>
+        <members>Question</members>
+        <members>Reply</members>
+        <members>Session__c</members>
+        <members>Site</members>
+        <members>SmartPay_Settings__c</members>
+        <members>Solution</members>
+        <members>StreamingChannel</members>
+        <members>Task</members>
+        <members>Transaction_Submission__c</members>
+        <members>Transaction_Type_Step__mdt</members>
+        <members>Transaction_Type__mdt</members>
+        <members>Transaction__c</members>
+        <members>User</members>
+        <members>UserProvisioningRequest</members>
+        <members>User_Authorisation__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>unfiled$public</members>
+        <members>unfiled$public/ContactFollowUpSAMPLE</members>
+        <members>unfiled$public/CustomerPortalChangePwdEmail</members>
+        <members>unfiled$public/CustomerPortalNewUserEmail</members>
+        <members>unfiled$public/CustomerPortalSelfRegUserEmail</members>
+        <members>unfiled$public/DocusignTransactionExpired</members>
+        <members>unfiled$public/ExpiryNotification</members>
+        <members>unfiled$public/LeadsNewassignmentnotificationSAMPLE</members>
+        <members>unfiled$public/LeadsWebtoLeademailresponseSAMPLE</members>
+        <members>unfiled$public/ReviewStatus</members>
+        <members>unfiled$public/SUPPORTCaseResponsewithSolutionSAMPLE</members>
+        <members>unfiled$public/SUPPORTCaseescalationnotificationSAMPLE</members>
+        <members>unfiled$public/SUPPORTNewassignmentnotificationSAMPLE</members>
+        <members>unfiled$public/SUPPORTSelfServiceNewCommentNotificationSAMPLE</members>
+        <members>unfiled$public/SUPPORTSelfServiceNewUserLoginInformationSAMPLE</members>
+        <members>unfiled$public/SUPPORTSelfServiceResetPasswordSAMPLE</members>
+        <members>unfiled$public/SUPPORTWebtoCaseemailresponseSAMPLE</members>
+        <members>unfiled$public/TransactionExpired</members>
+        <members>unfiled$public/testDocusignEmail</members>
+        <name>EmailTemplate</name>
+    </types>
+    <types>
+        <members>Access_Token__c-Access Token Layout</members>
+        <members>Account-Account %28Marketing%29 Layout</members>
+        <members>Account-Account %28Sales%29 Layout</members>
+        <members>Account-Account %28Support%29 Layout</members>
+        <members>Account-Account Layout</members>
+        <members>Asset-Asset Layout</members>
+        <members>CH_USER_Profile__c-CH User Profile Layout</members>
+        <members>Company_Authorisation__c-Company Authorisation Layout</members>
+        <members>Contact-Contact %28Marketing%29 Layout</members>
+        <members>Contact-Contact %28Sales%29 Layout</members>
+        <members>Contact-Contact %28Support%29 Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>ContentVersion-Content Version Layout</members>
+        <members>DuplicateRecordSet-Duplicate Record Set Layout</members>
+        <members>EmailMessage-Email Message Layout - Email-to-Case</members>
+        <members>FAQ__kav-How To Layout</members>
+        <members>Global-Global Layout</members>
+        <members>Officer__c-Officer Layout</members>
+        <members>Pricebook2-Price Book Layout</members>
+        <members>PricebookEntry-Price Book Entry Layout</members>
+        <members>Product2-Product Layout</members>
+        <members>Question-Question Layout</members>
+        <members>Reply-Reply Layout</members>
+        <members>ServiceContract-Service Contract Layout</members>
+        <members>Session__c-Session Layout</members>
+        <members>Solution-Solution Layout</members>
+        <members>Task-Task Layout</members>
+        <members>Transaction_Submission__c-Transaction Submission Layout</members>
+        <members>Transaction_Type_Step__mdt-Transaction Type Step Layout</members>
+        <members>Transaction_Type__mdt-Transaction Type Layout</members>
+        <members>Transaction__c-Transaction Layout</members>
+        <members>User-User Layout</members>
+        <members>UserProvAccount-User Provisioning Account Layout</members>
+        <members>UserProvisioningLog-User Provisioning Log Layout</members>
+        <members>UserProvisioningRequest-User Provisioning Request Layout</members>
+        <members>User_Authorisation__c-User Authorisation Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <members>Default Profile</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>RemoteSiteSetting</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
+    <types>
+        <members>Transaction__c</members>
+        <name>Workflow</name>
+    </types>
+    <version>31.0</version>
 </Package>

@@ -35,9 +35,11 @@ public with sharing class AccountsAuthCallbackController {
     
     private User_Authorisation__c userAuth;
     private Company_Authorisation__c companyAuth;
-        
+    
+    Sobject presenterInfo;
     String transactionType;
     Id presenterID;
+    String presenterEmail;
     Sobject companyNumberId;
 
     public AppConstants constants;
@@ -115,12 +117,15 @@ public with sharing class AccountsAuthCallbackController {
                 
         upsert new Account(Name=userProfileName);
 
+
         transactionType = u.getUserDocument();
+
+        System.debug( 'transaction type is ' + transactionType);
         String hostname = ApexPages.currentPage().getHeaders().get('Host');
         String startjourneyURL = 'https://' + hostname + '/company?t=' +transactionType;
         PageReference startjourney = new PageReference(startjourneyURL);
         System.debug('redirect is = ' + startjourney);
-        // redirecdt to the framework once userprofile is given
+        // redirect to the framework once userprofile is given
         // note this presenter information is minimal (e.g. locale, email address, etc.)
         // will only drop a cookie with the profile information and access token 
         startjourney.setRedirect(true);
@@ -136,9 +141,7 @@ public with sharing class AccountsAuthCallbackController {
 
             System.debug('you have entered the company auth code redirect and here is the authcode' + companyAuth);
 
-                //    insert submission record
-
-                //
+            //  insert submission record
 
             //pass a submission ID and a Step ID
             //
@@ -146,11 +149,15 @@ public with sharing class AccountsAuthCallbackController {
 
             transactionMgr = new TransactionManager(transactionType);
 
-            presenterID = u.returnCurrentUser(); // will get from cookie
+            presenterInfo = u.returnCurrentUser();
+
+            presenterID = presenterInfo.Id; // will get from cookie
+
+            presenterEmail = String.valueof(presenterInfo.get('Name')); //presenterInfo.Name;
 
             companyNumberId = u.returnCurrentCompanyObject(); //will get from cookie
 
-            Id submissionId = submissionMgr.initialise( transactionType, presenterID, companyNumberId,transactionMgr.td );   
+            Id submissionId = submissionMgr.initialise( transactionType, presenterID, presenterEmail, companyNumberId, transactionMgr.td );   
             System.debug('submission ID is  ' + submissionId);
             
             //PageReference transactioninformation =  TransactionManager.firstStep(submissionId); // firstStep(submissionId);

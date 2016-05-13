@@ -134,8 +134,8 @@ public with sharing class StartFrameworkController {
 
             // todo - the code below forces reauthentication.
             // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
-
-            userTracker.getUserDocument();
+			userTracker.saveUserDocumentInfo();
+            //userTracker.getUserDocument();
 
            
             // todo - reinstate user authentication by returning the pagereference below instead of logging it out.

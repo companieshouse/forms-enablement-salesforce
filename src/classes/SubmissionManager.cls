@@ -26,7 +26,7 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c,PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c,isPresenter__c,isSignatory__c From Officers__r) from Transaction__c where Id=:submissionId];
+        List<Transaction__c> recs = [select Id,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c,PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, (SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c,isPresenter__c,isSignatory__c From Officers__r) from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
         System.debug(LoggingLevel.ERROR, submission);   
@@ -61,7 +61,7 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,Presenter__c,Form_Name__c, Presenter__r.Name,isMajorityRequired__c,PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c,isPresenter__c,isSignatory__c From Officers__r) from Transaction__c 
+        List<Transaction__c> recs = [select Id,Presenter__c,Form_Name__c, Presenter__r.Name,isMajorityRequired__c,PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, MultipleDirectors__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,Status__c,Amount__c,SubmissionId__c,(SELECT Id,BodyLength, Name FROM Attachments),(Select Id,Name, Email__c,isPresenter__c,isSignatory__c From Officers__r) from Transaction__c 
                                                     where Presenter__c=:presenterId 
                                                             and Company__c=:companyId.Id
                                                             and Transaction_Type__c=:transactionType
@@ -69,7 +69,7 @@ public with sharing class SubmissionManager {
                                                                 or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
         if (recs.size()==1) return recs[0].Id;                  
         
-        submission = new Transaction__c(Presenter__c=presenterId, Amount__c = td.Fee__c, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
+        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail, Amount__c = td.Fee__c, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
         insert submission;
         return submission.Id;       
     }
@@ -221,7 +221,8 @@ public with sharing class SubmissionManager {
         }
         
         s.Historical_Valid_Step_Ids__c = historicalSteps;
-        s.Valid_Step_Ids__c=newValidStepIdPath;     
+        s.Valid_Step_Ids__c=newValidStepIdPath; 
+		s.MultipleDirectors__c = false;    
         update s;
     }
 

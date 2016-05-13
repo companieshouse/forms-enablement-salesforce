@@ -99,7 +99,6 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
       } catch (Exception e){ return; } 
 
         
-
       return;
     }
 

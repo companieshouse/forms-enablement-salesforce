@@ -28,6 +28,16 @@
         <required>false</required>
         <type>TextArea</type>
     </fields>
+<fields>
+        <fullName>Expiry_Date_Length__c</fullName>
+        <externalId>false</externalId>
+        <label>Expiry Date Length</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
     <fields>
         <fullName>Family__c</fullName>
         <externalId>false</externalId>

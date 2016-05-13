@@ -20,7 +20,7 @@ public with sharing class CompanyController {
     // Public properties.
     public String companyNumber { get; set; }
     public Boolean hasPageErrors { get; set; }
-      public String transactionType {get; set;}
+    public String transactionType {get; set;}
 
     // Private class members.
     Boolean isPageInitialised=false;
@@ -33,6 +33,8 @@ public with sharing class CompanyController {
         
     // Constructors.
     public CompanyController(){
+		trackuser = new TrackUserClass();
+        trackuser.saveUserDocumentInfo();
         initialise();
     }
     // End Constructors. 
@@ -41,10 +43,7 @@ public with sharing class CompanyController {
     private void initialise(){
         securityMgr = new SecurityManager();        
         submissionMgr = new SubmissionManager();
-              //  trackuser = new TrackUserClass();
-            //trackuser.getUserDocument();
 
-        
         try {
             
             // todo - check for valid user auth cookie. 
@@ -92,8 +91,11 @@ public with sharing class CompanyController {
         return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }
     
-    public PageReference previousAction(){      
+    public PageReference previousAction(){  
+		trackuser = new TrackUserClass();
+       	trackuser.saveUserDocumentInfo();    
         return new PageReference('/?t='+transactionType);
     }
     // End Instance methods.
+
 }

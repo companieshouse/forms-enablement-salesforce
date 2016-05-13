@@ -159,6 +159,16 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+<fields>
+        <fullName>ContactEmail__c</fullName>
+        <description>Presenter Contact information for notifications</description>
+        <externalId>false</externalId>
+        <label>ContactEmail</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
     <fields>
         <fullName>Company__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
@@ -171,6 +181,24 @@
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
+<fields>
+        <fullName>ExpiryDate__c</fullName>
+        <description>Date of Expiry calculated from Custom meta data automatically. This is the period between sending a document and the actual signing of the document(s)</description>
+        <externalId>false</externalId>
+        <label>ExpiryDate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ExpirySEnt__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>expiry email sent and okay to set to inactive and/or delete file</description>
+        <externalId>false</externalId>
+        <label>ExpirySEnt</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
     <fields>
         <fullName>Date_1__c</fullName>
         <externalId>false</externalId>
@@ -178,6 +206,17 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+<fields>
+        <fullName>Expiry_Date_Length__c</fullName>
+        <externalId>false</externalId>
+        <label>Expiry Date Length</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Date_2__c</fullName>
@@ -225,6 +264,23 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+<fields>
+        <fullName>InActiveTransaction__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>InActiveTransaction</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MultipleDirectors__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If the transaction requires multiple directors</description>
+        <externalId>false</externalId>
+        <label>MultipleDirectors</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Number_2__c</fullName>
@@ -275,6 +331,18 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+<fields>
+        <fullName>ReviewRedirect__c</fullName>
+        <description>URL Redirect field to be sent to Presenter once transaction has been set to signed (note this is currently for multiple directors only).
+Developer note: This is the encrypted C value parameter to be added as a merged field in the Email correspondence</description>
+        <externalId>false</externalId>
+        <label>ReviewRedirect</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>RequiredOfficerSign__c</fullName>

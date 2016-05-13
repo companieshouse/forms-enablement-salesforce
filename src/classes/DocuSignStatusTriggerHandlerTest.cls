@@ -7,6 +7,7 @@
  * 
  * Author: antonio.bravo@golligo.co.uk
  * ab
+ * lb - updated rejected status test
  **/
 @isTest
 public class DocuSignStatusTriggerHandlerTest {
@@ -69,4 +70,27 @@ public class DocuSignStatusTriggerHandlerTest {
         System.assertEquals(dss.Transaction__c, txAfter.Id);
         System.assertnotEquals(AppConstants.REQUEST_STATUS_SIGNED, txAfter.Status__c);
     }
+
+      @IsTest(SeeAllData=false)
+      static void updateRejectedTransaction(){
+
+        //Create Transaction record
+        Transaction__c tx = createTransaction();
+
+        //Create DocuSign Status record
+        dsfs__DocuSign_Status__c dss = createDocSignStatus(tx);
+        
+        test.startTest();
+        dss.dsfs__Envelope_Status__c = AppConstants.DOCUSIGN_STATUS_REJECTED;
+        update dss;
+        test.stopTest();
+
+        //Validate
+        Transaction__c txAfter = [Select Id, Status__c from Transaction__c where Id = :tx.Id];
+        
+        System.assertEquals(dss.Transaction__c, txAfter.Id);
+        System.assertEquals(AppConstants.DOCUSIGN_STATUS_REJECTED, txAfter.Status__c);
+    }
+
+
 }

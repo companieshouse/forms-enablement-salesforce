@@ -132,8 +132,6 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         }        
 
     }
-        
-    
 
     // Action methods.     
     public PageReference nextAction(){ 

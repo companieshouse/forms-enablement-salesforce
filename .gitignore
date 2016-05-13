@@ -9,3 +9,5 @@
 #MavensMate exclusions
 config/*
 mm.log
+*.log
+*.orig
