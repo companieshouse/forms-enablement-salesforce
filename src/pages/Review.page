@@ -1,0 +1,85 @@
+<apex:page title="{!$Label.UI_Text_Review}" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <script>
+    if (window.frameElement) {
+        parent.location.href = window.location;
+        console.log("found iframe and reloading")
+    } else {
+        console.log('not finding iframe probably on mobile');
+    }
+    </script>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  An error has occurred.
+              </h1>
+                        <p>
+                            Optional description of the errors and how to correct them
+                        </p>
+                        <ul class="error-summary-list">
+                            <li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
+                        </ul>
+                    </div>
+                </apex:outputPanel>
+                <h1 class="heading-xlarge">
+                {!headerText1}
+             <!-- {!$Label.UI_Text_Review_page_Title} -->
+               </h1>
+                <p class="lede">{!displayText1}
+                </p>
+                <table class="check-your-answers">
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                <h2 class="heading-medium">Application details</h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Company details</td>
+                            <td>{!companyName}
+                                <br/> {!companyNumber}
+                                <br/> {!companyAddress1}
+                                <!--<br/> {!companyAddress2}
+                                <br/> {!companyregion}-->
+                                <br/> {!companyLocality}
+                                <br/> {!companypostcode}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Directors</td>
+                            <td>
+                                <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
+                                    <apex:outputText value="{!Director.Name}" id="theValue" />
+                                    <br/>
+                                </apex:repeat>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Presenter details</td>
+                            <td>{!presenterEmail}
+                                <br/>{!presenterName}
+                                <br/> {!presenterPhone}
+                            </td>
+                            <!-- <td class="change-answer">
+                                <a href="#">
+              Change <span class="visuallyhidden">Presenter details</span>
+            </a>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <h2 class="heading-medium">{!displayText2}</h2>
+                <p class="text">
+                    {!displayText3}
+                </p>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue to Payment" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+                <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
