@@ -72,7 +72,6 @@
         <members>Solution</members>
         <members>StreamingChannel</members>
         <members>Task</members>
-        <members>Transaction_Submission__c</members>
         <members>Transaction_Type_Step__mdt</members>
         <members>Transaction_Type__mdt</members>
         <members>Transaction__c</members>
@@ -135,7 +134,6 @@
         <members>Session__c-Session Layout</members>
         <members>Solution-Solution Layout</members>
         <members>Task-Task Layout</members>
-        <members>Transaction_Submission__c-Transaction Submission Layout</members>
         <members>Transaction_Type_Step__mdt-Transaction Type Step Layout</members>
         <members>Transaction_Type__mdt-Transaction Type Layout</members>
         <members>Transaction__c-Transaction Layout</members>
