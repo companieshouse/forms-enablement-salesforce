@@ -43,8 +43,8 @@
     private void SendNow() {
         Blob pdfBlob;
         Integer count;
+        List<Officer__c> officersToSignList = new List<Officer__c>();
 
-        Integer offListSize = tx.Officers__r.size();
 
         DocuSignSetting__c dsSetting = getDocuSignSettings();
 
@@ -53,7 +53,7 @@
 
         //Set Authentication
         String auth = '<DocuSignCredentials><Username>'+ dsSetting.Username__c 
-                +'</Username><Password>' + dsSetting.Password__c 
+                + '</Username><Password>' + dsSetting.Password__c 
                 + '</Password><IntegratorKey>' + dsSetting.IntegratorKey__c
                 + '</IntegratorKey></DocuSignCredentials>';
         System.debug('Setting authentication to: ' + auth);
@@ -115,26 +115,33 @@
 
         
         // Recipient
+        // Get Officers requested to sign and add to envelope as a recipients
         System.debug('getting the Recipients');
         
+        for(Officer__c off : tx.Officers__r){
+            if(off.isSignatory__c){
+                officersToSignList.add(off);      
+            }
+        }
+
         envelope.Recipients = new DocuSignAPI.ArrayOfRecipient();
-        envelope.Recipients.Recipient = new DocuSignAPI.Recipient[offListSize];
+        envelope.Recipients.Recipient = new DocuSignAPI.Recipient[officersToSignList.size()];
         
         count=0;
-        for(Officer__c off : tx.Officers__r){
+        for(Officer__c off : officersToSignList){
             DocuSignAPI.Recipient recipient = getRecipient(off, count+1);
             envelope.Recipients.Recipient[count] = recipient;
-            count++;
+            count++;    
         }
 
 
-        
+       
         // Tab
         envelope.Tabs = new DocuSignAPI.ArrayOfTab();
-        envelope.Tabs.Tab = new DocuSignAPI.Tab[offListSize*2]; //for each Officer we will create 2 tabs
+        envelope.Tabs.Tab = new DocuSignAPI.Tab[officersToSignList.size()*2]; //for each Officer we will create 2 tabs
         
         count=0;
-        for(Integer recipientId=1; recipientId <= offListSize; recipientId++){
+        for(Integer recipientId=1; recipientId <= officersToSignList.size(); recipientId++){
             //create a tab for signing 
             DocuSignAPI.Tab tab1 = createTab('SignHere', recipientId, 1);
             envelope.Tabs.Tab[count] = tab1;

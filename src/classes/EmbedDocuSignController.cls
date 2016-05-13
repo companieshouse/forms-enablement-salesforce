@@ -77,10 +77,8 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             return ApexPages.currentPage();
         }
 
-        tx = [Select Id, Name, CompanyName__c, Status__c, Form_Name__c,
-                    (Select Id, Name, Email__c, isPresenter__c from Officers__r),
-                    (Select Id, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c from DocuSign_Status__r)
-                from Transaction__c where id = :submissionId];
+        //Get transaction
+        tx = submissionMgr.submission;
         
 
         // Transaction context

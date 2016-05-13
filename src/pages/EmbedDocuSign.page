@@ -29,6 +29,11 @@
         </apex:outputPanel>
 
         <apex:outputPanel rendered="{!requestedSignatures}">
+            <!-- ab function to close iframes. TO DO: move to Transaction Page Template -->
+            <script type="text/javascript">
+              if (window.frameElement){parent.location.href = window.location; console.log("found iframe and reloading")} 
+              else {console.log('not finding iframe probably on mobile');}
+            </script>
             <h1 class="heading-xlarge">
               {!$Label.UI_Text_DocuSign}
             </h1> 
