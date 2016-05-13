@@ -34,6 +34,10 @@
                 <behavior>Edit</behavior>
                 <field>Fee__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>isMajorityForm__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

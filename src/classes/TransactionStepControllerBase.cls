@@ -115,7 +115,6 @@ public virtual class TransactionStepControllerBase {
             }
             else
                 isPageAlreadyValidStep = false;
-    	
     	} catch (Exception e){ return; }
     	return;
     }

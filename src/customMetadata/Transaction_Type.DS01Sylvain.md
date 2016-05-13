@@ -61,4 +61,8 @@
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
+    <values>
+        <field>isMajorityForm__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
 </CustomMetadata>

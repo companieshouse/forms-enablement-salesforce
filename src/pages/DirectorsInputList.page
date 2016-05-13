@@ -20,62 +20,70 @@
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
 <apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorInputListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
    <apex:composition template="TransactionPageTemplate">
       <apex:define name="content">
       <apex:form >
+        <apex:outputPanel id="emptyDiv"/>
 
          <div class="form-group">
          <h1 class="heading-xlarge">Request approval from company directors</h1>
          <p class="lede">
             {!companyName} has the following director listed on the public register.
          </p>
-         <div class="panel panel-border-wide">
-		    <p>
-		      Please select the directors to be signatory. <br/>
-		      You will need to select {!requiredSignature} Directors to sign
-		    </p>
-		  </div>
-         <ul style="display:{!if(!editList,"block","none")};" class="list list-bullet">
-            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-               <li>{!director.officerTXT}, {!director.isSignatory}, {!director.email}</li>
-            </apex:repeat>
-         </ul>
-
-         <table style="display:{!if(editList,"block","none")};">
-		    <thead>
-		      <tr>
-		        <th>Name</th>
-		        <th>Are you the presenter?</th>
-		        <th>Signatory?</th>
-		        <th>Email</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat2">
-               <tr>
-		        <td >{!director.officerTXT}</td>
-		        <td ><label class="block-label" for="{!director.officer.Id}">
-			        <input id="{!director.officer.Id}" name="Check {!director.officer.Id}" type="radio" value="{!director.isPresenter}"></input>
-			      </label>
-			      </td>
-		        <td >
-		        <label class="block-label" for="{!director.officer.Id} 2">
-			        <input id="{!director.officer.Id} 2" name="Check {!director.officer.Id}2" type="checkbox" value="{!director.isSignatory}"></input>
-			      </label></td>
-		        <td ><input type="text"  value="{!director.email}" /></td>
-		      </tr>
-            </apex:repeat>
-		    </tbody>
-		  </table>
-
-         </div>
+         <p class="heading-medium">
+          Please select who is going to sign.
+        </p>
+        <fieldset class="inline">
+          <div class="form-group">
+           <table>
+              <thead>
+                <tr>
+                  <th scope="col">Select for Signature</th>
+                  <th scope="col">Director Name</th>
+                  <th scope="col">Email (Mandatory)</th>
+                </tr>
+              </thead>
+              <tbody>
+          <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                        <tr>
+                            <td>
+      
+            <label class="block-label" for="radio-{!director.officer.Id}">
+              <input class="checkButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatory}" onchange="updateSignatory(this.name);"></input>
+            </label></td><td>
+            {!director.officerTXT}</td><td>
+            <input class="emailButtonRepeat" id="email-{!director.officer.Id}" type="email" name="{!director.officer.Id}" value="{!director.email}"></input>
+            </td>
+            </tr>
+          </apex:repeat>
+          </tbody>
+  </table>
+          </div>
+        </fieldset>
+        </div>
          <br /><br />
+
+         <apex:actionFunction action="{!updateSignatory}" name="updateSignatory" reRender="emptyDiv">
+          <apex:param name="paramSignatory" value="" id="x" assignTo="{!selectedId}" />
+         </apex:actionFunction>
           <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
          <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
          &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" /><br />
 		 &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+      <script type="text/javascript">
+         $j = jQuery.noConflict();
 
+             $j(document).ready(function() {
+              
+                
+               
+            });
+              
+            
+         }
+         </script>
 
       </apex:form>  
       </apex:define>

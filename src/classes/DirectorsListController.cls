@@ -83,7 +83,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         initialiseAction();
         if(companyNumber == null)
         {
-            listOfDirectors.add('Sylvain Picory');
+            listOfDirectors.add('No Officers found.');
             return;
         }
         
@@ -120,7 +120,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 {
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name= officer.name, Email__c = 'sylvain.picory@methodsdigital.co.uk' , Transaction__c =submissionMgr.submission.Id ));
+                    officerList.add(new Officer__c(Name= officer.name , Transaction__c =submissionMgr.submission.Id ));
 
                 }
             }

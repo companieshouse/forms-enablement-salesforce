@@ -23,8 +23,10 @@ public with sharing class DirectorInputListController extends TransactionStepCon
     public String companyNumber {get; set;}
     public List<officerContainer> listOfDirectors {get; set;}
     public Integer nbOfOfficers {get; set;}
-    public Boolean editList {get; set;}
     public Integer requiredSignature {get; set;}
+    public String email {get; set;}
+    public Id selectedId {get; set;}
+
 
     public DirectorInputListController(){
         super();
@@ -39,13 +41,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         requiredSignature = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         listOfDirectors = new List<officerContainer>();
-        editList = true;
-
-        if(isPageAlreadyValidStep)
-        {
-            editList = false;
-        }
-
+        email = '';
         return;
        
     }
@@ -58,7 +54,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
                 if(off.Id == offCont.officer.Id)
                 {
                     off.Email__c = offCont.email;
-                    off.isPresenter__c = offCont.isPresenter;
+                    off.isSignatory__c = offCont.isSignatory;
                 }
             }
         }
@@ -70,6 +66,17 @@ public with sharing class DirectorInputListController extends TransactionStepCon
     {   
         Integer i = 0;
 
+        for(Officer__c off :submissionMgr.submission.Officers__r)
+        {
+            if(off.isPresenter__c)
+            {
+                if(off.isSignatory__c)
+                {
+                    i++;
+                }
+            }
+        }
+
         for(officerContainer offCont  :listOfDirectors ) 
         {
             if(offCont.isSignatory)
@@ -79,7 +86,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         if(requiredSignature > i)
             return false;
 
-        return false;
+        return true;
     }
 
     // Action methods.     
@@ -88,14 +95,19 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         
         if (!validatePageState()) return Page.TransactionException;
 
-        if(!isSignatureNumberOK())
+        if(submissionMgr.submission.isMajorityRequired__c)
         {
-            //TODO: Show an error?
 
-            return null;
+            if(!isSignatureNumberOK())
+            {
+                //TODO :show and error
+                return null;
+            }
+
+            
         }
         
-        persistStep();      
+        persistStep();
 
         return nextStep();      
     }
@@ -106,9 +118,8 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         return previousStep();
     }
 
-    public void populateDirectorList(){
+    public PageReference populateDirectorList(){
         initialiseAction();
-        
         
         //Get the list officer already created
         if(submissionMgr.submission.Officers__r != null)
@@ -117,11 +128,35 @@ public with sharing class DirectorInputListController extends TransactionStepCon
             {
                 for(Officer__c off :submissionMgr.submission.Officers__r)
                 {
-                    listOfDirectors.add(new officerContainer(off));
+                    if(!off.isPresenter__c)
+                        listOfDirectors.add(new officerContainer(off));
                 }
             }
         }
-        
+        //If my list is empty there is only on director so we shoudn't call this page...
+        if(listOfDirectors.isEmpty())
+        {
+            return nextAction();
+        }
+
+        return null;
+    }
+
+    
+
+    public void updateSignatory()
+    {
+        if(selectedId == null)
+            return;
+
+        for(officerContainer off :listOfDirectors)
+        {
+            if(off.officer.Id == selectedId)
+            {
+                off.isSignatory = true;
+                break;
+            }
+        }
     }
 
     public with sharing class officerContainer{
@@ -137,8 +172,8 @@ public with sharing class DirectorInputListController extends TransactionStepCon
             officer = off;
             officerTXT = off.Name;
             email = off.Email__c;
-            isPresenter = off.isPresenter__c;
-            isSignatory = false; 
+            isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
+            isSignatory = (off.isSignatory__c == null ? false : off.isSignatory__c);
         }
     }
 }

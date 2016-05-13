@@ -35,8 +35,24 @@
                 <field>OfficerCount__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Presenter__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>RequiredOfficerSign__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PresenterPhoneNumber__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PresenterName__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>isMajorityRequired__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -172,6 +188,7 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Email__c</fields>
+        <fields>isPresenter__c</fields>
         <relatedList>Officer__c.Transaction__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -192,7 +209,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h4E000000RDKP</masterLabel>
+        <masterLabel>00h4E000000EZXi</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

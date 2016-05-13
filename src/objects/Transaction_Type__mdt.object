@@ -117,6 +117,15 @@
         <required>false</required>
         <type>TextArea</type>
     </fields>
+    <fields>
+        <fullName>isMajorityForm__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Please select this option if you want the Directors Email screen to be validated with the majority rule</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select this option if you want the Directors Email screen to be validated with the majority rule</inlineHelpText>
+        <label>isMajorityForm?</label>
+        <type>Checkbox</type>
+    </fields>
     <label>Transaction Type</label>
     <pluralLabel>Transaction Type</pluralLabel>
 </CustomObject>

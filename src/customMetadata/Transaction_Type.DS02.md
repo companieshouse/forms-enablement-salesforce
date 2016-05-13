@@ -64,4 +64,8 @@ You cannot use this form to: - withdraw a striking off application by a Limited 
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
+    <values>
+        <field>isMajorityForm__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
 </CustomMetadata>

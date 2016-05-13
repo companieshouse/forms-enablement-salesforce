@@ -249,6 +249,22 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>PresenterName__c</fullName>
+        <externalId>false</externalId>
+        <label>PresenterName</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>PresenterPhoneNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>PresenterPhoneNumber</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Presenter__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -383,6 +399,14 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Warning Confirmation Flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isMajorityRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isMajorityRequired?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
