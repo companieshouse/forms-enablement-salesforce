@@ -24,7 +24,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
     public List<officerContainer> listOfDirectors {get; set;}
     public Integer nbOfOfficers {get; set;}
     public Integer requiredSignature {get; set;}
-    public String email {get; set;}
+    public String emails {get; set;}
     public Id selectedId {get; set;}
 
 
@@ -41,7 +41,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         requiredSignature = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         listOfDirectors = new List<officerContainer>();
-        email = '';
+        emails = '';
         return;
        
     }
@@ -157,6 +157,31 @@ public with sharing class DirectorInputListController extends TransactionStepCon
                 break;
             }
         }
+    }
+
+    public PageReference updateEmails(){
+
+        if(emails == null)
+            return null;
+
+        if(emails == '')
+            return null;
+        emails = emails.substringAfter('|');
+        List<String> firstSplit = emails.split(AppConstants.ID_DELIM_SPLIT_CHAR);
+
+        for(String word :firstSplit)
+        {
+            List<String> split = word.split(AppConstants.DELIM_HISTORICAL_STEP);
+
+            for(officerContainer off :listOfDirectors)
+            {
+                if(off.isSignatory && (String.valueOf(off.officer.Id) == split[0]))
+                {
+                    off.email = split[1];
+                }
+            }
+        }
+        return nextAction();
     }
 
     public with sharing class officerContainer{

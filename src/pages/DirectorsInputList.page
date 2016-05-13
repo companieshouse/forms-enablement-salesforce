@@ -67,10 +67,13 @@
          <apex:actionFunction action="{!updateSignatory}" name="updateSignatory" reRender="emptyDiv">
           <apex:param name="paramSignatory" value="" id="x" assignTo="{!selectedId}" />
          </apex:actionFunction>
+         <apex:actionFunction action="{!updateEmails}" name="updateEmails" reRender="emptyPanel">
+          <apex:param name="paramEmailValue" value="" id="y" assignTo="{!emails}" />
+         </apex:actionFunction>
           <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
          <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
-         &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" /><br />
+         &nbsp;<apex:commandButton styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" onfocus="changeValue();" /><br />
 		 &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
       <script type="text/javascript">
          $j = jQuery.noConflict();
@@ -81,7 +84,25 @@
                
             });
               
-            
+            function changeValue() 
+             {
+              var myList = '';
+               $('.emailButtonRepeat').each(function(){
+                  if(this.value != null)
+                  {
+                    if(this.value != '')
+                    {
+
+                      myList += ('|' + this.name + "_-_" + this.value);
+                      
+                    }
+                  }
+
+                
+               
+            });
+
+              updateEmails(myList);
          }
          </script>
 
