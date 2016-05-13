@@ -289,6 +289,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ReviewNotificationTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ReviewNotificationTriggerHandlerTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SecurityManager</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -345,6 +353,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>StartController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>StartFrameworkController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -362,6 +374,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>TrackUserClass</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TransactionCleanup</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TransactionCleanupTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1277,14 +1297,14 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Officer__c.IsPresenter__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Officer__c.Transaction__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Officer__c.isPresenter__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -1678,6 +1698,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type__mdt.Expiry_Date_Length__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type__mdt.Family__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1753,6 +1778,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction__c.ContactEmail__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction__c.Date_1__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1767,6 +1797,21 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.ExpiryDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.ExpirySEnt__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.Expiry_Date_Length__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.Form_Name__c</field>
         <readable>true</readable>
@@ -1774,6 +1819,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction__c.Historical_Valid_Step_Ids__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.InActiveTransaction__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.MultipleDirectors__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1812,6 +1867,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.ReviewRedirect__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.Status__c</field>
         <readable>true</readable>
@@ -1829,6 +1889,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction__c.Text_2__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.TransactionState__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1903,6 +1968,9 @@
         <layout>DuplicateRecordSet-Duplicate Record Set Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>EmailMessage-Email Message Layout - Email-to-Case</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>FAQ__kav-How To Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -1910,9 +1978,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Officer__c-Officer Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Presenter__c-Presenter Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Pricebook2-Price Book Layout</layout>

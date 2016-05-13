@@ -86,7 +86,7 @@
         <fullName>isSignatory__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>isSignatory__c</label>
+        <label>is Signatory?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

@@ -20,7 +20,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>isPresenter__c</field>
+                <field>IsPresenter__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

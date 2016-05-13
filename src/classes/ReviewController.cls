@@ -10,13 +10,6 @@ public class ReviewController extends TransactionStepControllerBase{
 // Public properties.
     public Boolean hasPageErrors { get; set; }
 
-<<<<<<< HEAD
-    public String displayText1 {get; set;}
-    public String displayText2 {get; set;}
-    public String displayText3 {get; set;}
-    
-
-=======
     // MetaData
     public String displayText1 {get; set;}
     public String displayText2 {get; set;}
@@ -42,7 +35,6 @@ public class ReviewController extends TransactionStepControllerBase{
     public String companyCountry {get;set;}
     public String companyLocality {get;set;}
     public Boolean showprevious {get; set;}
->>>>>>> 09ed56bb0e63161e32a7e3f35b1bbb7c65bbb4b2
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -53,10 +45,6 @@ public class ReviewController extends TransactionStepControllerBase{
         displayText1 = transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
-<<<<<<< HEAD
-        return;
-        
-=======
         headerText1 = transactionMgr.currentStep.Header_Text_1__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
@@ -78,7 +66,6 @@ public class ReviewController extends TransactionStepControllerBase{
         if(submissionMgr.submission.Officers__r.size() > 1) {showprevious=false;}
 
         return;
->>>>>>> 09ed56bb0e63161e32a7e3f35b1bbb7c65bbb4b2
     }
 
     private void persistStep(){

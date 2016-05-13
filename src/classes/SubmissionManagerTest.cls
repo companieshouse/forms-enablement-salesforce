@@ -25,7 +25,7 @@ private class SubmissionManagerTest {
 		//Initialise the Submission Manager
 		SubmissionManager subMan = new SubmissionManager();
 
-		subMan.initialise(testForm.Family__c,testPresenter.Id , testCompany, testForm);
+		subMan.initialise(testForm.Family__c,testPresenter.Id ,'sylvain.picory@methodsdigital.co.uk', testCompany, testForm);
 
 		Test.startTest();
 

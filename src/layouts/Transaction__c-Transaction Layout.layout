@@ -42,7 +42,7 @@
                 <behavior>Readonly</behavior>
                 <field>RequiredOfficerSign__c</field>
             </layoutItems>
-<layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Expiry_Date_Length__c</field>
             </layoutItems>
@@ -220,7 +220,7 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Email__c</fields>
-        <fields>isPresenter__c</fields>
+        <fields>IsPresenter__c</fields>
         <relatedList>Officer__c.Transaction__c</relatedList>
     </relatedLists>
     <relatedLists>

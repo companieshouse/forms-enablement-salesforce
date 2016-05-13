@@ -18,7 +18,7 @@
                 <behavior>Edit</behavior>
                 <field>Landing_Page_Text2__c</field>
             </layoutItems>
-			<layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Expiry_Date_Length__c</field>
             </layoutItems>
