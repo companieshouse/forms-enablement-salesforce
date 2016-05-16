@@ -205,8 +205,8 @@ public with sharing class Form_DS0Controller{
         if(mapURLParameters.get('currentPage') == '0')
         {
             //Make the API call for the company name
-            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(currentTransaction.CompanyNumber__c);
-
+            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo('09243039');
+            currentTransaction.CompanyNumber__c = '09243039';
             currentTransaction.CompanyName__c = compProf.company_name;
 
             mapURLParameters.put('currentPage', '1'); //We set the next current page 
@@ -326,6 +326,8 @@ public with sharing class Form_DS0Controller{
         currentTransaction.Amount__c = 10;
         currentTransaction.Status__c = 'In Progress';
         currentTransaction.Form_Name__c = 'DS01';
+        currentTransaction.Transaction_Type__c = 'D';
+        currentTransaction.CompanyNumber__c = '09243039';
         insert currentTransaction;
         return currentTransaction.Id;
     }

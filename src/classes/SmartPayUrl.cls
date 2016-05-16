@@ -162,8 +162,8 @@ public class SmartPayUrl {
         // It would be nice to specify the result URL dynamically, so that it's driven by us
         // and not by the skin config in the SmartPay backend, but this doesn't work. SmartPay
         // never sends us here.
-        // url += '&';     
-        // url += 'resUrl=' + getResultUrl();
+         url += '&';     
+         url += 'resURL=' + getResultUrl();
         
         // We use this to sign the query string parameter values we're sending over.
         String hmacKey = settings.HMAC_key__c;
@@ -179,7 +179,8 @@ public class SmartPayUrl {
         
         // TODO: (BETA) Before switching this over to hmacSHA256, be aware that that changes the whole
         // signing string format. See the HMAC check tool. None of this is documented in the PDF
-        // documentation.
+        // documentation.    
+        //Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
         Blob sig = crypto.generateMac('hmacSHA1', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
         String sigEncoded = EncodingUtil.base64Encode(sig);
         
@@ -200,8 +201,12 @@ public class SmartPayUrl {
      */
     private String getResultUrl() {
         String hostname = ApexPages.currentPage().getHeaders().get('Host');
-        String url = 'https://' + hostname + '/apex/payment';
-        
+        String pageUrl = ApexPages.currentPage().getUrl();
+
+        //Here page URL contains Apex/Payment
+        pageUrl = pageUrl.substringAfter('/apex');
+
+        String url = 'https://' + hostname + pageUrl;
         return url;
     }
     

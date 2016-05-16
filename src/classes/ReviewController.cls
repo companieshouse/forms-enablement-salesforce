@@ -5,74 +5,88 @@
  * 
  * Author: eliot.stock@methods.co.uk
  */
-public class ReviewController {
+public class ReviewController extends TransactionStepControllerBase{
     
-    public Transaction__c tx {get; private set;}
-    public Id attachmentId {get; private set;}
-    public String title {get; private set;}
+// Public properties.
+    public Boolean hasPageErrors { get; set; }
 
-    public String size {get; private set;}
-    
+    // MetaData
+    public String displayText1 {get; set;}
+    public String displayText2 {get; set;}
+    public String displayText3 {get; set;}
+    public String headerText1 {get; set;}
+
+    // dynamic data
+    public String directorName {get; set;}
+    public String companyName {get; set;}
+    public String companyNumber {get; set;}
+    public String presenterEmail {get; set;}
+    public String presenterName {get; set;}
+    public String presenterPhone {get; set;}
+
+    public List<Officer__c> companyDirectors {get; set;}
+   // public CompaniesHouse.registered_office_address companyaddress {get; set;}
+
+    // company address information
+    public String companyAddress1 {get;set;}
+    public String companyAddress2 {get;set;}
+    public String companyregion {get;set;}
+    public String companypostcode {get;set;}
+    public String companyCountry {get;set;}
+    public String companyLocality {get;set;}
+    public Boolean showprevious {get; set;}
     public ReviewController() {
-        init();
+        super();
+        if (isPageInitialised) initialiseStep();
+
     }
     
-    public void init() {
-        String txId = ApexPages.currentPage().getParameters().get('txid'); //ad change from tid to txid
-        
-        if (txId == null || txId.length() == 0) {
-            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,
-					'No transaction ID on query string.'));
-            return;
-        }
-        
-        // Binary fields cannot be selected in join queries, so we need two queries here.
-        try {
-    	    tx = [SELECT Id, (SELECT Id,BodyLength, Name FROM Attachments) FROM Transaction__c WHERE Id = :txId];
-    	}
-        catch (QueryException qe) {
-            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,
-					'No such transaction:' + txId));
-            return;
-        }
-        
-        if (tx.attachments.size() != 1) {
-            // This should never happen.
-     //       ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,
-					//'Transaction should have one and only one attachment. This one ('
-					//+ txId + ') has ' + tx.attachments.size()));
-            return;
-        }
-        
-        title = tx.attachments[0].Name; 
-        Integer sizeInt = tx.attachments[0].BodyLength;
-        String tempSize = String.valueOf(sizeInt);
-        size = tempSize.left(3);
-        //MB
-        if(tempSize.length() >= 9)
-        {   
-            size += 'M';
-        }
-        //KB
-        else if(tempSize.length() >= 6 && tempSize.length() < 9)
-        {   
-            size += 'K';
-        } 
-    	attachmentId = tx.attachments[0].Id;
+    public void initialiseStep() {
+        displayText1 = transactionMgr.currentStep.Display_Text_1__c;
+        displayText2 = transactionMgr.currentStep.Display_Text_2__c;
+        displayText3 = transactionMgr.currentStep.Display_Text_3__c;
+        headerText1 = transactionMgr.currentStep.Header_Text_1__c;
+        companyName = submissionMgr.submission.CompanyName__c;
+        companyNumber = submissionMgr.submission.CompanyNumber__c;
+        presenterEmail = submissionMgr.submission.Presenter__r.Name;
+        presenterName =  submissionMgr.submission.PresenterName__c;
+        presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
+
+        companyDirectors = submissionMgr.submission.Officers__r;
+
+        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+        companyAddress1 = compProf.registered_office_address.address_line_1;
+        companyAddress2 = compProf.registered_office_address.address_line_2;
+        companyregion = compProf.registered_office_address.region;
+        companypostcode = compProf.registered_office_address.postal_code;
+        companyCountry = compProf.registered_office_address.country;
+        companyLocality = compProf.registered_office_address.locality;
+        System.debug(' company profile is ' + compProf.registered_office_address);
+        showprevious = true;
+        if(submissionMgr.submission.Officers__r.size() > 1) {showprevious=false;}
+
         return;
     }
-    
-    public PageReference submit() {
-		// Let the PaymentController figure out how to do the redirect to SmartPay.
-        PageReference pageReference = new PageReference('/apex/Payment?txId=' + tx.Id); // ab added tx Id
-        return pageReference;
-    }
-    
-    public PageReference startOver() {
-        // Go back to the start of the process.
-        // TODO: When we have a "Start here" page in Salesforce, go there instead of the start of the flow.
-        PageReference pageReference = new PageReference('/apex/Form_DS0Page0');
-        return pageReference;
-    }
 
+    private void persistStep(){
+        submissionMgr.persist();    
+    }
+    // End Instance methods.    
+    
+    // Action methods.     
+    public PageReference nextAction(){ 
+        if (!validatePageState()) return Page.TransactionException;
+        
+        persistStep();      
+
+        return nextStep();      
+    }
+    
+    public PageReference previousAction(){
+        if (!validatePageState()) return Page.TransactionException;
+                
+        return previousStep();
+    }
+    // End Action methods.    
+    
 }

@@ -1,56 +1,70 @@
-<apex:page controller="PaymentController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-<!--  Author: eliot.stock@methodsdigitial.co.uk -->
-<!--[if lt IE 9]>
-<html class="lte-ie8" lang="en">
-<![endif]-->
-<!--[if gt IE 8]><!-->
+<apex:page title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:composition template="TransactionPageTemplate">
+  
+        <apex:define name="content">
+        <apex:form >
+            
+              <apex:outputPanel rendered="{!hasPageErrors}">
+            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+        
+              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  An error has occurred.
+              </h1>
+        
+              <p>
+                  Optional description of the errors and how to correct them
+              </p>
+        
+              <ul class="error-summary-list">
+                  <li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
+              </ul>
+        
+            </div>
+        </apex:outputPanel>
 
-<html lang="en" class="js svg cookies">
-<!--<![endif]-->
-
-<head>
-<c:head />
-</head>
-
-<body>
-<c:bodyScript />
-    
-<div class="entire-wrapper">
-    
-	<c:header />
-
-    <main id="page-container" class="search" role="main">
-        <c:phaseBanner />
         <h1 class="heading-xlarge">
-            Make a payment
-        </h1>
-        <div class="grid-row">
-            <br/>
+              {!$Label.UI_Text_Payment_page_Title}
+        </h1> 
+    
             <!-- TODO: How do we do a full width column? -->
-            <div id="payment" class="column-two-thirds"></div>
-                <apex:form >
                    <script>
-                 var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
+                //  var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
                    
-                   if(screen !=null && screen.length > 1){window.open('{!externalURL}','_self'); console.log('mobile');} 
-                   else { 
+                //    if(screen !=null && screen.length > 1){window.open('{!externalURL}','_self'); console.log('mobile');} 
+                //    else { 
                
-                document.getElementById("payment").innerHTML='<object  height="510" width="950" id="999" data="{!externalURL}" ></object>';
-                console.log('not mobile');
-                }
-                
+                // document.getElementById("payment").innerHTML='<object  height="510" width="950" id="999" data="{!externalURL}" ></object>';
+                // console.log('not mobile');
+
+                //}         
+                            if(!{!hasPaid})
+                              window.open('{!externalURL}','_self');
+
 
                    </script>
-               </apex:form>
 
-            <div class="column-third">
+            <apex:outputPanel rendered="{!hasPaid}">
+            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+        
+              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  The payment already processed!
+              </h1>
+        
+              <p>
+                  The payment has been succesful.
+              </p>
+        
+              
+        
             </div>
-        </div>
-    </main>
-    
-</div>
+        </apex:outputPanel>
 
-<c:footer />
-</body>
-</html>
+            &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />          
+            &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+     </apex:form>
+                
+        </apex:define>
+  
+    </apex:composition>
+
 </apex:page>

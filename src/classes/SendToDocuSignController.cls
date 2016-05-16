@@ -20,6 +20,10 @@
         {
             transactionID = currentP.getParameters().get('Id');
         }   
+        else
+        {
+            transactionID = 'a0I4E0000001Dwz';
+        }
         this.tx = [Select Id,Form_Name__c, Name, CompanyName__c,
             (Select Id, Name, Email__c from Officers__r)
             from Transaction__c where id = :transactionID];
@@ -73,6 +77,7 @@
         // Render the contract
         // Use PDFGeneration to render DS01
         System.debug('Rendering the PDF');
+
         PageReference pageRef = new PageReference('/apex/PDFGeneration');
         pageRef.getParameters().put('id',tx.Id);
         if(Test.IsRunningTest())
@@ -186,7 +191,7 @@
                 System.debug('Exception - ' + e );
                 envelopeId = 'Exception - ' + e;
         }
-        
+
         return token;
     }
 

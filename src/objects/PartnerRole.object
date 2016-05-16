@@ -5,9 +5,9 @@
         <fullName>ReverseRole</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Advertiser</fullName>
+                <fullName>System Integrator</fullName>
                 <default>false</default>
-                <reverseRole>Vendor</reverseRole>
+                <reverseRole>Client</reverseRole>
             </picklistValues>
             <picklistValues>
                 <fullName>Agency</fullName>
@@ -15,22 +15,12 @@
                 <reverseRole>Client</reverseRole>
             </picklistValues>
             <picklistValues>
-                <fullName>Broker</fullName>
+                <fullName>Advertiser</fullName>
                 <default>false</default>
-                <reverseRole>Agent</reverseRole>
+                <reverseRole>Vendor</reverseRole>
             </picklistValues>
             <picklistValues>
-                <fullName>Consultant</fullName>
-                <default>false</default>
-                <reverseRole>Client</reverseRole>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Dealer</fullName>
-                <default>false</default>
-                <reverseRole>Supplier</reverseRole>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Developer</fullName>
+                <fullName>VAR/Reseller</fullName>
                 <default>false</default>
                 <reverseRole>Vendor</reverseRole>
             </picklistValues>
@@ -40,9 +30,14 @@
                 <reverseRole>Vendor</reverseRole>
             </picklistValues>
             <picklistValues>
-                <fullName>Institution</fullName>
+                <fullName>Developer</fullName>
                 <default>false</default>
-                <reverseRole>Client</reverseRole>
+                <reverseRole>Vendor</reverseRole>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Broker</fullName>
+                <default>false</default>
+                <reverseRole>Agent</reverseRole>
             </picklistValues>
             <picklistValues>
                 <fullName>Lender</fullName>
@@ -50,14 +45,29 @@
                 <reverseRole>Broker</reverseRole>
             </picklistValues>
             <picklistValues>
-                <fullName>System Integrator</fullName>
+                <fullName>Supplier</fullName>
+                <default>false</default>
+                <reverseRole>Retailer</reverseRole>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Institution</fullName>
                 <default>false</default>
                 <reverseRole>Client</reverseRole>
             </picklistValues>
             <picklistValues>
-                <fullName>VAR/Reseller</fullName>
+                <fullName>Contractor</fullName>
                 <default>false</default>
-                <reverseRole>Vendor</reverseRole>
+                <reverseRole>Sub Contractor</reverseRole>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dealer</fullName>
+                <default>false</default>
+                <reverseRole>Supplier</reverseRole>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+                <reverseRole>Client</reverseRole>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>

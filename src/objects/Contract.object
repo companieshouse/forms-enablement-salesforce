@@ -236,7 +236,7 @@
         <searchResultsAdditionalFields>CONTRACT.CONTRACT_NUMBER</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTRACT.NAME</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <webLinks>
         <fullName>dsfs__Send_with_DocuSign</fullName>
         <availability>online</availability>

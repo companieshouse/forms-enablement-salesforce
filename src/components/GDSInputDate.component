@@ -1,0 +1,45 @@
+<!-- 
+Name: GDSInputDate.component
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Displays appropriate date input type with correct GDS styling, layout and behaviour
+
+todo - error state, validation, text literals etc.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:component >
+
+	<apex:attribute name="f" 
+        			description="Field to render"
+        			type="DynamicField"
+        			required="true" />
+        			
+	  <fieldset>
+
+          <legend>{!f.fieldLabel}</legend>
+
+
+            <p class="form-hint" id="date-hint">For example, 31 3 1980</p>
+
+              <label for="day-input">{!$Label.UI_Text_Day}</label>              
+              <apex:inputText styleClass="form-control" value="{!f.dayValue}" id="day-input" html-type="number" html-pattern="[0-9]*" html-min="0" html-max="31" html-aria-describedby="date-hint" />              
+
+              <label for="month-input">{!$Label.UI_Text_Month}</label>
+              <apex:inputText styleClass="form-control" value="{!f.monthValue}" id="month-input" html-type="number" html-pattern="[0-9]*" html-min="0" html-max="31" html-aria-describedby="date-hint" />
+
+              <label for="year-input">{!$Label.UI_Text_Year}</label>
+              <apex:inputText styleClass="form-control" value="{!f.yearValue}" id="year-input" html-type="number" html-pattern="[0-9]*" html-min="0" html-max="31" html-aria-describedby="date-hint" />
+
+        </fieldset>
+
+</apex:component>
