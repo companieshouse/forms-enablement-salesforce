@@ -34,7 +34,7 @@ public class DocuSignStatusTriggerHandler{
         // update rejected statuses on the Transaction object
        for(Transaction__c rejectedtransactions : [Select Id, Status__c from Transaction__c where Id IN :rejectedtxIds]) {
             //if(rejectedtransactions.Status__c == AppConstants.REQUEST_STATUS_DRAFT){
-                rejectedtransactions.Status__c = AppConstants.DOCUSIGN_STATUS_REJECTED;
+                rejectedtransactions.Status__c = AppConstants.DOCUSIGN_STATUS_DECLINED_SIG; //AppConstants.DOCUSIGN_STATUS_REJECTED;
                 transactionToUpdate.add(rejectedtransactions);
             //} 
         }

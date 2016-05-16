@@ -98,11 +98,11 @@ public with sharing class AccountsAuthCallbackController {
         
         accessTokenApiResponse = h.getAccessToken(authCode); //System.debug('access token is  ' + accessTokenApiResponse);
         // Call out again to get the user profile using the access token. If the authorisation was for a user.
-        if (userAuth!=null) 
+        if (userAuth!= null) 
         userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
 
-        if(userProfileApiResponse !=null){
+        if(userProfileApiResponse != null){
 
         // TODO (User Auth)
         // 1. Find the existing Presenter PersonAccount record by the user ID from the profile, if it exists.
@@ -114,7 +114,8 @@ public with sharing class AccountsAuthCallbackController {
         // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
         String userProfileName = userProfileApiResponse.email;
         u.getCurrentUser(userProfileName);
-                
+   // throw new AccountsAuthCallbackException('presenter info' + userProfileName);
+   
         upsert new Account(Name=userProfileName);
 
 
@@ -133,7 +134,7 @@ public with sharing class AccountsAuthCallbackController {
         return startjourney;
         }
         
-        if(userAuth ==null && companyAuth !=null){
+        if(userAuth == null && companyAuth != null){
 
            // insert account here
                 
@@ -149,7 +150,11 @@ public with sharing class AccountsAuthCallbackController {
 
             transactionMgr = new TransactionManager(transactionType);
 
+
             presenterInfo = u.returnCurrentUser();
+            
+            //throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
+            // todo error here check it out
 
             presenterID = presenterInfo.Id; // will get from cookie
 

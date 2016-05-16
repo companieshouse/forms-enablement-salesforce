@@ -394,6 +394,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
                 <fullName>Rejected</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>DeclinedSig</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <trackTrending>false</trackTrending>

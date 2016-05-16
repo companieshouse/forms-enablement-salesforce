@@ -87,6 +87,8 @@ public with sharing class TrackUserClass {
 
     Public SObject returnCurrentUser() {
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
+                 //   throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
+
         String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
         List < Account > recs = [select Id, Name from Account where Name = : userNameEmail];
 
@@ -97,7 +99,7 @@ public with sharing class TrackUserClass {
 
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
 
-        if (current_userEmail == null) {
+       // if (current_userEmail == null) {
 
             //  pass userprofile information
             String usersearchparameter = userEmail; // this should be the user email from the apiresponse.email method
@@ -109,13 +111,13 @@ public with sharing class TrackUserClass {
 
             System.debug('your newly created user email  is' + current_userEmail);
 
-        } else {
+      //  } else {
 
             // perhaps validate the value before returning cookie
             System.debug('your useremail from your cookie is' + current_userEmail);
 
             // increment time of cookie from -1 to 600s seconds/etc. 
-        }
+       // }
 
         String currentuservalue = SecurityManager.decryptText(current_userEmail.getValue());
 

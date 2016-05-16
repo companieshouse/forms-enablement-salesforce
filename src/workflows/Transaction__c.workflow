@@ -72,7 +72,7 @@
         <criteriaItems>
             <field>Transaction__c.Status__c</field>
             <operation>equals</operation>
-            <value>Rejected</value>
+            <value>DeclinedSig</value>
         </criteriaItems>
         <description>Notify presenter when Transaction Status is update with &apos;Declined&apos;.
 Email should contain a URL to start a new journey</description>
