@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify Presenter that the signing period has expired</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>ExpiryNotification</name>
+    <style>none</style>
+    <subject>Companies House Document Expiry Warning</subject>
+    <textOnly>Dear {!Transaction__c.Presenter__c}, 
+
+Your Companies House form {!Transaction__c.Form_Name__c} has expired concerning {!Transaction__c.CompanyName__c}. If you want to restart the {!Transaction__c.Form_Name__c} process please click on the link &lt;a href=&quot;https://lbdev2-chformsfactory.cs83.force.com/start?t=DS01&quot;&gt;Here&lt;/a&gt; 
+
+Regards, 
+
+Companies House</textOnly>
+    <type>custom</type>
+</EmailTemplate>
