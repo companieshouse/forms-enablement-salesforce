@@ -98,6 +98,7 @@ public with sharing class AccountsAuthCallbackController {
         
         accessTokenApiResponse = h.getAccessToken(authCode); //System.debug('access token is  ' + accessTokenApiResponse);
         // Call out again to get the user profile using the access token. If the authorisation was for a user.
+<<<<<<< HEAD
         if (userAuth!=null) 
         userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
@@ -150,6 +151,65 @@ public with sharing class AccountsAuthCallbackController {
             transactionMgr = new TransactionManager(transactionType);
 
             presenterInfo = u.returnCurrentUser();
+=======
+        if (userAuth!= null) 
+        userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
+        // need better error handling/redirection on failure to pull profile/token
+
+        if(userProfileApiResponse != null){
+
+        // TODO (User Auth)
+        // 1. Find the existing Presenter PersonAccount record by the user ID from the profile, if it exists.
+        // 2. Create one if not.
+        // 3. Put the forename, surname, email address on it.
+        // 4. Upsert it, possibly in a @Future, only after we're done calling out.
+        // 5. Update the user authorisation record, possibly in a @Future, only after we're done calling out.
+        // 6. Drop a cookie (user_auth) - value equal to the encrypted value of the User Auth record Id.
+        // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
+        String userProfileName = userProfileApiResponse.email;
+        u.getCurrentUser(userProfileName);
+   // throw new AccountsAuthCallbackException('presenter info' + userProfileName);
+   
+        upsert new Account(Name=userProfileName);
+
+
+        transactionType = u.getUserDocument();
+
+        System.debug( 'transaction type is ' + transactionType);
+        String hostname = ApexPages.currentPage().getHeaders().get('Host');
+        String startjourneyURL = 'https://' + hostname + '/company?t=' +transactionType;
+        PageReference startjourney = new PageReference(startjourneyURL);
+        System.debug('redirect is = ' + startjourney);
+        // redirect to the framework once userprofile is given
+        // note this presenter information is minimal (e.g. locale, email address, etc.)
+        // will only drop a cookie with the profile information and access token 
+        startjourney.setRedirect(true);
+
+        return startjourney;
+        }
+        
+        if(userAuth == null && companyAuth != null){
+
+           // insert account here
+                
+            // List<Accounts> userAccounts = [select Id from Accounts where Account.name=:userEmail];
+
+            System.debug('you have entered the company auth code redirect and here is the authcode' + companyAuth);
+
+            //  insert submission record
+
+            //pass a submission ID and a Step ID
+            //
+            transactionType = u.getUserDocument();
+
+            transactionMgr = new TransactionManager(transactionType);
+
+
+            presenterInfo = u.returnCurrentUser();
+            
+            //throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
+            // todo error here check it out
+>>>>>>> refs/remotes/origin/spdev
 
             presenterID = presenterInfo.Id; // will get from cookie
 

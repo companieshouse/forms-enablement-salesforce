@@ -87,6 +87,7 @@ public with sharing class TrackUserClass {
 
     Public SObject returnCurrentUser() {
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
+<<<<<<< HEAD
         String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
         List < Account > recs = [select Id, Name from Account where Name = : userNameEmail];
 
@@ -116,6 +117,39 @@ public with sharing class TrackUserClass {
 
             // increment time of cookie from -1 to 600s seconds/etc. 
         }
+=======
+                 //   throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
+
+        String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
+        List < Account > recs = [select Id, Name from Account where Name = : userNameEmail];
+
+        return recs[0];
+    }
+
+    Public String getCurrentUser(String userEmail) {
+
+        Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
+
+       // if (current_userEmail == null) {
+
+            //  pass userprofile information
+            String usersearchparameter = userEmail; // this should be the user email from the apiresponse.email method
+
+            current_userEmail = new Cookie('user_Email', SecurityManager.encryptText(usersearchparameter), null, -1, true);
+            // set time to 0 instead of -1 to remove cookie
+
+            ApexPages.currentPage().setCookies(new Cookie[] { current_userEmail });
+
+            System.debug('your newly created user email  is' + current_userEmail);
+
+      //  } else {
+
+            // perhaps validate the value before returning cookie
+            System.debug('your useremail from your cookie is' + current_userEmail);
+
+            // increment time of cookie from -1 to 600s seconds/etc. 
+       // }
+>>>>>>> refs/remotes/origin/spdev
 
         String currentuservalue = SecurityManager.decryptText(current_userEmail.getValue());
 
