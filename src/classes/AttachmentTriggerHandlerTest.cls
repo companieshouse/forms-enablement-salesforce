@@ -10,12 +10,13 @@
  **/
 @isTest
 public class AttachmentTriggerHandlerTest {
+    static final string FORMNAME = 'DS01';
     
     //Create Data
 	static Transaction__c createTransaction(){
 		Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
 		tx.Status__c = 'Draft';
-        tx.Form_Name__c = 'DS01 Test';
+        tx.Form_Name__c = FORMNAME;
 		insert tx;
 		
 		return tx;
@@ -44,7 +45,7 @@ public class AttachmentTriggerHandlerTest {
     	test.startTest();
         
         Attachment att = CompaniesHouseTestData.getInstance().pdf;
-        att.Name = 'DS01 Test';
+        att.Name = FORMNAME + '_CompanyTest';
         att.ParentId = dss.Id;
         insert att;
     	

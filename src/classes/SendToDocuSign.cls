@@ -65,7 +65,7 @@
         // - update subject
         // - update message
         DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
-        envelope.Subject = 'DS01 - Striking off application for ' + tx.CompanyName__c ;
+        envelope.Subject = tx.Form_Name__c + ' - application for ' + tx.CompanyName__c ;
         envelope.EmailBlurb = 'This is Companies House new eSignature service,'+ 
             ' it allows to get your electronic signoff.';
         envelope.AccountId  = dsSetting.AccountId__c; 
@@ -86,7 +86,7 @@
         DocuSignAPI.Document document = new DocuSignAPI.Document();
         document.ID = 1;
         document.pdfBytes = EncodingUtil.base64Encode(pdfBlob);
-        document.Name = tx.Form_Name__c;
+        document.Name = tx.Form_Name__c + '_'+ tx.CompanyName__c + '_'+ getDate();
         document.FileExtension = 'pdf';
         envelope.Documents = new DocuSignAPI.ArrayOfDocument();
         envelope.Documents.Document = new DocuSignAPI.Document[1];
@@ -315,6 +315,14 @@
         lastName = lastName.capitalize();
 
         return firstName + lastName;
+    }
+
+    private String getDate(){
+        Date d = date.today();
+        String day   = d.day() > 9   ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
+        String month = d.month() > 9 ? string.valueOf(d.month()) : '0' + string.valueOf(d.month());
+
+        return day + month + d.year();
     }
 
 }
