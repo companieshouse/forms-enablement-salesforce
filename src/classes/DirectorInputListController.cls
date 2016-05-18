@@ -58,12 +58,6 @@ public with sharing class DirectorInputListController extends TransactionStepCon
                 }
             }
         }
-
-        if(requiredSignature > 1)
-        {
-            submissionMgr.submission.MultipleDirectors__c = true;
-        }
-
         submissionMgr.persist();    
     }
     // End Instance methods.    

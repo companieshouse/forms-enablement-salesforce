@@ -27,9 +27,7 @@ public with sharing class AppConstants {
 	public static final String REQUEST_STATUS_ERROR = 'Error';
 	
 	//DocuSign Status
-    public static final String DOCUSIGN_STATUS_COMPLETED = 'Completed';   
-    public static final String DOCUSIGN_STATUS_REJECTED = 'Rejected';   
-	
+    public static final String DOCUSIGN_STATUS_COMPLETED = 'Completed';      
     public static final String DOCUSIGN_STATUS_REJECTED = 'Declined';   
 	public static final String DOCUSIGN_STATUS_DECLINED_SIG = 'DeclinedSig';   
 
