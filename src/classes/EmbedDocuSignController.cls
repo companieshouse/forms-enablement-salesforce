@@ -121,10 +121,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
 
             if(tx.Officers__r.size() > 1) { //there are more officers
                 tx.Status__c = 'Pending Signatures';
-<<<<<<< HEAD
-=======
                 tx.MultipleDirectors__c = true; 
->>>>>>> refs/remotes/origin/spdev
                 update tx;   
             }
 

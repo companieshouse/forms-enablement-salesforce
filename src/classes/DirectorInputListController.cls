@@ -58,13 +58,12 @@ public with sharing class DirectorInputListController extends TransactionStepCon
                 }
             }
         }
-<<<<<<< HEAD
+
         if(requiredSignature > 1)
         {
             submissionMgr.submission.MultipleDirectors__c = true;
         }
-=======
->>>>>>> refs/remotes/origin/spdev
+
         submissionMgr.persist();    
     }
     // End Instance methods.    

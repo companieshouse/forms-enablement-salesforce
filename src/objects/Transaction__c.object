@@ -392,13 +392,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
             </picklistValues>
             <picklistValues>
                 <fullName>Rejected</fullName>
-<<<<<<< HEAD
-=======
                 <default>false</default>
             </picklistValues>
             <picklistValues>
                 <fullName>DeclinedSig</fullName>
->>>>>>> refs/remotes/origin/spdev
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>

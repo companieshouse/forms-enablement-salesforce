@@ -98,7 +98,6 @@ public with sharing class AccountsAuthCallbackController {
         
         accessTokenApiResponse = h.getAccessToken(authCode); //System.debug('access token is  ' + accessTokenApiResponse);
         // Call out again to get the user profile using the access token. If the authorisation was for a user.
-<<<<<<< HEAD
         if (userAuth!=null) 
         userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
@@ -151,7 +150,7 @@ public with sharing class AccountsAuthCallbackController {
             transactionMgr = new TransactionManager(transactionType);
 
             presenterInfo = u.returnCurrentUser();
-=======
+
         if (userAuth!= null) 
         userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
@@ -209,7 +208,7 @@ public with sharing class AccountsAuthCallbackController {
             
             //throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
             // todo error here check it out
->>>>>>> refs/remotes/origin/spdev
+
 
             presenterID = presenterInfo.Id; // will get from cookie
 

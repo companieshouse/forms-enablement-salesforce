@@ -28,14 +28,11 @@ public with sharing class AppConstants {
 	
 	//DocuSign Status
     public static final String DOCUSIGN_STATUS_COMPLETED = 'Completed';   
-<<<<<<< HEAD
     public static final String DOCUSIGN_STATUS_REJECTED = 'Rejected';   
 	
-=======
     public static final String DOCUSIGN_STATUS_REJECTED = 'Declined';   
 	public static final String DOCUSIGN_STATUS_DECLINED_SIG = 'DeclinedSig';   
 
->>>>>>> refs/remotes/origin/spdev
 	public final static String TRANSACTION_TYPE_VISUALFORCE_PAGE = 'VF Page';
 	public final static String TRANSACTION_TYPE_APEX_CODE = 'Apex Code';
 	

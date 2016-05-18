@@ -87,7 +87,6 @@ public with sharing class TrackUserClass {
 
     Public SObject returnCurrentUser() {
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
-<<<<<<< HEAD
         String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
         List < Account > recs = [select Id, Name from Account where Name = : userNameEmail];
 
@@ -117,7 +116,7 @@ public with sharing class TrackUserClass {
 
             // increment time of cookie from -1 to 600s seconds/etc. 
         }
-=======
+
                  //   throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
 
         String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
@@ -149,7 +148,7 @@ public with sharing class TrackUserClass {
 
             // increment time of cookie from -1 to 600s seconds/etc. 
        // }
->>>>>>> refs/remotes/origin/spdev
+
 
         String currentuservalue = SecurityManager.decryptText(current_userEmail.getValue());
 
