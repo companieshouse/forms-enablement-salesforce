@@ -129,7 +129,7 @@
         
         count=0;
         for(Officer__c off : officersToSignList){
-            DocuSignAPI.Recipient recipient = getRecipient(off, count+1);
+            DocuSignAPI.Recipient recipient = getRecipient(off);
             envelope.Recipients.Recipient[count] = recipient;
             count++;    
         }
@@ -141,14 +141,14 @@
         envelope.Tabs.Tab = new DocuSignAPI.Tab[officersToSignList.size()*2]; //for each Officer we will create 2 tabs
         
         count=0;
-        for(Integer recipientId=1; recipientId <= officersToSignList.size(); recipientId++){
+        for(Officer__c off : officersToSignList){
             //create a tab for signing 
-            DocuSignAPI.Tab tab1 = createTab('SignHere', recipientId, 1);
+            DocuSignAPI.Tab tab1 = createTab('SignHere', off.recipientId__c, 1);
             envelope.Tabs.Tab[count] = tab1;
             count++;
             
             //create a tab for date
-            DocuSignAPI.Tab tab2 = createTab('DateSigned', recipientId, 1);
+            DocuSignAPI.Tab tab2 = createTab('DateSigned', off.recipientId__c, 1);
             envelope.Tabs.Tab[count] = tab2;
             count++;
         }
@@ -262,9 +262,9 @@
 
 
     /********************* Aux *********************/
-    private DocuSignAPI.Recipient getRecipient(Officer__c off, Integer recipientId) {
+    private DocuSignAPI.Recipient getRecipient(Officer__c off) {
         DocuSignAPI.Recipient recipient = new DocuSignAPI.Recipient();
-        recipient.ID = recipientId;
+        recipient.ID = Integer.valueOf(off.recipientId__c);
         recipient.Type_x = 'Signer';
         //Change this field if signing order is different, e.g. sign2 wait for sign1 completion
         recipient.RoutingOrder = 1; 
@@ -288,10 +288,10 @@
         return recipient;
     }
 
-    private DocuSignAPI.Tab createTab(String type, Integer recipientId, Integer documentId) {
+    private DocuSignAPI.Tab createTab(String type, String recipientId, Integer documentId) {
         DocuSignAPI.Tab tab = new DocuSignAPI.Tab();
         tab.Type_x = type; //'SignHere'
-        tab.RecipientID = recipientId;
+        tab.RecipientID = Integer.valueOf(recipientId);
         tab.DocumentID = documentId;
         tab.AnchorTabItem = new DocuSignAPI.AnchorTab();
         if(type == 'SignHere')
