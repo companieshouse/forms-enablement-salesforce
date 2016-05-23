@@ -1,3 +1,15 @@
+
+/**
+ * Submission URL
+ *
+ * Author: leo.bitoy@methods.digital.co.uk
+ * 
+ *  This transaction__c review handler trigger builds a submission URL for the user to later view
+ *
+ *
+ *
+ *
+ **/
 public with sharing class SubmissionURLTriggerHandler {
 
     private static Environment_Variables__c getSettings() {

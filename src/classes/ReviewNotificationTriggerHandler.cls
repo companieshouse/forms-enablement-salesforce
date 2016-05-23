@@ -26,6 +26,7 @@ public class ReviewNotificationTriggerHandler {
     // pass transactions to update list to this method from the trigger being called after update/insert
     public static void afterUpdateandafterInsert(List < Transaction__c > transactionsList) {
 
+            Environment_Variables__c settings = getSettings();
 
 
         List < Transaction__c > transactionsToUpdate = new List < Transaction__c > ();
@@ -36,7 +37,6 @@ public class ReviewNotificationTriggerHandler {
             // list of transactions to update at the end
 
             // loop through transactions from trigger and find the signed status
-            Environment_Variables__c settings = getSettings();
 
             // parameters needed for C value
             String redirectReviewURL = settings.Host_Address__c; 
