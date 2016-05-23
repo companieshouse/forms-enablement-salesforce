@@ -102,7 +102,6 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             
 
         // Transaction is signed
-        //} else if(isPageAlreadyValidStep) {
         } else if(isPageAlreadyValidStep) {
 
             showButtons=true;

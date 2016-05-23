@@ -2,6 +2,7 @@
 global class MockWebServiceResponseGenerator implements WebServiceMock {
   
   private static String TOKEN_URL = SendToDocuSignTest.TOKEN_URL;
+  private static String ENVELOPESTATUS = SendToDocuSignTest.ENVELOPESTATUS;
 
   // Implement this interface method  
   global void doInvoke(
@@ -17,20 +18,22 @@ global class MockWebServiceResponseGenerator implements WebServiceMock {
 
     // Create response element for each request depending on Request Name
     // Populate response element
-    system.debug('ab requestName: ' + requestName);
+    system.debug('MockWebServiceResponseGenerator requestName: ' + requestName);
     
-
+    //Create and Send Envelope Mock 
     if(requestName == 'CreateAndSendEnvelope'){
-      //Create and Send Envelope Mock  
-
+      //create envelopeStatus
+      DocuSignAPI.EnvelopeStatus envStatus = new DocuSignAPI.EnvelopeStatus();
+      envStatus.EnvelopeID = ENVELOPESTATUS;
+      
+      //create element and add envelope status to response
       DocuSignAPI.CreateAndSendEnvelopeResponse_element cseresp = new DocuSignAPI.CreateAndSendEnvelopeResponse_element();
-      cseresp.CreateAndSendEnvelopeResult = new DocuSignAPI.EnvelopeStatus();
+      cseresp.CreateAndSendEnvelopeResult = envStatus;
       response.put('response_x', cseresp); 
 
 
-    } else if(requestName == 'RequestRecipientToken') {
-      //Request Recipient Token Response
-      
+    //Request Recipient Token Response
+    } else if(requestName == 'RequestRecipientToken') {      
       DocuSignAPI.RequestRecipientTokenResponse_element rrtre = new DocuSignAPI.RequestRecipientTokenResponse_element();
       rrtre.RequestRecipientTokenResult = TOKEN_URL;
       response.put('response_x', rrtre); 

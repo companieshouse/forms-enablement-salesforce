@@ -7,9 +7,12 @@
  * ab
  **/
  public with sharing class SendToDocuSign {
+    public static String ENVELOPEIDNOTDEFINE = 'Not sent yet';
+    
+    public String envelopeId;
+    
     private Boolean isEmbedSignature;
     private String tokenURL; 
-    private String envelopeId;
     private String nextStepURL;
     private Transaction__c tx;
     
@@ -20,7 +23,7 @@
     public String embedDocuSignOpen(Transaction__c trans) {
         isEmbedSignature = false;
         tokenURL = null;
-        envelopeId = 'Not sent yet';
+        envelopeId = ENVELOPEIDNOTDEFINE;
         embedRecipient = null;
         
         //set
@@ -30,7 +33,7 @@
         System.debug('EmbedDocuSign transaction: ' + tx);
 
         //Create and send Envelope
-        SendNow();
+        sendNow();
 
         //If is Presenter is a Director get token to embedDocuSign
         if(embedRecipient != null)
@@ -40,7 +43,7 @@
     }
     
     
-    private void SendNow() {
+    private void sendNow() {
         Blob pdfBlob;
         Integer count;
         List<Officer__c> officersToSignList = new List<Officer__c>();
@@ -264,12 +267,19 @@
     /********************* Aux *********************/
     private DocuSignAPI.Recipient getRecipient(Officer__c off) {
         DocuSignAPI.Recipient recipient = new DocuSignAPI.Recipient();
+
         recipient.ID = Integer.valueOf(off.recipientId__c);
         recipient.Type_x = 'Signer';
         //Change this field if signing order is different, e.g. sign2 wait for sign1 completion
         recipient.RoutingOrder = 1; 
         recipient.Email = off.Email__c;
-        recipient.UserName = convertName(off.Name);
+
+        //Pick the correct name for signature
+        if(off.isDeceased__c)
+            recipient.UserName = off.AuthorizedSigner__c;
+        else
+            recipient.UserName = convertName(off.Name);    
+
         
         // If Officer is Presenter set embedded signature
         if(off.isPresenter__c) { 

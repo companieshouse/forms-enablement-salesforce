@@ -155,12 +155,13 @@
 	        	<h4>Authorising Company Director:</h4>
 		    	<apex:repeat value="{!Transaction__c.Officers__r}" var="off">
 		            <apex:panelGrid columns="3" width="100%" style="margin-top:25px" rendered="{!off.isSignatory__c}">
-		                <td style="width:40%">
+		                <td style="width:35%">
 		                	<div>{!off.name}</div>
 		                </td>
-						<td style="width:40%">
+						<td style="width:45%">
 							<div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
-							<div style='float:center;'>_____________________</div>
+							<div style='float:center;'>_________________________</div>
+							<div style="{!IF(off.isDeceased__c, 'display:block', 'display:none')}">*Signing on behalf of deceased director</div>
 						</td>
 						<td style="width:20%">
 							<div style='float:left;'>Signature Date:</div>
