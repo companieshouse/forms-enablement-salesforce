@@ -1302,9 +1302,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Officer__c.IsPresenter__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -1324,7 +1324,7 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Officer__c.isSignatory__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>

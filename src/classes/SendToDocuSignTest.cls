@@ -44,7 +44,7 @@ public class SendToDocuSignTest {
                 from Transaction__c where Id=:txId];
     }
 
-    /*@isTest(SeeAllData=false)
+    @isTest(SeeAllData=false)
     static void sendNowTest() {
         String tokenURL;
 
