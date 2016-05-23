@@ -16,86 +16,97 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-09  Initial development.
 */
 public with sharing class CompanyController {
-    
+
     // Public properties.
-    public String companyNumber { get; set; }
-    public Boolean hasPageErrors { get; set; }
-    public String transactionType {get; set;}
+    public String companyNumber {
+        get;
+        set;
+    }
+    public Boolean hasPageErrors {
+        get;
+        set;
+    }
+    public String transactionType {
+        get;
+        set;
+    }
 
     // Private class members.
-    Boolean isPageInitialised=false;
-    Boolean isUserAuthenticated=false;
+    Boolean isPageInitialised = false;
+    Boolean isUserAuthenticated = false;
     SecurityManager securityMgr;
-    SubmissionManager submissionMgr;    
+    SubmissionManager submissionMgr;
     TransactionManager transactionMgr;
     //String transactionType;
     TrackUserClass trackuser;
-        
+
     // Constructors.
-    public CompanyController(){
-		trackuser = new TrackUserClass();
-        trackuser.saveUserDocumentInfo();
-        initialise();
-    }
-    // End Constructors. 
-    
+    public CompanyController() {
+           
+            initialise();
+        }
+        // End Constructors. 
+
     // Instance methods.
-    private void initialise(){
-        securityMgr = new SecurityManager();        
+    private void initialise() {
+        securityMgr = new SecurityManager();
         submissionMgr = new SubmissionManager();
 
         try {
-            
+
             // todo - check for valid user auth cookie. 
-            isUserAuthenticated=true;
-        
-            if (!ApexPages.currentPage().getParameters().containsKey('t') || 
-                    String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
-                    !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
-                
+            isUserAuthenticated = true;
+
+            if (!ApexPages.currentPage().getParameters().containsKey('t') ||
+                String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
+                !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
+
             transactionType = ApexPages.currentPage().getParameters().get('t');
             transactionMgr = new TransactionManager(transactionType);
-                
-            isPageInitialised=true;
-        } catch (Exception e){ return; }        
+
+            isPageInitialised = true;
+        } catch (Exception e) {
+            return;
+        }
         return;
     }
-    
-    private Boolean validateStep(){
+
+    private Boolean validateStep() {
         return !String.isBlank(companyNumber);
     }
-    
-    public PageReference initialiseAction(){
-        if (!isUserAuthenticated) return Page.StartFramework;
-        if (!isPageInitialised) return Page.TransactionException;
+
+    public PageReference initialiseAction() {
+      
+            if (!isUserAuthenticated) return Page.StartFramework;
+            if (!isPageInitialised) return Page.TransactionException;
+            return null;
         return null;
     }
-        
-    public PageReference nextAction(){
-        
-        hasPageErrors=!validateStep();
+
+    public PageReference nextAction() {
+
+        hasPageErrors = !validateStep();
         if (hasPageErrors) return null;
-        trackuser = new TrackUserClass();
         // todo - the code below forces reauthentication.
         // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).
         // todo - reinstate company authentication
-        
-        
+        trackuser = new TrackUserClass();
+        trackuser.saveUserDocumentInfo();
         //Merged From Leo 03 May 2016
         trackuser.getSearchedCompany(companyNumber);
-        return securityMgr.getCompanyAuthRedirect(companyNumber,transactionType);
+        return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
         //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );                         
         //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
-		//Hack to bypass auth
-		//Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN','Sylvain.picory@methodsdigital.co.uk',trackuser.returnCurrentCompanyObject() ,transactionMgr.td);                         
+        //Hack to bypass auth
+        //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN','Sylvain.picory@methodsdigital.co.uk',trackuser.returnCurrentCompanyObject() ,transactionMgr.td);                         
         //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }
-    
-    public PageReference previousAction(){  
-		trackuser = new TrackUserClass();
-       	trackuser.saveUserDocumentInfo();    
-        return new PageReference('/?t='+transactionType);
-    }
-    // End Instance methods.
+
+    public PageReference previousAction() {
+            trackuser = new TrackUserClass();
+            trackuser.saveUserDocumentInfo();
+            return new PageReference('/?t=' + transactionType);
+        }
+        // End Instance methods.
 
 }

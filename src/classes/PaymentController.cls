@@ -51,8 +51,8 @@ public class PaymentController extends TransactionStepControllerBase {
     
     public void initialiseStep() {
         hasPaid = false;
-
-        if(isPageAlreadyValidStep)
+        if(true)
+        //if(isPageAlreadyValidStep)
         {
             hasPaid = true;
             return;

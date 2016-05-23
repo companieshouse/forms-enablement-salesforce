@@ -1,10 +1,19 @@
-/**
- * Controller for the transaction review page on which the user arrives after signing
- * the PDF on Docusign. Presents the user with an inline rendering of the PDF and a submit
- * button that takes them to the payment page at SmartPay.
- * 
- * Author: eliot.stock@methods.co.uk
- */
+/*
+Name:  Review.cls
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Controller Class for Transaction Review Page
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Leo Bitoy    2016-05-19  Initial development.
+*/
 public class ReviewController extends TransactionStepControllerBase{
     
 // Public properties.
@@ -16,7 +25,7 @@ public class ReviewController extends TransactionStepControllerBase{
     public String displayText3 {get; set;}
     public String headerText1 {get; set;}
 
-    // dynamic data
+    // dynamic set data
     public String directorName {get; set;}
     public String companyName {get; set;}
     public String companyNumber {get; set;}
@@ -25,8 +34,7 @@ public class ReviewController extends TransactionStepControllerBase{
     public String presenterPhone {get; set;}
 
     public List<Officer__c> companyDirectors {get; set;}
-   // public CompaniesHouse.registered_office_address companyaddress {get; set;}
-
+    
     // company address information
     public String companyAddress1 {get;set;}
     public String companyAddress2 {get;set;}

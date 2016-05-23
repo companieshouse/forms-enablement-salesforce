@@ -111,6 +111,18 @@
         envelope.CustomFields.CustomField[0].Value = tx.Id + '~Transaction__c'; 
         envelope.CustomFields.CustomField[0].CustomFieldType = 'Text';
         // relate with Officer
+
+        // can' we loop throught the officers.length
+        // for (officers[i] in officers list loop through them and create field)
+        /*{
+
+        envelope.CustomFields.CustomField[1] = new DocuSignAPI.CustomField();
+        envelope.CustomFields.CustomField[1].Name = 'OfficerSigner1'; 
+        envelope.CustomFields.CustomField[1].Value = tx.Officers__r[0].Id + '~Officer__c'; 
+        envelope.CustomFields.CustomField[1].CustomFieldType = 'Text';
+
+        }
+        */
         envelope.CustomFields.CustomField[1] = new DocuSignAPI.CustomField();
         envelope.CustomFields.CustomField[1].Name = 'OfficerSigner1'; /* check this */
         envelope.CustomFields.CustomField[1].Value = tx.Officers__r[0].Id + '~Officer__c'; 
@@ -162,11 +174,12 @@
         * To do - set correct values
         */
         DocuSignAPI.RequestRecipientTokenAuthenticationAssertion assert = new DocuSignAPI.RequestRecipientTokenAuthenticationAssertion();
-        assert.AssertionID = 'Your AssertionID Here';
+        assert.AssertionID = 'Your AssertionID Here';  // (should be unique id userid+companyname+transaction+timestamp) tx.ContactEmail__c + AppConstants.ID_DELIM_CHAR + tx.CompanyName__c + AppConstants.ID_DELIM_CHAR + tx.Transaction_Type__c + AppConstants.ID_DELIM_CHAR + Time.Now(); 
+
+
         assert.AuthenticationInstant = system.now();
         assert.AuthenticationMethod = 'Password';
         assert.SecurityDomain = 'YourApp.com';
-        
         
         //Set return URL
         /**
