@@ -33,7 +33,8 @@ public with sharing class SubmissionManager {
                                         Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, 
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c,
-                                            AuthorizedSigner__c, isDeceased__c From Officers__r) 
+                                            AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
+                                        From Officers__r) 
                                     from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
@@ -75,7 +76,8 @@ public with sharing class SubmissionManager {
                                         Status__c,Amount__c,SubmissionId__c,
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c, 
-                                            AuthorizedSigner__c, isDeceased__c From Officers__r) 
+                                            AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
+                                        From Officers__r) 
                                     from Transaction__c 
                                     where Presenter__c=:presenterId 
                                             and Company__c=:companyId.Id

@@ -275,7 +275,7 @@
         recipient.Email = off.Email__c;
 
         //Pick the correct name for signature
-        if(off.isDeceased__c)
+        if(off.isDeceased__c || off.isPowerOfAttorney__c || off.isCorporateDirector__c)
             recipient.UserName = off.AuthorizedSigner__c;
         else
             recipient.UserName = convertName(off.Name);    

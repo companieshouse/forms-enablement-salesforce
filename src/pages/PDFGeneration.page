@@ -161,7 +161,10 @@
 						<td style="width:45%">
 							<div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
 							<div style='float:center;'>_________________________</div>
-							<div style="{!IF(off.isDeceased__c, 'display:block', 'display:none')}">*Signing on behalf of deceased director</div>
+							<div style="{!IF(off.isDeceased__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_Deceased}</div>
+							<div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">{!$Label.PDF_Power_Of_Attorney_On_Behalf_Of}</div>
+							<div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_The_Corporate_Director}</div>
+								
 						</td>
 						<td style="width:20%">
 							<div style='float:left;'>Signature Date:</div>
@@ -170,10 +173,6 @@
 		            </apex:panelGrid>
 		        </apex:repeat>
 	        	<hr/>
-	        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Authentication</p>
-	        		        	<br />
-	        	<p class="font-xsmall">This form was authorised by the majority of the company's directors on {!Now()}</p>
-	        	<br />
 	        </div>
   
 	        

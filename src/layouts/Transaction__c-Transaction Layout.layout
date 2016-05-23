@@ -223,7 +223,12 @@
         <fields>IsPresenter__c</fields>
         <fields>isSignatory__c</fields>
         <fields>RecipientId__c</fields>
+        <fields>isDeceased__c</fields>
+        <fields>isPowerOfAttorney__c</fields>
+        <fields>isCorporateDirector__c</fields>
         <relatedList>Officer__c.Transaction__c</relatedList>
+        <sortField>RecipientId__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

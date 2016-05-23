@@ -1318,7 +1318,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Officer__c.isCorporateDirector__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Officer__c.isDeceased__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isPowerOfAttorney__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

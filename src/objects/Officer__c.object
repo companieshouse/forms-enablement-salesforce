@@ -103,10 +103,26 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>isCorporateDirector__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Corporate Director?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isDeceased__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>is Deceased?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPowerOfAttorney__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Power Of Attorney?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
