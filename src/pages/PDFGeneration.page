@@ -102,6 +102,21 @@
 					padding-top: 0px;
 					padding-right: 0px;
 					padding-bottom: 0px;
+				}
+				.col1 {
+					width:35%;
+				}
+				.col2 {
+					width:5%;
+				}
+				.col3 {
+					width:60%;
+				}
+				.panelGrid {
+					margin-top:30px; 
+					page-break-inside:avoid; 
+					table-layout:fixed;
+					width: 100%;
 				}	
 
   			</style>
@@ -111,73 +126,73 @@
 	  	
 	  	<body>
 		  	<div style="container">
-		  	<header>
-		  		<div class="primary_header">
-					<p><img src="{!$Resource.Logo}"/>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong class="headerText">DS01</strong><strong class="HeaderText2">(ef)</strong></p>
-				</div>
-				<div id="test" class="PDFBody" >
-			  <div id="rectangle" >
-			  <div id="rectangle2" >
-			  <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Application to strike off</p>
-			  </div>
-			  </div>
-			  </div>
-		  	</header>
-		  	<br/>
-		  	<br/>
-		  	<br/>
-		  	<div>
-		  		<!-- Company Deatails -->
-		  		<apex:panelGrid columns="2" width="70%">
-		  			<apex:outputLabel >Company Name:</apex:outputLabel>
-		            <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-		            <apex:outputLabel >Company Number:</apex:outputLabel>
-		            <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
-		        </apex:panelGrid>
-	        </div>
-	        <br/>
-		  	<br/>
-		  	<br/>
-		  	<br/>
-		    <hr/>
-	        <!-- warning message -->
-	        <div class="warningText">
-	        	<br />
-	        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Important notice for all interested parties</p>
-	        		        	<br />
-	        	<p>This company has applied to be struck off and dissolved. The registrar will proceed unless there is reasonable cause not to, and on dissolution any assets remaining in the company will be passed to the Crown. Guidance is available on grounds for objection. If in doubt seek professional advice.</p>
-	        	<br />
-	        	<hr/>
-	        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director</p>
-	        	<br />
-	        	<p>We as the majority of directors apply for this company to be struck off the Register and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006 (being circumstances in which the directors would otherwise be prohibited under those sections from making an application) exists in relation to the company.</p>
-	        	<br />
-	        	<h4>Authorising Company Director:</h4>
-		    	<apex:repeat value="{!Transaction__c.Officers__r}" var="off">
-		            <apex:panelGrid columns="3" width="100%" style="margin-top:25px" rendered="{!off.isSignatory__c}">
-		                <td style="width:35%">
-		                	<div>{!off.name}</div>
-		                </td>
-						<td style="width:45%">
-							<div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
-							<div style='float:center;'>_________________________</div>
-							<div style="{!IF(off.isDeceased__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_Deceased}</div>
-							<div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">{!$Label.PDF_Power_Of_Attorney_On_Behalf_Of}</div>
-							<div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_The_Corporate_Director}</div>
-								
-						</td>
-						<td style="width:20%">
-							<div style='float:left;'>Signature Date:</div>
-							<div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>
-		                </td>
-		            </apex:panelGrid>
-		        </apex:repeat>
-	        	<hr/>
-	        </div>
-  
-	        
-	        </div>
+			  	<header>
+			  		<div class="primary_header">
+						<p><img src="{!$Resource.Logo}"/>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong class="headerText">DS01</strong><strong class="HeaderText2">(ef)</strong></p>
+					</div>
+					<div id="test" class="PDFBody" >
+						<div id="rectangle" >
+							<div id="rectangle2" >
+								<p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Application to strike off</p>
+							</div>
+						</div>
+				  	</div>
+			  	</header>
+			  	<br/>
+			  	<br/>
+			  	<br/>
+			  	<div>
+			  		<!-- Company Deatails -->
+			  		<apex:panelGrid columns="2" width="70%">
+			  			<apex:outputLabel >Company Name:</apex:outputLabel>
+			            <apex:outputText value="{!Transaction__c.CompanyName__c}" />
+			            <apex:outputLabel >Company Number:</apex:outputLabel>
+			            <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
+			        </apex:panelGrid>
+		        </div>
+		        <br/>
+			  	<br/>
+			  	<br/>
+			  	<br/>
+			    <hr/>
+		        <!-- warning message -->
+		        <div class="warningText">
+		        	<br />
+		        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Important notice for all interested parties</p>
+		        		        	<br />
+		        	<p>This company has applied to be struck off and dissolved. The registrar will proceed unless there is reasonable cause not to, and on dissolution any assets remaining in the company will be passed to the Crown. Guidance is available on grounds for objection. If in doubt seek professional advice.</p>
+		        	<br />
+		        	<hr/>
+		        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director</p>
+		        	<br />
+		        	<p>We as the majority of directors apply for this company to be struck off the Register and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006 (being circumstances in which the directors would otherwise be prohibited under those sections from making an application) exists in relation to the company.</p>
+		        	<br />
+		        	<h4>Authorising Company Director:</h4>
+			    	<apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+			            <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
+			                <td class="col1" align="left">
+			                	<div>{!off.name}</div>
+			                </td>
+			               	<td class="col2" >
+			                </td>
+							<td class="col3">
+								<!--  Signature -->
+								<div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
+								<div style='float:center;'>___________________________________</div>
+								<div style="{!IF(off.isDeceased__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_Deceased}</div>
+								<div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">{!$Label.PDF_Power_Of_Attorney_On_Behalf_Of}</div>
+								<div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_The_Corporate_Director}</div>
 
+								<!--  Signature date -->
+								<div style='float:left;'>Signature Date:</div>
+								<div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>
+							</td>
+			            </apex:panelGrid>
+			        </apex:repeat>
+		        	<hr/>
+		        </div>    
+	        </div>
 	  	</body>
+
   	</html>
 </apex:page>
