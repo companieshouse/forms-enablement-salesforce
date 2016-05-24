@@ -1,0 +1,42 @@
+<apex:page title="{!$Label.UI_Text_Confirmation_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="DocumentDownloadController"
+    >
+    <apex:composition template="TransactionPageTemplate">
+       <apex:define name="content">
+          <apex:form >
+             <div class="govuk-box-highlight">
+                <h1 class="bold-large">Your Submission is complete</h1>
+                <p>
+                   Your reference number is 
+                   <strong class="heading-medium">{!submissionId}</strong>
+                </p>
+             </div>
+             <h2 class="heading-medium">What happens now?</h2>
+             <apex:inputHidden value="{!companyName}" id="theHiddenInput"/>
+
+             <apex:outputtext value="{!displayText3}" escape="false"/>
+
+             <div class="form-group">
+                <h1>Documents</h1>
+                <section class="attachment embedded" id="attachment_1365490">
+                   <div style="display:{!IF(showDoc,"block","none")};" class="panel panel-border-wide">
+                                           
+                      <p>Download the {!transactionType} Document:
+                         <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a>    PDF, {!size}B
+                      </p>
+                   </div>
+                   <div style="display:{!IF(showDoc,"none","block")};" class="panel panel-border-wide">                              
+                      <p>No Documents founds.
+                      </p>
+                   </div>
+                </section>
+             </div>
+             
+          </apex:form>
+       </apex:define>
+    </apex:composition>
+
+</apex:page>

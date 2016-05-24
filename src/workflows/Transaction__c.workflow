@@ -9,7 +9,18 @@
             <type>email</type>
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
-        <template>unfiled$public/testDocusignEmail</template>
+        <template>unfiled$public/CH_Director_Decline</template>
+    </alerts>
+    <alerts>
+        <fullName>DocumentDownloadLink</fullName>
+        <description>DocumentDownloadLink</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <alerts>
         <fullName>EMAIL_NOTIFICATION_FOR_EXPIRED_SIGNING_PERIOD_RESTART_JOURNEY</fullName>
@@ -20,7 +31,7 @@
             <type>email</type>
         </recipients>
         <senderType>CurrentUser</senderType>
-        <template>unfiled$public/ExpiryNotification</template>
+        <template>unfiled$public/CHExpired_Transaction</template>
     </alerts>
     <alerts>
         <fullName>Notify_presenter_that_documents_are_signed_and_awaiting_review_redirect_to_the_r</fullName>
@@ -31,7 +42,18 @@
             <type>email</type>
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
-        <template>unfiled$public/ReviewStatus</template>
+        <template>unfiled$public/CHReviewStatus</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Submission_Confirmation</fullName>
+        <description>Send Submission Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <fieldUpdates>
         <fullName>setContactFieldtoPresenter</fullName>
@@ -121,6 +143,25 @@ Email should contain a URL to start a new journey</description>
             <value>http</value>
         </criteriaItems>
         <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SubmissionDownloadLink</fullName>
+        <actions>
+            <name>DocumentDownloadLink</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>

@@ -198,6 +198,15 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>DownloadLink__c</fullName>
+        <description>Link to download your attachment with authentication</description>
+        <externalId>false</externalId>
+        <label>DownloadLink</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
         <fullName>ErrorDescription__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>API call errors will be presented here</inlineHelpText>
@@ -506,6 +515,12 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
     </listViews>
     <listViews>
         <fullName>All1</fullName>
+        <columns>NAME</columns>
+        <columns>CompanyName__c</columns>
+        <columns>ContactEmail__c</columns>
+        <columns>SubmissionId__c</columns>
+        <columns>Status__c</columns>
+        <columns>OfficerCount__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
