@@ -189,6 +189,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DocumentController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DocumentDownloadController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DynamicField</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -366,6 +374,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SubmissionManagerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SubmissionURLTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1808,6 +1820,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction__c.DownloadLink__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction__c.ErrorDescription__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -2370,6 +2387,14 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DirectorsList</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocumentDownload</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Documents</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

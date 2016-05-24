@@ -1,4 +1,3 @@
-
 /**
  * Submission URL
  *
