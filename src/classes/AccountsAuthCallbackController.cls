@@ -162,12 +162,15 @@ public with sharing class AccountsAuthCallbackController {
 
             companyNumberId = u.returnCurrentCompanyObject(); //will get from cookie
 
+            //TODO: either create the submission or get the cookie if exist and don't create but amend
+
+
             Id submissionId = submissionMgr.initialise( transactionType, presenterID, presenterEmail, companyNumberId, transactionMgr.td );   
             System.debug('submission ID is  ' + submissionId);
             
             //PageReference transactioninformation =  TransactionManager.firstStep(submissionId); // firstStep(submissionId);
            // System.debug('transaction information ' + transactioninformation);
-            return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
+            return transactionMgr==null ? null : transactionMgr.nextStep(submissionId);
         //PageReference pr = getNextStepPageReference(0,submissionId);
 
             //return pr;

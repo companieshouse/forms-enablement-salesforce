@@ -1,0 +1,52 @@
+<!--/*
+Name:  Guidance.cls
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+
+
+Page to be introduced in any form that needs a guidance page.
+
+======================================================
+======================================================
+History
+
+Ver. Author        		Date        Detail
+1.0  Sylvain Picory     2016-05-28  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Guidance_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="GuidanceController"
+    action="{!loadStep}">
+
+ <apex:composition template="TransactionPageTemplate">
+       <apex:define name="content">
+          <apex:form id="form">
+          <apex:outputPanel id="empty"/>
+          		<div class="form-group">
+                    <apex:outputText rendered="{!IF(displayText0 != null, true, false)}" escape="false" value="{!displayText0}"/>
+
+						<fieldset>
+
+						<legend class="visuallyhidden">{!checkboxText0}</legend>
+						<label class="block-label" for="agree">
+							<input id="agree" name="agreeBoxx" onclick="clickBox();" type="checkbox" value="{!warningAgreeBox}">
+							{!checkboxText0}
+							</input>
+						</label>
+						</fieldset>
+						<apex:commandButton id="nextButton" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" disabled="{!NOT(warningAgreeBox)}" /><br />
+		 			<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/>
+					</div>
+
+					<apex:actionFunction action="{!updateBox}" name="clickBox" reRender="nextButton">
+					</apex:actionFunction>
+					
+            </apex:form>
+       </apex:define>
+    </apex:composition>
+
+</apex:page>

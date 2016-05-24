@@ -237,6 +237,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GuidanceController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ISerialisable</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -350,10 +354,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SmartPayUrlTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>StartController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1633,6 +1633,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.Display_Text_4__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.Display_Text_5__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.Display_Text_6__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type_Step__mdt.Document_Template_Name__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -2270,6 +2285,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Form_DS0Page4</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Guidance</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

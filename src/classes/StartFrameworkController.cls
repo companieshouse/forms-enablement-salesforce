@@ -75,6 +75,7 @@ public with sharing class StartFrameworkController {
     Boolean isPageInitialised = false;
     SecurityManager securityMgr;
     TransactionManager transactionMgr;
+    SubmissionManager submissionMgr;
     TrackUserClass userTracker;
 
     //String transactionType;
@@ -129,17 +130,34 @@ public with sharing class StartFrameworkController {
     }
 
     public PageReference startAction() {
+            Id submissionId = submissionMgr.initialise( transactionType, null, null, null, transactionMgr.td );
+            PageReference pr = transactionMgr.firstStep(submissionId);    
 
-            userTracker = new TrackUserClass();
+            //change the if to if the get URL contains Guidance Page then return otherwise not return
+            if(pr.getUrl().contains('Guidance'))
+            {
+                return pr;
+            }
+            else{
+                //Clear the field Historical set valid step and Set valid ste p.
+                submissionMgr.submission.Valid_Step_Ids__c = '';
+                submissionMgr.submission.Historical_Valid_Step_Ids__c = '';
+                update submissionMgr.submission;
 
-            // todo - the code below forces reauthentication.
-            // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
-			userTracker.saveUserDocumentInfo();
-            //userTracker.getUserDocument();
+                //We don't redirect to the next step but to the auth
+                userTracker = new TrackUserClass();
 
-           
-            // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
-            return securityMgr.getUserAuthRedirect();
+                // todo - the code below forces reauthentication.
+                // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
+                userTracker.saveUserDocumentInfo();
+                //userTracker.getUserDocument();
+
+               
+                // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
+                return securityMgr.getUserAuthRedirect();
+            }
+
         }
         // End Instance methods.
+            
 }

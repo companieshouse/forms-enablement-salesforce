@@ -109,13 +109,14 @@ public class PaymentController extends TransactionStepControllerBase {
 
 
         if (merchantReference != null && merchantReference.length() > 0) {
+            initialiseAction();
+
             // Valid params for the result URL back to us after payment. Now check authResult.
             if (authResult == AUTH_RESULT_AUTHORISED) {
                 // The user has paid already. We're done. Move on.
                 //PageReference pageReference = new PageReference('/apex/confirmation?txId=' + merchantReference); // ab added tx Id
                 //pageReference.setRedirect(true);
                 //return pageReference;
-                initialiseAction();
                 submissionMgr.submission.Status__c = 'Paid';
                 PageReference nextPage = nextAction();
                 nextPage.setRedirect(true);
@@ -129,7 +130,6 @@ public class PaymentController extends TransactionStepControllerBase {
                 //Nothing to do?
             }
             else if(authResult == AUTH_RESULT_CANCELLED) {
-                initialiseAction();
                 PageReference nextPage = previousAction();
                 nextPage.setRedirect(true);
                 return nextPage;

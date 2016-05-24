@@ -61,7 +61,7 @@ public class CompaniesHouseTestData {
         //ab
         dss = new dsfs__DocuSign_Status__c ();
 
-        testForm = [Select Below_Button_Text__c, Below_Button_Text2__c, Below_Button_Text3__c, Below_Button_Title__c, Id, DeveloperName, Family__c, Fee__c, MasterLabel, Label, Landing_Page_Text__c, Landing_Page_Text2__c, Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c, Landing_Page_Title__c, Language, NamespacePrefix, QualifiedApiName, Serialisation_Class_Name__c, above_button_text__c from Transaction_Type__mdt Where DeveloperName = 'TestForm'];
+        testForm = [Select isMajorityForm__c,Below_Button_Text__c, Below_Button_Text2__c, Below_Button_Text3__c, Below_Button_Title__c, Id, DeveloperName, Family__c, Fee__c, MasterLabel, Label, Landing_Page_Text__c, Landing_Page_Text2__c, Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c, Landing_Page_Title__c, Language, NamespacePrefix, QualifiedApiName, Serialisation_Class_Name__c, above_button_text__c from Transaction_Type__mdt Where DeveloperName = 'TestForm'];
 
         testStep1 = [Select Apex_Class_Name__c, Id, DeveloperName, Display_Text_1__c, Display_Text_2__c, Display_Text_3__c, Document_Template_Name__c, Header_Text_1__c, Is_Active__c, Label, MasterLabel, Language, NamespacePrefix, Persist_FieldSet_1_Name__c, QualifiedApiName, Query_FieldSet_1_Name__c, SObject_Type__c, Step_Number__c, Step_Type__c, Transaction_Type__c, Visualforce_Page_Name__c From Transaction_Type_Step__mdt Where DeveloperName = 'TestStep1'];
 

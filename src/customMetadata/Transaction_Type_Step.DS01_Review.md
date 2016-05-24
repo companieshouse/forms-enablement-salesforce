@@ -18,6 +18,18 @@
         <value xsi:type="xsd:string">until you have reviewed this document and the associated fee has been paid on the following page.</value>
     </values>
     <values>
+        <field>Display_Text_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Display_Text_5__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Display_Text_6__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Document_Template_Name__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -43,7 +55,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">7.0</value>
+        <value xsi:type="xsd:double">6.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
