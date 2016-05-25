@@ -7,9 +7,12 @@
  * ab
  **/
  public with sharing class SendToDocuSign {
+    public static String ENVELOPEIDNOTDEFINE = 'Not sent yet';
+    
+    public String envelopeId;
+    
     private Boolean isEmbedSignature;
     private String tokenURL; 
-    private String envelopeId;
     private String nextStepURL;
     private Transaction__c tx;
     
@@ -20,7 +23,7 @@
     public String embedDocuSignOpen(Transaction__c trans) {
         isEmbedSignature = false;
         tokenURL = null;
-        envelopeId = 'Not sent yet';
+        envelopeId = ENVELOPEIDNOTDEFINE;
         embedRecipient = null;
         
         //set
@@ -30,7 +33,7 @@
         System.debug('EmbedDocuSign transaction: ' + tx);
 
         //Create and send Envelope
-        SendNow();
+        sendNow();
 
         //If is Presenter is a Director get token to embedDocuSign
         if(embedRecipient != null)
@@ -40,7 +43,7 @@
     }
     
     
-    private void SendNow() {
+    private void sendNow() {
         Blob pdfBlob;
         Integer count;
         List<Officer__c> officersToSignList = new List<Officer__c>();
@@ -64,9 +67,8 @@
         // To do:
         // - update subject
         // - update message
-        //TODO make this dynamic for the blurb and subject. should be pulling from transaction meta data
         DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
-        envelope.Subject = 'DS01 - Striking off application for ' + tx.CompanyName__c ;
+        envelope.Subject = tx.Form_Name__c + ' - application for ' + tx.CompanyName__c ;
         envelope.EmailBlurb = 'This is Companies House new eSignature service,'+ 
             ' it allows to get your electronic signoff.';
         envelope.AccountId  = dsSetting.AccountId__c; 
@@ -87,7 +89,7 @@
         DocuSignAPI.Document document = new DocuSignAPI.Document();
         document.ID = 1;
         document.pdfBytes = EncodingUtil.base64Encode(pdfBlob);
-        document.Name = tx.Form_Name__c;
+        document.Name = tx.Form_Name__c + '_'+ tx.CompanyName__c + '_'+ getDate();
         document.FileExtension = 'pdf';
         envelope.Documents = new DocuSignAPI.ArrayOfDocument();
         envelope.Documents.Document = new DocuSignAPI.Document[1];
@@ -130,7 +132,7 @@
         
         count=0;
         for(Officer__c off : officersToSignList){
-            DocuSignAPI.Recipient recipient = getRecipient(off, count+1);
+            DocuSignAPI.Recipient recipient = getRecipient(off);
             envelope.Recipients.Recipient[count] = recipient;
             count++;    
         }
@@ -142,14 +144,14 @@
         envelope.Tabs.Tab = new DocuSignAPI.Tab[officersToSignList.size()*2]; //for each Officer we will create 2 tabs
         
         count=0;
-        for(Integer recipientId=1; recipientId <= officersToSignList.size(); recipientId++){
+        for(Officer__c off : officersToSignList){
             //create a tab for signing 
-            DocuSignAPI.Tab tab1 = createTab('SignHere', recipientId, 1);
+            DocuSignAPI.Tab tab1 = createTab('SignHere', off.recipientId__c, 1);
             envelope.Tabs.Tab[count] = tab1;
             count++;
             
             //create a tab for date
-            DocuSignAPI.Tab tab2 = createTab('DateSigned', recipientId, 1);
+            DocuSignAPI.Tab tab2 = createTab('DateSigned', off.recipientId__c, 1);
             envelope.Tabs.Tab[count] = tab2;
             count++;
         }
@@ -263,14 +265,21 @@
 
 
     /********************* Aux *********************/
-    private DocuSignAPI.Recipient getRecipient(Officer__c off, Integer recipientId) {
+    private DocuSignAPI.Recipient getRecipient(Officer__c off) {
         DocuSignAPI.Recipient recipient = new DocuSignAPI.Recipient();
-        recipient.ID = recipientId;
+
+        recipient.ID = Integer.valueOf(off.recipientId__c);
         recipient.Type_x = 'Signer';
         //Change this field if signing order is different, e.g. sign2 wait for sign1 completion
         recipient.RoutingOrder = 1; 
         recipient.Email = off.Email__c;
-        recipient.UserName = convertName(off.Name);
+
+        //Pick the correct name for signature
+        if(off.isDeceased__c || off.isPowerOfAttorney__c || off.isCorporateDirector__c)
+            recipient.UserName = off.AuthorizedSigner__c;
+        else
+            recipient.UserName = convertName(off.Name);    
+
         
         // If Officer is Presenter set embedded signature
         if(off.isPresenter__c) { 
@@ -289,10 +298,10 @@
         return recipient;
     }
 
-    private DocuSignAPI.Tab createTab(String type, Integer recipientId, Integer documentId) {
+    private DocuSignAPI.Tab createTab(String type, String recipientId, Integer documentId) {
         DocuSignAPI.Tab tab = new DocuSignAPI.Tab();
         tab.Type_x = type; //'SignHere'
-        tab.RecipientID = recipientId;
+        tab.RecipientID = Integer.valueOf(recipientId);
         tab.DocumentID = documentId;
         tab.AnchorTabItem = new DocuSignAPI.AnchorTab();
         if(type == 'SignHere')
@@ -316,6 +325,14 @@
         lastName = lastName.capitalize();
 
         return firstName + lastName;
+    }
+
+    private String getDate(){
+        Date d = date.today();
+        String day   = d.day() > 9   ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
+        String month = d.month() > 9 ? string.valueOf(d.month()) : '0' + string.valueOf(d.month());
+
+        return day + month + d.year();
     }
 
 }

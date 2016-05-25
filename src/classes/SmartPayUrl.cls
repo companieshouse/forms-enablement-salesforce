@@ -179,7 +179,8 @@ public class SmartPayUrl {
         
         // TODO: (BETA) Before switching this over to hmacSHA256, be aware that that changes the whole
         // signing string format. See the HMAC check tool. None of this is documented in the PDF
-        // documentation.
+        // documentation.    
+        //Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
         Blob sig = crypto.generateMac('hmacSHA1', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
         String sigEncoded = EncodingUtil.base64Encode(sig);
         

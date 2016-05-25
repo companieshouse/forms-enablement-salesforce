@@ -14,7 +14,6 @@ History
 ------- 
 Ver. Author            Date        Detail
 1.0  Antonio Bravo     2016-02-04  Initial development.
-LB updated multiple directors flag for review status integration
 */
 public with sharing class EmbedDocuSignController extends TransactionStepControllerBase {
     
@@ -103,7 +102,6 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             
 
         // Transaction is signed
-        //} else if(isPageAlreadyValidStep) {
         } else if(isPageAlreadyValidStep) {
 
             showButtons=true;
@@ -132,6 +130,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             return null;
 
         }        
+
     }
 
     // Action methods.     

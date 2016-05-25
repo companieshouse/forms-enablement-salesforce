@@ -33,6 +33,30 @@
         <value>Rhybudd i bob ymgeisydd : Mae&apos;n drosedd i ddarparu gwybodaeth anghywir neu gamarweiniol ar y cais hwn yn fwriadol neu&apos;n fyrbwyll . Mae&apos;n drosedd i wneud cais am ddileu&apos;n dan yr adran hon os yw&apos;r cwmni wedi cyfrannau dygiedydd yn broblem. Fe&apos;ch cynghorir i ymgynghori â&apos;r canllawiau sydd ar gael gan Dŷ&apos;r Cwmnïau cyn llenwi&apos;r ffurflen hon . Os oes amheuaeth, gofynnwch am gyngor proffesiynol.</value>
     </labels>
     <labels>
+        <fullName>PDF_On_Behalf_Of_Deceased</fullName>
+        <categories>PDF generation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PDF On Behalf Of Deceased</shortDescription>
+        <value>*Sign on behalf of the deceased director</value>
+    </labels>
+    <labels>
+        <fullName>PDF_On_Behalf_Of_The_Corporate_Director</fullName>
+        <categories>PDF generation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PDF On Behalf Of The Corporate Director</shortDescription>
+        <value>*Sign on behalf of the corporate director</value>
+    </labels>
+    <labels>
+        <fullName>PDF_Power_Of_Attorney_On_Behalf_Of</fullName>
+        <categories>PDF generation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PDF Power Of Attorney On Behalf Of</shortDescription>
+        <value>*Power of Attorney sign on behalf of the director</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Company</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
