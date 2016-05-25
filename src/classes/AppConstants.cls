@@ -22,7 +22,7 @@ public with sharing class AppConstants {
 	//Request Status
 	public final static String REQUEST_STATUS_DRAFT = 'Draft';
 	public static final String REQUEST_STATUS_SIGNED = 'Signed';
-	public static final String REQUEST_STATUS_PENDING_SUBMISSION = 'Awaiting Submission';
+	public static final String REQUEST_STATUS_PENDING_SUBMISSION = 'Submission pending';
 	public static final String REQUEST_STATUS_SUBMITTED = 'Submitted';
 	public static final String REQUEST_STATUS_ERROR = 'Error';
 	

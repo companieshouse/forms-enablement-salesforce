@@ -9,7 +9,7 @@
     </script>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -39,10 +39,16 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Company details</td>
-                            <td>{!companyName}
-                                <br/> {!companyNumber}
-                                <br/> {!companyAddress1}
+                            <td>Company Name</td>
+                            <td>{!companyName}</td>
+                        </tr>
+                        <tr>
+                            <td>Company Number</td>
+                            <td>{!companyNumber}</td>
+                        </tr>
+                        <tr>
+                            <td>Registered Address</td>
+                            <td> {!companyAddress1}
                                 <!--<br/> {!companyAddress2}
                                 <br/> {!companyregion}-->
                                 <br/> {!companyLocality}

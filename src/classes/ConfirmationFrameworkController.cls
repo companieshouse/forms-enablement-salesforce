@@ -54,7 +54,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 String h = EncodingUtil.ConvertTohex(b);
                 String guid = h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
                 submissionMgr.submission.SubmissionId__c =  guid;
-                submissionMgr.submission.Status__c = 'Awaiting Submission';
+                submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
             }
 
             submissionId = submissionMgr.submission.SubmissionId__c;

@@ -50,7 +50,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             pageText = transactionMgr.currentStep.Display_Text_1__c;
 
             //Debug
-            temp=ApexPages.currentPage().getParameters().get('event');
+           // temp=ApexPages.currentPage().getParameters().get('event');
        
         } catch (Exception e){ return; }        
         return;
@@ -94,6 +94,8 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             
             if(tx.Status__c == 'Pending Signatures') { //there are more officers
                 requestedSignatures = true;
+                //tx.MultipleDirectors__c = true; // if there are more officers flag = true
+                //update tx; // flag set to true even if presenter is not director.
                 return null;
             } else { // There is only the presenter as officer
                 tx.Status__c = 'Signed';
@@ -127,6 +129,8 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
 
             if(externalURL == null) //presenter is not a director
                 requestedSignatures = true;
+                tx.MultipleDirectors__c = true; // if there are more officers flag = true
+                update tx; // flag set to true even if presenter is not director.
             
             return null;
 
