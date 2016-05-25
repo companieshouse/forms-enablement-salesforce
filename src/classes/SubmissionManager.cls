@@ -27,7 +27,7 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select Id,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,
                                         Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, 

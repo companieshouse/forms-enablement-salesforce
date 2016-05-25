@@ -24,8 +24,6 @@
         <members>CH_SearchControllerClass_Test</members>
         <members>ChApiClient</members>
         <members>ChApiMock</members>
-        <members>ChangePasswordController</members>
-        <members>ChangePasswordControllerTest</members>
         <members>CompaniesHouse</members>
         <members>CompaniesHouseCalloutsRequest</members>
         <members>CompaniesHouseCalloutsResponse</members>
@@ -88,7 +86,6 @@
         <members>TransactionSerialiserTest</members>
         <members>TransactionSiteUrlRewriter</members>
         <members>TransactionStepControllerBase</members>
-        <members>TrialCustomerPortalHomePageController</members>
         <members>Util</members>
         <members>UtilTest</members>
         <members>superSort</members>
