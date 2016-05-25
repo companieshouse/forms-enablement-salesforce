@@ -6,7 +6,7 @@
     <name>CH DS01 Submission</name>
     <style>none</style>
     <subject>Application to close  {!Transaction__c. CompanyName__c} was successful</subject>
-    <textOnly>GOV.UK
+    <textOnly>Companies House
 
 Application to close {!Transaction__c. CompanyName__c}
 

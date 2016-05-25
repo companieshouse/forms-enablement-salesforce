@@ -6,7 +6,9 @@
     <name>CH Review Status</name>
     <style>none</style>
     <subject>Review your transaction</subject>
-    <textOnly>Dear {!Transaction__c.Presenter__c}, 
+    <textOnly>Companies House
+
+Dear {!Transaction__c.Presenter__c}, 
 
 Your Companies House form {!Transaction__c.Form_Name__c} has been signed and is awaiting your review for completion. If you would like to finish this process please click on the link &lt;a href=&quot;{!Transaction__c.ReviewRedirect__c}&quot;&gt;Here&lt;/a&gt; 
 

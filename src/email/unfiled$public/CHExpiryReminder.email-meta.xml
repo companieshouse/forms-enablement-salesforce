@@ -6,7 +6,7 @@
     <name>CH Expiry Reminder</name>
     <style>none</style>
     <subject>Application to Close Company</subject>
-    <textOnly>GOV.UK
+    <textOnly>Companies House
 
 Application to close {!Transaction__c.CompanyName__c}
 

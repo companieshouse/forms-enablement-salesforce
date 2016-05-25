@@ -6,7 +6,7 @@
     <name>CH Expired Transaction</name>
     <style>none</style>
     <subject>Application to close  {!Transaction__c. CompanyName__c}</subject>
-    <textOnly>GOV.UK
+    <textOnly>Companies House
 
 Application to close {!Transaction__c. CompanyName__c}
 
