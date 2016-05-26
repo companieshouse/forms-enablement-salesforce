@@ -221,7 +221,11 @@
         <fields>NAME</fields>
         <fields>Email__c</fields>
         <fields>IsPresenter__c</fields>
+        <fields>isSignatory__c</fields>
+        <fields>RecipientId__c</fields>
         <relatedList>Officer__c.Transaction__c</relatedList>
+        <sortField>RecipientId__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

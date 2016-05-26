@@ -305,14 +305,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>SendToDocuSignController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>SendToDocuSignControllerTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>SendToDocuSignTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1293,6 +1285,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Officer__c.AuthorizedSigner__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Officer__c.Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1303,7 +1300,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Officer__c.RecipientId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Officer__c.Transaction__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isCorporateDirector__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isDeceased__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isPowerOfAttorney__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2499,10 +2516,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>ca_tour_style</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>embedPop</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
