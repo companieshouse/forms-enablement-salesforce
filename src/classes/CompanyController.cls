@@ -66,7 +66,7 @@ public with sharing class CompanyController {
 
             isPageInitialised = true;
         } catch (Exception e) {
-            return;
+          //  return;
         }
         return;
     }

@@ -52,8 +52,8 @@ public class PaymentController extends TransactionStepControllerBase {
     public void initialiseStep() {
         hasPaid = false;
         // bypass for HMAC testing 
-        if(true)
-        //if(isPageAlreadyValidStep)
+        //if(true)
+        if(isPageAlreadyValidStep)
         {
             hasPaid = true;
             return;
