@@ -20,6 +20,18 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
 &lt;/span&gt; &lt;/p&gt;</value>
     </values>
     <values>
+        <field>Display_Text_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Display_Text_5__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Display_Text_6__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Document_Template_Name__c</field>
         <value xsi:nil="true"/>
     </values>

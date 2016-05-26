@@ -140,9 +140,17 @@
         <fullName>UI_Text_Error_Page</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>UI Text Error Page</shortDescription>
         <value>Error Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Guidance_Page</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Guidance Page</shortDescription>
+        <value>Guidance Page</value>
     </labels>
     <labels>
         <fullName>UI_Text_Landing_Page</fullName>

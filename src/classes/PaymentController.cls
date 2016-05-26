@@ -51,8 +51,7 @@ public class PaymentController extends TransactionStepControllerBase {
     
     public void initialiseStep() {
         hasPaid = false;
-        // bypass for HMAC testing 
-        //if(true)
+        
         if(isPageAlreadyValidStep)
         {
             hasPaid = true;
@@ -94,6 +93,8 @@ public class PaymentController extends TransactionStepControllerBase {
 
         String paramInput = ApexPages.currentPage().getParameters().get('c');
 
+
+
         if(paramInput.contains(' '))
         {
             paramInput = paramInput.replace(' ', '+');
@@ -110,14 +111,14 @@ public class PaymentController extends TransactionStepControllerBase {
 
 
         if (merchantReference != null && merchantReference.length() > 0) {
+            initialiseAction();
+
             // Valid params for the result URL back to us after payment. Now check authResult.
             if (authResult == AUTH_RESULT_AUTHORISED) {
                 // The user has paid already. We're done. Move on.
                 //PageReference pageReference = new PageReference('/apex/confirmation?txId=' + merchantReference); // ab added tx Id
                 //pageReference.setRedirect(true);
                 //return pageReference;
-                initialiseAction();
-                submissionMgr.submission.Status__c = 'Paid';
                 PageReference nextPage = nextAction();
                 nextPage.setRedirect(true);
                 //We need to update the status to awaiting submission when the payment is success
@@ -130,7 +131,6 @@ public class PaymentController extends TransactionStepControllerBase {
                 //Nothing to do?
             }
             else if(authResult == AUTH_RESULT_CANCELLED) {
-                initialiseAction();
                 PageReference nextPage = previousAction();
                 nextPage.setRedirect(true);
                 return nextPage;
@@ -144,6 +144,7 @@ public class PaymentController extends TransactionStepControllerBase {
     }
 
     private void persistStep(){
+        submissionMgr.submission.Status__c = 'Paid';
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -180,6 +181,7 @@ public class PaymentController extends TransactionStepControllerBase {
         SmartPayUrl url = new SmartPayUrl.Builder()
                 .merchantReference(submissionMgr.submission.Id)
                 .paymentAmount(submissionMgr.submission.Amount__c)
+                .customerEmail(submissionMgr.submission.ContactEmail__c)
                 .build();
         String redirectUrl = url.toString();
         externalURL = redirectUrl;

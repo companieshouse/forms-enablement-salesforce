@@ -16,6 +16,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 1.1  Antonio Bravo 2016-04-26  Update Constants
+1.2  Sylvain P 	   2016-05-26  Update Constants
 */
 public with sharing class AppConstants {
 	
@@ -38,4 +39,5 @@ public with sharing class AppConstants {
     public final static String ID_DELIM_SPLIT_CHAR = '\\|';	
 	
 	public final static String DELIM_HISTORICAL_STEP = '_-_';
+	public final static String PERCENTAGE_REPLACEMENT = 'jnxzxrwfus';
 }

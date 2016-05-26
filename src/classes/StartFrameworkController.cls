@@ -18,7 +18,6 @@ Ver. Author        Date        Detail
 public with sharing class StartFrameworkController {
 
     // Public properties.
-        public Cookie t_value {get; set;}
 
     public String pageTitle {
         get;
@@ -76,6 +75,7 @@ public with sharing class StartFrameworkController {
     SecurityManager securityMgr;
     TransactionManager transactionMgr;
     TrackUserClass userTracker;
+    Boolean hasGuidancePage = false;
 
     //String transactionType;
 
@@ -113,6 +113,7 @@ public with sharing class StartFrameworkController {
                 belowbuttontext = transactionMgr.td.Below_Button_Text__c;
                 belowbuttontext2 = transactionMgr.td.Below_Button_Text2__c;
                 belowbuttontext3 = transactionMgr.td.Below_Button_Text3__c;
+                hasGuidancePage = transactionMgr.td.hasGuidancePage__c;
 
                 isPageInitialised = true;
             } catch (Exception e) {
@@ -130,16 +131,31 @@ public with sharing class StartFrameworkController {
 
     public PageReference startAction() {
 
-            userTracker = new TrackUserClass();
 
-            // todo - the code below forces reauthentication.
-            // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
-			userTracker.saveUserDocumentInfo();
-            //userTracker.getUserDocument();
+            //Static step we need to check the boolean if there is a guidance page in the form
+            if(hasGuidancePage)
+            {
+                PageReference pr = new PageReference('/Guidance');
+                pr.getParameters().put('t', transactionType);
+                pr.setRedirect(true);
+                return pr;
+            }
+            else{
 
-           
-            // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
-            return securityMgr.getUserAuthRedirect();
+                //We don't redirect to the next step but to the auth
+                userTracker = new TrackUserClass();
+
+                // todo - the code below forces reauthentication.
+                // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
+                userTracker.saveUserDocumentInfo();
+                //userTracker.getUserDocument();
+
+               
+                // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
+                return securityMgr.getUserAuthRedirect();
+            }
+
         }
         // End Instance methods.
+            
 }

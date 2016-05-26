@@ -8,7 +8,6 @@
  **/
  public with sharing class SendToDocuSign {
     public static String ENVELOPEIDNOTDEFINE = 'Not sent yet';
-    
     public String envelopeId;
     
     private Boolean isEmbedSignature;
@@ -222,10 +221,8 @@
         String popURL = Site.getBaseUrl();
         String paramC = ApexPages.currentPage().getParameters().get('c');
 
-        if (popURL == null || popURL == '') {
-            //popURL = 'https://cs83.salesforce.com/'; // apex/
+        if (popURL == null || popURL == '') { //To be update
             popURL = 'https://abdev-companieshousedev.cs83.force.com';
-            //popURL = 'https://c.cs83.visual.force.com/apex/EmbedDocuSign';
         } 
         popURL += '/EmbedDocuSign';
         popURL += '?c=' + paramC;
@@ -329,7 +326,7 @@
 
     private String getDate(){
         Date d = date.today();
-        String day   = d.day() > 9   ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
+        String day   = d.day()   > 9 ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
         String month = d.month() > 9 ? string.valueOf(d.month()) : '0' + string.valueOf(d.month());
 
         return day + month + d.year();

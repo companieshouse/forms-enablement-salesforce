@@ -63,6 +63,69 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>GuidanceWarningText__c</fullName>
+        <description>Field used to display dynamic text against the checkbox item from the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Text that will appear against the checkbox of the guidance page</inlineHelpText>
+        <label>Guidance Warning Text</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Guidance_Text_1__c</fullName>
+        <description>This field is used to build the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
+        <label>Guidance Text 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Guidance_Text_2__c</fullName>
+        <description>This field is used to build the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
+        <label>Guidance Text 2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Guidance_Text_3__c</fullName>
+        <description>This field is used to build the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
+        <label>Guidance Text 3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Guidance_Text_4__c</fullName>
+        <description>This field is used to build the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
+        <label>Guidance Text 4</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Guidance_Text_5__c</fullName>
+        <description>This field is used to build the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
+        <label>Guidance Text 5</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Guidance_Text_6__c</fullName>
+        <description>This field is used to build the guidance page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
+        <label>Guidance Text 6</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Landing_Page_Text2__c</fullName>
         <externalId>false</externalId>
         <label>Landing Page Text2</label>
@@ -126,6 +189,15 @@
         <label>above button text</label>
         <required>false</required>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>hasGuidancePage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to notify is the form contains a guidance or not.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select this field if the form contains a guidance page</inlineHelpText>
+        <label>has Guidance Page?</label>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>isMajorityForm__c</fullName>
