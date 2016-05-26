@@ -84,6 +84,8 @@ public class SmartPayUrl {
     // To override the Skin's result URL, specify the URL in the parameter resURL in the
     // payment session. The resURL parameter does not need to be included in the signature.
     public String resURL;
+
+    public String customerEmail;
     
     // Required, since Apex code can't throw the standard Exception class.
     public class SmartPayUrlException extends Exception {
@@ -136,7 +138,7 @@ public class SmartPayUrl {
         
         // The date by which the goods or services specified in the order must be shipped
 	    // or rendered. YYYY-MM-DD format. This can always be a day or so from now.
-	    String shipBeforeDate = oneDayFromNow.format('YYYY-MM-DD');
+	    String shipBeforeDate = oneDayFromNow.format('yyyy-MM-dd');
         url += '&';
         url += 'shipBeforeDate=' + shipBeforeDate;
         
@@ -150,20 +152,26 @@ public class SmartPayUrl {
         merchantAccount = settings.Merchant_account__c;
         url += '&';
         url += 'merchantAccount=' + merchantAccount;
+
+        url += '&';
+        url += 'merchantReturnData=' + merchantReference;
+
+        url += '&';
+        url += 'shopperEmail=' + customerEmail;
         
         // The final time by which a payment needs to have been made. This is especially
         // useful for tickets/reservations, where you want to “lock” the item for sale for
         // only a short time and payments made after this time would lead to extra costs
         // and administrative hassle. YYYY-MM-DDThh:mm:ssTZD format.
-        String sessionValidity = oneMonthFromNow.format('YYYY-MM-DD\'T\'hh:mm:ss\'Z\'');
+        String sessionValidity = oneMonthFromNow.format('yyyy-MM-dd\'T\'hh:mm:ss\'Z\'');
         url += '&';
         url += 'sessionValidity=' + sessionValidity;
 
         // It would be nice to specify the result URL dynamically, so that it's driven by us
         // and not by the skin config in the SmartPay backend, but this doesn't work. SmartPay
         // never sends us here.
-         url += '&';     
-         url += 'resURL=' + getResultUrl();
+        url += '&';     
+        url += 'resURL=' + getResultUrl().replace('%', AppConstants.PERCENTAGE_REPLACEMENT);
         
         // We use this to sign the query string parameter values we're sending over.
         String hmacKey = settings.HMAC_key__c;
@@ -174,14 +182,21 @@ public class SmartPayUrl {
 		//   + allowedMethods + blockedMethods + shopperStatement + billingAddressType
 		// The order of the fields must be exactly the same as described above. If you are not using
 		// one of the fields, the value for this field in the signing string is an empty string.
-		String signingString = paymentAmount + CURRENCY_CODE + shipBeforeDate + merchantReference
-            + skinCode + merchantAccount + sessionValidity + ALLOWED_METHODS;
-        
+		//String signingString = paymentAmount + CURRENCY_CODE + shipBeforeDate + merchantReference
+        //    + skinCode + merchantAccount + sessionValidity + ALLOWED_METHODS;
+
+        //String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperLocale:skinCode:skipSelection:';
+        //signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + paymentAmount + ':' + getResultUrl() + ':'+ sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION ;
+
+        String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:merchantReturnData:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperEmail:shopperLocale:skinCode:skipSelection:';
+        signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + merchantReference + ':' + paymentAmount + ':'  + getResultUrl().replace('\\', '\\\\').replace(':', '\\:').replace('%', AppConstants.PERCENTAGE_REPLACEMENT)  +':' + sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + customerEmail + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION;
+
+
         // TODO: (BETA) Before switching this over to hmacSHA256, be aware that that changes the whole
         // signing string format. See the HMAC check tool. None of this is documented in the PDF
         // documentation.    
-        //Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
-        Blob sig = crypto.generateMac('hmacSHA1', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
+        Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString),EncodingUtil.convertFromHex(hmacKey));
+        //Blob sig = crypto.generateMac('hmacSHA1', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
         String sigEncoded = EncodingUtil.base64Encode(sig);
         
         // To debug signature issues, uncomment this. Don't leave it in. Insecure to have the HMAC
@@ -254,6 +269,12 @@ public class SmartPayUrl {
 			Integer valueInPence = Integer.valueOf(String.valueOf(Math.roundToLong(valueInPounds))) * 100;
             url.paymentAmount = String.valueOf(valueInPence);
             
+            return this;
+        }
+
+        public Builder customerEmail(String email)
+        {
+            url.customerEmail = email;
             return this;
         }
         

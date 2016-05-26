@@ -52,6 +52,7 @@
         <members>FormsApiClient</members>
         <members>FormsApiClientTest</members>
         <members>FormsApiMock</members>
+        <members>GuidanceController</members>
         <members>ISerialisable</members>
         <members>IStepNavigable</members>
         <members>MockHttpResponseGenerator</members>
@@ -114,6 +115,7 @@
         <members>DynamicTest</members>
         <members>EmbedDocuSign</members>
         <members>Exception</members>
+        <members>Guidance</members>
         <members>PDFGeneration</members>
         <members>Payment</members>
         <members>PaymentPage</members>

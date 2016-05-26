@@ -58,19 +58,24 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 	            {
 	                if(off.Id == offCont.officer.Id)
 	                {
-	                    off.isPresenter__c = offCont.isPresenter;
-                        off.isSignatory__c = true;
-                        off.Email__c = submissionMgr.submission.Presenter__r.Name;
+                        if(offCont.isPresenter)
+                        {
+	                        off.isPresenter__c = offCont.isPresenter;
+                            off.isSignatory__c = true;
+                            off.Email__c = submissionMgr.submission.Presenter__r.Name;
+                        }
 	                }
 	            }
 	        }
+            //TODO: Remove presenter details from trsansaction if the officer is selected.
 	    }
 	    else
 	    {
 	    	submissionMgr.submission.PresenterPhoneNumber__c = phoneNumber;
         	submissionMgr.submission.PresenterName__c = presenterName;
+            //TODO: remove existing flag in case of previous from officer
 	    }
-       
+
         submissionMgr.persist();    
     }
     // End Instance methods.    

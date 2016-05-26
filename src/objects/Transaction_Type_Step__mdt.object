@@ -33,6 +33,33 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Display_Text_4__c</fullName>
+        <description>This field is used to display content of the page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please input HTML or plain Text to be added in the page.</inlineHelpText>
+        <label>Display Text 4</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Display_Text_5__c</fullName>
+        <description>This field is used to display content of the page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please input HTML or plain Text to be added in the page.</inlineHelpText>
+        <label>Display Text 5</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Display_Text_6__c</fullName>
+        <description>This field is used to display content of the page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please input HTML or plain Text to be added in the page.</inlineHelpText>
+        <label>Display Text 6</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Document_Template_Name__c</fullName>
         <externalId>false</externalId>
         <label>Document Template Name</label>
