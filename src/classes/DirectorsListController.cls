@@ -120,7 +120,6 @@ public with sharing class DirectorsListController extends TransactionStepControl
                     //Temporary save an address email against each officer and save officer to the transaction
                     officerList.add(new Officer__c(Name = officer.name, RecipientId__c = String.valueOf(recipientID), Transaction__c = submissionMgr.submission.Id));
                     recipientID++;
-
                 } else if (officer.officer_role == 'llp-designated-member' && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
