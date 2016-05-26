@@ -39,10 +39,16 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Company details</td>
-                            <td>{!companyName}
-                                <br/> {!companyNumber}
-                                <br/> {!companyAddress1}
+                            <td>Company Name</td>
+                            <td>{!companyName}</td>
+                        </tr>
+                        <tr>
+                            <td>Company Number</td>
+                            <td>{!companyNumber}</td>
+                        </tr>
+                        <tr>
+                            <td>Registered Address</td>
+                            <td> {!companyAddress1}
                                 <!--<br/> {!companyAddress2}
                                 <br/> {!companyregion}-->
                                 <br/> {!companyLocality}

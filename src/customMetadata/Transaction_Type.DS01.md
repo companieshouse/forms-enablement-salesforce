@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - DIssolution</label>
+    <label>DS01 - Dissolution</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:type="xsd:string">&lt;p&gt;This service is also available in &lt;a href=&quot;#&quot;&gt;Welsh (Cymraeg).&lt;/a&gt;&lt;/p&gt;</value>

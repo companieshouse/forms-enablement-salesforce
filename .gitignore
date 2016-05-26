@@ -11,3 +11,6 @@ config/*
 mm.log
 *.log
 *.orig
+README.MD
+.project
+.settings/

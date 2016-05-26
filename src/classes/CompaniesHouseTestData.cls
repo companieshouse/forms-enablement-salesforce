@@ -52,7 +52,9 @@ public class CompaniesHouseTestData {
                                 SubmissionId__c = guid);
 
         off = new Officer__c(Name = 'Test Name',
-                            Email__c = 'test@test.com');
+                            Email__c = 'test@test.com',
+                            RecipientId__c = '1',
+                            isSignatory__c = true);
         
         pdf = new Attachment(Name = 'unit test attachment',
 				Body = Blob.valueOf('unit test attachment'),

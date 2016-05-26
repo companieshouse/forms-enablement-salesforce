@@ -50,7 +50,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             pageText = transactionMgr.currentStep.Display_Text_1__c;
 
             //Debug
-            temp=ApexPages.currentPage().getParameters().get('event');
+           // temp=ApexPages.currentPage().getParameters().get('event');
        
         } catch (Exception e){ return; }        
         return;
@@ -94,6 +94,8 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             
             if(tx.Status__c == 'Pending Signatures') { //there are more officers
                 requestedSignatures = true;
+                //tx.MultipleDirectors__c = true; // if there are more officers flag = true
+                //update tx; // flag set to true even if presenter is not director.
                 return null;
             } else { // There is only the presenter as officer
                 tx.Status__c = 'Signed';
@@ -103,7 +105,6 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             
 
         // Transaction is signed
-        //} else if(isPageAlreadyValidStep) {
         } else if(isPageAlreadyValidStep) {
 
             showButtons=true;
@@ -123,11 +124,16 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             if(tx.Officers__r.size() > 1) { //there are more officers
                 tx.Status__c = 'Pending Signatures';
                 tx.MultipleDirectors__c = true; 
+                tx.Expiry_Date_Length__c = transactionMgr.td.Expiry_Date_Length__c; // set the expiry date
                 update tx;   
             }
 
             if(externalURL == null) //presenter is not a director
                 requestedSignatures = true;
+                tx.MultipleDirectors__c = true;
+                tx.Expiry_Date_Length__c = transactionMgr.td.Expiry_Date_Length__c; // set the expiry date
+                // if there are more officers flag = true
+                update tx; // flag set to true even if presenter is not director.
             
             return null;
 

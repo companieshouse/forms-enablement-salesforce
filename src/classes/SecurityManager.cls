@@ -83,6 +83,7 @@ public with sharing class SecurityManager {
 	
     // Static methods.
     public static String decryptText(String encodedCipherText){
+      return encodedCipherText;
     	CryptoSettings__c cryptoOrgSettings = CryptoSettings__c.getOrgDefaults();
  		String k = String.isBlank(cryptoOrgSettings.Encryption_Private_Key__c) ? DEFAULT_PRIVATE_KEY_TEXT : cryptoOrgSettings.Encryption_Private_Key__c;
     	
@@ -97,6 +98,7 @@ public with sharing class SecurityManager {
     }
         
     public static String encryptText(String clearText){
+      return clearText;
     	CryptoSettings__c cryptoOrgSettings = CryptoSettings__c.getOrgDefaults();
  		String k = String.isBlank(cryptoOrgSettings.Encryption_Private_Key__c) ? DEFAULT_PRIVATE_KEY_TEXT : cryptoOrgSettings.Encryption_Private_Key__c;
     	

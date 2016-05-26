@@ -34,10 +34,10 @@
 
     	for(Attachment att:attToUpdate)
     	{
-    		//Get the corresponding DocuSignStatus with Transaction Form Name
+    		//Get the corresponding DocuSignStatus starting with Transaction Form Name
     		dsfs__DocuSign_Status__c dss = dsStatusMap.get(att.ParentId);
 
-    		if(att.Name == dss.Transaction__r.Form_Name__c)
+    		if(att.Name.startsWith(dss.Transaction__r.Form_Name__c))
     		{
     			if(dss.Transaction__c != null)
     			{

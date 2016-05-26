@@ -32,6 +32,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
         if (isPageInitialised) initialiseStep();
 
     }
+
+    
     
     public void initialiseStep() {
         
@@ -115,12 +117,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
             List<Officer__c> officerList = new List<Officer__c>();
 
             //We want only director that haven't resign and or will resign in futur 
+            Integer recipientID = 1;
             for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
                 if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
                 {
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name= officer.name , Transaction__c =submissionMgr.submission.Id ));
+                    officerList.add(new Officer__c(Name= officer.name , RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
+                    recipientID++;
 
                 }
             }

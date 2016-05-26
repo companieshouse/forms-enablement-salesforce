@@ -56,6 +56,15 @@
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <fieldUpdates>
+        <fullName>TransactionPathBuilder</fullName>
+        <field>TransactionPath__c</field>
+        <formula>$Setup.Environment_Variables_Hierarchy__c.Host_Address__c+&quot;start?t=&quot;+Transaction_Type__c</formula>
+        <name>TransactionPathBuilder</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>setContactFieldtoPresenter</fullName>
         <field>ContactEmail__c</field>
         <formula>IF(ISBLANK(&apos;ContactEmail__c&apos;),Presenter__c, ContactEmail__c )</formula>
@@ -89,6 +98,10 @@
         <actions>
             <name>ContactPresenteronDecline</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>TransactionPathBuilder</name>
+            <type>FieldUpdate</type>
         </actions>
         <active>true</active>
         <criteriaItems>

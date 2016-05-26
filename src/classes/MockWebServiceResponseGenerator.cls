@@ -1,7 +1,24 @@
+/**
+ * Mock WebService to generate a response base on the request. 
+ * Mock used for test class SendToDocuSignTest
+ *
+ * Response type:
+ * - Create and Send Envelope
+ * - Request Recipient Token
+ * 
+ * Author: antonio.bravo@golligo.co.uk
+ * ab
+ **/
 @isTest
 global class MockWebServiceResponseGenerator implements WebServiceMock {
   
   private static String TOKEN_URL = SendToDocuSignTest.TOKEN_URL;
+  private static String SUCCESS_STATUS = SendToDocuSignTest.SUCCESS_STATUS;
+  private static String ERROR_STATUS = SendToDocuSignTest.ERROR_STATUS;
+
+  // Public variables to be set on SendToDocuSignTest for checking Authorized Recipient signing on behalf of
+  public static boolean isSigningOnBehalf = false; //default value is false
+  public static String authorizedSignerName;
 
   // Implement this interface method  
   global void doInvoke(
@@ -16,27 +33,53 @@ global class MockWebServiceResponseGenerator implements WebServiceMock {
            String responseType) {
 
     // Create response element for each request depending on Request Name
-    // Populate response element
-    system.debug('ab requestName: ' + requestName);
+    system.debug('MockWebServiceResponseGenerator requestName: ' + requestName);
     
 
+    //////////////////////////////////////
+    // Create and Send Envelope Mock 
+    //////////////////////////////////////
     if(requestName == 'CreateAndSendEnvelope'){
-      //Create and Send Envelope Mock  
+      String responseStatus;
+      
+      //Get Recipient Name
+      DocuSignAPI.CreateAndSendEnvelope_element element = (DocuSignAPI.CreateAndSendEnvelope_element)request;
+      DocuSignAPI.Envelope envelope = element.Envelope;
+      DocuSignAPI.Recipient recipient = envelope.Recipients.Recipient[0];
+      String recipientName = recipient.UserName;
 
+      system.debug('MockWebServiceResponseGenerator isSigningOnBehalf: ' + isSigningOnBehalf);
+      if(isSigningOnBehalf){
+
+        if(authorizedSignerName == recipientName)
+          responseStatus = SUCCESS_STATUS;
+        else
+          responseStatus = ERROR_STATUS;
+
+      } else {
+        responseStatus = SUCCESS_STATUS;
+      }
+
+      //create envelopeStatus
+      DocuSignAPI.EnvelopeStatus envStatus = new DocuSignAPI.EnvelopeStatus();
+      envStatus.EnvelopeID = responseStatus;
+      
+      //create element and add envelope status to response
       DocuSignAPI.CreateAndSendEnvelopeResponse_element cseresp = new DocuSignAPI.CreateAndSendEnvelopeResponse_element();
-      cseresp.CreateAndSendEnvelopeResult = new DocuSignAPI.EnvelopeStatus();
+      cseresp.CreateAndSendEnvelopeResult = envStatus;
       response.put('response_x', cseresp); 
 
 
-    } else if(requestName == 'RequestRecipientToken') {
-      //Request Recipient Token Response
-      
+    //////////////////////////////////////
+    // Request Recipient Token Response
+    //////////////////////////////////////
+    } else if(requestName == 'RequestRecipientToken') {      
       DocuSignAPI.RequestRecipientTokenResponse_element rrtre = new DocuSignAPI.RequestRecipientTokenResponse_element();
       rrtre.RequestRecipientTokenResult = TOKEN_URL;
       response.put('response_x', rrtre); 
 
     }
-
+    
   }
 
 }
