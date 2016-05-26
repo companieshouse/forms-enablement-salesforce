@@ -52,6 +52,17 @@ public with sharing class SecurityManager {
        return new PageReference(h.getCompanyAuthUrl(companyNumber, transactionType, nonce));
    }
 
+    public PageReference getDownloadAuthRedirect(String companyNumber, String transactionType) {
+       AccountsAPIHelper h = new AccountsAPIHelper();
+
+       // String tempcompanyinformation =  TrackUserClass.getSearchedCompany(companyNumber);
+       // always create/update a cookie when new company search is called
+
+       nonce = getNonce();
+
+       return new PageReference(h.getCompanyDownloadAuthUrl(companyNumber, transactionType, nonce));
+   }
+
     private String getNonce() {
     	
     	final Integer NONCE_LENGTH = 16;
@@ -72,6 +83,7 @@ public with sharing class SecurityManager {
 	
     // Static methods.
     public static String decryptText(String encodedCipherText){
+      return encodedCipherText;
     	CryptoSettings__c cryptoOrgSettings = CryptoSettings__c.getOrgDefaults();
  		String k = String.isBlank(cryptoOrgSettings.Encryption_Private_Key__c) ? DEFAULT_PRIVATE_KEY_TEXT : cryptoOrgSettings.Encryption_Private_Key__c;
     	
@@ -86,6 +98,7 @@ public with sharing class SecurityManager {
     }
         
     public static String encryptText(String clearText){
+      return clearText;
     	CryptoSettings__c cryptoOrgSettings = CryptoSettings__c.getOrgDefaults();
  		String k = String.isBlank(cryptoOrgSettings.Encryption_Private_Key__c) ? DEFAULT_PRIVATE_KEY_TEXT : cryptoOrgSettings.Encryption_Private_Key__c;
     	

@@ -1,7 +1,0 @@
-Dear {!Transaction__c.Presenter__c}, 
-
-Your Companies House form {!Transaction__c.Form_Name__c} has expired concerning {!Transaction__c.CompanyName__c}. If you want to restart the {!Transaction__c.Form_Name__c} process please click on the link <a href="https://lbdev2-chformsfactory.cs83.force.com/start?t=DS01">Here</a> 
-
-Regards, 
-
-Companies House

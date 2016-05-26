@@ -18,7 +18,9 @@ public with sharing class TrackUserClass {
 
          t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, -1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[] { t_value });
+        Cookie d_valueCookieStatus = new Cookie('d_valueCookieStatus', SecurityManager.encryptText('initial'), null, -1, true);
+
+        ApexPages.currentPage().setCookies(new Cookie[] { t_value, d_valueCookieStatus });
 
         return tvalueparameter;
     }

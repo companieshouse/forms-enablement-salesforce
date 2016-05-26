@@ -1,7 +1,0 @@
-Dear {!Transaction__c.Presenter__c}, 
-
-Your Companies House form {!Transaction__c.Form_Name__c} has been signed and is awaiting your review for completion. If you would like to finish this process please click on the link <a href="{!Transaction__c.ReviewRedirect__c}">Here</a> 
-
-Regards, 
-
-Companies House

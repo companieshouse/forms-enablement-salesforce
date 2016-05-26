@@ -32,6 +32,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
         if (isPageInitialised) initialiseStep();
 
     }
+
+    
     
     public void initialiseStep() {
         

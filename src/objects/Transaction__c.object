@@ -198,6 +198,15 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>DownloadLink__c</fullName>
+        <description>Link to download your attachment with authentication</description>
+        <externalId>false</externalId>
+        <label>DownloadLink</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
         <fullName>ErrorDescription__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>API call errors will be presented here</inlineHelpText>
@@ -358,6 +367,17 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>SF_ConfirmationID__c</fullName>
+        <description>Internal ID to signify completion of transaction in salesforce. Id will only be shown if FormsAPI/CH doesn&apos;t respond in time on the confirmation page</description>
+        <externalId>false</externalId>
+        <label>SF ConfirmationID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -435,6 +455,17 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>TransactionPath__c</fullName>
+        <description>Path Back to beginning of Transaction with Transaction Type</description>
+        <externalId>false</externalId>
+        <label>TransactionPath</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>TransactionState__c</fullName>
         <description>Keeps track of encrypted state value for parsing after multiple directors have signed</description>
         <externalId>false</externalId>
@@ -506,6 +537,12 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
     </listViews>
     <listViews>
         <fullName>All1</fullName>
+        <columns>NAME</columns>
+        <columns>CompanyName__c</columns>
+        <columns>ContactEmail__c</columns>
+        <columns>SubmissionId__c</columns>
+        <columns>Status__c</columns>
+        <columns>OfficerCount__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
