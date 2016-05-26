@@ -419,9 +419,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Officer__c.isCorporateDirector__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -429,18 +429,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Officer__c.isPowerOfAttorney__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
-        <field>Officer__c.isSignatory__c</field>
+        <field>Officer__c.isPowerOfAttorney__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Officer__c.isSignatory_c__c</field>
+        <field>Officer__c.isSignatory__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

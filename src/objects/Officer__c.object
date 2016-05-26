@@ -76,7 +76,7 @@
         <fullName>IsPresenter__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>IsPresenter</label>
+        <label>is Presenter?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -131,14 +131,6 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>is Signatory?</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>isSignatory_c__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>isSignatory__c</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
