@@ -30,6 +30,34 @@
         <value xsi:type="xsd:double">100.0</value>
     </values>
     <values>
+        <field>GuidanceWarningText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Guidance_Text_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Guidance_Text_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Guidance_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Guidance_Text_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Guidance_Text_5__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Guidance_Text_6__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Landing_Page_Text2__c</field>
         <value xsi:type="xsd:string">&lt;p&gt;To close a company you will need:&lt;/p&gt;</value>
     </values>
@@ -69,6 +97,10 @@
     <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>hasGuidancePage__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isMajorityForm__c</field>

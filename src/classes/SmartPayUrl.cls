@@ -84,6 +84,8 @@ public class SmartPayUrl {
     // To override the Skin's result URL, specify the URL in the parameter resURL in the
     // payment session. The resURL parameter does not need to be included in the signature.
     public String resURL;
+
+    public String customerEmail;
     
     // Required, since Apex code can't throw the standard Exception class.
     public class SmartPayUrlException extends Exception {
@@ -155,7 +157,7 @@ public class SmartPayUrl {
         url += 'merchantReturnData=' + merchantReference;
 
         url += '&';
-        url += 'shopperEmail=' + 'sylvain.picory@methodsdigital.co.uk';
+        url += 'shopperEmail=' + customerEmail;
         
         // The final time by which a payment needs to have been made. This is especially
         // useful for tickets/reservations, where you want to “lock” the item for sale for
@@ -169,7 +171,7 @@ public class SmartPayUrl {
         // and not by the skin config in the SmartPay backend, but this doesn't work. SmartPay
         // never sends us here.
         url += '&';     
-        url += 'resURL=' + getResultUrl();
+        url += 'resURL=' + getResultUrl().replace('%', AppConstants.PERCENTAGE_REPLACEMENT);
         
         // We use this to sign the query string parameter values we're sending over.
         String hmacKey = settings.HMAC_key__c;
@@ -183,18 +185,18 @@ public class SmartPayUrl {
 		//String signingString = paymentAmount + CURRENCY_CODE + shipBeforeDate + merchantReference
         //    + skinCode + merchantAccount + sessionValidity + ALLOWED_METHODS;
 
-        String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperLocale:skinCode:skipSelection:';
-        signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + paymentAmount + ':' + getResultUrl() + ':'+ sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION ;
+        //String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperLocale:skinCode:skipSelection:';
+        //signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + paymentAmount + ':' + getResultUrl() + ':'+ sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION ;
 
-        //String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:merchantReturnData:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperEmail:shopperLocale:skinCode:skipSelection:';
-        //signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + merchantReference + ':' + paymentAmount + ':'  + '\\%' +':' + sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + 'sylvain.picory@methodsdigital.co.uk' + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION;
+        String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:merchantReturnData:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperEmail:shopperLocale:skinCode:skipSelection:';
+        signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + merchantReference + ':' + paymentAmount + ':'  + getResultUrl().replace('\\', '\\\\').replace(':', '\\:').replace('%', AppConstants.PERCENTAGE_REPLACEMENT)  +':' + sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + customerEmail + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION;
 
 
         // TODO: (BETA) Before switching this over to hmacSHA256, be aware that that changes the whole
         // signing string format. See the HMAC check tool. None of this is documented in the PDF
         // documentation.    
-        //Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString),EncodingUtil.convertFromHex(hmacKey));
-        Blob sig = crypto.generateMac('hmacSHA1', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
+        Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString),EncodingUtil.convertFromHex(hmacKey));
+        //Blob sig = crypto.generateMac('hmacSHA1', Blob.valueOf(signingString), Blob.valueOf(hmacKey));
         String sigEncoded = EncodingUtil.base64Encode(sig);
         
         // To debug signature issues, uncomment this. Don't leave it in. Insecure to have the HMAC
@@ -218,7 +220,6 @@ public class SmartPayUrl {
 
         //Here page URL contains Apex/Payment
         pageUrl = pageUrl.substringAfter('/apex');
-        pageUrl = pageUrl.substringBefore('?');
 
         String url = 'https://' + hostname + pageUrl;
         return url;
@@ -268,6 +269,12 @@ public class SmartPayUrl {
 			Integer valueInPence = Integer.valueOf(String.valueOf(Math.roundToLong(valueInPounds))) * 100;
             url.paymentAmount = String.valueOf(valueInPence);
             
+            return this;
+        }
+
+        public Builder customerEmail(String email)
+        {
+            url.customerEmail = email;
             return this;
         }
         

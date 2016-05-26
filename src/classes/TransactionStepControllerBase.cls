@@ -71,8 +71,16 @@ public virtual class TransactionStepControllerBase {
     		if (!ApexPages.currentPage().getParameters().containsKey('c') || 
     				String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return;
 			
-			String paramValue = SecurityManager.decryptText(ApexPages.currentPage().getParameters().get('c'));    				
-    				
+            //Reverse the logic of C parameter for the payment only 
+            String paramInput = ApexPages.currentPage().getParameters().get('c');
+            if(paramInput.contains(AppConstants.PERCENTAGE_REPLACEMENT))
+            {
+                paramInput = paramInput.replace( AppConstants.PERCENTAGE_REPLACEMENT,'%');
+                paramInput = EncodingUtil.urlDecode(paramInput, 'UTF-8');
+            }
+
+			String paramValue = SecurityManager.decryptText(paramInput);    				
+    	   
 			// Submission state.
 			submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
 			if (!SubmissionManager.isValidSubmissionId(submissionId)) return;

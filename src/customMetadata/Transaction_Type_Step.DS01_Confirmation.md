@@ -57,7 +57,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">8.0</value>
+        <value xsi:type="xsd:double">7.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

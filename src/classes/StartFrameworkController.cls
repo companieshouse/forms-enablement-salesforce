@@ -18,7 +18,6 @@ Ver. Author        Date        Detail
 public with sharing class StartFrameworkController {
 
     // Public properties.
-        public Cookie t_value {get; set;}
 
     public String pageTitle {
         get;
@@ -75,8 +74,8 @@ public with sharing class StartFrameworkController {
     Boolean isPageInitialised = false;
     SecurityManager securityMgr;
     TransactionManager transactionMgr;
-    SubmissionManager submissionMgr;
     TrackUserClass userTracker;
+    Boolean hasGuidancePage = false;
 
     //String transactionType;
 
@@ -114,6 +113,7 @@ public with sharing class StartFrameworkController {
                 belowbuttontext = transactionMgr.td.Below_Button_Text__c;
                 belowbuttontext2 = transactionMgr.td.Below_Button_Text2__c;
                 belowbuttontext3 = transactionMgr.td.Below_Button_Text3__c;
+                hasGuidancePage = transactionMgr.td.hasGuidancePage__c;
 
                 isPageInitialised = true;
             } catch (Exception e) {
@@ -130,19 +130,17 @@ public with sharing class StartFrameworkController {
     }
 
     public PageReference startAction() {
-            Id submissionId = submissionMgr.initialise( transactionType, null, null, null, transactionMgr.td );
-            PageReference pr = transactionMgr.firstStep(submissionId);    
 
-            //change the if to if the get URL contains Guidance Page then return otherwise not return
-            if(pr.getUrl().contains('Guidance'))
+
+            //Static step we need to check the boolean if there is a guidance page in the form
+            if(hasGuidancePage)
             {
+                PageReference pr = new PageReference('/Guidance');
+                pr.getParameters().put('t', transactionType);
+                pr.setRedirect(true);
                 return pr;
             }
             else{
-                //Clear the field Historical set valid step and Set valid ste p.
-                submissionMgr.submission.Valid_Step_Ids__c = '';
-                submissionMgr.submission.Historical_Valid_Step_Ids__c = '';
-                update submissionMgr.submission;
 
                 //We don't redirect to the next step but to the auth
                 userTracker = new TrackUserClass();

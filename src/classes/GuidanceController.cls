@@ -14,7 +14,7 @@ History
 Ver. Author        		Date        Detail
 1.0  Sylvain Picory     2016-05-28  Initial development.
 */
-public with sharing class GuidanceController extends TransactionStepControllerBase{
+public with sharing class GuidanceController{
 
 	public TrackUserClass userTracker;
 
@@ -29,35 +29,58 @@ public with sharing class GuidanceController extends TransactionStepControllerBa
 	//
 	public Boolean warningAgreeBox {get; set;}
 
+    Boolean isPageInitialised = false;
+    SecurityManager securityMgr;
+    TransactionManager transactionMgr;
+
+    public String transactionType {get; set;}
+
+
 	//Constructor of the controller
 	public GuidanceController() {
-        super();
-        if (isPageInitialised) initialiseStep();
+        initialiseStep();
 
     }
     
     public void initialiseStep() {
-    	warningAgreeBox = false;
-    	displayText0 = '';
-    	displayText0 += transactionMgr.currentStep.Header_Text_1__c;
-    	displayText0 += transactionMgr.currentStep.Display_Text_1__c;
-    	displayText0 += transactionMgr.currentStep.Display_Text_2__c;
-    	displayText0 += transactionMgr.currentStep.Display_Text_3__c;
-    	displayText0 += transactionMgr.currentStep.Display_Text_4__c;
-    	displayText0 += transactionMgr.currentStep.Display_Text_5__c;
+        securityMgr = new SecurityManager();
+                      //  userTracker = new TrackUserClass();
 
-    	if(String.isEmpty(displayText0))
-    		displayText0 = null;
+           // userTracker.getUserDocument();
 
-    	checkboxText0 = transactionMgr.currentStep.Display_Text_6__c;
+            try {
+                
+                if (!ApexPages.currentPage().getParameters().containsKey('t') ||
+                    String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
+                    !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
+                    
+                transactionType = ApexPages.currentPage().getParameters().get('t');
+                transactionMgr = new TransactionManager(transactionType);
 
-        return;
+                // this is not efficient unless start pages follow this format consistently
+               warningAgreeBox = false;
+                displayText0 = '';
+                displayText0 += transactionMgr.td.Guidance_Text_1__c;
+                displayText0 += transactionMgr.td.Guidance_Text_2__c;
+                displayText0 += transactionMgr.td.Guidance_Text_3__c;
+                displayText0 += transactionMgr.td.Guidance_Text_4__c;
+                displayText0 += transactionMgr.td.Guidance_Text_5__c;
+                displayText0 += transactionMgr.td.Guidance_Text_6__c;
+
+
+                if(String.isEmpty(displayText0))
+                    displayText0 = null;
+
+                checkboxText0 = transactionMgr.td.GuidanceWarningText__c;
+
+                isPageInitialised = true;
+            } catch (Exception e) {
+                return;
+            }
+            return;
     }
 
-    public void loadStep(){
-    	initialiseAction();
-
-    }
+    
 
     public void updateBox(){
     	if(warningAgreeBox == true)
@@ -67,19 +90,11 @@ public with sharing class GuidanceController extends TransactionStepControllerBa
     	return;
     }
 
-    private void persistStep(){
-    	submissionMgr.submission.Warning_Confirmation_Flag__c = warningAgreeBox;
-        submissionMgr.persist();    
-    }
+   
     // End Instance methods.    
     
     // Action methods.     
     public PageReference nextAction(){ 
-        if (!validatePageState()) return Page.TransactionException;
-        
-        persistStep();  
-
-        //return nextStep();    
 
         //We don't redirect to the next step but to the auth
         userTracker = new TrackUserClass();
@@ -89,16 +104,15 @@ public with sharing class GuidanceController extends TransactionStepControllerBa
 		userTracker.saveUserDocumentInfo();
         //userTracker.getUserDocument();
 
-       
         // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
         return securityMgr.getUserAuthRedirect();
               
     }
     
     public PageReference previousAction(){
-        if (!validatePageState()) return Page.TransactionException;
-                
-        return previousStep();
+        userTracker = new TrackUserClass();
+        userTracker.saveUserDocumentInfo();    
+        return new PageReference('/?t='+transactionType);
     }
     // End Action methods.    
     

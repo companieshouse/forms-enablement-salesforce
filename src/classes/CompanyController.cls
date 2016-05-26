@@ -90,7 +90,12 @@ public with sharing class CompanyController {
     
     public PageReference previousAction(){  
 		trackuser = new TrackUserClass();
-       	trackuser.saveUserDocumentInfo();    
+       	trackuser.saveUserDocumentInfo(); 
+        if(transactionMgr.td.hasGuidancePage__c)
+        {
+            return new PageReference('/Guidance?t=' + transactionType);
+        }
+
         return new PageReference('/?t='+transactionType);
     }
     // End Instance methods.

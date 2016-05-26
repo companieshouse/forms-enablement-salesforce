@@ -19,8 +19,7 @@ Ver. Author        		Date        Detail
     showHeader="false" 
     sidebar="false" 
     standardStylesheets="false"
-    controller="GuidanceController"
-    action="{!loadStep}">
+    controller="GuidanceController">
 
  <apex:composition template="TransactionPageTemplate">
        <apex:define name="content">
@@ -38,7 +37,7 @@ Ver. Author        		Date        Detail
 							</input>
 						</label>
 						</fieldset>
-						<apex:commandButton id="nextButton" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" disabled="{!NOT(warningAgreeBox)}" /><br />
+						<apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Next}" /><br />
 		 			<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/>
 					</div>
 
