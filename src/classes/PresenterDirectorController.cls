@@ -63,6 +63,9 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 	                        off.isPresenter__c = offCont.isPresenter;
                             off.isSignatory__c = true;
                             off.Email__c = submissionMgr.submission.Presenter__r.Name;
+                            
+                            //ab populate Presenter Name field with Director Name
+                            submissionMgr.submission.PresenterName__c = convertName(off.Name); 
                         }
 	                }
 	            }
@@ -180,5 +183,20 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             officerTXT = off.Name;
             isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
         }
+    }
+
+    // API is returning last name + first Name
+    // This function set name in the correct order
+    private String convertName(String name) {
+        String firstName;
+        String lastName;
+
+        firstName = name.substringAfter(',') + ' ';
+        
+        lastName = name.substringBefore(',');
+        lastName = lastName.toLowerCase();
+        lastName = lastName.capitalize();
+
+        return firstName + lastName;
     }
 }
