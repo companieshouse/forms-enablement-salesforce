@@ -1,3 +1,62 @@
-<apex:page showHeader="true" sidebar="true">
-	
+<!-- Authenticated Page for Document Approval Statuses -->
+<!--  Author: Leo Bitoy -->
+<apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="initialiseController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+              <style>
+                .govuk-box-review {
+                    /*text-align: center;
+                     */
+                     padding: 2em 0 1em 0;
+                    margin: 1em 0 1em 0;
+                    color: #000;
+                    background: #D3D3D3;
+                }
+                /*
+                .gov-uk-box-review-fontcolor {
+                    color: #000;
+                    font-size: 14px;
+                }*/
+                </style>
+                <div class="govuk-box-review">
+                    <h1 class="bold-large gov-uk-box-review-fontcolor ">Templeton Metal Works Limited</h1>
+                    <p class="gov-uk-box-review-fontcolor ">
+                        <b>05647510</b> - Incorporated on 27th January 2005
+                    </p>
+                    <p class="gov-uk-box-review-fontcolor"> 22 Everdene Lane West Morton Northamptonshire NT54 3ET
+                    </p>
+                </div>
+                <h2 class="heading-large">Requested Approvals</h2>
+                <div class="form-group">
+                    <table class="check-your-answers">
+                        <thead>
+                            <tr>
+                                <th scope="row">Director Name</th>
+                                <th scope="row">Date of Birth</th>
+                                <th scope="row">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mr. PotatoHead</td>
+                                <td>September 1945</td>
+                                <td> Awaiting Approval</td>
+                            </tr>
+                            <tr>
+                                <td>Mr. Lettuce Head</td>
+                                <td>September 1989</td>
+                                <td> Awaiting Approval</td>
+                            </tr>
+                            <tr>
+                                <td>Mr. Tomato Face</td>
+                                <td>September 2001</td>
+                                <td> Awaiting Approval</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>
