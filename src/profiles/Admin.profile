@@ -149,6 +149,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DocStatusController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DocuSignAPI</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -440,6 +444,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Officer__c.isSignatory__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isSignatory_c__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -824,7 +833,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.isLLP__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.isMajorityRequired__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.nonofficerPresenter__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -946,6 +965,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DirectorsList</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocStatusPage</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

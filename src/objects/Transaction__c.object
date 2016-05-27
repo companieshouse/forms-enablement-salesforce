@@ -517,10 +517,26 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isLLP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isLLP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isMajorityRequired__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>isMajorityRequired?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>nonofficerPresenter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>nonofficerPresenter</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

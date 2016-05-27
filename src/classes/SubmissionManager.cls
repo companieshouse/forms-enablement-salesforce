@@ -30,7 +30,7 @@ public with sharing class SubmissionManager {
         List<Transaction__c> recs = [select Id,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,
-                                        Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, 
+                                        Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c,
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
@@ -73,7 +73,7 @@ public with sharing class SubmissionManager {
         List<Transaction__c> recs = [select Id,Presenter__c,Form_Name__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
-                                        Status__c,Amount__c,SubmissionId__c,
+                                        Status__c,Amount__c, isLLP__c, SubmissionId__c,
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c, 
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 

@@ -26,7 +26,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
     public Integer requiredSignature {get; set;}
     public String emails {get; set;}
     public Id selectedId {get; set;}
-
+    public Boolean isLLPCompany {get; set;}
 
     public DirectorInputListController(){
         super();
@@ -39,6 +39,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         //Set up the company name
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+        isLLPCompany = submissionMgr.submission.isLLP__c;
         requiredSignature = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         listOfDirectors = new List<officerContainer>();
         emails = '';
@@ -120,7 +121,6 @@ public with sharing class DirectorInputListController extends TransactionStepCon
 
     public PageReference populateDirectorList(){
         initialiseAction();
-        
         //Get the list officer already created
         if(submissionMgr.submission.Officers__r != null)
         {

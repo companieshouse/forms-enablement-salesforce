@@ -38,6 +38,7 @@
         <members>DeveloperToolsController</members>
         <members>DirectorInputListController</members>
         <members>DirectorsListController</members>
+        <members>DocStatusController</members>
         <members>DocuSignAPI</members>
         <members>DocuSignAPITest</members>
         <members>DocuSignStatusTriggerHandler</members>
@@ -110,6 +111,7 @@
         <members>DeveloperTools</members>
         <members>DirectorsInputList</members>
         <members>DirectorsList</members>
+        <members>DocStatusPage</members>
         <members>DocumentDownload</members>
         <members>Documents</members>
         <members>DynamicTest</members>
@@ -139,10 +141,14 @@
     </types>
     <types>
         <members>*</members>
+        <name>CustomLabels</name>
+    </types>
+    <types>
+        <members>*</members>
         <name>CustomMetadata</name>
     </types>
     <types>
-         <members>API_Org_Settings__c</members>
+        <members>API_Org_Settings__c</members>
         <members>Access_Token__c</members>
         <members>Account_API_Settings__c</members>
         <members>Company_Authorisation__c</members>
@@ -172,10 +178,6 @@
         <members>Admin</members>
         <members>Default Profile</members>
         <name>Profile</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>CustomLabels</name>
     </types>
     <types>
         <members>*</members>
