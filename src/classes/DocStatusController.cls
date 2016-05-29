@@ -57,8 +57,11 @@ public with sharing class DocStatusController {
         get;
         private set;
     }
+    public dsfs__DocuSign_Status__c docusignrecipientstatus {get; set;}
 
-	private String nonce;
+    public dsfs__DocuSign_Status__c txrs {get; set;}
+
+    private String nonce;
     private Company_Authorisation__c companyAuth;
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
 
@@ -71,6 +74,20 @@ public with sharing class DocStatusController {
     }
     public PageReference initialiseController() {
 
+    	// initialze controller and set docusign recipient status screen variables in view state
+
+    	// companyName = tx.
+    	// companyNumber = tx. 
+    	// companyIncorporationDate = // may need CH api to query this information 
+    	// Note: (if we are calling this multiple times then we should do an upsert on the initial call to CH and persist
+    	// this data at least for the length of the transaction)
+    	// companyAddress = tx.
+    	// directorName = txrs.
+    	// directorSigningStatus = txrs.
+    	// directorDateofBirth = ??
+    	// statusComplete = txrs.??Status if all complete and envelope is ready to go
+    	//
+
         parseQueryString();
 
         findCompanyAuthByNonce();
@@ -80,14 +97,17 @@ public with sharing class DocStatusController {
         if (companyAuth != null) {
 
             // get transaction and attachment and set vforcepage
-            getDocumentDownloadTransaction();
+            getDocumentStatusTransaction();
+
+            getSigningStatusInfo(transactionID);
 
             tx = currenttransaction;
+
+            txrs = docusignrecipientstatus;
 
             DestroyCookies();
 
             return null;
-
         } else {
             // set the cookiestatus and then redirect to companypage and call SecurityManager.getDownloadAuthRedirect();
             // to be sent back and captured in the above
@@ -96,22 +116,24 @@ public with sharing class DocStatusController {
             CreateDocumentStatusCookies();
             system.debug('transactiontype= ' + transactionType + 'company number=' + companyNumber);
             // need to check for company number/ parameters and if they don't exist then throw an error to show up on the docstatus page in apex messages
-            
-            return securityMgr.getDocumentStatusAuthRedirect(companyNumber, transactionType);
 
-            // company page search redirect
-            /*
-            PageReference pr = new PageReference('/Company');
-            pr.getParameters().put('t', transactionType);
-            return pr;
-            */
+            return securityMgr.getDocumentStatusAuthRedirect(companyNumber, transactionType);
         }
+
+    }
+
+    public sObject getSigningStatusInfo(Id transactionID) {
+
+    	List<dsfs__DocuSign_Status__c> records = [ SELECT dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Transaction__c, dsfs__Sender_Email__c, (SELECT dsfs__DocuSign_Recipient_Id__c,Name,dsfs__Parent_Status_Record__c,dsfs__DocuSign_Recipient_Title__c,dsfs__DocuSign_Recipient_Email__c,dsfs__DocuSign_Recipient_Company__c,dsfs__Recipient_Status__c,dsfs__Envelope_Id__c,Officer__c,dsfs__Date_Signed__c,dsfs__Date_Delivered__c,dsfs__Date_Declined__c,dsfs__Date_Sent__c,dsfs__Decline_Reason__c FROM dsfs__R00NS0000000WUO2MAO__r) FROM dsfs__DocuSign_Status__c  Where Transaction__c = :transactionID];
+    	records[0] = docusignrecipientstatus;
+
+    	return docusignrecipientstatus;
 
     }
 
     Public String CreateDocumentStatusCookies() {
 
-        String dvalueparameter = ApexPages.currentPage().getParameters().get('documentstatus');
+        String dvalueparameter = ApexPages.currentPage().getParameters().get('documentsigningstatus');
 
         transactionType = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
 
@@ -136,7 +158,7 @@ public with sharing class DocStatusController {
         return null;
     }
 
-    Public sObject getDocumentDownloadTransaction() {
+    Public sObject getDocumentStatusTransaction() {
 
         Cookie a = ApexPages.currentPage().getCookies().get('d_valueTType');
 
@@ -150,12 +172,14 @@ public with sharing class DocStatusController {
 
         transactionID = SecurityManager.decryptText(c.getValue());
 
+        // retrieve the transaction
         List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, Presenter__r.Name, isMajorityRequired__c, PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c, MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, Status__c, CompanyName__c, SubmissionId__c, Warning_Confirmation_Flag__c, Amount__c, (SELECT Id, BodyLength, Name FROM Attachments), (Select Id, Name, Email__c, isPresenter__c, isSignatory__c From Officers__r) from Transaction__c where Id = : transactionID];
         if (recs.size() == 1) currenttransaction = recs[0];
 
 
         return currenttransaction;
     }
+
 
     Public String DestroyCookies() {
 
@@ -175,8 +199,11 @@ public with sharing class DocStatusController {
 
             // not authenticated so call authentication
 
+        } else {
+            // apex error message here
+            //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
+
         }
-        //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
     }
 
     private void findCompanyAuthByNonce() {

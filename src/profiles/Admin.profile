@@ -153,6 +153,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DocStatusUrlTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DocuSignAPI</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -174,6 +178,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DocumentDownloadController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DocusignTecipientTriggerStatusHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -788,6 +796,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.SignerStatus__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -965,10 +978,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DirectorsList</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocStatusPage</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

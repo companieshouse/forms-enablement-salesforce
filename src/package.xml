@@ -39,12 +39,14 @@
         <members>DirectorInputListController</members>
         <members>DirectorsListController</members>
         <members>DocStatusController</members>
+        <members>DocStatusUrlTriggerHandler</members>
         <members>DocuSignAPI</members>
         <members>DocuSignAPITest</members>
         <members>DocuSignStatusTriggerHandler</members>
         <members>DocuSignStatusTriggerHandlerTest</members>
         <members>DocumentController</members>
         <members>DocumentDownloadController</members>
+        <members>DocusignTecipientTriggerStatusHandler</members>
         <members>DynamicField</members>
         <members>DynamicTestController</members>
         <members>EmbedDocuSignController</members>
@@ -111,7 +113,6 @@
         <members>DeveloperTools</members>
         <members>DirectorsInputList</members>
         <members>DirectorsList</members>
-        <members>DocStatusPage</members>
         <members>DocumentDownload</members>
         <members>Documents</members>
         <members>DynamicTest</members>
