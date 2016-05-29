@@ -126,6 +126,7 @@
         <members>Review</members>
         <members>SmartPayNotification</members>
         <members>StartFramework</members>
+        <members>Status</members>
         <members>StdExceptionTemplate</members>
         <members>Summary</members>
         <members>TransactionException</members>
@@ -173,6 +174,7 @@
         <members>unfiled$public/CHExpiryReminder</members>
         <members>unfiled$public/CHReviewStatus</members>
         <members>unfiled$public/CH_Director_Decline</members>
+        <members>unfiled$public/CH_Signing_Status</members>
         <name>EmailTemplate</name>
     </types>
     <types>

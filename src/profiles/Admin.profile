@@ -1033,6 +1033,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>Status</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>StdExceptionTemplate</apexPage>
         <enabled>true</enabled>
     </pageAccesses>

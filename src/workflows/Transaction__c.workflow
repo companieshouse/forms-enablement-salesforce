@@ -55,6 +55,17 @@
         <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
+    <alerts>
+        <fullName>SigningStatusScreen</fullName>
+        <description>SigningStatusScreen</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/CH_Signing_Status</template>
+    </alerts>
     <fieldUpdates>
         <fullName>TransactionPathBuilder</fullName>
         <field>TransactionPath__c</field>
@@ -161,6 +172,26 @@ Email should contain a URL to start a new journey</description>
             <value>True</value>
         </criteriaItems>
         <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SigningStatusTransaction</fullName>
+        <actions>
+            <name>SigningStatusScreen</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.MultipleDirectors__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the review page</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
