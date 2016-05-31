@@ -145,7 +145,7 @@
             <td>
                 <h1 class="page-title-style-email">Application to close {!Transaction__c.CompanyName__c}</h1>
                 <p>Dear {!Transaction__c.PresenterName__c} </p>
-                <p>Your Companies House Form {!Transaction__c.Form_Name__c} is awaiting signatures from multiple directors. If you would like to keep track of this process please click on the link <a href="{!Transaction__c.ReviewRedirect__c}">here</a>.  </p>
+                <p>Your Companies House Form {!Transaction__c.Form_Name__c} is awaiting signatures from multiple directors. If you would like to keep track of this process please click on the link <a href="{!Transaction__c.SignerStatus__c}">here</a>.  </p>
                 <p>Regards,</p>
                 <p>Companies House</p>
                 <div>

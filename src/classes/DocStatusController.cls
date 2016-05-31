@@ -36,6 +36,30 @@ public with sharing class DocStatusController {
         get;
         set;
     }
+    public String companyName {
+        get;
+        set;
+    }
+    public String directorName {
+        get;
+        set;
+    }
+    public String directorSigningStatus {
+        get;
+        set;
+    }
+    public String directorDateofBirth {
+        get;
+        set;
+    }
+    public String envelopeID {
+        get;
+        set;
+    }
+    public String docusignobjectsname {
+        get;
+        set;
+    }
     public Transaction__c currenttransaction {
         get;
         set;
@@ -57,10 +81,53 @@ public with sharing class DocStatusController {
         get;
         private set;
     }
-    public dsfs__DocuSign_Status__c docusignrecipientstatus {get; set;}
+    public dsfs__DocuSign_Status__c docusignrecipientstatus {
+        get;
+        set;
+    }
 
-    public dsfs__DocuSign_Status__c txrs {get; set;}
+    public dsfs__DocuSign_Status__c txrs {
+        get;
+        set;
+    }
 
+    // address information
+    public String companyAddress1 {
+        get;
+        set;
+    }
+    public String companyAddress2 {
+        get;
+        set;
+    }
+    public String companyregion {
+        get;
+        set;
+    }
+    public String companypostcode {
+        get;
+        set;
+    }
+    public String companyCountry {
+        get;
+        set;
+    }
+    public String companyLocality {
+        get;
+        set;
+    }
+    public String companyIncorporationDate {
+        get;
+        set;
+    }
+    public String informationstuff {
+        get;
+        set;
+    }
+    public List <dsfs__DocuSign_Recipient_Status__c> listofOfficers {
+        get;
+        set;
+    }
     private String nonce;
     private Company_Authorisation__c companyAuth;
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
@@ -74,19 +141,7 @@ public with sharing class DocStatusController {
     }
     public PageReference initialiseController() {
 
-    	// initialze controller and set docusign recipient status screen variables in view state
-
-    	// companyName = tx.
-    	// companyNumber = tx. 
-    	// companyIncorporationDate = // may need CH api to query this information 
-    	// Note: (if we are calling this multiple times then we should do an upsert on the initial call to CH and persist
-    	// this data at least for the length of the transaction)
-    	// companyAddress = tx.
-    	// directorName = txrs.
-    	// directorSigningStatus = txrs.
-    	// directorDateofBirth = ??
-    	// statusComplete = txrs.??Status if all complete and envelope is ready to go
-    	//
+        // initialze controller and set docusign recipient status screen variables in view state
 
         parseQueryString();
 
@@ -98,12 +153,40 @@ public with sharing class DocStatusController {
 
             // get transaction and attachment and set vforcepage
             getDocumentStatusTransaction();
-
-            getSigningStatusInfo(transactionID);
-
             tx = currenttransaction;
 
+            System.debug('here is your envelopeID' + envelopeID);
+            System.debug('here is your transcationId' + transactionID);
+
+            getRecipientSigningStatusInfo();
+            System.debug('here is your recipient status' + docusignrecipientstatus);
+
             txrs = docusignrecipientstatus;
+
+            companyName = tx.CompanyName__c;
+            companyNumber = tx.CompanyNumber__c;
+
+            // address information
+            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+            companyAddress1 = compProf.registered_office_address.address_line_1;
+            companyAddress2 = compProf.registered_office_address.address_line_2;
+            companyregion = compProf.registered_office_address.region;
+            companypostcode = compProf.registered_office_address.postal_code;
+            companyCountry = compProf.registered_office_address.country;
+            companyLocality = compProf.registered_office_address.locality;
+            companyIncorporationDate = compProf.date_of_creation;
+            listofOfficers = docusignrecipientstatus.dsfs__R00NS0000000WUO2MAO__r;
+            system.debug('officers list for dsfs recipient status ===='   + listofOfficers);
+            // companyIncorporationDate = // may need CH api to query this information 
+            // Note: (if we are calling this multiple times then we should do an upsert on the initial call to CH and persist
+            // this data at least for the length of the transaction)
+            // companyAddress = tx.
+            //directorName = txrs.Name;
+
+            //directorSigningStatus = txrs.dsfs__Recipient_Status__c;
+            // directorDateofBirth = ??
+            // statusComplete = txrs.??Status if all complete and envelope is ready to go
+            //
 
             DestroyCookies();
 
@@ -122,12 +205,32 @@ public with sharing class DocStatusController {
 
     }
 
-    public sObject getSigningStatusInfo(Id transactionID) {
+    private static docusignNamedObject__c getSettings() {
 
-    	List<dsfs__DocuSign_Status__c> records = [ SELECT dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Transaction__c, dsfs__Sender_Email__c, (SELECT dsfs__DocuSign_Recipient_Id__c,Name,dsfs__Parent_Status_Record__c,dsfs__DocuSign_Recipient_Title__c,dsfs__DocuSign_Recipient_Email__c,dsfs__DocuSign_Recipient_Company__c,dsfs__Recipient_Status__c,dsfs__Envelope_Id__c,Officer__c,dsfs__Date_Signed__c,dsfs__Date_Delivered__c,dsfs__Date_Declined__c,dsfs__Date_Sent__c,dsfs__Decline_Reason__c FROM dsfs__R00NS0000000WUO2MAO__r) FROM dsfs__DocuSign_Status__c  Where Transaction__c = :transactionID];
-    	records[0] = docusignrecipientstatus;
+        for (docusignNamedObject__c s: docusignNamedObject__c.getAll().values()) {
+            return s;
+        }
 
-    	return docusignrecipientstatus;
+        System.debug(LoggingLevel.ERROR, 'No active docusign settings in Custom Settings' + 'Can\'t build the system Host URL.');
+
+        return null;
+    }
+
+    Public sObject getRecipientSigningStatusInfo() {
+        //String transactionID
+
+        Cookie c = ApexPages.currentPage().getCookies().get('d_valueId');
+
+        transactionID = SecurityManager.decryptText(c.getValue());
+
+        //tx.DocuSign_Status__r[0].dsfs__DocuSign_Envelope_ID__c = envelopeID;
+
+        //System.debug('your envelope ids are '  + envelopeID);
+
+        List < dsfs__DocuSign_Status__c > records = [SELECT  dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Name, Id, (SELECT dsfs__DocuSign_Recipient_Company__c, dsfs__DocuSign_Recipient_Email__c, Name, dsfs__DocuSign_Recipient_Id__c, dsfs__Recipient_Status__c, Id FROM dsfs__R00NS0000000WUO2MAO__r) FROM dsfs__DocuSign_Status__c WHERE Transaction__c = :transactionID]; //and Transaction__r.Name = :'SUB0145'];
+        docusignrecipientstatus =  records[0];
+        System.debug('your records are '  + records[0]);
+        return docusignrecipientstatus;
 
     }
 
@@ -143,6 +246,9 @@ public with sharing class DocStatusController {
 
         companyNumber = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[3];
 
+        //envelopeID = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[4];
+
+
         cookiestatus = 'setauth';
 
         Cookie d_valuetType = new Cookie('d_valueTType', SecurityManager.encryptText(transactionType), null, -1, true);
@@ -153,8 +259,10 @@ public with sharing class DocStatusController {
 
         Cookie d_valueCookieStatus = new Cookie('d_valueCookieStatus', SecurityManager.encryptText(cookiestatus), null, -1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[] { d_valuetType, d_valueEmail, d_valueId, d_valueCookieStatus });
+        //Cookie d_valueEnvelopeId = new Cookie('d_valueEnvelopeId', SecurityManager.encryptText(envelopeID), null, -1, true);
 
+        ApexPages.currentPage().setCookies(new Cookie[] { d_valuetType, d_valueEmail, d_valueId, d_valueCookieStatus });
+        //, d_valueEnvelopeId 
         return null;
     }
 
@@ -166,14 +274,18 @@ public with sharing class DocStatusController {
 
         Cookie c = ApexPages.currentPage().getCookies().get('d_valueId');
 
+        //Cookie d = ApexPages.currentPage().getCookies().get('d_valueEnvelopeId');
+
         transactiontype = SecurityManager.decryptText(a.getValue());
 
         contactemail = SecurityManager.decryptText(b.getValue());
 
         transactionID = SecurityManager.decryptText(c.getValue());
 
+        //envelopeID = SecurityManager.decryptText(d.getValue());
+
         // retrieve the transaction
-        List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, Presenter__r.Name, isMajorityRequired__c, PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c, MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, Status__c, CompanyName__c, SubmissionId__c, Warning_Confirmation_Flag__c, Amount__c, (SELECT Id, BodyLength, Name FROM Attachments), (Select Id, Name, Email__c, isPresenter__c, isSignatory__c From Officers__r) from Transaction__c where Id = : transactionID];
+        List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, Presenter__r.Name, isMajorityRequired__c, PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c, MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, Status__c, CompanyName__c, SubmissionId__c, Warning_Confirmation_Flag__c, Amount__c, (SELECT Id, BodyLength, Name FROM Attachments), (Select Id, Name, Email__c, isPresenter__c, isSignatory__c From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) from Transaction__c where Id = : transactionID];
         if (recs.size() == 1) currenttransaction = recs[0];
 
 
@@ -188,6 +300,9 @@ public with sharing class DocStatusController {
         Cookie d_valueEmail = new Cookie('d_valueEmail', 'empty', null, 0, true);
 
         Cookie d_valueId = new Cookie('d_valueId', 'empty', null, 0, true);
+
+        //Cookie d_valueEnvelopeId = new Cookie('d_valueId', 'empty', null, 0, true);
+
 
         return null;
     }

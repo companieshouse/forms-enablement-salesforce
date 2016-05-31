@@ -25,7 +25,7 @@ public with sharing class AccountsAPIHelper {
 	
         SecurityManager securityMgr;
 
-         private TrackUserClass userTracker {
+        private TrackUserClass userTracker {
         get;
         set;
     }
@@ -49,7 +49,7 @@ public with sharing class AccountsAPIHelper {
 	
     public String getDocumentStatusRedirectUrl() {
         String hostname = ApexPages.currentPage().getHeaders().get('Host');
-        String docstatusredirectUrl = 'https://' + hostname + '/docstatuspage';
+        String docstatusredirectUrl = 'https://' + hostname + '/Status';
         System.debug('hostname is  ' + hostname); 
                return docstatusredirectUrl;
     }   

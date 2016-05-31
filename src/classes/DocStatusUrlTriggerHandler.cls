@@ -27,7 +27,11 @@ public with sharing class DocStatusUrlTriggerHandler {
 	}
 
 
-    public static void afterUpdateandafterInsert(List < Transaction__c > transactionsList) {
+    public static void afterUpdate(List <Transaction__c> transactionsList) {
+
+       // Set<Id> triggerIDs = Trigger.newMap.keyset();
+
+        //List<dsfs__DocuSign_Status__c> transactionStatuses = [SELECT Transaction__c,Transaction__r.CompanyNumber__c , Transaction__r.ContactEmail__c,Transaction__r.CompanyName__c, Transaction__r.Form_Name__c, Transaction__r.Id, Transaction__r.Name, dsfs__Envelope_Status__c, dsfs__DocuSign_Envelope_ID__c FROM dsfs__DocuSign_Status__c Where Transaction__r.Id = :triggerIDs];
 
         for (Transaction__c transactionupdater: transactionsList) {
             // list of transactions to update at the end
@@ -46,11 +50,11 @@ public with sharing class DocStatusUrlTriggerHandler {
 
                 parametername += '/Status?documentsigningstatus=';
 
-                parametername += SecurityManager.encryptText(transactiontype + AppConstants.ID_DELIM_CHAR + contactemail + AppConstants.ID_DELIM_CHAR + transactionID + AppConstants.ID_DELIM_CHAR + companyNumber);
+                parametername += SecurityManager.encryptText(transactiontype + AppConstants.ID_DELIM_CHAR + contactemail + AppConstants.ID_DELIM_CHAR + transactionID + AppConstants.ID_DELIM_CHAR + companyNumber);// + AppConstants.ID_DELIM_CHAR + envelopeID);
 
-                PageReference downloadreference = new PageReference(parametername);
+                PageReference statusreference = new PageReference(parametername);
 
-                System.debug('your signing status url is' + downloadreference);
+                System.debug('your signing status url is' + statusreference);
 
                 transactionupdater.SignerStatus__c = parametername;
             }

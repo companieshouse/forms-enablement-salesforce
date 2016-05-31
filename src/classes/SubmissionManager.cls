@@ -34,7 +34,7 @@ public with sharing class SubmissionManager {
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c,
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
-                                        From Officers__r) 
+                                        From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
@@ -77,7 +77,7 @@ public with sharing class SubmissionManager {
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c, 
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
-                                        From Officers__r) 
+                                        From Officers__r),(SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c 
                                     where Presenter__c=:presenterId 
                                             and Company__c=:companyId.Id
