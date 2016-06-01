@@ -58,7 +58,7 @@ public class FormAPISubmissionManager {
             }
         }
 
-        //To do: One Transacation (Package in the future) can only be send if all contains a barcode
+        //To do: One Transacation (Package in the future) can only be send if all Transactions contain a barcode
         if(tx.Barcode__c == null || tx.Barcode__c == ''){
             return tx;
         }
