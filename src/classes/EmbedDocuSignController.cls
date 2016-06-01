@@ -26,12 +26,13 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
 
     public String pageTitle { get; private set; }
     public String pageText  { get; private set; }  
+    public String pageText2  { get; private set; }  
+    public String companyName { get; private set; }
+    public String presenterEmail { get; private set; }
+
+    public List<Officer__c> offResquestedToSign { get; private set; } 
     
-    public String temp  { get; private set; } //debug
-
-    private Transaction__c tx;   
-
-
+    
     // Constructors.
     public EmbedDocuSignController(){
         super();
@@ -48,9 +49,11 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             System.debug(LoggingLevel.ERROR, submissionMgr.submission); 
             pageTitle = transactionMgr.currentStep.Header_Text_1__c;
             pageText = transactionMgr.currentStep.Display_Text_1__c;
+            pageText2 = transactionMgr.currentStep.Display_Text_2__c;
 
-            //Debug
-           // temp=ApexPages.currentPage().getParameters().get('event');
+            companyName = submissionMgr.submission.CompanyName__c;
+            presenterEmail = submissionMgr.submission.Presenter__r.Name;
+
        
         } catch (Exception e){ return; }        
         return;
@@ -77,9 +80,6 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
 
             return ApexPages.currentPage();
         }
-
-        //Get transaction
-        tx = submissionMgr.submission;
         
 
         // Transaction context
@@ -92,14 +92,15 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
                     !String.isBlank(ApexPages.currentPage().getParameters().get('event'))
                     && ApexPages.currentPage().getParameters().get('event')=='OnSigningComplete') {
             
-            if(tx.Status__c == 'Pending Signatures') { //there are more officers
+            if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SIGNATURES) { //there are more officers
                 requestedSignatures = true;
+                offResquestedToSign = submissionMgr.submission.Officers__r;
                 //tx.MultipleDirectors__c = true; // if there are more officers flag = true
                 //update tx; // flag set to true even if presenter is not director.
                 return null;
             } else { // There is only the presenter as officer
-                tx.Status__c = 'Signed';
-                update tx;
+                submissionMgr.submission.Status__c = 'Signed';
+                persistStep();
                 return nextAction();
             }
             
@@ -111,42 +112,50 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             return null;
 
         // Transaction is pending signatures    
-        } else if (tx.Status__c == 'Pending Signatures') {
+        } else if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SIGNATURES) {
             requestedSignatures = true;
+            offResquestedToSign = submissionMgr.submission.Officers__r;
             return null;
          
         // Else create a new evelope
         } else {
         
             SendToDocuSign sendToDS = new SendToDocuSign();
-            externalURL = sendToDS.embedDocuSignOpen(tx);
+            externalURL = sendToDS.embedDocuSignOpen(submissionMgr.submission);
 
-            if(tx.Officers__r.size() > 1) { //there are more officers
-                tx.Status__c = 'Pending Signatures';
-                tx.MultipleDirectors__c = true; 
-                tx.Expiry_Date_Length__c = transactionMgr.td.Expiry_Date_Length__c; // set the expiry date
-                update tx;   
+            submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SIGNATURES;
+            submissionMgr.submission.Expiry_Date_Length__c = transactionMgr.td.Expiry_Date_Length__c; // set the expiry date
+            offResquestedToSign = submissionMgr.submission.Officers__r;
+
+            //there are more than one officer
+            if(submissionMgr.submission.Officers__r.size() > 1) {
+                requestedSignatures = true;
+                submissionMgr.submission.MultipleDirectors__c = true; 
             }
 
             //presenter is not a director
             if(externalURL == null){
                 requestedSignatures = true;
-                tx.MultipleDirectors__c = true;
-                tx.Expiry_Date_Length__c = transactionMgr.td.Expiry_Date_Length__c; // set the expiry date
-                // if there are more officers flag = true
-                update tx; // flag set to true even if presenter is not director.
             }
-                
+
+            //else sole Director as presenter
+            //continue
+
+            persistStep(); 
             
             return null;
 
         }        
     }
 
+    private void persistStep(){
+        submissionMgr.persist();    
+    }
+
     // Action methods.     
     public PageReference nextAction(){ 
         if (!validatePageState()) return Page.TransactionException;
-             
+
         return nextStep();      
     }
     

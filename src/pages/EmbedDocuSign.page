@@ -35,10 +35,34 @@
               else {console.log('not finding iframe probably on mobile');}
             </script>
             <h1 class="heading-xlarge">
-              {!$Label.UI_Text_DocuSign}
+              {!$Label.UI_Text_DocuSignPending}
             </h1> 
             <h3 >
-              Document sent to Directors. You will be notified when all signatures are completed 
+              Requests for approval of {!pageText2} <b>{!companyName}</b> have been sent to the following directors:
+            </h3>
+            <br/>
+
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Director Name</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <apex:repeat value="{!offResquestedToSign}" var="director" id="theRepeat" >
+                  <tr>
+                    <td>{!director.Name}</td>
+                    <td>{!director.Email__c}</td>
+                  </tr>
+                </apex:repeat>
+              </tbody>
+            </table>
+
+            <br/>
+            <br/>
+            <h3>
+              <p align="justify">A notification email will be sent to <b>{!presenterEmail}</b> which will allow you to check the status of the signatures and submit the application.</p>
             </h3> 
         </apex:outputPanel>
 

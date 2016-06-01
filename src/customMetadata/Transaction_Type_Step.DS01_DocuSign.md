@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">the application to close</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
