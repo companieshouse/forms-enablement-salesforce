@@ -189,6 +189,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FormAPISubmissionManager</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Form_CustomException</apexClass>
         <enabled>true</enabled>
     </classAccesses>
