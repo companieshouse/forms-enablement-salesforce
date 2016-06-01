@@ -23,6 +23,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     public String externalURL {get; set;}
     public Boolean showButtons {get; set;}
     public Boolean requestedSignatures {get; set;}
+    public Boolean declined {get; set;}
 
     public String pageTitle { get; private set; }
     public String pageText  { get; private set; }  
@@ -99,15 +100,18 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
                 //update tx; // flag set to true even if presenter is not director.
                 return null;
             } else { // There is only the presenter as officer
-                submissionMgr.submission.Status__c = 'Signed';
+                submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SIGNED;
                 persistStep();
                 return nextAction();
             }
             
-
+        // Transaction has been declined
+        } else if (submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_DECLINED_SIG){
+            declined = true;
+            return null;
+        
         // Transaction is signed
         } else if(isPageAlreadyValidStep) {
-
             showButtons=true;
             return null;
 

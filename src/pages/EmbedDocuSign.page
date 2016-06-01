@@ -28,6 +28,15 @@
             <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />  
         </apex:outputPanel>
 
+        <apex:outputPanel rendered="{!declined}">
+            <h1 class="heading-xlarge">
+              Declined
+            </h1> 
+            <h3 >
+              The application to close your company has been cancelled. The application process will need to be restarted if you still wish to close your company. 
+            </h3> 
+        </apex:outputPanel>
+
         <apex:outputPanel rendered="{!requestedSignatures}">
             <!-- ab function to close iframes. TO DO: move to Transaction Page Template -->
             <script type="text/javascript">
