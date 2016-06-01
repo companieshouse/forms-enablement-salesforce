@@ -259,6 +259,8 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         }
         
         if (response.getBody().startsWith('<!DOCTYPE html>')) {
+                     //   throw new AccountsApiException('body ======' + response);
+
             throw new AccountsApiException('HTML response. Expected JSON. Probably an error page. Check the logs for a span tag with id="error-description".');
         }
         

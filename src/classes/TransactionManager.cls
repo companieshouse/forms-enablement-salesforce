@@ -50,7 +50,10 @@ public with sharing class TransactionManager {
 				break;
 			}
 		}
-		if (currentStep==null) {} // todo - error handling.
+		if (currentStep==null) {
+
+
+		} // todo - error handling.
     }    
     // End Constructors.
     
@@ -70,6 +73,13 @@ public with sharing class TransactionManager {
 		} else {
 			// todo - error handling.
 		}
+    }    
+    public PageReference getCurrentStep(Id submissionId){    	
+		PageReference pr = getNextStepPageReference(Integer.valueOf(currentStep.Step_Number__c)-1, submissionId);  
+		
+		//pr.setCookies(new List<Cookie> { new Cookie('submission', SecurityManager.encryptText(submissionId), null, 600, true) } );
+		pr.setRedirect(true);
+		return pr;		
     }        
        
     public PageReference firstStep(Id submissionId){    	
@@ -81,6 +91,7 @@ public with sharing class TransactionManager {
     }    
     
     public PageReference nextStep(Id submissionId){
+
 		if (currentStep.Step_Number__c>=stepCount) return null; 
 		
 		PageReference pr = getNextStepPageReference(Integer.valueOf(currentStep.Step_Number__c), submissionId);     	
