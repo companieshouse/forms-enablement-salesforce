@@ -145,13 +145,22 @@
             <td>
                 <h1 class="page-title-style-email">Application to close {!Transaction__c.CompanyName__c}</h1>
                 <p>Dear {!Transaction__c.PresenterName__c} </p>
-                <p>Your Companies House Form {!Transaction__c.Form_Name__c} is awaiting signatures from multiple directors. If you would like to keep track of this process please click on the link <a href="{!Transaction__c.SignerStatus__c}">here</a>.  </p>
-                <p>Regards,</p>
-                <p>Companies House</p>
-                <div>
-                   
+                <p>
+                The application to close {!Transaction__c.CompanyName__c} has been sent to the directors for signing. The status of the application can be viewed here: {!Transaction__c.SignerStatus__c}      
             </td>
         </tr>
+        <tr>
+                <td>
+                <p align="center">
+                  <h6>
+                  <br/><br/><br/>
+
+                This is an automated email, please do not reply. Forward any enquiries to the following:<br/>
+                Email: <a href="enquiries@companieshouse.gov.uk">enquiries@companieshouse.gov.uk</a> <br/>
+                Service Desk: +44 (0)303 1234 500</h6>
+                </p>
+                </td>
+            </tr>
     </table>
 </body>
 

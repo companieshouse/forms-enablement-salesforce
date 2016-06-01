@@ -144,15 +144,31 @@
         <tr>
             <td>
                 <h1 class="page-title-style-email">Application to close {!Transaction__c.CompanyName__c}</h1>
-                <p>Dear {!Transaction__c.PresenterName__c}, </p>
-                <p>The application to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Transaction__c.ExpiryDate__c}. </p>
+                <p>{!Transaction__c.PresenterName__c},</p>
+                <p>
+                    The application to close the following company was not completed and has been cancelled as a result.<br/>
+                    Company name: {!Transaction__c.CompanyName__c}<br/>
+                    Company Number:{!Transaction__c.CompanyNumber__c}
+                    </p>
+
+
+                    <p>
+                If you still wish to close the company, please begin the process again using the following link: {!Transaction__c.ApplicationBaseURL__c} </p>
            
-                <p class="paragraphs-regular">
-                   The following directors have not approved of the application:
-                     {!Transaction__c.Officer__r}
-                </p>
             </td>
         </tr>
+        <tr>
+                <td>
+                <p align="center">
+                  <h6>
+                  <br/><br/><br/>
+
+                This is an automated email, please do not reply. Forward any enquiries to the following:<br/>
+                Email: <a href="enquiries@companieshouse.gov.uk">enquiries@companieshouse.gov.uk</a> <br/>
+                Service Desk: +44 (0)303 1234 500</h6>
+                </p>
+                </td>
+            </tr>
     </table>
 </body>
 

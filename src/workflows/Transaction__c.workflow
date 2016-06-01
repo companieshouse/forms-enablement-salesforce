@@ -175,6 +175,26 @@ Email should contain a URL to start a new journey</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
+        <fullName>SigningCeremony</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.MultipleDirectors__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.InActiveTransaction__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>SigningStatusTransaction</fullName>
         <actions>
             <name>SigningStatusScreen</name>

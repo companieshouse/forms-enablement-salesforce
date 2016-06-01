@@ -3,21 +3,15 @@
 <apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="{!initialiseController}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <style>
                 .govuk-box-review {
-                    /*text-align: center;
-                     */
+                    text-align: center; 
                     padding: 2em 0 1em 0;
                     margin: 1em 0 1em 0;
                     color: #000;
                     background: #D3D3D3;
                 }
-                /*
-                .gov-uk-box-review-fontcolor {
-                    color: #000;
-                    font-size: 14px;
-                }*/
                 </style>
                 <div class="govuk-box-review">
                     <h1 class="bold-large gov-uk-box-review-fontcolor ">{!companyName}</h1>

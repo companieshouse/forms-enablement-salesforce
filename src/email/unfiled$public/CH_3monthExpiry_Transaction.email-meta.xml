@@ -3,7 +3,7 @@
     <available>true</available>
     <description>Expired Transaction</description>
     <encodingKey>ISO-8859-1</encodingKey>
-    <name>CH Expired Transaction</name>
+    <name>CH 3monthExpiry Transaction</name>
     <style>none</style>
     <subject>Application to close  {!Transaction__c. CompanyName__c}</subject>
     <textOnly>Companies House

@@ -129,6 +129,14 @@
         <type>Currency</type>
     </fields>
     <fields>
+        <fullName>ApplicationBaseURL__c</fullName>
+        <externalId>false</externalId>
+        <label>ApplicationBaseURL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
         <fullName>Barcode__c</fullName>
         <description>Represents the barcode of the transaction received from CHIPS</description>
         <externalId>false</externalId>
@@ -424,6 +432,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
             </picklistValues>
             <picklistValues>
                 <fullName>DeclinedSig</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Signatures</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>

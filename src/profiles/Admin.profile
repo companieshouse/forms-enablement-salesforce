@@ -29,6 +29,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>BaseURLHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CH_ChargeController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -170,6 +174,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DocuSignStatusTriggerHandlerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DocuSignUrlBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -671,6 +679,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.ApplicationBaseURL__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.Barcode__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -978,6 +991,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DirectorsList</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocuSignRedirect</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
