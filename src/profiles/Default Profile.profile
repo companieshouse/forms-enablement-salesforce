@@ -297,6 +297,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SubmissionController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SubmissionManager</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -1002,6 +1006,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>StdExceptionTemplate</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Submission</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
