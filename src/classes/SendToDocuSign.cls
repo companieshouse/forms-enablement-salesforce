@@ -68,8 +68,8 @@
         // - update message
         DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
         envelope.Subject = tx.Form_Name__c + ' - application for ' + tx.CompanyName__c ;
-        envelope.EmailBlurb = 'This is Companies House new eSignature service,'+ 
-            ' it allows to get your electronic signoff.';
+        envelope.EmailBlurb = '<h1 class="page-title-style-email">Application to close'+' '+tx.CompanyName__c+' '+'</h1> <p>' +' '+tx.PresenterName__c+' '+'</p> <p>An application to close'+' '+tx.CompanyName__c+' '+'needs your approval before it can be submitted to Companies House for processing. </p> <h2 class="second-level-heading">What to do next</h2> <p class="paragraphs-regular"> Please ensure that you have read and understood your responsibilities as a director in this process before approving the application. Guidance on the process of voluntarily closing a company can be found on the Companies House website. Once the application has been submitted you will receive an email containing a link to the submitted application. It is your responsibility as a director to ensure that copies of the application have been sent to all notifiable parties within 7 days of submitting the completed application. This includes <ul> <li>Creditors</li> <li>Employees</li> <li>Shareholders</li> <li>Pension managers or trustees</li> </ul> </p> <p class="paragraphs-regular"> Note: Please check the guidance notes which contain a full list of those who must be notified. </p> <p> <b>Failure to notify interested parties is an offence. It is advisable to obtain and retain some proof of delivery or posting of copies to notifiable parties.</b> </p> <p> If the application has not been signed by all required directors by'+ ' '+tx.ExpiryDate__c+' '+ ', the application will be automatically cancelled. </p>';
+        
         envelope.AccountId  = dsSetting.AccountId__c; 
         
 
