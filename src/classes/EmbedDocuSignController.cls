@@ -92,7 +92,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
                     !String.isBlank(ApexPages.currentPage().getParameters().get('event'))
                     && ApexPages.currentPage().getParameters().get('event')=='OnSigningComplete') {
             
-            if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SIGNATURES) { //there are more officers
+            if(submissionMgr.submission.Officers__r.size() > 1) { //there are more officers
                 requestedSignatures = true;
                 offResquestedToSign = submissionMgr.submission.Officers__r;
                 //tx.MultipleDirectors__c = true; // if there are more officers flag = true
