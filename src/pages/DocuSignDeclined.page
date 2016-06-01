@@ -1,0 +1,41 @@
+<!-- 
+Name: DocuSignDeclined.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+DocuSign Decline To Sign page - user will be redirect to here
+after declined to sign the document from email
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author         Date        Detail
+1.0  Antonio Bravo  2016-06-01  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Confirmation_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false">
+        
+    <apex:composition template="TransactionPageTemplate">
+       <apex:define name="content">
+          <apex:form >
+             
+            <h1 class="heading-xlarge">
+              Declined to Sign
+            </h1>
+
+            <h3 >
+              This application has been cancelled. The application process will need to be restarted if you still wish to apply. 
+            </h3>
+             
+             
+          </apex:form>
+       </apex:define>
+    </apex:composition>
+
+</apex:page>

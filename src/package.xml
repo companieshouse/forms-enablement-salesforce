@@ -113,6 +113,10 @@
         <members>DeveloperTools</members>
         <members>DirectorsInputList</members>
         <members>DirectorsList</members>
+        <members>DocuSignDeclined</members>
+        <members>DocuSignSigningCompleted</members>
+        <members>DocuSignTimeout</members>
+        <members>DocuSignViewed</members>
         <members>DocumentDownload</members>
         <members>Documents</members>
         <members>DynamicTest</members>
