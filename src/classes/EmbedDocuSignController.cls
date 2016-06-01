@@ -136,6 +136,10 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             //presenter is not a director
             if(externalURL == null){
                 requestedSignatures = true;
+
+                // need to have this flag to notify presenter that signatures are completed
+                // to do: update field name to emailSignaturesRequested
+                submissionMgr.submission.MultipleDirectors__c = true; 
             }
 
             //else sole Director as presenter
