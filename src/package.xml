@@ -92,6 +92,7 @@
         <members>Util</members>
         <members>UtilTest</members>
         <members>superSort</members>
+        <members>FormAPISubmissionManagerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
