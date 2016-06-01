@@ -133,15 +133,15 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
 
             //there are more than one officer
             if(submissionMgr.submission.Officers__r.size() > 1) {
-                requestedSignatures = true;
                 submissionMgr.submission.MultipleDirectors__c = true; 
             }
 
             //presenter is not a director
             if(externalURL == null){
                 requestedSignatures = true;
-
-                // need to have this flag to notify presenter that signatures are completed
+                
+                // need to have this flag to notify the presenter that signature is completed
+                // when is a Sole Directer
                 // to do: update field name to emailSignaturesRequested
                 submissionMgr.submission.MultipleDirectors__c = true; 
             }
