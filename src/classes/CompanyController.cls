@@ -62,7 +62,13 @@ public with sharing class CompanyController {
     }
     
     private Boolean validateStep(){
-        return !String.isBlank(companyNumber);
+        if(String.isBlank(companyNumber))
+            return false;
+
+        if(!companyNumber.right(6).isNumeric())
+            return false;
+
+        return true;
     }
     
     public PageReference initialiseAction(){

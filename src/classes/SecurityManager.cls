@@ -63,6 +63,17 @@ public with sharing class SecurityManager {
        return new PageReference(h.getCompanyDownloadAuthUrl(companyNumber, transactionType, nonce));
    }
 
+   public PageReference getDocumentStatusAuthRedirect(String companyNumber, String transactionType) {
+       AccountsAPIHelper h = new AccountsAPIHelper();
+
+       // String tempcompanyinformation =  TrackUserClass.getSearchedCompany(companyNumber);
+       // always create/update a cookie when new company search is called
+
+       nonce = getNonce();
+
+       return new PageReference(h.getDocumentStatusURL(companyNumber, transactionType, nonce));
+   }
+
     private String getNonce() {
     	
     	final Integer NONCE_LENGTH = 16;

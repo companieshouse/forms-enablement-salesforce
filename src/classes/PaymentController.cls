@@ -41,6 +41,8 @@ public class PaymentController extends TransactionStepControllerBase {
     public String externalURL {get; set;}
 
     public Boolean hasPaid {get; set;}
+
+    public String paymentStatus {get; set;}
     
 
     public PaymentController() {
@@ -51,20 +53,22 @@ public class PaymentController extends TransactionStepControllerBase {
     
     public void initialiseStep() {
         hasPaid = false;
-        
-        if(isPageAlreadyValidStep)
+        paymentStatus = '';
+
+        if(isPageAlreadyValidStep || submissionMgr.submission.Status__c == 'Paid')
         {
             hasPaid = true;
             return;
         }
         else{
-            submissionMgr.submission.Status__c = 'Payment pending';
+            paymentStatus = 'Payment pending';
         }
 
 
         //If there is no fee associated we need to protect the page to be displayed
         if(transactionMgr.td.Fee__c == null || transactionMgr.td.Fee__c == 00.00) 
         {
+            paymentStatus = 'Paid';
             PageReference nextPage = nextAction();
             nextPage.setRedirect(true);
             return;
@@ -77,16 +81,23 @@ public class PaymentController extends TransactionStepControllerBase {
 
     public PageReference checkPaymentResult(){
 
+        if(isPageAlreadyValidStep || hasPaid){
+            hasPaid = true;
+            return null;
+        }
+
         parseQueryString(); 
                   
         if(authResult == null)
         {
-            if(submissionMgr.submission.Status__c == 'Payment pending')
+            if(paymentStatus == 'Payment pending')
             {
                 persistStep();
             }
             return null;
-        }                         
+        }   
+
+
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || 
             String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -144,7 +155,7 @@ public class PaymentController extends TransactionStepControllerBase {
     }
 
     private void persistStep(){
-        submissionMgr.submission.Status__c = 'Paid';
+        submissionMgr.submission.Status__c = paymentStatus;
         submissionMgr.persist();    
     }
     // End Instance methods.    

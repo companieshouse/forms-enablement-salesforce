@@ -129,6 +129,14 @@
         <type>Currency</type>
     </fields>
     <fields>
+        <fullName>ApplicationBaseURL__c</fullName>
+        <externalId>false</externalId>
+        <label>ApplicationBaseURL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
         <fullName>Barcode__c</fullName>
         <description>Represents the barcode of the transaction received from CHIPS</description>
         <externalId>false</externalId>
@@ -138,6 +146,51 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyAddress1__c</fullName>
+        <description>Represents the company Address 1 from CHIPS</description>
+        <externalId>false</externalId>
+        <label>Company Address 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyAddress2__c</fullName>
+        <description>Represents the company Address 2 from CHIPS</description>
+        <externalId>false</externalId>
+        <label>Company Address 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyCountry__c</fullName>
+        <description>Represents the Country of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Country</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyIncorporationDate__c</fullName>
+        <description>This represents the date of incorporation of the company</description>
+        <externalId>false</externalId>
+        <label>Company Incorporation Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyLocality__c</fullName>
+        <description>Represents the Company locality</description>
+        <externalId>false</externalId>
+        <label>Company Locality</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>CompanyName__c</fullName>
@@ -158,6 +211,42 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyPostCode__c</fullName>
+        <description>Represents the Postcode of a Company</description>
+        <externalId>false</externalId>
+        <label>Company PostCode</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyRegion__c</fullName>
+        <description>Represents the Region of a Company</description>
+        <externalId>false</externalId>
+        <label>Company Region</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyStatus__c</fullName>
+        <description>This represents the status of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyType__c</fullName>
+        <description>This represents the type of the company.</description>
+        <externalId>false</externalId>
+        <label>Company Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Company__c</fullName>
@@ -378,6 +467,22 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>SentreviewURL__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>SentreviewURL</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SignerStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>SignerStatus</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -416,6 +521,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
             </picklistValues>
             <picklistValues>
                 <fullName>DeclinedSig</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Signatures</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -517,10 +626,34 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isLLP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isLLP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isMajorityRequired__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>isMajorityRequired?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>nonofficerPresenter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>nonofficerPresenter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>sentsignerstatus__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>sentsignerstatus</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

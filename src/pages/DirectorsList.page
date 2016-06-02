@@ -25,7 +25,9 @@
       <apex:form >
 
          <div class="form-group">
-         <h1 class="heading-xlarge">Request approval from company directors</h1>
+         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+
+                  <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
          <p class="lede">
             {!companyName} has the following director listed on the public register.
          </p>
@@ -39,14 +41,23 @@
         <fieldset class="inline">
 
               <legend>Is this information correct?</legend>
-
+              <apex:outputPanel id="error">
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <span  class="error-message" id="error-message-full-name">Please select one of the options below</span>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!showNoError}">
+                    <span  class="error-message" id="error-message-full-name">You cannot continue until you have updated the list of directors.  Use the following link to update this information:  <a href="https://www.gov.uk/government/collections/update-director-or-company-secretary-details">Update your company details</a></span>
+                    </apex:outputPanel>
+                    </apex:outputPanel>
+                    <br/>
               <label class="block-label" for="radio-inline-1">
-                <input id="radio-inline-1" type="radio"  name="radio-inline-group" value="Yes">
+              
+                <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio"  name="radio-inline-group" value="Yes">
                 Yes
                 </input>
               </label>
               <label class="block-label" for="radio-inline-2">
-                <input id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
+                <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
                 No
                 </input>
               </label>
@@ -57,9 +68,12 @@
           <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
          <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
-         &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" /><br />
-		 &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+         <apex:commandButton id="buttonNext" styleClass="button" disabled="{!showNoError}" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error" /><br />
+		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
 
+     <apex:actionFunction action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+               <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
+         </apex:actionFunction>
 
       </apex:form>  
       </apex:define>

@@ -147,13 +147,6 @@
                 <p>{!Transaction__c.PresenterName__c} </p>
                 <p>Your application to close {!Transaction__c.CompanyName__c} has been successfully submitted. </p>
                 <div>
-                    <!--
-    <div class="govuk-box-highlight">
-        Your Reference number is
-        <br>
-        <strong class="heading-medium"> {!Transaction__c. SubmissionId__c}</strong> 
-</div>
--->
                     <p class="submission-banner">
                         Your Reference number is
                         <br>
@@ -170,10 +163,10 @@
                     </ul>
                 </p>
                 <p class="paragraphs-regular">
-                    Please check the guidance notes for more information on the process <a href="https://www.gov.uk/government/organisations/companies-house">click here</a>.
+                    Please check the guidance notes for more information on the process: https://www.gov.uk/government/organisations/companies-house
                 </p>
                 <p>
-                    <img src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png"> Failure to notify interested parties is an offence. It is advisable to obtain and retain some proof of delivery or posting of copies to notifiable parties.
+               Failure to notify interested parties is an offence. It is advisable to obtain and retain some proof of delivery or posting of copies to notifiable parties.
                 </p>
                 <p>
                     <div class="form-group" align="center">
@@ -184,10 +177,23 @@
                     <h2 class="third-level-heading">Withdrawal of striking off application by a company</h2>
                 </p>
                 <p class="paragraphs-regular">
-                    If the company ceases to be eligible for striking off at any time after the application is made, and before the application is finally dealt with, as specified in section 1009 of the Companies Act 2006, then the application must be Click to download a copy of your application withdrawn using form DS02 ‘Withdrawal of striking off application by a company’ available from our website: www.gov.uk/companieshouse
+                    If the company ceases to be eligible for striking off at any time after the application is made, and before the application is  finally dealt with, as specified in section 1009 of the Companies Act 2006, the refer to the guidance on how to Click to download a copy of your application
+                    proceed: https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4#withdrawal-of-the-strike-off-application
                 </p>
             </td>
         </tr>
+         <tr>
+                <td>
+                <p align="center">
+                  <h6>
+                  <br/><br/><br/>
+
+                This is an automated email, please do not reply. Forward any enquiries to the following:<br/>
+                Email: <a href="enquiries@companieshouse.gov.uk">enquiries@companieshouse.gov.uk</a> <br/>
+                Service Desk: +44 (0)303 1234 500</h6>
+                </p>
+                </td>
+            </tr>
     </table>
 </body>
 

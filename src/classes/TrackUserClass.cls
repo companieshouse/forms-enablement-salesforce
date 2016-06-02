@@ -10,13 +10,13 @@ public with sharing class TrackUserClass {
 
     }
 
-    Public String saveUserDocumentInfo(){
+    Public String saveUserDocumentInfo() {
 
         String tvalueparameter = ApexPages.currentPage().getParameters().get('t');
 
         Cookie t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, 0, true);
 
-         t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, -1, true);
+        t_value = new Cookie('t_value', SecurityManager.encryptText(tvalueparameter), null, -1, true);
 
         Cookie d_valueCookieStatus = new Cookie('d_valueCookieStatus', SecurityManager.encryptText('initial'), null, -1, true);
 
@@ -25,11 +25,58 @@ public with sharing class TrackUserClass {
         return tvalueparameter;
     }
 
-    Public String getUserDocument() {
+    Public Boolean GuidanceAgreeBox() {
+
+        Cookie agreebox = ApexPages.currentPage().getCookies().get('agreebox');
         
+        if(agreebox == null) return false;
+
+        String warningboxvalue = SecurityManager.decryptText(agreebox.getValue());
+        return Boolean.valueOf(warningboxvalue);
+    }
+
+
+    Public Boolean setBooleanGuidanceAgreeBox(Boolean warningboxvalue) {
+        String warningboxvaluetext = String.valueOf(warningboxvalue);
+        // pull agree box value on guidance page
+        Cookie agreebox = new Cookie('agreebox', SecurityManager.encryptText(warningboxvaluetext), null, -1, true);
+
+        ApexPages.currentPage().setCookies(new Cookie[] { agreebox });
+
+        return Boolean.valueOf(warningboxvaluetext);
+    }
+
+    Public Boolean setStringGuidanceAgreeBox(String warningboxvalue) {
+        String warningboxvaluetext = String.valueOf(warningboxvalue);
+        // pull agree box value on guidance page
+        Cookie agreebox = new Cookie('agreebox', SecurityManager.encryptText(warningboxvaluetext), null, -1, true);
+
+        ApexPages.currentPage().setCookies(new Cookie[] { agreebox });
+
+        return Boolean.valueOf(warningboxvaluetext);
+    }
+
+    //Public String setGuidanceAgreeBox(String warningboxvalue) {
+    //    //String warningboxvaluetext = String.valueOf(warningboxvalue);
+    //            String warningboxvaluetext = warningboxvalue;
+
+    //    // pull agree box value on guidance page
+    //    Cookie agreebox = new Cookie('agreebox', SecurityManager.encryptText(warningboxvaluetext), null, -1, true);
+
+    //    ApexPages.currentPage().setCookies(new Cookie[] { agreebox });
+
+    //    return warningboxvaluetext;
+    //}
+
+
+
+    Public String getUserDocument() {
+
         Cookie cookiet_value = ApexPages.currentPage().getCookies().get('t_value');
-                
+
         return SecurityManager.decryptText(cookiet_value.getValue());
+        return tvalueparameter;
+
     }
 
     Public String getSearchedCompany(String companyNumber) {
@@ -89,7 +136,7 @@ public with sharing class TrackUserClass {
 
     Public SObject returnCurrentUser() {
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
-                 //   throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
+        //   throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
 
         String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
         List < Account > recs = [select Id, Name from Account where Name = : userNameEmail];
@@ -101,25 +148,25 @@ public with sharing class TrackUserClass {
 
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
 
-       // if (current_userEmail == null) {
+        // if (current_userEmail == null) {
 
-            //  pass userprofile information
-            String usersearchparameter = userEmail; // this should be the user email from the apiresponse.email method
+        //  pass userprofile information
+        String usersearchparameter = userEmail; // this should be the user email from the apiresponse.email method
 
-            current_userEmail = new Cookie('user_Email', SecurityManager.encryptText(usersearchparameter), null, -1, true);
-            // set time to 0 instead of -1 to remove cookie
+        current_userEmail = new Cookie('user_Email', SecurityManager.encryptText(usersearchparameter), null, -1, true);
+        // set time to 0 instead of -1 to remove cookie
 
-            ApexPages.currentPage().setCookies(new Cookie[] { current_userEmail });
+        ApexPages.currentPage().setCookies(new Cookie[] { current_userEmail });
 
-            System.debug('your newly created user email  is' + current_userEmail);
+        System.debug('your newly created user email  is' + current_userEmail);
 
-      //  } else {
+        //  } else {
 
-            // perhaps validate the value before returning cookie
-            System.debug('your useremail from your cookie is' + current_userEmail);
+        // perhaps validate the value before returning cookie
+        System.debug('your useremail from your cookie is' + current_userEmail);
 
-            // increment time of cookie from -1 to 600s seconds/etc. 
-       // }
+        // increment time of cookie from -1 to 600s seconds/etc. 
+        // }
 
         String currentuservalue = SecurityManager.decryptText(current_userEmail.getValue());
 

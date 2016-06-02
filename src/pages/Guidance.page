@@ -17,6 +17,7 @@ Ver. Author        		Date        Detail
 -->
 <apex:page title="{!$Label.UI_Text_Guidance_Page}" 
     showHeader="false" 
+    action="{!initializeBox}"
     sidebar="false" 
     standardStylesheets="false"
     controller="GuidanceController">
@@ -31,18 +32,20 @@ Ver. Author        		Date        Detail
 						<fieldset>
 
 						<legend class="visuallyhidden">{!checkboxText0}</legend>
-						<label class="block-label" for="agree">
+						 <label class="block-label" for="agree">
 							<input id="agree" name="agreeBoxx" onclick="clickBox();" type="checkbox" value="{!warningAgreeBox}">
 							{!checkboxText0}
 							</input>
-						</label>
+
+						</label> 
+
 						</fieldset>
-						<apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Next}" /><br />
+						<apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" /><br />
 		 			<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/>
 					</div>
 
 					<apex:actionFunction action="{!updateBox}" name="clickBox" reRender="nextButton">
-					</apex:actionFunction>
+					</apex:actionFunction> 
 					
             </apex:form>
        </apex:define>

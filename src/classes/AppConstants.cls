@@ -17,6 +17,7 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 1.1  Antonio Bravo 2016-04-26  Update Constants
 1.2  Sylvain P 	   2016-05-26  Update Constants
+1.3  Leo B. 	   2016-05-29  Update constants
 */
 public with sharing class AppConstants {
 	

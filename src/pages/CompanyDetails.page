@@ -1,0 +1,52 @@
+<apex:page title="{!$Label.UI_Text_Company_Details}" controller="CompanyDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+ 
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="heading-xlarge">
+                {!headerText1}
+             <!-- {!$Label.UI_Text_Review_page_Title} -->
+               </h1>
+                <p class="lede">{!displayText1}
+                </p>
+                <table class="check-your-answers">
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                <h2 class="heading-medium">{!companyName}</h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Company Number</td>
+                            <td>{!companyNumber}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>{!companyStatus}</td>
+                        </tr>
+                        <tr>
+                        	<td>Incorporation date</td>
+                        	<td>{!companyDateOfCreation}</td>
+                        </tr>
+                        <tr>
+                        	<td>Company Type</td>
+                        	<td>{!companyType}</td>
+                        </tr>
+                        <tr>
+                            <td>Registered Address</td>
+                            <td><apex:outputText escape="false" value="{!companyAddress}"/>
+                            </td>
+                        </tr>
+             
+                    </tbody>
+                </table>
+                <br/>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" rendered="{!NOT(isLastPage)}" />
+                <br/>
+                <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Not_Your_Company}" id="thePreviousButton" /> 
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

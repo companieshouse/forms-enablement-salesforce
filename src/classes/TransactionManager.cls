@@ -50,14 +50,17 @@ public with sharing class TransactionManager {
 				break;
 			}
 		}
-		if (currentStep==null) {} // todo - error handling.
+		if (currentStep==null) {
+
+
+		} // todo - error handling.
     }    
     // End Constructors.
     
     // Instance methods.
     private void retrieveTransactionType(String transactionType){
 
-		List<Transaction_Type__mdt> recs = [select Id, Expiry_Date_Length__c ,Guidance_Text_1__c,Guidance_Text_2__c,Guidance_Text_3__c,Guidance_Text_4__c,Guidance_Text_5__c,Guidance_Text_6__c,GuidanceWarningText__c,hasGuidancePage__c,isMajorityForm__c,Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
+		List<Transaction_Type__mdt> recs = [select Id, Expiry_Date_Length__c ,Guidance_Text_1__c,Guidance_Text_2__c,Guidance_Text_3__c,Guidance_Text_4__c,Guidance_Text_5__c,Guidance_Text_6__c,GuidanceWarningText__c,hasGuidancePage__c,isMajorityForm__c, Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
 		if (recs.size()==1){
 			
 			td = recs[0];
@@ -70,6 +73,13 @@ public with sharing class TransactionManager {
 		} else {
 			// todo - error handling.
 		}
+    }    
+    public PageReference getCurrentStep(Id submissionId){    	
+		PageReference pr = getNextStepPageReference(Integer.valueOf(currentStep.Step_Number__c)-1, submissionId);  
+		
+		//pr.setCookies(new List<Cookie> { new Cookie('submission', SecurityManager.encryptText(submissionId), null, 600, true) } );
+		pr.setRedirect(true);
+		return pr;		
     }        
        
     public PageReference firstStep(Id submissionId){    	
@@ -81,6 +91,7 @@ public with sharing class TransactionManager {
     }    
     
     public PageReference nextStep(Id submissionId){
+
 		if (currentStep.Step_Number__c>=stepCount) return null; 
 		
 		PageReference pr = getNextStepPageReference(Integer.valueOf(currentStep.Step_Number__c), submissionId);     	
