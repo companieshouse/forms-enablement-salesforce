@@ -18,6 +18,7 @@ Ver. Author        Date        Detail
 public with sharing class PresenterDirectorController extends TransactionStepControllerBase {
 
     public Boolean hasPageErrors { get; set; }
+    public Boolean hasPageErrorsDirector {get; set;}
 
     public String companyName {get; set;}
     public String companyNumber {get; set;}
@@ -26,6 +27,13 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public Id selectedId {get; set;}
     public String presenterName {get; set;}
     public String phoneNumber {get; set;}
+
+    public String behalfName {get; set;}
+    public String behalfEmail {get; set;}
+    public Boolean signBehalf {get; set;}
+    public Integer behalfSelected {get; set;}
+    public Id selectedBehalfId {get; set;}
+    
 
     public PresenterDirectorController(){
         super();
@@ -37,8 +45,13 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
         //Set up the company name
         directorPresenter = false;
+        hasPageErrorsDirector = false;
         phoneNumber = '';
         presenterName = '';
+        behalfName = '';
+        behalfEmail = '';
+        behalfSelected = 0;
+        signBehalf = false;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List<officerContainer>();
@@ -64,17 +77,86 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                             off.isSignatory__c = true;
                             off.Email__c = submissionMgr.submission.Presenter__r.Name;
                         }
+                        off.isDeceased__c = false;
+                        off.isCorporateDirector__c = false;
+                        off.isPowerOfAttorney__c = false;
 	                }
 	            }
 	        }
-            //TODO: Remove presenter details from trsansaction if the officer is selected.
+
+            behalfSelected = 0;
+            //Remove presenter details from trsansaction if the officer is selected.
+            submissionMgr.submission.PresenterPhoneNumber__c = null;
+            submissionMgr.submission.PresenterName__c = null;
+
 	    }
 	    else
 	    {
 	    	submissionMgr.submission.PresenterPhoneNumber__c = phoneNumber;
         	submissionMgr.submission.PresenterName__c = presenterName;
-            //TODO: remove existing flag in case of previous from officer
+            
+            //remove existing flag in case of previous from officer
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                for(officerContainer offCont :listOfDirectors)
+                {
+                    if(off.Id == offCont.officer.Id)
+                    {
+                        off.isPresenter__c = false;
+                        off.isSignatory__c = false;
+                        off.Email__c = null;
+                        
+                        off.isDeceased__c = false;
+                        off.isCorporateDirector__c = false;
+                        off.isPowerOfAttorney__c = false;
+                    }
+                }
+            }
 	    }
+
+        
+        //We are presenter signing on behalf
+        if(behalfSelected != 0)
+        {
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                for(officerContainer offCont :listOfDirectors)
+                {
+                    if(off.Id == offCont.officer.Id)
+                    {
+                        if(offCont.isSignatory)
+                        {
+                            off.isPresenter__c = true;
+                            off.isSignatory__c = offCont.isSignatory;
+                            off.Email__c = behalfEmail;
+                            off.AuthorizedSigner__c = presenterName;
+                            if(behalfSelected == 1)
+                            {
+                                off.isDeceased__c = true;
+                                off.isCorporateDirector__c = false;
+                                off.isPowerOfAttorney__c = false;
+                            }
+                            else if(behalfSelected == 2)
+                            {
+                                off.isDeceased__c = false;
+                                off.isCorporateDirector__c = true;
+                            }
+                            else if(behalfSelected == 3)
+                            {
+                                off.isDeceased__c = false;
+                                off.isPowerOfAttorney__c = true;
+                            }
+                        }
+                        else{
+                            off.isDeceased__c = false;
+                            off.isCorporateDirector__c = false;
+                            off.isPowerOfAttorney__c = false;
+                        }
+                    }
+                }
+            }
+        }
+
 
         submissionMgr.persist();    
     }
@@ -83,10 +165,14 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public Boolean isPresentorCorrect(){
         if(!directorPresenter)
         {
-            if(String.isEmpty(phoneNumber) || String.isEmpty(presenterName))
+            if(phoneNumber.length() > 11 || phoneNumber.isAlphanumeric())
                 return false;
+            //Not mandatory
+            //if(String.isEmpty(phoneNumber) || String.isEmpty(presenterName))
+               // return false;
 
         }
+        hasPageErrors = false;
         return true;
     }
 
@@ -94,7 +180,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public PageReference nextAction(){     
         if(!isPresentorCorrect())
         {
-            //TODO: ERROR CONTROL 
+            hasPageErrors = true;
             return null;
         }
 
@@ -142,13 +228,28 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     }
 
 
+    public PageReference updateBDCPA(){
+        return null;
+    }
+
     public PageReference updatePresenter()
     {
+        if(directorPresenter == true)
+            hasPageErrorsDirector = true;
+        else
+            hasPageErrorsDirector = false;
     	return null;
+    }
+
+    public PageReference updateBehalf()
+    {
+        return null;
     }
 
 	public PageReference updateSelectedPresenter()
     {
+        hasPageErrorsDirector = false;
+
     	if(selectedId != null)
     	{
     		for(officerContainer off :listOfDirectors)
@@ -166,6 +267,25 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     	return null;
     }
 
+    public PageReference updateSelectedBehalf()
+    {
+        if(selectedBehalfId != null)
+        {
+            for(officerContainer off :listOfDirectors)
+            {
+                if(off.officer.Id != selectedBehalfId)
+                {
+                    off.isSignatory = false;
+                }
+                else
+                {
+                    off.isSignatory = true;
+                }
+            }
+        }
+        return null;
+    }
+
     
 
     public with sharing class officerContainer{
@@ -173,12 +293,14 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         public Officer__c officer {get; set;}
         public String officerTXT {get; set;}
         public Boolean isPresenter {get; set;}
+        public Boolean isSignatory {get; set;}
 
         public officerContainer(Officer__c off)
         {
             officer = off;
             officerTXT = off.Name;
             isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
+            isSignatory = (off.isSignatory__c == null ? false : off.isSignatory__c);
         }
     }
 }

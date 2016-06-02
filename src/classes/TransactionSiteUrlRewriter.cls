@@ -32,6 +32,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String PRESENTER 		= '/presenter';
 	public String OFFICERSEMAIL 	= '/inputEmails';
 	public String GUIDANCE			= '/guidance';
+	public String DETAILSCOMP		= '/detailsCompany';
 	
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -48,6 +49,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String VF_PAGE_PRESENTER		= '/PresenterDirector';
 	public String VF_PAGE_OFFICERSEMAIL	= '/DirectorsInputList';
 	public String VF_PAGE_GUIDANCE 		= '/Guidance';
+	public String VF_PAGE_DETAILSCOMP 	= '/CompanyDetails';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -74,7 +76,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	   	else if(url.startsWith(PRESENTER))				{ pr = new PageReference(VF_PAGE_PRESENTER); }
 	   	else if(url.startsWith(OFFICERSEMAIL))			{ pr = new PageReference(VF_PAGE_OFFICERSEMAIL); }
 	   	else if(url.startsWith(GUIDANCE))				{ pr = new PageReference(VF_PAGE_GUIDANCE); }
-
+	   	else if(url.startsWith(DETAILSCOMP))			{ pr = new PageReference(VF_PAGE_DETAILSCOMP); }
 		
 
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
@@ -96,6 +98,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     		friendlyPageReference=null;
     		
     		if(url.startsWith(VF_PAGE_START))				{ friendlyPageReference = new PageReference(START); }
+    		else if(url.startsWith(VF_PAGE_DETAILSCOMP))	{ friendlyPageReference = new PageReference(DETAILSCOMP); }
 	    	else if(url.startsWith(VF_PAGE_COMPANY))		{ friendlyPageReference = new PageReference(COMPANY); }
 	    	else if(url.startsWith(VF_PAGE_CONFIRMATION))	{ friendlyPageReference = new PageReference(CONFIRMATION); }
 	    	else if(url.startsWith(VF_PAGE_DYNAMIC))		{ friendlyPageReference = new PageReference(DYNAMIC); }
@@ -109,7 +112,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	        else if(url.startsWith(VF_PAGE_REVIEW))			{ friendlyPageReference = new PageReference(REVIEW); }
 	        else if(url.startsWith(VF_PAGE_PRESENTER))		{ friendlyPageReference = new PageReference(PRESENTER); }
 	        else if(url.startsWith(VF_PAGE_OFFICERSEMAIL))	{ friendlyPageReference = new PageReference(OFFICERSEMAIL); }
-	        else if(url.startsWith(VF_PAGE_GUIDANCE))		{ friendlyPageReference = new PageReference(GUIDANCE); }
+	        else if(url.startsWith(VF_PAGE_GUIDANCE))		{ friendlyPageReference = new PageReference(GUIDANCE); }	       
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	

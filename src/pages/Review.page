@@ -48,11 +48,7 @@
                         </tr>
                         <tr>
                             <td>Registered Address</td>
-                            <td> {!companyAddress1}
-                                <!--<br/> {!companyAddress2}
-                                <br/> {!companyregion}-->
-                                <br/> {!companyLocality}
-                                <br/> {!companypostcode}
+                            <td> <apex:outputText escape="false" value="{!companyAddress}"/>
                             </td>
                         </tr>
                         <tr>
@@ -82,7 +78,7 @@
                 <p class="text">
                     {!displayText3}
                 </p>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue to Payment" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue_to_Payment}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
             </apex:form>

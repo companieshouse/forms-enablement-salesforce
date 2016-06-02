@@ -18,6 +18,7 @@ Ver. Author        Date        Detail
 public with sharing class DirectorsListController extends TransactionStepControllerBase {
 
     public Boolean hasPageErrors { get; set; }
+    public Boolean showNoError {get; set;}
     public Boolean hasAlreadyLoadedOfficers {get; set;}
 
     public String companyName {get; set;}
@@ -41,6 +42,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List<String>();
+        showNoError = false;
         if(isPageAlreadyValidStep)
         {
             hasAlreadyLoadedOfficers = true;
@@ -70,11 +72,32 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public PageReference nextAction(){ 
         if (!validatePageState()) return Page.TransactionException;
         
+        hasPageErrors=!validateStep();
+        if (hasPageErrors) {
+
+            return null;
+        }
+
         persistStep();      
 
         return nextStep();      
     }
+
+    private Boolean validateStep(){
+        if(validationDirector == null)
+            return false;
+
+        return true;
+    }
     
+    public void updateDirectorList(){
+        if(validationDirector == false)
+            showNoError = true;
+        else
+            showNoError = false;
+        hasPageErrors = false;
+    }
+
     public PageReference previousAction(){
         if (!validatePageState()) return Page.TransactionException;
                 
@@ -89,11 +112,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
             return;
         }
         
-        if(companyName == null)
-        {
-            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
-            companyName = compProf.company_name;
-        }
+        
         if(hasAlreadyLoadedOfficers)
         {
             //Get the list officer already created

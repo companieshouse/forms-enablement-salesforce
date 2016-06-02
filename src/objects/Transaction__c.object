@@ -140,6 +140,51 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>CompanyAddress1__c</fullName>
+        <description>Represents the company Address 1 from CHIPS</description>
+        <externalId>false</externalId>
+        <label>Company Address 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyAddress2__c</fullName>
+        <description>Represents the company Address 2 from CHIPS</description>
+        <externalId>false</externalId>
+        <label>Company Address 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyCountry__c</fullName>
+        <description>Represents the Country of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Country</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyIncorporationDate__c</fullName>
+        <description>This represents the date of incorporation of the company</description>
+        <externalId>false</externalId>
+        <label>Company Incorporation Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyLocality__c</fullName>
+        <description>Represents the Company locality</description>
+        <externalId>false</externalId>
+        <label>Company Locality</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>CompanyName__c</fullName>
         <externalId>false</externalId>
         <label>Company Name</label>
@@ -158,6 +203,42 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyPostCode__c</fullName>
+        <description>Represents the Postcode of a Company</description>
+        <externalId>false</externalId>
+        <label>Company PostCode</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyRegion__c</fullName>
+        <description>Represents the Region of a Company</description>
+        <externalId>false</externalId>
+        <label>Company Region</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyStatus__c</fullName>
+        <description>This represents the status of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyType__c</fullName>
+        <description>This represents the type of the company.</description>
+        <externalId>false</externalId>
+        <label>Company Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Company__c</fullName>

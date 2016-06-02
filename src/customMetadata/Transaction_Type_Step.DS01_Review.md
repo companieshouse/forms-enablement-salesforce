@@ -7,15 +7,15 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Your signed request is shown below and should be checked by you to ensure all information is correct.</value>
+        <value xsi:type="xsd:string">Review the information entered for the application to close your company.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Your request has not been submitted</value>
+        <value xsi:type="xsd:string">Request Approval</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">until you have reviewed this document and the associated fee has been paid on the following page.</value>
+        <value xsi:type="xsd:string">A request will now be sent to the company directors to authorize the application. An email notification will be sent once the director has given their approval.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -35,7 +35,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Review your application</value>
     </values>
     <values>
         <field>Is_Active__c</field>
@@ -55,7 +55,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">5.0</value>
+        <value xsi:type="xsd:double">6.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

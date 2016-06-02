@@ -56,12 +56,16 @@
             <p>
                 Please indicate yourself.
               </p>
+              <apex:outputPanel id="errorDirector">
+                <apex:outputPanel rendered="{!hasPageErrorsDirector}">
+                    <span  class="error-message" id="error-message-full-name">Select a director</span>
+                    </apex:outputPanel>
+                    </apex:outputPanel>
+                    <br/>
 	            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-	               
 	            <label class="block-label" for="radio-{!director.officer.Id}">
 	               <input class="radioButtonRepeat" id="radio-{!director.officer.Id}" type="radio" name="{!director.officer.Id}" value="{!director.isPresenter}" onchange="changeValue(this);">{!director.officerTXT}</input>
               </label><br/>
-	              
 	            </apex:repeat>
 	         </fieldset>
             </div>
@@ -79,26 +83,105 @@
               </div>
 
               <div class="form-group">
+              <apex:outputPanel id="error">
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <span  class="error-message" id="error-message-full-name">Provide correct phone number</span>
+                    </apex:outputPanel>
+                    </apex:outputPanel>
                 <label class="form-label" for="directors-confirm-phone">Phone number</label>
                 <apex:input styleclass="form-control" value="{!phoneNumber}"  type="tel" id="directors-confirm-phone"/>
               </div>
              </div>
+             <p class="heading-medium">
+            Are you Signing on behalf of a director?
+            </p>
+            <div class="form-group">
+            <fieldset class="inline">
+          <legend class="visuallyhidden">Are you Signing on behalf of a director?</legend>
+          <div id="presenterSelection777" class="form-group">
+            <label class="block-label" for="radio-indent-111">
+              <input class="BoolBehalfYesClass" id="radio-indent-111" type="radio" name="BoolBehalf" value="Yes" onchange="updateBehalf(true);" >
+              Yes
+              </input>
+            </label>
+            <label class="block-label" for="radio-indent-222">
+              <input class="BoolBehalfNoClass" id="radio-indent-222" type="radio" name="BoolBehalf" value="No" onchange="updateBehalf(false);">
+              No
+              </input>
+            </label>
+            
+            </div>
+        </fieldset>
+        </div>
+                    <apex:outputPanel id="behalf">
+                    <apex:outputPanel rendered="{!signBehalf}">
+
+             <fieldset>
+             <p class="heading-medium">
+            Are you Signing on behalf of?
+            </p>
+            <apex:repeat value="{!listOfDirectors}" var="director2" id="theRepeat2"> 
+              <label class="block-label" for="radio-{!director2.officer.Id}-2">
+                 <input class="radioButtonRepeat" id="radio-{!director2.officer.Id}-2" type="radio" name="{!director2.officer.Id}" value="{!director2.isSignatory}" onchange="changeValueBehalf(this);">{!director2.officerTXT}</input>
+              </label><br/>
+              </apex:repeat>
+              </fieldset>
+              <br/>
+              <p class="heading-medium">
+            <br/>As?
+            </p>
+          <legend class="visuallyhidden">Are you Signing on behalf of?</legend>
+          <div id="presenterSelection" class="form-group">
+            <label class="block-label" for="radio-indent-9">
+              <input class="presenterDeceased" id="radio-indent-9" type="radio" name="behalfOption" value="Deceased" onchange="updateBDCPA(1);" >
+              Deceased?
+              </input>
+            </label>
+            <label class="block-label" for="radio-indent-99">
+              <input class="presenterCorporate" id="radio-indent-99" type="radio" name="behalfOption" value="Corporate" onchange="updateBDCPA(2);" >
+              Corporate?
+              </input>
+            </label>
+            <label class="block-label" for="radio-indent-999">
+              <input class="presenterPOA" id="radio-indent-999" type="radio" name="behalfOption" value="Power of Attorney" onchange="updateBDCPA(3);">
+              Power of Attorney?
+              </input>
+            </label>
+            <br/>
+              <div class="form-group">
+                <label class="form-label" for="behalf-email">Your Email</label>
+                <apex:input styleclass="form-control" value="{!behalfEmail}"  type="email" id="behalf-email"/>
+              </div>
+            </div>
+        
+        </apex:outputPanel>
+          </apex:outputPanel>
              </apex:outputPanel>
              </apex:outputPanel>
 
-           <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
+             
+              <apex:actionFunction action="{!updateBDCPA}" name="updateBDCPA" reRender="emptyPanel">
+      <apex:param name="paramPresenter" value="" id="x2" assignTo="{!behalfSelected}" />
+     </apex:actionFunction>
+           <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv,errorDirector,buttonId">
 			<apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
 		 </apex:actionFunction>
-		 <apex:actionFunction action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
+     <apex:actionFunction action="{!updateBehalf}" name="updateBehalf" reRender="behalf">
+      <apex:param name="paramBehalf" value="" id="z" assignTo="{!signBehalf}" />
+     </apex:actionFunction>
+		 <apex:actionFunction action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel,errorDirector,buttonId">
 			<apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
 		 </apex:actionFunction>
+     <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+      <apex:param name="paramPresenterSelected" value="" id="y2" assignTo="{!selectedBehalfId}" />
+     </apex:actionFunction>
         </div>
          <br /><br />
           <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
          <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
-         &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" /><br />
-		 &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+         <apex:commandButton id="buttonId" styleClass="button" action="{!nextAction}" disabled="{!hasPageErrorsDirector}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error" /><br />
+		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
 		 <script type="text/javascript">
 		 $j = jQuery.noConflict();
 		 	function changeValue(out) 
@@ -121,6 +204,27 @@
 				   
 				});
 		     }
+
+         function changeValueBehalf(out) 
+         {
+          
+           var radioClicked = document.getElementById(out.id);
+
+
+           updateSelectedBehalf(radioClicked.name);
+
+           $('.radioButtonRepeat').each(function(){
+           if(this.name == radioClicked.name)
+           {
+              this.checked = true;
+           }
+           else{
+              this.checked = false;
+           }
+            
+           
+        });
+         }
 
 		     $j(document).ready(function() {
     			if({!directorPresenter} == true)

@@ -65,6 +65,14 @@
         <value>Company</value>
     </labels>
     <labels>
+        <fullName>UI_Text_Company_Details</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Company Details</shortDescription>
+        <value>Company Details</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Company_Page_Display_Text</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
@@ -79,6 +87,22 @@
         <protected>true</protected>
         <shortDescription>UI Text Confirmation Page</shortDescription>
         <value>Confirmation Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Continue</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Continue</shortDescription>
+        <value>Continue</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Continue_to_Payment</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Continue to Payment</shortDescription>
+        <value>Continue to Payment</value>
     </labels>
     <labels>
         <fullName>UI_Text_DS01</fullName>
@@ -175,6 +199,14 @@
         <protected>true</protected>
         <shortDescription>UI Text Next</shortDescription>
         <value>Save and continue</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Not_Your_Company</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Not Your Company</shortDescription>
+        <value>Not your company?</value>
     </labels>
     <labels>
         <fullName>UI_Text_Payment</fullName>

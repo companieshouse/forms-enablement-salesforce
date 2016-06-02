@@ -27,7 +27,7 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
+        List<Transaction__c> recs = [select Id,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,
                                         Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, 
@@ -70,7 +70,7 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,Presenter__c,Form_Name__c, Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select Id,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
                                         Status__c,Amount__c,SubmissionId__c,
