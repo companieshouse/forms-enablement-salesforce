@@ -5,7 +5,7 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>CH Signing Status</name>
     <style>none</style>
-    <subject>Review your transaction</subject>
+    <subject>Track your transaction signings</subject>
     <textOnly>Companies House
 
 Application to close {!Transaction__c.CompanyName__c}

@@ -204,7 +204,7 @@ public with sharing class DocStatusController {
         }
 
     }
-
+    /*
     private static docusignNamedObject__c getSettings() {
 
         for (docusignNamedObject__c s: docusignNamedObject__c.getAll().values()) {
@@ -215,6 +215,7 @@ public with sharing class DocStatusController {
 
         return null;
     }
+    */
 
     Public sObject getRecipientSigningStatusInfo() {
         //String transactionID
