@@ -19,7 +19,7 @@
                         <b>{!companyNumber}</b> - Incorporated on {!companyIncorporationDate}
                     </p>
                     <p class="gov-uk-box-review-fontcolor">
-                        {!companyAddress1} - {!companyLocality} - {!companypostcode} - information here {!informationstuff}
+                        {!companyAddress1} - {!companyLocality} - {!companypostcode} <!-- information here {!informationstuff} -->
                     </p>
                 </div>
                 <h2 class="heading-large">Requested Approvals</h2>
