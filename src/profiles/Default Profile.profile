@@ -209,6 +209,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FormAPISubmissionManager</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Form_CustomException</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -314,6 +318,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>StartFrameworkController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SubmissionController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -993,9 +1001,25 @@
         <apexPage>DirectorsList</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
-    <pageAccesses>
+	<pageAccesses>
         <apexPage>DocuSignRedirect</apexPage>
         <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocuSignDeclined</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocuSignSigningCompleted</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocuSignTimeout</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocuSignViewed</apexPage>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>DocumentDownload</apexPage>
@@ -1055,6 +1079,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>StdExceptionTemplate</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Submission</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

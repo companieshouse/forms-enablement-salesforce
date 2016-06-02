@@ -22,8 +22,8 @@ Ver. Author        Date        Detail
 public with sharing class AppConstants {
 	
 	//Request Status
-	public static final String REQUEST_STATUS_PENDING_SIGNATURES = 'Pending Signatures';
 	public final static String REQUEST_STATUS_DRAFT = 'Draft';
+	public final static String REQUEST_STATUS_PENDING_SIGNATURES = 'Pending Signatures';
 	public static final String REQUEST_STATUS_SIGNED = 'Signed';
 	public static final String REQUEST_STATUS_PENDING_SUBMISSION = 'Submission pending';
 	public static final String REQUEST_STATUS_SUBMITTED = 'Submitted';

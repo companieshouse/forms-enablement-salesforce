@@ -67,7 +67,12 @@ public class FormsApiClient {
     /**
     * Send a Package of forms to FormsAPI
     */
-    public HTTPResponse sendForm(List<Transaction__c> txList) {       
+    public HTTPResponse sendForm(Transaction__c tx) {  
+        List<Transaction__c> txList = new List<Transaction__c>();
+
+        //This function will receive a package
+        // query and add all transaction from the package to the transactions list
+        txList.add(tx);
         
         // Don't forget to add a Remote Site record for the server as well as the custom setting
         // record.
