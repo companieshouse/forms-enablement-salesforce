@@ -129,6 +129,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             }
             //presenter is not a director
             if(externalURL == null){ 
+                tx.Status__c = 'Pending Signatures';
                 requestedSignatures = true;
                 tx.MultipleDirectors__c = true;
                 tx.Expiry_Date_Length__c = transactionMgr.td.Expiry_Date_Length__c; // set the expiry date
