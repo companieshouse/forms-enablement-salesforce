@@ -98,9 +98,8 @@ public with sharing class SubmissionController extends TransactionStepController
         system.debug('Before save tx: ' + submissionMgr.submission);
 
         persistStep();
-
-        if(!validatePageState() || submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
-            return Page.TransactionException;
+       // if(!validatePageState() || submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
+         //   return Page.TransactionException;
 
         return nextStep();      
     }

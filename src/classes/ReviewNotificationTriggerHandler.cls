@@ -55,7 +55,6 @@ public class ReviewNotificationTriggerHandler {
 
             transactionupdater.MultipleDirectors__c = false;
             transactionupdater.ReviewRedirect__c = redirectReviewURL;
-
             System.debug('These transactions are signed and have multiple directors' + transactionupdater.ContactEmail__c);
 
             Transaction__c transactionshim = new Transaction__c();
