@@ -81,6 +81,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	   	else if(url.startsWith(OFFICERSEMAIL))			{ pr = new PageReference(VF_PAGE_OFFICERSEMAIL); }
 	   	else if(url.startsWith(GUIDANCE))				{ pr = new PageReference(VF_PAGE_GUIDANCE); }
 	   	else if(url.startsWith(DETAILSCOMP))			{ pr = new PageReference(VF_PAGE_DETAILSCOMP); }
+	   	else if(url.startsWith(STATUS))					{ pr = new PageReference(VF_PAGE_STATUS); }
+	   	else if(url.startsWith(SUBMISSION))				{ pr = new PageReference(VF_PAGE_SUBMISSION); }
 
 		
 
@@ -117,7 +119,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	        else if(url.startsWith(VF_PAGE_REVIEW))			{ friendlyPageReference = new PageReference(REVIEW); }
 	        else if(url.startsWith(VF_PAGE_PRESENTER))		{ friendlyPageReference = new PageReference(PRESENTER); }
 	        else if(url.startsWith(VF_PAGE_OFFICERSEMAIL))	{ friendlyPageReference = new PageReference(OFFICERSEMAIL); }
-	        else if(url.startsWith(VF_PAGE_GUIDANCE))		{ friendlyPageReference = new PageReference(GUIDANCE); }	       
+	        else if(url.startsWith(VF_PAGE_GUIDANCE))		{ friendlyPageReference = new PageReference(GUIDANCE); }
+  	        else if(url.startsWith(VF_PAGE_STATUS))			{ friendlyPageReference = new PageReference(STATUS); }	       
+	        else if(url.startsWith(VF_PAGE_SUBMISSION))		{ friendlyPageReference = new PageReference(SUBMISSION); }	       
+	       
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	

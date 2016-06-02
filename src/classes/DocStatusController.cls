@@ -205,6 +205,7 @@ public with sharing class DocStatusController {
 
     }
 
+    /*
     private static docusignNamedObject__c getSettings() {
 
         for (docusignNamedObject__c s: docusignNamedObject__c.getAll().values()) {
@@ -214,7 +215,7 @@ public with sharing class DocStatusController {
         System.debug(LoggingLevel.ERROR, 'No active docusign settings in Custom Settings' + 'Can\'t build the system Host URL.');
 
         return null;
-    }
+    }*/
 
     Public sObject getRecipientSigningStatusInfo() {
         //String transactionID

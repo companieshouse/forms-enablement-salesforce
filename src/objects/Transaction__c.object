@@ -467,6 +467,14 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>SentreviewURL__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>SentreviewURL</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>SignerStatus__c</fullName>
         <externalId>false</externalId>
         <label>SignerStatus</label>
@@ -638,6 +646,14 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>nonofficerPresenter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>sentsignerstatus__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>sentsignerstatus</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

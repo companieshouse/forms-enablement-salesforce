@@ -205,6 +205,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>EmailTemplatesBuilder</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>EmbedDocuSignController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -214,6 +218,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FormAPISubmissionManager</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormAPISubmissionManagerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -865,6 +873,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.SentreviewURL__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.SignerStatus__c</field>
         <readable>true</readable>
@@ -928,6 +941,11 @@
         <editable>true</editable>
         <field>Transaction__c.nonofficerPresenter__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.sentsignerstatus__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -1054,13 +1072,13 @@
         <apexPage>DirectorsList</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
-	<pageAccesses>
-        <apexPage>DocuSignRedirect</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
     <pageAccesses>
         <apexPage>DocuSignDeclined</apexPage>
         <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocuSignRedirect</apexPage>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>DocuSignSigningCompleted</apexPage>
