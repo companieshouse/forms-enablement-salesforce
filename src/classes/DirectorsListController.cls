@@ -26,6 +26,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean validationDirector {get; set;}
     public List<String> listOfDirectors {get; set;}
     public Integer nbOfOfficers {get; set;}
+	public Boolean isLLPCompany {get; set;}
 
     public DirectorsListController(){
         super();
@@ -43,6 +44,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List<String>();
         showNoError = false;
+		isLLPCompany = submissionMgr.submission.isLLP__c;
         if(isPageAlreadyValidStep)
         {
             hasAlreadyLoadedOfficers = true;
@@ -64,6 +66,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
     private void persistStep(){
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
+		submissionMgr.submission.isLLP__c = isLLPCompany;
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -115,6 +118,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         
         if(hasAlreadyLoadedOfficers)
         {
+			isLLPCompany = submissionMgr.submission.isLLP__c; 
             //Get the list officer already created
             if(submissionMgr.submission.Officers__r != null)
             {
@@ -140,11 +144,18 @@ public with sharing class DirectorsListController extends TransactionStepControl
             for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
                 if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
                 {
+					isLLPCompany = false;
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
                     officerList.add(new Officer__c(Name= officer.name , RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
                     recipientID++;
 
+                }else if (officer.officer_role == 'llp-designated-member' && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    isLLPCompany = true;
+                    listOfDirectors.add(officer.name);
+                    //Temporary save an address email against each officer and save officer to the transaction
+                    officerList.add(new Officer__c(Name = officer.name, RecipientId__c = String.valueOf(recipientID), Transaction__c = submissionMgr.submission.Id));
+                    recipientID++;
                 }
             }
 

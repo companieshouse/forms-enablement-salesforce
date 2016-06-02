@@ -26,13 +26,17 @@
       <apex:define name="content">
       <apex:form >
          <div id="masterDiv" class="form-group">
-         <h1 class="heading-xlarge">Request approval from company directors</h1>
+         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+
+                        <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
 
          <p class="heading-medium">
-         Are you a director of {!companyName}?
+         <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you a director of {!companyName}?"></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="Are you a member of {!companyName}?"></apex:outputText>
         </p>
         <fieldset class="inline">
-          <legend class="visuallyhidden">Are you the sole director listed above?</legend>
+          <legend class="visuallyhidden"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you the sole director listed above?"></apex:outputText>
+                            <apex:outputText rendered="{!isLLPCompany}" value="Are you the sole member listed above?"></apex:outputText></legend>
           <div id="presenterSelection" class="form-group">
             <label class="block-label" for="radio-indent-1">
               <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);" >
@@ -75,7 +79,10 @@
             <div aria-hidden="false" class="panel panel-border-narrow">
             	
               <p>
-                To apply to close this company we will need to know your details to help the director recognise your request. We'll also contact you through the email address used with this account.
+                <apex:outputText rendered="{!NOT(isLLPCompany)}" value="
+                                To apply to close this company we will need to know your details to help the director(s) recognise your request. We'll also contact you through the email address used with this account."></apex:outputText>
+                                    <apex:outputText rendered="{!isLLPCompany}" value="
+                                    To apply to close this company we will need to know your details to help the member(s) recognise your request. We'll also contact you through the email address used with this account."></apex:outputText>
               </p>
               <div class="form-group">
                 <label class="form-label" for="directors-name">Your full name</label>

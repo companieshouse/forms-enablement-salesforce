@@ -27,14 +27,14 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select Id,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Form_Name__c, Presenter__c,Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
+        List<Transaction__c> recs = [select CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,
-                                        Status__c,CompanyName__c,SubmissionId__c, Warning_Confirmation_Flag__c,Amount__c, 
+                                        Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c,
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
-                                        From Officers__r) 
+                                        From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c where Id=:submissionId];
         if (recs.size()==1) submission = recs[0];   
         
@@ -70,21 +70,27 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select Id,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
-                                        MultipleDirectors__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
-                                        Status__c,Amount__c,SubmissionId__c,
+                                        MultipleDirectors__c,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
+                                        Status__c,Amount__c, isLLP__c, SubmissionId__c,
                                         (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c, 
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
-                                        From Officers__r) 
+                                        From Officers__r),(SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c 
                                     where Presenter__c=:presenterId 
+                                        and Form_Name__c = :td.DeveloperName
+                                        and ContactEmail__c = :presenterEmail
                                             and Company__c=:companyId.Id
-                                            and Transaction_Type__c=:transactionType
-                                            and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
-                                                or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
-        if (recs.size()==1) return recs[0].Id;                  
+                                            and Transaction_Type__c=:transactionType];
+                                            //and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
+                                              //  or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
+        if (recs.size()==1) 
+        { 
+            submission = recs[0] ;
+            return recs[0].Id;
+        }
         
         submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail, Amount__c = td.Fee__c, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
         insert submission;

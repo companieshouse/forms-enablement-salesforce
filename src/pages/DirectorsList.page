@@ -25,7 +25,9 @@
       <apex:form >
 
          <div class="form-group">
-         <h1 class="heading-xlarge">Request approval from company directors</h1>
+         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+
+                  <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
          <p class="lede">
             {!companyName} has the following director listed on the public register.
          </p>

@@ -1,0 +1,52 @@
+<!-- 
+Name: Submission.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Submission page - Legal requirement to allow users to 
+submit a request 
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author         Date        Detail
+1.0  Antonio Bravo  2016-05-27  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Confirmation_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="SubmissionController"
+    action="{!initialiseAction}">
+        
+    <apex:composition template="TransactionPageTemplate">
+       <apex:define name="content">
+          <apex:form >
+             <div class="govuk-box-highlight">
+                <h1 class="bold-large">{!displayHeader}</h1>
+                
+                  <!-- <p>
+                   {!displayText1}
+                <strong class="heading-medium">{!submissionId}</strong>  
+                </p>-->
+             </div>
+             <h2 class="heading-medium">{!displayText2}</h2>
+             <apex:outputtext value="{!displayText3}" escape="false"/>
+            
+            <br/> 
+            <br/>
+            &nbsp;
+            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
+
+            <br/>
+            &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
+            &nbsp;
+          </apex:form>
+       </apex:define>
+    </apex:composition>
+
+</apex:page>

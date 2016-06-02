@@ -27,9 +27,10 @@
         <apex:outputPanel id="emptyDiv"/>
 
          <div class="form-group">
-         <h1 class="heading-xlarge">Request approval from company directors</h1>
-         <p class="lede">
-            {!companyName} has the following director listed on the public register.
+         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+                      <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
+         <p class="lede"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director listed on the public register."></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member listed on the public register.{!isLLPCompany}"></apex:outputText>
          </p>
          <p class="heading-medium">
           Please select who is going to sign.
@@ -56,7 +57,8 @@
               <thead>
                 <tr>
                   <th scope="col">Select for Signature</th>
-                  <th scope="col">Director Name</th>
+                  <th scope="col"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director Name"></apex:outputText>
+                                            <apex:outputText rendered="{!isLLPCompany}" value="Member Name"></apex:outputText></th>
                   <th scope="col">Status</th>
                   <th scope="col">Signotary Name (Mandatory for Special Status)</th>
                   <th scope="col">Email (Mandatory)</th>

@@ -30,6 +30,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
     public Id selectedId {get; set;}
     public String selectedStatus {get; set;}
     public Id selectIdStatus {get; set;}
+	public Boolean isLLPCompany {get; set;}
 
 
     public DirectorInputListController(){
@@ -43,6 +44,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
         //Set up the company name
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+		isLLPCompany = submissionMgr.submission.isLLP__c;
         requiredSignature = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         listOfDirectors = new List<officerContainer>();
         selectedStatus = '';

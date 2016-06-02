@@ -55,6 +55,17 @@
         <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
+    <alerts>
+        <fullName>SigningStatusScreen</fullName>
+        <description>SigningStatusScreen</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/CH_Signing_Status</template>
+    </alerts>
     <fieldUpdates>
         <fullName>TransactionPathBuilder</fullName>
         <field>TransactionPath__c</field>
@@ -62,6 +73,24 @@
         <name>TransactionPathBuilder</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>sentreviewurlupdate</fullName>
+        <field>SentreviewURL__c</field>
+        <literalValue>1</literalValue>
+        <name>sentreviewurlupdate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>sentsignertrue</fullName>
+        <field>sentsignerstatus__c</field>
+        <literalValue>1</literalValue>
+        <name>sentsignertrue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
@@ -149,9 +178,34 @@ Email should contain a URL to start a new journey</description>
             <name>Notify_presenter_that_documents_are_signed_and_awaiting_review_redirect_to_the_r</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>sentreviewurlupdate</name>
+            <type>FieldUpdate</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Transaction__c.ReviewRedirect__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.SentreviewURL__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SigningCeremony</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
             <operation>contains</operation>
             <value>http</value>
         </criteriaItems>
@@ -160,8 +214,41 @@ Email should contain a URL to start a new journey</description>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
-        <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <criteriaItems>
+            <field>Transaction__c.InActiveTransaction__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SigningStatusTransaction</fullName>
+        <actions>
+            <name>SigningStatusScreen</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>sentsignertrue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.MultipleDirectors__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.sentsignerstatus__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the review page</description>
+        <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>SubmissionDownloadLink</fullName>

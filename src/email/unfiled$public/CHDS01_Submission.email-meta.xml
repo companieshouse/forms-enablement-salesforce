@@ -8,18 +8,18 @@
     <subject>Application to close  {!Transaction__c. CompanyName__c} was successful</subject>
     <textOnly>Companies House
 
-Application to close {!Transaction__c. CompanyName__c}
+Application to close {!Transaction__c.CompanyName__c}
 
-{!Transaction__c. PresenterName__c}
+{!Transaction__c.PresenterName__c}
 
-Your application to close {!Transaction__c. CompanyName__c} has been successfully submitted.
+Your application to close {!Transaction__c.CompanyName__c} has been successfully submitted.
 
 Your Reference number is
-{!Transaction__c. SubmissionId__c}
+{!Transaction__c.SubmissionId__c}
 
 What to do next
 
-Once the application has been submitted you will receive an email containing the submitted application. It is the director’s responsibility to ensure that copies of the application have been sent to all notifiable parties by {!Transaction__c. ExpiryDate__c}. This includes:
+Once the application has been submitted you will receive an email containing the submitted application. It is the director’s responsibility to ensure that copies of the application have been sent to all notifiable parties by {!Transaction__c.ExpiryDate__c}. This includes:
 
 Creditors
 Employees
@@ -31,12 +31,14 @@ Please check the guidance notes for more information on the process click here.
 
 Failure to notify interested parties is an offence. It is advisable to obtain and retain some proof of delivery or posting of copies to notifiable parties.
 
-
-Click to download a copy of your application
-
+Download a copy of your transaction here: {!Transaction__c.DownloadLink__c} .
 
 Withdrawal of striking off application by a company
 
-If the company ceases to be eligible for striking off at any time after the application is made, and before the application is finally dealt with, as specified in section 1009 of the Companies Act 2006, then the application must be Click to download a copy of your application withdrawn using form DS02 ‘Withdrawal of striking off application by a company’ available from our website: www.gov.uk/companieshouse</textOnly>
+If the company ceases to be eligible for striking off at any time after the application is made, and before the application is finally dealt with, as specified in section 1009 of the Companies Act 2006, then the application must be Click to download a copy of your application withdrawn using form DS02 ‘Withdrawal of striking off application by a company’ available from our website: www.gov.uk/companieshouse
+
+
+This is an automated email, please do not reply. Forward any enquiries to the following: Email: enquiries@companieshouse.gov.uk
+Service Desk: +44 (0)303 1234 500</textOnly>
     <type>custom</type>
 </EmailTemplate>

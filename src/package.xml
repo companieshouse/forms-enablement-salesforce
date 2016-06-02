@@ -8,6 +8,7 @@
 		<members>AppConstants</members>
 		<members>AttachmentTriggerHandler</members>
 		<members>AttachmentTriggerHandlerTest</members>
+		<members>BaseURLHandler</members>
 		<members>CH_ChargeController</members>
 		<members>CH_ChargeController_Test</members>
 		<members>CH_SearchByNumberClass_Test</members>
@@ -39,22 +40,28 @@
 		<members>DS02Step2Navigator</members>
 		<members>DeveloperToolsController</members>
 		<members>DirectorInputListController</members>
-		<members>DirectorStatusController</members>
 		<members>DirectorsListController</members>
 		<members>DocuSignAPI</members>
 		<members>DocuSignAPITest</members>
+		<members>DocuSignUrlBuilder</members>
+		<members>DocStatusController</members>
+		<members>DocStatusUrlTriggerHandler</members>
 		<members>DocuSignStatusTriggerHandler</members>
 		<members>DocuSignStatusTriggerHandlerTest</members>
+		<members>DocusignTecipientTriggerStatusHandler</members>
 		<members>DocumentController</members>
 		<members>DocumentDownloadController</members>
 		<members>DynamicField</members>
 		<members>DynamicTestController</members>
 		<members>EmbedDocuSignController</members>
+		<members>EmailTemplatesBuilder</members>
 		<members>Form</members>
 		<members>Form_CustomException</members>
 		<members>FormsApiClient</members>
 		<members>FormsApiClientTest</members>
 		<members>FormsApiMock</members>
+        <members>FormAPISubmissionManagerTest</members>
+        <members>FormAPISubmissionManager</members>
 		<members>GuidanceController</members>
 		<members>ISerialisable</members>
 		<members>IStepNavigable</members>
@@ -79,6 +86,7 @@
 		<members>SmartPayUrlTest</members>
 		<members>StartFrameworkController</members>
 		<members>SubmissionManager</members>
+        <members>SubmissionController</members>
 		<members>SubmissionManagerTest</members>
 		<members>SubmissionURLTriggerHandler</members>
 		<members>SummaryController</members>
@@ -112,9 +120,13 @@
 		<members>CompanyDetails</members>
 		<members>ConfirmationFramework</members>
 		<members>DeveloperTools</members>
-		<members>DirectorStatus</members>
 		<members>DirectorsInputList</members>
 		<members>DirectorsList</members>
+		<members>DocuSignRedirect</members>
+        <members>DocuSignDeclined</members>
+        <members>DocuSignSigningCompleted</members>
+        <members>DocuSignTimeout</members>
+        <members>DocuSignViewed</members>
 		<members>DocumentDownload</members>
 		<members>Documents</members>
 		<members>DynamicTest</members>
@@ -128,6 +140,8 @@
 		<members>Review</members>
 		<members>SmartPayNotification</members>
 		<members>StartFramework</members>
+		<members>Status</members>
+        <members>Submission</members>
 		<members>StdExceptionTemplate</members>
 		<members>Summary</members>
 		<members>TransactionException</members>
@@ -136,6 +150,8 @@
 		<name>ApexPage</name>
 	</types>
 	<types>
+		<members>BaseURLTransactionHandler</members>
+		<members>DocStatusURLBuilder</members>
 		<members>AttachmentTrigger</members>
 		<members>DocuSignStatusTrigger</members>
 		<members>ReviewStatusTrigger</members>
@@ -166,13 +182,15 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
-		<members>unfiled$public/CHDS01_Submission</members>
+       <members>unfiled$public/CHDS01_Submission</members>
 		<members>unfiled$public/CHExpired_Transaction</members>
 		<members>unfiled$public/CHExpiryReminder</members>
 		<members>unfiled$public/CHReviewStatus</members>
+		<members>unfiled$public/CH_3monthExpiry_Transaction</members>
 		<members>unfiled$public/CH_Director_Decline</members>
+		<members>unfiled$public/CH_Signing_Status</members>
 		<name>EmailTemplate</name>
-	</types>
+    </types>
 	<types>
 		<members>Admin</members>
 		<members>Default Profile</members>

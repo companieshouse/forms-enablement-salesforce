@@ -33,7 +33,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String OFFICERSEMAIL 	= '/inputEmails';
 	public String GUIDANCE			= '/guidance';
 	public String DETAILSCOMP		= '/detailsCompany';
-	
+	public String STATUS = '/status';
+    public String SUBMISSION = '/submission';
+
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
 	public String VF_PAGE_CONFIRMATION 	= '/ConfirmationFramework';
@@ -50,6 +52,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String VF_PAGE_OFFICERSEMAIL	= '/DirectorsInputList';
 	public String VF_PAGE_GUIDANCE 		= '/Guidance';
 	public String VF_PAGE_DETAILSCOMP 	= '/CompanyDetails';
+	public String VF_PAGE_STATUS = '/Status';
+    public String VF_PAGE_SUBMISSION = '/Submission';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -77,6 +81,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	   	else if(url.startsWith(OFFICERSEMAIL))			{ pr = new PageReference(VF_PAGE_OFFICERSEMAIL); }
 	   	else if(url.startsWith(GUIDANCE))				{ pr = new PageReference(VF_PAGE_GUIDANCE); }
 	   	else if(url.startsWith(DETAILSCOMP))			{ pr = new PageReference(VF_PAGE_DETAILSCOMP); }
+
 		
 
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());

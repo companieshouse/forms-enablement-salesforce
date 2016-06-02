@@ -33,7 +33,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public Boolean signBehalf {get; set;}
     public Integer behalfSelected {get; set;}
     public Id selectedBehalfId {get; set;}
-    
+    public Boolean isLLPCompany { get;
+        set; }
 
     public PresenterDirectorController(){
         super();
@@ -55,6 +56,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List<officerContainer>();
+		isLLPCompany = submissionMgr.submission.isLLP__c;
 
         
 
@@ -76,6 +78,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 	                        off.isPresenter__c = offCont.isPresenter;
                             off.isSignatory__c = true;
                             off.Email__c = submissionMgr.submission.Presenter__r.Name;
+							//ab populate Presenter Name field with Director Name
+                            submissionMgr.submission.PresenterName__c = convertName(off.Name);
                         }
                         off.isDeceased__c = false;
                         off.isCorporateDirector__c = false;
@@ -285,7 +289,21 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         }
         return null;
     }
+	
+	// API is returning last name + first Name
+    // This function set name in the correct order
+    private String convertName(String name) {
+        String firstName;
+        String lastName;
 
+        firstName = name.substringAfter(',') + ' ';
+
+        lastName = name.substringBefore(',');
+        lastName = lastName.toLowerCase();
+        lastName = lastName.capitalize();
+
+        return firstName + lastName;
+    }
     
 
     public with sharing class officerContainer{

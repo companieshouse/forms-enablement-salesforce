@@ -46,17 +46,15 @@ public class FormsApiClientTest {
         Attachment att = createAttachment(tx.Id);
 
 
-        List<Transaction__c> txList = new List<Transaction__c>();
-        txList.add(tx);
-
         Test.startTest();
         
         // Unit tests shouldn't call out. Use a mock to give them an HTTP response.
         Test.setMock(HttpCalloutMock.class, new FormsApiMock());
         
         // Going for coverage only at this stage. No assertions.
+        //In the future sendForm() will receive a package
         FormsApiClient client = new FormsApiClient();
-        HTTPResponse response = client.sendForm(txList);
+        HTTPResponse response = client.sendForm(tx);
         
         Test.stopTest();
     }

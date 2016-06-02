@@ -25,7 +25,7 @@ public with sharing class AccountsAPIHelper {
 	
         SecurityManager securityMgr;
 
-         private TrackUserClass userTracker {
+        private TrackUserClass userTracker {
         get;
         set;
     }
@@ -47,6 +47,12 @@ public with sharing class AccountsAPIHelper {
                return downloadredirectUrl;
     }   
 	
+    public String getDocumentStatusRedirectUrl() {
+        String hostname = ApexPages.currentPage().getHeaders().get('Host');
+        String docstatusredirectUrl = 'https://' + hostname + '/Status';
+        System.debug('hostname is  ' + hostname); 
+               return docstatusredirectUrl;
+    }   
 
 	public String getUserAuthUrl(String nonce){
 
@@ -148,6 +154,39 @@ public with sharing class AccountsAPIHelper {
         return authUrl;
     }
 
+public String getDocumentStatusURL(String companyNumber, String transactionType, String nonce){
+        
+        final String SCOPE_PREFIX = 'http://api.companieshouse.gov.uk/company/';
+
+        Account_Api_Settings__c settings = getSettings();
+
+
+      
+             // always insert new company auth when this is called so we can track user and company searched
+        insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nonce, Transaction_Type__c=transactionType);
+
+        String authUrl = 'https://'+settings.Host__c+'/oauth2/authorise' + '?';
+        
+        // Response type is always "code"
+        authUrl+='response_type=code';
+        
+        // Client ID identifies us to the server and is not secret
+        authUrl+='&client_id='+settings.Client_Id__c;
+        
+         // Chris Smith's instructions: It is mandatory to pass a state parameter, containing a nonce
+        // value. This will be returned to the supplied redirect_ui along with the authorisation
+        // code, and must be checked to ensure it is still valid.
+        //lb changed the sequence....really shouldn't matter
+        authUrl+='&state='+nonce;
+        
+        // Redirect URL.
+        String redirectUrl = EncodingUtil.urlEncode(getDocumentStatusRedirectUrl(), 'UTF-8'); //  EncodingUtil.urlEncode(settings.Callback_Url__c, 'UTF-8');      
+
+        authUrl+='&redirect_uri='+ redirectUrl;  
+        authUrl+='&scope='+SCOPE_PREFIX+companyNumber;      
+        
+        return authUrl;
+    }
     
     // Look for a custom setting record with the credentials for the server.
     private static Account_Api_Settings__c getSettings() {
@@ -220,6 +259,8 @@ public with sharing class AccountsAPIHelper {
         }
         
         if (response.getBody().startsWith('<!DOCTYPE html>')) {
+                     //   throw new AccountsApiException('body ======' + response);
+
             throw new AccountsApiException('HTML response. Expected JSON. Probably an error page. Check the logs for a span tag with id="error-description".');
         }
         

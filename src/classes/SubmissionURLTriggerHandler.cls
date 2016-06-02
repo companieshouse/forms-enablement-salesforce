@@ -3,7 +3,7 @@
  *
  * Author: leo.bitoy@methods.digital.co.uk
  * 
- *  This transaction__c review handler trigger builds a submission URL for the user to later view
+ *  This transaction__c review trigger handler builds a submission URL for the user to later view
  *
  *
  *
