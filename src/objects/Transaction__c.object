@@ -46,7 +46,7 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
@@ -264,7 +264,7 @@
         <fullName>ContactEmail__c</fullName>
         <description>Presenter Contact information for notifications</description>
         <externalId>false</externalId>
-        <label>ContactEmail</label>
+        <label>Contact Email</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Email</type>
@@ -513,6 +513,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
             </picklistValues>
             <picklistValues>
                 <fullName>Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
