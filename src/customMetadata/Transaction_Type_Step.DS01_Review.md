@@ -11,11 +11,11 @@
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Request Approval</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">A request will now be sent to the company directors to authorize the application. An email notification will be sent once the director has given their approval.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_4__c</field>

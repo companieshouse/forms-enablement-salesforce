@@ -100,12 +100,18 @@
               </div>
              </div>
              <p class="heading-medium">
-            Are you Signing on behalf of a director?
+            Are you signing on behalf of a director?
             </p>
             <div class="form-group">
             <fieldset class="inline">
           <legend class="visuallyhidden">Are you Signing on behalf of a director?</legend>
           <div id="presenterSelection777" class="form-group">
+          <apex:outputPanel id="errorBehalf">
+                <apex:outputPanel rendered="{!hasPageErrorsBehalf}">
+                    <span  class="error-message" id="error-message-full-name">Select from the options below</span>
+                    </apex:outputPanel>
+                    </apex:outputPanel>
+                    <br/>
             <label class="block-label" for="radio-indent-111">
               <input class="BoolBehalfYesClass" id="radio-indent-111" type="radio" name="BoolBehalf" value="Yes" onchange="updateBehalf(true);" >
               Yes
@@ -125,7 +131,7 @@
 
              <fieldset>
              <p class="heading-medium">
-            Are you Signing on behalf of?
+            Are you signing on behalf of?
             </p>
             <apex:repeat value="{!listOfDirectors}" var="director2" id="theRepeat2"> 
               <label class="block-label" for="radio-{!director2.officer.Id}-2">
@@ -135,30 +141,34 @@
               </fieldset>
               <br/>
               <p class="heading-medium">
-            <br/>As?
+            <br/>Reason for signing on behalf of a director?
             </p>
           <legend class="visuallyhidden">Are you Signing on behalf of?</legend>
           <div id="presenterSelection" class="form-group">
             <label class="block-label" for="radio-indent-9">
               <input class="presenterDeceased" id="radio-indent-9" type="radio" name="behalfOption" value="Deceased" onchange="updateBDCPA(1);" >
-              Deceased?
+              Deceased
               </input>
             </label>
             <label class="block-label" for="radio-indent-99">
               <input class="presenterCorporate" id="radio-indent-99" type="radio" name="behalfOption" value="Corporate" onchange="updateBDCPA(2);" >
-              Corporate?
+              Corporate
               </input>
             </label>
             <label class="block-label" for="radio-indent-999">
               <input class="presenterPOA" id="radio-indent-999" type="radio" name="behalfOption" value="Power of Attorney" onchange="updateBDCPA(3);">
-              Power of Attorney?
+              Power of Attorney
               </input>
             </label>
             <br/>
+            <apex:outputPanel id="EmailPan">
+            <apex:outputPanel rendered="{!emailPanel}">
               <div class="form-group">
                 <label class="form-label" for="behalf-email">Your Email</label>
                 <apex:input styleclass="form-control" value="{!behalfEmail}"  type="email" id="behalf-email"/>
               </div>
+              </apex:outputPanel>
+              </apex:outputPanel>
             </div>
         
         </apex:outputPanel>
@@ -173,13 +183,13 @@
            <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv,errorDirector,buttonId">
 			<apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
 		 </apex:actionFunction>
-     <apex:actionFunction action="{!updateBehalf}" name="updateBehalf" reRender="behalf">
+     <apex:actionFunction action="{!updateBehalf}" name="updateBehalf" reRender="behalf,errorBehalf">
       <apex:param name="paramBehalf" value="" id="z" assignTo="{!signBehalf}" />
      </apex:actionFunction>
 		 <apex:actionFunction action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel,errorDirector,buttonId">
 			<apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
 		 </apex:actionFunction>
-     <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+     <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel,EmailPan">
       <apex:param name="paramPresenterSelected" value="" id="y2" assignTo="{!selectedBehalfId}" />
      </apex:actionFunction>
         </div>
@@ -187,7 +197,7 @@
           <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
          <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
-         <apex:commandButton id="buttonId" styleClass="button" action="{!nextAction}" disabled="{!hasPageErrorsDirector}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error" /><br />
+         <apex:commandButton id="buttonId" styleClass="button" action="{!nextAction}" disabled="{!hasPageErrorsDirector}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error,errorBehalf,EmailPan" /><br />
 		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
 		 <script type="text/javascript">
 		 $j = jQuery.noConflict();
