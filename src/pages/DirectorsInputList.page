@@ -33,7 +33,7 @@
                         <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member listed on the public register.{!isLLPCompany}"></apex:outputText>
          </p>
          <p class="heading-medium">
-          Please select who is going to sign.
+          Select who is going to sign.
         </p>
         <apex:outputPanel id="errorDirector">
         <apex:outputPanel rendered="{!hasPageErrorsDirector}">
@@ -47,7 +47,7 @@
         </apex:outputPanel>
 
          <apex:outputPanel rendered="{!isNameError}">
-            <span  class="error-message" id="error-message-full-name">Please specify a Signotary Name if you sign on behalf of a Director</span>
+            <span  class="error-message" id="error-message-full-name">Specify a Signotary Name if you sign on behalf of a Director</span>
         </apex:outputPanel>
         </apex:outputPanel>       
         <br/>
@@ -60,8 +60,8 @@
                   <th scope="col"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director Name"></apex:outputText>
                                             <apex:outputText rendered="{!isLLPCompany}" value="Member Name"></apex:outputText></th>
                   <th scope="col">Status</th>
-                  <th scope="col">Signotary Name (Mandatory for Special Status)</th>
-                  <th scope="col">Email (Mandatory)</th>
+                  <th scope="col">Signatory Name</th>
+                  <th scope="col">Email</th>
                 </tr>
               </thead>
               <tbody>

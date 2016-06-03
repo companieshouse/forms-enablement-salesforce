@@ -146,7 +146,7 @@
                 <h1 class="page-title-style-email">Application to close {!Transaction__c.CompanyName__c}</h1>
                 <p>Dear {!Transaction__c.PresenterName__c} </p>
                 <p>
-                The application to close {!Transaction__c.CompanyName__c} has been signed by all required directors. The application can be reviewed and the application process completed by going to the following link: {!Transaction__c.ReviewRedirect__c}      
+                The application to close {!Transaction__c.CompanyName__c} has been signed by all required directors. The application can be reviewed and the application process completed by going to the following link: <a href="{!Transaction__c.ReviewRedirect__c}">Link</a>      
             </td>
         </tr>
         <tr>

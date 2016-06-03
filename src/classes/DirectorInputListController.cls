@@ -222,7 +222,7 @@ public with sharing class DirectorInputListController extends TransactionStepCon
                     
                     if(off.isSignatory )
                     {
-                        if(split.size() < 2)
+                        if(split.size() != 3)
                         {
                             hasPageErrorsCorrectEmails = true;
                             return null;

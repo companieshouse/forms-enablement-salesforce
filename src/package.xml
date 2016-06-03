@@ -33,7 +33,6 @@
 		<members>CompaniesHouseTestData</members>
 		<members>CompanyController</members>
 		<members>CompanyDetailsController</members>
-		<members>CompanyDetailsPage</members>
 		<members>CompanyQueryAction</members>
 		<members>ConfirmationFrameworkController</members>
 		<members>DS01Serialiser</members>

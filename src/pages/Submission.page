@@ -39,12 +39,10 @@ Ver. Author         Date        Detail
             
             <br/> 
             <br/>
-            &nbsp;
             <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
 
             <br/>
-            &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-            &nbsp;
+            
           </apex:form>
        </apex:define>
     </apex:composition>

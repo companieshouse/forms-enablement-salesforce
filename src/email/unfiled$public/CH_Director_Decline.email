@@ -145,7 +145,7 @@
             <td>
                 <h1 class="page-title-style-email">Application to close {!Transaction__c.CompanyName__c}</h1>
                 <p>Dear {!Transaction__c.PresenterName__c},</p>
-                <p>A directorhas declined to sign the application to close:</p>
+                <p>A director has declined to sign the application to close:</p>
                 <p>
                 Company name: {!Transaction__c.CompanyName__c} <br/>
                 Company Number:{!Transaction__c.CompanyNumber__c}
@@ -154,7 +154,7 @@
                 <p> The application has been cancelled as a result. You will need to start the application again to complete the process of closing {!Transaction__c.CompanyName__c}. 
              </p>
             <p>
-            Please use the following service to start the application to close {!Transaction__c.CompanyName__c} : {!Transaction__c.TransactionPath__c}
+            Please use the following service to start the application to close {!Transaction__c.CompanyName__c} : <a href="{!Transaction__c.TransactionPath__c}">Start</a>
             </p>
                 <div>
             </td>

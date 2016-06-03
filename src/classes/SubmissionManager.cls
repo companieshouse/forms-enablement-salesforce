@@ -83,8 +83,8 @@ public with sharing class SubmissionManager {
                                         and Form_Name__c = :td.DeveloperName
                                         and ContactEmail__c = :presenterEmail
                                             and Company__c=:companyId.Id
-                                            and Transaction_Type__c=:transactionType];
-                                            //and (Status__c=:AppConstants.REQUEST_STATUS_DRAFT
+                                            and Transaction_Type__c=:transactionType
+                                            and Status__c!=:AppConstants.REQUEST_STATUS_SUBMITTED];
                                               //  or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
         if (recs.size()==1) 
         { 

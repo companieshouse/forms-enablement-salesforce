@@ -19,6 +19,9 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
     public Boolean hasPageErrors { get; set; }
     public Boolean hasPageErrorsDirector {get; set;}
+    public Boolean hasPageErrorsBehalf {get; set;}
+
+    public Boolean emailPanel {get; set;}
 
     public String companyName {get; set;}
     public String companyNumber {get; set;}
@@ -52,7 +55,6 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         behalfName = '';
         behalfEmail = '';
         behalfSelected = 0;
-        signBehalf = false;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List<officerContainer>();
@@ -91,7 +93,6 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             behalfSelected = 0;
             //Remove presenter details from trsansaction if the officer is selected.
             submissionMgr.submission.PresenterPhoneNumber__c = null;
-            submissionMgr.submission.PresenterName__c = null;
 
 	    }
 	    else
@@ -169,7 +170,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public Boolean isPresentorCorrect(){
         if(!directorPresenter)
         {
-            if(phoneNumber.length() > 11 || phoneNumber.isAlphanumeric())
+            if(phoneNumber.length() > 11 || !phoneNumber.isNumeric())
                 return false;
             //Not mandatory
             //if(String.isEmpty(phoneNumber) || String.isEmpty(presenterName))
@@ -181,10 +182,16 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     }
 
     // Action methods.     
-    public PageReference nextAction(){     
+    public PageReference nextAction(){   
+
         if(!isPresentorCorrect())
         {
             hasPageErrors = true;
+            return null;
+        }
+        if(signBehalf == null && !directorPresenter)
+        {
+            hasPageErrorsBehalf = true;
             return null;
         }
 
@@ -239,14 +246,24 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public PageReference updatePresenter()
     {
         if(directorPresenter == true)
+        {
             hasPageErrorsDirector = true;
+            emailPanel = false;
+        }
         else
+        {
             hasPageErrorsDirector = false;
+            emailPanel = true;
+        }
     	return null;
     }
 
     public PageReference updateBehalf()
     {
+        if(signBehalf != null)
+        {
+            hasPageErrorsBehalf = false;
+        }
         return null;
     }
 
