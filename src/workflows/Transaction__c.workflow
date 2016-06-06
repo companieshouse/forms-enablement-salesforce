@@ -12,6 +12,28 @@
         <template>unfiled$public/CH_Director_Decline</template>
     </alerts>
     <alerts>
+        <fullName>Contact_Presenter_On_CH_Approval</fullName>
+        <description>Contact Presenter On CH Approval</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_Approved_Transaction</template>
+    </alerts>
+    <alerts>
+        <fullName>Contact_Presenter_On_CH_Rejection</fullName>
+        <description>Contact Presenter On CH Rejection</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_Rejected_Transaction</template>
+    </alerts>
+    <alerts>
         <fullName>DocumentDownloadLink</fullName>
         <description>DocumentDownloadLink</description>
         <protected>false</protected>
@@ -122,6 +144,36 @@
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
+    <rules>
+        <fullName>CH Approval notification</fullName>
+        <actions>
+            <name>Contact_Presenter_On_CH_Approval</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Rejection notification</fullName>
+        <actions>
+            <name>Contact_Presenter_On_CH_Rejection</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Rejected&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
     <rules>
         <fullName>Decline notification</fullName>
         <actions>
