@@ -3,5 +3,5 @@
     <apiVersion>36.0</apiVersion>
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <label>PDF Generation</label>
+    <label>SH19</label>
 </ApexPage>

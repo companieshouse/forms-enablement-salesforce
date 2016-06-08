@@ -1,127 +1,106 @@
-<apex:page title="{!$Label.UI_Text_DocuSign}" 
-    showHeader="false" 
-    sidebar="false" 
-    standardStylesheets="false"
-    controller="EmbedDocuSignController"
-    action="{!actionFunction}"
-    docType="html-5.0" >
-      <!--    
+<apex:page title="{!$Label.UI_Text_DocuSign}" showHeader="false" sidebar="false" standardStylesheets="false" controller="EmbedDocuSignController" action="{!actionFunction}" docType="html-5.0">
+    <!--    
        <script>
           window.open('{!URL}','_self');
        </script> 
 
        -->
-  <apex:composition template="TransactionPageTemplate">
-    <apex:define name="content">
-      <apex:form >
-
-        <apex:outputPanel rendered="{!showButtons}">
-            <h1 class="heading-xlarge">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel rendered="{!showButtons}">
+                    <h1 class="heading-xlarge">
               {!$Label.UI_Text_DocuSign}
-            </h1> 
-            <h3 >
+            </h1>
+                    <h3>
               Document has been signed sucessul. 
-            </h3> 
-            &nbsp;
-            <apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />      
-            &nbsp;
-            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />  
-        </apex:outputPanel>
-
-        <apex:outputPanel rendered="{!declined}">
-            <h1 class="heading-xlarge">
+            </h3> &nbsp;
+                    <apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> &nbsp;
+                    <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!declined}">
+                    <h1 class="heading-xlarge">
               Declined
-            </h1> 
-            <h3 >
+            </h1>
+                    <h3>
               The application to close your company has been cancelled. The application process will need to be restarted if you still wish to close your company. 
-            </h3> 
-        </apex:outputPanel>
-
-        <apex:outputPanel rendered="{!requestedSignatures}">
-            <!-- ab function to close iframes. TO DO: move to Transaction Page Template -->
-            <script type="text/javascript">
-              if (window.frameElement){parent.location.href = window.location; console.log("found iframe and reloading")} 
-              else {console.log('not finding iframe probably on mobile');}
-            </script>
-            <h1 class="heading-xlarge">
+            </h3>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!requestedSignatures}">
+                    <!-- ab function to close iframes. TO DO: move to Transaction Page Template -->
+                    <script type="text/javascript">
+                    if (window.frameElement) {
+                        parent.location.href = window.location;
+                        console.log("found iframe and reloading")
+                    } else {
+                        console.log('not finding iframe probably on mobile');
+                    }
+                    </script>
+                    <h1 class="heading-xlarge">
               {!$Label.UI_Text_DocuSignPending}
-            </h1> 
-            <h3 >
+            </h1>
+                    <h3>
               Requests for approval of {!pageText2} <b>{!companyName}</b> have been sent to the following directors:
             </h3>
-            <br/>
-
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Director Name</th>
-                  <th scope="col">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <apex:repeat value="{!offResquestedToSign}" var="director" id="theRepeat" >
-                  <tr>
-                    <td>{!director.Name}</td>
-                    <td>{!director.Email__c}</td>
-                  </tr>
-                </apex:repeat>
-              </tbody>
-            </table>
-
-            <br/>
-            <br/>
-            <h3>
+                    <br/>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Director Name</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!offResquestedToSign}" var="director" id="theRepeat">
+                                <tr>
+                                    <td>{!director.Name}</td>
+                                    <td>{!director.Email__c}</td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    <h3>
               <p align="justify">A notification email will be sent to <b>{!presenterEmail}</b> which will allow you to check the status of the signatures and submit the application.</p>
-            </h3> 
-        </apex:outputPanel>
-
-        <apex:outputPanel rendered="{!hasPageErrors}">
-          <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-
-            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+            </h3>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
             An error has occurred.
             </h1>
-
-            <p>
-            Optional description of the errors and how to correct them
-            </p>
-
-            <ul class="error-summary-list">
-            <li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
-            </ul>
-
-          </div>
-        </apex:outputPanel>
-
-        <!-- <h1 class="heading-xlarge">
+                        <p>
+                            Optional description of the errors and how to correct them
+                        </p>
+                        <ul class="error-summary-list">
+                            <li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
+                        </ul>
+                    </div>
+                </apex:outputPanel>
+                <!-- <h1 class="heading-xlarge">
           {!$Label.UI_Text_DocuSign}
-        </h1> --> 
+        </h1> -->
+                <!-- TODO: How do we do a full width column? -->
+                <div id="doculoader"></div>
+                <script>
+                // window.open('{!externalURL}','_self'); 
 
-          <!-- TODO: How do we do a full width column? -->
-          <div id="doculoader" ></div>
-          <script>
-            // window.open('{!externalURL}','_self'); 
+                var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
 
-            var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
+                if (screen != null && screen.length > 1) {
+                    window.open('{!externalURL}', '_self');
+                    console.log('mobile');
 
-            if(screen !=null && screen.length > 1){
-              window.open('{!externalURL}','_self'); console.log('mobile');
-
-            } else { 
-
-              document.getElementById("doculoader").innerHTML='<object height="650" width="950" id="999" data="{!externalURL}" ></object>';
-              console.log('not mobile');
-
-            }
-
-          </script>
-          
-        
-      </apex:form>
-
-    </apex:define>
-
-  </apex:composition>
-
-
+                } else {
+                    if (!{!showButtons
+                        }) {
+                        document.getElementById("doculoader").innerHTML = '<iframe height="650" width="950" id="999" src="{!externalURL}" ></iframe>';
+                        console.log('not mobile');
+                    }
+                }
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>

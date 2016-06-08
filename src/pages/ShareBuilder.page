@@ -1,0 +1,36 @@
+<!-- 
+Name: Shares.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Shares input 
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Leo Bitoy&    2016-04-11  Initial development.
+-->
+<apex:page title="Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="ShareBuilderController" >
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <h1 class="heading-xlarge">
+                	{!headerText1}
+	               </h1>
+                <p class="lede">{!displayText1}
+                </p>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:commandButton styleClass="button" action="{!viewnewShares}" value="Add a share" />
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

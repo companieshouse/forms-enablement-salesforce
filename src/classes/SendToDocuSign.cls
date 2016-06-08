@@ -77,7 +77,8 @@
         // Use PDFGeneration to render DS01
         // To do update PDFGeneration to be generic
         System.debug('Rendering the PDF');
-        PageReference pageRef = new PageReference('/apex/PDFGeneration');
+         String documentreference = '/apex/'+tx.Form_Name__c;
+        PageReference pageRef = new PageReference(documentreference);
         pageRef.getParameters().put('id',tx.Id);
         if(Test.IsRunningTest())
             pdfBlob = Blob.valueOf('This is a test');

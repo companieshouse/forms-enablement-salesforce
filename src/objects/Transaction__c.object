@@ -614,7 +614,7 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <linkType>page</linkType>
         <masterLabel>Create PDF</masterLabel>
         <openType>sidebar</openType>
-        <page>PDFGeneration</page>
+        <page>DS01</page>
         <protected>false</protected>
     </webLinks>
     <webLinks>

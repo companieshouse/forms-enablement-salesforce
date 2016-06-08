@@ -1,0 +1,72 @@
+<!-- 
+Name: Shares.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Shares Tabular Data Page
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Leo Bitoy&    2016-04-11  Initial development.
+-->
+<apex:page title="Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddSharesController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <h1 class="heading-xlarge">
+                	{!headerText1}
+	               </h1>
+                <p class="lede">{!displayText1}
+                </p>
+                <br/>
+                <apex:outputPanel rendered="{!showtable}">
+                    <table class="check-your-answers">
+                        <tbody>
+                            <tr>
+                                <td>Currency</td>
+                                <td>Class of shares</td>
+                                <td>No. of shares</td>
+                                <td>Total value aggregate</td>
+                                <td></td>
+                            </tr>
+                            <apex:repeat value="{!sharecapital}" var="sp" id="theRepeat">
+                                <br/>
+                                <tr>
+                                    <td>
+                                        <apex:outputText value="{!sp.Currency__c}" id="currency" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value="{!sp.Total_aggregate_amount_unpaid__c}" id="aggregate" />
+                                    </td>
+                                    <td>
+                                        <apex:commandLink action="{!AddShare}" value="Change" id="addashare" />
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <p>
+                        <apex:commandLink action="{!AddShare}" value="+ Add a Share" id="addashare" />
+                    </p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:commandButton styleClass="button" action="{!nextAction}" value="Finish adding shares" rendered="{!NOT(isLastPage)}" />
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

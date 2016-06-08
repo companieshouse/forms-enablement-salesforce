@@ -27,7 +27,7 @@ public with sharing class SubmissionURLTriggerHandler {
 
         for (Transaction__c transactionupdater: transactionsList) {
             // list of transactions to update at the end
-            if (transactionupdater.Status__c == AppConstants.REQUEST_STATUS_PENDING_SUBMISSION) {
+            if (transactionupdater.Status__c == AppConstants.REQUEST_STATUS_SUBMITTED) {
                 // loop through transactions from trigger and find the signed status
                 Environment_Variables__c settings = getSettings();
 
