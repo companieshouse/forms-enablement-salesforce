@@ -93,8 +93,7 @@
                     console.log('mobile');
 
                 } else {
-                    if (!{!showButtons
-                        }) {
+                    if (!{!showButtons}) {
                         document.getElementById("doculoader").innerHTML = '<iframe height="650" width="950" id="999" src="{!externalURL}" ></iframe>';
                         console.log('not mobile');
                     }
