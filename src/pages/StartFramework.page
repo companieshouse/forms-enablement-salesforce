@@ -30,14 +30,14 @@ Ver. Author        Date        Detail
             }
                 </style>
                  <h1 class="heading-xlarge">
-                    {!pageTitle}
+                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
                 </h1>
                 <!--
                 <div class="grid-row">
                     <div class="column-two-thirds">
                        -->
                         <p class="lede">
-                            {!pageText}
+                            <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
                         </p>
                         <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
 
