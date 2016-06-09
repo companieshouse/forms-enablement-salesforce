@@ -1,0 +1,22 @@
+<apex:page title="Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="ShareBuilderController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <h1 class="heading-large">
+                Share Capital 
+                   </h1>
+                <p class="lede">Please input your share currency
+                </p>
+                <div class="form-group">
+                    <apex:pageMessages />
+                    <input type="text" style="form-control" value="GBP" id="sharecurrency" />
+                </div>
+                <apex:outputLink value="Add a share" />
+                <br/>
+                <br/>
+                <br/>
+                <apex:outputLink value="Next" />
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

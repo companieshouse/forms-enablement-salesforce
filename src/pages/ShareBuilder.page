@@ -24,12 +24,35 @@ Ver. Author        Date        Detail
 	               </h1>
                 <p class="lede">{!displayText1}
                 </p>
+                   <div class="form-group">
+                   <apex:pageMessages />
+
+                    <label class="form-label" for="text-input">Currency
+                       <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                    </label>
+                    <apex:inputText styleClass="form-control" value="{!sharecurrency}" id="sharecurrency" />
+
+                    <label class="form-label" for="text-input">Class of shares
+                       <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                    </label>
+                    <apex:inputText styleClass="form-control" value="{!classofshares}" id="classofshares" />
+
+                    <label class="form-label" for="text-input">Number of shares
+                       <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                    </label>
+                    <apex:inputText styleClass="form-control" value="{!numberofshares}" id="numberofshares" />
+
+                    <label class="form-label" for="text-input">Total value of shares
+                       <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                    </label>
+                    <apex:inputText styleClass="form-control" value="{!totalvalueofshares}" id="totalvalueofshares" />
+                </div> 
                 <br/>
                 <br/>
                 <br/>
                 <br/>
                 <br/>
-                <apex:commandButton styleClass="button" action="{!viewnewShares}" value="Add a share" />
+                <apex:commandButton disabled="{!addsharedisabled}" styleClass="button" action="{!viewnewShares}" value="Add a share" />
             </apex:form>
         </apex:define>
     </apex:composition>

@@ -58,6 +58,10 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         get;
         set;
     }
+    public Decimal totalsharenumber {
+        get;
+        set;
+    }
 
     public List < Shares__c > sharecapital {
         get;
@@ -72,6 +76,7 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         get;
         set;
     }
+    public String sfdcID {get; set;}
 
     // Public properties.
 
@@ -131,6 +136,16 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         pr.getParameters().put('c', SecurityManager.encryptText(transactionrecordid + AppConstants.ID_DELIM_CHAR + transactioncompanynumber + AppConstants.ID_DELIM_CHAR + transactioncompanyname));
         pr.setRedirect(true);
         return pr;
+    }
+
+    public PageReference ChangeShare() {
+        //String sfdcID = this.Id;
+        String redirection = 'https://cs83.salesforce.com/';
+        redirection += sfdcID;
+        PageReference pr = new PageReference(redirection);
+        pr.setRedirect(true);
+        return pr;
+
     }
 
     private void persistStep() {

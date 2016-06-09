@@ -122,6 +122,9 @@
 		<members>Company</members>
 		<members>ConfirmationFramework</members>
 		<members>DS01</members>
+		<members>DemoPage0</members>
+		<members>DemoPage1</members>
+		<members>DemoPage2</members>
 		<members>DeveloperTools</members>
 		<members>DirectorsInputList</members>
 		<members>DirectorsList</members>
@@ -152,6 +155,7 @@
 		<members>TransactionException</members>
 		<members>TransactionPageTemplate</members>
 		<members>TransactionSiteRobotsTxt</members>
+		<members>TypeToSearchCurrencyFlow</members>
 		<name>ApexPage</name>
 	</types>
 	<types>
