@@ -80,14 +80,14 @@ public virtual class TransactionStepControllerBase {
             }
 
 			String paramValue = SecurityManager.decryptText(paramInput);    				
-    	   
+
 			// Submission state.
 			submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
 			if (!SubmissionManager.isValidSubmissionId(submissionId)) return;
 		
     		stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
     		if (!TransactionManager.isValidTransactionStep(stepId)) return;
-    		
+
     		// Finally check that the step Id is valid for the submission 
     		// todo - merge with submission id check early in context.
     		if (!SubmissionManager.isValidSubmissionStepId(submissionId,stepId)) return;
@@ -136,7 +136,7 @@ public virtual class TransactionStepControllerBase {
     protected virtual Boolean loadStepSubmissionState(){    	
     	try {
     		submissionMgr = new SubmissionManager(submissionId); // default state loading invoked unless overridden by the step controller class.
-    	} catch(Exception e){
+        } catch(Exception e){
     		return false;
     	}    	
     	return true;

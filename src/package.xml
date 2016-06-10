@@ -60,9 +60,9 @@
 		<members>FormsApiClientTest</members>
 		<members>FormsApiMock</members>
 		<members>FormsAPIService</members>
-        <members>FormsAPIServiceTest</members>
-        <members>FormAPISubmissionManagerTest</members>
-        <members>FormAPISubmissionManager</members>
+		<members>FormsAPIServiceTest</members>
+		<members>FormAPISubmissionManagerTest</members>
+		<members>FormAPISubmissionManager</members>
 		<members>GuidanceController</members>
 		<members>ISerialisable</members>
 		<members>IStepNavigable</members>
@@ -87,7 +87,7 @@
 		<members>SmartPayUrlTest</members>
 		<members>StartFrameworkController</members>
 		<members>SubmissionManager</members>
-        <members>SubmissionController</members>
+		<members>SubmissionController</members>
 		<members>SubmissionManagerTest</members>
 		<members>SubmissionURLTriggerHandler</members>
 		<members>SummaryController</members>
@@ -123,11 +123,11 @@
 		<members>DeveloperTools</members>
 		<members>DirectorsInputList</members>
 		<members>DirectorsList</members>
+		<members>DocuSignDeclined</members>
 		<members>DocuSignRedirect</members>
-        <members>DocuSignDeclined</members>
-        <members>DocuSignSigningCompleted</members>
-        <members>DocuSignTimeout</members>
-        <members>DocuSignViewed</members>
+		<members>DocuSignSigningCompleted</members>
+		<members>DocuSignTimeout</members>
+		<members>DocuSignViewed</members>
 		<members>DocumentDownload</members>
 		<members>Documents</members>
 		<members>DynamicTest</members>
@@ -136,14 +136,13 @@
 		<members>Guidance</members>
 		<members>PDFGeneration</members>
 		<members>Payment</members>
-		<members>PaymentPage</members>
 		<members>PresenterDirector</members>
 		<members>Review</members>
 		<members>SmartPayNotification</members>
 		<members>StartFramework</members>
 		<members>Status</members>
-        <members>Submission</members>
 		<members>StdExceptionTemplate</members>
+		<members>Submission</members>
 		<members>Summary</members>
 		<members>TransactionException</members>
 		<members>TransactionPageTemplate</members>
@@ -183,7 +182,7 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
-       <members>unfiled$public/CHDS01_Submission</members>
+		<members>unfiled$public/CHDS01_Submission</members>
 		<members>unfiled$public/CHExpired_Transaction</members>
 		<members>unfiled$public/CHExpiryReminder</members>
 		<members>unfiled$public/CHReviewStatus</members>
@@ -191,9 +190,9 @@
 		<members>unfiled$public/CH_Director_Decline</members>
 		<members>unfiled$public/CH_Signing_Status</members>
 		<members>unfiled$public/CH_Approved_Transaction</members>
-        <members>unfiled$public/CH_Rejected_Transaction</members>
+		<members>unfiled$public/CH_Rejected_Transaction</members>
 		<name>EmailTemplate</name>
-    </types>
+	</types>
 	<types>
 		<members>Admin</members>
 		<members>Default Profile</members>

@@ -27,7 +27,7 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
+        List<Transaction__c> recs = [select hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,
                                         Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
@@ -36,6 +36,7 @@ public with sharing class SubmissionManager {
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
                                         From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c where Id=:submissionId];
+
         if (recs.size()==1) submission = recs[0];   
         
         System.debug(LoggingLevel.ERROR, submission);   
@@ -70,7 +71,7 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select Id,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
                                         Status__c,Amount__c, isLLP__c, SubmissionId__c,
@@ -91,8 +92,11 @@ public with sharing class SubmissionManager {
             submission = recs[0] ;
             return recs[0].Id;
         }
+
+        //Determine is the payment is needed or not.
+        Boolean isPaymentNeeded = (td.Fee__c == null || td.Fee__c == 0 ? false : true);
         
-        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail, Amount__c = td.Fee__c, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
+        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail, Amount__c = td.Fee__c,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
         insert submission;
         return submission.Id;       
     }
@@ -115,6 +119,7 @@ public with sharing class SubmissionManager {
         Transaction__c s = idToSubmission.values()[0];
         if (String.isBlank(s.Valid_Step_Ids__c)) return false;
         
+
         for (String validStepId : s.Valid_Step_Ids__c.split(AppConstants.ID_DELIM_SPLIT_CHAR)){
             if (validStepId.equalsIgnoreCase(stepId)) return true;
         }

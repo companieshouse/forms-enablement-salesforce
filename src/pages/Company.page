@@ -31,9 +31,9 @@ Ver. Author        Date        Detail
   
         <apex:define name="content">
             
-            <apex:form id="formID" >
+            <apex:form >
             
-                <!-- <apex:outputPanel rendered="{!hasPageErrors}">
+                <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                 
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -49,7 +49,7 @@ Ver. Author        Date        Detail
                         </ul>
                 
                     </div>
-                </apex:outputPanel> -->
+                </apex:outputPanel>
                 
                 <h1 class="heading-xlarge">
                     {!$Label.UI_Text_Enter_Company_Number}
@@ -59,22 +59,19 @@ Ver. Author        Date        Detail
             
                 <br /> -->
 
-                <div class="form-group">
+                <div class="form-group {!IF(hasPageErrors,'error', '')}">
                     <label class="form-label" for="text-input">{!$Label.UI_Text_Enter_Company_Number}
                         <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span>
+                        <apex:outputPanel rendered="{!hasPageErrors}"><span class="error-message" id="error-message-ni-number">Error message about Company Number goes here</span></apex:outputPanel>
                     </label>
-                    <apex:outputPanel rendered="{!hasPageErrors}">
-                    <span  class="error-message" id="error-message-full-name">Must contain 8 digits or 2 prefix letters and 6 digits that identify your company.</span>
-                    </apex:outputPanel>
-                    <br/>
-                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" maxlength="8"/>
+                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
                 </div>                              
                 
                 <!--&nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Confirm my company details" reRender="formID"/>
+                &nbsp;<apex:commandButton styleClass="button" action="{!nextAction}" value="Confirm my company details" />
                 <br/>
-         		<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-         		
+                &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
+                &nbsp;
                 
             </apex:form>
                 
