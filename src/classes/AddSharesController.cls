@@ -96,11 +96,12 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         headerText1 = 'Share Capital'; //transactionMgr.currentStep.Header_Text_1__c;
 
         displayText1 = 'Add Shares'; //transactionMgr.currentStep.Display_Text_1__c;
+        
         //sharecapital = submissionMgr.submission.Shares__r;
 
 
 
-        String transactionID = 'a0N4E000000mJn9';
+        String transactionID = 'a0N4E000000mLw8';
 
         List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
             PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
@@ -115,7 +116,7 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         transactionrecords = recs[0];
         // if (recs.size() == 1) { transactionrecords = recs[0]; }
 
-        sharecapital = transactionrecords.Shares__r;
+        sharecapital = transactionrecords.Shares__r; 
 
 
 
@@ -145,7 +146,6 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         PageReference pr = new PageReference(redirection);
         pr.setRedirect(true);
         return pr;
-
     }
 
     private void persistStep() {

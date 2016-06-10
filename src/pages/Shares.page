@@ -24,7 +24,6 @@ Ver. Author        Date        Detail
                    </h1>
                 <p class="lede">{!displayText1}
                 </p>
-                <br/>
                 <apex:outputPanel rendered="{!showtable}">
                     <table class="check-your-answers">
                         <tbody>
@@ -36,7 +35,6 @@ Ver. Author        Date        Detail
                                 <td></td>
                             </tr>
                             <apex:repeat value="{!sharecapital}" var="sp" id="theRepeat">
-                                <br/>
                                 <tr>
                                     <td>
                                         <apex:outputText value="{!sp.Currency__c}" id="currency" />
