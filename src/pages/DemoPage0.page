@@ -1,7 +1,7 @@
 <apex:page title="Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="ShareBuilderController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <h1 class="heading-large">
                 Share Capital 
                    </h1>

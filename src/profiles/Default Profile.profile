@@ -21,6 +21,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AddSharesController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AppConstants</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -134,6 +138,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ConfirmationFrameworkController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>CurrencyController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -310,6 +318,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Session</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ShareBuilderController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -942,9 +954,19 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.selectedCurrency__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.sentsignerstatus__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.sharecurrencyselection__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -1069,7 +1091,19 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>CurrencySelection</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>DS01</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DemoPage0</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DemoPage1</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1149,6 +1183,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>ShareBuilder</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>Shares</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1186,6 +1224,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>TransactionSiteRobotsTxt</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>TypeToSearchCurrencyFlow</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <userLicense>Guest User License</userLicense>

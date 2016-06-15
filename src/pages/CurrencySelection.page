@@ -1,0 +1,341 @@
+<apex:page title="Currency Selection" showHeader="false" sidebar="false" standardStylesheets="false" controller="CurrencyController" action="{!initialiseStep}" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+            <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <script>
+            var currencies = ['Pound Sterling',
+                'Euro',
+                'US Dollar',
+                'Yen',
+                'Swiss Franc',
+                'Canadian Dollar',
+                'Australian Dollar',
+                'New Zealand Dollar',
+                'Russian Rouble',
+                'Hong Kong Dollar',
+                'Singapore Dollar',
+                'UAE Dirham',
+                'Afghani',
+                'Lek',
+                'Armenian Dram',
+                'Netherlands Antillian Guilder',
+                'Kwanza',
+                'Angolan New Kwanza ',
+                'Argentine Peso',
+                'Aruban Guilder',
+                'Azerbaijanian New Manat ',
+                'Convertible Marks',
+                'Barbados Dollar',
+                'Taka',
+                'Belgian Franc',
+                'Bulgarian Lev',
+                'Bahraini Dinar',
+                'Burundi Franc',
+                'Bermuda Dollar',
+                'Brunei Dollar',
+                'Mvdol',
+                'Boliviano',
+                'Brazilian Real',
+                'Bahamian Dollar',
+                'Ngultrum',
+                'Pula',
+                'Belarussian Ruble',
+                'Belize Dollar',
+                'Franc Congolais',
+                'WIR Euro',
+                'WIR Franc',
+                'Unidades de formento',
+                'Chilean Peso',
+                'Yuan Renminbi',
+                'Colombian Peso',
+                'Unidad de Valor Real',
+                'Costa Rican Colon',
+                'Serbian Dinar',
+                'Cuban Peso',
+                'Cape Verde Escudo',
+                'Cyprus Pound',
+                'Czech Koruna',
+                'Djibouti Franc',
+                'Danish Krone',
+                'Dominican Peso',
+                'Algerian Dinar',
+                'Kroon',
+                'Egyptian Pound',
+                'Nakfa',
+                'Ethiopian Birr',
+                'Fiji Dollar',
+                'Falkland Islands Pound',
+                'Lari',
+                'Cedi',
+                'Gibraltar Pound',
+                'Dalasi',
+                'Guinea Franc',
+                'Quetzal',
+                'Guinea-Bissau Peso',
+                'Guyana Dollar',
+                'Lempira',
+                'Croatian Kuna',
+                'Gourde',
+                'Forint',
+                'Rupiah',
+                'New Israeli Sheqel',
+                'Indian Rupee',
+                'Iraqi Dinar',
+                'Iranian Rial',
+                'Iceland Krona',
+                'Jamaican Dollar',
+                'Jordanian Dinar',
+                'Kenyan Shilling',
+                'Som',
+                'Riel',
+                'Comoro Franc',
+                'North Korean Won',
+                'Won',
+                'Kuwaiti Dinar',
+                'Cayman Islands Dollar',
+                'Tenge',
+                'Kip',
+                'Lebanese Pound',
+                'Sri Lanka Rupee',
+                'Liberian Dollar',
+                'Loti',
+                'Lithuanian Litas',
+                'Latvian Lats',
+                'Libyan Dinar',
+                'Moroccan Dirham',
+                'Moldovan Leu',
+                'Malagasy Ariary',
+                'Denar',
+                'Kyat',
+                'Tugrik',
+                'Pataca',
+                'Ouguiya',
+                'Maltese Lira',
+                'Mauritius Rupee',
+                'Rufiyaa',
+                'Kwacha',
+                'Mexican Peso',
+                'Mexican Unidad de Inversion (UID)',
+                'Malaysian Ringgit',
+                'Merical',
+                'Namibian Dollar',
+                'Naira',
+                'Cordoba Oro',
+                'Norwegian Krone',
+                'Nepalese Rupee',
+                'Rial Omani',
+                'Balboa',
+                'Nuevo Sol',
+                'Kina',
+                'Philippine Peso',
+                'Pakistan Rupee',
+                'Zloty',
+                'Guarani',
+                'Qatari Rial',
+                'New Leu',
+                'Rwanda Franc',
+                'Saudi Riyal',
+                'Solomon Islands Dollar',
+                'Seychelles Rupee',
+                'Sudanese Dinar',
+                'Swedish Krona',
+                'Saint Helena Pound',
+                'Tolar',
+                'Slovak Koruna',
+                'Leone',
+                'Somali Shilling',
+                'Surinam Dollar',
+                'Dobra',
+                'El Salvador Colon',
+                'Syrian Pound',
+                'Lilangeni',
+                'Baht',
+                'Somoni',
+                'Manat',
+                'Tunisian Dinar',
+                'Pa anga',
+                'New Turkish Lira',
+                'Trinidad and Tobago Dollar',
+                'New Taiwan Dollar',
+                'Tanzanian Shilling',
+                'Hryvnia',
+                'Uganda Shilling',
+                'Peso Uruguayo',
+                'Uzbekistan Sum',
+                'Bolivar',
+                'Dong',
+                'Vatu',
+                'Tala',
+                'CFA Franc BEAC',
+                'East Caribbean Dollar',
+                'SDR',
+                'CFA Franc BCEAO',
+                'CFP Franc',
+                'Yemeni Rial',
+                'Rand',
+                'Kwacha',
+                'Zimbabwe Dollar',
+                'UKRAINE HRYVNIA'
+            ];
+            $(function() {
+                $("#currency-input").autocomplete({
+                    //source: currencies
+                    source: function(request, response) {
+                        var results = $.ui.autocomplete.filter(currencies, request.term);
+                        //console.log('terms request =   ' + request.term);
+                        response(results.slice(0, 10));
+                    },
+                    select: function(event, ui) {
+                        console.log('selected currency ui is ' + ui.item.value);
+                    }
+                });
+            });
+
+            function updatecurrency() {
+
+                var completedselection = document.getElementById('currency-input').value;
+
+                if (completedselection.length < 1) {
+                    document.getElementById("Hint").innerHTML = '<h4 class="custom-erromessage-medium">Please make a valid selection before going to the next step</h1>';
+                    return;
+                }
+                if (completedselection.length > 1) {
+                    if (currencies.indexOf(completedselection) >= 1) {
+                        console.log('currency from client = ' + ' ' + completedselection);
+                        document.getElementById("Hint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
+
+                        setSelectedCurrency(completedselection);
+                    } else if (currencies.indexOf(completedselection) < 0) {
+
+                        document.getElementById("Hint").innerHTML = '<h4 class="custom-erromessage-medium">Denomination does not exist!</h1>';
+                    }
+                }
+            };
+            </script>
+            <apex:form>
+                <style>
+                .custom-erromessage-medium {
+                    font-family: "nta", Arial, sans-serif;
+                    font-size: 18px;
+                    line-height: 1.2;
+                    font-weight: 700;
+                    text-transform: none;
+                    font-size-adjust: 0.525;
+                    margin-top: 1.25em;
+                    margin-bottom: 0.5em;
+                    color: #b10e1e;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+                
+                .custom-thanksmessage-medium {
+                    font-family: "nta", Arial, sans-serif;
+                    font-size: 18px;
+                    line-height: 1.2;
+                    font-weight: 700;
+                    text-transform: none;
+                    font-size-adjust: 0.525;
+                    margin-top: 1.25em;
+                    margin-bottom: 0.5em;
+                    color: #00B300;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+                </style>
+                <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel rendered="{!showautocomplete}" id="searchcurrency">
+                        <div>
+                            <h1 class="heading-large">Share Capital
+                            </h1>
+                            <p class="lede">Please select your share currency
+                            </p>
+                            <div class="form-group">
+                                <label class="form-label" for="currency-item">Currency
+                                    <span class="form-hint" id="Hint">Please enter your share currency</span>
+                                </label>
+                                <input style="form-control" name="currency-item" id="currency-input" />
+                            </div>
+                        </div>
+                        <apex:commandButton reRender="none" styleClass="button" onclick="updatecurrency();" value="select currency" />
+                        <apex:actionFunction action="{!setSelectedCurrency}" name="setSelectedCurrency" reRender="emptyPanel">
+                            <apex:param name="currencyParam" value="" id="y" assignTo="{!selectedCurrency}" />
+                        </apex:actionFunction>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!NOT(showautocomplete)}" id="buildShares">
+                        <h1 class="heading-large">
+                            Share Capital
+                        </h1>
+                        <p class="lede">Add your company shares below to show the issued share capital on re-registration
+                        </p>
+                        <div class="form-group">
+                            <apex:pageMessages />
+                            <label class="form-label" for="text-input">Class of shares
+                                <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                            </label>
+                            <!-- <input type="text" style="form-control" value="{!classofshares}" id="classofshares" />-->
+                            <apex:inputText styleClass="form-control" value="{!classofshares}" id="classofshare" />
+                            <label class="form-label" for="text-input">Number of shares
+                                <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                            </label>
+                            <apex:inputText html-pattern="[0-9]" styleClass="form-control" value="{!numberofshares}" id="numberofshares" />
+                            <!--<input type="text" style="form-control" value="{!numberofshares}" id="numberofshares" />-->
+                            <label class="form-label" for="text-input">Total value of shares
+                                <!-- <span class="form-hint">This is the number you put at the bottom of your company stationery, e.g. 80082211</span> -->
+                            </label>
+                            <apex:inputText html-pattern="[0-9]" styleClass="form-control" value="{!totalvalueofshares}" id="totalvalueofshares" />
+                            <!--<input type="text" style="form-control" value="{!totalvalueofshares}" id="totalvalueofshares" />-->
+                            <br/>
+                            <apex:commandLink value="+ Add Shares" reRender="theRepeat" action="{!AddShare}" />
+                        </div>
+                        <br/>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                        <table class="check-your-answers">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Statement of Capital</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Currency</td>
+                                    <td>Class of shares</td>
+                                    <td>No. of shares</td>
+                                    <td>Total value aggregate</td>
+                                </tr>
+                                <br/>
+                                <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{!sp.Currency__c}" id="currency" />
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                                <tr>
+                                    <td></td>
+                                    <td>Total</td>
+                                    <td id="totalnumberofshares">{!totalnumberofShares}</td>
+                                    <td id="totalnumberaggregate">{!totalnumberAggregate}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

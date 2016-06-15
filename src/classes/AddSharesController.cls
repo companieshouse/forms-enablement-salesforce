@@ -78,15 +78,39 @@ public with sharing class AddSharesController extends TransactionStepControllerB
     }
     public String sfdcID {get; set;}
 
+     public String sharecurrency {
+        get;
+        set;
+    }
+ public String classofshares {
+        get;
+        set;
+    }
+    public Decimal numberofshares {
+        get;
+        set;
+    }
+
+    public Decimal totalvalueofshares {
+        get;
+        set;
+    }
+    public String totalnumberofShares {
+        get;
+        set;
+    }
+    public String totalnumberAggregate {
+        get;
+        set;
+    }
     // Public properties.
 
 
 
     public AddSharesController() {
 
-        // super();
-        //put back later
-        //if (isPageInitialised)
+        super();
+        if (isPageInitialised)
         initialiseStep();
     }
 
@@ -96,11 +120,15 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         headerText1 = 'Share Capital'; //transactionMgr.currentStep.Header_Text_1__c;
 
         displayText1 = 'Add Shares'; //transactionMgr.currentStep.Display_Text_1__c;
+
+        sharecurrency = submissionMgr.submission.sharecurrencyselection__c;
         
-        //sharecapital = submissionMgr.submission.Shares__r;
+        sharecapital = submissionMgr.submission.Shares__r;
+        companyName = submissionMgr.submission.CompanyName__c;
+        companyNumber = submissionMgr.submission.CompanyNumber__c;
 
 
-
+        /*
         String transactionID = 'a0N4E000000mLw8';
 
         List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
@@ -118,7 +146,7 @@ public with sharing class AddSharesController extends TransactionStepControllerB
 
         sharecapital = transactionrecords.Shares__r; 
 
-
+        */
 
 
         return;
@@ -148,11 +176,13 @@ public with sharing class AddSharesController extends TransactionStepControllerB
         return pr;
     }
 
-    private void persistStep() {
+     private void persistStep() {
+            submissionMgr.submission.CompanyName__c = companyName;
             submissionMgr.persist();
         }
         // End Instance methods.    
 
+ 
     // Action methods.     
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;

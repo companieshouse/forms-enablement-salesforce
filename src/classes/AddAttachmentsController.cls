@@ -87,22 +87,7 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
         // attachment list - may loop through attachments on page to show previously upload if user research calls for it
         attachment = submissionMgr.submission.Attachments;
-        try {
-
-            // todo - check for valid user auth cookie.	
-            isUserAuthenticated = true;
-
-            if (!ApexPages.currentPage().getParameters().containsKey('t') ||
-                String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
-                !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
-
-            transactionType = ApexPages.currentPage().getParameters().get('t');
-            transactionMgr = new TransactionManager(transactionType);
-
-            isPageInitialised = true;
-        } catch (Exception e) {
-            return;
-        }
+        
         return;
     }
 

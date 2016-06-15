@@ -1,7 +1,7 @@
 <apex:page title="{!$Label.UI_Text_DocuSign}" showHeader="false" sidebar="false" standardStylesheets="false" controller="EmbedDocuSignController" action="{!actionFunction}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel rendered="{!showButtons}">
                     <h1 class="heading-xlarge">
                         {!$Label.UI_Text_DocuSign}
@@ -86,8 +86,7 @@
                     console.log('mobile');
 
                 } else {
-                    if (!{!showButtons
-                        }) {
+                    if (!{!noEmbedDoc}) {
                         document.getElementById("doculoader").innerHTML = '<iframe height="650" width="950" id="999" src="{!externalURL}" ></iframe>';
                         console.log('not mobile');
                     }

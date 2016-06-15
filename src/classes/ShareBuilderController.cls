@@ -46,8 +46,22 @@ public with sharing class ShareBuilderController {
         get;
         set;
     }
-    public Boolean addsharedisabled { get;
+    public String totalnumberofShares {
+        get;
+        set;
+    }
+    public String totalnumberAggregate {
+        get;
+        set;
+    }
+
+    public Boolean addsharedisabled {
+        get;
+        set;
+    }
+    public List < Shares__c > shareCapital { get;
         set; }
+    public Transaction__c transactionrecords {get; set;}
 
 
     SecurityManager securityMgr;
@@ -61,58 +75,59 @@ public with sharing class ShareBuilderController {
 
         headerText1 = 'Add a Share Capital';
         displayText1 = 'Add Shares';
-        securityMgr = new SecurityManager();
-        submissionMgr = new SubmissionManager();
+        //securityMgr = new SecurityManager();
+        //submissionMgr = new SubmissionManager();
 
-        try {
-            if (!ApexPages.currentPage().getParameters().containsKey('c') ||
-                String.isBlank(ApexPages.currentPage().getParameters().get('c'))) {
-                return;
-            }
+        String transactionID = 'a0N4E000000mLw8';
 
-        } catch (Exception e) {
-            return;
-        }
+        List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
+            PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
+            MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c,
+            Status__c, CompanyName__c, SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c, Amount__c, isLLP__c,sharecurrencyselection__c,
+            (SELECT Id, BodyLength, Name FROM Attachments), (SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
+            (Select Id, Name, Email__c, isPresenter__c, isSignatory__c, RecipientId__c,
+                AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c From Officers__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
+            from Transaction__c where Id = : transactionID
+        ];
 
-        // ShareBuilder state.
-        String paramInput = ApexPages.currentPage().getParameters().get('c');
-        String paramValue = SecurityManager.decryptText(paramInput);
-        transactionSFID = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
-        if (!SubmissionManager.isValidSubmissionId(transactionSFID)) {
-            return; }
+         transactionrecords = recs[0];
+        // if (recs.size() == 1) { transactionrecords = recs[0]; }
 
-        companyName = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
+        shareCapital = transactionrecords.Shares__r;
+        transactionSFID = transactionrecords.Id;
+        sharecurrency = transactionrecords.sharecurrencyselection__c;
+      
+        //transactionSFID = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+        //if (!SubmissionManager.isValidSubmissionId(transactionSFID)) {
+        //    return;
+        //}
+        //        shareCapital = submissionMgr.submission.Shares__r;
 
-        companyNumber = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[2];
+        //companyName = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
 
+        //companyNumber = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[2];
 
         return;
     }
 
     public PageReference viewnewShares() {
-
-        addShare(transactionSFID, numberofshares, sharecurrency, classofshares, totalvalueofshares);
-
-        String redirection = '/Shares';
-        PageReference pr = new PageReference(redirection);
-        String storedCValue = 'thisisthestoredcvaluewhichwillbeencrypted';
-        //get stored c value in cookie and redirect back to Shares View State
-        //pr.getParameters().put('c', storedCValue);
-        pr.setRedirect(true);
-        return pr;
+        addShare();
+        //classofshares, transactionSFID, numberofshares, sharecurrency, classofshares, totalvalueofshares
+        return null;
     }
 
-    private void addShare(String transactionid, Decimal numberofshares, String sharecurrency, String classofshares, Decimal totalvalueofshares) {
+    private void addShare() {
         try {
+            //String name, String transactionid, Decimal numberofshares, String sharecurrency, String classofshares, Decimal totalvalueofshares
+            insert new Shares__c(Name = classofshares, Transaction__c = transactionrecords.Id, Number_of_Shares__c = numberofshares, Currency__c = sharecurrency, Class_of_Shares__c = classofshares, Total_aggregate_amount_unpaid__c = totalvalueofshares, ActiveData__c = true);
 
-            insert new Shares__c(Name = classofshares, Transaction__c = transactionid, Number_of_Shares__c = numberofshares, Currency__c = sharecurrency, Class_of_Shares__c = classofshares, Total_aggregate_amount_unpaid__c = totalvalueofshares);
         } catch (DmlException e) {
 
             ApexPages.Message error = new ApexPages.Message(ApexPages.Severity.ERROR, 'Error: Invalid Input.' + e);
             ApexPages.addMessage(error);
             //return;
-        } catch(Exception e) {
- 			ApexPages.Message error = new ApexPages.Message(ApexPages.Severity.ERROR, 'Error: Invalid Input.' + e);
+        } catch (Exception e) {
+            ApexPages.Message error = new ApexPages.Message(ApexPages.Severity.ERROR, 'Error: Invalid Input.' + e);
             ApexPages.addMessage(error);
             //return;
 

@@ -6,6 +6,7 @@
 		<members>AccountsAPIHelper</members>
 		<members>AccountsAuthCallbackController</members>
 		<members>AddAttachmentsController</members>
+		<members>AddSharesBaseController</members>
 		<members>AddSharesController</members>
 		<members>AppConstants</members>
 		<members>AttachmentTriggerHandler</members>
@@ -34,8 +35,10 @@
 		<members>CompaniesHouseCallsoutRequestTest</members>
 		<members>CompaniesHouseTestData</members>
 		<members>CompanyController</members>
+		<members>CompanyDetailsController</members>
 		<members>CompanyQueryAction</members>
 		<members>ConfirmationFrameworkController</members>
+		<members>CurrencyController</members>
 		<members>DS01Serialiser</members>
 		<members>DS02Step2Navigator</members>
 		<members>DeveloperToolsController</members>
@@ -71,6 +74,7 @@
 		<members>OfficersQueryAction_Test</members>
 		<members>PaymentController</members>
 		<members>PaymentControllerTest</members>
+		<members>PreParticularsController</members>
 		<members>PresenterDirectorController</members>
 		<members>ReviewController</members>
 		<members>ReviewControllerTest</members>
@@ -112,6 +116,7 @@
 	<types>
 		<members>AccountsAuthCallback</members>
 		<members>AddAttachment</members>
+		<members>AddSharesBase</members>
 		<members>CH_ChargesList</members>
 		<members>CH_SearchControllerByFilingHistoryClass</members>
 		<members>Companies_House_Insolvency</members>
@@ -120,11 +125,12 @@
 		<members>Companies_House_Search</members>
 		<members>Companies_House_Search_Number</members>
 		<members>Company</members>
+		<members>CompanyDetails</members>
 		<members>ConfirmationFramework</members>
+		<members>CurrencySelection</members>
 		<members>DS01</members>
 		<members>DemoPage0</members>
 		<members>DemoPage1</members>
-		<members>DemoPage2</members>
 		<members>DeveloperTools</members>
 		<members>DirectorsInputList</members>
 		<members>DirectorsList</members>
@@ -141,6 +147,7 @@
 		<members>Guidance</members>
 		<members>Payment</members>
 		<members>PaymentPage</members>
+		<members>PreParticularRights</members>
 		<members>PresenterDirector</members>
 		<members>Review</members>
 		<members>SH19</members>

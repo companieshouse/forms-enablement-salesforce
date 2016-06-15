@@ -30,7 +30,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     public String pageText2  { get; private set; }  
     public String companyName { get; private set; }
     public String presenterEmail { get; private set; }
-
+    public Boolean noEmbedDoc {get; set;}
     public List<Officer__c> offResquestedToSign { get; private set; } 
     
     
@@ -113,11 +113,13 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         // Transaction is signed
         } else if(isPageAlreadyValidStep) {
             showButtons=true;
+            noEmbedDoc = true;
             return null;
 
         // Transaction is pending signatures    
         } else if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SIGNATURES) {
             requestedSignatures = true;
+            noEmbedDoc = true;
             offResquestedToSign = submissionMgr.submission.Officers__r;
             return null;
          

@@ -31,13 +31,15 @@ public with sharing class SubmissionManager {
         set;
     }
 
+
+
     // Constructors.
     public SubmissionManager() {}
 
     public SubmissionManager(Id submissionId) {
-        List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
+        List < Transaction__c > recs = [select CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c, Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
             PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
-            MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c,
+            MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, sharecurrencyselection__c,
             Status__c, CompanyName__c, SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c, Amount__c, isLLP__c,
             (SELECT Id, BodyLength, Name FROM Attachments), (SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
             (Select Id, Name, Email__c, isPresenter__c, isSignatory__c, RecipientId__c,
@@ -93,9 +95,9 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td) {
 
         // Only initialise with pending submissions.
-        List < Transaction__c > recs = [select Id, Presenter__c, Form_Name__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c,
+        List < Transaction__c > recs = [select CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c, Id, Presenter__c, Form_Name__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c,
             PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
-            MultipleDirectors__c, Valid_Step_Ids__c, Historical_Valid_Step_Ids__c, CompanyName__c, CompanyNumber__c,
+            MultipleDirectors__c, Valid_Step_Ids__c, Historical_Valid_Step_Ids__c, CompanyName__c, CompanyNumber__c, sharecurrencyselection__c,
             Status__c, Amount__c, isLLP__c, SubmissionId__c,
             (SELECT Id, BodyLength, Name FROM Attachments), (SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
             (Select Id, Name, Email__c, isPresenter__c, isSignatory__c, RecipientId__c,
@@ -121,6 +123,7 @@ public with sharing class SubmissionManager {
 
     public void persist() {
             Database.update(submission.Officers__r);
+            //Database.update(submission.Shares__r);
             Database.update(submission);
             //Database.update(submissionShares);
         }
