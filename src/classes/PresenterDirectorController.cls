@@ -15,38 +15,68 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-02-04  Initial development.
 */
-public with sharing class PresenterDirectorController extends TransactionStepControllerBase {
+public with sharing class PresenterDirectorController extends TransactionStepControllerBase
+{
 
-    public Boolean hasPageErrors { get;
-        set; }
+    public Boolean hasPageErrors
+    {
+        get;
+        set;
+    }
 
-    public String companyName { get;
-        set; }
-    public String companyNumber { get;
-        set; }
-    public List < officerContainer > listOfDirectors { get;
-        set; }
-    public Boolean directorPresenter { get;
-        set; }
-    public Id selectedId { get;
-        set; }
-    public String presenterName { get;
-        set; }
-    public String phoneNumber { get;
-        set; }
-    public Boolean isLLPCompany { get;
-        set; }
+    public String companyName
+    {
+        get;
+        set;
+    }
+    public String companyNumber
+    {
+        get;
+        set;
+    }
+    public List < officerContainer > listOfDirectors
+    {
+        get;
+        set;
+    }
+    public Boolean directorPresenter
+    {
+        get;
+        set;
+    }
+    public Id selectedId
+    {
+        get;
+        set;
+    }
+    public String presenterName
+    {
+        get;
+        set;
+    }
+    public String phoneNumber
+    {
+        get;
+        set;
+    }
+    public Boolean isLLPCompany
+    {
+        get;
+        set;
+    }
 
-    public PresenterDirectorController() {
+    public PresenterDirectorController()
+    {
         super();
         if (isPageInitialised) initialiseStep();
 
     }
 
-    public void initialiseStep() {
+    public void initialiseStep()
+    {
 
         //Set up the company name
-        directorPresenter = false;
+        directorPresenter = true;
         phoneNumber = '';
         presenterName = '';
         companyName = submissionMgr.submission.CompanyName__c;
@@ -59,12 +89,18 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
     }
 
-    private void persistStep() {
-            if (directorPresenter) {
-                for (Officer__c off: submissionMgr.submission.Officers__r) {
-                    for (officerContainer offCont: listOfDirectors) {
-                        if (off.Id == offCont.officer.Id) {
-                            if (offCont.isPresenter) {
+    private void persistStep()
+        {
+            if (directorPresenter)
+            {
+                for (Officer__c off: submissionMgr.submission.Officers__r)
+                {
+                    for (officerContainer offCont: listOfDirectors)
+                    {
+                        if (off.Id == offCont.officer.Id)
+                        {
+                            if (offCont.isPresenter)
+                            {
                                 off.isPresenter__c = offCont.isPresenter;
                                 off.isSignatory__c = true;
                                 off.Email__c = submissionMgr.submission.Presenter__r.Name;
@@ -76,7 +112,9 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                     }
                 }
                 //TODO: Remove presenter details from trsansaction if the officer is selected.
-            } else {
+            }
+            else
+            {
                 submissionMgr.submission.PresenterPhoneNumber__c = phoneNumber;
                 submissionMgr.submission.PresenterName__c = presenterName;
                 //TODO: remove existing flag in case of previous from officer
@@ -86,8 +124,10 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         }
         // End Instance methods.    
 
-    public Boolean isPresentorCorrect() {
-        if (!directorPresenter) {
+    public Boolean isPresentorCorrect()
+    {
+        if (!directorPresenter)
+        {
             if (String.isEmpty(phoneNumber) || String.isEmpty(presenterName))
                 return false;
 
@@ -96,8 +136,27 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     }
 
     // Action methods.     
-    public PageReference nextAction() {
-        if (!isPresentorCorrect()) {
+    public PageReference nextAction()
+    {
+        if (directorPresenter)
+        {
+            if (submissionMgr.submission.Officers__r.size() == 1)
+            {
+                submissionMgr.submission.SoleDirectorPresenter__c = true;
+                submissionMgr.submission.Officers__r[0].isSignatory__c = true;
+                submissionMgr.submission.Officers__r[0].isPresenter__c = true;
+            }
+        }
+        else if (!directorPresenter)
+        {
+            {
+                submissionMgr.submission.SoleDirectorPresenter__c = false;
+            }
+
+        }
+
+        if (!isPresentorCorrect())
+        {
             //TODO: ERROR CONTROL 
             return null;
         }
@@ -109,21 +168,27 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         return nextStep();
     }
 
-    public PageReference previousAction() {
+    public PageReference previousAction()
+    {
         if (!validatePageState()) return Page.TransactionException;
 
         return previousStep();
     }
 
-    public void populateDirectorList() {
+    public void populateDirectorList()
+    {
         initialiseAction();
 
         //Get the list officer already created
-        if (submissionMgr.submission.Officers__r != null) {
-            if (submissionMgr.submission.Officers__r.size() > 0) {
-                for (Officer__c off: submissionMgr.submission.Officers__r) {
+        if (submissionMgr.submission.Officers__r != null)
+        {
+            if (submissionMgr.submission.Officers__r.size() > 0)
+            {
+                for (Officer__c off: submissionMgr.submission.Officers__r)
+                {
                     listOfDirectors.add(new officerContainer(off));
-                    if (off.isPresenter__c) {
+                    if (off.isPresenter__c)
+                    {
                         directorPresenter = true;
                         selectedId = off.Id;
                     }
@@ -131,7 +196,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             }
         }
 
-        if (submissionMgr.submission.PresenterPhoneNumber__c != null || submissionMgr.submission.PresenterName__c != null) {
+        if (submissionMgr.submission.PresenterPhoneNumber__c != null || submissionMgr.submission.PresenterName__c != null)
+        {
             phoneNumber = submissionMgr.submission.PresenterPhoneNumber__c;
             presenterName = submissionMgr.submission.PresenterName__c;
             directorPresenter = false;
@@ -141,16 +207,24 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     }
 
 
-    public PageReference updatePresenter() {
+
+    public PageReference updatePresenter()
+    {
         return null;
     }
 
-    public PageReference updateSelectedPresenter() {
-        if (selectedId != null) {
-            for (officerContainer off: listOfDirectors) {
-                if (off.officer.Id != selectedId) {
+    public PageReference updateSelectedPresenter()
+    {
+        if (selectedId != null)
+        {
+            for (officerContainer off: listOfDirectors)
+            {
+                if (off.officer.Id != selectedId)
+                {
                     off.isPresenter = false;
-                } else {
+                }
+                else
+                {
                     off.isPresenter = true;
                 }
             }
@@ -160,16 +234,27 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
 
 
-    public with sharing class officerContainer {
+    public with sharing class officerContainer
+    {
 
-        public Officer__c officer { get;
-            set; }
-        public String officerTXT { get;
-            set; }
-        public Boolean isPresenter { get;
-            set; }
+        public Officer__c officer
+        {
+            get;
+            set;
+        }
+        public String officerTXT
+        {
+            get;
+            set;
+        }
+        public Boolean isPresenter
+        {
+            get;
+            set;
+        }
 
-        public officerContainer(Officer__c off) {
+        public officerContainer(Officer__c off)
+        {
             officer = off;
             officerTXT = off.Name;
             isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
@@ -178,7 +263,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
     // API is returning last name + first Name
     // This function set name in the correct order
-    private String convertName(String name) {
+    private String convertName(String name)
+    {
         String firstName;
         String lastName;
 

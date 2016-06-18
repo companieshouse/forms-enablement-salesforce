@@ -148,84 +148,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>CompanyName__c</fullName>
-        <externalId>false</externalId>
-        <label>Company Name</label>
-        <length>255</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>CompanyNumber__c</fullName>
-        <externalId>false</externalId>
-        <label>Company Number</label>
-        <length>30</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Company__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Company</label>
-        <referenceTo>Account</referenceTo>
-        <relationshipLabel>Transaction (Company)</relationshipLabel>
-        <relationshipName>Transaction_Company</relationshipName>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>ContactEmail__c</fullName>
-        <description>Presenter Contact information for notifications</description>
-        <externalId>false</externalId>
-        <label>ContactEmail</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Email</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>CompanyStatus__c</fullName>
-        <description>This represents the status of the Company</description>
-        <externalId>false</externalId>
-        <label>Company Status</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>CompanyIncorporationDate__c</fullName>
-        <description>This represents the date of incorporation of the company</description>
-        <externalId>false</externalId>
-        <label>Company Incorporation Date</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>CompanyLocality__c</fullName>
-        <description>Represents the Company locality</description>
-        <externalId>false</externalId>
-        <label>Company Locality</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>CompanyType__c</fullName>
-        <description>This represents the type of the company.</description>
-        <externalId>false</externalId>
-        <label>Company Type</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>TextArea</type>
-    </fields>
-    <fields>
         <fullName>CompanyAddress1__c</fullName>
         <description>Represents the company Address 1 from CHIPS</description>
         <externalId>false</externalId>
@@ -252,7 +174,45 @@
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
     </fields>
-       <fields>
+    <fields>
+        <fullName>CompanyIncorporationDate__c</fullName>
+        <description>This represents the date of incorporation of the company</description>
+        <externalId>false</externalId>
+        <label>Company Incorporation Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyLocality__c</fullName>
+        <description>Represents the Company locality</description>
+        <externalId>false</externalId>
+        <label>Company Locality</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyName__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Number</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>CompanyPostCode__c</fullName>
         <description>Represents the Postcode of a Company</description>
         <externalId>false</externalId>
@@ -269,6 +229,46 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyStatus__c</fullName>
+        <description>This represents the status of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyType__c</fullName>
+        <description>This represents the type of the company.</description>
+        <externalId>false</externalId>
+        <label>Company Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Company</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Transaction (Company)</relationshipLabel>
+        <relationshipName>Transaction_Company</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ContactEmail__c</fullName>
+        <description>Presenter Contact information for notifications</description>
+        <externalId>false</externalId>
+        <label>ContactEmail</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Date_1__c</fullName>
@@ -481,6 +481,14 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>SoleDirectorPresenter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>SoleDirectorPresenter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Status__c</fullName>

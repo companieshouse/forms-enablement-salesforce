@@ -3,19 +3,37 @@
     <label>DS01 - Dissolution</label>
     <values>
         <field>Below_Button_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;This service is also available in &lt;a href=&quot;#&quot;&gt;Welsh (Cymraeg).&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
+        &lt;li&gt;ensure the directors of the company are aware this application is going to be made&lt;/li&gt;
+        &lt;li&gt;read the guidance on &lt;a href=&quot;#&quot;&gt; closing your company&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Below_Button_Text3__c</field>
+        <value xsi:type="xsd:string">&lt;p&gt;&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>Below_Button_Text4__c</field>
+        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>Below_Button_Text5__c</field>
+        <value xsi:type="xsd:string">&lt;p&gt;This service is also available in &lt;a href=&quot;#&quot;&gt;Welsh (Cymraeg).&lt;/a&gt;&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>Below_Button_Text6__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;Before you start this application, you should:&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>Below_Button_Title2__c</field>
+        <value xsi:type="xsd:string">Other ways to close a company</value>
     </values>
     <values>
         <field>Below_Button_Title__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Before you begin</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -81,7 +99,7 @@ It is an offence not to tell all interested parties
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;To close a company you will need:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;It normally takes 10 minutes to comlete this process.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>

@@ -40,6 +40,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
     public String CURRENCYSELECTION = '/currencySelection';
     public String PREPARTICULARRIGHTS = '/preparticularrights';
     public String ADDSHAREBASE = '/addsharesbase';
+    public String CHOOSEDIRECTOR = '/choosedirector';
+    public String WHICHDIRECTOR = '/whichdirector';
 
 
     public String VF_PAGE_START = '/StartFramework';
@@ -64,6 +66,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
     public String VF_PAGE_CURRENCYSELECTION = '/CurrencySelection';
     public String VF_PAGE_PREPARTICULARRIGHTS = '/PreParticularRights';
     public String VF_PAGE_ADDSHARESBASE = '/AddSharesBase';
+    public String VF_PAGE_CHOOSEDIRECTOR = '/chooseDirector';
+    public String VF_PAGE_WHICHDIRECTOR = '/whichDirector';
 
 
     global PageReference mapRequestUrl(PageReference friendlyUrl)
@@ -164,7 +168,14 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
         {
             pr = new PageReference(VF_PAGE_ADDSHARESBASE);
         }
-
+        else if (url.startsWith(CHOOSEDIRECTOR))
+        {
+            pr = new PageReference(VF_PAGE_CHOOSEDIRECTOR);
+        }
+        else if (url.startsWith(WHICHDIRECTOR))
+        {
+            pr = new PageReference(VF_PAGE_WHICHDIRECTOR);
+        }
 
 
 
@@ -278,7 +289,15 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
             {
                 friendlyPageReference = new PageReference(ADDSHAREBASE);
             }
-            
+             else if (url.startsWith(VF_PAGE_CHOOSEDIRECTOR))
+            {
+                friendlyPageReference = new PageReference(CHOOSEDIRECTOR);
+            }
+            else if (url.startsWith(VF_PAGE_WHICHDIRECTOR))
+            {
+                friendlyPageReference = new PageReference(WHICHDIRECTOR);
+            }
+
 
 
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());

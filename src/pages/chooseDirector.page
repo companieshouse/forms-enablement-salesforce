@@ -1,0 +1,48 @@
+<!-- 
+   Name: chooseDirector.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+  	Presenter chooses which directors will sign
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Leo Bitoy&    2016-06-16  Initial development.
+   -->
+<apex:page title="Closing a limited company" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <div class="form-group">
+                    <h1>
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Choose your directors?"></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="Choose your members?"></apex:outputText>
+                    </h1>
+                    <p class="lede">
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="To close a company, you first need the majority of directors to approve the application"></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="To close a company, you first need the majority of members to approve the application"></apex:outputText>
+                    </p>
+                    <h3 class="heading-medium">
+                        <apex:outputText styleClass="{!majoritySignError}" rendered="{!NOT(isLLPCompany)}" value="Please select at least {!majoritytosign} of the directors below."></apex:outputText>
+                        <apex:outputText styleClass="{!majoritySignError}" rendered="{!isLLPCompany}" value="Please select at least {!majoritytosign} of the members below."></apex:outputText>
+                    </h3>
+                    <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
+                        <label class="block-label">
+                            <apex:inputCheckbox value="{!director.selected}">{!director.off.Name}</apex:inputCheckbox>
+                        </label>
+                    </apex:repeat>
+                </div>
+                <br />
+                <br /> &nbsp;
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                <br /> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

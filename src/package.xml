@@ -42,6 +42,8 @@
 		<members>DS01Serialiser</members>
 		<members>DS02Step2Navigator</members>
 		<members>DeveloperToolsController</members>
+		<members>DirectorDetails</members>
+		<members>DirectorDetailsController</members>
 		<members>DirectorInputListController</members>
 		<members>DirectorsListController</members>
 		<members>DocStatusController</members>
@@ -106,7 +108,9 @@
 		<members>TransactionStepControllerBase</members>
 		<members>Util</members>
 		<members>UtilTest</members>
+		<members>chooseDirector</members>
 		<members>superSort</members>
+		<members>whichDirector</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -132,6 +136,7 @@
 		<members>DemoPage0</members>
 		<members>DemoPage1</members>
 		<members>DeveloperTools</members>
+		<members>DirectorDetails</members>
 		<members>DirectorsInputList</members>
 		<members>DirectorsList</members>
 		<members>DocuSignDeclined</members>
@@ -163,6 +168,8 @@
 		<members>TransactionPageTemplate</members>
 		<members>TransactionSiteRobotsTxt</members>
 		<members>TypeToSearchCurrencyFlow</members>
+		<members>chooseDirector</members>
+		<members>whichDirector</members>
 		<name>ApexPage</name>
 	</types>
 	<types>

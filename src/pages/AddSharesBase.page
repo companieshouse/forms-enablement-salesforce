@@ -1,7 +1,7 @@
 <apex:page title="{!$Label.UI_Text_Company_Details}" controller="AddSharesBaseController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel rendered="{!NOT(showCurrentShares)}" id="GUIDANCE">
                     <h1 class="heading-xlarge">
                         {!headerText1}
@@ -39,15 +39,13 @@
                                 <td></td>
                             </tr>
                             <span class="form-hint" id="Error"></span>
-                            <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                            <apex:repeat value="{!displayresult}" var="sp" id="theRepeat">
                                 <tr>
                                     <td>
-                                        <apex:outputText value="{!sp.Currency__c}" id="currency" />
-                                        <div id="submissionID" hidden="true">{!sp.Transaction__c} </div>
+                                        <apex:outputText value="{!sp}" id="object" />
                                     </td>
                                     <td>
-                                        <a href="#"> </a>
-                                        <apex:commandLink reRender="none" onclick="sendCurrency('{!sp.Currency__c}');" value="Add Shares" />
+                                        <apex:commandLink reRender="none" onclick="sendCurrency('{!sp}');" value="Add Shares" />
                                     </td>
                                 </tr>
                             </apex:repeat>

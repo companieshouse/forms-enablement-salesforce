@@ -11,10 +11,45 @@
         <apex:define name="content">
             <apex:form >
                 <h1> TEST PREPARTICULARS UNRENDERED </h1>
-        
+                <apex:outputPanel id="preparticulars">
+                    <table class="check-your-answers">
+                        <thead>
+                            <tr>
+                                <th colspan="4">Statement of Capital</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!displayresult}" var="sp" id="theRepeat">
+                                <tr>
+                                    <td>Class of share
+                                        <br/>
+                                        <apex:inputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Prescribed Particular
+                                        <br/>
+                                        <apex:inputTextArea value="{!sp.Prescribed_Particulars__c}" id="preparticularrights" />
+                                    </td>
+                                </tr>
+                                <!--
+                                <br/>
+                                
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                -->
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    <br/>
+                </apex:outputPanel>
                 <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue to Payment" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
-                <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
             </apex:form>
         </apex:define>
     </apex:composition>

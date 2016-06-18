@@ -10,7 +10,23 @@
         <value xsi:type="xsd:string">&lt;p&gt;Additional documents are required with the Statement of Capital (SH19), in order to register the reduction of share capital.&lt;/p&gt;</value>
     </values>
     <values>
+        <field>Below_Button_Text4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Below_Button_Text5__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Below_Button_Text6__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Below_Button_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Below_Button_Title2__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

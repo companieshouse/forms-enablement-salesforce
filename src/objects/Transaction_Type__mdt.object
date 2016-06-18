@@ -15,9 +15,37 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Below_Button_Text4__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Text4</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Below_Button_Text5__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Text5</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Below_Button_Text6__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Text6</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Below_Button_Text__c</fullName>
         <externalId>false</externalId>
         <label>Below Button Text</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Below_Button_Title2__c</fullName>
+        <externalId>false</externalId>
+        <label>Below Button Title2</label>
         <required>false</required>
         <type>TextArea</type>
     </fields>

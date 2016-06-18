@@ -1,0 +1,48 @@
+<!-- 
+   Name: whichDirector.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+  	Presenter selects which director they are
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Leo Bitoy&    2016-06-16  Initial development.
+   -->
+<apex:page title="Closing a limited company" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="form-group">
+                    <h1>
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Which director are you?"></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="which member are you?"></apex:outputText>
+                    </h1>
+                    <p class="lede">
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director(s) listed on the public register."></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member(s) listed on the public register."></apex:outputText>
+                    </p>
+                    <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
+                        <label class="block-label" for="radio-1">
+                            <input id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}"/> {!director.Name}
+                        </label>
+                    </apex:repeat>
+                    <apex:actionFunction name="selectPresenter" action="{!selectPresenter}" reRender="none">
+                        <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
+                    </apex:actionFunction>
+                </div>
+                <br />
+                <br />
+                &nbsp;
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                <br /> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
