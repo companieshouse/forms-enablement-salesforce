@@ -53,7 +53,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Transaction__c</value>
     </values>
     <values>
         <field>Step_Number__c</field>

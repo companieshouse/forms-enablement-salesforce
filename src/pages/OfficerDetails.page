@@ -6,7 +6,7 @@
    Purpose:
    -------
    
-  	Presenter chooses Emails of directors
+    Presenter chooses Emails of directors
    ======================================================
    ======================================================
    History
@@ -18,19 +18,36 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form>
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            An error has occurred.
+                        </h1>
+                        <p>
+                            {!emailErrors}
+                        </p>
+                    </div>
+                </apex:outputPanel>
                 <div class="form-group">
                     <h1>
                         <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director details"></apex:outputText>
                         <apex:outputText rendered="{!isLLPCompany}" value="Member details"></apex:outputText>
                     </h1>
                     <p class="lede">
-                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="To request the directors approval, we'll need their email addresses to contact them"></apex:outputText>
-                        <apex:outputText rendered="{!isLLPCompany}" value="To request the members approval, we'll need their email addresses to contact them"></apex:outputText>
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="To request the directors approval, we'll need their email addresses to contact them."></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="To request the members approval, we'll need their email addresses to contact them."></apex:outputText>
                     </p>
                     <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
-                        <label class="block-label">
-                            <apex:inputCheckbox value="{!director.selected}">{!director.off.Name}</apex:inputCheckbox>
+                        <label class="form-label" for="email">
+                            {!director.off.Name}
                         </label>
+                        <span class="error-message">{!director.validationErrors}</span>
+                        <span class="form-hint">Email Address </span>
+                        <apex:inputText value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                        <label class="form-label" for="emailconfirmation">
+                        </label>
+                        <span class="form-hint">Confirm email address</span>
+                        <apex:inputText value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
                     </apex:repeat>
                 </div>
                 <br />

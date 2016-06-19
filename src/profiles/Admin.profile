@@ -425,6 +425,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>chooseDirector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>superSort</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1204,10 +1208,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>DirectorDetails</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>DirectorsInputList</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1257,6 +1257,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Guidance</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>OfficerDetails</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

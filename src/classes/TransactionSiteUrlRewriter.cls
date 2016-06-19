@@ -42,6 +42,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
     public String ADDSHAREBASE = '/addsharesbase';
     public String CHOOSEDIRECTOR = '/choosedirector';
     public String WHICHDIRECTOR = '/whichdirector';
+    public String OFFICERDETAILS = '/officerdetails';
 
 
     public String VF_PAGE_START = '/StartFramework';
@@ -68,6 +69,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
     public String VF_PAGE_ADDSHARESBASE = '/AddSharesBase';
     public String VF_PAGE_CHOOSEDIRECTOR = '/chooseDirector';
     public String VF_PAGE_WHICHDIRECTOR = '/whichDirector';
+    public String VF_PAGE_OFFICERDETAILS = '/OfficerDetails';
 
 
     global PageReference mapRequestUrl(PageReference friendlyUrl)
@@ -175,6 +177,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
         else if (url.startsWith(WHICHDIRECTOR))
         {
             pr = new PageReference(VF_PAGE_WHICHDIRECTOR);
+        }
+        else if (url.startsWith(OFFICERDETAILS))
+        {
+            pr = new PageReference(VF_PAGE_OFFICERDETAILS);
         }
 
 
@@ -296,6 +302,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
             else if (url.startsWith(VF_PAGE_WHICHDIRECTOR))
             {
                 friendlyPageReference = new PageReference(WHICHDIRECTOR);
+            }
+            else if (url.startsWith(VF_PAGE_OFFICERDETAILS))
+            {
+                friendlyPageReference = new PageReference(OFFICERDETAILS);
             }
 
 

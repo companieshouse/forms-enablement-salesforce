@@ -137,6 +137,12 @@
     <label>Officer</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>isSignatory__c</columns>
+        <columns>IsPresenter__c</columns>
+        <columns>isPowerOfAttorney__c</columns>
+        <columns>isDeceased__c</columns>
+        <columns>Email__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

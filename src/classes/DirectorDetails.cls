@@ -49,7 +49,7 @@ public class DirectorDetails extends TransactionStepControllerBase
         get;
         set;
     }
-    public String majoritySignError
+    public String emailErrors
     {
         get;
         set;
@@ -92,7 +92,7 @@ public class DirectorDetails extends TransactionStepControllerBase
             {
                 if (chosenOfficer.isSignatory__c == true)
                 {
-                builtDirectors.add(chosenOfficer);
+                    builtDirectors.add(chosenOfficer);
                 }
             }
         }
@@ -103,7 +103,7 @@ public class DirectorDetails extends TransactionStepControllerBase
     private void persistStep()
     {
 
-        saveWrappedDirectorsSelection();
+
         submissionMgr.persist();
 
     }
@@ -112,21 +112,36 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
         if (!validatePageState()) return Page.TransactionException;
 
-        /*
-        if (submissionMgr.submission.isMajorityRequired__c)
-        {
-            if (isSignatureNumberOK())
-            {
-                majoritySignError = 'form-label-bold';
-            }
-            else if (!isSignatureNumberOK())
-            {
-                majoritySignError = 'error-message';
+        // saveWrappedDirectorsSelection();
 
-                return null;
+        for (Officer__c off: submissionMgr.submission.Officers__r)
+        {
+            for (directorWrapper directorstoUPDATE: getWrappedDirectors())
+            {
+                if (off.Id == directorstoUPDATE.off.Id)
+                {
+                    if (!emailValidation(directorstoUPDATE.email, directorstoUPDATE.off.Name))
+                    {
+                        directorstoUPDATE.validationErrors = emailErrors;
+                        return null;
+                    }
+                    if (!emailValidation(directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name))
+                    {
+                        directorstoUPDATE.validationErrors = emailErrors;
+                        return null;
+                    }
+                    if (!emailComparison(directorstoUPDATE.email, directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name))
+                    {
+                        directorstoUPDATE.validationErrors = emailErrors;
+                        return null;
+                    }
+                                            directorstoUPDATE.validationErrors = '';
+
+                    off.Email__c = directorstoUPDATE.email;
+                }
             }
         }
-        */
+
         persistStep();
 
         return nextStep();
@@ -139,34 +154,35 @@ public class DirectorDetails extends TransactionStepControllerBase
         return previousStep();
     }
 
-    public Boolean isSignatureNumberOK()
-    { /*
-        Integer i = 0;
+    public Boolean isEmailNumberOK()
+    {
+        /*
+               Integer i = 0;
 
-        for (Officer__c off: submissionMgr.submission.Officers__r)
-        {
-            if (off.isPresenter__c)
-            {
-                if (off.isSignatory__c)
-                {
-                    i++;
-                }
-            }
-        }
+               for (Officer__c off: submissionMgr.submission.Officers__r)
+               {
+                   if (off.isPresenter__c)
+                   {
+                       if (off.isSignatory__c)
+                       {
+                           i++;
+                       }
+                   }
+               }
 
 
-        for (DirectorWrapper directorstoAddtoSignatoryChecklist: getWrappedDirectors())
-        {
-            if (directorstoAddtoSignatoryChecklist.selected)
-                i++;
-        }
+               for (DirectorWrapper directorstoAddtoSignatoryChecklist: getWrappedDirectors())
+               {
+                   if (directorstoAddtoSignatoryChecklist.selected)
+                       i++;
+               }
 
-        if (Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c) > i)
-        {
-            return false;
-        }
-        */
-                return true;
+               if (Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c) > i)
+               {
+                   return false;
+               }
+               */
+        return true;
 
     }
 
@@ -182,7 +198,13 @@ public class DirectorDetails extends TransactionStepControllerBase
             get;
             set;
         }
-         public String confirmationemail
+        public String confirmationemail
+        {
+            get;
+            set;
+        }
+
+         public String validationErrors
         {
             get;
             set;
@@ -190,11 +212,73 @@ public class DirectorDetails extends TransactionStepControllerBase
 
         public directorWrapper(Officer__c wrappedofficer)
         {
-
+            validationErrors = '';
             off = wrappedofficer;
             email = '';
-            confirmationemail ='';
+            confirmationemail = '';
         }
+    }
+
+    public Boolean emailValidation(String emailAddress, String username)
+    {
+        // remove whitespaces
+        String email = emailAddress;
+
+        String[] whitespaceFinder = email.split(' ');
+
+        for (String afterstringString: whitespaceFinder)
+        {
+            email = email + afterstringString;
+        }
+        if (String.isBlank(email))
+        {
+            //throw new Form_CustomException(' email is blank  for ' + ' ' + username);
+
+            emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must not be blank';
+            hasPageErrors = true;
+            return false;
+        }
+        // check for @
+        if (email.contains('@'))
+        {
+            // check for "."
+
+            if (!email.contains('.'))
+            {
+                //throw new Form_CustomException(' email error for' + ' ' + username + ' '+  'not containing dot ' + email);
+
+                emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
+                hasPageErrors = true;
+                return false;
+            }
+        }
+        else
+        {
+            // throw new Form_CustomException(' email not valid needs @ ' + email);
+
+            emailErrors = 'Email Address for' + ' ' + username + ' ' + ' must be valid and contain an @';
+            hasPageErrors = true;
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean emailComparison(String email1, String email2, String username)
+    {
+        // check to make sure the emails are the same  after validation has occurred then call next();
+        if (email1 != email2)
+        {
+            //throw new Form_CustomException(' emails do not match' + email1 + email2 + ' for Member/Director' + username);
+
+            emailErrors = 'Email Addresses' + ' ' + email1 + ' ' + 'does not match' + ' ' + email2 + ' ' + 'for' + ' ' + username;
+            hasPageErrors = true;
+
+            return false;
+        }
+
+
+        return true;
     }
 
     public List < directorWrapper > getWrappedDirectors()
@@ -222,6 +306,9 @@ public class DirectorDetails extends TransactionStepControllerBase
             {
                 if (off.Id == directorstoUPDATE.off.Id)
                 {
+                    emailValidation(directorstoUPDATE.email, directorstoUPDATE.off.Name);
+                    emailValidation(directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name);
+                    emailComparison(directorstoUPDATE.email, directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name);
                     off.Email__c = directorstoUPDATE.email;
 
                 }
