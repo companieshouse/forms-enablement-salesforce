@@ -61,6 +61,7 @@ public class whichDirector extends TransactionStepControllerBase
         super();
         if (isPageInitialised) initialiseStep();
 
+
     }
     private String convertName(String name)
     {
@@ -94,7 +95,7 @@ public class whichDirector extends TransactionStepControllerBase
 
         if (submissionMgr.submission.SoleDirectorPresenter__c == true)
         {
-            nextStep();
+            nextAction();
         }
 
     }

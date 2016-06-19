@@ -83,11 +83,11 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List < officerContainer > ();
         isLLPCompany = submissionMgr.submission.isLLP__c;
-
-
         return;
 
     }
+
+    
 
     private void persistStep()
         {
@@ -107,6 +107,12 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
                                 //ab populate Presenter Name field with Director Name
                                 submissionMgr.submission.PresenterName__c = convertName(off.Name);
+                                // if the officer is a presenter and the officer size equals one set flag below
+                                if (submissionMgr.submission.Officers__r.size() == 1)
+                                {
+                                    submissionMgr.submission.SoleDirectorPresenter__c = true;
+
+                                }
                             }
                         }
                     }
@@ -142,7 +148,6 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         {
             if (submissionMgr.submission.Officers__r.size() == 1)
             {
-                submissionMgr.submission.SoleDirectorPresenter__c = true;
                 submissionMgr.submission.Officers__r[0].isSignatory__c = true;
                 submissionMgr.submission.Officers__r[0].isPresenter__c = true;
             }

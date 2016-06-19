@@ -77,9 +77,18 @@ public class DirectorDetails extends TransactionStepControllerBase
         builtDirectors = new List < Officer__c > ();
         isLLPCompany = submissionMgr.submission.isLLP__c;
         buildDirectorsList();
+        checkDirectorStatus();
         return;
     }
 
+    public void checkDirectorStatus()
+    {
+
+        if (submissionMgr.submission.SoleDirectorPresenter__c == true)
+        {
+            nextStep();
+        }
+    }
     public void buildDirectorsList()
     {
         for (Officer__c chosenOfficer: companyDirectors)
@@ -135,7 +144,7 @@ public class DirectorDetails extends TransactionStepControllerBase
                         directorstoUPDATE.validationErrors = emailErrors;
                         return null;
                     }
-                                            directorstoUPDATE.validationErrors = '';
+                    directorstoUPDATE.validationErrors = '';
 
                     off.Email__c = directorstoUPDATE.email;
                 }
@@ -152,38 +161,6 @@ public class DirectorDetails extends TransactionStepControllerBase
         if (!validatePageState()) return Page.TransactionException;
 
         return previousStep();
-    }
-
-    public Boolean isEmailNumberOK()
-    {
-        /*
-               Integer i = 0;
-
-               for (Officer__c off: submissionMgr.submission.Officers__r)
-               {
-                   if (off.isPresenter__c)
-                   {
-                       if (off.isSignatory__c)
-                       {
-                           i++;
-                       }
-                   }
-               }
-
-
-               for (DirectorWrapper directorstoAddtoSignatoryChecklist: getWrappedDirectors())
-               {
-                   if (directorstoAddtoSignatoryChecklist.selected)
-                       i++;
-               }
-
-               if (Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c) > i)
-               {
-                   return false;
-               }
-               */
-        return true;
-
     }
 
     public with sharing class directorWrapper
@@ -204,7 +181,7 @@ public class DirectorDetails extends TransactionStepControllerBase
             set;
         }
 
-         public String validationErrors
+        public String validationErrors
         {
             get;
             set;

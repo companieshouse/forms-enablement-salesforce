@@ -18,6 +18,7 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form>
+            <!-- may use later
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -28,6 +29,7 @@
                         </p>
                     </div>
                 </apex:outputPanel>
+                -->
                 <div class="form-group">
                     <h1>
                         <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director details"></apex:outputText>
