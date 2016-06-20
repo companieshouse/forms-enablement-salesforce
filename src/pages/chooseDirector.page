@@ -17,7 +17,7 @@
 <apex:page title="Closing a limited company" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form ><!--action="{!checkDirectorStatus}" -->
                 <div class="form-group">
                     <h1>
                         <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Choose your directors?"></apex:outputText>

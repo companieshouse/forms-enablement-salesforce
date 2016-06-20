@@ -14,11 +14,11 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page title="Closing a limited company" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
-    <apex:composition template="TransactionPageTemplate">
+<apex:page title="Closing a limited company" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false"  action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate"> <!--action="{!checkDirectorStatus}" -->
         <apex:define name="content">
-            <apex:form>
-            <!-- may use later
+            <apex:form >
+         
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -29,7 +29,6 @@
                         </p>
                     </div>
                 </apex:outputPanel>
-                -->
                 <div class="form-group">
                     <h1>
                         <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director details"></apex:outputText>
@@ -43,8 +42,8 @@
                         <label class="form-label" for="email">
                             {!director.off.Name}
                         </label>
-                        <span class="error-message">{!director.validationErrors}</span>
                         <span class="form-hint">Email Address </span>
+                         <span class="error-message">{!director.validationErrors}</span>
                         <apex:inputText value="{!director.email}" id="email" html-name="email"></apex:inputText>
                         <label class="form-label" for="emailconfirmation">
                         </label>

@@ -191,6 +191,7 @@
         <members>Transaction_Type_Step.DS01_Choose_Director</members>
         <members>Transaction_Type_Step.DS01_Company_Details</members>
         <members>Transaction_Type_Step.DS01_Confirmation</members>
+        <members>Transaction_Type_Step.DS01_Director_Details</members>
         <members>Transaction_Type_Step.DS01_DirectorsInputPresenter</members>
         <members>Transaction_Type_Step.DS01_DirectorsList</members>
         <members>Transaction_Type_Step.DS01_DirectorsPresenter</members>

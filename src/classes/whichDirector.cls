@@ -17,7 +17,6 @@ Ver. Author        Date        Detail
 public class whichDirector extends TransactionStepControllerBase
 {
 
-    // Public properties.
     public Boolean hasPageErrors
     {
         get;
@@ -85,16 +84,15 @@ public class whichDirector extends TransactionStepControllerBase
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         isLLPCompany = submissionMgr.submission.isLLP__c;
-        //checkDirectorStatus();
         return;
     }
     public PageReference checkDirectorStatus()
     {
 
-
-        if (submissionMgr.submission.SoleDirectorPresenter__c == true)
+        if (submissionMgr.submission.Officers__r.size() == 1)
         {
-            return nextStep();
+            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+                return nextAction();
         }
         return null;
     }
@@ -127,12 +125,10 @@ public class whichDirector extends TransactionStepControllerBase
 
 
     private void persistStep()
-        {
-            submissionMgr.persist();
-        }
-        // End Instance methods.    
+    {
+        submissionMgr.persist();
+    }
 
-    // Action methods.     
     public PageReference nextAction()
     {
         if (!validatePageState()) return Page.TransactionException;
@@ -143,11 +139,10 @@ public class whichDirector extends TransactionStepControllerBase
     }
 
     public PageReference previousAction()
-        {
-            if (!validatePageState()) return Page.TransactionException;
+    {
+        if (!validatePageState()) return Page.TransactionException;
 
-            return previousStep();
-        }
-        // End Action methods.    
+        return previousStep();
+    }
 
 }

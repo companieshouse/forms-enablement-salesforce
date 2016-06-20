@@ -73,7 +73,6 @@ public class DirectorDetails extends TransactionStepControllerBase
         builtDirectors = new List < Officer__c > ();
         isLLPCompany = submissionMgr.submission.isLLP__c;
         buildDirectorsList();
-        //checkDirectorStatus();
         return;
     }
 
@@ -81,9 +80,10 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
 
 
-        if (submissionMgr.submission.SoleDirectorPresenter__c == true)
+        if (submissionMgr.submission.Officers__r.size() == 1)
         {
-            return nextStep();
+            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+                return nextAction();
         }
         return null;
     }
@@ -111,7 +111,6 @@ public class DirectorDetails extends TransactionStepControllerBase
     private void persistStep()
     {
 
-
         submissionMgr.persist();
 
     }
@@ -120,7 +119,11 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
         if (!validatePageState()) return Page.TransactionException;
 
-        // saveWrappedDirectorsSelection();
+        if (submissionMgr.submission.Officers__r.size() == 1)
+        {
+            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+                return nextStep();
+        }
 
         for (Officer__c off: submissionMgr.submission.Officers__r)
         {
