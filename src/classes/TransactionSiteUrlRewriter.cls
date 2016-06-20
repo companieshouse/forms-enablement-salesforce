@@ -38,6 +38,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String UPDATECPD			= '/updateDirectors';
     public String BEHALFDECISION    = '/behalfDecision';
     public String SELECTIONBEHALF    = '/selectBDi';
+    public String INPUTBEHALF 	    = '/randomI';
 
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -60,6 +61,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_UPDATECPD		= '/UpdateCompanyDirectors';
     public String VF_PAGE_BEHALFDECISION = '/BehalfDecision';
     public String VF_PAGE_SELECTIONBEHALF = '/BehalfWhichSignatory';
+    public String VF_PAGE_INPUTBEHALF 	    = '/BehalfInputDetails';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -92,7 +94,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	   	else if(url.startsWith(UPDATECPD))				{ pr = new PageReference(VF_PAGE_UPDATECPD); }
 	   	else if(url.startsWith(BEHALFDECISION))			{ pr = new PageReference(VF_PAGE_BEHALFDECISION); }
 	   	else if(url.startsWith(SELECTIONBEHALF))			{ pr = new PageReference(VF_PAGE_SELECTIONBEHALF); }
-		
+		else if(url.startsWith(INPUTBEHALF))			{ pr = new PageReference(VF_PAGE_INPUTBEHALF); }
+
 
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
     	return pr;	    
@@ -133,6 +136,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	        else if(url.startsWith(VF_PAGE_UPDATECPD))		{ friendlyPageReference = new PageReference(UPDATECPD); }	       	       
 	        else if(url.startsWith(VF_PAGE_BEHALFDECISION))		{ friendlyPageReference = new PageReference(BEHALFDECISION); }	       	       
 	        else if(url.startsWith(VF_PAGE_SELECTIONBEHALF))		{ friendlyPageReference = new PageReference(SELECTIONBEHALF); }	       	       
+	        else if(url.startsWith(VF_PAGE_INPUTBEHALF))		{ friendlyPageReference = new PageReference(INPUTBEHALF); }	       	       
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	
