@@ -67,28 +67,27 @@ public class DirectorDetails extends TransactionStepControllerBase
     public void initialiseStep()
     {
 
-        if (submissionMgr.submission.SoleDirectorPresenter__c == true)
-        {
-            nextAction();
-        }
 
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();
         isLLPCompany = submissionMgr.submission.isLLP__c;
         buildDirectorsList();
-        checkDirectorStatus();
+        //checkDirectorStatus();
         return;
     }
 
-    public void checkDirectorStatus()
+    public PageReference checkDirectorStatus()
     {
+
 
         if (submissionMgr.submission.SoleDirectorPresenter__c == true)
         {
-            nextStep();
+            return nextStep();
         }
+        return null;
     }
+
     public void buildDirectorsList()
     {
         for (Officer__c chosenOfficer: companyDirectors)

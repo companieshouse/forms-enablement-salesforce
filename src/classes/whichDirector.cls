@@ -85,19 +85,18 @@ public class whichDirector extends TransactionStepControllerBase
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         isLLPCompany = submissionMgr.submission.isLLP__c;
-        checkDirectorStatus();
+        //checkDirectorStatus();
         return;
     }
-
-    public void checkDirectorStatus()
+    public PageReference checkDirectorStatus()
     {
 
 
         if (submissionMgr.submission.SoleDirectorPresenter__c == true)
         {
-            nextAction();
+            return nextStep();
         }
-
+        return null;
     }
 
     public void selectPresenter()

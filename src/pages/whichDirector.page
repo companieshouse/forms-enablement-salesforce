@@ -14,7 +14,7 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page title="Closing a limited company" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="Closing a limited company" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

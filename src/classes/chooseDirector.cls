@@ -84,20 +84,21 @@ public class chooseDirector extends TransactionStepControllerBase
         isLLPCompany = submissionMgr.submission.isLLP__c;
         majoritySignError = 'form-label-bold';
         buildDirectorsList();
-        checkDirectorStatus();
+        //checkDirectorStatus();
         return;
     }
 
-    public void checkDirectorStatus()
-    {
+    public PageReference checkDirectorStatus()
+   {
 
 
-        if (submissionMgr.submission.SoleDirectorPresenter__c == true)
-        {
-            nextStep();
-        }
+       if (submissionMgr.submission.SoleDirectorPresenter__c == true)
+       {
+           return nextStep();
+       }
+       return null;
+   }
 
-    }
 
     public void buildDirectorsList()
     {
