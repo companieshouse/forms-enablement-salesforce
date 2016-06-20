@@ -101,7 +101,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
 
         for(Officer__c off :submissionMgr.submission.Officers__r)      
         {
-        	if(!off.hasInputBehalfDetails__c && !off.IsPresenter__c)
+        	if(!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c)
         	{
         		hasFinishedOfficerList = false;
         	}
@@ -141,7 +141,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         
         //Initialise the current directors
         for(Officer__c off : submissionMgr.submission.Officers__r){
-        	if(!off.hasInputBehalfDetails__c && !off.IsPresenter__c)
+        	if(!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c)
         	{
         		currentOfficer = off;
         	}

@@ -63,7 +63,9 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     }
 
     private void persistStep(){
-
+        if(listOfDirectors == null)
+            return;
+            
     	for(Officer__c off :submissionMgr.submission.Officers__r)
         {
             for(officerContainer offCont :listOfDirectors)
@@ -103,7 +105,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public PageReference initPage(){
         initialiseAction();
 
-        if(submissionMgr.submission.SoleDirectorPresenter__c)
+        if(submissionMgr.submission.SoleDirectorPresenter__c || !submissionMgr.submission.isBehalfSignatoryEnable__c)
         {
             return nextAction();
         }

@@ -1,0 +1,63 @@
+<!-- 
+   Name: DirectorDetails.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+    Presenter chooses Emails of directors
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Leo Bitoy&    2016-06-16  Initial development.
+   -->
+<apex:page title="Closing a limited company" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false"  action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate"> <!--action="{!checkDirectorStatus}" -->
+        <apex:define name="content">
+            <apex:form >
+            <!-- may use later
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            An error has occurred.
+                        </h1>
+                        <p>
+                            {!emailErrors}
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                -->
+                <div class="form-group">
+                    <h1>
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director details"></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="Member details"></apex:outputText>
+                    </h1>
+                    <p class="lede">
+                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="To request the directors approval, we'll need their email addresses to contact them."></apex:outputText>
+                        <apex:outputText rendered="{!isLLPCompany}" value="To request the members approval, we'll need their email addresses to contact them."></apex:outputText>
+                    </p>
+                    <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
+                        <label class="form-label" for="email">
+                            {!director.off.Name}
+                        </label>
+                        <span class="error-message">{!director.validationErrors}</span>
+                        <span class="form-hint">Email Address </span>
+                        <apex:inputText value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                        <label class="form-label" for="emailconfirmation">
+                        </label>
+                        <span class="form-hint">Confirm email address</span>
+                        <apex:inputText value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
+                    </apex:repeat>
+                </div>
+                <br />
+                <br /> &nbsp;
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                <br /> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

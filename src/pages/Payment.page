@@ -15,7 +15,7 @@
                                 </input>
                             </label>
                             <label class="block-label" for="radio-indent-2">
-                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Account in my pocket
+                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Account
                                 </input>
                             </label>
                         </div>
@@ -23,7 +23,7 @@
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!!hasPaid || !!hasPaymentRejected || !!hasPaymentError || !!hasPaymentPending}">
                     <fieldset class="inline">
-                        <legend>Do you want Adam to treat your demand today?</legend>
+                        <legend>Do you want you application to be proceed on the same day?</legend>
                         <div id="presenterSelection2" class="form-group">
                             <label class="block-label" for="radio-indent-4">
                                 <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes

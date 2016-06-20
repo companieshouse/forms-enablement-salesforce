@@ -39,6 +39,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String BEHALFDECISION    = '/behalfDecision';
     public String SELECTIONBEHALF    = '/selectBDi';
     public String INPUTBEHALF 	    = '/randomI';
+    public String CHOOSEDIRECTOR = '/choosedirector';
+    public String WHICHDIRECTOR = '/whichdirector';
+    public String OFFICERDETAILS = '/officerdetails';
 
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -62,6 +65,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_BEHALFDECISION = '/BehalfDecision';
     public String VF_PAGE_SELECTIONBEHALF = '/BehalfWhichSignatory';
     public String VF_PAGE_INPUTBEHALF 	    = '/BehalfInputDetails';
+    public String VF_PAGE_CHOOSEDIRECTOR = '/chooseDirector';
+    public String VF_PAGE_WHICHDIRECTOR = '/whichDirector';
+    public String VF_PAGE_OFFICERDETAILS = '/OfficerDetails';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -95,6 +101,18 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	   	else if(url.startsWith(BEHALFDECISION))			{ pr = new PageReference(VF_PAGE_BEHALFDECISION); }
 	   	else if(url.startsWith(SELECTIONBEHALF))			{ pr = new PageReference(VF_PAGE_SELECTIONBEHALF); }
 		else if(url.startsWith(INPUTBEHALF))			{ pr = new PageReference(VF_PAGE_INPUTBEHALF); }
+		else if (url.startsWith(CHOOSEDIRECTOR))
+        {
+            pr = new PageReference(VF_PAGE_CHOOSEDIRECTOR);
+        }
+        else if (url.startsWith(WHICHDIRECTOR))
+        {
+            pr = new PageReference(VF_PAGE_WHICHDIRECTOR);
+        }
+        else if (url.startsWith(OFFICERDETAILS))
+        {
+            pr = new PageReference(VF_PAGE_OFFICERDETAILS);
+        }
 
 
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
@@ -137,6 +155,18 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	        else if(url.startsWith(VF_PAGE_BEHALFDECISION))		{ friendlyPageReference = new PageReference(BEHALFDECISION); }	       	       
 	        else if(url.startsWith(VF_PAGE_SELECTIONBEHALF))		{ friendlyPageReference = new PageReference(SELECTIONBEHALF); }	       	       
 	        else if(url.startsWith(VF_PAGE_INPUTBEHALF))		{ friendlyPageReference = new PageReference(INPUTBEHALF); }	       	       
+	        else if (url.startsWith(VF_PAGE_CHOOSEDIRECTOR))
+            {
+                friendlyPageReference = new PageReference(CHOOSEDIRECTOR);
+            }
+            else if (url.startsWith(VF_PAGE_WHICHDIRECTOR))
+            {
+                friendlyPageReference = new PageReference(WHICHDIRECTOR);
+            }
+            else if (url.startsWith(VF_PAGE_OFFICERDETAILS))
+            {
+                friendlyPageReference = new PageReference(OFFICERDETAILS);
+            }
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	

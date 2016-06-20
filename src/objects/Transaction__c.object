@@ -696,6 +696,16 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isPresenterMultipleDirectors__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to mark the transaction if the user answer to the question are you a director and if there is more than 1 director</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, BACK END ONLY</inlineHelpText>
+        <label>is Presenter Multiple Director?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isSameDayProcessing__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field mark if the user has paid the extra to make Companies House processing the transaction on the same day</description>

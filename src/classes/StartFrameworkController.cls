@@ -51,6 +51,10 @@ public with sharing class StartFrameworkController {
         get;
         private set;
     }
+    public String belowbuttontitle2 {
+        get;
+        private set;
+    }
     public String belowbuttontitle {
         get;
         private set;
@@ -67,6 +71,19 @@ public with sharing class StartFrameworkController {
         get;
         private set;
     }
+    public String belowbuttontext4 {
+        get;
+        private set;
+    }
+    public String belowbuttontext5 {
+        get;
+        private set;
+    }
+    public String belowbuttontext6 {
+        get;
+        private set;
+    }
+
     public String transactionType { get;
         set; }
 
@@ -91,7 +108,7 @@ public with sharing class StartFrameworkController {
             //  userTracker = new TrackUserClass();
 
             // userTracker.getUserDocument();
-
+            
             try {
 
                 if (!ApexPages.currentPage().getParameters().containsKey('t') ||
@@ -100,7 +117,6 @@ public with sharing class StartFrameworkController {
 
                 transactionType = ApexPages.currentPage().getParameters().get('t');
                 transactionMgr = new TransactionManager(transactionType);
-
                 // this is not efficient unless start pages follow this format consistently
                 pageTitle = transactionMgr.td.Landing_Page_Title__c;
                 pageText = transactionMgr.td.Landing_Page_Text__c;
@@ -110,10 +126,17 @@ public with sharing class StartFrameworkController {
                 pageText5 = transactionMgr.td.Landing_Page_Text5__c;
                 pageText6 = transactionMgr.td.Landing_Page_Text6__c;
                 abovebuttontext = transactionMgr.td.above_button_text__c;
+
                 belowbuttontitle = transactionMgr.td.Below_Button_Title__c;
+                belowbuttontitle2 = transactionMgr.td.Below_Button_Title2__c;
+
                 belowbuttontext = transactionMgr.td.Below_Button_Text__c;
                 belowbuttontext2 = transactionMgr.td.Below_Button_Text2__c;
                 belowbuttontext3 = transactionMgr.td.Below_Button_Text3__c;
+                belowbuttontext4 = transactionMgr.td.Below_Button_Text4__c;
+                belowbuttontext5 = transactionMgr.td.Below_Button_Text5__c;
+                belowbuttontext6 = transactionMgr.td.Below_Button_Text6__c;
+
                 hasGuidancePage = transactionMgr.td.hasGuidancePage__c;
 
                 isPageInitialised = true;
