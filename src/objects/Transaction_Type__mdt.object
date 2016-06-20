@@ -255,6 +255,15 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isPaypalAllowed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will configure the payment page to allow the user to pay by using Paypal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select this field if your form is going to allow paypal payment by the user.</inlineHelpText>
+        <label>is paypal for payment allowed?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isSameDayPayment__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field will configure the payment page to allow the user to pay by using same day payment.</description>

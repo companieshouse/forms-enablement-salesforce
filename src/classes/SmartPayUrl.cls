@@ -27,8 +27,8 @@ public class SmartPayUrl {
     @TestVisible
     private static final  String COUNTRY_CODE = 'GB';
     
-    @TestVisible
-    private static final  String ALLOWED_METHODS = 'card';
+
+    public String allowedMethods = '';
     
     @TestVisible
     private static final String SHOPPER_LOCALE = 'en_GB';
@@ -91,7 +91,7 @@ public class SmartPayUrl {
         url += 'shopperLocale=' + SHOPPER_LOCALE;
         
         url += '&';
-        url += 'allowedMethods=' + ALLOWED_METHODS;
+        url += 'allowedMethods=' + allowedMethods;
         
         url += '&';
         url += 'skipSelection=' + SKIP_SELECTION;
@@ -137,7 +137,7 @@ public class SmartPayUrl {
         String hmacKey = settings.HMAC_key__c;
         
         String signingString = 'allowedMethods:countryCode:currencyCode:merchantAccount:merchantReference:merchantReturnData:paymentAmount:resURL:sessionValidity:shipBeforeDate:shopperEmail:shopperLocale:skinCode:skipSelection:';
-        signingString += ALLOWED_METHODS + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + merchantReference + ':' + paymentAmount + ':'  + getResultUrl().replace('\\', '\\\\').replace(':', '\\:').replace('%', AppConstants.PERCENTAGE_REPLACEMENT)  +':' + sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + customerEmail + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION;
+        signingString += allowedMethods + ':' + COUNTRY_CODE + ':' + CURRENCY_CODE + ':' + merchantAccount + ':' + merchantReference + ':' + merchantReference + ':' + paymentAmount + ':'  + getResultUrl().replace('\\', '\\\\').replace(':', '\\:').replace('%', AppConstants.PERCENTAGE_REPLACEMENT)  +':' + sessionValidity.replace('\\', '\\\\').replace(':', '\\:') + ':' + shipBeforeDate.replace('\\', '\\\\').replace(':', '\\:') + ':' + customerEmail + ':' + SHOPPER_LOCALE + ':' + skinCode + ':' + SKIP_SELECTION;
 
         Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString),EncodingUtil.convertFromHex(hmacKey));
 
@@ -215,10 +215,18 @@ public class SmartPayUrl {
             url.customerEmail = email;
             return this;
         }
+
+        public Builder customerMethodsPayment(Boolean isPaypal)
+        {
+            url.allowedMethods = ( isPaypal == true ? 'paypal' : 'card');
+            return this;
+        }
         
         public SmartPayUrl build() {
             return url;
         }
+
+        
         
     }
     

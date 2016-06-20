@@ -40,16 +40,19 @@ public class PaymentController extends TransactionStepControllerBase {
     public String externalURL {get; set;}
 
     public Boolean hasPaid {get; set;}
+    public Boolean hasPaymentSuccess {get; set;}
     public Boolean hasPaymentRejected {get; set;}
     public Boolean hasPaymentError {get; set;} 
     public Boolean hasPaymentPending {get; set;}
     public Boolean previousClicked {get; set;}
 
     public Boolean isCardPayment {get; set;}
+    public Boolean isPaypalPayment {get; set;}
     public Boolean isAccountPayment {get; set;}
     public Boolean isSameDayPayment {get; set;}
 
     public Boolean isCardSelected {get; set;}
+    public Boolean isPaypalSelected {get; set;}
     public Boolean isAccountSelected {get; set;}
 
     public Boolean isSameDaySelected {get; set;}
@@ -71,14 +74,19 @@ public class PaymentController extends TransactionStepControllerBase {
     
     public void initialiseStep() {
         hasPaid = false;
+        hasPaymentSuccess = false;
         hasPaymentRejected = false;
         hasPaymentError = false;
+        hasPaymentPending = false;
+        previousClicked = false;
 
-        isCardPayment = transactionMgr.td.isCardAllowed__c;
-        isAccountPayment = transactionMgr.td.isAccountPayment__c;
-        isSameDayPayment = transactionMgr.td.isSameDayPayment__c;
+        isCardPayment = (transactionMgr.td.isCardAllowed__c == null ? false : transactionMgr.td.isCardAllowed__c);
+        isPaypalPayment = (transactionMgr.td.isPaypalAllowed__c == null ? false : transactionMgr.td.isPaypalAllowed__c);
+        isAccountPayment = (transactionMgr.td.isAccountPayment__c == null ? false : transactionMgr.td.isAccountPayment__c);
+        isSameDayPayment = (transactionMgr.td.isSameDayPayment__c == null ? false : transactionMgr.td.isSameDayPayment__c);
 
         isCardSelected = false;
+        isPaypalSelected = false;
         isAccountSelected = false;
         isSameDaySelected = false;
     }
@@ -133,7 +141,7 @@ public class PaymentController extends TransactionStepControllerBase {
     }
 
     private void persistStep(){
-        if(hasPaid)
+        if(hasPaymentSuccess || hasPaid)
         {
             submissionMgr.submission.Status__c = 'Paid';
             submissionMgr.submission.hasPaid__c = true;
@@ -148,6 +156,7 @@ public class PaymentController extends TransactionStepControllerBase {
         {
             submissionMgr.submission.isSameDayProcessing__c = true;   
         }
+
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -156,7 +165,7 @@ public class PaymentController extends TransactionStepControllerBase {
     public PageReference nextAction(){ 
         if (!validatePageState()) return Page.TransactionException;
 
-        if(isCardSelected)
+        if(isCardSelected || isPaypalSelected)
         {
             submit();
             PageReference pg = new PageReference(externalURL);
@@ -208,12 +217,13 @@ public class PaymentController extends TransactionStepControllerBase {
         
         // Get a URL for SmartPay, the payment processor. Whether this is on TEST or LIVE is
         // driven by the active custom setting record.
-
+        
         //CODE FOR PRODUCTION WHEN Submission manager will be in sync with Transaction Object
         SmartPayUrl url = new SmartPayUrl.Builder()
                 .merchantReference(submissionMgr.submission.Id)
                 .paymentAmount(submissionMgr.submission.Amount__c)
                 .customerEmail(submissionMgr.submission.ContactEmail__c)
+                .customerMethodsPayment(isPaypalSelected)
                 .build();
         String redirectUrl = url.toString();
         externalURL = redirectUrl;
@@ -255,7 +265,8 @@ public class PaymentController extends TransactionStepControllerBase {
             // Valid params for the result URL back to us after payment. Now check authResult.
             if (authResult == AUTH_RESULT_AUTHORISED) {
                 //change the status of the payment page
-                hasPaid = true;
+                hasPaid = false;
+                hasPaymentSuccess = true;
                 hasPaymentRejected = false;
                 hasPaymentPending = false;
                 previousClicked = false;
@@ -263,6 +274,7 @@ public class PaymentController extends TransactionStepControllerBase {
             }
             else if(authResult == AUTH_RESULT_REFUSED) {
                 //Go To refused Payment page ?
+                hasPaymentSuccess = false;
                 hasPaid = false;
                 hasPaymentRejected = true;
                 hasPaymentPending = false;
@@ -271,6 +283,7 @@ public class PaymentController extends TransactionStepControllerBase {
             }
             else if(authResult == AUTH_RESULT_PENDING) {
                 //Nothing to do?
+                hasPaymentSuccess = false;
                 hasPaid = false;
                 hasPaymentRejected = false;
                 hasPaymentPending = true;
@@ -278,6 +291,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 hasPaymentError = false;
             }
             else if(authResult == AUTH_RESULT_CANCELLED) {
+                hasPaymentSuccess = false;
                 hasPaid = false;
                 hasPaymentRejected = false;
                 hasPaymentPending = false;
@@ -285,6 +299,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 hasPaymentError = false;
             }
             else if(authResult == AUTH_RESULT_ERROR) {
+                hasPaymentSuccess = false;
                 hasPaid = false;
                 hasPaymentRejected = false;
                 hasPaymentPending = false;
@@ -294,6 +309,7 @@ public class PaymentController extends TransactionStepControllerBase {
             
         }
         else{
+            hasPaymentSuccess = false;
             hasPaid = false;
             hasPaymentRejected = false;
             hasPaymentPending = false;

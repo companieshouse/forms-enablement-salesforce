@@ -81,9 +81,10 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
 
 
-      if (submissionMgr.submission.Officers__r.size() == 1)
-        {  if(submissionMgr.submission.Officers__r[0].isSignatory__c)
-          return nextAction();
+        if (submissionMgr.submission.Officers__r.size() == 1)
+        {  
+            if(submissionMgr.submission.Officers__r[0].IsPresenter__c)
+                 return nextAction();
         }
         return null;
     }

@@ -131,6 +131,10 @@
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
+        <field>isPaypalAllowed__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>isSameDayPayment__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
