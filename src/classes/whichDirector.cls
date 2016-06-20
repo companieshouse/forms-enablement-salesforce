@@ -90,15 +90,16 @@ public class whichDirector extends TransactionStepControllerBase
     }
     public PageReference checkDirectorStatus()
     {
-        Boolean isPresenterDetected = (submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c && submissionMgr.submission.isPresenterMultipleDirectors__c == null ? false :  submissionMgr.submission.isPresenterMultipleDirectors__c);
+        Boolean isSolePresenterDetected = submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c ;
+        Boolean isPresenterDetected = SubmissionMgr.submission.isPresenterMultipleDirectors__c == null ? false :  submissionMgr.submission.isPresenterMultipleDirectors__c;
     
 
-        if(!isPresenterDetected)
+        if(isPresenterDetected || isSolePresenterDetected )
         {
-            return nextAction();
+            return null;
         }
 
-        return null;
+        return nextAction();
     }
 
     public void selectPresenter()
