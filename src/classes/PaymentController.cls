@@ -45,6 +45,16 @@ public class PaymentController extends TransactionStepControllerBase {
     public Boolean hasPaymentPending {get; set;}
     public Boolean previousClicked {get; set;}
 
+    public Boolean isCardPayment {get; set;}
+    public Boolean isAccountPayment {get; set;}
+    public Boolean isSameDayPayment {get; set;}
+
+    public Boolean isCardSelected {get; set;}
+    public Boolean isAccountSelected {get; set;}
+
+    public Boolean isSameDaySelected {get; set;}
+
+    public Integer valuePaymentUI {get; set;}
 
     public PaymentController() {
         super();
@@ -64,6 +74,13 @@ public class PaymentController extends TransactionStepControllerBase {
         hasPaymentRejected = false;
         hasPaymentError = false;
 
+        isCardPayment = transactionMgr.td.isCardAllowed__c;
+        isAccountPayment = transactionMgr.td.isAccountPayment__c;
+        isSameDayPayment = transactionMgr.td.isSameDayPayment__c;
+
+        isCardSelected = false;
+        isAccountSelected = false;
+        isSameDaySelected = false;
     }
 
     public PageReference checkPaymentResult(){
@@ -109,20 +126,10 @@ public class PaymentController extends TransactionStepControllerBase {
             return previousAction();
         }
 
-        if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
-        {
-            return null;
-        }
-
-        if(hasPaid)
-        {
-            return nextAction();
-        }
-
-        submit();
-        PageReference pg = new PageReference(externalURL);
-        pg.setRedirect(true);
-        return pg;
+        //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
+        return null;
+        
+        
     }
 
     private void persistStep(){
@@ -130,6 +137,16 @@ public class PaymentController extends TransactionStepControllerBase {
         {
             submissionMgr.submission.Status__c = 'Paid';
             submissionMgr.submission.hasPaid__c = true;
+        }
+
+        if(isAccountSelected)
+        {
+            submissionMgr.submission.isPaymentAccount__c = true;
+        }
+
+        if(isSameDaySelected)
+        {
+            submissionMgr.submission.isSameDayProcessing__c = true;   
         }
         submissionMgr.persist();    
     }
@@ -139,7 +156,15 @@ public class PaymentController extends TransactionStepControllerBase {
     public PageReference nextAction(){ 
         if (!validatePageState()) return Page.TransactionException;
 
-        persistStep();      
+        if(isCardSelected)
+        {
+            submit();
+            PageReference pg = new PageReference(externalURL);
+            pg.setRedirect(true);
+            return pg;
+        }
+            
+        persistStep(); 
 
         if(!hasPaid())
             return null;
@@ -154,7 +179,25 @@ public class PaymentController extends TransactionStepControllerBase {
     }
     // End Action methods.    
     
+    public void updatePayment()
+    {
+        if(valuePaymentUI == null) return;
+
+        if(valuePaymentUI == 1) 
+        {
+            isCardSelected = true;
+            isAccountSelected = false;
+        }
+        else if(valuePaymentUI == 2)
+        {
+            isCardSelected = false;
+            isAccountSelected = true;
+        }
+    }
     
+    public void updateSameDay(){
+
+    }
     
     /**
      * Off we go to a SmartPay URL.

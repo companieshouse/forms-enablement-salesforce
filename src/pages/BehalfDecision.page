@@ -1,53 +1,39 @@
 <!-- 
-   Name: DirectorsList.page
+   Name: BehalfDecision.page
    Copyright © 2016  Methods Digital
    ======================================================
    ======================================================
    Purpose:
    -------
-   
-   Todo : required functionality.
-   
-   1. Get Company Number from Transaction Submission
-   2. Make callout to the CHS API for Directors list (using an Apex Continuation to avoid synchronous limits)
-   3. Render Directors list for confirmation.
+      
+   1. This page will design if the flow need to redirect the user to the selection of who will
+   be signed on behalf for the company
+
    
    ======================================================
    ======================================================
    History
    ------- 
    Ver. Author        Date        Detail
-   1.0  Mark Cane&    2016-04-11  Initial development.
+   1.0  SylvainP      2016-06-17  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="{!$Label.UI_Text_Behalf_Decision}" controller="BehalfDecisionController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
    <apex:composition template="TransactionPageTemplate">
       <apex:define name="content">
       <apex:form >
 
          <div class="form-group">
-         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+         <h1 class="heading-xlarge"><apex:outputText value="{!headerBox1}"></apex:outputText>
 
-                  <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
-         <p class="lede">
-            {!companyName} has the following director listed on the public register.
-         </p>
-         <ul class="list list-bullet">
-            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-               <li>{!director}</li>
-            </apex:repeat>
-         </ul>
+                  </h1>
+         <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+         
+         
+
 
 
         <fieldset class="inline">
 
-              <legend>Is this information correct?</legend>
-              <apex:outputPanel id="error">
-                <apex:outputPanel rendered="{!hasPageErrors}">
-                    <span  class="error-message" id="error-message-full-name">Please select one of the options below</span>
-                    </apex:outputPanel>
-                    
-                    </apex:outputPanel>
-                    <br/>
               <label class="block-label" for="radio-inline-1">
               
                 <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio"  name="radio-inline-group" value="Yes">
@@ -70,7 +56,7 @@
 		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
 
      <apex:actionFunction action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
-               <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
+               <apex:param name="paramBoolean" value="" id="x" assignTo="{!behalfValidation}" />
          </apex:actionFunction>
 
       </apex:form>  

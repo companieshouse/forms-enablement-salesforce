@@ -33,8 +33,11 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String OFFICERSEMAIL 	= '/inputEmails';
 	public String GUIDANCE			= '/guidance';
 	public String DETAILSCOMP		= '/detailsCompany';
-	public String STATUS = '/status';
-    public String SUBMISSION = '/submission';
+	public String STATUS 			= '/status';
+    public String SUBMISSION 		= '/submission';
+    public String UPDATECPD			= '/updateDirectors';
+    public String BEHALFDECISION    = '/behalfDecision';
+    public String SELECTIONBEHALF    = '/selectBDi';
 
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -52,8 +55,11 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String VF_PAGE_OFFICERSEMAIL	= '/DirectorsInputList';
 	public String VF_PAGE_GUIDANCE 		= '/Guidance';
 	public String VF_PAGE_DETAILSCOMP 	= '/CompanyDetails';
-	public String VF_PAGE_STATUS = '/Status';
-    public String VF_PAGE_SUBMISSION = '/Submission';
+	public String VF_PAGE_STATUS 		= '/Status';
+    public String VF_PAGE_SUBMISSION 	= '/Submission';
+    public String VF_PAGE_UPDATECPD		= '/UpdateCompanyDirectors';
+    public String VF_PAGE_BEHALFDECISION = '/BehalfDecision';
+    public String VF_PAGE_SELECTIONBEHALF = '/BehalfWhichSignatory';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -83,7 +89,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	   	else if(url.startsWith(DETAILSCOMP))			{ pr = new PageReference(VF_PAGE_DETAILSCOMP); }
 	   	else if(url.startsWith(STATUS))					{ pr = new PageReference(VF_PAGE_STATUS); }
 	   	else if(url.startsWith(SUBMISSION))				{ pr = new PageReference(VF_PAGE_SUBMISSION); }
-
+	   	else if(url.startsWith(UPDATECPD))				{ pr = new PageReference(VF_PAGE_UPDATECPD); }
+	   	else if(url.startsWith(BEHALFDECISION))			{ pr = new PageReference(VF_PAGE_BEHALFDECISION); }
+	   	else if(url.startsWith(SELECTIONBEHALF))			{ pr = new PageReference(VF_PAGE_SELECTIONBEHALF); }
 		
 
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
@@ -122,7 +130,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	        else if(url.startsWith(VF_PAGE_GUIDANCE))		{ friendlyPageReference = new PageReference(GUIDANCE); }
   	        else if(url.startsWith(VF_PAGE_STATUS))			{ friendlyPageReference = new PageReference(STATUS); }	       
 	        else if(url.startsWith(VF_PAGE_SUBMISSION))		{ friendlyPageReference = new PageReference(SUBMISSION); }	       
-	       
+	        else if(url.startsWith(VF_PAGE_UPDATECPD))		{ friendlyPageReference = new PageReference(UPDATECPD); }	       	       
+	        else if(url.startsWith(VF_PAGE_BEHALFDECISION))		{ friendlyPageReference = new PageReference(BEHALFDECISION); }	       	       
+	        else if(url.startsWith(VF_PAGE_SELECTIONBEHALF))		{ friendlyPageReference = new PageReference(SELECTIONBEHALF); }	       	       
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	

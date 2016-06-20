@@ -9,6 +9,9 @@
 		<members>AttachmentTriggerHandler</members>
 		<members>AttachmentTriggerHandlerTest</members>
 		<members>BaseURLHandler</members>
+		<members>BehalfDecisionController</members>
+		<members>BehalfInputDetailsController</members>
+		<members>BehalfWhichSignatoryController</members>
 		<members>CH_ChargeController</members>
 		<members>CH_ChargeController_Test</members>
 		<members>CH_SearchByNumberClass_Test</members>
@@ -40,29 +43,29 @@
 		<members>DeveloperToolsController</members>
 		<members>DirectorInputListController</members>
 		<members>DirectorsListController</members>
-		<members>DocuSignAPI</members>
-		<members>DocuSignAPITest</members>
-		<members>DocuSignUrlBuilder</members>
 		<members>DocStatusController</members>
 		<members>DocStatusUrlTriggerHandler</members>
+		<members>DocuSignAPI</members>
+		<members>DocuSignAPITest</members>
 		<members>DocuSignStatusTriggerHandler</members>
 		<members>DocuSignStatusTriggerHandlerTest</members>
-		<members>DocusignTecipientTriggerStatusHandler</members>
+		<members>DocuSignUrlBuilder</members>
 		<members>DocumentController</members>
 		<members>DocumentDownloadController</members>
+		<members>DocusignTecipientTriggerStatusHandler</members>
 		<members>DynamicField</members>
 		<members>DynamicTestController</members>
-		<members>EmbedDocuSignController</members>
 		<members>EmailTemplatesBuilder</members>
+		<members>EmbedDocuSignController</members>
 		<members>Form</members>
+		<members>FormAPISubmissionManager</members>
+		<members>FormAPISubmissionManagerTest</members>
 		<members>Form_CustomException</members>
+		<members>FormsAPIService</members>
+		<members>FormsAPIServiceTest</members>
 		<members>FormsApiClient</members>
 		<members>FormsApiClientTest</members>
 		<members>FormsApiMock</members>
-		<members>FormsAPIService</members>
-		<members>FormsAPIServiceTest</members>
-		<members>FormAPISubmissionManagerTest</members>
-		<members>FormAPISubmissionManager</members>
 		<members>GuidanceController</members>
 		<members>ISerialisable</members>
 		<members>IStepNavigable</members>
@@ -86,8 +89,8 @@
 		<members>SmartPayUrl</members>
 		<members>SmartPayUrlTest</members>
 		<members>StartFrameworkController</members>
-		<members>SubmissionManager</members>
 		<members>SubmissionController</members>
+		<members>SubmissionManager</members>
 		<members>SubmissionManagerTest</members>
 		<members>SubmissionURLTriggerHandler</members>
 		<members>SummaryController</members>
@@ -99,6 +102,7 @@
 		<members>TransactionSerialiserTest</members>
 		<members>TransactionSiteUrlRewriter</members>
 		<members>TransactionStepControllerBase</members>
+		<members>UpdateCompanyDirectorsController</members>
 		<members>Util</members>
 		<members>UtilTest</members>
 		<members>superSort</members>
@@ -110,6 +114,9 @@
 	</types>
 	<types>
 		<members>AccountsAuthCallback</members>
+		<members>BehalfDecision</members>
+		<members>BehalfInputDetails</members>
+		<members>BehalfWhichSignatory</members>
 		<members>CH_ChargesList</members>
 		<members>CH_SearchControllerByFilingHistoryClass</members>
 		<members>Companies_House_Insolvency</members>
@@ -147,6 +154,7 @@
 		<members>TransactionException</members>
 		<members>TransactionPageTemplate</members>
 		<members>TransactionSiteRobotsTxt</members>
+		<members>UpdateCompanyDirectors</members>
 		<name>ApexPage</name>
 	</types>
 	<types>

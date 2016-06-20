@@ -1,85 +1,92 @@
 <apex:page title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-<apex:composition template="TransactionPageTemplate">
-  
+    <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-        <apex:form >
-            
-        <h1 class="heading-xlarge">
+            <apex:form >
+                <h1 class="heading-xlarge">
               {!$Label.UI_Text_Payment_page_Title}
-        </h1> 
-    
-
-            <apex:outputPanel rendered="{!hasPaid}">
-            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-        
-              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                </h1>
+                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel rendered="{!!hasPaid || !!hasPaymentRejected || !!hasPaymentError || !!hasPaymentPending}">
+                    <fieldset class="inline">
+                        <legend>Select a payment method:</legend>
+                        <div id="presenterSelection" class="form-group">
+                            <label class="block-label" for="radio-indent-1">
+                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit Card/Debit Card
+                                </input>
+                            </label>
+                            <label class="block-label" for="radio-indent-2">
+                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Account in my pocket
+                                </input>
+                            </label>
+                        </div>
+                    </fieldset>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!!hasPaid || !!hasPaymentRejected || !!hasPaymentError || !!hasPaymentPending}">
+                    <fieldset class="inline">
+                        <legend>Do you want Adam to treat your demand today?</legend>
+                        <div id="presenterSelection2" class="form-group">
+                            <label class="block-label" for="radio-indent-4">
+                                <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
+                                </input>
+                            </label>
+                            <label class="block-label" for="radio-indent-5">
+                                <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
+                                </input>
+                            </label>
+                        </div>
+                    </fieldset>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!updatePayment}" name="updatePayment" reRender="emptyPanel">
+                    <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
+                </apex:actionFunction>
+                <apex:actionFunction action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel">
+                    <apex:param name="paramBool" value="" id="y" assignTo="{!validationDirector}" />
+                </apex:actionFunction>
+                <apex:outputPanel rendered="{!hasPaid}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                   The payment already processed!
-              </h1>
-        
-              <p>
-                  The payment has been succesful.
-              </p>
-        
-              
-        
-            </div>
-        </apex:outputPanel>
-
-        <apex:outputPanel rendered="{!hasPaymentRejected}">
-            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-        
-              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        </h1>
+                        <p>
+                            The payment has been succesful.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentRejected}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                   The payment has been rejected.
-              </h1>
-                    
-              <p>
-                  Do you want to try again? (LINK HERE TO RUN JS TO REDIRECT TO PAYMENT AGAIN)
-              </p>
-        
-              
-        
-            </div>
-        </apex:outputPanel>
-
-        <apex:outputPanel rendered="{!hasPaymentError}">
-            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-        
-              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        </h1>
+                        <p>
+                            Do you want to try again? (LINK HERE TO RUN JS TO REDIRECT TO PAYMENT AGAIN)
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentError}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                   Barclays has encoutered an issue.
-              </h1>
-              <br/>
-              <p>
-                  Do you want to try again (It might not work)?(LINK HERE TO RUN JS TO REDIRECT TO PAYMENT AGAIN)
-                  Or come back later by loging with the same user. 
-              </p>
-        
-              
-        
-            </div>
-        </apex:outputPanel>
-
-        <apex:outputPanel rendered="{!hasPaymentPending}">
-            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-        
-              <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        </h1>
+                        <br/>
+                        <p>
+                            Do you want to try again (It might not work)?(LINK HERE TO RUN JS TO REDIRECT TO PAYMENT AGAIN) Or come back later by loging with the same user.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentPending}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                   The payment is pending.
-              </h1>
-                    
-              <p>
-                  You will have to do further action to validate the payment.
-              </p>
-        
-              
-        
-            </div>
-        </apex:outputPanel>
-
-            <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}"/><br />
-            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/>
-     </apex:form>
-                
+                        </h1>
+                        <p>
+                            You will have to do further action to validate the payment.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                <br />
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+            </apex:form>
         </apex:define>
-  
     </apex:composition>
-
 </apex:page>

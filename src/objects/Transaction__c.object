@@ -483,6 +483,16 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Url</type>
     </fields>
     <fields>
+        <fullName>SoleDirectorPresenter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to control the flow if the presenter is a sole director.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH USED IN THE BACK END</inlineHelpText>
+        <label>SoleDirectorPresenter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -630,6 +640,26 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>hasPaid__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to notify the transaction has been paid.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD. FIELD USED BY CODE</inlineHelpText>
+        <label>Has paid?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isBehalfSignatoryEnable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to control if we will display the flow of behalf signature selection and input screen</description>
+        <externalId>false</externalId>
+        <inlineHelpText>TO NO TOUCH THIS FIELD BACK END FIELD ONLY</inlineHelpText>
+        <label>is behalf signatory enable?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isLLP__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -642,6 +672,36 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>isMajorityRequired?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentAccount__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark is the transaction will require to load the account through the JSON</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY CODE TO CONTROL ACCOUNT PAYMENT</inlineHelpText>
+        <label>is paying against an Account?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox is used to acknowledge if a payment is required.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populated automatically by code. DO NOT TOUCH</inlineHelpText>
+        <label>is payment required?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSameDayProcessing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark if the user has paid the extra to make Companies House processing the transaction on the same day</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, USED BY THE CODE IN THE APPLICATION.</inlineHelpText>
+        <label>is same day processing?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

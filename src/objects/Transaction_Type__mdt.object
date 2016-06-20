@@ -200,12 +200,39 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isAccountPayment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will configure the payment page to allow the user to pay by using account.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select this field if your form is going to allow account payment by the user.</inlineHelpText>
+        <label>is account payment allowed?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isCardAllowed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will configure the payment page to allow the user to pay by using Card.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select this field if your form is going to allow card payment by the user.</inlineHelpText>
+        <label>is card for payment allowed?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isMajorityForm__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Please select this option if you want the Directors Email screen to be validated with the majority rule</description>
         <externalId>false</externalId>
         <inlineHelpText>Please select this option if you want the Directors Email screen to be validated with the majority rule</inlineHelpText>
         <label>isMajorityForm?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSameDayPayment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will configure the payment page to allow the user to pay by using same day payment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select this field if your form is going to allow same day payment by the user.</inlineHelpText>
+        <label>is same day payment allowed?</label>
         <type>Checkbox</type>
     </fields>
     <label>Transaction Type</label>

@@ -103,6 +103,16 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>hasInputBehalfDetails__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will notify to the behalf input details page if the director has been cover or not.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, BACK END FIELD</inlineHelpText>
+        <label>has input behalf signatory details?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isCorporateDirector__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -127,18 +137,20 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isSignatory__c</fullName>
+        <fullName>isSignatoryBehalf__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>This field is used to mark which officer has been selected by the user.</description>
         <externalId>false</externalId>
-        <label>is Signatory?</label>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY BACK END</inlineHelpText>
+        <label>is Signatory on behalf?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isSignatory_c__c</fullName>
+        <fullName>isSignatory__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>isSignatory__c</label>
+        <label>is Signatory?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

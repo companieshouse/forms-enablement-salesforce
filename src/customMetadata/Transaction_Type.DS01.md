@@ -31,53 +31,31 @@
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">Agree</value>
+        <value xsi:type="xsd:string">The company understands that it is responsible for notifying all interested parties</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Before you start
-&lt;/h1&gt;
-&lt;h2 class=&quot;heading-medium&quot;&gt;Getting ready to close your company&lt;/h2&gt;
-&lt;p&gt;Before you start this application, you should:&lt;/p&gt;
-&lt;ul class=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;Speak to all the company directors&lt;/li&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Understanding the company&apos;s responsibilities&lt;/h1&gt;&lt;h3 class=&quot;heading-medium&quot;&gt;Who to tell about your company closing&lt;/h3&gt;&lt;p&gt;A company must inform all interested parties that it is going to close</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;li&gt;Read the guidance on &lt;a href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4&quot;&gt;closing your company&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Check that your company is eligble&lt;/li&gt;
-&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">. All interested parties must be informed within 7 days of the application being submitted.&lt;br/&gt;Interested parties may include:&lt;/p&gt;&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Read the</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium&quot;&gt;Who to tell about your company closing&lt;/h3&gt;
-&lt;p&gt;Directors applying to close their company must tell all interested parties that the application has been made within 7 days. Interested parties may include:&lt;/p&gt;
-&lt;ul class</value>
+        <value xsi:type="xsd:string">full list of &lt;a href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4#how-to-apply-for-strike-off-and-who-to-tell&quot;&gt;who to tell&lt;span class=&quot;visuallyhidden&quot;&gt; about yo</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;members, usually shareholders&lt;/li&gt;
-&lt;li&gt;creditors&lt;/li&gt;
-&lt;li&gt;employees&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;
-Read the full list of &lt;a href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-</value>
+        <value xsi:type="xsd:string">ur company closing&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span class=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;&lt;img src=&quot;http://govuk-elements.herokuapp.com/public/images/i</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">dissolution-and-restoration-gp4#how-to-apply-for-strike-off-and-who-to-tell&quot;&gt;who to tell&lt;span class=&quot;visuallyhidden&quot;&gt; about your company closing&lt;/span&gt;&lt;/a&gt;.
-&lt;/p&gt;
-&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;
-&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span cl</value>
+        <value xsi:type="xsd:string">con-important.png&quot;/&gt;It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:type="xsd:string">ass=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;
-&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;&lt;img src=&quot;https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png&quot;/&gt;
-It is an offence not to tell all interested parties
-&lt;/strong&gt;&lt;/div&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
@@ -125,7 +103,19 @@ It is an offence not to tell all interested parties
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
+        <field>isAccountPayment__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>isCardAllowed__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>isMajorityForm__c</field>
         <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isSameDayPayment__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
 </CustomMetadata>

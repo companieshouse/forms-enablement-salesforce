@@ -145,7 +145,7 @@ public class SmartPayUrl {
         
         
         url += '&';
-        url += 'merchantSig=' + sigEncoded;
+        url += 'merchantSig=' + sigEncoded.replace('+','%2B');
 
         return url;
     }
@@ -158,9 +158,10 @@ public class SmartPayUrl {
     private String getResultUrl() {
         String hostname = ApexPages.currentPage().getHeaders().get('Host');
         String pageUrl = ApexPages.currentPage().getUrl();
-
         //Here page URL contains Apex/Payment
         pageUrl = pageUrl.substringAfter('/apex');
+
+        pageUrl = pageUrl.substringBefore('?') + '?c=' + EncodingUtil.urlEncode(ApexPages.currentPage().getParameters().get('c'), 'UTF-8') ;
 
         String url = 'https://' + hostname + pageUrl;
         return url;
