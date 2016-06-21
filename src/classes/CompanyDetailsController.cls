@@ -67,7 +67,8 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
         companyStatus = compProf.company_status;
         companyDateOfCreation = compProf.date_of_creation;
 		companyName = compProf.company_name;
-		companyType = compProf.type.toUpperCase();
+		companyType = compProf.type;
+        companyType = companyType.capitalize();
         showprevious = true;
 
         companyAddress = (companyAddress1 ==  null ? '' : companyAddress1+ '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2+ '<br/>')  + (companyregion ==  null ? '' : companyregion+ '<br/>')  + (companyLocality ==  null ? '' : companyLocality+ '<br/>')  + (companypostcode ==  null ? '' : companypostcode+ '<br/>')  + (companyCountry ==  null ? '' : companyCountry);

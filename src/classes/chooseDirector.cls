@@ -73,6 +73,11 @@ public class chooseDirector extends TransactionStepControllerBase
     public void initialiseStep()
     {
 
+        //if (submissionMgr.submission.Officers__r.size() == 1)
+        //{  if(submissionMgr.submission.Officers__r[0].isSignatory__c)
+        //      nextAction();
+        //}
+
         majoritytosign = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
@@ -80,19 +85,24 @@ public class chooseDirector extends TransactionStepControllerBase
         isLLPCompany = submissionMgr.submission.isLLP__c;
         majoritySignError = 'form-label-bold';
         buildDirectorsList();
+        //checkDirectorStatus();
         return;
     }
 
     public PageReference checkDirectorStatus()
-    {
+   {
 
-        if (submissionMgr.submission.Officers__r.size() == 1)
-        {
-            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
-                return nextAction();
+    if (submissionMgr.submission.Officers__r.size() == 1)
+        {  if(submissionMgr.submission.Officers__r[0].isSignatory__c)
+          return nextAction();
         }
         return null;
-    }
+       //if (submissionMgr.submission.SoleDirectorPresenter__c ==true)
+       //{
+       //    return nextStep();
+       //}
+       //return null;
+   }
 
 
     public void buildDirectorsList()

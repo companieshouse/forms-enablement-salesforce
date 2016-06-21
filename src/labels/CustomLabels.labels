@@ -57,6 +57,30 @@
         <value>*Power of Attorney sign on behalf of the director</value>
     </labels>
     <labels>
+        <fullName>UI_Text_Behalf_Decision</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Behalf Decision</shortDescription>
+        <value>Approving on behalf of a director</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Behalf_Input_Details</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Behalf Input Details</shortDescription>
+        <value>Inputs details</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Behalf_Which_Signatory</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Behalf Which Signatory</shortDescription>
+        <value>Behalf which selection</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Company</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
@@ -295,6 +319,14 @@
         <protected>true</protected>
         <shortDescription>UI Text Summary Page</shortDescription>
         <value>Summary Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Update_Company_Directors</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Update Company Directors</shortDescription>
+        <value>Update Company Directors</value>
     </labels>
     <labels>
         <fullName>UI_Text_Year</fullName>

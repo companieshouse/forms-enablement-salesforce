@@ -46,7 +46,7 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
@@ -264,7 +264,7 @@
         <fullName>ContactEmail__c</fullName>
         <description>Presenter Contact information for notifications</description>
         <externalId>false</externalId>
-        <label>ContactEmail</label>
+        <label>Contact Email</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Email</type>
@@ -485,7 +485,9 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
     <fields>
         <fullName>SoleDirectorPresenter__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>This field is used to control the flow if the presenter is a sole director.</description>
         <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH USED IN THE BACK END</inlineHelpText>
         <label>SoleDirectorPresenter</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -521,6 +523,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
             </picklistValues>
             <picklistValues>
                 <fullName>Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -634,6 +640,26 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>hasPaid__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to notify the transaction has been paid.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD. FIELD USED BY CODE</inlineHelpText>
+        <label>Has paid?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isBehalfSignatoryEnable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to control if we will display the flow of behalf signature selection and input screen</description>
+        <externalId>false</externalId>
+        <inlineHelpText>TO NO TOUCH THIS FIELD BACK END FIELD ONLY</inlineHelpText>
+        <label>is behalf signatory enable?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isLLP__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -646,6 +672,46 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>isMajorityRequired?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentAccount__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark is the transaction will require to load the account through the JSON</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY CODE TO CONTROL ACCOUNT PAYMENT</inlineHelpText>
+        <label>is paying against an Account?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox is used to acknowledge if a payment is required.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populated automatically by code. DO NOT TOUCH</inlineHelpText>
+        <label>is payment required?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPresenterMultipleDirectors__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to mark the transaction if the user answer to the question are you a director and if there is more than 1 director</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, BACK END ONLY</inlineHelpText>
+        <label>is Presenter Multiple Director?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSameDayProcessing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark if the user has paid the extra to make Companies House processing the transaction on the same day</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, USED BY THE CODE IN THE APPLICATION.</inlineHelpText>
+        <label>is same day processing?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -723,7 +789,7 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <linkType>page</linkType>
         <masterLabel>Create PDF</masterLabel>
         <openType>sidebar</openType>
-        <page>DS01</page>
+        <page>PDFGeneration</page>
         <protected>false</protected>
     </webLinks>
     <webLinks>

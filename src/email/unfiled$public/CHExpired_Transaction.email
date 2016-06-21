@@ -153,7 +153,7 @@
 
 
                     <p>
-                If you still wish to close the company, please begin the process again using the following link: {!Transaction__c.ApplicationBaseURL__c} </p>
+                If you still wish to close the company, please begin the process again using the following link: <a href="{!Transaction__c.ApplicationBaseURL__c}">Start</a> </p>
            
             </td>
         </tr>

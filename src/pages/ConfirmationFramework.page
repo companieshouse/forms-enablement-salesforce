@@ -81,8 +81,6 @@ Ver. Author        Date        Detail
              <p>
                 Your feedback will help us make this service better for all our users. It only takes 30 seconds to <a href="/forms/feedback">tell us what you thought of this service</a>.
              </p>
-             &nbsp;
-             <apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" />
           </apex:form>
        </apex:define>
     </apex:composition>

@@ -36,57 +36,80 @@ public class PaymentController extends TransactionStepControllerBase {
 
 
     // Public properties.
-    public Boolean hasPageErrors { get; set; }
 
     public String externalURL {get; set;}
 
     public Boolean hasPaid {get; set;}
-    
+    public Boolean hasPaymentSuccess {get; set;}
+    public Boolean hasPaymentRejected {get; set;}
+    public Boolean hasPaymentError {get; set;} 
+    public Boolean hasPaymentPending {get; set;}
+    public Boolean previousClicked {get; set;}
+
+    public Boolean isCardPayment {get; set;}
+    public Boolean isPaypalPayment {get; set;}
+    public Boolean isAccountPayment {get; set;}
+    public Boolean isSameDayPayment {get; set;}
+
+    public Boolean isCardSelected {get; set;}
+    public Boolean isPaypalSelected {get; set;}
+    public Boolean isAccountSelected {get; set;}
+
+    public Boolean isSameDaySelected {get; set;}
+
+    public Integer valuePaymentUI {get; set;}
 
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
+    }
 
+    public Boolean hasPaid(){
+        if(submissionMgr.submission.hasPaid__c)
+        {
+            return true;
+        }
+        return false;
     }
     
     public void initialiseStep() {
         hasPaid = false;
-        
-        if(isPageAlreadyValidStep)
-        {
-            hasPaid = true;
-            return;
-        }
-        else{
-            submissionMgr.submission.Status__c = 'Payment pending';
-        }
+        hasPaymentSuccess = false;
+        hasPaymentRejected = false;
+        hasPaymentError = false;
+        hasPaymentPending = false;
+        previousClicked = false;
 
+        isCardPayment = (transactionMgr.td.isCardAllowed__c == null ? false : transactionMgr.td.isCardAllowed__c);
+        isPaypalPayment = (transactionMgr.td.isPaypalAllowed__c == null ? false : transactionMgr.td.isPaypalAllowed__c);
+        isAccountPayment = (transactionMgr.td.isAccountPayment__c == null ? false : transactionMgr.td.isAccountPayment__c);
+        isSameDayPayment = (transactionMgr.td.isSameDayPayment__c == null ? false : transactionMgr.td.isSameDayPayment__c);
 
-        //If there is no fee associated we need to protect the page to be displayed
-        if(transactionMgr.td.Fee__c == null || transactionMgr.td.Fee__c == 00.00) 
-        {
-            PageReference nextPage = nextAction();
-            nextPage.setRedirect(true);
-            return;
-        }
-
-        submit();
-        return;
-        
+        isCardSelected = false;
+        isPaypalSelected = false;
+        isAccountSelected = false;
+        isSameDaySelected = false;
     }
 
     public PageReference checkPaymentResult(){
-
+        initialiseAction();
         parseQueryString(); 
-                  
-        if(authResult == null)
+
+        //If there is no payment associated we need to protect the page to be displayed
+        if(!submissionMgr.submission.isPaymentRequired__c) 
         {
-            if(submissionMgr.submission.Status__c == 'Payment pending')
-            {
-                persistStep();
-            }
+            hasPaid = true;
+            PageReference nextPage = nextAction();
+            nextPage.setRedirect(true);
+            return nextPage;
+        }
+
+        if(hasPaid())
+        {
+            hasPaid = true;
             return null;
-        }                         
+        }
+        
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || 
             String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -106,54 +129,54 @@ public class PaymentController extends TransactionStepControllerBase {
             return ApexPages.currentPage();
         }
 
-        
-
-
-
-        if (merchantReference != null && merchantReference.length() > 0) {
-            initialiseAction();
-
-            // Valid params for the result URL back to us after payment. Now check authResult.
-            if (authResult == AUTH_RESULT_AUTHORISED) {
-                // The user has paid already. We're done. Move on.
-                //PageReference pageReference = new PageReference('/apex/confirmation?txId=' + merchantReference); // ab added tx Id
-                //pageReference.setRedirect(true);
-                //return pageReference;
-                PageReference nextPage = nextAction();
-                nextPage.setRedirect(true);
-                //We need to update the status to awaiting submission when the payment is success
-                return nextPage;
-            }
-            else if(authResult == AUTH_RESULT_REFUSED) {
-                //Go To refused Payment page ?
-            }
-            else if(authResult == AUTH_RESULT_PENDING) {
-                //Nothing to do?
-            }
-            else if(authResult == AUTH_RESULT_CANCELLED) {
-                PageReference nextPage = previousAction();
-                nextPage.setRedirect(true);
-                return nextPage;
-            }
-            else if(authResult == AUTH_RESULT_ERROR) {
-                //Reload the current page to do the payment again?
-            }
-
+        if(previousClicked)
+        {
+            return previousAction();
         }
+
+        //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
         return null;
+        
+        
     }
 
     private void persistStep(){
-        submissionMgr.submission.Status__c = 'Paid';
+        if(hasPaymentSuccess || hasPaid)
+        {
+            submissionMgr.submission.Status__c = 'Paid';
+            submissionMgr.submission.hasPaid__c = true;
+        }
+
+        if(isAccountSelected)
+        {
+            submissionMgr.submission.isPaymentAccount__c = true;
+        }
+
+        if(isSameDaySelected)
+        {
+            submissionMgr.submission.isSameDayProcessing__c = true;   
+        }
+
         submissionMgr.persist();    
     }
     // End Instance methods.    
-    
+
     // Action methods.     
     public PageReference nextAction(){ 
         if (!validatePageState()) return Page.TransactionException;
-        
-        persistStep();      
+
+        if(isCardSelected || isPaypalSelected)
+        {
+            submit();
+            PageReference pg = new PageReference(externalURL);
+            pg.setRedirect(true);
+            return pg;
+        }
+            
+        persistStep(); 
+
+        if(!hasPaid())
+            return null;
 
         return nextStep();      
     }
@@ -165,7 +188,25 @@ public class PaymentController extends TransactionStepControllerBase {
     }
     // End Action methods.    
     
+    public void updatePayment()
+    {
+        if(valuePaymentUI == null) return;
+
+        if(valuePaymentUI == 1) 
+        {
+            isCardSelected = true;
+            isAccountSelected = false;
+        }
+        else if(valuePaymentUI == 2)
+        {
+            isCardSelected = false;
+            isAccountSelected = true;
+        }
+    }
     
+    public void updateSameDay(){
+
+    }
     
     /**
      * Off we go to a SmartPay URL.
@@ -176,12 +217,13 @@ public class PaymentController extends TransactionStepControllerBase {
         
         // Get a URL for SmartPay, the payment processor. Whether this is on TEST or LIVE is
         // driven by the active custom setting record.
-
+        
         //CODE FOR PRODUCTION WHEN Submission manager will be in sync with Transaction Object
         SmartPayUrl url = new SmartPayUrl.Builder()
                 .merchantReference(submissionMgr.submission.Id)
                 .paymentAmount(submissionMgr.submission.Amount__c)
                 .customerEmail(submissionMgr.submission.ContactEmail__c)
+                .customerMethodsPayment(isPaypalSelected)
                 .build();
         String redirectUrl = url.toString();
         externalURL = redirectUrl;
@@ -217,6 +259,63 @@ public class PaymentController extends TransactionStepControllerBase {
         merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);        
         authResult = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_RESULT);
         
+        if (merchantReference != null && merchantReference.length() > 0) {
+            
+
+            // Valid params for the result URL back to us after payment. Now check authResult.
+            if (authResult == AUTH_RESULT_AUTHORISED) {
+                //change the status of the payment page
+                hasPaid = false;
+                hasPaymentSuccess = true;
+                hasPaymentRejected = false;
+                hasPaymentPending = false;
+                previousClicked = false;
+                hasPaymentError = false;
+            }
+            else if(authResult == AUTH_RESULT_REFUSED) {
+                //Go To refused Payment page ?
+                hasPaymentSuccess = false;
+                hasPaid = false;
+                hasPaymentRejected = true;
+                hasPaymentPending = false;
+                previousClicked = false;
+                hasPaymentError = false;
+            }
+            else if(authResult == AUTH_RESULT_PENDING) {
+                //Nothing to do?
+                hasPaymentSuccess = false;
+                hasPaid = false;
+                hasPaymentRejected = false;
+                hasPaymentPending = true;
+                previousClicked = false;
+                hasPaymentError = false;
+            }
+            else if(authResult == AUTH_RESULT_CANCELLED) {
+                hasPaymentSuccess = false;
+                hasPaid = false;
+                hasPaymentRejected = false;
+                hasPaymentPending = false;
+                previousClicked = true;
+                hasPaymentError = false;
+            }
+            else if(authResult == AUTH_RESULT_ERROR) {
+                hasPaymentSuccess = false;
+                hasPaid = false;
+                hasPaymentRejected = false;
+                hasPaymentPending = false;
+                previousClicked = false;
+                hasPaymentError = true;
+            }
+            
+        }
+        else{
+            hasPaymentSuccess = false;
+            hasPaid = false;
+            hasPaymentRejected = false;
+            hasPaymentPending = false;
+            previousClicked = false;
+            hasPaymentError = false;
+        }
     }
     
 }

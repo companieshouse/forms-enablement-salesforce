@@ -66,12 +66,13 @@ public with sharing class GuidanceController {
             warningAgreeBox = false;
             // display text
             displayText0 = '';
-            displayText0 += transactionMgr.td.Guidance_Text_1__c;
-            displayText0 += transactionMgr.td.Guidance_Text_2__c;
-            displayText0 += transactionMgr.td.Guidance_Text_3__c;
-            displayText0 += transactionMgr.td.Guidance_Text_4__c;
-            displayText0 += transactionMgr.td.Guidance_Text_5__c;
-            displayText0 += transactionMgr.td.Guidance_Text_6__c;
+            displayText0 += (transactionMgr.td.Guidance_Text_1__c == null ? '' : transactionMgr.td.Guidance_Text_1__c);
+            displayText0 += (transactionMgr.td.Guidance_Text_2__c == null ? '' : transactionMgr.td.Guidance_Text_2__c);
+            displayText0 += (transactionMgr.td.Guidance_Text_3__c == null ? '' : transactionMgr.td.Guidance_Text_3__c);
+            displayText0 += (transactionMgr.td.Guidance_Text_4__c == null ? '' : transactionMgr.td.Guidance_Text_4__c);
+            displayText0 += (transactionMgr.td.Guidance_Text_5__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
+            displayText0 += (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
+    
             // checkbox text
             checkboxText0 = transactionMgr.td.GuidanceWarningText__c;
 

@@ -40,7 +40,7 @@ Ver. Author        		Date        Detail
 						</label> 
 
 						</fieldset>
-						<apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Next}" /><br />
+						<apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" /><br />
 		 			<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/>
 					</div>
 

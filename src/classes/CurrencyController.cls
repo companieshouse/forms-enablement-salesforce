@@ -80,23 +80,26 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
         get;
         set;
     }
-    public Boolean showTable
+
+    public Boolean previousSharesBoolean
     {
-        get
-        {
-            if (currentShares.size() < 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        get;
         set;
     }
 
     public String statusvalue
+    {
+        get;
+        set;
+    }
+
+    public String searchCurrencyError
+    {
+        get;
+        set;
+    }
+
+    public String valueTestdata
     {
         get;
         set;
@@ -110,7 +113,6 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
     }
 
 
-
     public void initialiseStep()
     {
         companyName = submissionMgr.submission.CompanyName__c;
@@ -122,88 +124,81 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
     public void autoCompleteState()
     {
 
-        if (submissionMgr.submission.sharecurrencyselection__c == null)
-        {
-            showautocomplete = true;
-        }
-        else
-        {
-            showautocomplete = false;
-            sharecurrency = submissionMgr.submission.sharecurrencyselection__c;
-            selectCurrentCurrencyTable(submissionMgr.submission.sharecurrencyselection__c);
-        }
-
-    }
-
-    public void selectCurrentCurrencyTable(String currencycomparer)
-    {
-
         if (submissionMgr.submission.Shares__r.size() > 0)
         {
-            for (Shares__c previousShares: submissionMgr.submission.Shares__r)
-            {
-                if (previousShares.Currency__c == currencycomparer)
-                {
-                    currentShares.add(previousShares);
+            valueTestdata = String.valueOf(submissionMgr.submission.Shares__r.size());
+            previousSharesBoolean = true;
+            // loop through the current shares and assign them to the buttons
+            // build a wrapper class
 
-                }
+            for (Shares__c foundShares: submissionMgr.submission.Shares__r)
+            {
+
+                currentShares.add(foundShares);
             }
         }
+        else if (submissionMgr.submission.Shares__r.size() == 0)
+        {
+            valueTestdata = String.valueOf(submissionMgr.submission.Shares__r.size());
+
+            previousSharesBoolean = false;
+        }
     }
 
-    public PageReference checkCurrencyTable(string currencyToCheckAgainst)
+    public void checkCurrencyTable(string currencyToCheckAgainst)
     {
+        //throw new Form_CustomException('finally working and currency to check against is   ' + submissionMgr.submission.Shares__r.size());
 
         if (submissionMgr.submission.Shares__r.size() > 0)
-        {  
-            showautocomplete = false;
-         //throw new Form_CustomException('finally working and currency to check against is   ' + showautocomplete);
+        {
             for (Shares__c previousShares: submissionMgr.submission.Shares__r)
             {
                 if (previousShares.Currency__c == currencyToCheckAgainst)
                 {
-                    return null;
-                    //showautocomplete = false;
-                    //showTable = true;
-                    //statusvalue = 'currency is the same';
-                    //selectCurrentCurrencyTable(currencyToCheckAgainst);
-                    // return true; 
-
-                    // throw new Form_CustomException('it looks like you already have shares in this class' + currencyToCheckAgainst);
+                    searchCurrencyError = 'It looks like you have shares in this currency already';
+                    throw new Form_CustomException('found a previous currency selection for  ' + currencyToCheckAgainst);
 
                 }
                 else if (previousShares.Currency__c != currencyToCheckAgainst)
                 {
-                    showautocomplete = false;
-                    statusvalue = 'currency is different';
-                                        return null;
-
-                    // throw new Form_CustomException('finally working and currency to check against is   ' + currencyToCheckAgainst);
+                    throw new Form_CustomException('found not previous currency selection for  this should never be hit.  ' + currencyToCheckAgainst);
                 }
             }
         }
-        else
+        else if (submissionMgr.submission.Shares__r.size() == 0)
         {
-            throw new Form_CustomException('there is nothing to test against so your statement works');
+
+            throw new Form_CustomException('there is nothing to test against so your statement works but there is no reason to have this else statement');
 
         }
-        return null;
+    }
+
+    public PageReference finishedAddingShares()
+    {
+
+
+        submissionMgr.submission.finishedAddingShares__c = true;
+        // may just need next step and no persist and nextAction
+
+        submissionMgr.persist();
+
+        return nextStep();
     }
 
     public PageReference setSelectedCurrency()
     {
-        submissionMgr.submission.sharecurrencyselection__c = selectedCurrency;
 
         // throw new Form_CustomException('currency after persist' + submissionMgr.submission.sharecurrencyselection__c);
 
-        checkCurrencyTable(submissionMgr.submission.sharecurrencyselection__c);
+        checkCurrencyTable(selectedCurrency);
+
+        submissionMgr.submission.sharecurrencyselection__c = selectedCurrency;
 
         System.debug('Currency Changed to   ' + selectedCurrency);
 
-        showautocomplete = false;
 
         persistStep();
-        return null;
+        return nextAction();
     }
 
 
@@ -214,30 +209,6 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
 
         // persist stuff here
         submissionMgr.persist();
-    }
-
-    public String addShare()
-    {
-        try
-        {
-            //String name, String transactionid, Decimal numberofshares, String sharecurrency, String classofshares, Decimal totalvalueofshares
-            insert new Shares__c(Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = sharecurrency, Class_of_Shares__c = classofshares, Total_aggregate_amount_unpaid__c = totalvalueofshares, ActiveData__c = true);
-            selectCurrentCurrencyTable(submissionMgr.submission.sharecurrencyselection__c);
-        }
-        catch (DmlException e)
-        {
-
-            ApexPages.Message error = new ApexPages.Message(ApexPages.Severity.ERROR, 'Error: Invalid Input.' + e);
-            ApexPages.addMessage(error);
-            return null;
-        }
-        catch (Exception e)
-        {
-            ApexPages.Message error = new ApexPages.Message(ApexPages.Severity.ERROR, 'Error: Invalid Input.' + e);
-            ApexPages.addMessage(error);
-            return null;
-        }
-        return null;
     }
 
     public PageReference nextAction()

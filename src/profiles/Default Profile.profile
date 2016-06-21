@@ -45,6 +45,18 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>BehalfDecisionController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BehalfInputDetailsController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BehalfWhichSignatoryController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CH_ChargeController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -417,6 +429,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>UpdateCompanyDirectorsController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Util</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -504,6 +520,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Officer__c.hasInputBehalfDetails__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Officer__c.isCorporateDirector__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -515,6 +536,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Officer__c.isPowerOfAttorney__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isSignatoryBehalf__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -784,7 +810,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type__mdt.isAccountPayment__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.isCardAllowed__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type__mdt.isMajorityForm__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.isPaypalAllowed__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.isSameDayPayment__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1029,12 +1075,42 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.hasPaid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.isBehalfSignatoryEnable__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.isLLP__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.isMajorityRequired__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.isPaymentAccount__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.isPaymentRequired__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.isPresenterMultipleDirectors__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.isSameDayProcessing__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1144,7 +1220,23 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>AddShares</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>AddSharesBase</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>BehalfDecision</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>BehalfInputDetails</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>BehalfWhichSignatory</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1333,6 +1425,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>TypeToSearchCurrencyFlow</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>UpdateCompanyDirectors</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

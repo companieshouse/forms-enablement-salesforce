@@ -22,7 +22,7 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <style>
                 .hypercolorblue {
                     color: #005EA5;
@@ -2644,12 +2644,9 @@ Ver. Author        Date        Detail
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                             An error has occurred.
                         </h1>
-                        <p>
-                            Optional description of the errors and how to correct them
-                        </p>
                         <ul class="error-summary-list">
                             <li>
-                                <a href="#example-personal-details">Descriptive link to the question with an error</a>
+                                <span class="error-message">{!currentErrorMessage}</span>
                             </li>
                         </ul>
                     </div>
@@ -2661,10 +2658,13 @@ Ver. Author        Date        Detail
                 <label class="form-label" for="text-input">What is the company number?
                     <span class="form-hint">This is the 8 digit number at the bottom of your company certificate.</span>
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <span class="error-message" id="error-message-ni-number">Error message about Company Number goes here</span>
+                        <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                        </span>
                     </apex:outputPanel>
                 </label>
+                <apex:outputText escape='false' value='{!currentErrortop}' />
                 <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
+                <apex:outputText escape='false' value='{!currentErrorbottom}' />
                 <!-- </div>   -->
                 <br/>
                 <span class="hypercolorblue"> &#9654;</span>

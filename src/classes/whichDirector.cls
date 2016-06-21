@@ -17,6 +17,7 @@ Ver. Author        Date        Detail
 public class whichDirector extends TransactionStepControllerBase
 {
 
+    // Public properties.
     public Boolean hasPageErrors
     {
         get;
@@ -84,17 +85,21 @@ public class whichDirector extends TransactionStepControllerBase
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         isLLPCompany = submissionMgr.submission.isLLP__c;
+        //checkDirectorStatus();
         return;
     }
     public PageReference checkDirectorStatus()
     {
+        Boolean isSolePresenterDetected = submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c ;
+        Boolean isPresenterDetected = SubmissionMgr.submission.isPresenterMultipleDirectors__c == null ? false :  submissionMgr.submission.isPresenterMultipleDirectors__c;
+    
 
-        if (submissionMgr.submission.Officers__r.size() == 1)
+        if(isPresenterDetected || isSolePresenterDetected )
         {
-            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
-                return nextAction();
+            return null;
         }
-        return null;
+
+        return nextAction();
     }
 
     public void selectPresenter()
@@ -108,12 +113,14 @@ public class whichDirector extends TransactionStepControllerBase
             {
                 selectingOfficer.IsPresenter__c = true;
                 selectingOfficer.isSignatory__c = true;
+                selectingOfficer.Email__c = submissionMgr.submission.Presenter__r.Name;
                 officerUpdaterMap.put(selectingOfficer.Name, selectingOfficer);
             }
             else if (selectingOfficer.Id != selectedId)
             {
                 selectingOfficer.IsPresenter__c = false;
                 selectingOfficer.isSignatory__c = false;
+                selectingOfficer.Email__c = null;
                 officerUpdaterMap.put(selectingOfficer.Name, selectingOfficer);
             }
 
@@ -125,10 +132,12 @@ public class whichDirector extends TransactionStepControllerBase
 
 
     private void persistStep()
-    {
-        submissionMgr.persist();
-    }
+        {
+            submissionMgr.persist();
+        }
+        // End Instance methods.    
 
+    // Action methods.     
     public PageReference nextAction()
     {
         if (!validatePageState()) return Page.TransactionException;
@@ -139,10 +148,11 @@ public class whichDirector extends TransactionStepControllerBase
     }
 
     public PageReference previousAction()
-    {
-        if (!validatePageState()) return Page.TransactionException;
+        {
+            if (!validatePageState()) return Page.TransactionException;
 
-        return previousStep();
-    }
+            return previousStep();
+        }
+        // End Action methods.    
 
 }

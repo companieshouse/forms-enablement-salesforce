@@ -55,6 +55,22 @@ public class DirectorDetails extends TransactionStepControllerBase
         set;
     }
 
+    public Boolean showErrors
+    {
+        get;
+        set;
+    }
+
+    public String currentErrortop
+    {
+        get;
+        set;
+    }
+    public String currentErrorbottom
+    {
+        get;
+        set;
+    }
 
     public DirectorDetails()
     {
@@ -72,7 +88,11 @@ public class DirectorDetails extends TransactionStepControllerBase
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();
         isLLPCompany = submissionMgr.submission.isLLP__c;
+        currentErrortop = '<div class="form-group error">';
+        currentErrorbottom = '</div>';
         buildDirectorsList();
+        showErrors = false;
+        //checkDirectorStatus();
         return;
     }
 
@@ -82,9 +102,35 @@ public class DirectorDetails extends TransactionStepControllerBase
 
         if (submissionMgr.submission.Officers__r.size() == 1)
         {
-            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+            if (submissionMgr.submission.Officers__r[0].IsPresenter__c)
+
                 return nextAction();
         }
+
+        // must test better against on behalf multiple director flow.
+        if (submissionMgr.submission.Officers__r.size() >= 1)
+        {
+            Integer baseline = 0;
+            Integer myinteger = 0;
+            for (Officer__c officerstoCount: submissionMgr.submission.Officers__r)
+            {
+                if (officerstoCount.isSignatory__c == true)
+                {
+                    baseline++;
+                    if (officerstoCount.Email__c != null)
+                    {
+                        myinteger++;
+                    }
+                }
+            }
+
+            if (baseline == myinteger)
+            {
+                // all signature emails have been acquired. call next action
+                return nextAction();
+            }
+        }
+
         return null;
     }
 
@@ -92,17 +138,11 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
         for (Officer__c chosenOfficer: companyDirectors)
         {
-            if (chosenOfficer.isSignatory__c == True)
+            if (chosenOfficer.isSignatory__c && !chosenOfficer.hasInputBehalfDetails__c && !chosenOfficer.IsPresenter__c)
             {
                 builtDirectors.add(chosenOfficer);
             }
-            else if (chosenOfficer.IsPresenter__c == true)
-            {
-                if (chosenOfficer.isSignatory__c == true)
-                {
-                    builtDirectors.add(chosenOfficer);
-                }
-            }
+
         }
     }
 
@@ -112,18 +152,38 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
 
         submissionMgr.persist();
-
     }
 
     public PageReference nextAction()
     {
+        // skip if officer is presenter
         if (!validatePageState()) return Page.TransactionException;
 
         if (submissionMgr.submission.Officers__r.size() == 1)
         {
-            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+            if (submissionMgr.submission.Officers__r[0].IsPresenter__c)
+
                 return nextStep();
         }
+
+        // skip if all officers have an email address already
+
+        /*
+        if (submissionMgr.submission.Officers__r.size() >= 1)
+        {
+            for (Officer__c officerstoCount: submissionMgr.submission.Officers__r)
+                if (officerstoCount.isSignatory__c == true)
+                {
+                    if (officerstoCount.IsPresenter__c == false)
+                    {
+                        if (officerstoCount.Email__c != null)
+                        {
+                            return nextStep();
+                        }
+                    }
+                }
+        }
+        */
 
         for (Officer__c off: submissionMgr.submission.Officers__r)
         {
@@ -134,19 +194,43 @@ public class DirectorDetails extends TransactionStepControllerBase
                     if (!emailValidation(directorstoUPDATE.email, directorstoUPDATE.off.Name))
                     {
                         directorstoUPDATE.validationErrors = emailErrors;
+                        directorstoUPDATE.privateErrors = showErrors;
+                        directorstoUPDATE.topErrors = currentErrortop;
+                        directorstoUPDATE.bottomErrors = currentErrorbottom;
+                        directorstoUPDATE.confirmationerrorTop = '';
+                        directorstoUPDATE.confirmationerrorBottom = '';
                         return null;
                     }
                     if (!emailValidation(directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name))
                     {
-                        directorstoUPDATE.validationErrors = emailErrors;
+                        directorstoUPDATE.confirmationErrors = emailErrors;
+                        directorstoUPDATE.validationErrors = ' ';
+                        directorstoUPDATE.privateErrors = showErrors;
+                        directorstoUPDATE.topErrors = '';
+                        directorstoUPDATE.bottomErrors = '';
+                        directorstoUPDATE.confirmationerrorTop = currentErrortop;
+                        directorstoUPDATE.confirmationerrorBottom = currentErrorbottom;
                         return null;
                     }
                     if (!emailComparison(directorstoUPDATE.email, directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name))
                     {
                         directorstoUPDATE.validationErrors = emailErrors;
+                        directorstoUPDATE.privateErrors = showErrors;
+                        directorstoUPDATE.topErrors = currentErrortop;
+                        directorstoUPDATE.bottomErrors = currentErrorbottom;
+                        directorstoUPDATE.confirmationerrorTop = currentErrortop;
+                        directorstoUPDATE.confirmationerrorBottom = currentErrorbottom;
                         return null;
                     }
                     directorstoUPDATE.validationErrors = '';
+                    directorstoUPDATE.confirmationErrors = '';
+                    directorstoUPDATE.privateErrors = false;
+                    directorstoUPDATE.topErrors = '';
+                    directorstoUPDATE.bottomErrors = '';
+                    directorstoUPDATE.topErrors = '';
+                    directorstoUPDATE.bottomErrors = '';
+                    directorstoUPDATE.confirmationerrorTop = '';
+                    directorstoUPDATE.confirmationerrorBottom = '';
 
                     off.Email__c = directorstoUPDATE.email;
                 }
@@ -189,12 +273,51 @@ public class DirectorDetails extends TransactionStepControllerBase
             set;
         }
 
+        public Boolean privateErrors
+        {
+            get;
+            set;
+        }
+        public String topErrors
+        {
+            get;
+            set;
+        }
+        public String bottomErrors
+        {
+            get;
+            set;
+        }
+
+        public String confirmationErrors
+        {
+            get;
+            set;
+        }
+
+        public String confirmationerrorTop
+        {
+            get;
+            set;
+        }
+        public String confirmationerrorBottom
+        {
+            get;
+            set;
+        }
+
         public directorWrapper(Officer__c wrappedofficer)
         {
+            confirmationerrorBottom = '';
+            confirmationerrorTop = '';
+            confirmationErrors = '';
+            privateErrors = false;
             validationErrors = '';
             off = wrappedofficer;
             email = '';
             confirmationemail = '';
+            topErrors = '';
+            bottomErrors = '';
         }
     }
 
@@ -215,6 +338,7 @@ public class DirectorDetails extends TransactionStepControllerBase
 
             emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must not be blank';
             hasPageErrors = true;
+            showErrors = true;
             return false;
         }
         // check for @
@@ -228,6 +352,8 @@ public class DirectorDetails extends TransactionStepControllerBase
 
                 emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
                 hasPageErrors = true;
+                showErrors = true;
+
                 return false;
             }
         }
@@ -237,6 +363,8 @@ public class DirectorDetails extends TransactionStepControllerBase
 
             emailErrors = 'Email Address for' + ' ' + username + ' ' + ' must be valid and contain an @';
             hasPageErrors = true;
+            showErrors = true;
+
             return false;
         }
 
@@ -252,6 +380,8 @@ public class DirectorDetails extends TransactionStepControllerBase
 
             emailErrors = 'Email Addresses' + ' ' + email1 + ' ' + 'does not match' + ' ' + email2 + ' ' + 'for' + ' ' + username;
             hasPageErrors = true;
+            showErrors = true;
+
 
             return false;
         }

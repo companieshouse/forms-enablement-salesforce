@@ -2690,9 +2690,6 @@
                     <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
                         <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
                     </apex:actionFunction>
-                    <apex:actionFunction action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
-                        <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
-                    </apex:actionFunction>
                 </div>
                 <br />
                 <br /> &nbsp;

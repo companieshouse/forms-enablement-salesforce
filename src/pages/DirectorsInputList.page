@@ -20,98 +20,141 @@
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
 <apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorInputListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
-    <apex:composition template="TransactionPageTemplate">
-        <apex:define name="content">
-            <apex:form >
-                <apex:outputPanel id="emptyDiv" />
-                <div class="form-group">
-                    <h1 class="heading-xlarge">
-                     <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
-                      <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText>
-                      </h1>
-                    <p class="lede">
-                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director listed on the public register."></apex:outputText>
+<apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
+   <apex:composition template="TransactionPageTemplate">
+      <apex:define name="content">
+      <apex:form >
+        <apex:outputPanel id="emptyDiv"/>
+
+         <div class="form-group">
+         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+                      <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
+         <p class="lede"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director listed on the public register."></apex:outputText>
                         <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member listed on the public register.{!isLLPCompany}"></apex:outputText>
-                    </p>
-                    <p class="heading-medium">
-                        Please select who is going to sign.
-                    </p>
-                    <fieldset class="inline">
-                        <div class="form-group">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Select for Signature</th>
-                                        <th scope="col">
-                                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director Name"></apex:outputText>
-                                            <apex:outputText rendered="{!isLLPCompany}" value="Member Name"></apex:outputText>
-                                        </th>
-                                        <th scope="col">Email (Mandatory)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-                                        <tr>
-                                            <td>
-                                                <label class="block-label" for="radio-{!director.officer.Id}">
-                                                    <input class="checkButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatory}" onchange="updateSignatory(this.name);"></input>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                {!director.officerTXT}</td>
-                                            <td>
-                                                <input class="emailButtonRepeat" id="email-{!director.officer.Id}" type="email" name="{!director.officer.Id}" value="{!director.email}"></input>
-                                            </td>
-                                        </tr>
-                                    </apex:repeat>
-                                </tbody>
-                            </table>
-                        </div>
-                    </fieldset>
-                </div>
-                <br />
-                <br />
-                <apex:actionFunction action="{!updateSignatory}" name="updateSignatory" reRender="emptyDiv">
-                    <apex:param name="paramSignatory" value="" id="x" assignTo="{!selectedId}" />
-                </apex:actionFunction>
-                <apex:actionFunction action="{!updateEmails}" name="updateEmails" reRender="emptyPanel">
-                    <apex:param name="paramEmailValue" value="" id="y" assignTo="{!emails}" />
-                </apex:actionFunction>
-                <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->
-                <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->
-                &nbsp;
-                <apex:commandButton styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" onfocus="changeValue();" />
-                <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
-                <script type="text/javascript">
-                $j = jQuery.noConflict();
+         </p>
+         <p class="heading-medium">
+          Select who is going to sign.
+        </p>
+        <apex:outputPanel id="errorDirector">
+        <apex:outputPanel rendered="{!hasPageErrorsDirector}">
+            <span  class="error-message" id="error-message-full-name">You need to select enough directors for the majority</span>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!hasPageErrorsEmail}">
+            <span  class="error-message" id="error-message-full-name">You specified an email without selecting the Director for signature please correct</span>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!hasPageErrorsCorrectEmails}">
+            <span  class="error-message" id="error-message-full-name">Enter valid email address</span>
+        </apex:outputPanel>
 
-                $j(document).ready(function() {
+         <apex:outputPanel rendered="{!isNameError}">
+            <span  class="error-message" id="error-message-full-name">Specify a Signotary Name if you sign on behalf of a Director</span>
+        </apex:outputPanel>
+        </apex:outputPanel>       
+        <br/>
+        <fieldset class="inline">
+          <div class="form-group">
+           <table>
+              <thead>
+                <tr>
+                  <th scope="col">Select for Signature</th>
+                  <th scope="col"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Director Name"></apex:outputText>
+                                            <apex:outputText rendered="{!isLLPCompany}" value="Member Name"></apex:outputText></th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Signatory Name</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+          <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                        <tr>
+                            <td>
+        <!--class="block-label"-->
+            <label  for="radio-{!director.officer.Id}">
+              <input class="checkButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatory}" onchange="updateSignatory(this.name);"></input>
+            </label></td><td>
+            {!director.officerTXT}</td>
+            <td>
+            <select onchange="updateStatus(this.value,this.name);" name="{!director.officer.Id}" id="picklist-{!director.officer.Id}" >
+              <option value="None">None</option>
+              <option value="Deceased">Deceased</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Power of Attorney">Power of Attorney</option>
+            </select>
+            </td>
+            <td>
+            <input class="nameAuth" style="height:26px;" id="nameAuth-{!director.officer.Id}" type="text" name="{!director.officer.Id}" value="{!director.authName}"></input>
+            </td>
+            <td>
+            <input class="emailButtonRepeat" id="email-{!director.officer.Id}" type="email" name="{!director.officer.Id}" value="{!director.email}"></input>
+            </td>
+            </tr>
+          </apex:repeat>
+          </tbody>
+  </table>
+          </div>
+        </fieldset>
+        </div>
+         <br /><br />
 
+         <apex:actionFunction action="{!updateSignatory}" name="updateSignatory" reRender="emptyDiv">
+          <apex:param name="paramSignatory" value="" id="x" assignTo="{!selectedId}" />
+         </apex:actionFunction>
+         <apex:actionFunction action="{!updateEmails}" name="updateEmails" reRender="emptyDiv,errorDirector">
+          <apex:param name="paramEmailValue" value="" id="y" assignTo="{!emails}" />
+         </apex:actionFunction>
+         <apex:actionFunction action="{!updateStatusBehalf}" name="updateStatusBehalf" reRender="emptyDiv">
+          <apex:param name="valueSelected" value="" id="y23" assignTo="{!selectedStatus}" />
+          <apex:param name="directorId" value="" id="y233" assignTo="{!selectIdStatus}" />
+         </apex:actionFunction>
+          <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
 
+         <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
+         <apex:commandButton styleClass="button" value="{!$Label.UI_Text_Next}" reRender="errorDirector" rendered="{!NOT(isLastPage)}" onClick="changeValue(); event.preventDefault();" /><br />
+         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;
+      <script type="text/javascript">
+         $j = jQuery.noConflict();
 
-                });
+             $j(document).ready(function() {
+              
+                
+               $('.nameAuth').each(function(){
+                this.disabled = true;
+              });
+            });
+              
 
-                function changeValue() {
-                    var myList = '';
-                    $('.emailButtonRepeat').each(function() {
-                        if (this.value != null) {
-                            if (this.value != '') {
+            function updateStatus(out1, out2)
+            {
+              updateStatusBehalf(out1,out2);
+              
+              if(out1 != 'None')
+                document.getElementById('nameAuth-' + out2).disabled = false;
+              else
+              {
+                var authNamee = document.getElementById('nameAuth-' + out2);
+                authNamee.disabled = true;
+                authNamee.value = '';
 
-                                myList += ('|' + this.name + "_-_" + this.value);
+              }
+            }
 
-                            }
-                        }
+            function changeValue() 
+             {
+              var myList = '';
+               $('.emailButtonRepeat').each(function(){
+                  
+                      var name = document.getElementById('nameAuth-' + this.name);
+                      myList += ('|' + this.name + "_-_" + name.value + "_-_" + this.value);
+                      
+                   
 
+               
+            });
+              updateEmails(myList);
+         }
+         </script>
 
-
-                    });
-
-                    updateEmails(myList);
-                }
-                </script>
-            </apex:form>
-        </apex:define>
-    </apex:composition>
+      </apex:form>  
+      </apex:define>
+   </apex:composition>
 </apex:page>

@@ -36,6 +36,7 @@ public class ReviewController extends TransactionStepControllerBase{
     public List<Officer__c> companyDirectors {get; set;}
     
     // company address information
+    public String companyAddress {get; set;}
     public String companyAddress1 {get;set;}
     public String companyAddress2 {get;set;}
     public String companyregion {get;set;}
@@ -62,14 +63,23 @@ public class ReviewController extends TransactionStepControllerBase{
 
         companyDirectors = submissionMgr.submission.Officers__r;
 
-        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
-        companyAddress1 = compProf.registered_office_address.address_line_1;
-        companyAddress2 = compProf.registered_office_address.address_line_2;
-        companyregion = compProf.registered_office_address.region;
-        companypostcode = compProf.registered_office_address.postal_code;
-        companyCountry = compProf.registered_office_address.country;
-        companyLocality = compProf.registered_office_address.locality;
-        System.debug(' company profile is ' + compProf.registered_office_address);
+        //CSBEGINMOD SP 01/06/2016: Code changed because we don't need to do an API call
+        //CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+        //companyAddress1 = compProf.registered_office_address.address_line_1;
+        //companyAddress2 = compProf.registered_office_address.address_line_2;
+        //companyregion = compProf.registered_office_address.region;
+        //companypostcode = compProf.registered_office_address.postal_code;
+        //companyCountry = compProf.registered_office_address.country;
+        //companyLocality = compProf.registered_office_address.locality;
+        //CSENDMOD SP 01/06/2016
+
+        companyAddress1 = submissionMgr.submission.CompanyAddress1__c;
+        companyAddress2 = submissionMgr.submission.CompanyAddress2__c;
+        companyregion = submissionMgr.submission.CompanyRegion__c;
+        companypostcode = submissionMgr.submission.CompanyPostCode__c;
+        companyCountry = submissionMgr.submission.CompanyCountry__c;
+        companyLocality = submissionMgr.submission.CompanyLocality__c;
+        companyAddress = (companyAddress1 ==  null ? '' : companyAddress1+ '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2+ '<br/>')  + (companyregion ==  null ? '' : companyregion+ '<br/>')  + (companyLocality ==  null ? '' : companyLocality+ '<br/>')  + (companypostcode ==  null ? '' : companypostcode+ '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
         showprevious = true;
         if(submissionMgr.submission.Officers__r.size() > 1) {showprevious=false;}
 

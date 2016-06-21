@@ -17,22 +17,16 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
 <apex:component >
-    <apex:attribute name="f" description="Field to render" type="DynamicField" required="true" />
-    <apex:outputPanel layout="inline" rendered="{!f.inputType=='TEXT'}">
-        <c:GDSInputText f="{!f}" />
-    </apex:outputPanel>
-    <apex:outputPanel layout="inline" rendered="{!f.inputType=='Date'}">
-        <c:GDSInputDate f="{!f}" />
-    </apex:outputPanel>
-    <apex:outputPanel layout="inline" rendered="{!f.inputType=='TextArea'}">
-        <c:GDSInputTextArea f="{!f}" />
-    </apex:outputPanel>
-    <apex:outputPanel layout="inline" rendered="{!f.inputType=='Currency'}">
-    </apex:outputPanel>
-    <apex:outputPanel layout="inline" rendered="{!f.inputType=='Boolean'}">
-        <c:GDSInputBoolean f="{!f}" />
-    </apex:outputPanel>
-    <apex:outputPanel layout="inline" rendered="{!f.inputType=='Reference'}">
-        <c:GDSInputReference f="{!f}" />
-    </apex:outputPanel>
+
+	<apex:attribute name="f" 
+        			description="Field to render"
+        			type="DynamicField"
+        			required="true" />
+        			
+	<apex:outputPanel layout="inline" rendered="{!f.inputType=='Text'}">
+		<c:GDSInputText f="{!f}" />
+	</apex:outputPanel>
+	<apex:outputPanel layout="inline" rendered="{!f.inputType=='Date'}">
+		<c:GDSInputDate f="{!f}" />
+	</apex:outputPanel>
 </apex:component>

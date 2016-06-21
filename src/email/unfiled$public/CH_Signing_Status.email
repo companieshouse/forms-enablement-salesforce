@@ -146,7 +146,7 @@
                 <h1 class="page-title-style-email">Application to close {!Transaction__c.CompanyName__c}</h1>
                 <p>Dear {!Transaction__c.PresenterName__c} </p>
                 <p>
-                The application to close {!Transaction__c.CompanyName__c} has been sent to the directors for signing. The status of the application can be viewed here: {!Transaction__c.SignerStatus__c}      
+                The application to close {!Transaction__c.CompanyName__c} has been sent to the directors for signing. The status of the application can be viewed here: <a href="{!Transaction__c.SignerStatus__c}">Link</a>      
             </td>
         </tr>
         <tr>

@@ -108,7 +108,7 @@ public with sharing class StartFrameworkController {
             //  userTracker = new TrackUserClass();
 
             // userTracker.getUserDocument();
-
+            
             try {
 
                 if (!ApexPages.currentPage().getParameters().containsKey('t') ||
@@ -117,7 +117,6 @@ public with sharing class StartFrameworkController {
 
                 transactionType = ApexPages.currentPage().getParameters().get('t');
                 transactionMgr = new TransactionManager(transactionType);
-
                 // this is not efficient unless start pages follow this format consistently
                 pageTitle = transactionMgr.td.Landing_Page_Title__c;
                 pageText = transactionMgr.td.Landing_Page_Text__c;
