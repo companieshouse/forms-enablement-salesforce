@@ -42,6 +42,10 @@
         <value xsi:type="xsd:string">Dissolution</value>
     </values>
     <values>
+        <field>FeeFastTrack__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Fee__c</field>
         <value xsi:type="xsd:double">10.0</value>
     </values>
@@ -124,6 +128,10 @@
     <values>
         <field>isMajorityForm__c</field>
         <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isPaymentRequired__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isPaypalAllowed__c</field>

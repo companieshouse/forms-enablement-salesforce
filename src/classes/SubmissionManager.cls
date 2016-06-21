@@ -94,9 +94,9 @@ public with sharing class SubmissionManager {
         }
 
         //Determine is the payment is needed or not.
-        Boolean isPaymentNeeded = (td.Fee__c == null || td.Fee__c == 0 ? false : true);
+        Boolean isPaymentNeeded = (td.isPaymentRequired__c == null ? false : td.isPaymentRequired__c);
         
-        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail, Amount__c = td.Fee__c,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
+        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
         insert submission;
         return submission.Id;       
     }

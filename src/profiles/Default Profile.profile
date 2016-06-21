@@ -670,6 +670,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type__mdt.FeeFastTrack__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type__mdt.Fee__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -761,6 +766,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction_Type__mdt.isMajorityForm__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.isPaymentRequired__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
