@@ -43,7 +43,7 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">10.0</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
@@ -125,6 +125,10 @@
     <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>companySearchPageText__c</field>
+        <value xsi:type="xsd:string">Tell us which company you would like to add share capital</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

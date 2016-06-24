@@ -19,7 +19,7 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <div class="govuk-box-highlight">
                     <h1 class="bold-large">Submission complete</h1>
                     <p>

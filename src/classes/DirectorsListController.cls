@@ -86,7 +86,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
             PageReference pg = Page.UpdateCompanyDirectors;
             pg.getParameters().put('c', ApexPages.currentPage().getParameters().get('c'));
             pg.setRedirect(true);
-            throw new Form_CustomException(' here is your exception. .adf.a,sdfasdf ===='+ pg);
+            //throw new Form_CustomException(' here is your exception. .adf.a,sdfasdf ===='+ pg);
             return pg;
         }
 

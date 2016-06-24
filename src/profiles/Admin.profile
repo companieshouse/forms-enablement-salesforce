@@ -21,11 +21,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AddSharesBaseController</apexClass>
+        <apexClass>AddAttachmentsControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AddSharesController</apexClass>
+        <apexClass>AddSharesBaseController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -166,6 +166,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>CurrencyController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>CustomViews</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -350,14 +354,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Session</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ShareBuilderController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Shares</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -613,6 +609,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.CompanyNameText__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.ContinueButtonText__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.CustomView__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type_Step__mdt.Display_Text_1__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -653,6 +664,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.Header_Text_2__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.Header_Text_3__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type_Step__mdt.Is_Active__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -669,6 +690,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction_Type_Step__mdt.SObject_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type_Step__mdt.StandardView__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -809,6 +835,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction_Type__mdt.above_button_text__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.companySearchPageText__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1297,14 +1328,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>DemoPage0</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DemoPage1</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>DeveloperTools</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1365,6 +1388,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>PDFGeneration</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>Payment</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1386,14 +1413,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>SH19</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>ShareBuilder</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>Shares</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1438,10 +1457,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>TransactionSiteRobotsTxt</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>TypeToSearchCurrencyFlow</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
