@@ -1,0 +1,309 @@
+<apex:page title="Currency Selection" showHeader="false" sidebar="false" standardStylesheets="false" controller="CurrencyController" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <script>
+                var currencies = ['Pound Sterling',
+                    'Euro',
+                    'US Dollar',
+                    'Yen',
+                    'Swiss Franc',
+                    'Canadian Dollar',
+                    'Australian Dollar',
+                    'New Zealand Dollar',
+                    'Russian Rouble',
+                    'Hong Kong Dollar',
+                    'Singapore Dollar',
+                    'UAE Dirham',
+                    'Afghani',
+                    'Lek',
+                    'Armenian Dram',
+                    'Netherlands Antillian Guilder',
+                    'Kwanza',
+                    'Angolan New Kwanza ',
+                    'Argentine Peso',
+                    'Aruban Guilder',
+                    'Azerbaijanian New Manat ',
+                    'Convertible Marks',
+                    'Barbados Dollar',
+                    'Taka',
+                    'Belgian Franc',
+                    'Bulgarian Lev',
+                    'Bahraini Dinar',
+                    'Burundi Franc',
+                    'Bermuda Dollar',
+                    'Brunei Dollar',
+                    'Mvdol',
+                    'Boliviano',
+                    'Brazilian Real',
+                    'Bahamian Dollar',
+                    'Ngultrum',
+                    'Pula',
+                    'Belarussian Ruble',
+                    'Belize Dollar',
+                    'Franc Congolais',
+                    'WIR Euro',
+                    'WIR Franc',
+                    'Unidades de formento',
+                    'Chilean Peso',
+                    'Yuan Renminbi',
+                    'Colombian Peso',
+                    'Unidad de Valor Real',
+                    'Costa Rican Colon',
+                    'Serbian Dinar',
+                    'Cuban Peso',
+                    'Cape Verde Escudo',
+                    'Cyprus Pound',
+                    'Czech Koruna',
+                    'Djibouti Franc',
+                    'Danish Krone',
+                    'Dominican Peso',
+                    'Algerian Dinar',
+                    'Kroon',
+                    'Egyptian Pound',
+                    'Nakfa',
+                    'Ethiopian Birr',
+                    'Fiji Dollar',
+                    'Falkland Islands Pound',
+                    'Lari',
+                    'Cedi',
+                    'Gibraltar Pound',
+                    'Dalasi',
+                    'Guinea Franc',
+                    'Quetzal',
+                    'Guinea-Bissau Peso',
+                    'Guyana Dollar',
+                    'Lempira',
+                    'Croatian Kuna',
+                    'Gourde',
+                    'Forint',
+                    'Rupiah',
+                    'New Israeli Sheqel',
+                    'Indian Rupee',
+                    'Iraqi Dinar',
+                    'Iranian Rial',
+                    'Iceland Krona',
+                    'Jamaican Dollar',
+                    'Jordanian Dinar',
+                    'Kenyan Shilling',
+                    'Som',
+                    'Riel',
+                    'Comoro Franc',
+                    'North Korean Won',
+                    'Won',
+                    'Kuwaiti Dinar',
+                    'Cayman Islands Dollar',
+                    'Tenge',
+                    'Kip',
+                    'Lebanese Pound',
+                    'Sri Lanka Rupee',
+                    'Liberian Dollar',
+                    'Loti',
+                    'Lithuanian Litas',
+                    'Latvian Lats',
+                    'Libyan Dinar',
+                    'Moroccan Dirham',
+                    'Moldovan Leu',
+                    'Malagasy Ariary',
+                    'Denar',
+                    'Kyat',
+                    'Tugrik',
+                    'Pataca',
+                    'Ouguiya',
+                    'Maltese Lira',
+                    'Mauritius Rupee',
+                    'Rufiyaa',
+                    'Kwacha',
+                    'Mexican Peso',
+                    'Mexican Unidad de Inversion (UID)',
+                    'Malaysian Ringgit',
+                    'Merical',
+                    'Namibian Dollar',
+                    'Naira',
+                    'Cordoba Oro',
+                    'Norwegian Krone',
+                    'Nepalese Rupee',
+                    'Rial Omani',
+                    'Balboa',
+                    'Nuevo Sol',
+                    'Kina',
+                    'Philippine Peso',
+                    'Pakistan Rupee',
+                    'Zloty',
+                    'Guarani',
+                    'Qatari Rial',
+                    'New Leu',
+                    'Rwanda Franc',
+                    'Saudi Riyal',
+                    'Solomon Islands Dollar',
+                    'Seychelles Rupee',
+                    'Sudanese Dinar',
+                    'Swedish Krona',
+                    'Saint Helena Pound',
+                    'Tolar',
+                    'Slovak Koruna',
+                    'Leone',
+                    'Somali Shilling',
+                    'Surinam Dollar',
+                    'Dobra',
+                    'El Salvador Colon',
+                    'Syrian Pound',
+                    'Lilangeni',
+                    'Baht',
+                    'Somoni',
+                    'Manat',
+                    'Tunisian Dinar',
+                    'Pa anga',
+                    'New Turkish Lira',
+                    'Trinidad and Tobago Dollar',
+                    'New Taiwan Dollar',
+                    'Tanzanian Shilling',
+                    'Hryvnia',
+                    'Uganda Shilling',
+                    'Peso Uruguayo',
+                    'Uzbekistan Sum',
+                    'Bolivar',
+                    'Dong',
+                    'Vatu',
+                    'Tala',
+                    'CFA Franc BEAC',
+                    'East Caribbean Dollar',
+                    'SDR',
+                    'CFA Franc BCEAO',
+                    'CFP Franc',
+                    'Yemeni Rial',
+                    'Rand',
+                    'Kwacha',
+                    'Zimbabwe Dollar',
+                    'UKRAINE HRYVNIA'
+                ];
+                $(function() {
+                    $("#currency-input").autocomplete({
+                        //source: currencies
+                        source: function(request, response) {
+                            var results = $.ui.autocomplete.filter(currencies, request.term);
+                            //console.log('terms request =   ' + request.term);
+                            response(results.slice(0, 10));
+                        },
+                        select: function(event, ui) {
+                            console.log('selected currency ui is ' + ui.item.value);
+                        }
+                    });
+                });
+
+                function updatecurrency() {
+
+                    var completedselection = document.getElementById('currency-input').value;
+                    if (completedselection.length < 1) {
+                        document.getElementById("Hint").innerHTML = '<h4 class="custom-erromessage-medium">Please make a valid selection before going to the next step</h1>';
+                        return;
+                    }
+                    if (completedselection.length > 1) {
+                        if (currencies.indexOf(completedselection) >= 0) {
+                            console.log('currency from client = ' + ' ' + completedselection);
+                            document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
+                            setSelectedCurrency(completedselection);
+                        } else if (currencies.indexOf(completedselection) < 0) {
+
+                            document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-erromessage-medium">Denomination does not exist!</h1>';
+                        }
+                    } else if (completedselection.length < 1) {
+                        alert('value is not together' + completedselection);
+                    }
+
+                };
+                </script>
+                <style>
+                .custom-erromessage-medium {
+                    font-family: "nta", Arial, sans-serif;
+                    font-size: 18px;
+                    line-height: 1.2;
+                    font-weight: 700;
+                    text-transform: none;
+                    font-size-adjust: 0.525;
+                    margin-top: 1.25em;
+                    margin-bottom: 0.5em;
+                    color: #b10e1e;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+                
+                .custom-thanksmessage-medium {
+                    font-family: "nta", Arial, sans-serif;
+                    font-size: 18px;
+                    line-height: 1.2;
+                    font-weight: 700;
+                    text-transform: none;
+                    font-size-adjust: 0.525;
+                    margin-top: 1.25em;
+                    margin-bottom: 0.5em;
+                    color: #00B300;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+                </style>
+                <apex:outputPanel id="masterpanel">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">Share Capital
+                        </h1>
+                        <p class="lede">Please select your share currency
+                        </p>
+                        <label class="form-label" for="currency-item">Currency
+                            <span class="form-hint" id="CurrencyHint"></span>
+                        </label>
+                        <input style="form-control" name="currency-item" id="currency-input" />
+                        <br/>
+                    </div>
+                    <apex:commandButton reRender="none" styleClass="button" onclick="updatecurrency();" value="Select currency and continue" />
+                    <apex:actionFunction action="{!setSelectedCurrency}" name="setSelectedCurrency" reRender="none">
+                        <apex:param name="currencyParam" value="" id="y" assignTo="{!selectedCurrency}" />
+                    </apex:actionFunction>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!showCurrentShares}" id="currentsharestable">
+                <p class="lede">It looks like you have previous share capital?
+                        </p>
+                    <div class="form-group">
+                        <table class="check-your-answers">
+                            <tbody>
+                                <tr>
+                                    <td>Currency</td>
+                                    <td></td>
+                                </tr>
+                                <apex:repeat value="{!displayresult}" var="sp" id="theRepeat">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{!sp}" id="object" />
+                                        </td>
+                                        <td>
+                                            <apex:commandLink reRender="none" onclick="sendCurrency('{!sp}');" value="Add Shares" />
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                        <apex:actionFunction name="AddtocurrentShare" action="{!AddtocurrentShare}" reRender="none">
+                            <apex:param name="currencyParam" id="z" value="" assignTo="{!currencyperSelection}" />
+                        </apex:actionFunction>
+                    </div>
+                </apex:outputPanel>
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                <!--<apex:commandLink action="{!finishedAddingShares}" value="Finished Adding all Shares" id="finishedSharesButton" /> -->&nbsp;
+                <script>
+            function sendCurrency(currency) {
+                console.log('here is your currency    ' + currency);
+                if (currency.length > 1) {
+                    AddtocurrentShare(currency);
+                } else {
+                    document.getElementById("Error").innerHTML = '<h4 style="color:#b10e1e;">Error</h1>';
+
+                }
+            }
+            </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

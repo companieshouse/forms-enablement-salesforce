@@ -5,6 +5,11 @@
 		<members>AccountApiClientTest</members>
 		<members>AccountsAPIHelper</members>
 		<members>AccountsAuthCallbackController</members>
+		<members>AddAttachmentsController</members>
+		<members>AddAttachmentsControllerTest</members>
+		<members>AddSharesBaseController</members>
+		<members>AddSharesController</members>
+		<members>AddSharesTableController</members>
 		<members>AppConstants</members>
 		<members>AttachmentTriggerHandler</members>
 		<members>AttachmentTriggerHandlerTest</members>
@@ -38,6 +43,8 @@
 		<members>CompanyDetailsController</members>
 		<members>CompanyQueryAction</members>
 		<members>ConfirmationFrameworkController</members>
+		<members>CurrencyController</members>
+		<members>CustomViews</members>
 		<members>DS01Serialiser</members>
 		<members>DS02Step2Navigator</members>
 		<members>DeveloperToolsController</members>
@@ -88,6 +95,9 @@
 		<members>SendToDocuSign</members>
 		<members>SendToDocuSignTest</members>
 		<members>Session</members>
+		<members>ShareBuilderController</members>
+		<members>Shares</members>
+		<members>SigningController</members>
 		<members>SmartPayNotificationController</members>
 		<members>SmartPayNotificationControllerTest</members>
 		<members>SmartPayUrl</members>
@@ -111,7 +121,6 @@
 		<members>UtilTest</members>
 		<members>chooseDirector</members>
 		<members>superSort</members>
-		<members>test</members>
 		<members>whichDirector</members>
 		<name>ApexClass</name>
 	</types>
@@ -121,6 +130,8 @@
 	</types>
 	<types>
 		<members>AccountsAuthCallback</members>
+		<members>AddSharesBase</members>
+		<members>Attachments</members>
 		<members>BehalfDecision</members>
 		<members>BehalfInputDetails</members>
 		<members>BehalfWhichSignatory</members>
@@ -134,6 +145,10 @@
 		<members>Company</members>
 		<members>CompanyDetails</members>
 		<members>ConfirmationFramework</members>
+		<members>CurrencySelection</members>
+		<members>DS01</members>
+		<members>DemoPage0</members>
+		<members>DemoPage1</members>
 		<members>DeveloperTools</members>
 		<members>DirectorsInputList</members>
 		<members>DirectorsList</members>
@@ -149,19 +164,25 @@
 		<members>Exception</members>
 		<members>Guidance</members>
 		<members>OfficerDetails</members>
-		<members>PDFGeneration</members>
+		<members>PreParticularRights</members>
 		<members>Payment</members>
 		<members>PresenterDirector</members>
 		<members>Review</members>
+		<members>SH19</members>
+		<members>ShareBuilder</members>
+		<members>Shares</members>
+		<members>SigningPage</members>
 		<members>SmartPayNotification</members>
 		<members>StartFramework</members>
 		<members>Status</members>
 		<members>StdExceptionTemplate</members>
 		<members>Submission</members>
 		<members>Summary</members>
+		<members>TabularData</members>
 		<members>TransactionException</members>
 		<members>TransactionPageTemplate</members>
 		<members>TransactionSiteRobotsTxt</members>
+		<members>TypeToSearchCurrencyFlow</members>
 		<members>UpdateCompanyDirectors</members>
 		<members>chooseDirector</members>
 		<members>whichDirector</members>
@@ -194,6 +215,7 @@
 		<members>Forms_API_Service__c</members>
 		<members>Officer__c</members>
 		<members>Session__c</members>
+		<members>Shares__c</members>
 		<members>SmartPay_Settings__c</members>
 		<members>Transaction_Type_Step__mdt</members>
 		<members>Transaction_Type__mdt</members>

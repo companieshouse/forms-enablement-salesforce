@@ -26,7 +26,6 @@ public with sharing class DocStatusUrlTriggerHandler {
 		
 	}
 
-
     public static void afterUpdate(List <Transaction__c> transactionsList) {
 
        // Set<Id> triggerIDs = Trigger.newMap.keyset();
@@ -50,7 +49,7 @@ public with sharing class DocStatusUrlTriggerHandler {
 
                 parametername += '/Status?documentsigningstatus=';
 
-                parametername += SecurityManager.encryptText(transactiontype + AppConstants.ID_DELIM_CHAR + contactemail + AppConstants.ID_DELIM_CHAR + transactionID + AppConstants.ID_DELIM_CHAR + companyNumber);// + AppConstants.ID_DELIM_CHAR + envelopeID);
+                parametername += SecurityManager.encryptText(transactiontype+AppConstants.ID_DELIM_CHAR+contactemail+AppConstants.ID_DELIM_CHAR+transactionID+AppConstants.ID_DELIM_CHAR+companyNumber);// + AppConstants.ID_DELIM_CHAR + envelopeID);
 
                 PageReference statusreference = new PageReference(parametername);
 

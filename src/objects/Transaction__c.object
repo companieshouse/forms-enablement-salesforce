@@ -653,6 +653,15 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>finishedAddingShares__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Boolean to set once Shares are finished to bypass the Adding Shares Table and call the next Step</description>
+        <externalId>false</externalId>
+        <label>finishedAddingShares</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>hasPaid__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to notify the transaction has been paid.</description>
@@ -757,12 +766,32 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>selectedCurrency__c</fullName>
+        <externalId>false</externalId>
+        <label>selectedCurrency</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>sentsignerstatus__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>sentsignerstatus</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>sharecurrencyselection__c</fullName>
+        <externalId>false</externalId>
+        <label>sharecurrencyselection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <label>Transaction</label>
     <listViews>
