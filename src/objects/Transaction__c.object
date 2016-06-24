@@ -119,6 +119,19 @@
         <label>DS02 Query</label>
     </fieldSets>
     <fields>
+        <fullName>AccountNumber__c</fullName>
+        <description>This field store the account number if the user pay against an account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account number of the user transaction</inlineHelpText>
+        <label>Account Number</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Amount__c</fullName>
         <externalId>false</externalId>
         <label>Amount</label>
@@ -682,6 +695,26 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <externalId>false</externalId>
         <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY CODE TO CONTROL ACCOUNT PAYMENT</inlineHelpText>
         <label>is paying against an Account?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentCard__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This value of this field represents if the user has paid using card</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD BACK END ONLY</inlineHelpText>
+        <label>is paying against an Card?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentPaypal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark if the transaction will require to load the paypal through the JSON</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY CODE TO CONTROL PAYPAL PAYMENT</inlineHelpText>
+        <label>is paying against an Paypal?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

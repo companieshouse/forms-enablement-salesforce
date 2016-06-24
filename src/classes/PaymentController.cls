@@ -66,6 +66,8 @@ public class PaymentController extends TransactionStepControllerBase {
     public Integer fastTrackFee {get; set;}
     public Integer normalFee {get; set;}
 
+    public String accountNumber {get; set;}
+
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -86,6 +88,7 @@ public class PaymentController extends TransactionStepControllerBase {
         hasPaymentError = false;
         hasPaymentPending = false;
         previousClicked = false;
+        accountNumber = '';
 
         isCardPayment = (transactionMgr.td.isCardAllowed__c == null ? false : transactionMgr.td.isCardAllowed__c);
         isPaypalPayment = (transactionMgr.td.isPaypalAllowed__c == null ? false : transactionMgr.td.isPaypalAllowed__c);
@@ -174,7 +177,17 @@ public class PaymentController extends TransactionStepControllerBase {
         {
             submissionMgr.submission.isPaymentAccount__c = true;
             submissionMgr.submission.hasPaid__c = true;
+            submissionMgr.submission.AccountNumber__c = Integer.valueOf(accountNumber);
+        }
 
+        if(isPaypalSelected)
+        {
+            submissionMgr.submission.isPaymentPaypal__c = true;
+        }
+
+        if(isCardSelected)
+        {
+            submissionMgr.submission.isPaymentCard__c = true;
         }
 
         if(isSameDaySelected)

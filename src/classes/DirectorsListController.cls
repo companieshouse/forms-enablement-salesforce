@@ -115,6 +115,23 @@ public with sharing class DirectorsListController extends TransactionStepControl
         return previousStep();
     }
 
+    //Method used to extract the title from the name of an officer, return null if no title found
+    // 0 = surname 1= forename and middlename 2 = title null incorrect module value or corporate name -_-
+    public String extractOfficerName(Integer module, String name)
+    {
+        if(name.contains(','))
+        {
+            String[] extract = name.split(',');
+            if(extract.size()-1 >= module)
+                if(!String.isBlank(extract[module]))
+                {
+                    return extract[module];
+                }
+        }
+
+        return null;
+    }
+
     public void populateDirectorList(){
         initialiseAction();
         if(companyNumber == null)
@@ -155,14 +172,20 @@ public with sharing class DirectorsListController extends TransactionStepControl
 					isLLPCompany = false;
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name= officer.name , RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
-                    recipientID++;
+                    officerList.add(new Officer__c(Name= officer.name ,Title__c = extractOfficerName(2, officer.name),
+                    Forename__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
+                    Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
+                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
+                      recipientID++;
 
                 }else if (officer.officer_role == 'llp-designated-member' && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = true;
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name = officer.name, RecipientId__c = String.valueOf(recipientID), Transaction__c = submissionMgr.submission.Id));
+                    officerList.add(new Officer__c(Name= officer.name ,Title__c = extractOfficerName(2, officer.name),
+                    Forename__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
+                    Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
+                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
                     recipientID++;
                 }
             }

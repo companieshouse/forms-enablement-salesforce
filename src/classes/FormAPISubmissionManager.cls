@@ -35,7 +35,7 @@ public class FormAPISubmissionManager {
         //Get Barcode
         if(tx.Barcode__c == null || tx.Barcode__c == ''){
 
-            try {
+            //try {
                 FormsApiClient client = new FormsApiClient();
                 HTTPResponse response = client.requestBarcode();    
                 output = response.getStatusCode() + ': ' + response.getStatus() + '\n\n' + response.getBody();
@@ -51,11 +51,11 @@ public class FormAPISubmissionManager {
                     tx.ErrorDescription__c = output;
                 }
 
-            }
-            catch (Exception e) {
-                tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
-                tx.ErrorDescription__c = e.getMessage();
-            }
+           // }
+            //catch (Exception e) {
+            //    tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+            //    tx.ErrorDescription__c = e.getMessage();
+            //}
         }
 
         //To do: One Transacation (Package in the future) can only be send if all Transactions contain a barcode
@@ -66,7 +66,7 @@ public class FormAPISubmissionManager {
         System.debug('FormAPISubmissionManager before send: ' + tx);
         System.debug('FormAPISubmissionManager before send: ' + tx.Barcode__c);
         //Send form
-        try {
+        //try {
             FormsApiClient client = new FormsApiClient();
             HTTPResponse response = client.sendForm(tx);    
             output = response.getStatusCode() + ': ' + response.getStatus() + '\n\n' + response.getBody();
@@ -80,12 +80,12 @@ public class FormAPISubmissionManager {
                 tx.ErrorDescription__c = output;
             }
                 
-        }
-        catch (Exception e) {
-            tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
-            tx.ErrorDescription__c = e.getMessage();
+        //}
+        //catch (Exception e) {
+        //    tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+        //    tx.ErrorDescription__c = e.getMessage();
             
-        }
+        //}
         return tx;
     }
 }

@@ -276,7 +276,6 @@
         else
             recipient.UserName = convertName(off.Name);    
 
-        
         // If Officer is Presenter set embedded signature
         if(off.isPresenter__c) { 
             isEmbedSignature = true;

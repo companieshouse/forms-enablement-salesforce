@@ -64,6 +64,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>DateSigned__c</fullName>
+        <description>This field represents when an officer has signed with Docusign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when the officer has signed a docusign document</inlineHelpText>
+        <label>Date Signed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>Email__c</fullName>
         <externalId>false</externalId>
         <label>Email</label>
@@ -71,6 +81,16 @@
         <trackTrending>false</trackTrending>
         <type>Email</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Forename__c</fullName>
+        <description>This field describe the forename of an officer</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Forename of the officer</inlineHelpText>
+        <label>Forename</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>IsPresenter__c</fullName>
@@ -81,6 +101,16 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Middlenames__c</fullName>
+        <description>This field describe middlenames of an officer</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Middle names of the officer</inlineHelpText>
+        <label>Middlenames</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>RecipientId__c</fullName>
         <externalId>false</externalId>
         <label>Recipient Id</label>
@@ -89,6 +119,26 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Surname__c</fullName>
+        <description>This field describe the Surname of an officer</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The surname of the officer</inlineHelpText>
+        <label>Surname</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <description>This field describe the title of the director</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the officer</inlineHelpText>
+        <label>Title</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Transaction__c</fullName>

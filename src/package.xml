@@ -41,12 +41,14 @@
 		<members>DS01Serialiser</members>
 		<members>DS02Step2Navigator</members>
 		<members>DeveloperToolsController</members>
+		<members>DirectorDetails</members>
 		<members>DirectorInputListController</members>
 		<members>DirectorsListController</members>
 		<members>DocStatusController</members>
 		<members>DocStatusUrlTriggerHandler</members>
 		<members>DocuSignAPI</members>
 		<members>DocuSignAPITest</members>
+		<members>DocuSignRecipientStatusTriggerHandler</members>
 		<members>DocuSignStatusTriggerHandler</members>
 		<members>DocuSignStatusTriggerHandlerTest</members>
 		<members>DocuSignUrlBuilder</members>
@@ -76,6 +78,8 @@
 		<members>PaymentController</members>
 		<members>PaymentControllerTest</members>
 		<members>PresenterDirectorController</members>
+		<members>RecipientStatusDocuSign</members>
+		<members>RecipientStatusDocusignTriggerHandler</members>
 		<members>ReviewController</members>
 		<members>ReviewControllerTest</members>
 		<members>ReviewNotificationTriggerHandler</members>
@@ -105,10 +109,10 @@
 		<members>UpdateCompanyDirectorsController</members>
 		<members>Util</members>
 		<members>UtilTest</members>
-		<members>superSort</members>
-		<members>DirectorDetails</members>
-		<members>whichDirector</members>
 		<members>chooseDirector</members>
+		<members>superSort</members>
+		<members>test</members>
+		<members>whichDirector</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -164,11 +168,13 @@
 		<name>ApexPage</name>
 	</types>
 	<types>
+		<members>AttachmentTrigger</members>
 		<members>BaseURLTransactionHandler</members>
 		<members>DocStatusURLBuilder</members>
-		<members>AttachmentTrigger</members>
 		<members>DocuSignStatusTrigger</members>
+		<members>RecipientStatusTrigger</members>
 		<members>ReviewStatusTrigger</members>
+		<members>SignatureRecipientStatus</members>
 		<members>SubmissionLinkTrigger</members>
 		<name>ApexTrigger</name>
 	</types>

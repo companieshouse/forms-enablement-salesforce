@@ -69,11 +69,11 @@
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">ur company closing&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span class=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;&lt;img src=&quot;http://govuk-elements.herokuapp.com/public/images/i</value>
+        <value xsi:type="xsd:string">ur company closing&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span class=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">con-important.png&quot;/&gt;It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
+        <value xsi:type="xsd:string">It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
