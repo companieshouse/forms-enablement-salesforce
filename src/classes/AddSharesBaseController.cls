@@ -96,6 +96,12 @@ public class AddSharesBaseController extends TransactionStepControllerBase
         get;
         set;
     }
+
+    public List < Shares__c > testsharesfinder
+    {
+        get;
+        set;
+    }
     public AddSharesBaseController()
     {
         super();
@@ -112,6 +118,7 @@ public class AddSharesBaseController extends TransactionStepControllerBase
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         companyName = submissionMgr.submission.CompanyName__c;
         displayresult = new List < String > ();
+        testsharesfinder = submissionMgr.submission.Shares__r;
         checkShares();
         return;
     }
@@ -159,8 +166,15 @@ public class AddSharesBaseController extends TransactionStepControllerBase
     {
 
         submissionMgr.submission.sharecurrencyselection__c = currencyperSelection;
+        submissionMgr.persist();
 
-        return nextAction();
+        PageReference pg = new PageReference('/TabularData');
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        pg.setRedirect(true);
+
+        return pg;
+
+        //return nextAction();
     }
 
     public PageReference createNewShares()

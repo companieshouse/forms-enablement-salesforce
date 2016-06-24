@@ -6,6 +6,7 @@
 		<members>AccountsAPIHelper</members>
 		<members>AccountsAuthCallbackController</members>
 		<members>AddAttachmentsController</members>
+		<members>AddAttachmentsControllerTest</members>
 		<members>AddSharesBaseController</members>
 		<members>AddSharesController</members>
 		<members>AddSharesTableController</members>
@@ -43,6 +44,7 @@
 		<members>CompanyQueryAction</members>
 		<members>ConfirmationFrameworkController</members>
 		<members>CurrencyController</members>
+		<members>CustomViews</members>
 		<members>DS01Serialiser</members>
 		<members>DS02Step2Navigator</members>
 		<members>DeveloperToolsController</members>
@@ -91,6 +93,7 @@
 		<members>Session</members>
 		<members>ShareBuilderController</members>
 		<members>Shares</members>
+		<members>SigningController</members>
 		<members>SmartPayNotificationController</members>
 		<members>SmartPayNotificationControllerTest</members>
 		<members>SmartPayUrl</members>
@@ -123,9 +126,8 @@
 	</types>
 	<types>
 		<members>AccountsAuthCallback</members>
-		<members>AddAttachment</members>
-		<members>AddShares</members>
 		<members>AddSharesBase</members>
+		<members>Attachments</members>
 		<members>BehalfDecision</members>
 		<members>BehalfInputDetails</members>
 		<members>BehalfWhichSignatory</members>
@@ -166,12 +168,14 @@
 		<members>SH19</members>
 		<members>ShareBuilder</members>
 		<members>Shares</members>
+		<members>SigningPage</members>
 		<members>SmartPayNotification</members>
 		<members>StartFramework</members>
 		<members>Status</members>
 		<members>StdExceptionTemplate</members>
 		<members>Submission</members>
 		<members>Summary</members>
+		<members>TabularData</members>
 		<members>TransactionException</members>
 		<members>TransactionPageTemplate</members>
 		<members>TransactionSiteRobotsTxt</members>
@@ -216,7 +220,6 @@
 		<members>Transaction_Type_Step.SH19_Company_Details</members>
 		<members>Transaction_Type_Step.SH19_Confirmation</members>
 		<members>Transaction_Type_Step.SH19_CurrencySelection</members>
-		<members>Transaction_Type_Step.SH19_DirectorsList</members>
 		<members>Transaction_Type_Step.SH19_GuidedInfo</members>
 		<members>Transaction_Type_Step.SH19_Payment</members>
 		<members>Transaction_Type_Step.SH19_PreParticulars</members>

@@ -67,6 +67,6 @@
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">CurrencySelectionPage</value>
+        <value xsi:type="xsd:string">CurrencySelection</value>
     </values>
 </CustomMetadata>

@@ -126,7 +126,8 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
          
         // Else create a new evelope
         } else {
-        
+            noEmbedDoc = true;
+
             SendToDocuSign sendToDS = new SendToDocuSign();
             externalURL = sendToDS.embedDocuSignOpen(submissionMgr.submission);
 

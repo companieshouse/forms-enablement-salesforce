@@ -3,7 +3,7 @@
 <apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="{!initialiseController}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <style>
                 .govuk-box-review {
                     text-align: center;

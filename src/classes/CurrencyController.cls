@@ -17,36 +17,6 @@ Ver. Author        Date        Detail
 */
 public with sharing class CurrencyController extends TransactionStepControllerBase
 {
-    public String totalnumberofShares
-    {
-        get;
-        set;
-    }
-    public String totalnumberAggregate
-    {
-        get;
-        set;
-    }
-    public Decimal numberofshares
-    {
-        get;
-        set;
-    }
-    public String sharecurrency
-    {
-        get;
-        set;
-    }
-    public String classofshares
-    {
-        get;
-        set;
-    }
-    public Decimal totalvalueofshares
-    {
-        get;
-        set;
-    }
 
     public String selectedCurrency
     {
@@ -63,47 +33,48 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
         get;
         set;
     }
-
+    public Boolean showCurrentShares
+    {
+        get;
+        set;
+    }
     public List < Shares__c > currentShares
     {
         get;
         set;
     }
-
-    public Shares__c shareCapital
+    public List < String > displayresult
     {
         get;
         set;
     }
-    public Boolean showautocomplete
+    public String displayText2
     {
         get;
         set;
     }
-
-    public Boolean previousSharesBoolean
+    public String displayText3
     {
         get;
         set;
     }
-
-    public String statusvalue
-    {
-        get;
-        set;
-    }
-
-    public String searchCurrencyError
+    public String headerText1
     {
         get;
         set;
     }
 
-    public String valueTestdata
+    public String currencyperSelection
     {
         get;
         set;
     }
+    public Map < String, Shares__c > mapShares
+    {
+        get;
+        set;
+    }
+
 
     public CurrencyController()
     {
@@ -117,97 +88,80 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
     {
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
-        currentShares = new List < Shares__c > ();
-        autoCompleteState();
+        displayText2 = transactionMgr.currentStep.Display_Text_2__c;
+        displayText3 = transactionMgr.currentStep.Display_Text_3__c;
+        headerText1 = transactionMgr.currentStep.Header_Text_1__c;
+        displayresult = new List < String > ();
+
+        checkShares();
+
     }
 
-    public void autoCompleteState()
+    public void checkShares()
     {
 
-        if (submissionMgr.submission.Shares__r.size() > 0)
-        {
-            valueTestdata = String.valueOf(submissionMgr.submission.Shares__r.size());
-            previousSharesBoolean = true;
-            // loop through the current shares and assign them to the buttons
-            // build a wrapper class
 
-            for (Shares__c foundShares: submissionMgr.submission.Shares__r)
+        if (submissionMgr.submission.Shares__r.size() >= 1)
+        {
+            showCurrentShares = true;
+            currentShares = submissionMgr.submission.Shares__r;
+
+            Map < String, Shares__c > mapShares = new Map < String, Shares__c > ();
+
+            for (Shares__c sortedshares: currentShares)
             {
 
-                currentShares.add(foundShares);
-            }
-        }
-        else if (submissionMgr.submission.Shares__r.size() == 0)
-        {
-            valueTestdata = String.valueOf(submissionMgr.submission.Shares__r.size());
+                mapShares.put(sortedshares.Currency__c, sortedshares);
 
-            previousSharesBoolean = false;
+            }
+            displayresult.addAll(mapShares.keySet());
+            //throw new Form_CustomException('here is the error' + displayresult);
+
         }
+        else if (submissionMgr.submission.Shares__r.size() < 1)
+        {
+            showCurrentShares = false;
+        }
+
     }
 
-    public void checkCurrencyTable(string currencyToCheckAgainst)
+
+    public PageReference AddtocurrentShare()
     {
-        //throw new Form_CustomException('finally working and currency to check against is   ' + submissionMgr.submission.Shares__r.size());
+        submissionMgr.submission.sharecurrencyselection__c = currencyperSelection;
+        submissionMgr.persist();
+        //throw new Form_CustomException(' your currency per selection is?' + submissionMgr.submission.sharecurrencyselection__c);
 
-        if (submissionMgr.submission.Shares__r.size() > 0)
-        {
-            for (Shares__c previousShares: submissionMgr.submission.Shares__r)
-            {
-                if (previousShares.Currency__c == currencyToCheckAgainst)
-                {
-                    searchCurrencyError = 'It looks like you have shares in this currency already';
-                    throw new Form_CustomException('found a previous currency selection for  ' + currencyToCheckAgainst);
+        //PageReference pg = new PageReference('/TabularData');
+        //pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        //pg.setRedirect(true);
 
-                }
-                else if (previousShares.Currency__c != currencyToCheckAgainst)
-                {
-                    throw new Form_CustomException('found not previous currency selection for  this should never be hit.  ' + currencyToCheckAgainst);
-                }
-            }
-        }
-        else if (submissionMgr.submission.Shares__r.size() == 0)
-        {
+        //return pg;
 
-            throw new Form_CustomException('there is nothing to test against so your statement works but there is no reason to have this else statement');
-
-        }
+        return nextStep();
     }
 
     public PageReference finishedAddingShares()
     {
 
-
         submissionMgr.submission.finishedAddingShares__c = true;
-        // may just need next step and no persist and nextAction
-
         submissionMgr.persist();
-
         return nextStep();
     }
 
     public PageReference setSelectedCurrency()
     {
 
-        // throw new Form_CustomException('currency after persist' + submissionMgr.submission.sharecurrencyselection__c);
-
-        checkCurrencyTable(selectedCurrency);
-
-        submissionMgr.submission.sharecurrencyselection__c = selectedCurrency;
-
         System.debug('Currency Changed to   ' + selectedCurrency);
 
-
-        persistStep();
         return nextAction();
     }
 
 
     private void persistStep()
     {
-        //throw new Form_CustomException('this is the selected currency' + selectedCurrency);
         submissionMgr.submission.sharecurrencyselection__c = selectedCurrency;
 
-        // persist stuff here
         submissionMgr.persist();
     }
 

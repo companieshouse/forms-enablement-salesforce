@@ -49,6 +49,7 @@ public with sharing class CompanyController
         get;
         set;
     }
+    public String companySearchHeader {get;set;}
 
     // Private class members.
     Boolean isPageInitialised = false;
@@ -87,7 +88,7 @@ public with sharing class CompanyController
 
             transactionType = ApexPages.currentPage().getParameters().get('t');
             transactionMgr = new TransactionManager(transactionType);
-
+            companySearchHeader = transactionMgr.td.companySearchPageText__c;
             isPageInitialised = true;
         }
         catch (Exception e)

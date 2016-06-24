@@ -197,22 +197,23 @@
                 function updatecurrency() {
 
                     var completedselection = document.getElementById('currency-input').value;
-
                     if (completedselection.length < 1) {
                         document.getElementById("Hint").innerHTML = '<h4 class="custom-erromessage-medium">Please make a valid selection before going to the next step</h1>';
                         return;
                     }
                     if (completedselection.length > 1) {
-                        if (currencies.indexOf(completedselection) >= 1) {
+                        if (currencies.indexOf(completedselection) >= 0) {
                             console.log('currency from client = ' + ' ' + completedselection);
-                            document.getElementById("Hint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
-
+                            document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
                             setSelectedCurrency(completedselection);
                         } else if (currencies.indexOf(completedselection) < 0) {
 
-                            document.getElementById("Hint").innerHTML = '<h4 class="custom-erromessage-medium">Denomination does not exist!</h1>';
+                            document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-erromessage-medium">Denomination does not exist!</h1>';
                         }
+                    } else if (completedselection.length < 1) {
+                        alert('value is not together' + completedselection);
                     }
+
                 };
                 </script>
                 <style>
@@ -244,42 +245,64 @@
                     text-decoration: underline;
                 }
                 </style>
-                <apex:outputPanel id='masterpanel'>
-                <!-- <apex:outputText value="{!previousSharesBoolean}" /> 
-                                <apex:outputText value="{!valueTestdata}" />-->
-
-                    <apex:outputPanel id="searchcurrency">
-                        <div>
-                            <h1 class="heading-large">Share Capital {!statusvalue}
-                            </h1>
-                            <p class="lede">Please select your share currency
-                            </p>
-                            <div class="form-group">
-                                <label class="form-label" for="currency-item">Currency
-                                    <span class="form-hint" id="Hint">Please enter your share currency</span>
-                                </label>
-                                <input style="form-control" name="currency-item" id="currency-input" />
-                            </div>
-                        </div>
-                        <apex:commandButton reRender="StatemasterPanel" styleClass="button" onclick="updatecurrency();" value="select currency" />
-                        <apex:actionFunction action="{!setSelectedCurrency}" name="setSelectedCurrency" reRender="emptyPanel">
-                            <apex:param name="currencyParam" value="" id="y" assignTo="{!selectedCurrency}" />
-                        </apex:actionFunction>
-                    </apex:outputPanel>
-                    <apex:outputPanel rendered="{!previousSharesBoolean}" id="previousShareCapital">
-                        <h1>Previous Share Capital</h1>
-                        <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
-                                        <a href="#" class="link-back">Add to {!sp.Currency__c} Shares</a>
-                                    </apex:repeat>
-                                    <br/>
-                                    <br/>
-                    </apex:outputPanel>
+                <apex:outputPanel id="masterpanel">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">Share Capital
+                        </h1>
+                        <p class="lede">Please select your share currency
+                        </p>
+                        <label class="form-label" for="currency-item">Currency
+                            <span class="form-hint" id="CurrencyHint"></span>
+                        </label>
+                        <input style="form-control" name="currency-item" id="currency-input" />
+                        <br/>
+                    </div>
+                    <apex:commandButton reRender="none" styleClass="button" onclick="updatecurrency();" value="Select currency and continue" />
+                    <apex:actionFunction action="{!setSelectedCurrency}" name="setSelectedCurrency" reRender="none">
+                        <apex:param name="currencyParam" value="" id="y" assignTo="{!selectedCurrency}" />
+                    </apex:actionFunction>
+                    <br/>
                 </apex:outputPanel>
-                <br/>
-              
+                <apex:outputPanel rendered="{!showCurrentShares}" id="currentsharestable">
+                <p class="lede">It looks like you have previous share capital?
+                        </p>
+                    <div class="form-group">
+                        <table class="check-your-answers">
+                            <tbody>
+                                <tr>
+                                    <td>Currency</td>
+                                    <td></td>
+                                </tr>
+                                <apex:repeat value="{!displayresult}" var="sp" id="theRepeat">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{!sp}" id="object" />
+                                        </td>
+                                        <td>
+                                            <apex:commandLink reRender="none" onclick="sendCurrency('{!sp}');" value="Add Shares" />
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                        <apex:actionFunction name="AddtocurrentShare" action="{!AddtocurrentShare}" reRender="none">
+                            <apex:param name="currencyParam" id="z" value="" assignTo="{!currencyperSelection}" />
+                        </apex:actionFunction>
+                    </div>
+                </apex:outputPanel>
                 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
-                <apex:commandLink action="{!finishedAddingShares}" value="Finished Adding all Shares" id="finishedSharesButton" /> &nbsp;
+                <!--<apex:commandLink action="{!finishedAddingShares}" value="Finished Adding all Shares" id="finishedSharesButton" /> -->&nbsp;
+                <script>
+            function sendCurrency(currency) {
+                console.log('here is your currency    ' + currency);
+                if (currency.length > 1) {
+                    AddtocurrentShare(currency);
+                } else {
+                    document.getElementById("Error").innerHTML = '<h4 style="color:#b10e1e;">Error</h1>';
 
+                }
+            }
+            </script>
             </apex:form>
         </apex:define>
     </apex:composition>

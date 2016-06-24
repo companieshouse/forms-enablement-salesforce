@@ -29,6 +29,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AddSharesTableController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AppConstants</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -354,6 +358,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Shares</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SigningController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1075,6 +1083,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.finishedAddingShares__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.hasPaid__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1216,15 +1229,11 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>AddAttachment</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>AddShares</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>AddSharesBase</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Attachments</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1388,6 +1397,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>SigningPage</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>SmartPayNotification</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1409,6 +1422,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Summary</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>TabularData</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

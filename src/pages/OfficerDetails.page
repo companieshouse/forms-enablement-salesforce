@@ -18,7 +18,7 @@
     <apex:composition template="TransactionPageTemplate">
         <!--action="{!checkDirectorStatus}" -->
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <style>
                 .hypercolorblue {
                     color: #005EA5;
@@ -2660,16 +2660,16 @@
                         </label>
                         <span class="form-hint">Email Address </span>
                         <span class="error-message">{!director.validationErrors}</span>
-                        <apex:outputText escape='false' rendered='{!NOT(ISBLANK(director.validationErrors))}' value="{!director.topErrors}"></apex:outputText>
+                        <apex:outputText escape="false" rendered="{!NOT(ISBLANK(director.validationErrors))}" value="{!director.topErrors}"></apex:outputText>
                         <apex:inputText value="{!director.email}" id="email" html-name="email"></apex:inputText>
-                        <apex:outputText escape='false' rendered='{!NOT(ISBLANK(director.validationErrors))}' value="{!director.bottomErrors}"></apex:outputText>
+                        <apex:outputText escape="false" rendered="{!NOT(ISBLANK(director.validationErrors))}" value="{!director.bottomErrors}"></apex:outputText>
                         <label class="form-label" for="emailconfirmation">
                         </label>
                         <span class="form-hint">Confirm email address</span>
                         <span class="error-message">{!director.confirmationErrors}</span>
-                        <apex:outputText escape='false' rendered='{!NOT(ISBLANK(director.confirmationErrors))}' value="{!director.confirmationerrorTop}"></apex:outputText>
+                        <apex:outputText escape="false" rendered="{!NOT(ISBLANK(director.confirmationErrors))}" value="{!director.confirmationerrorTop}"></apex:outputText>
                         <apex:inputText value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
-                        <apex:outputText escape='false' rendered='{!NOT(ISBLANK(director.confirmationErrors))}' value="{!director.confirmationerrorBottom}"></apex:outputText>
+                        <apex:outputText escape="false" rendered="{!NOT(ISBLANK(director.confirmationErrors))}" value="{!director.confirmationerrorBottom}"></apex:outputText>
                     </apex:repeat>
                 </div>
                 <br />

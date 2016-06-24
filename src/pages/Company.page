@@ -22,7 +22,7 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <style>
                 .hypercolorblue {
                     color: #005EA5;
@@ -2652,7 +2652,7 @@ Ver. Author        Date        Detail
                     </div>
                 </apex:outputPanel>
                 <h1 class="heading-xlarge">
-                    Tell us which company you would like to close
+                {!companySearchHeader}
                 </h1>
                 <!-- <div class="form-group {!IF(hasPageErrors,'error', '')}"> -->
                 <label class="form-label" for="text-input">What is the company number?
@@ -2662,9 +2662,9 @@ Ver. Author        Date        Detail
                         </span>
                     </apex:outputPanel>
                 </label>
-                <apex:outputText escape='false' value='{!currentErrortop}' />
+                <apex:outputText escape="false" value="{!currentErrortop}" />
                 <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                <apex:outputText escape='false' value='{!currentErrorbottom}' />
+                <apex:outputText escape="false" value="{!currentErrorbottom}" />
                 <!-- </div>   -->
                 <br/>
                 <span class="hypercolorblue"> &#9654;</span>

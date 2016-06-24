@@ -16,15 +16,12 @@ Ver. Author        Date        Detail
 */
 public class PreParticularsController extends TransactionStepControllerBase
 {
-
-    // Public properties.
     public Boolean hasPageErrors
     {
         get;
         set;
     }
 
-    // MetaData
     public String displayText1
     {
         get;
@@ -46,7 +43,6 @@ public class PreParticularsController extends TransactionStepControllerBase
         set;
     }
 
-    // dynamic set data
     public String directorName
     {
         get;
@@ -89,7 +85,6 @@ public class PreParticularsController extends TransactionStepControllerBase
         set;
     }
 
-    // company address information
     public String companyAddress1
     {
         get;
@@ -163,15 +158,34 @@ public class PreParticularsController extends TransactionStepControllerBase
     }
 
     private void persistStep()
-        {
-            submissionMgr.persist();
-        }
-        // End Instance methods.    
+    {
+        if (displayresult == null)
+            return;
 
-    // Action methods.     
+        for (Shares__c sharestoUpdate: submissionMgr.submission.Shares__r)
+        {
+            for (Shares__c preParticulars: displayresult)
+            {
+                if (preParticulars.Class_of_Shares__c == sharestoUpdate.Class_of_Shares__c)
+                {
+                    if (preParticulars.Prescribed_Particulars__c.length() > 0)
+                    {
+                        sharestoUpdate.Prescribed_Particulars__c = preParticulars.Prescribed_Particulars__c;
+                    }
+                }
+            }
+        }
+
+        submissionMgr.persist();
+    }
+
     public PageReference nextAction()
     {
-        if (!validatePageState()) return Page.TransactionException;
+        if (!validatePageState())
+        {
+            return Page.TransactionException;
+        }
+
 
         persistStep();
 
@@ -179,11 +193,9 @@ public class PreParticularsController extends TransactionStepControllerBase
     }
 
     public PageReference previousAction()
-        {
-            if (!validatePageState()) return Page.TransactionException;
+    {
+        if (!validatePageState()) return Page.TransactionException;
 
-            return previousStep();
-        }
-        // End Action methods.    
-
+        return previousStep();
+    }
 }
