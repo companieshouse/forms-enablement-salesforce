@@ -114,6 +114,10 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>companySearchPageText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>hasGuidancePage__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>

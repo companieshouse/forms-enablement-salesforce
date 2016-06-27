@@ -14,132 +14,176 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-27  Initial development.
 */
-public with sharing class DocStatusController {
+public with sharing class DocStatusController
+{
 
-    public String cookiestatus {
+    public String cookiestatus
+    {
         get;
         set;
     }
-    public String transactionType {
+    public String transactionType
+    {
         get;
         set;
     }
-    public String contactemail {
+    public String contactemail
+    {
         get;
         set;
     }
-    public String transactionID {
+    public String transactionID
+    {
         get;
         set;
     }
-    public String companyNumber {
+    public String companyNumber
+    {
         get;
         set;
     }
-    public String companyName {
+    public String companyName
+    {
         get;
         set;
     }
-    public String directorName {
+    public String directorName
+    {
         get;
         set;
     }
-    public String directorSigningStatus {
+    public String directorSigningStatus
+    {
         get;
         set;
     }
-    public String directorDateofBirth {
+    public String directorDateofBirth
+    {
         get;
         set;
     }
-    public String envelopeID {
+    public String envelopeID
+    {
         get;
         set;
     }
-    public String docusignobjectsname {
+    public String docusignobjectsname
+    {
         get;
         set;
     }
-    public Transaction__c currenttransaction {
-        get;
-        set;
-    }
-
-    public Transaction__c tx {
-        get;
-        set;
-    }
-    public String title {
-        get;
-        private set;
-    }
-    public Id attachmentId {
-        get;
-        private set;
-    }
-    public String size {
-        get;
-        private set;
-    }
-    public dsfs__DocuSign_Status__c docusignrecipientstatus {
+    public Transaction__c currenttransaction
+    {
         get;
         set;
     }
 
-    public dsfs__DocuSign_Status__c txrs {
+    public Transaction__c tx
+    {
+        get;
+        set;
+    }
+    public String title
+    {
+        get;
+        private set;
+    }
+    public Id attachmentId
+    {
+        get;
+        private set;
+    }
+    public String size
+    {
+        get;
+        private set;
+    }
+    public dsfs__DocuSign_Status__c docusignrecipientstatus
+    {
+        get;
+        set;
+    }
+
+    public dsfs__DocuSign_Status__c txrs
+    {
         get;
         set;
     }
 
     // address information
-    public String companyAddress1 {
+    public String companyAddress1
+    {
         get;
         set;
     }
-    public String companyAddress2 {
+    public String companyAddress2
+    {
         get;
         set;
     }
-    public String companyregion {
+    public String companyregion
+    {
         get;
         set;
     }
-    public String companypostcode {
+    public String companypostcode
+    {
         get;
         set;
     }
-    public String companyCountry {
+    public String companyCountry
+    {
         get;
         set;
     }
-    public String companyLocality {
+    public String companyLocality
+    {
         get;
         set;
     }
-    public String companyIncorporationDate {
+    public String companyIncorporationDate
+    {
         get;
         set;
     }
-    public String informationstuff {
+    public String informationstuff
+    {
         get;
         set;
     }
-    public List <dsfs__DocuSign_Recipient_Status__c> listofOfficers {
+    public List < dsfs__DocuSign_Recipient_Status__c > listofOfficers
+    {
         get;
         set;
     }
+
+    public Boolean hasPageErrors
+    {
+        get;
+        set;
+    }
+
+    public String statusErrors
+    {
+        get;
+        set;
+    }
+
     private String nonce;
     private Company_Authorisation__c companyAuth;
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
 
     SecurityManager securityMgr;
 
-    public class DocStatusControllerCallbackException extends Exception {}
+    public class DocStatusControllerCallbackException extends Exception
+    {}
 
-    public DocStatusController() {
+    public DocStatusController()
+    {
 
     }
-    public PageReference initialiseController() {
+    public PageReference initialiseController()
+    {
 
         // initialze controller and set docusign recipient status screen variables in view state
 
@@ -149,7 +193,8 @@ public with sharing class DocStatusController {
 
         // parse the query string and search for the company auth by the noncevalue 
         // if null redirect to company search page for auth 
-        if (companyAuth != null) {
+        if (companyAuth != null)
+        {
 
             // get transaction and attachment and set vforcepage
             getDocumentStatusTransaction();
@@ -165,7 +210,6 @@ public with sharing class DocStatusController {
 
             companyName = tx.CompanyName__c;
             companyNumber = tx.CompanyNumber__c;
-
             // address information
             CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
             companyAddress1 = compProf.registered_office_address.address_line_1;
@@ -175,8 +219,7 @@ public with sharing class DocStatusController {
             companyCountry = compProf.registered_office_address.country;
             companyLocality = compProf.registered_office_address.locality;
             companyIncorporationDate = compProf.date_of_creation;
-            listofOfficers = docusignrecipientstatus.dsfs__R00NS0000000WUO2MAO__r;
-            system.debug('officers list for dsfs recipient status ===='   + listofOfficers);
+            system.debug('officers list for dsfs recipient status ====' + listofOfficers);
             // companyIncorporationDate = // may need CH api to query this information 
             // Note: (if we are calling this multiple times then we should do an upsert on the initial call to CH and persist
             // this data at least for the length of the transaction)
@@ -191,7 +234,9 @@ public with sharing class DocStatusController {
             DestroyCookies();
 
             return null;
-        } else {
+        }
+        else
+        {
             // set the cookiestatus and then redirect to companypage and call SecurityManager.getDownloadAuthRedirect();
             // to be sent back and captured in the above
             securityMgr = new SecurityManager();
@@ -202,7 +247,6 @@ public with sharing class DocStatusController {
 
             return securityMgr.getDocumentStatusAuthRedirect(companyNumber, transactionType);
         }
-
     }
 
     /*
@@ -217,42 +261,67 @@ public with sharing class DocStatusController {
         return null;
     }*/
 
-    Public sObject getRecipientSigningStatusInfo() {
+    public sObject getRecipientSigningStatusInfo()
+    {
         //String transactionID
 
         Cookie c = ApexPages.currentPage().getCookies().get('d_valueId');
 
+
         transactionID = SecurityManager.decryptText(c.getValue());
+
+        //throw new Form_CustomException(' c=====' + transactionID);
 
         //tx.DocuSign_Status__r[0].dsfs__DocuSign_Envelope_ID__c = envelopeID;
 
         //System.debug('your envelope ids are '  + envelopeID);
 
-        List < dsfs__DocuSign_Status__c > records = [SELECT  dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Name, Id, (SELECT dsfs__DocuSign_Recipient_Company__c, dsfs__DocuSign_Recipient_Email__c, Name, dsfs__DocuSign_Recipient_Id__c, dsfs__Recipient_Status__c, Id FROM dsfs__R00NS0000000WUO2MAO__r) FROM dsfs__DocuSign_Status__c WHERE Transaction__c = :transactionID]; //and Transaction__r.Name = :'SUB0145'];
-        docusignrecipientstatus =  records[0];
-        System.debug('your records are '  + records[0]);
-        return docusignrecipientstatus;
+        List < dsfs__DocuSign_Status__c > records = [SELECT dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Name, Id, (SELECT dsfs__DocuSign_Recipient_Company__c, dsfs__DocuSign_Recipient_Email__c, Name, dsfs__DocuSign_Recipient_Id__c, dsfs__Recipient_Status__c, Id FROM dsfs__R00NS0000000WUO2MAO__r) FROM dsfs__DocuSign_Status__c WHERE Transaction__c = : transactionID]; //and Transaction__r.Name = :'SUB0145'];
+        if (records.size() > 0)
+        {
+            hasPageErrors = false;
+            docusignrecipientstatus = records[0];
+            listofOfficers = docusignrecipientstatus.dsfs__R00NS0000000WUO2MAO__r;
+
+            System.debug('your records are ' + records[0]);
+            return docusignrecipientstatus;
+        }
+
+        hasPageErrors = true;
+        statusErrors = 'Sorry we cannot seem to find your document at the moment. Please try again later';
+        return null;
 
     }
 
-    Public String CreateDocumentStatusCookies() {
+    public String CreateDocumentStatusCookies()
+    {
 
         String dvalueparameter = ApexPages.currentPage().getParameters().get('documentsigningstatus');
 
-        transactionType = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+        //throw new Form_CustomException(' d value param is ' + '  ' + dvalueparameter);
 
-        contactemail = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
 
-        transactionID = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[2];
+        if (dvalueparameter.contains(' '))
+        {
+            dvalueparameter = dvalueparameter.replace(' ', '+');
+        }
+        
+        String paramValue = SecurityManager.decryptText(dvalueparameter);
 
-        companyNumber = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[3];
+        transactionType = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
 
-        //envelopeID = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[4];
+        contactemail = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
+
+        transactionID = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[2];
+
+        companyNumber = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[3];
+
+        //envelopeID = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[4];
 
 
         cookiestatus = 'setauth';
 
-        Cookie d_valuetType = new Cookie('d_valueTType', SecurityManager.encryptText(transactionType), null, -1, true);
+        Cookie d_valueTType = new Cookie('d_valueTType', SecurityManager.encryptText(transactionType), null, -1, true);
 
         Cookie d_valueEmail = new Cookie('d_valueEmail', SecurityManager.encryptText(contactemail), null, -1, true);
 
@@ -262,12 +331,19 @@ public with sharing class DocStatusController {
 
         //Cookie d_valueEnvelopeId = new Cookie('d_valueEnvelopeId', SecurityManager.encryptText(envelopeID), null, -1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[] { d_valuetType, d_valueEmail, d_valueId, d_valueCookieStatus });
+        ApexPages.currentPage().setCookies(new Cookie[]
+        {
+            d_valueTType,
+            d_valueEmail,
+            d_valueId,
+            d_valueCookieStatus
+        });
         //, d_valueEnvelopeId 
         return null;
     }
 
-    Public sObject getDocumentStatusTransaction() {
+    public sObject getDocumentStatusTransaction()
+    {
 
         Cookie a = ApexPages.currentPage().getCookies().get('d_valueTType');
 
@@ -286,7 +362,7 @@ public with sharing class DocStatusController {
         //envelopeID = SecurityManager.decryptText(d.getValue());
 
         // retrieve the transaction
-        List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, Presenter__r.Name, isMajorityRequired__c, PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c, MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, Status__c, CompanyName__c, SubmissionId__c, Warning_Confirmation_Flag__c, Amount__c, (SELECT Id, BodyLength, Name FROM Attachments), (Select Id, Name, Email__c, isPresenter__c, isSignatory__c From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) from Transaction__c where Id = : transactionID];
+        List < Transaction__c > recs = [select Id, Form_Name__c, Presenter__c, Presenter__r.Name, isMajorityRequired__c, PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c, MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, Status__c, CompanyName__c, SubmissionId__c, Warning_Confirmation_Flag__c, Amount__c, (SELECT Id, BodyLength, Name FROM Attachments), (Select Id, Name, Email__c, isPresenter__c, isSignatory__c From Officers__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r) from Transaction__c where Id = : transactionID];
         if (recs.size() == 1) currenttransaction = recs[0];
 
 
@@ -294,9 +370,10 @@ public with sharing class DocStatusController {
     }
 
 
-    Public String DestroyCookies() {
+    public String DestroyCookies()
+    {
 
-        Cookie d_valuetType = new Cookie('d_valueTType', 'empty', null, 0, true);
+        Cookie d_valueTType = new Cookie('d_valueTType', 'empty', null, 0, true);
 
         Cookie d_valueEmail = new Cookie('d_valueEmail', 'empty', null, 0, true);
 
@@ -308,29 +385,38 @@ public with sharing class DocStatusController {
         return null;
     }
 
-    private void parseQueryString() {
+    private void parseQueryString()
+    {
         // Expect a nonce on the query string under the param "state".
         nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
-        if (String.isBlank(nonce)) {
+        if (String.isBlank(nonce))
+        {
 
             // not authenticated so call authentication
 
-        } else {
+        }
+        else
+        {
             // apex error message here
             //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
 
         }
     }
 
-    private void findCompanyAuthByNonce() {
-        try {
+    private void findCompanyAuthByNonce()
+    {
+        try
+        {
 
             List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
-            if (companyAuthorisations.size() == 1) {
+            if (companyAuthorisations.size() == 1)
+            {
                 companyAuth = companyAuthorisations[0];
                 return;
             }
-        } catch (QueryException e) {
+        }
+        catch (QueryException e)
+        {
             throw new DocStatusControllerCallbackException('Invalid state ' + nonce);
         }
     }

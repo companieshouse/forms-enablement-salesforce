@@ -60,12 +60,12 @@ public with sharing class TransactionManager {
     // Instance methods.
     private void retrieveTransactionType(String transactionType){
 
-		List<Transaction_Type__mdt> recs = [select Id, FeeFastTrack__c,isPaypalAllowed__c,isPaymentRequired__c,Below_Button_Title2__c,Below_Button_Text4__c,Below_Button_Text5__c,Below_Button_Text6__c,isSameDayPayment__c,isCardAllowed__c,isAccountPayment__c,Expiry_Date_Length__c ,Guidance_Text_1__c,Guidance_Text_2__c,Guidance_Text_3__c,Guidance_Text_4__c,Guidance_Text_5__c,Guidance_Text_6__c,GuidanceWarningText__c,hasGuidancePage__c,isMajorityForm__c, Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
+		List<Transaction_Type__mdt> recs = [select Id, companySearchPageText__c ,FeeFastTrack__c,isPaypalAllowed__c,isPaymentRequired__c,Below_Button_Title2__c,Below_Button_Text4__c,Below_Button_Text5__c,Below_Button_Text6__c,isSameDayPayment__c,isCardAllowed__c,isAccountPayment__c,Expiry_Date_Length__c ,Guidance_Text_1__c,Guidance_Text_2__c,Guidance_Text_3__c,Guidance_Text_4__c,Guidance_Text_5__c,Guidance_Text_6__c,GuidanceWarningText__c,hasGuidancePage__c,isMajorityForm__c, Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
 		if (recs.size()==1){
 			
 			td = recs[0];
 			
-			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select Display_Text_4__c,Display_Text_6__c,Display_Text_5__c,Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
+			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select CustomView__c ,StandardView__c, CompanyNameText__c, Header_Text_2__c, Header_Text_3__c, ContinueButtonText__c,Display_Text_4__c,Display_Text_6__c,Display_Text_5__c,Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
 																		Header_Text_1__c, Display_Text_1__c,Display_Text_2__c,Display_Text_3__c, Is_Active__c, Document_Template_Name__c, SObject_Type__c 
 																	from Transaction_Type_Step__mdt 
 																	where Transaction_Type__c=:td.DeveloperName and Is_Active__c=true order by Step_Number__c asc]);

@@ -231,6 +231,15 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>companySearchPageText__c</fullName>
+        <externalId>false</externalId>
+        <label>companySearchPageText</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>hasGuidancePage__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to notify is the form contains a guidance or not.</description>

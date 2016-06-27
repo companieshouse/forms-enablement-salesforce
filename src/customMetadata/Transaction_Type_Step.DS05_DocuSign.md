@@ -6,6 +6,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>CompanyNameText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ContinueButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CustomView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">Sign</value>
     </values>
@@ -38,6 +50,14 @@
         <value xsi:type="xsd:string">DS01 DocuSign</value>
     </values>
     <values>
+        <field>Header_Text_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Is_Active__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
@@ -52,6 +72,10 @@
     <values>
         <field>SObject_Type__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>StandardView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Step_Number__c</field>

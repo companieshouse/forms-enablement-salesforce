@@ -8,7 +8,6 @@
         <members>AddAttachmentsController</members>
         <members>AddAttachmentsControllerTest</members>
         <members>AddSharesBaseController</members>
-        <members>AddSharesController</members>
         <members>AddSharesTableController</members>
         <members>AppConstants</members>
         <members>AttachmentTriggerHandler</members>
@@ -55,7 +54,6 @@
         <members>DocStatusUrlTriggerHandler</members>
         <members>DocuSignAPI</members>
         <members>DocuSignAPITest</members>
-        <members>DocuSignRecipientStatusTriggerHandler</members>
         <members>DocuSignStatusTriggerHandler</members>
         <members>DocuSignStatusTriggerHandlerTest</members>
         <members>DocuSignUrlBuilder</members>
@@ -86,7 +84,6 @@
         <members>PaymentControllerTest</members>
         <members>PreParticularsController</members>
         <members>PresenterDirectorController</members>
-        <members>RecipientStatusDocuSign</members>
         <members>RecipientStatusDocusignTriggerHandler</members>
         <members>ReviewController</members>
         <members>ReviewControllerTest</members>
@@ -96,8 +93,6 @@
         <members>SendToDocuSign</members>
         <members>SendToDocuSignTest</members>
         <members>Session</members>
-        <members>ShareBuilderController</members>
-        <members>Shares</members>
         <members>SigningController</members>
         <members>SmartPayNotificationController</members>
         <members>SmartPayNotificationControllerTest</members>
@@ -148,8 +143,6 @@
         <members>ConfirmationFramework</members>
         <members>CurrencySelection</members>
         <members>DS01</members>
-        <members>DemoPage0</members>
-        <members>DemoPage1</members>
         <members>DeveloperTools</members>
         <members>DirectorsInputList</members>
         <members>DirectorsList</members>
@@ -171,8 +164,6 @@
         <members>PresenterDirector</members>
         <members>Review</members>
         <members>SH19</members>
-        <members>ShareBuilder</members>
-        <members>Shares</members>
         <members>SigningPage</members>
         <members>SmartPayNotification</members>
         <members>StartFramework</members>
@@ -184,7 +175,6 @@
         <members>TransactionException</members>
         <members>TransactionPageTemplate</members>
         <members>TransactionSiteRobotsTxt</members>
-        <members>TypeToSearchCurrencyFlow</members>
         <members>UpdateCompanyDirectors</members>
         <members>chooseDirector</members>
         <members>whichDirector</members>
@@ -197,7 +187,6 @@
         <members>DocuSignStatusTrigger</members>
         <members>RecipientStatusTrigger</members>
         <members>ReviewStatusTrigger</members>
-        <members>SignatureRecipientStatus</members>
         <members>SubmissionLinkTrigger</members>
         <name>ApexTrigger</name>
     </types>

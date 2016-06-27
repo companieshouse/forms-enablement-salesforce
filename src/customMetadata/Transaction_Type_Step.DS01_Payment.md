@@ -6,6 +6,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>CompanyNameText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ContinueButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CustomView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
 It costs £FEE to close your company. Your application will not be submitted until you have made this payment.
@@ -43,6 +55,14 @@ How do you want to make the payment?
         <value xsi:type="xsd:string">Paying to close your company</value>
     </values>
     <values>
+        <field>Header_Text_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Is_Active__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -57,6 +77,10 @@ How do you want to make the payment?
     <values>
         <field>SObject_Type__c</field>
         <value xsi:type="xsd:string">Transaction__c</value>
+    </values>
+    <values>
+        <field>StandardView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Step_Number__c</field>

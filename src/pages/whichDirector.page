@@ -6,7 +6,7 @@
    Purpose:
    -------
    
-  	Presenter selects which director they are
+    Presenter selects which director they are
    ======================================================
    ======================================================
    History
@@ -15,29 +15,38 @@
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
 <apex:page title="Closing a limited company" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
-    <apex:composition template="TransactionPageTemplate"> <!-- action="{!checkDirectorStatus}" -->
+    <apex:composition template="TransactionPageTemplate">
+        <!-- action="{!checkDirectorStatus}" -->
         <apex:define name="content">
             <apex:form >
-                <div class="form-group">
-                    <h1>
-                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Which director are you?"></apex:outputText>
-                        <apex:outputText rendered="{!isLLPCompany}" value="which member are you?"></apex:outputText>
-                    </h1>
-                    <p class="lede">
-                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director(s) listed on the public register."></apex:outputText>
-                        <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member(s) listed on the public register."></apex:outputText>
-                    </p>
-                    <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
-                        <label class="block-label" for="radio-1">
-                            <input id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}"/> {!director.Name}
-                        </label>
-                    </apex:repeat>
-                    <apex:actionFunction name="selectPresenter" action="{!selectPresenter}" reRender="none">
-                        <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
-                    </apex:actionFunction>
-                </div>
-                <br />
-                <br />
+                <apex:outputPanel id="masterpanel">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">
+                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Which director are you?"></apex:outputText>
+                            <apex:outputText rendered="{!isLLPCompany}" value="which member are you?"></apex:outputText>
+                        </h1>
+                        <p class="lede">
+                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director(s) listed on the public register."></apex:outputText>
+                            <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member(s) listed on the public register."></apex:outputText>
+                        </p>
+                        <fieldset>
+                            <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
+                                <label class="block-label" for="radio-1">
+                                    <input id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}" /> {!director.Name}
+                                </label>
+                            </apex:repeat>
+                        </fieldset>
+                        <apex:actionFunction name="selectPresenter" action="{!selectPresenter}" reRender="none">
+                            <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
+                        </apex:actionFunction>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                         <br />
+                        <br />
+                    </div>
+                </apex:outputPanel>
                 &nbsp;
                 <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                 <br /> &nbsp;

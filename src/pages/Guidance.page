@@ -15,40 +15,27 @@ History
 Ver. Author        		Date        Detail
 1.0  Sylvain Picory     2016-05-28  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Guidance_Page}" 
-    showHeader="false" 
-    action="{!initializeBox}"
-    sidebar="false" 
-    standardStylesheets="false"
-    controller="GuidanceController">
-
- <apex:composition template="TransactionPageTemplate">
-       <apex:define name="content">
-          <apex:form id="form">
-          <apex:outputPanel id="empty"/>
-          		<div class="form-group">
-                    <apex:outputText rendered="{!IF(displayText0 != null, true, false)}" escape="false" value="{!displayText0}"/>
-
-						<fieldset>
-
-						<legend class="visuallyhidden">{!checkboxText0}</legend>
-						 <label class="block-label" for="agree">
-							<input id="agree" name="agreeBoxx" onclick="clickBox();" type="checkbox" value="{!warningAgreeBox}">
-							{!checkboxText0}
-							</input>
-
-						</label> 
-
-						</fieldset>
-						<apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" /><br />
-		 			<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/>
-					</div>
-
-					<apex:actionFunction action="{!updateBox}" name="clickBox" reRender="nextButton">
-					</apex:actionFunction> 
-					
+<apex:page title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" action="{!initializeBox}" sidebar="false" standardStylesheets="false" controller="GuidanceController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form id="form">
+                <apex:outputPanel id="empty" />
+                <div class="form-group">
+                    <apex:outputText rendered="{!IF(displayText0 != null, true, false)}" escape="false" value="{!displayText0}" />
+                    <fieldset>
+                        <legend class="visuallyhidden">{!checkboxText0}</legend>
+                        <label class="block-label" for="agree">
+                            <input id="agree" name="agreeBoxx" onclick="clickBox();" type="checkbox" value="{!warningAgreeBox}"> {!checkboxText0}
+                            </input>
+                        </label>
+                    </fieldset>
+                </div>
+                <apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
+                <br />
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                <apex:actionFunction action="{!updateBox}" name="clickBox" reRender="nextButton">
+                </apex:actionFunction>
             </apex:form>
-       </apex:define>
+        </apex:define>
     </apex:composition>
-
 </apex:page>
