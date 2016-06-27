@@ -6,16 +6,28 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>CompanyNameText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ContinueButtonText__c</field>
+        <value xsi:type="xsd:string">continue to signing</value>
+    </values>
+    <values>
+        <field>CustomView__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">particular review test</value>
+        <value xsi:type="xsd:string">SC review page content</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">particular review test</value>
+        <value xsi:type="xsd:string">SC review page content 2</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">particular review test</value>
+        <value xsi:type="xsd:string">SC review page content 2</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -35,7 +47,15 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">particular review test</value>
+        <value xsi:type="xsd:string">Share Capital</value>
+    </values>
+    <values>
+        <field>Header_Text_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Is_Active__c</field>
@@ -52,6 +72,10 @@
     <values>
         <field>SObject_Type__c</field>
         <value xsi:type="xsd:string">Transaction__c</value>
+    </values>
+    <values>
+        <field>StandardView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Step_Number__c</field>

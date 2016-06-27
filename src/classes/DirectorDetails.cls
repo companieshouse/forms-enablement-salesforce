@@ -142,7 +142,6 @@ public class DirectorDetails extends TransactionStepControllerBase
             {
                 builtDirectors.add(chosenOfficer);
             }
-
         }
     }
 

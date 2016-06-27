@@ -1,7 +1,7 @@
 <apex:page title="Currency Selection" showHeader="false" sidebar="false" standardStylesheets="false" controller="CurrencyController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
                 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
                 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

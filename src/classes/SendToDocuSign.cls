@@ -143,7 +143,7 @@ public with sharing class SendToDocuSign
         // Tab
         envelope.Tabs = new DocuSignAPI.ArrayOfTab();
         envelope.Tabs.Tab = new DocuSignAPI.Tab[officersToSignList.size() * 2]; //for each Officer we will create 2 tabs
-
+        //for(Integer i; i < officersToSignList.size(); i++){
         count = 0;
         for (Officer__c off: officersToSignList)
         {
@@ -157,7 +157,7 @@ public with sharing class SendToDocuSign
             envelope.Tabs.Tab[count] = tab2;
             count++;
         }
-
+    //}
 
         System.debug('Calling the API');
         try
@@ -286,7 +286,7 @@ public with sharing class SendToDocuSign
         //Change this field if signing order is different, e.g. sign2 wait for sign1 completion
         recipient.RoutingOrder = 1;
         recipient.Email = off.Email__c;
-
+        //recipient.CustomFields[officerfield?] = off.Id;
         //Pick the correct name for signature
         if (off.isDeceased__c || off.isPowerOfAttorney__c || off.isCorporateDirector__c)
             recipient.UserName = off.AuthorizedSigner__c;

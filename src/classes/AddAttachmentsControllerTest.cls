@@ -33,7 +33,7 @@ public class AddAttachmentsControllerTest
         addingattachmentcontroller.attachmentId = trans.id;
         Test.stopTest();
 
-        System.assertEquals(0, addingattachmentcontroller.getAttachments().size());
+        System.assertEquals(0, addingattachmentcontroller.attachments.size());
 
         System.assertEquals(1, addingattachmentcontroller.newAttachments.size());
 
@@ -56,6 +56,6 @@ public class AddAttachmentsControllerTest
         addingattachmentcontroller.save();
         Test.stopTest();
 
-        System.assertEquals(2, addingattachmentcontroller.getAttachments().size());
+        System.assertEquals(2, addingattachmentcontroller.attachments.size());
     }
 }

@@ -84,6 +84,7 @@
 		<members>OfficersQueryAction_Test</members>
 		<members>PaymentController</members>
 		<members>PaymentControllerTest</members>
+		<members>PreParticularsController</members>
 		<members>PresenterDirectorController</members>
 		<members>RecipientStatusDocuSign</members>
 		<members>RecipientStatusDocusignTriggerHandler</members>
@@ -164,6 +165,7 @@
 		<members>Exception</members>
 		<members>Guidance</members>
 		<members>OfficerDetails</members>
+		<members>PDFGeneration</members>
 		<members>PreParticularRights</members>
 		<members>Payment</members>
 		<members>PresenterDirector</members>

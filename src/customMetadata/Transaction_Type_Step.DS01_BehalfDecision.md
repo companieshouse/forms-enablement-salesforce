@@ -6,6 +6,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>CompanyNameText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ContinueButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CustomView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Some directors may need someone to sign on behalf of them if they:
 &lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;Are deceased&lt;/li&gt;&lt;li&gt;Need a Power of Attorney to act on their behalf&lt;/li&gt;
@@ -40,6 +52,14 @@
         <value xsi:type="xsd:string">Approving on behalf of another director</value>
     </values>
     <values>
+        <field>Header_Text_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Is_Active__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -54,6 +74,10 @@
     <values>
         <field>SObject_Type__c</field>
         <value xsi:type="xsd:string">Transaction__c</value>
+    </values>
+    <values>
+        <field>StandardView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Step_Number__c</field>
