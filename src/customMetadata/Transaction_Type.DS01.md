@@ -121,10 +121,6 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>companySearchPageText__c</field>
-        <value xsi:type="xsd:string">Tell us which company you would like to close</value>
-    </values>
-    <values>
         <field>hasGuidancePage__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>

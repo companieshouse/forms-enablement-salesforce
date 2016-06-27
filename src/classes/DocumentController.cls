@@ -14,76 +14,62 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
-public with sharing class DocumentController
-{
+public with sharing class DocumentController {
 
-    public String cookiestatus
-    {
+    public String cookiestatus {
         get;
         set;
     }
-    public String transactionType
-    {
+    public String transactionType {
         get;
         set;
     }
-    public String contactemail
-    {
+    public String contactemail {
         get;
         set;
     }
-    public String transactionID
-    {
+    public String transactionID {
         get;
         set;
     }
-    public String companyNumber
-    {
+    public String companyNumber {
         get;
         set;
     }
-    public Transaction__c currenttransaction
-    {
+    public Transaction__c currenttransaction {
         get;
         set;
     }
 
-    public Transaction__c tx
-    {
+    public Transaction__c tx {
         get;
         set;
     }
-    public String title
-    {
+    public String title {
         get;
         private set;
     }
-    public Id attachmentId
-    {
+    public Id attachmentId {
         get;
         private set;
     }
-    public String size
-    {
+    public String size {
         get;
         private set;
     }
 
-    private String nonce;
+	private String nonce;
     private Company_Authorisation__c companyAuth;
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
 
     SecurityManager securityMgr;
 
-    public class DocumentControllerCallbackException extends Exception
-    {}
+    public class DocumentControllerCallbackException extends Exception {}
 
-    public DocumentController()
-    {
+    public DocumentController() {
 
     }
-    public PageReference initialiseController()
-    {
+    public PageReference initialiseController() {
 
         parseQueryString();
 
@@ -91,18 +77,15 @@ public with sharing class DocumentController
 
         // parse the query string and search for the company auth by the noncevalue 
         // if null redirect to company search page for auth 
-        if (companyAuth != null)
-        {
+        if (companyAuth != null) {
 
             // get transaction and attachment and set vforcepage
             getDocumentDownloadTransaction();
 
             tx = currenttransaction;
 
-            if (tx.attachments != null)
-            {
-                if (tx.attachments.size() > 0)
-                {
+            if (tx.attachments != null) {
+                if (tx.attachments.size() > 0) {
                     //showDoc = true;
                     attachmentId = tx.attachments[0].Id;
                     title = tx.attachments[0].Name;
@@ -110,19 +93,15 @@ public with sharing class DocumentController
                     String tempSize = String.valueOf(sizeInt);
                     size = tempSize.left(3);
                     //MB
-                    if (tempSize.length() >= 9)
-                    {
+                    if (tempSize.length() >= 9) {
                         size += 'M';
                     }
                     //KB
-                    else if (tempSize.length() >= 6 && tempSize.length() < 9)
-                    {
+                    else if (tempSize.length() >= 6 && tempSize.length() < 9) {
                         size += 'K';
                     }
                 }
-            }
-            else
-            {
+            } else {
                 title = 'NA';
                 size = 'NA';
                 attachmentId = null;
@@ -134,9 +113,7 @@ public with sharing class DocumentController
 
             return null;
 
-        }
-        else
-        {
+        } else {
             // set the cookiestatus and then redirect to companypage and call SecurityManager.getDownloadAuthRedirect();
             // to be sent back and captured in the above
             securityMgr = new SecurityManager();
@@ -152,32 +129,24 @@ public with sharing class DocumentController
             return pr;
             */
         }
+
     }
 
-    public String CreateDocumentDownloadCookies()
-    {
+    Public String CreateDocumentDownloadCookies() {
 
         String dvalueparameter = ApexPages.currentPage().getParameters().get('documentdownload');
-        //throw new Form_CustomException(' d value param is ' + '  ' + dvalueparameter);
 
-        if (dvalueparameter.contains(' '))
-        {
-            dvalueparameter = dvalueparameter.replace(' ', '+');
-        }
+        transactionType = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
 
-        String paramValue = SecurityManager.decryptText(dvalueparameter);
+        contactemail = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
 
-        transactionType = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+        transactionID = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[2];
 
-        contactemail = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
-
-        transactionID = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[2];
-
-        companyNumber = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[3];
+        companyNumber = dvalueparameter.split(AppConstants.ID_DELIM_SPLIT_CHAR)[3];
 
         cookiestatus = 'setauth';
 
-        Cookie d_valueTType = new Cookie('d_valueTType', SecurityManager.encryptText(transactionType), null, -1, true);
+        Cookie d_valuetType = new Cookie('d_valueTType', SecurityManager.encryptText(transactionType), null, -1, true);
 
         Cookie d_valueEmail = new Cookie('d_valueEmail', SecurityManager.encryptText(contactemail), null, -1, true);
 
@@ -185,19 +154,12 @@ public with sharing class DocumentController
 
         Cookie d_valueCookieStatus = new Cookie('d_valueCookieStatus', SecurityManager.encryptText(cookiestatus), null, -1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[]
-        {
-            d_valueTType,
-            d_valueEmail,
-            d_valueId,
-            d_valueCookieStatus
-        });
+        ApexPages.currentPage().setCookies(new Cookie[] { d_valuetType, d_valueEmail, d_valueId, d_valueCookieStatus });
 
         return null;
     }
 
-    public sObject getDocumentDownloadTransaction()
-    {
+    Public sObject getDocumentDownloadTransaction() {
 
         Cookie a = ApexPages.currentPage().getCookies().get('d_valueTType');
 
@@ -218,10 +180,9 @@ public with sharing class DocumentController
         return currenttransaction;
     }
 
-    public String DestroyCookies()
-    {
+    Public String DestroyCookies() {
 
-        Cookie d_valueTType = new Cookie('d_valueTType', 'empty', null, 0, true);
+        Cookie d_valuetType = new Cookie('d_valueTType', 'empty', null, 0, true);
 
         Cookie d_valueEmail = new Cookie('d_valueEmail', 'empty', null, 0, true);
 
@@ -230,12 +191,10 @@ public with sharing class DocumentController
         return null;
     }
 
-    private void parseQueryString()
-    {
+    private void parseQueryString() {
         // Expect a nonce on the query string under the param "state".
         nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
-        if (String.isBlank(nonce))
-        {
+        if (String.isBlank(nonce)) {
 
             // not authenticated so call authentication
 
@@ -245,20 +204,15 @@ public with sharing class DocumentController
         //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
     }
 
-    private void findCompanyAuthByNonce()
-    {
-        try
-        {
+    private void findCompanyAuthByNonce() {
+        try {
 
             List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
-            if (companyAuthorisations.size() == 1)
-            {
+            if (companyAuthorisations.size() == 1) {
                 companyAuth = companyAuthorisations[0];
                 return;
             }
-        }
-        catch (QueryException e)
-        {
+        } catch (QueryException e) {
             throw new DocumentControllerCallbackException('Invalid state ' + nonce);
         }
     }

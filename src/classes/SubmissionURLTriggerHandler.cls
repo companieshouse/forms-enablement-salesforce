@@ -43,7 +43,7 @@ public with sharing class SubmissionURLTriggerHandler {
 
                 parametername += '/documents?documentdownload=';
 
-                parametername += SecurityManager.encryptText(transactiontype+AppConstants.ID_DELIM_CHAR+contactemail+AppConstants.ID_DELIM_CHAR+transactionID+AppConstants.ID_DELIM_CHAR+companyNumber);
+                parametername += SecurityManager.encryptText(transactiontype + AppConstants.ID_DELIM_CHAR + contactemail + AppConstants.ID_DELIM_CHAR + transactionID + AppConstants.ID_DELIM_CHAR + companyNumber);
 
                 PageReference downloadreference = new PageReference(parametername);
 

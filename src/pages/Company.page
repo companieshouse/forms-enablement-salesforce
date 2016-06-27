@@ -2644,27 +2644,27 @@ Ver. Author        Date        Detail
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                             An error has occurred.
                         </h1>
+                        <p>
+                            Optional description of the errors and how to correct them
+                        </p>
                         <ul class="error-summary-list">
                             <li>
-                                <span class="error-message">{!currentErrorMessage}</span>
+                                <a href="#example-personal-details">Descriptive link to the question with an error</a>
                             </li>
                         </ul>
                     </div>
                 </apex:outputPanel>
                 <h1 class="heading-xlarge">
-                {!companySearchHeader}
+                    Tell us which company you would like to close
                 </h1>
                 <!-- <div class="form-group {!IF(hasPageErrors,'error', '')}"> -->
                 <label class="form-label" for="text-input">What is the company number?
                     <span class="form-hint">This is the 8 digit number at the bottom of your company certificate.</span>
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
-                        </span>
+                        <span class="error-message" id="error-message-ni-number">Error message about Company Number goes here</span>
                     </apex:outputPanel>
                 </label>
-                <apex:outputText escape="false" value="{!currentErrortop}" />
                 <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                <apex:outputText escape="false" value="{!currentErrorbottom}" />
                 <!-- </div>   -->
                 <br/>
                 <span class="hypercolorblue"> &#9654;</span>

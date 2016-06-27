@@ -27,12 +27,12 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select finishedAddingShares__c, sharecurrencyselection__c, Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
-                                        MultipleDirectors__c,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
-                                        Status__c,Amount__c, isLLP__c, SubmissionId__c,
-                                        (SELECT Id,BodyLength, Description, Name FROM Attachments),(SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
-                                        (Select Id,Name, Email__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c, 
+                                        MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,
+                                        Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
+                                        (SELECT Id,BodyLength, Name FROM Attachments),
+                                        (Select Id,Name, Email__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
                                             AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
                                         From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c where Id=:submissionId];
@@ -71,11 +71,11 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select finishedAddingShares__c, sharecurrencyselection__c, Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
                                         Status__c,Amount__c, isLLP__c, SubmissionId__c,
-                                        (SELECT Id,BodyLength, Description, Name FROM Attachments),(SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
+                                        (SELECT Id,BodyLength, Name FROM Attachments),
                                         (Select Id,Name, Email__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c, 
                                             AuthorizedSigner__c,hasInputBehalfDetails__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
                                         From Officers__r),(SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
@@ -102,8 +102,6 @@ public with sharing class SubmissionManager {
     }
     
     public void persist(){
-        Database.update(submission.Attachments);
-        Database.update(submission.Shares__r);
         Database.update(submission.Officers__r);
         Database.update(submission);
     }

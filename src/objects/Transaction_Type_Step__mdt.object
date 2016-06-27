@@ -12,30 +12,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>CompanyNameText__c</fullName>
-        <externalId>false</externalId>
-        <label>CompanyNameText</label>
-        <required>false</required>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>ContinueButtonText__c</fullName>
-        <description>Button Text for Review Page</description>
-        <externalId>false</externalId>
-        <label>ContinueButtonText</label>
-        <length>255</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>CustomView__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>CustomView</label>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>Display_Text_1__c</fullName>
         <externalId>false</externalId>
         <label>Display Text 1</label>
@@ -100,20 +76,6 @@
         <type>TextArea</type>
     </fields>
     <fields>
-        <fullName>Header_Text_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Header Text 2</label>
-        <required>false</required>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>Header_Text_3__c</fullName>
-        <externalId>false</externalId>
-        <label>Header Text 3</label>
-        <required>false</required>
-        <type>TextArea</type>
-    </fields>
-    <fields>
         <fullName>Is_Active__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -146,13 +108,6 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>StandardView__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>StandardView</label>
-        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Step_Number__c</fullName>
@@ -204,4 +159,5 @@
     </fields>
     <label>Transaction Type Step</label>
     <pluralLabel>Transaction Type Steps</pluralLabel>
+    <visibility>Protected</visibility>
 </CustomObject>

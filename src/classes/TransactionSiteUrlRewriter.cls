@@ -42,13 +42,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String CHOOSEDIRECTOR = '/choosedirector';
     public String WHICHDIRECTOR = '/whichdirector';
     public String OFFICERDETAILS = '/officerdetails';
-	public String SHAREBUILDER = '/shareBuilder';
-    public String CURRENCYSELECTION = '/currencySelection';
-    public String PREPARTICULARRIGHTS = '/preparticularrights';
-    public String ADDSHAREBASE = '/addsharesbase';
-    public String TABULARDATA = '/tabularddata';
-    public String ATTACHMENTS = '/attachments';
-    public String SIGNINGPAGE = '/signingpage';
 
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -75,14 +68,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_CHOOSEDIRECTOR = '/chooseDirector';
     public String VF_PAGE_WHICHDIRECTOR = '/whichDirector';
     public String VF_PAGE_OFFICERDETAILS = '/OfficerDetails';
-	public String VF_PAGE_SHAREBUILDER = '/ShareBuilder';
-    public String VF_PAGE_CURRENCYSELECTION = '/CurrencySelection';
-    public String VF_PAGE_PREPARTICULARRIGHTS = '/PreParticularRights';
-    public String VF_PAGE_ADDSHARESBASE = '/AddSharesBase';
-    public String VF_PAGE_TABULARDATA = '/TabularData';
-    public String VF_PAGE_ATTACHMENTS = '/Attachments';
-    public String VF_PAGE_SIGNINGPAGE = '/SigningPage';
-
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -127,35 +112,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.startsWith(OFFICERDETAILS))
         {
             pr = new PageReference(VF_PAGE_OFFICERDETAILS);
-        }
-		else if (url.startsWith(SHAREBUILDER))
-        {
-            pr = new PageReference(VF_PAGE_SHAREBUILDER);
-        }
-        else if (url.startsWith(CURRENCYSELECTION))
-        {
-            pr = new PageReference(VF_PAGE_CURRENCYSELECTION);
-        }
-        else if (url.startsWith(PREPARTICULARRIGHTS))
-        {
-            pr = new PageReference(VF_PAGE_PREPARTICULARRIGHTS);
-        }
-        else if (url.startsWith(ADDSHAREBASE))
-        {
-            pr = new PageReference(VF_PAGE_ADDSHARESBASE);
-        }
-
-        else if (url.startsWith(TABULARDATA))
-        {
-            pr = new PageReference(VF_PAGE_TABULARDATA);
-        }
-        else if (url.startsWith(SIGNINGPAGE))
-        {
-            pr = new PageReference(VF_PAGE_SIGNINGPAGE);
-        }
-        else if (url.startsWith(ATTACHMENTS))
-        {
-            pr = new PageReference(VF_PAGE_ATTACHMENTS);
         }
 
 
@@ -210,34 +166,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             else if (url.startsWith(VF_PAGE_OFFICERDETAILS))
             {
                 friendlyPageReference = new PageReference(OFFICERDETAILS);
-            }
-			else if (url.startsWith(VF_PAGE_SHAREBUILDER))
-            {
-                friendlyPageReference = new PageReference(SHAREBUILDER);
-            }
-            else if (url.startsWith(VF_PAGE_CURRENCYSELECTION))
-            {
-                friendlyPageReference = new PageReference(CURRENCYSELECTION);
-            }
-            else if (url.startsWith(VF_PAGE_PREPARTICULARRIGHTS))
-            {
-                friendlyPageReference = new PageReference(PREPARTICULARRIGHTS);
-            }
-            else if (url.startsWith(VF_PAGE_ADDSHARESBASE))
-            {
-                friendlyPageReference = new PageReference(ADDSHAREBASE);
-            }
-            else if (url.startsWith(VF_PAGE_TABULARDATA))
-            {
-                friendlyPageReference = new PageReference(TABULARDATA);
-            }
-            else if (url.startsWith(VF_PAGE_SIGNINGPAGE))
-            {
-                friendlyPageReference = new PageReference(SIGNINGPAGE);
-            }
-            else if (url.startsWith(VF_PAGE_ATTACHMENTS))
-            {
-                friendlyPageReference = new PageReference(ATTACHMENTS);
             }
 
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	

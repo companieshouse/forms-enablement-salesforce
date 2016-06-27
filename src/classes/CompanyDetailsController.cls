@@ -64,7 +64,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
         companypostcode = compProf.registered_office_address.postal_code;
         companyCountry = compProf.registered_office_address.country;
         companyLocality = compProf.registered_office_address.locality;
-        companyStatus = compProf.company_status.capitalize();
+        companyStatus = compProf.company_status;
         companyDateOfCreation = compProf.date_of_creation;
 		companyName = compProf.company_name;
 		companyType = compProf.type;

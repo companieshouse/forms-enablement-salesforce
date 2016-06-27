@@ -6,18 +6,6 @@
         <value xsi:type="xsd:string">ReviewController</value>
     </values>
     <values>
-        <field>CompanyNameText__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
-        <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
-        <field>CustomView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">Your signed request is shown below and should be checked by you to ensure all information is correct.</value>
     </values>
@@ -50,14 +38,6 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
-        <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
         <field>Is_Active__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -72,10 +52,6 @@
     <values>
         <field>SObject_Type__c</field>
         <value xsi:type="xsd:string">Transaction__c</value>
-    </values>
-    <values>
-        <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Step_Number__c</field>

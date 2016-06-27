@@ -31,7 +31,6 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
     public String companyName { get; private set; }
     public String presenterEmail { get; private set; }
     public Boolean noEmbedDoc {get; set;}
-
     public List<Officer__c> offResquestedToSign { get; private set; } 
     
     
@@ -114,7 +113,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
         // Transaction is signed
         } else if(isPageAlreadyValidStep) {
             showButtons=true;
-           noEmbedDoc = true;
+            noEmbedDoc = true;
             return null;
 
         // Transaction is pending signatures    
@@ -126,8 +125,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
          
         // Else create a new evelope
         } else {
-            noEmbedDoc = true;
-
+        
             SendToDocuSign sendToDS = new SendToDocuSign();
             externalURL = sendToDS.embedDocuSignOpen(submissionMgr.submission);
 
