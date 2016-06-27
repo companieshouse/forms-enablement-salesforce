@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>Companies House Connector App API settings</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>CH_Authentication_Token__c</fullName>
+        <externalId>false</externalId>
+        <label>CH_Authentication_Token</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CH_Endpoint_RegAddress_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>CH_Endpoint_RegAddress_URL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>CH_Endpoint__c</fullName>
+        <externalId>false</externalId>
+        <label>CH_Endpoint</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>CH_Endpoint_cNum_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>CH_Endpoint_cNum_URL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <label>API Org Settings</label>
+</CustomObject>

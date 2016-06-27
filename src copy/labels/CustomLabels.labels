@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>FLOW_TEXT_DIRECTOR_APPROVAL</fullName>
+        <categories>FLOW TEXT</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>FLOW_TEXT_DIRECTOR_APPROVAL</shortDescription>
+        <value>I/We as director(s) / the majority of directors apply for this company to be struck off the Register and declare that none of the circumstances described in section 1004 or 1005 of the Companies Act 2006 (being circumstances in which the directors would otherwise be prohibited under those sections from making an application) exists in relation to the company.</value>
+    </labels>
+    <labels>
+        <fullName>FLOW_TEXT_DIRECTOR_APPROVAL_WELSH</fullName>
+        <categories>FLOW TEXT</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>FLOW TEXT DIRECTOR APPROVAL WELSH</shortDescription>
+        <value>Rwyf i / Rydym ni fel cyfarwyddwr ( au ) / y mwyafrif o&apos;r cyfarwyddwyr yn gwneud cais am i&apos;r cwmni hwn gael ei ddileu o&apos;r Gofrestr ac yn datgan nad oes yr un o&apos;r amgylchiadau a ddisgrifir yn adran 1004 neu 1005 o Ddeddf Cwmnïau 2006 ( amgylchiadau lle byddai&apos;r cyfarwyddwyr fel arall yn cael ei wahardd o dan yr adrannau hynny rhag gwneud cais ) yn bodoli mewn perthynas â&apos;r cwmni.</value>
+    </labels>
+    <labels>
+        <fullName>FLOW_TEXT_WARINNG</fullName>
+        <categories>FLOW TEXT</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>FLOW_TEXT_WARINNG</shortDescription>
+        <value>Warning to all applicants: It is an offence to knowingly or recklessly provide false or misleading information on this application. It is an offence to apply for strike-off under this section if the company has bearer shares in issue. You are advised to to consult the guidance available from Companies House before completing this form. If in doubt, seek professional advice.</value>
+    </labels>
+    <labels>
+        <fullName>FLOW_TEXT_WARINNG_WELSH</fullName>
+        <categories>FLOW TEXT</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>FLOW TEXT WARINNG WELSH</shortDescription>
+        <value>Rhybudd i bob ymgeisydd : Mae&apos;n drosedd i ddarparu gwybodaeth anghywir neu gamarweiniol ar y cais hwn yn fwriadol neu&apos;n fyrbwyll . Mae&apos;n drosedd i wneud cais am ddileu&apos;n dan yr adran hon os yw&apos;r cwmni wedi cyfrannau dygiedydd yn broblem. Fe&apos;ch cynghorir i ymgynghori â&apos;r canllawiau sydd ar gael gan Dŷ&apos;r Cwmnïau cyn llenwi&apos;r ffurflen hon . Os oes amheuaeth, gofynnwch am gyngor proffesiynol.</value>
+    </labels>
+    <labels>
+        <fullName>PDF_On_Behalf_Of_Deceased</fullName>
+        <categories>PDF generation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PDF On Behalf Of Deceased</shortDescription>
+        <value>*Sign on behalf of the deceased director</value>
+    </labels>
+    <labels>
+        <fullName>PDF_On_Behalf_Of_The_Corporate_Director</fullName>
+        <categories>PDF generation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PDF On Behalf Of The Corporate Director</shortDescription>
+        <value>*Sign on behalf of the corporate director</value>
+    </labels>
+    <labels>
+        <fullName>PDF_Power_Of_Attorney_On_Behalf_Of</fullName>
+        <categories>PDF generation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PDF Power Of Attorney On Behalf Of</shortDescription>
+        <value>*Power of Attorney sign on behalf of the director</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Behalf_Decision</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Behalf Decision</shortDescription>
+        <value>Approving on behalf of a director</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Behalf_Input_Details</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Behalf Input Details</shortDescription>
+        <value>Inputs details</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Behalf_Which_Signatory</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Behalf Which Signatory</shortDescription>
+        <value>Behalf which selection</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Company</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Company</shortDescription>
+        <value>Company</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Company_Details</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Company Details</shortDescription>
+        <value>Company Details</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Company_Page_Display_Text</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Company Page Display Text</shortDescription>
+        <value>Please enter your company number e.g. 80082211</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Confirmation_Page</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Confirmation Page</shortDescription>
+        <value>Confirmation Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Continue</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Continue</shortDescription>
+        <value>Continue</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Continue_to_Payment</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Continue to Payment</shortDescription>
+        <value>Continue to Payment</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_DS01</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text DS01</shortDescription>
+        <value>DS01</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Day</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Day</shortDescription>
+        <value>Day</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Digital_Forms</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Digital Forms</shortDescription>
+        <value>Digital Forms</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Directors</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Directors List</shortDescription>
+        <value>Directors</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_DocuSign</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text DocuSign</shortDescription>
+        <value>Signing Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_DocuSignPending</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text DocuSignPending</shortDescription>
+        <value>Request Pending</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Dynamic_Test</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Dynamic Test</shortDescription>
+        <value>Dynamic Test</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Enter_Company_Number</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Enter Company Number</shortDescription>
+        <value>Enter Company Number</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Error_Page</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Error Page</shortDescription>
+        <value>Error Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Guidance_Page</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Guidance Page</shortDescription>
+        <value>Guidance Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Landing_Page</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Landing Page</shortDescription>
+        <value>Landing Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Month</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Month</shortDescription>
+        <value>Month</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Next</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Next</shortDescription>
+        <value>Save and continue</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Not_Your_Company</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Not Your Company</shortDescription>
+        <value>Not your company?</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Payment</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Payment</shortDescription>
+        <value>Payment Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Payment_page_Title</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Payment page</shortDescription>
+        <value>Make a payment</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Please_Confirm</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Please Confirm</shortDescription>
+        <value>Please Confirm</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Previous</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Previous</shortDescription>
+        <value>Previous</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Review</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI_Text_Review</shortDescription>
+        <value>Review Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Review_page_Title</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI_Text_Review_page_Title</shortDescription>
+        <value>Review strike off request</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Search</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Start</fullName>
+        <categories>Ui Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Start</shortDescription>
+        <value>Start now</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Submit</fullName>
+        <categories>Ui Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Submit</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Summary_Page</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Summary Page</shortDescription>
+        <value>Summary Page</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Update_Company_Directors</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Update Company Directors</shortDescription>
+        <value>Update Company Directors</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Year</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UI Text Year</shortDescription>
+        <value>Year</value>
+    </labels>
+</CustomLabels>

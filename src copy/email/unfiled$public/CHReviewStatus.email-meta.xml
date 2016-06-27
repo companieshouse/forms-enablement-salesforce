@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify presenter that transaction is currently in the review status</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>CH Review Status</name>
+    <style>none</style>
+    <subject>Review your transaction</subject>
+    <textOnly>Companies House
+
+Dear {!Transaction__c.Presenter__c}, 
+
+Your Companies House form {!Transaction__c.Form_Name__c} has been signed and is awaiting your review for completion. If you would like to finish this process please click on the link &lt;a href=&quot;{!Transaction__c.ReviewRedirect__c}&quot;&gt;Here&lt;/a&gt; 
+
+Regards, 
+
+Companies House</textOnly>
+    <type>custom</type>
+</EmailTemplate>
