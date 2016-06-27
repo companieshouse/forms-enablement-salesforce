@@ -41,6 +41,9 @@
                         <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp;
                         <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp;
                         <apex:commandLink value="Save" action="{!save}" />
+                        <!--<apex:actionFunction name="deleteAttachment" action="{!DeleteAttachments}">
+                            <apex:param name="attachmentIdParam" value="" assignTo="{!attachmentId}" />
+                        </apex:actionFunction>-->
                     </p>
                 </div>
                 <apex:outputPanel id="BuildTable">
