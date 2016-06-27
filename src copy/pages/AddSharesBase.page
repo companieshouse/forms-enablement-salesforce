@@ -1,0 +1,82 @@
+<apex:page title="{!$Label.UI_Text_Company_Details}" controller="AddSharesBaseController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel rendered="{!NOT(showCurrentShares)}" id="GUIDANCE">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">
+                            {!headerText1}
+                            
+                        </h1>
+                        <p class="lede">{!displayText1}
+                        </p>
+                        <table class="check-your-answers">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">
+                                        <h2 class="heading-medium">{!companyName}</h2>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Company Number</td>
+                                    <td>{!companyNumber}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </apex:outputPanel><!--
+                <apex:outputPanel rendered="{!showCurrentShares}" id="currentsharestable">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">
+                            {!headerText1}
+                        </h1>
+                        <p class="lede">{!displayText2}
+                        </p>
+                        <table class="check-your-answers">
+                            <tbody>
+                                <tr>
+                                    <td>Currency</td>
+                                    <td></td>
+                                </tr>
+                                <span class="form-hint" id="Error"></span>
+                                <apex:repeat value="{!displayresult}" var="sp" id="theRepeat">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{!sp}" id="object" />
+                                        </td>
+                                        <td>
+                                            <apex:commandLink reRender="none" onclick="sendCurrency('{!sp}');" value="Add Shares" />
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <p>{!displayText3}
+                        </p>
+                        <apex:actionFunction name="AddtocurrentShare" action="{!AddtocurrentShare}" reRender="none">
+                            <apex:param name="currencyParam" id="y" value="" assignTo="{!currencyperSelection}" />
+                        </apex:actionFunction>
+                    </div>
+                </apex:outputPanel>
+                <br/>-->
+                <apex:commandButton styleClass="button" action="{!createNewShares}" value="{!$Label.UI_Text_Continue}" rendered="{!NOT(isLastPage)}" />
+                <br/>  
+            </apex:form>
+            <script>
+            function sendCurrency(currency) {
+                console.log('here is your currency    ' + currency);
+                if (currency.length > 1) {
+                    AddtocurrentShare(currency);
+                } else {
+                    document.getElementById("Error").innerHTML = '<h4 style="color:#b10e1e;">Error</h1>';
+
+                }
+            }
+            </script>
+          
+        </apex:define>
+    </apex:composition>
+</apex:page>

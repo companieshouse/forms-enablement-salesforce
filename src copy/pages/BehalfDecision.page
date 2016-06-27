@@ -1,0 +1,65 @@
+<!-- 
+   Name: BehalfDecision.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+      
+   1. This page will design if the flow need to redirect the user to the selection of who will
+   be signed on behalf for the company
+
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  SylvainP      2016-06-17  Initial development.
+   -->
+<apex:page title="{!$Label.UI_Text_Behalf_Decision}" controller="BehalfDecisionController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+   <apex:composition template="TransactionPageTemplate">
+      <apex:define name="content">
+      <apex:form >
+
+         <div class="form-group">
+         <h1 class="heading-xlarge"><apex:outputText value="{!headerBox1}"></apex:outputText>
+
+                  </h1>
+         <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+         
+         
+
+
+
+        <fieldset class="inline">
+
+              <label class="block-label" for="radio-inline-1">
+              
+                <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio"  name="radio-inline-group" value="Yes">
+                Yes
+                </input>
+              </label>
+              <label class="block-label" for="radio-inline-2">
+                <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
+                No
+                </input>
+              </label>
+
+              </fieldset>
+         </div>
+         <br /><br />
+          <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
+
+         <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
+         <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error" /><br />
+		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
+
+     <apex:actionFunction action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+               <apex:param name="paramBoolean" value="" id="x" assignTo="{!behalfValidation}" />
+         </apex:actionFunction>
+
+      </apex:form>  
+      </apex:define>
+   </apex:composition>
+</apex:page>

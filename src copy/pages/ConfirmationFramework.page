@@ -1,0 +1,76 @@
+<!-- 
+Name: Confirmation.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Confirmation page - displays Confirmation message 
+and captures boolean state (Yes/No) via Checkbox input.
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="govuk-box-highlight">
+                    <h1 class="bold-large">Submission complete</h1>
+                    <p>
+                        Your reference number is
+                        <strong class="heading-medium">{!submissionId}</strong>
+                    </p>
+                </div>
+                <h2 class="heading-medium">{!confirmationHeading1}</h2>
+                <apex:outputtext value="{!companyNameText}" escape="false" />
+                <p>
+                    {!confirmationContent1}
+                </p>
+                <p>
+                    {!confirmationContent2}
+                </p>
+                <div class="form-group">
+                    <h1>Documents</h1>
+                    <section class="attachment embedded" id="attachment_1365490">
+                        <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
+                            <p>Download the Document:
+                                <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
+                            </p>
+                        </div>
+                        <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                            <p>No Documents founds.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+                <p>{!confirmationContent3}</p>
+                <p>We'll contact you by email if we need more information. </p>
+                <h2 class="heading-medium">Your next steps</h2>
+                <p>
+                    {!confirmationNextStepContent}
+                </p>
+                <div class="notice">
+                    <i class="icon icon-important">
+                        <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
+                    </i>
+                    <strong class="bold-small">
+                        {!confirmationWarningContent1}
+                    </strong>
+                </div>
+                <h2 class="heading-medium">{!confirmationHeading2}</h2>
+                <p>{!confiratmionWarningContent2}</p>
+                <h2 class="heading-medium">How did we do?</h2>
+                <p>
+                    Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                    <a href="/forms/feedback">tell us what you thought of this service</a>.
+                </p>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
