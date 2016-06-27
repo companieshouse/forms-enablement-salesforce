@@ -59,11 +59,8 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         get;
         private set;
     }
-    public String displayText3
-    {
-        get;
-        set;
-    }
+   
+
     public String confirmationHeading1
     {
         get;
@@ -155,10 +152,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             confirmationHeading2 = transactionMgr.currentStep.Header_Text_2__c;
             confiratmionWarningContent2 = transactionMgr.currentStep.Header_Text_3__c;
 
-            if (displayText3.contains('COMPANYNAME'))
+
+            if (confirmationContent3.contains('COMPANYNAME'))
             {
-                displayText3 = displayText3.replace('COMPANYNAME', companyName);
+                confirmationContent3 = confirmationContent3.replace('COMPANYNAME', companyName);
             }
+
 
             if (submissionMgr.submission.attachments != null)
             {
