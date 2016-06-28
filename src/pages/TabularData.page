@@ -1,7 +1,7 @@
 <apex:page title="Currency Selection" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddSharesTableController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -19,20 +19,20 @@
                         <apex:outputPanel id="buildShares">
                             <div class="form-group">
                                 <h1 class="heading-xlarge">
-                                    Share capital
-                                    <!--<br/> shares here = {!statusvalue} 
-                                    <br/> Current Shares = {!currentShares}
-                                    -->
+                                    {!headerText1} {!selectedCurrency}
                                 </h1>
                                 <p class="lede">Share capital content here
                                 </p>
                                 <label class="form-label" for="text-input">Class of shares
+                                    <span class="form-hint" id="sharesHint">For example, Ordinary, Preference</span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!classofshares}" id="classofshare" />
                                 <label class="form-label" for="text-input">Number of shares
+                                    <span class="form-hint" id="numberofshares">Total number of issued shares in this class</span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!numberofshares}" id="numberofshares" />
-                                <label class="form-label" for="text-input">Aggregate nominal value
+                                <label class="form-label" for="text-input">Reduction in the aggregate nominal value
+                                    <span class="form-hint" id="AggregateNominalValue">This is the number of shares issued multiplied by nominal value of each share</span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!aggregateNominalValue}" id="aggregateNominalValue" />
                                 <br/>
@@ -42,18 +42,20 @@
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!showTable}" id="BuildTable">
                             <div class="form-group">
+                
                                 <table class="check-your-answers">
                                     <thead>
-                                        <tr>
-                                            <th colspan="4">Statement of Capital </th>
+                                       <tr>
+                                            <th colspan="4"> {!headerText2} </th>
+                                            <br/> {!headerText3} {!companyName}:
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Currency</td>
                                             <td>Class of shares</td>
-                                            <td>No. of shares</td>
-                                            <td>Total value aggregate</td>
+                                            <td>Number of shares</td>
+                                            <td>Aggregate nominal value</td>
                                         </tr>
                                         <br/>
                                         <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
@@ -79,7 +81,6 @@
                                             <td>Total</td>
                                             <td id="totalnumberofshares"></td>
                                             <td id="totalnumberaggregate"></td>
-                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -286,9 +286,10 @@ public with sharing class DocStatusController
             System.debug('your records are ' + records[0]);
             return docusignrecipientstatus;
         }
-
+        else{
         hasPageErrors = true;
         statusErrors = 'Sorry we cannot seem to find your document at the moment. Please try again later';
+        }
         return null;
 
     }
