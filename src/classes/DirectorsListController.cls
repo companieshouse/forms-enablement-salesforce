@@ -83,8 +83,9 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
         if(validationDirector == false)
         {
-            PageReference pg = Page.UpdateCompanyDirectors;
-            pg.getParameters().put('c', ApexPages.currentPage().getParameters().get('c'));
+                        PageReference pg = new PageReference('/UpdateCompanyDirectors');
+
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
             pg.setRedirect(true);
             return pg;
         }

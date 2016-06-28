@@ -63,8 +63,8 @@ public class PaymentController extends TransactionStepControllerBase {
     public String textBox1NormalFee {get; set;}
     public String textBox1FastTrackFee {get; set;}
 
-    public Integer fastTrackFee {get; set;}
-    public Integer normalFee {get; set;}
+    public Decimal fastTrackFee {get; set;}
+    public Decimal normalFee {get; set;}
 
     public String accountNumber {get; set;}
 
@@ -95,8 +95,8 @@ public class PaymentController extends TransactionStepControllerBase {
         isAccountPayment = (transactionMgr.td.isAccountPayment__c == null ? false : transactionMgr.td.isAccountPayment__c);
         isSameDayPayment = (transactionMgr.td.isSameDayPayment__c == null ? false : transactionMgr.td.isSameDayPayment__c);
 
-        normalFee = (transactionMgr.td.Fee__c == null ? 0 : Integer.valueOf(transactionMgr.td.Fee__c));
-        fastTrackFee = (transactionMgr.td.FeeFastTrack__c == null ? 0 : Integer.valueOf(transactionMgr.td.FeeFastTrack__c));
+        normalFee = (transactionMgr.td.Fee__c == null ? 0 : transactionMgr.td.Fee__c);
+        fastTrackFee = (transactionMgr.td.FeeFastTrack__c == null ? 0 : transactionMgr.td.FeeFastTrack__c);
 
         textBox1NormalFee = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);

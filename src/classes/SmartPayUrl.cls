@@ -204,9 +204,10 @@ public class SmartPayUrl {
             // We cast this to an Integer number of pence, then store it as a String.
             // Awful but necessary. See:
 			//   http://boards.developerforce.com/t5/Apex-Code-Development/Converting-number-fields-to-Integer/td-p/58518
-			Integer valueInPence = Integer.valueOf(String.valueOf(Math.roundToLong(valueInPounds))) * 100;
-            url.paymentAmount = String.valueOf(valueInPence);
-            
+
+			//Integer valueInPence = Integer.valueOf(String.valueOf(Math.roundToLong(valueInPounds))) * 100;
+            Decimal valueInPence =  valueInPounds * 100;
+            url.paymentAmount = String.valueOf(valueInPence).substringBefore('.');
             return this;
         }
 
