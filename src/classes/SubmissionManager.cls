@@ -33,7 +33,7 @@ public with sharing class SubmissionManager {
                                         Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
                                         (SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
                                         (Select Id,Name, Email__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
-                                            AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
+                                            AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
                                         From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c where Id=:submissionId];
 
@@ -77,7 +77,7 @@ public with sharing class SubmissionManager {
                                         Status__c,Amount__c, isLLP__c, SubmissionId__c, finishedAddingShares__c,
                                         (SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
                                         (Select Id,Name, Email__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c, 
-                                            AuthorizedSigner__c,hasInputBehalfDetails__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
+                                            AuthorizedSigner__c,hasInputBehalfDetails__c, isPowerOfAttorney__c, isCorporateDirector__c 
                                         From Officers__r),(SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c 
                                     where Presenter__c=:presenterId 
