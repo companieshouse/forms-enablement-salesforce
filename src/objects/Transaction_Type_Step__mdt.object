@@ -204,4 +204,5 @@
     </fields>
     <label>Transaction Type Step</label>
     <pluralLabel>Transaction Type Steps</pluralLabel>
+    <visibility>Protected</visibility>
 </CustomObject>

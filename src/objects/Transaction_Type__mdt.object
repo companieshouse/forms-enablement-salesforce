@@ -283,4 +283,5 @@
     </fields>
     <label>Transaction Type</label>
     <pluralLabel>Transaction Type</pluralLabel>
+    <visibility>Protected</visibility>
 </CustomObject>

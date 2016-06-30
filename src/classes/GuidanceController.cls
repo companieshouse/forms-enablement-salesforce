@@ -71,7 +71,7 @@ public with sharing class GuidanceController {
             displayText0 += (transactionMgr.td.Guidance_Text_3__c == null ? '' : transactionMgr.td.Guidance_Text_3__c);
             displayText0 += (transactionMgr.td.Guidance_Text_4__c == null ? '' : transactionMgr.td.Guidance_Text_4__c);
             displayText0 += (transactionMgr.td.Guidance_Text_5__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
-            displayText0 += (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
+            displayText0 += (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_6__c);
     
             // checkbox text
             checkboxText0 = transactionMgr.td.GuidanceWarningText__c;

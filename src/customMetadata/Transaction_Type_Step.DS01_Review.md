@@ -75,7 +75,7 @@
     </values>
     <values>
         <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Step_Number__c</field>

@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">test</value>
+        <value xsi:type="xsd:string">What are the prescribed particulars attached to the shares?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">5.0</value>
+        <value xsi:type="xsd:double">4.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

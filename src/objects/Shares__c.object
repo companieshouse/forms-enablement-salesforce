@@ -44,6 +44,7 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Share Capital SH19 Dependency</description>
@@ -250,6 +251,28 @@
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
+    <fields>
+        <fullName>totalNumAggregate__c</fullName>
+        <externalId>false</externalId>
+        <label>totalNumAggregate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>totalNumofShares__c</fullName>
+        <externalId>false</externalId>
+        <label>totalNumofShares</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
     <label>Share</label>
     <listViews>
         <fullName>All</fullName>
@@ -260,6 +283,7 @@
         <columns>ActiveData__c</columns>
         <columns>Aggregate_nominal_value__c</columns>
         <columns>Transaction__c</columns>
+        <columns>Total_aggregate_amount_unpaid__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

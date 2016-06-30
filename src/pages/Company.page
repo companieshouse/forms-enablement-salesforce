@@ -22,7 +22,7 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <style>
                 .hypercolorblue {
                     color: #005EA5;

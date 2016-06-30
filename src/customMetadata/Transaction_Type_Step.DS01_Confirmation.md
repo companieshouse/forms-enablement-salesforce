@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;span class=&quot;bold-medium&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p&gt;Your strike off request will be processed by our dissolution team and after 2 months, {!companyName} will be removed from the register.&lt;/p&gt;
 We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
 &lt;/span&gt; &lt;/p&gt;</value>
     </values>
@@ -37,11 +37,11 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Warning</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">It is an offence not to notify all required parties</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -53,11 +53,11 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">How to cancel this request</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">If you need to cancel this request so that {!companyName} remains on the register, you can &lt;a href=&quot;&quot;&gt;submit a withdrawal to strike off&lt;/a&gt;.</value>
     </values>
     <values>
         <field>Is_Active__c</field>
@@ -77,7 +77,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Step_Number__c</field>

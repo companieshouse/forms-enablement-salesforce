@@ -44,6 +44,7 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Because our users authenticate using Companies House&apos;s OAuth2 server and NOT using a Salesforce.com user account, we need to build our own session handling. Each logged in user has a record of this object during their session.</description>

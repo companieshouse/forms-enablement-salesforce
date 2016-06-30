@@ -9,7 +9,7 @@
     </script>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <style>
                 .td {
                     position: relative;
