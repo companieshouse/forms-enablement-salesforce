@@ -120,6 +120,16 @@
         <label>DS02 Query</label>
     </fieldSets>
     <fields>
+        <fullName>AccountAuthorisationCode__c</fullName>
+        <description>This field contains the auth code to reconcile if the Account number input by the presenter is authorised.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Authorisation code of the presenter to pay by Account</inlineHelpText>
+        <label>Account authorisation code for presenter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>AccountNumber__c</fullName>
         <description>This field store the account number if the user pay against an account</description>
         <externalId>false</externalId>

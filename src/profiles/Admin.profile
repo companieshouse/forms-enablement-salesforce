@@ -921,6 +921,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.AccountAuthorisationCode__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.AccountNumber__c</field>
         <readable>true</readable>
     </fieldPermissions>

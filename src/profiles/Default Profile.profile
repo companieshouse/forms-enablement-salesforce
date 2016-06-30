@@ -920,6 +920,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.AccountAuthorisationCode__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.AccountNumber__c</field>
         <readable>true</readable>
