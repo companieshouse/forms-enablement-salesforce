@@ -74,6 +74,19 @@ public class TransactionSerialiser {
 			this.signDate = signDate;
 		}
 	}
+//TODO: SHARES__R
+//public class Shares{
+//		public personName personName {get; set;}
+//		public String signDate {get; set;}
+
+//		public officer(){}
+
+//		public officer(personName personName, String signDate)
+//		{
+//			this.personName = personName;
+//			this.signDate = signDate;
+//		}
+//	}
 
 	public class officerCollection{
 		public List<officer> officer {get; set;}
@@ -130,18 +143,21 @@ public class TransactionSerialiser {
 		}
 	}
 
-	public class attachments{
+	public class attachments{// PDF
 		public String mimetype {get; set;}
 		public String category {get; set;}
 		public String data {get; set;}
-
+		// Public String Name {get;set;}
+		// public String Description  {get;set;}
 		public attachments(){}
 
 		public attachments(String mimetype, String category, String data)
-		{
+		{			// String name, String description
 			this.mimetype = mimetype;
 			this.category = category;
 			this.data = data;
+			//this.name = name;
+			//this.description = description;
 		} 
 	}
 
