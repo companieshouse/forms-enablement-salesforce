@@ -81,10 +81,22 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>FeeFastTrack__c</fullName>
+        <description>This field represents the cost of the form for the fast track payment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please input the amount for an user to pay if they want the fast track option for the transaction</inlineHelpText>
+        <label>Fee Fast-track</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Fee__c</fullName>
         <externalId>false</externalId>
         <label>Fee</label>
-        <precision>7</precision>
+        <precision>9</precision>
         <required>false</required>
         <scale>2</scale>
         <type>Number</type>
@@ -261,6 +273,15 @@
         <externalId>false</externalId>
         <inlineHelpText>Please select this option if you want the Directors Email screen to be validated with the majority rule</inlineHelpText>
         <label>isMajorityForm?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field notify if the transaction will need a to load the payment page or not</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please indicate if the Form required a payment, make sure to populate fee of the form.</inlineHelpText>
+        <label>is payment required?</label>
         <type>Checkbox</type>
     </fields>
     <fields>

@@ -3,27 +3,58 @@
         <apex:define name="content">
             <apex:form >
                 <h1 class="heading-xlarge">
-              {!$Label.UI_Text_Payment_page_Title}
+              {!headerBox1}
                 </h1>
-                <apex:outputPanel id="emptyPanel" />
-                <apex:outputPanel rendered="{!!hasPaid || !!hasPaymentRejected || !!hasPaymentError || !!hasPaymentPending}">
+                                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
+                <apex:outputPanel id="body">
+                <apex:outputText escape="false"  rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}"/>
+                <apex:outputText escape="false"  rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}"/>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
                     <fieldset class="inline">
-                        <legend>Select a payment method:</legend>
+                        <legend class="visuallyhidden">Select a payment method:</legend>
                         <div id="presenterSelection" class="form-group">
+                        <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
+                            <label class="block-label" for="radio-indent-3">
+                                <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"> Paypal
+                                </input>
+                            </label>
+                            </apex:outputPanel>
+                        <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
                             <label class="block-label" for="radio-indent-1">
-                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit Card/Debit Card
+                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or Debit Card
                                 </input>
                             </label>
+                            </apex:outputPanel>
+                            <apex:outputPanel id="accountPanel" rendered="{!isAccountPayment}">
+                            <p class="form-block">or</p>
                             <label class="block-label" for="radio-indent-2">
-                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Account
+                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Payment on Account
                                 </input>
                             </label>
+                            <apex:outputPanel id="accountInput">
+                            <apex:outputPanel rendered="{!valuePaymentUI == 2}">
+                             <div aria-hidden="false" class="panel panel-border-narrow">
+                                <div class="form-group">
+                                    <label class="form-label" for="accountnumberinput">Account Number:</label>
+                                    <apex:input styleclass="form-control" value="{!accountNumber}" type="text" id="accountnumberinput" />
+                                     <label class="form-label" for="accountAuthCode"></label>
+                                    <apex:input styleclass="form-control" value="{!accountAuthCode}" type="text" id="accountAuthCode" />
+                                </div>
+                            </div>
+                            </apex:outputPanel>
+                            </apex:outputPanel>
+                            </apex:outputPanel>
                         </div>
                     </fieldset>
                 </apex:outputPanel>
-                <apex:outputPanel rendered="{!!hasPaid || !!hasPaymentRejected || !!hasPaymentError || !!hasPaymentPending}">
+                
+                <apex:outputPanel rendered="{!isSameDayPayment}" >
+                
                     <fieldset class="inline">
-                        <legend>Do you want you application to be proceed on the same day?</legend>
+                        <h3 class="heading-medium">Do you want you application to be proceed on the same day?</h3>
                         <div id="presenterSelection2" class="form-group">
                             <label class="block-label" for="radio-indent-4">
                                 <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
@@ -36,19 +67,32 @@
                         </div>
                     </fieldset>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!updatePayment}" name="updatePayment" reRender="emptyPanel">
+                </apex:outputPanel>
+                <apex:actionFunction action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
                     <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
                 </apex:actionFunction>
-                <apex:actionFunction action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel">
-                    <apex:param name="paramBool" value="" id="y" assignTo="{!validationDirector}" />
+                <apex:actionFunction action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel,body">
+                    <apex:param name="paramBool" value="" id="y" assignTo="{!isSameDaySelected}" />
                 </apex:actionFunction>
+                <apex:actionFunction action="{!updateLink}" name="updateLink" reRender="emptyPanel">
+                </apex:actionFunction>
+                <apex:outputPanel rendered="{!hasPaymentSuccess}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                  The payment is a success!
+                        </h1>
+                        <p>
+                            The payment has been succesful.
+                        </p>
+                    </div>
+                </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaid}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                   The payment already processed!
                         </h1>
                         <p>
-                            The payment has been succesful.
+                            You have already paid for this transaction.
                         </p>
                     </div>
                 </apex:outputPanel>
@@ -58,7 +102,8 @@
                   The payment has been rejected.
                         </h1>
                         <p>
-                            Do you want to try again? (LINK HERE TO RUN JS TO REDIRECT TO PAYMENT AGAIN)
+                            Do you want to try again? <a onclick="updateLink();" href="#">Try again?</a>
+
                         </p>
                     </div>
                 </apex:outputPanel>
@@ -69,7 +114,7 @@
                         </h1>
                         <br/>
                         <p>
-                            Do you want to try again (It might not work)?(LINK HERE TO RUN JS TO REDIRECT TO PAYMENT AGAIN) Or come back later by loging with the same user.
+                            Do you want to try again (It might not work)?<a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
                         </p>
                     </div>
                 </apex:outputPanel>

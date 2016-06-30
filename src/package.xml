@@ -8,7 +8,6 @@
         <members>AddAttachmentsController</members>
         <members>AddAttachmentsControllerTest</members>
         <members>AddSharesBaseController</members>
-        <members>AddSharesController</members>
         <members>AddSharesTableController</members>
         <members>AppConstants</members>
         <members>AttachmentTriggerHandler</members>
@@ -69,6 +68,8 @@
         <members>FormAPISubmissionManager</members>
         <members>FormAPISubmissionManagerTest</members>
         <members>Form_CustomException</members>
+        <members>FormsAPIService</members>
+        <members>FormsAPIServiceTest</members>
         <members>FormsApiClient</members>
         <members>FormsApiClientTest</members>
         <members>FormsApiMock</members>
@@ -83,6 +84,7 @@
         <members>PaymentControllerTest</members>
         <members>PreParticularsController</members>
         <members>PresenterDirectorController</members>
+        <members>RecipientStatusDocusignTriggerHandler</members>
         <members>ReviewController</members>
         <members>ReviewControllerTest</members>
         <members>ReviewNotificationTriggerHandler</members>
@@ -91,8 +93,6 @@
         <members>SendToDocuSign</members>
         <members>SendToDocuSignTest</members>
         <members>Session</members>
-        <members>ShareBuilderController</members>
-        <members>Shares</members>
         <members>SigningController</members>
         <members>SmartPayNotificationController</members>
         <members>SmartPayNotificationControllerTest</members>
@@ -143,8 +143,6 @@
         <members>ConfirmationFramework</members>
         <members>CurrencySelection</members>
         <members>DS01</members>
-        <members>DemoPage0</members>
-        <members>DemoPage1</members>
         <members>DeveloperTools</members>
         <members>DirectorsInputList</members>
         <members>DirectorsList</members>
@@ -162,13 +160,10 @@
         <members>OfficerDetails</members>
         <members>PDFGeneration</members>
         <members>Payment</members>
-        <members>PaymentPage</members>
         <members>PreParticularRights</members>
         <members>PresenterDirector</members>
         <members>Review</members>
         <members>SH19</members>
-        <members>ShareBuilder</members>
-        <members>Shares</members>
         <members>SigningPage</members>
         <members>SmartPayNotification</members>
         <members>StartFramework</members>
@@ -180,7 +175,6 @@
         <members>TransactionException</members>
         <members>TransactionPageTemplate</members>
         <members>TransactionSiteRobotsTxt</members>
-        <members>TypeToSearchCurrencyFlow</members>
         <members>UpdateCompanyDirectors</members>
         <members>chooseDirector</members>
         <members>whichDirector</members>
@@ -191,6 +185,7 @@
         <members>BaseURLTransactionHandler</members>
         <members>DocStatusURLBuilder</members>
         <members>DocuSignStatusTrigger</members>
+        <members>RecipientStatusTrigger</members>
         <members>ReviewStatusTrigger</members>
         <members>SubmissionLinkTrigger</members>
         <name>ApexTrigger</name>
@@ -200,37 +195,7 @@
         <name>CustomLabels</name>
     </types>
     <types>
-        <members>Transaction_Type.DS01</members>
-        <members>Transaction_Type.SH19</members>
-        <members>Transaction_Type_Step.DS01_BehalfDecision</members>
-        <members>Transaction_Type_Step.DS01_BehalfInputDetails</members>
-        <members>Transaction_Type_Step.DS01_BehalfWhich</members>
-        <members>Transaction_Type_Step.DS01_Choose_Director</members>
-        <members>Transaction_Type_Step.DS01_Company_Details</members>
-        <members>Transaction_Type_Step.DS01_Confirmation</members>
-        <members>Transaction_Type_Step.DS01_DirectorsInputPresenter</members>
-        <members>Transaction_Type_Step.DS01_DirectorsList</members>
-        <members>Transaction_Type_Step.DS01_DirectorsPresenter</members>
-        <members>Transaction_Type_Step.DS01_DocuSign</members>
-        <members>Transaction_Type_Step.DS01_Officer_Details</members>
-        <members>Transaction_Type_Step.DS01_Payment</members>
-        <members>Transaction_Type_Step.DS01_Review</members>
-        <members>Transaction_Type_Step.DS01_Submit</members>
-        <members>Transaction_Type_Step.DS01_Which_Director</members>
-        <members>Transaction_Type_Step.DS02_Confirmation</members>
-        <members>Transaction_Type_Step.DS02_DirectorsList</members>
-        <members>Transaction_Type_Step.DS02_DocuSign</members>
-        <members>Transaction_Type_Step.DS02_Review</members>
-        <members>Transaction_Type_Step.SH19_AddAttachments</members>
-        <members>Transaction_Type_Step.SH19_Add_Shares</members>
-        <members>Transaction_Type_Step.SH19_Company_Details</members>
-        <members>Transaction_Type_Step.SH19_Confirmation</members>
-        <members>Transaction_Type_Step.SH19_CurrencySelection</members>
-        <members>Transaction_Type_Step.SH19_GuidedInfo</members>
-        <members>Transaction_Type_Step.SH19_Payment</members>
-        <members>Transaction_Type_Step.SH19_PreParticulars</members>
-        <members>Transaction_Type_Step.SH19_Review</members>
-        <members>Transaction_Type_Step.SH19_Signing</members>
+        <members>*</members>
         <name>CustomMetadata</name>
     </types>
     <types>
@@ -259,7 +224,9 @@
         <members>unfiled$public/CHExpiryReminder</members>
         <members>unfiled$public/CHReviewStatus</members>
         <members>unfiled$public/CH_3monthExpiry_Transaction</members>
+        <members>unfiled$public/CH_Approved_Transaction</members>
         <members>unfiled$public/CH_Director_Decline</members>
+        <members>unfiled$public/CH_Rejected_Transaction</members>
         <members>unfiled$public/CH_Signing_Status</members>
         <name>EmailTemplate</name>
     </types>

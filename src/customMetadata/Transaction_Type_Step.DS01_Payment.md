@@ -19,11 +19,16 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Test</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+It costs £FEE to close your company. Your application will not be submitted until you have made this payment.
+&lt;/p&gt;
+&lt;h3 class=&quot;heading-medium&quot;&gt;
+How do you want to make the payment?
+&lt;/h3&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Test</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -47,7 +52,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Test</value>
+        <value xsi:type="xsd:string">Paying to close your company</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

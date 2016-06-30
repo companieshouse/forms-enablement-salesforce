@@ -10,6 +10,24 @@ private class TransactionSerialiserTest {
 
 		insert transac;
 
+		Officer__c off = testData.off;
+
+		off.DateSigned__c = system.today();
+
+		off.Transaction__c = transac.Id;
+
+		insert off;
+
+		Officer__c off2 = testData.off2;
+
+		off2.DateSigned__c = system.today();
+
+		off2.Name = 'BLABLA';
+
+		off2.Transaction__c = transac.Id;
+
+		insert off2;
+
 		Attachment att = testData.pdf;
 		att.ParentId = transac.Id;
 
@@ -20,6 +38,7 @@ private class TransactionSerialiserTest {
 		test.startTest();
 
 		String result = TransactionSerialiser.transactionToJSON(transac);
+		throw new Form_CustomException('' + result);
 
 		test.stopTest();
 

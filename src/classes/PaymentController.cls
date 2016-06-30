@@ -59,6 +59,16 @@ public class PaymentController extends TransactionStepControllerBase {
 
     public Integer valuePaymentUI {get; set;}
 
+    public String headerBox1 {get; set;}
+    public String textBox1NormalFee {get; set;}
+    public String textBox1FastTrackFee {get; set;}
+
+    public Decimal fastTrackFee {get; set;}
+    public Decimal normalFee {get; set;}
+
+    public String accountNumber {get; set;}
+    public String accountAuthCode {get; set;}
+
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -79,16 +89,29 @@ public class PaymentController extends TransactionStepControllerBase {
         hasPaymentError = false;
         hasPaymentPending = false;
         previousClicked = false;
+        accountNumber = '';
 
         isCardPayment = (transactionMgr.td.isCardAllowed__c == null ? false : transactionMgr.td.isCardAllowed__c);
         isPaypalPayment = (transactionMgr.td.isPaypalAllowed__c == null ? false : transactionMgr.td.isPaypalAllowed__c);
         isAccountPayment = (transactionMgr.td.isAccountPayment__c == null ? false : transactionMgr.td.isAccountPayment__c);
         isSameDayPayment = (transactionMgr.td.isSameDayPayment__c == null ? false : transactionMgr.td.isSameDayPayment__c);
 
+        normalFee = (transactionMgr.td.Fee__c == null ? 0 : transactionMgr.td.Fee__c);
+        fastTrackFee = (transactionMgr.td.FeeFastTrack__c == null ? 0 : transactionMgr.td.FeeFastTrack__c);
+
+        textBox1NormalFee = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
+        headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+
+        textBox1FastTrackFee = textBox1NormalFee.replace('FEE', fastTrackFee + '');
+        textBox1NormalFee = textBox1NormalFee.replace('FEE', normalFee + '');
+
         isCardSelected = false;
         isPaypalSelected = false;
         isAccountSelected = false;
         isSameDaySelected = false;
+
+        accountAuthCode = '';
+
     }
 
     public PageReference checkPaymentResult(){
@@ -139,6 +162,12 @@ public class PaymentController extends TransactionStepControllerBase {
         
         
     }
+    public PageReference updateLink(){
+        submit();
+        PageReference pg = new PageReference(externalURL);
+        pg.setRedirect(true);
+        return pg;
+    } 
 
     private void persistStep(){
         if(hasPaymentSuccess || hasPaid)
@@ -150,6 +179,19 @@ public class PaymentController extends TransactionStepControllerBase {
         if(isAccountSelected)
         {
             submissionMgr.submission.isPaymentAccount__c = true;
+            submissionMgr.submission.hasPaid__c = true;
+            submissionMgr.submission.AccountNumber__c = Integer.valueOf(accountNumber);
+            submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
+        }
+
+        if(isPaypalSelected)
+        {
+            submissionMgr.submission.isPaymentPaypal__c = true;
+        }
+
+        if(isCardSelected)
+        {
+            submissionMgr.submission.isPaymentCard__c = true;
         }
 
         if(isSameDaySelected)
@@ -157,6 +199,9 @@ public class PaymentController extends TransactionStepControllerBase {
             submissionMgr.submission.isSameDayProcessing__c = true;   
         }
 
+        if(submissionMgr.submission.Amount__c == null)
+            submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
+        
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -164,6 +209,8 @@ public class PaymentController extends TransactionStepControllerBase {
     // Action methods.     
     public PageReference nextAction(){ 
         if (!validatePageState()) return Page.TransactionException;
+
+        persistStep(); 
 
         if(isCardSelected || isPaypalSelected)
         {
@@ -173,7 +220,6 @@ public class PaymentController extends TransactionStepControllerBase {
             return pg;
         }
             
-        persistStep(); 
 
         if(!hasPaid())
             return null;
@@ -196,11 +242,19 @@ public class PaymentController extends TransactionStepControllerBase {
         {
             isCardSelected = true;
             isAccountSelected = false;
+            isPaypalSelected = false;
         }
         else if(valuePaymentUI == 2)
         {
             isCardSelected = false;
+            isPaypalSelected = false;
             isAccountSelected = true;
+        }
+        else if(valuePaymentUI == 3)
+        {
+            isCardSelected = false;
+            isAccountSelected = false;
+            isPaypalSelected = true;
         }
     }
     
@@ -221,7 +275,7 @@ public class PaymentController extends TransactionStepControllerBase {
         //CODE FOR PRODUCTION WHEN Submission manager will be in sync with Transaction Object
         SmartPayUrl url = new SmartPayUrl.Builder()
                 .merchantReference(submissionMgr.submission.Id)
-                .paymentAmount(submissionMgr.submission.Amount__c)
+                .paymentAmount(isSameDaySelected == true ? fastTrackFee : normalFee)
                 .customerEmail(submissionMgr.submission.ContactEmail__c)
                 .customerMethodsPayment(isPaypalSelected)
                 .build();

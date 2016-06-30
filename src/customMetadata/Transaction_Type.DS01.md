@@ -44,8 +44,12 @@
         <value xsi:type="xsd:string">Dissolution</value>
     </values>
     <values>
+        <field>FeeFastTrack__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Fee__c</field>
-        <value xsi:type="xsd:double">8.0</value>
+        <value xsi:type="xsd:double">1.0</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
@@ -65,11 +69,11 @@
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">ur company closing&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span class=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;&lt;img src=&quot;http://govuk-elements.herokuapp.com/public/images/i</value>
+        <value xsi:type="xsd:string">ur company closing&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span class=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">con-important.png&quot;/&gt;It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
+        <value xsi:type="xsd:string">It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
@@ -77,24 +81,26 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;It normally takes 10 minutes to comlete this process.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">Before you start</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-        &lt;li&gt;the company number&lt;/li&gt;
-        &lt;li&gt;the company authentication code&lt;/li&gt;
-        &lt;li&gt;an email address for each director&lt;/li&gt;
-        &lt;li&gt;a credit or debit card&lt;/li&gt;
-      &lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You must:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell any director(s) of the company or any partner(s) of the partnership about this request&lt;/li&gt;
+&lt;li&gt;read the guidance on closing a company or partnership&lt;/li&gt;
+&lt;/ul&gt; It costs £8 to submit a request to close a</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;It normally takes 15 minutes to complete this process.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">company or partnership (paid by debit or credit card or PayPal account). 
+
+You&apos;ll need:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director&lt;/li&gt;&lt;li&gt;a credit or debit ca</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">rd or PayPal account.
+
+Your request will need to be approved by the sole director if there&apos;s only 1, by both if there are 2, or by the majority if there are more than 2. It will appear on the public register.</value>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
@@ -102,11 +108,14 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">This service is used to close a company or limited liability partnership.</value>
+        <value xsi:type="xsd:string">You can use this service to:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;request to strike off a limited company&lt;/li&gt;
+&lt;li&gt;request to strike off a limited liability partnership (LLP)&lt;/li&gt;
+&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Closing a limited company</value>
+        <value xsi:type="xsd:string">Closing a limited company or limited liability partnership</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -126,19 +135,23 @@
     </values>
     <values>
         <field>isAccountPayment__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isCardAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isMajorityForm__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
+        <field>isPaymentRequired__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
         <field>isPaypalAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isSameDayPayment__c</field>

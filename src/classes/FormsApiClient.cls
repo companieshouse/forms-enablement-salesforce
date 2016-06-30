@@ -62,8 +62,6 @@ public class FormsApiClient {
 
     }
 
-
-
     /**
     * Send a Package of forms to FormsAPI
     */
@@ -100,7 +98,7 @@ public class FormsApiClient {
         // Send the request
         Http http = new Http();
         HTTPResponse response = http.send(request);
-        
+
         // Debug response
         System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
         System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());

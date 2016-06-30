@@ -27,9 +27,9 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select sharecurrencyselection__c, isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
+        List<Transaction__c> recs = [select sharecurrencyselection__c,Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
-                                        MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c,finishedAddingShares__c,
+                                        MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c, finishedAddingShares__c,
                                         Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
                                         (SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT totalNumAggregate__c,totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
                                         (Select Id,Name, Email__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
@@ -71,7 +71,7 @@ public with sharing class SubmissionManager {
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td){
         
         // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select sharecurrencyselection__c, isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
+        List<Transaction__c> recs = [select sharecurrencyselection__c,Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
                                         Status__c,Amount__c, isLLP__c, SubmissionId__c,finishedAddingShares__c,
@@ -94,9 +94,9 @@ public with sharing class SubmissionManager {
         }
 
         //Determine is the payment is needed or not.
-        Boolean isPaymentNeeded = (td.Fee__c == null || td.Fee__c == 0 ? false : true);
+        Boolean isPaymentNeeded = (td.isPaymentRequired__c == null ? false : td.isPaymentRequired__c);
         
-        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail, Amount__c = td.Fee__c,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
+        submission = new Transaction__c(Presenter__c=presenterId,ContactEmail__c=presenterEmail,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
         insert submission;
         return submission.Id;       
     }

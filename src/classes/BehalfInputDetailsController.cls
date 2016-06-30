@@ -110,8 +110,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         //Refresh the screen to pick the next officer...
         if(!hasFinishedOfficerList)
         {
-        	PageReference pg = Page.BehalfInputDetails;
-        	pg.getParameters().put('c', ApexPages.currentPage().getParameters().get('c'));
+        	PageReference pg = new PageReference('/BehalfInputDetails');
+        	pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
         	pg.setRedirect(true);
 
         	return pg;
@@ -138,7 +138,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             return nextAction();
         }
 
-        
+        System.debug(LoggingLevel.ERROR,'New Run' + currentOfficer);
+
         //Initialise the current directors
         for(Officer__c off : submissionMgr.submission.Officers__r){
         	if(!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c)
@@ -146,6 +147,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         		currentOfficer = off;
         	}
         }
+
+        System.debug(LoggingLevel.ERROR,'After loop' + currentOfficer);
 
         if(currentOfficer == null)
         	return nextAction();

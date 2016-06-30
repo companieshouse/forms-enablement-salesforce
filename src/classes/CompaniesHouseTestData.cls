@@ -17,6 +17,8 @@ public class CompaniesHouseTestData {
     public Transaction__c tx {get; private set;}
 
     public Officer__c off {get; private set;}
+
+    public Officer__c off2 {get; private set;}
     
     public Attachment pdf {get; private set;}
 
@@ -52,8 +54,17 @@ public class CompaniesHouseTestData {
                                 SubmissionId__c = guid);
 
         off = new Officer__c(Name = 'Test Name',
+                            Forename__c = 'Test',
+                            Surname__c = 'Name',
                             Email__c = 'test@test.com',
                             RecipientId__c = '1',
+                            isSignatory__c = true);
+
+        off2 = new Officer__c(Name = 'Test2 Name2',
+                            Forename__c = 'Test2',
+                            Surname__c = 'Name2',
+                            Email__c = 'test2@test.com',
+                            RecipientId__c = '2',
                             isSignatory__c = true);
         
         pdf = new Attachment(Name = 'unit test attachment',
