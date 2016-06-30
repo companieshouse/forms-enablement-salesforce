@@ -212,7 +212,7 @@ public class ReviewController extends TransactionStepControllerBase {
                 }
             }
         } else {
-            throw new Form_CustomException('You have no shares to iterate over');
+            //throw new Form_CustomException('You have no shares to iterate over');
         }
     }
     private void persistStep() {
