@@ -40,6 +40,8 @@
                                 <div class="form-group">
                                     <label class="form-label" for="accountnumberinput">Account Number:</label>
                                     <apex:input styleclass="form-control" value="{!accountNumber}" type="text" id="accountnumberinput" />
+                                     <label class="form-label" for="accountAuthCode"></label>
+                                    <apex:input styleclass="form-control" value="{!accountAuthCode}" type="text" id="accountAuthCode" />
                                 </div>
                             </div>
                             </apex:outputPanel>

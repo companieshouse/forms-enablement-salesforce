@@ -67,6 +67,7 @@ public class PaymentController extends TransactionStepControllerBase {
     public Decimal normalFee {get; set;}
 
     public String accountNumber {get; set;}
+    public String accountAuthCode {get; set;}
 
     public PaymentController() {
         super();
@@ -108,6 +109,8 @@ public class PaymentController extends TransactionStepControllerBase {
         isPaypalSelected = false;
         isAccountSelected = false;
         isSameDaySelected = false;
+
+        accountAuthCode = '';
 
     }
 
@@ -178,6 +181,7 @@ public class PaymentController extends TransactionStepControllerBase {
             submissionMgr.submission.isPaymentAccount__c = true;
             submissionMgr.submission.hasPaid__c = true;
             submissionMgr.submission.AccountNumber__c = Integer.valueOf(accountNumber);
+            submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
         }
 
         if(isPaypalSelected)
