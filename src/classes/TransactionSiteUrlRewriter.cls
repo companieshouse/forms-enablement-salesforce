@@ -47,7 +47,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter
     public String CURRENCYSELECTION = '/currencySelection';
     public String PREPARTICULARRIGHTS = '/preparticularrights';
     public String ADDSHAREBASE = '/addsharesbase';
-    public String TABULARDATA = '/tabularddata';
+    public String TABULARDATA = '/tabulardata';
     public String ATTACHMENTS = '/attachments';
     public String SIGNINGPAGE = '/signingpage';
 

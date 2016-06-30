@@ -204,7 +204,7 @@
                     if (completedselection.length > 1) {
                         if (currencies.indexOf(completedselection) >= 0) {
                             console.log('currency from client = ' + ' ' + completedselection);
-                            document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
+                            // document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
                             setSelectedCurrency(completedselection);
                         } else if (currencies.indexOf(completedselection) < 0) {
 
@@ -254,7 +254,7 @@
                         <label class="form-label" for="currency-item">{!displayText}
                             <span class="form-hint" id="CurrencyHint"></span>
                         </label>
-                        <input style="form-control" name="currency-item" id="currency-input" />
+                        <input class="form-control" name="currency-item" id="currency-input" />
                         <br/>
                     </div>
                     <apex:commandButton reRender="none" styleClass="button" onclick="updatecurrency();" value="{!button1}" />

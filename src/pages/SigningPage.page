@@ -47,29 +47,37 @@
                     <h1 class="heading-xlarge">
                         Share Capital Signing
                     </h1>
-                    <p class="lede">
-                        Legal implications here
-                    </p>
-                    <p>
-                        More Legal Content Here
-                    </p>
-                    <p>
-                        <a href="#">Link to Legal Content</a>
-                    </p>
-                    <p>
-                        <a href="#">Link 2 to more legal content</a>. Information here
-                    </p>
-                    <p>
-                        <a href="#" rel="external">An external Link Here.</a> Information about this external source regarding share capital
-                    </p>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="block-label" for="director">
+                                <input id="director" name="radio-group" type="radio" value="director" /> director
+                            </label>
+                            <label class="block-label" for="secretary">
+                                <input id="secretary" name="radio-group" type="radio" value="secretary" /> secretary
+                            </label>
+                            <label class="block-label" for="nationalities-other">
+                                <input id="authorized" name="radio-group" type="radio" value="authorized" /> person authorised under either section 270 or 274 of the Companies Act 2006
+                            </label>
+                            <label class="block-label" for="CICmanager">
+                                <input id="CICmanager" name="radio-group" type="radio" value="CICmanager" /> CIC manager
+                            </label>
+                            <label class="block-label" for="Other" data-target="OtherBoxPanel">
+                                <input id="Other" name="radio-group" type="radio" value="Other" /> Other
+                            </label>
+                            <div class="panel panel-border-narrow js-hidden" id="OtherBoxPanel">
+                                <label class="form-label" for="OtherBox">What is your role in relation to the company?</label>
+                                <input class="form-control" type="text" id="OtherBox" value="" name="other-radio-group" />
+                            </div>
+                        </div>
+                    </fieldset>
                     <p>
                         <fieldset class="inline">
                             <apex:outputText escape="false" value="{!currentErrorMessage}" />
                             <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" type="radio"  name="signingStatus" value="true" /> Yes
+                                <input id="radio-inline-1" type="radio" name="signingStatus" value="true" /> Yes
                             </label>
                             <label class="block-label" for="radio-inline-2">
-                                <input id="radio-inline-2" type="radio"  name="signingStatus" value="false" /> No
+                                <input id="radio-inline-2" type="radio" name="signingStatus" value="false" /> No
                             </label>
                             <apex:outputPanel id="emptypanel" />
                         </fieldset>
@@ -82,41 +90,49 @@
                     <apex:actionFunction action="{!setSigningvalue}" name="setSigningvalue" reRender="SigningForm">
                         <apex:param name="signingParam" value="" id="xyz" assignTo="{!signingchoice}" />
                     </apex:actionFunction>
+                    <apex:actionFunction action="{!setAuthorizerValue}" name="setAuthorizerValue" reRender="">
+                        <apex:param name="statusparam" value="" id="abc" assignTo="{!whoAuthorised}" />
+                    </apex:actionFunction>
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
                 </p>
                 <script>
-                //onclick="setNoButton()"
-                //onclick="setYesButton()"
-                // function setYesButton() {
-                //     document.getElementById("SignButton").disabled = false;
-
-                // };
-
-                // function setNoButton() {
-                //     document.getElementById("SignButton").disabled = true;
-
-                // };
-
                 function updateRadio(selection) {
 
-                    var statuses = document.getElementsByName('signingStatus')
+                    var statuses = document.getElementsByName('signingStatus');
+                    var signingstatus = document.getElementsByName('radio-group');
+                    var othersigningstatus = document.getElementsByName('other-radio-group')[0].value; 
                     for (var i = 0, length = statuses.length; i < length; i++) {
-                        // if (typeof(statuses[i]) == 'undefined') {
-                        //     alert('undefined please select the button yes');
-                        // }
-                        // console.log(status[i].value);
+
+                        console.log(statuses[i].value);
+
                         if (statuses[i].checked) {
                             console.log(statuses[i].value);
 
-                            // do whatever you want with the checked radio
-                            // if (statuses[i].value == 'Yes') {
-                            //     
-                            // } else if (statuses[i].value == 'No') {
 
-                            //     return;
-                            // }
                             setSigningvalue(statuses[i].value);
+                        }
+                    }
+
+                    for (var i = 0, length = signingstatus.length; i < length; i++) {
+
+                        console.log(signingstatus[i].value);
+
+                        if (signingstatus[i].checked) {
+                            console.log(signingstatus[i].value);
+
+                            if (signingstatus[i].value == 'Other') {
+                                if (othersigningstatus.length > 0) {
+
+                                    setAuthorizerValue(othersigningstatus);
+                                } else {
+                                    setAuthorizerValue("Other");
+                                }
+                            } else {
+                                console.log(signingstatus[i].value);
+
+                                setAuthorizerValue(signingstatus[i].value);
+                            }
                         }
                     }
                 };

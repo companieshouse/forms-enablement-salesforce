@@ -40,6 +40,12 @@ public with sharing class SigningController extends TransactionStepControllerBas
         get;
         set;
     }
+
+     public String whoAuthorised
+    {
+        get;
+        set;
+    }
     public Boolean hasPageErrors
     {
         get;
@@ -65,6 +71,7 @@ public with sharing class SigningController extends TransactionStepControllerBas
     {
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+        //whoAuthorised = submissionMgr.submission.PresenterName__c;
     }
 
     public List < SelectOption > getItems()
@@ -87,12 +94,19 @@ public with sharing class SigningController extends TransactionStepControllerBas
     {
         if (signingchoice)
         {
+            submissionMgr.submission.PresenterName__c = whoAuthorised;
             submissionMgr.submission.Status__c = 'Signed';
         }
         // persist stuff here
         submissionMgr.persist();
     }
 
+    public void setAuthorizerValue (){
+        //throw new Form_CustomException('who authorised' + whoAuthorised);
+
+                submissionMgr.submission.PresenterName__c = whoAuthorised;
+                //return whoAuthorised;
+    }
 
     public PageReference nextAction()
     {
@@ -110,7 +124,7 @@ public with sharing class SigningController extends TransactionStepControllerBas
             currentErrorMessage = '';
             hasPageErrors = false;
         }
-        else if (signingchoice == null)
+        else if (String.valueOf(signingchoice) == 'undefined')
         {
             currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
             hasPageErrors = true;

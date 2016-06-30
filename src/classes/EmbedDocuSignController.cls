@@ -124,9 +124,8 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             offResquestedToSign = submissionMgr.submission.Officers__r;
             return null;
          
-        // Else create a new evelope
+        // Else create a new envelope
         } else {
-            noEmbedDoc = true;
 
             SendToDocuSign sendToDS = new SendToDocuSign();
             externalURL = sendToDS.embedDocuSignOpen(submissionMgr.submission);
