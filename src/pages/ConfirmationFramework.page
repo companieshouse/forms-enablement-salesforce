@@ -19,9 +19,9 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel rendered="{!customView}">
-                   <div class="govuk-box-highlight">
+                    <div class="govuk-box-highlight">
                         <h1 class="bold-large">You have submitted your statement</h1>
                         <p>
                             Your reference number is
@@ -36,7 +36,6 @@ Ver. Author        Date        Detail
                     <p>
                         <apex:outputText escape="false" value="{!confirmationContent2}" />
                     </p>
-                    
                     <p>{!confirmationContent3}</p>
                     <h2 class="heading-medium">What happens next?</h2>
                     <p>
@@ -111,7 +110,7 @@ Ver. Author        Date        Detail
                     <h2 class="heading-medium">How did we do?</h2>
                     <p>
                         Your feedback will help us make this service better for all our users. It only takes 30 seconds to
-                        <a href="#" target="_blank" >tell us what you thought of this service</a>.
+                        <a href="#" target="_blank">tell us what you thought of this service</a>.
                     </p>
                 </apex:outputPanel>
             </apex:form>

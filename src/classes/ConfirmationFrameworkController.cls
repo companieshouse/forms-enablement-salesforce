@@ -131,9 +131,11 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             standardView = transactionMgr.currentStep.StandardView__c;
             customView = transactionMgr.currentStep.CustomView__c;
 
-            if (displayText3.contains('COMPANYNAME')) {
-                displayText3 = displayText3.replace('COMPANYNAME', companyName);
+            if (confirmationContent3.contains('COMPANYNAME'))
+            {
+                confirmationContent3 = confirmationContent3.replace('COMPANYNAME', companyName);
             }
+            
             if (submissionMgr.submission.attachments != null) {
                 if (submissionMgr.submission.attachments.size() > 0) {
                     showDoc = true;
