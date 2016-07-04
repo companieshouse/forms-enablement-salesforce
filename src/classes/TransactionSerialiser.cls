@@ -75,13 +75,13 @@ public class TransactionSerialiser {
 		}
 	}
 //TODO: SHARES__R
-//public class Shares{
+//public class shares{
 //		public personName personName {get; set;}
 //		public String signDate {get; set;}
 
-//		public officer(){}
+//		public shares(){}
 
-//		public officer(personName personName, String signDate)
+//		public shares(personName personName, String signDate)
 //		{
 //			this.personName = personName;
 //			this.signDate = signDate;

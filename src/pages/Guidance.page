@@ -12,29 +12,60 @@ Page to be introduced in any form that needs a guidance page.
 ======================================================
 History
 
-Ver. Author        		Date        Detail
+Ver. Author             Date        Detail
 1.0  Sylvain Picory     2016-05-28  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" action="{!initializeBox}" sidebar="false" standardStylesheets="false" controller="GuidanceController">
+<apex:page title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="GuidanceController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="form">
-                <apex:outputPanel id="empty" />
-                <div class="form-group">
-                    <apex:outputText rendered="{!IF(displayText0 != null, true, false)}" escape="false" value="{!displayText0}" />
-                    <fieldset>
-                        <legend class="visuallyhidden">{!checkboxText0}</legend>
-                        <label class="block-label" for="agree">
-                            <input id="agree" name="agreeBoxx" onclick="clickBox();" type="checkbox" value="{!warningAgreeBox}"> {!checkboxText0}
-                            </input>
-                        </label>
-                    </fieldset>
-                </div>
-                <apex:commandButton styleClass="button" id="nextButton" disabled="{!NOT(warningAgreeBox)}" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
-                <br />
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
-                <apex:actionFunction action="{!updateBox}" name="clickBox" reRender="nextButton">
-                </apex:actionFunction>
+                <apex:outputPanel id='masterPanel'>
+                    <apex:outputPanel id="empty" />
+                    <div class="form-group">
+                        <div id="errorList" class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1" hidden="hidden">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li id="errorLI">
+                                </li>
+                            </ul>
+                        </div>
+                        <apex:outputText rendered="{!IF(displayText0 != null, true, false)}" escape="false" value="{!displayText0}" />
+                        <fieldset>
+                            <span id='errorHint' class='error-message'>{!currentErrorMessage}</span>
+                            <label class="block-label" for="agree">
+                                <input id="agree" name="agree" type="checkbox" value="true" /> {!checkboxText0}
+                            </label>
+                        </fieldset>
+                        <apex:actionFunction action="{!setAgreeValue}" name="setAgreeValue" reRender="form">
+                            <apex:param name="agreeboxparam" value="" id="cde" assignTo="{!agreeBoxChoice}" />
+                        </apex:actionFunction>
+                    </div>
+                    <script>
+                    function updateField(selection) {
+
+                        var statuses = document.getElementsByName('agree');
+                        for (var i = 0, length = statuses.length; i < length; i++) {
+
+                            // console.log(statuses[i].checked);
+
+                            if (statuses[i].checked == true) {
+                                document.getElementById('errorHint').innerHTML = '';
+                                document.getElementById('errorList').setAttribute('hidden', true);
+                                setAgreeValue(statuses[i].value);
+                            } else if (statuses[i].checked == false) {
+                                document.getElementById('errorList').removeAttribute('hidden');
+                                document.getElementById('errorLI').innerHTML = 'You must agree to proceed';
+                                document.getElementById('errorHint').innerHTML = 'You must agree to proceed';
+                            }
+                        }
+                    };
+                    </script>
+                    <input type="button" class="button" id="nextButton" value="{!$Label.UI_Text_Continue}" onclick="updateField()" />
+                    <br />
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

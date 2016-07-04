@@ -71,7 +71,7 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Transaction__c</value>
     </values>
     <values>
         <field>StandardView__c</field>

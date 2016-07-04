@@ -20,28 +20,28 @@ public class SendToDocuSignTest {
     public static String TOKEN_URL = 'https://demo.docusign.net/Signing/xxxx';
     public static String SUCCESS_STATUS = 'Success';
     public static String ERROR_STATUS = 'Error';
-    
-    //Create Data
+	
+	//Create Data
     //Create Transaction
-    static Transaction__c createTransaction() {
-        Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
-        insert tx;
-        
-        return tx;
-    }
-    //Create Officer
-    static Officer__c createOfficer(Transaction__c tx) {
-        Officer__c off = CompaniesHouseTestData.getInstance().off;
-        off.Transaction__c = tx.Id;
-        insert off;
+	static Transaction__c createTransaction() {
+		Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
+		insert tx;
+		
+		return tx;
+	}
+	//Create Officer
+	static Officer__c createOfficer(Transaction__c tx) {
+		Officer__c off = CompaniesHouseTestData.getInstance().off;
+		off.Transaction__c = tx.Id;
+		insert off;
 
-        return off;
-    }
+		return off;
+	}
 
     static Transaction__c queryTransaction(String txId){
         return [Select Id,Form_Name__c,CompanyName__c, 
                     (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c,
-                        AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c 
+                        AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
                     from Officers__r) 
                 from Transaction__c where Id=:txId];
     }
@@ -79,11 +79,11 @@ public class SendToDocuSignTest {
     static void getTokenTest() {
         String tokenURL;
 
-        //Create Transaction
-        Transaction__c tx = createTransaction();
+    	//Create Transaction
+    	Transaction__c tx = createTransaction();
 
-        //create officer
-        Officer__c off = createOfficer(tx);
+    	//create officer
+    	Officer__c off = createOfficer(tx);
         
         //Set Officer as presenter
         off.isPresenter__c = true;
@@ -92,7 +92,7 @@ public class SendToDocuSignTest {
         
         test.startTest();
 
-        //Set Mock WebService Response
+    	//Set Mock WebService Response
         Test.setMock(WebServiceMock.class, new MockWebServiceResponseGenerator());
 
         // This unit test is not linked with framework. Need to query transaction
@@ -100,8 +100,8 @@ public class SendToDocuSignTest {
 
         SendToDocuSign sendToDS = new SendToDocuSign();
         tokenURL = sendToDS.embedDocuSignOpen(tx);
-        
-        test.stopTest();
+    	
+    	test.stopTest();
 
         //Validate
         System.assertEquals(TOKEN_URL, tokenURL);
@@ -120,7 +120,7 @@ public class SendToDocuSignTest {
         Officer__c off = createOfficer(tx);
 
         //Set Officer as Desead, Power Of Attorney or Corporate Director
-        // isPowerOfAttorney__c, isCorporateDirector__c
+        //isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
         off.isCorporateDirector__c = true;
         off.AuthorizedSigner__c = recipientName;
         update off;
@@ -158,6 +158,7 @@ public class SendToDocuSignTest {
         Officer__c off = createOfficer(tx);
 
         //Set Officer as Desead
+        off.isDeceased__c = true;
         off.AuthorizedSigner__c = recipientName;
         update off;
         

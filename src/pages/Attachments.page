@@ -1,4 +1,4 @@
-<apex:page title="Add Attachments" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
+<apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
@@ -55,7 +55,7 @@
                     <table class="check-your-answers">
                         <thead>
                             <tr>
-                                <th colspan="4">Share Capital Attachments</th>
+                                <th colspan="4">{!headerText2}</th>
                             </tr>
                         </thead>
                         <tbody>

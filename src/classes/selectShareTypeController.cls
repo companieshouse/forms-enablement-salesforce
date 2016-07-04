@@ -1,12 +1,12 @@
 /*
-Name:  SigningController.cls
+Name:  AddSharesTableController.cls
 Copyright © 2016  Methods Digital
 ======================================================
 ======================================================
 Purpose:
 -------
 
-Controller class for the Visualforce Page: SigningController
+Controller class for the Visualforce Page: AddShares
 
 ======================================================
 ======================================================
@@ -15,24 +15,16 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
-public with sharing class SigningController extends TransactionStepControllerBase {
+public with sharing class selectShareTypeController extends TransactionStepControllerBase {
+    public String selectedTransactionType {
+        get;
+        set;
+    }
     public String companyName {
         get;
         set;
     }
     public String companyNumber {
-        get;
-        set;
-    }
-    public String signingOptions {
-        get;
-        set;
-    }
-    public Boolean signingchoice {
-        get;
-        set;
-    }
-    public String whoAuthorised {
         get;
         set;
     }
@@ -80,25 +72,27 @@ public with sharing class SigningController extends TransactionStepControllerBas
         get;
         set;
     }
+    public String button1 {
+        get;
+        set;
+    }
     public String continueButtonText {
         get;
         set;
     }
-    public Boolean standardView {
+    public Boolean showprevious {
         get;
         set;
     }
-    public Boolean customView {
-        get;
-        set;
-    }
-    public SigningController() {
+    public selectShareTypeController() {
+
         super();
         if (isPageInitialised) initialiseStep();
+
     }
     public void initialiseStep() {
-        standardView = transactionMgr.currentStep.StandardView__c;
-        customView = transactionMgr.currentStep.CustomView__c;
+                                                //throw new Form_CustomException('here is the submissionID' + submissionId);
+
         displayText = transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
@@ -108,41 +102,35 @@ public with sharing class SigningController extends TransactionStepControllerBas
         headerText1 = transactionMgr.currentStep.Header_Text_1__c;
         headerText2 = transactionMgr.currentStep.Header_Text_2__c;
         headerText3 = transactionMgr.currentStep.Header_Text_3__c;
-        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
+        button1 = transactionMgr.currentStep.ContinueButtonText__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
-    }
-    public List < SelectOption > getItems() {
-        List < SelectOption > options = new List < SelectOption > ();
-        options.add(new SelectOption('True', 'Yes'));
-        options.add(new SelectOption('False', 'No'));
-        return options;
-    }
-    public PageReference setSigningvalue() {
-        return nextAction();
+        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
+        showprevious = false;
     }
     private void persistStep() {
-        if (signingchoice) {
-            submissionMgr.submission.Status__c = 'Signed';
+        if (selectedTransactionType == 'Normal') {
+            submissionMgr.submission.trueTransactionName__c = 'SH06';
+        } else if (selectedTransactionType == 'Treasury') {
+            submissionMgr.submission.trueTransactionName__c = 'SH05';
+        } else if (selectedTransactionType == 'Public Company') {
+            submissionMgr.submission.trueTransactionName__c = 'SH07';
         }
-        // persist stuff here
         submissionMgr.persist();
     }
-    public void setAuthorizerValue() {}
+    public void setErrors() {
+        if (hasPageErrors == true) {
+            currentErrorMessage = 'Please make a valid share selection before going to the next step';
+        } else if (hasPageErrors == false) {
+            currentErrorMessage = '';
+        }
+    }
+
+    public PageReference selectShareType() {
+        return nextAction();
+    }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
-        if (!signingchoice) {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
-        } else if (signingchoice) {
-            currentErrorMessage = '';
-            hasPageErrors = false;
-        } else if (String.valueOf(signingchoice) == 'undefined') {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
-        }
         persistStep();
         return nextStep();
     }

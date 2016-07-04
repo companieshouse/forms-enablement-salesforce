@@ -179,6 +179,7 @@
                                 <!--  Signature -->
                                 <div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
                                 <div style='float:center;'>___________________________________</div>
+                                <div style="{!IF(off.isDeceased__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_Deceased}</div>
                                 <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">{!$Label.PDF_Power_Of_Attorney_On_Behalf_Of}</div>
                                 <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_The_Corporate_Director}</div>
 

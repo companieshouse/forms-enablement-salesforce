@@ -1,12 +1,12 @@
 /*
-Name:  SigningController.cls
+Name:  AddSharesTableController.cls
 Copyright © 2016  Methods Digital
 ======================================================
 ======================================================
 Purpose:
 -------
 
-Controller class for the Visualforce Page: SigningController
+Controller class for the Visualforce Page: AddShares
 
 ======================================================
 ======================================================
@@ -15,24 +15,20 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
-public with sharing class SigningController extends TransactionStepControllerBase {
+public with sharing class ChangeShareClassName extends TransactionStepControllerBase {
+    public String classofshares {
+        get;
+        set;
+    }
+    public String classofsharesNew {
+        get;
+        set;
+    }
     public String companyName {
         get;
         set;
     }
     public String companyNumber {
-        get;
-        set;
-    }
-    public String signingOptions {
-        get;
-        set;
-    }
-    public Boolean signingchoice {
-        get;
-        set;
-    }
-    public String whoAuthorised {
         get;
         set;
     }
@@ -84,21 +80,20 @@ public with sharing class SigningController extends TransactionStepControllerBas
         get;
         set;
     }
-    public Boolean standardView {
+    public List < Shares__c > currentShares {
         get;
         set;
     }
-    public Boolean customView {
+    public Boolean showTable {
         get;
         set;
     }
-    public SigningController() {
+    public ChangeShareClassName() {
         super();
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
-        standardView = transactionMgr.currentStep.StandardView__c;
-        customView = transactionMgr.currentStep.CustomView__c;
+        //throw new Form_CustomException(' ERror here ');
         displayText = transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
@@ -108,41 +103,51 @@ public with sharing class SigningController extends TransactionStepControllerBas
         headerText1 = transactionMgr.currentStep.Header_Text_1__c;
         headerText2 = transactionMgr.currentStep.Header_Text_2__c;
         headerText3 = transactionMgr.currentStep.Header_Text_3__c;
-        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
+        showShares();
     }
-    public List < SelectOption > getItems() {
-        List < SelectOption > options = new List < SelectOption > ();
-        options.add(new SelectOption('True', 'Yes'));
-        options.add(new SelectOption('False', 'No'));
-        return options;
-    }
-    public PageReference setSigningvalue() {
-        return nextAction();
-    }
-    private void persistStep() {
-        if (signingchoice) {
-            submissionMgr.submission.Status__c = 'Signed';
+    public void showShares() {
+        if (submissionMgr.submission.Shares__r.size() > 0) {
+            showTable = true;
+            currentShares = submissionMgr.submission.Shares__r;
+        } else {
+            showTable = false;
         }
-        // persist stuff here
+    }
+    public void setOldSelectedShare() {}
+    public void setNewSelectedShare() {}
+    private void persistStep() {
         submissionMgr.persist();
     }
-    public void setAuthorizerValue() {}
+    public PageReference addShare() {
+        try {
+            List < Shares__c > sharesToAdd = new List < Shares__c > ();
+            if (classofshares == null || classofshares.length() == 0) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Must add the old class of shares name';
+                return null;
+            }
+            if (classofsharesNew == null || classofsharesNew.length() == 0) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Must add a new class of shares name';
+                return null;
+            }
+            if (classofshares == classofsharesNew) {
+                hasPageErrors = true;
+                currentErrorMessage = 'New share name cannot be the same as the old share name';
+            }
+            sharesToAdd.add(new Shares__c(Name = classofshares, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = classofshares, Class_of_Share_new__c = classofsharesNew, ActiveData__c = true));
+            insert sharesToAdd;
+        } catch (DmlException e) {} catch (Exception e) {}
+        PageReference pg = new PageReference('/ChangeShareClassName');
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        pg.setRedirect(true);
+        return pg;
+    }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
-        if (!signingchoice) {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
-        } else if (signingchoice) {
-            currentErrorMessage = '';
-            hasPageErrors = false;
-        } else if (String.valueOf(signingchoice) == 'undefined') {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
-        }
         persistStep();
         return nextStep();
     }

@@ -133,7 +133,7 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
         headerText2 = transactionMgr.currentStep.Header_Text_2__c;
         headerText3 = transactionMgr.currentStep.Header_Text_3__c;
         button1 = transactionMgr.currentStep.ContinueButtonText__c;
-
+        currentShares = new List<Shares__c>();
         displayresult = new List < String > ();
 
         checkShares();
@@ -141,12 +141,17 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
 
     public void checkShares()
     {
+        for(Shares__c sharestoUse: submissionMgr.submission.Shares__r)
+        {
+            if(sharestoUse.cancelled_shares__c == false){
+                currentShares.add(sharestoUse);
+            }
+        }
 
-
-        if (submissionMgr.submission.Shares__r.size() >= 1)
+        if (currentShares.size() >= 1)
         {
             showCurrentShares = true;
-            currentShares = submissionMgr.submission.Shares__r;
+            //currentShares = submissionMgr.submission.Shares__r;
 
             Map < String, Shares__c > mapShares = new Map < String, Shares__c > ();
 
@@ -160,7 +165,7 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
             //throw new Form_CustomException('here is the error' + displayresult);
 
         }
-        else if (submissionMgr.submission.Shares__r.size() < 1)
+        else if (currentShares.size() < 1)
         {
             showCurrentShares = false;
         }

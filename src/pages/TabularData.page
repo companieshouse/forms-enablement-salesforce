@@ -22,7 +22,7 @@
                         <apex:outputPanel id="buildShares">
                             <div class="form-group">
                                 <h1 class="heading-xlarge">
-                                    {!headerText1} {!selectedCurrency}
+                                    {!headerText1} <br/> for: {!selectedCurrency}
                                 </h1>
                                 <label class="form-label" for="classofShare-item">Class of shares
                                     <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
@@ -53,7 +53,8 @@
                                 'Ordinary B',
                                 'Ordinary C',
                                 'Preference',
-                                'Deferred'
+                                'Deferred',
+                                'Deferred Ordinary'
                             ];
 
                             $(function() {
@@ -151,7 +152,7 @@
                                 var aggsum = 0;
                                 document.getElementById('totalnumberofshares').value = sharesum;
                                 document.getElementById('totalnumberaggregate').value = aggsum;
-                                console.log('here is your share sum' + sharesum + ' here is your aggsum' + aggsum);
+                               // console.log('here is your share sum' + sharesum + ' here is your aggsum' + aggsum);
                                 numofSharesCalculation(sharesum);
                                 totalNumAggregate(aggsum);
                             }

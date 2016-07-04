@@ -189,6 +189,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DirectorInputListController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DirectorsListController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -563,6 +567,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Officer__c.isCorporateDirector__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Officer__c.isDeceased__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1397,6 +1406,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DeveloperTools</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DirectorsInputList</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

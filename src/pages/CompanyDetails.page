@@ -5,7 +5,6 @@
             <apex:form >
                 <h1 class="heading-xlarge">
                 {!headerText1}
-             <!-- {!$Label.UI_Text_Review_page_Title} -->
                </h1>
                 <p class="lede">{!displayText1}
                 </p>

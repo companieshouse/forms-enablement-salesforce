@@ -145,6 +145,10 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         public Boolean isPresenter {get; set;}
         public String email {get; set;}
         public Boolean isSignatory {get; set;}
+        public String authName {get; set;}
+        public Boolean deceased {get; set;}
+        public Boolean corp {get; set;}
+        public Boolean poa {get; set;}
         public Boolean isSignatoryBehalf {get; set;}
 
         public officerContainer(Officer__c off)
@@ -152,6 +156,10 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             officer = off;
             officerTXT = off.Name;
             email = off.Email__c;
+            authName = off.AuthorizedSigner__c;
+            deceased = (off.isDeceased__c == null ? false : off.isDeceased__c);
+            corp = (off.isCorporateDirector__c == null ? false : off.isCorporateDirector__c);
+            poa = (off.isPowerOfAttorney__c == null ? false : off.isPowerOfAttorney__c);
             isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
             isSignatory = (off.isSignatory__c == null ? false : off.isSignatory__c);
             isSignatoryBehalf = (off.isSignatoryBehalf__c == null ? false : off.isSignatoryBehalf__c);

@@ -15,12 +15,14 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
 public class ReviewController extends TransactionStepControllerBase {
-    // Public properties.
     public Boolean hasPageErrors {
         get;
         set;
     }
-    // MetaData
+    public String currentErrorMessage {
+        get;
+        set;
+    }
     public String displayText1 {
         get;
         set;
@@ -150,6 +152,52 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public List < Shares__c > sharesforBuilding {
+        get;
+        set;
+    }
+    public List < Shares__c > sharesforCancelling {
+        get;
+        set;
+    }
+    public Boolean showStatementofCapital {
+        get;
+        set;
+    }
+    public Boolean showParticulars {
+        get;
+        set;
+    }
+    public Boolean showCancelledShares {
+        get;
+        set;
+    }
+    public Set < String > requiresStatementofC {
+        get;
+        set;
+    }
+    public Set < String > requiresParticulars {
+        get;
+        set;
+    }
+    public String labelText {
+        get;
+        set;
+    }
+    public String dateQuestionText {
+        get;
+        set;
+    }
+    public String variationText {
+        get;
+        set;
+    }
+    public Boolean showCurrency {
+        get;
+        set;
+    }
+    public Boolean variationNotice {get;set;}
+
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -182,12 +230,24 @@ public class ReviewController extends TransactionStepControllerBase {
         companyLocality = submissionMgr.submission.CompanyLocality__c;
         companyAddress = (companyAddress1 == null ? '' : companyAddress1 + '<br/>') + (companyAddress2 == null ? '' : companyAddress2 + '<br/>') + (companyregion == null ? '' : companyregion + '<br/>') + (companyLocality == null ? '' : companyLocality + '<br/>') + (companypostcode == null ? '' : companypostcode + '<br/>') + (companyCountry == null ? '' : companyCountry);
         showprevious = true;
+        sharesforBuilding = new List < Shares__c > ();
+        sharesforCancelling = new List < Shares__c > ();
+        requiresStatementofC = new Set < String > {
+            'SH19',
+            'SH05_6_7'
+        };
+        requiresParticulars = new Set < String > {
+            'SH09'
+        };
+        showCurrency = true;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
         }
         buildReviewShares();
+        buildCancelShares();
+        buildlabels();
         if (submissionMgr.submission.Shares__r.size() > 0) {
-            preParticulars = submissionMgr.submission.Shares__r;
+            preParticulars = sharesforBuilding;
         }
         if (submissionMgr.submission.Attachments.size() > 0) {
             reviewAttachments = submissionMgr.submission.Attachments;
@@ -195,15 +255,52 @@ public class ReviewController extends TransactionStepControllerBase {
         }
         return;
     }
+    public void buildLABELS() {
+        if (submissionMgr.submission.Form_Name__c.contains('SH10')) {
+            labelText = 'Notice of particulars of variation of rights attached to shares';
+            dateQuestionText = 'Date of variation of rights';
+            variationText = 'Details of variation of rights';
+            variationNotice = true;
+
+        } else if (submissionMgr.submission.Form_Name__c.contains('SH11')) {
+            labelText = 'Notice of new class of members';
+            dateQuestionText = 'Date of creation of new class of members';
+            variationText = 'Rights attached to class of members';
+            variationNotice= true;
+        } else if (submissionMgr.submission.Form_Name__c.contains('SH12')) {
+            labelText = 'Notice of particulars of variation of class rights';
+            dateQuestionText = 'Date of variation of class rights';
+            variationText = 'Variation in the rights of the class of members';
+            variationNotice = true;
+        }
+        if(variationNotice == true){
+            
+        }
+    }
+    public void buildCancelShares() {
+        for (Shares__c deadShares: submissionMgr.submission.Shares__r) {
+            if (deadShares.cancelled_shares__c == true) {
+                sharesforCancelling.add(deadShares);
+            }
+        }
+        if (sharesforCancelling.size() > 0) {
+            showCancelledShares = true;
+        }
+    }
     public void buildReviewShares() {
-        if (submissionMgr.submission.Shares__r.size() > 0) {
-            for (Shares__c sharecurrencylimiter: submissionMgr.submission.Shares__r) {
+        for (Shares__c safeShares: submissionMgr.submission.Shares__r) {
+            if (safeShares.cancelled_shares__c == false) {
+                sharesforBuilding.add(safeShares);
+            }
+        }
+        if (sharesforBuilding.size() > 0) {
+            for (Shares__c sharecurrencylimiter: sharesforBuilding) {
                 shareCurrencyMap.put(sharecurrencylimiter.Currency__c, sharecurrencylimiter);
             }
             List < String > listKeys = new List < String > (shareCurrencyMap.keyset());
             for (Integer i = 0; i < listKeys.size(); i++) {
                 matchedShares = new List < Shares__c > ();
-                for (Shares__c buildShares: submissionMgr.submission.Shares__r) {
+                for (Shares__c buildShares: sharesforBuilding) {
                     if (buildShares.Currency__c == listKeys.get(i)) {
                         matchedShares.add(buildShares);
                         viewmap.put(i, matchedShares);
@@ -213,6 +310,13 @@ public class ReviewController extends TransactionStepControllerBase {
             }
         } else {
             //throw new Form_CustomException('You have no shares to iterate over');
+        }
+        if (requiresStatementofC.contains(submissionMgr.submission.Form_Name__c)) {
+            showStatementofCapital = true;
+        }
+        if (requiresParticulars.contains(submissionMgr.submission.Form_Name__c)) {
+            showParticulars = true;
+            showCurrency = false;
         }
     }
     private void persistStep() {

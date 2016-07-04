@@ -1,12 +1,12 @@
 /*
-Name:  SigningController.cls
+Name:  ApplicationDateController.cls
 Copyright © 2016  Methods Digital
 ======================================================
 ======================================================
 Purpose:
 -------
 
-Controller class for the Visualforce Page: SigningController
+Controller class for the Visualforce Page: ApplicationDateController
 
 ======================================================
 ======================================================
@@ -15,24 +15,12 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
-public with sharing class SigningController extends TransactionStepControllerBase {
+public with sharing class ApplicationDateController extends TransactionStepControllerBase {
     public String companyName {
         get;
         set;
     }
     public String companyNumber {
-        get;
-        set;
-    }
-    public String signingOptions {
-        get;
-        set;
-    }
-    public Boolean signingchoice {
-        get;
-        set;
-    }
-    public String whoAuthorised {
         get;
         set;
     }
@@ -92,7 +80,11 @@ public with sharing class SigningController extends TransactionStepControllerBas
         get;
         set;
     }
-    public SigningController() {
+    public Date applicationDate {
+        get;
+        set;
+    }
+    public ApplicationDateController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
@@ -111,38 +103,14 @@ public with sharing class SigningController extends TransactionStepControllerBas
         continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
-    }
-    public List < SelectOption > getItems() {
-        List < SelectOption > options = new List < SelectOption > ();
-        options.add(new SelectOption('True', 'Yes'));
-        options.add(new SelectOption('False', 'No'));
-        return options;
-    }
-    public PageReference setSigningvalue() {
-        return nextAction();
+        applicationDate = submissionMgr.submission.ApplicationDate__c;
+        //throw new Form_CustomException('custom exception here');
     }
     private void persistStep() {
-        if (signingchoice) {
-            submissionMgr.submission.Status__c = 'Signed';
-        }
-        // persist stuff here
+    	submissionMgr.submission.ApplicationDate__c = applicationDate;
         submissionMgr.persist();
     }
-    public void setAuthorizerValue() {}
     public PageReference nextAction() {
-        if (!validatePageState()) return Page.TransactionException;
-        if (!signingchoice) {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
-        } else if (signingchoice) {
-            currentErrorMessage = '';
-            hasPageErrors = false;
-        } else if (String.valueOf(signingchoice) == 'undefined') {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
-        }
         persistStep();
         return nextStep();
     }

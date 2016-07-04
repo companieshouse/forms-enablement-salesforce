@@ -172,6 +172,14 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isDeceased__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Deceased?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isPowerOfAttorney__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>

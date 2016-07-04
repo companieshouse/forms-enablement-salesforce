@@ -1,0 +1,143 @@
+<apex:page title="Cancel Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="cancelShares" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="BuildTablemasterpanel">
+                        <apex:outputPanel id="buildShares">
+                            <div class="form-group">
+                                <h1 class="heading-xlarge">
+                                    {!headerText1}
+                                </h1>
+                                <label class="form-label" for="classofShare-item">Class of shares
+                                    <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
+                                </label>
+                                <input class="form-control" name="classofShare-item" id="classofsharetypetosearch" />
+                                <apex:actionFunction action="{!setSelectedShare}" name="setSelectedShare" reRender="none">
+                                    <apex:param name="shareParam" value="" id="xyz" assignTo="{!classofshares}" />
+                                </apex:actionFunction>
+                                <label class="form-label" for="numberofshares">Number of shares cancelled
+                                    <span class="form-hint" id="numberofsharesHint">Total number of shares cancelled in this class</span>
+                                </label>
+                                <apex:inputText styleClass="form-control" value="{!numberofshares}" id="numberofshares" />
+                                <label class="form-label" for="AggregateNominalValue">Nominal value of each share
+                                    <span class="form-hint" id="AggregateNominalValueHint"></span>
+                                </label>
+                                <apex:inputText styleClass="form-control" value="{!aggregateNominalValue}" id="aggregateNominalValue" />
+                                <apex:outputPanel rendered="{!showDates}" >
+                                                                <br/>
+
+                                <label class="form-label" for="date">What was the date of cancellation of these shares?
+                                    <span class="form-hint" id="date">Date must not be in the future</span>
+                                </label>
+                                <apex:input type='date' styleClass="form-control" value="{!cancellationDate}" id="cancellationDate" />
+                                </apex:outputPanel>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <apex:commandLink value="+ Add Shares" reRender="masterPanel" action="{!AddShare}" />
+                                <script>
+                                var sharetypes = ['Ordinary',
+                                    'Ordinary A',
+                                    'Ordinary B',
+                                    'Ordinary C',
+                                    'Preference',
+                                    'Deferred',
+                                    'Deferred Ordinary'
+                                ];
+
+                                $(function() {
+                                    $("#classofsharetypetosearch").autocomplete({
+                                        source: function(request, response) {
+                                            var results = $.ui.autocomplete.filter(sharetypes, request.term);
+                                            response(results.slice(0, 10));
+                                        },
+                                        select: function(event, ui) {
+                                            var completedselection = ui.item.value;
+                                            // console.log('completed selection is ' + completedselection);
+                                            if (completedselection.length < 1) {
+
+                                                return;
+                                            }
+                                            if (completedselection.length > 1) {
+                                                // console.log('share from client = ' + ' ' + completedselection);
+                                                setSelectedShare(completedselection);
+                                            }
+                                        },
+                                        change: function(event, ui) {
+                                            var completedselection = document.getElementById("classofsharetypetosearch").value;
+                                            if (completedselection.length < 1) {
+
+                                                return;
+                                            }
+                                            if (completedselection.length > 1) {
+                                                // console.log('share from client = ' + ' ' + completedselection);
+                                                setSelectedShare(completedselection);
+                                            }
+                                        }
+                                    });
+                                });
+                                </script>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!headerText2} </th>
+                                            <br/> {!headerText3} {!companyName}:
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Class of shares</td>
+                                            <td>Number of shares</td>
+                                            <td>Aggregate nominal value</td>
+                                            <td>Cancellation date</td>
+                                        </tr>
+                                        <br/>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Date__c}" id="Date" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:commandButton styleClass="button" action="{!nextPage}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

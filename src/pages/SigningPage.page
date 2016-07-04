@@ -1,4 +1,4 @@
-<apex:page title="Sign for Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" docType="html-5.0">
+<apex:page title="Authorise Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="SigningForm">
@@ -31,112 +31,134 @@
                     text-decoration: underline;
                 }
                 </style>
-                <apex:outputPanel id="errorspanel" rendered="{!hasPageErrors}">
-                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                            An error has occurred.
-                        </h1>
-                        <ul class="error-summary-list">
-                            <li>
-                                <apex:outputText escape="false" value="{!currentErrorMessage}" />
-                            </li>
-                        </ul>
-                    </div>
-                </apex:outputPanel>
-                <div class="form-group">
-                    <h1 class="heading-xlarge">
-                        Share Capital Signing
-                    </h1>
-                    <fieldset>
-                        <div class="form-group">
-                            <label class="block-label" for="director">
-                                <input id="director" name="radio-group" type="radio" value="director" /> director
-                            </label>
-                            <label class="block-label" for="secretary">
-                                <input id="secretary" name="radio-group" type="radio" value="secretary" /> secretary
-                            </label>
-                            <label class="block-label" for="nationalities-other">
-                                <input id="authorized" name="radio-group" type="radio" value="authorized" /> person authorised under either section 270 or 274 of the Companies Act 2006
-                            </label>
-                            <label class="block-label" for="CICmanager">
-                                <input id="CICmanager" name="radio-group" type="radio" value="CICmanager" /> CIC manager
-                            </label>
-                            <label class="block-label" for="Other" data-target="OtherBoxPanel">
-                                <input id="Other" name="radio-group" type="radio" value="Other" /> Other
-                            </label>
-                            <div class="panel panel-border-narrow js-hidden" id="OtherBoxPanel">
-                                <label class="form-label" for="OtherBox">What is your role in relation to the company?</label>
-                                <input class="form-control" type="text" id="OtherBox" value="" name="other-radio-group" />
-                            </div>
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorspanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                                </li>
+                            </ul>
                         </div>
-                    </fieldset>
-                    <p>
-                        <fieldset class="inline">
-                            <apex:outputText escape="false" value="{!currentErrorMessage}" />
-                            <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" type="radio" name="signingStatus" value="true" /> Yes
-                            </label>
-                            <label class="block-label" for="radio-inline-2">
-                                <input id="radio-inline-2" type="radio" name="signingStatus" value="false" /> No
-                            </label>
-                            <apex:outputPanel id="emptypanel" />
-                        </fieldset>
-                    </p>
-                </div>
-                <br/>
-                <p>
-                    <br/> &nbsp;
-                    <apex:commandButton id="SignButton" reRender="none" styleClass="button" onclick="updateRadio();" value="Sign and continue" />
-                    <apex:actionFunction action="{!setSigningvalue}" name="setSigningvalue" reRender="SigningForm">
-                        <apex:param name="signingParam" value="" id="xyz" assignTo="{!signingchoice}" />
-                    </apex:actionFunction>
-                    <apex:actionFunction action="{!setAuthorizerValue}" name="setAuthorizerValue" reRender="">
-                        <apex:param name="statusparam" value="" id="abc" assignTo="{!whoAuthorised}" />
-                    </apex:actionFunction>
-                    <br/>
-                    <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
-                </p>
-                <script>
-                function updateRadio(selection) {
+                    </apex:outputPanel>
+                    <apex:outputPanel id="standardSigning" rendered="{!standardView}">
+                        <div class="form-group">
+                            <h1 class="heading-xlarge">
+                                {!headerText1}
+                            </h1>
+                            <p class="lede">
+                            </p>
+                            <p>
+                                <fieldset class="inline">
+                                    <span id="radio-errors"></span>
+                                    <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                                    <label class="block-label" for="radio-inline-1">
+                                        <input id="radio-inline-1" onclick="clearErrors()" type="radio" name="signingStatus" value="true" /> Yes
+                                    </label>
+                                    <label class="block-label" for="radio-inline-2">
+                                        <input id="radio-inline-2" onclick="setErrors()" type="radio" name="signingStatus" value="false" /> No
+                                    </label>
+                                    <apex:outputPanel id="emptypanel" />
+                                </fieldset>
+                                <script>
+                                function setErrors() {
+                                    console.log('working');
 
-                    var statuses = document.getElementsByName('signingStatus');
-                    var signingstatus = document.getElementsByName('radio-group');
-                    var othersigningstatus = document.getElementsByName('other-radio-group')[0].value; 
-                    for (var i = 0, length = statuses.length; i < length; i++) {
+                                    document.getElementById('radio-errors').innerHTML = '<span class="error-message">You must select yes to authorise and submit</span>';
+                                };
 
-                        console.log(statuses[i].value);
+                                function clearErrors() {
 
-                        if (statuses[i].checked) {
-                            console.log(statuses[i].value);
+                                    console.log('working');
+                                    document.getElementById('radio-errors').innerHTML = '';
+                                };
+                                </script>
+                            </p>
+                        </div>
+                        <br/>
+                        <p>
+                            <br/> &nbsp;
+                            <apex:commandButton id="SignButton" reRender="none" styleClass="button" onclick="updateRadio();" value="{!continueButtonText}" />
+                            <apex:actionFunction action="{!setSigningvalue}" name="setSigningvalue" reRender="SigningForm">
+                                <apex:param name="signingParam" value="" id="xyz" assignTo="{!signingchoice}" />
+                            </apex:actionFunction>
+                            <apex:actionFunction action="{!setAuthorizerValue}" name="setAuthorizerValue" reRender="">
+                                <apex:param name="statusparam" value="" id="abc" assignTo="{!whoAuthorised}" />
+                            </apex:actionFunction>
+                            <br/>
+                            <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
+                        </p>
+                        <script>
+                        function updateRadio(selection) {
+
+                            var statuses = document.getElementsByName('signingStatus');
+                            for (var i = 0, length = statuses.length; i < length; i++) {
+
+                                console.log(statuses[i].value);
+
+                                if (statuses[i].checked) {
+                                    console.log(statuses[i].value);
 
 
-                            setSigningvalue(statuses[i].value);
-                        }
-                    }
-
-                    for (var i = 0, length = signingstatus.length; i < length; i++) {
-
-                        console.log(signingstatus[i].value);
-
-                        if (signingstatus[i].checked) {
-                            console.log(signingstatus[i].value);
-
-                            if (signingstatus[i].value == 'Other') {
-                                if (othersigningstatus.length > 0) {
-
-                                    setAuthorizerValue(othersigningstatus);
-                                } else {
-                                    setAuthorizerValue("Other");
+                                    setSigningvalue(statuses[i].value);
                                 }
-                            } else {
-                                console.log(signingstatus[i].value);
-
-                                setAuthorizerValue(signingstatus[i].value);
                             }
-                        }
-                    }
-                };
-                </script>
+                        };
+                        </script>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="standardSigning" rendered="{!standardView}">
+                        <div class="form-group">
+                            <h1 class="heading-xlarge">
+                                {!headerText1}
+                            </h1>
+                            <apex:outputPanel id="newSignatoryPanel">
+                                <apex:repeat value="{!newSignatories}" var="sig">
+                                    <label class="form-label" for="signature">
+                                        Signature
+                                    </label>
+                                    <apex:inputText value="{!sig.Signatory__c}" id="signature" />
+                                </apex:repeat>
+                            </apex:outputPanel>
+                            <p>
+                                <br/>
+                                <br/>
+                                <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp;
+                                <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp;
+                                <apex:commandLink value="Save" action="{!save}" />
+                            </p>
+                        </div>
+                        <apex:outputPanel id="BuildTable">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">{!headerText2}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Signature</td>
+                                    </tr>
+                                    <br/>
+                                    <apex:repeat value="{!attachments}" var="sp" id="theRepeat">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!sp.Signatory__c}" id="Description" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                            <br/>
+                        </apex:outputPanel>
+                        <br/> &nbsp;
+                        <apex:commandButton id="SignButton" action="{!nextAction}" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                        <br/>
+                        <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
+                    </apex:outputPanel>
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

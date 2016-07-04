@@ -34,7 +34,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public String nameAuthorized {get; set;}
     public String emailDirector {get; set;}
 
-    public Integer behalfSelection {get; set;} //0 for nothing 1 poa  3 corp
+    public Integer behalfSelection {get; set;} //0 for nothing 1 poa 2 deceased 3 corp
 
     public BehalfInputDetailsController(){
         super();
@@ -75,6 +75,10 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
                 if(behalfSelection == 1)
                 {
                 	off.isPowerOfAttorney__c = true;
+                }
+                else if(behalfSelection == 2)
+                {
+                	off.isDeceased__c = true;
                 }
                 else if(behalfSelection == 3)
                 {
@@ -134,6 +138,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             return nextAction();
         }
 
+        System.debug(LoggingLevel.ERROR,'New Run' + currentOfficer);
+
         //Initialise the current directors
         for(Officer__c off : submissionMgr.submission.Officers__r){
         	if(!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c)
@@ -141,6 +147,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         		currentOfficer = off;
         	}
         }
+
+        System.debug(LoggingLevel.ERROR,'After loop' + currentOfficer);
 
         if(currentOfficer == null)
         	return nextAction();
