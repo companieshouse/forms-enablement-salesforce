@@ -164,6 +164,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String pageTitle {get;set;}
     public Boolean cancelledSharesVar {get;set;}
     public cancelShares() {
         super();
@@ -194,27 +195,34 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             hintText = 'Total number of shares cancelled in this class';
             dateQuestionText = 'Enter date(s) shares were cancelled';
             variationText = '';
+            pageTitle = 'Cancel Shares';
             cancelledSharesVar = true;
             showdates = true;
         } else if (submissionMgr.submission.Form_Name__c.contains('SH04')) {
             labelText = 'Number of shares sold or transferred';
             hintText = '';
+            pageTitle = 'Shares sold';
             dateQuestionText = 'Enter date(s) shares were sold or transferred';
             variationText = '';
             cancelledSharesVar = false;
             showdates = true;
         }
     }
+
     public void checkSharestoCancel() {
         //throw new Form_CustomException(' my true transaction name is ' + submissionMgr.submission.trueTransactionName__c);
         if (submissionMgr.submission.trueTransactionName__c != null && submissionMgr.submission.trueTransactionName__c == 'SH05') {
             showDates = true;
         }
-        for (Shares__c previouslycancelledshares: submissionMgr.submission.Shares__r) {
-            if (previouslycancelledshares.cancelled_shares__c == true) {
-                currentShares.add(previouslycancelledshares);
-            }
-        }
+        // used for 4-7;
+        //for (Shares__c previouslycancelledshares: submissionMgr.submission.Shares__r) {
+            //if (previouslycancelledshares.cancelled_shares__c == true) {
+            //    currentShares.add(previouslycancelledshares);
+            //}
+        //}
+        currentShares = submissionMgr.submission.Shares__r;
+
+
         if (currentShares.size() > 0) {
             showTable = true;
         }

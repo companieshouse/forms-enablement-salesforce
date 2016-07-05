@@ -1,4 +1,4 @@
-<apex:page title="Cancel Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="cancelShares" docType="html-5.0">
+<apex:page title="{!PageTitle}" showHeader="false" sidebar="false" standardStylesheets="false" controller="cancelShares" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -108,7 +108,7 @@
                                             <td>Class of shares</td>
                                             <td>Number of shares</td>
                                             <td>Aggregate nominal value</td>
-                                            <td>Cancellation date</td>
+                                            <td>{!dateQuestionText}</td>
                                         </tr>
                                         <br/>
                                         <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
