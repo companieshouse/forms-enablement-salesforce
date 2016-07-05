@@ -196,6 +196,7 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public Date dateField {get; set;}
     public Boolean variationNotice {get;set;}
 
     public ReviewController() {
@@ -230,6 +231,7 @@ public class ReviewController extends TransactionStepControllerBase {
         companyLocality = submissionMgr.submission.CompanyLocality__c;
         companyAddress = (companyAddress1 == null ? '' : companyAddress1 + '<br/>') + (companyAddress2 == null ? '' : companyAddress2 + '<br/>') + (companyregion == null ? '' : companyregion + '<br/>') + (companyLocality == null ? '' : companyLocality + '<br/>') + (companypostcode == null ? '' : companypostcode + '<br/>') + (companyCountry == null ? '' : companyCountry);
         showprevious = true;
+        dateField = submissionMgr.submission.ApplicationDate__c;
         sharesforBuilding = new List < Shares__c > ();
         sharesforCancelling = new List < Shares__c > ();
         requiresStatementofC = new Set < String > {

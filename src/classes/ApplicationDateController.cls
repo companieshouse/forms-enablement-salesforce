@@ -104,7 +104,7 @@ public with sharing class ApplicationDateController extends TransactionStepContr
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         applicationDate = submissionMgr.submission.ApplicationDate__c;
-        //throw new Form_CustomException('custom exception here');
+        //throw new Form_CustomException('custom exception ere' + displayText);
     }
     private void persistStep() {
     	submissionMgr.submission.ApplicationDate__c = applicationDate;

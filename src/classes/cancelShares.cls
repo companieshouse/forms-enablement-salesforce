@@ -148,6 +148,23 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String labelText {
+        get;
+        set;
+    }
+    public String dateQuestionText {
+        get;
+        set;
+    }
+    public String variationText {
+        get;
+        set;
+    }
+    public String hintText {
+        get;
+        set;
+    }
+    public Boolean cancelledSharesVar {get;set;}
     public cancelShares() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -169,6 +186,24 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         selectedCurrency = submissionMgr.submission.sharecurrencyselection__c;
         currentShares = new List < Shares__c > ();
         checkSharestoCancel();
+        buildLABELS();
+    }
+    public void buildLABELS() {
+        if (submissionMgr.submission.Form_Name__c.contains('SH05')) {
+            labelText = 'Number of shares cancelled';
+            hintText = 'Total number of shares cancelled in this class';
+            dateQuestionText = 'Enter date(s) shares were cancelled';
+            variationText = '';
+            cancelledSharesVar = true;
+            showdates = true;
+        } else if (submissionMgr.submission.Form_Name__c.contains('SH04')) {
+            labelText = 'Number of shares sold or transferred';
+            hintText = '';
+            dateQuestionText = 'Enter date(s) shares were sold or transferred';
+            variationText = '';
+            cancelledSharesVar = false;
+            showdates = true;
+        }
     }
     public void checkSharestoCancel() {
         //throw new Form_CustomException(' my true transaction name is ' + submissionMgr.submission.trueTransactionName__c);
@@ -216,7 +251,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             currentErrorMessage = 'Aggregate nominal value must be greater than 0';
             return null;
         }
-        if(cancellationDate > date.today()){
+        if (cancellationDate > date.today()) {
             hasPageErrors = true;
             currentErrorMessage = 'Date cannot be in the future';
             return null;
@@ -226,8 +261,9 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         //    currentErrorMessage = 'Must add the cancellation date';
         //    return null;
         //}
-        sharesToAdd.add(new Shares__c(Date__c = cancellationDate, cancelled_shares__c = true, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
+        sharesToAdd.add(new Shares__c(Date__c = cancellationDate, cancelled_shares__c = cancelledSharesVar, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
         insert sharesToAdd;
+
         PageReference pg = new PageReference('/CancelledShares');
         pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         pg.setRedirect(true);

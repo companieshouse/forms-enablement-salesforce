@@ -49,11 +49,11 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String ATTACHMENTS = '/attachments';
     public String SIGNINGPAGE = '/signingpage';
     public String CANCELLEDSHARES = '/cancelledshares';
-    public String SELECTSHARETYPE = '/cancelledshares';
+    public String SELECTSHARETYPE = '/selectsharetype';
     public String CHANGESHARENAME = '/changeshareclassname';
     public String APPLICATIONDATE = '/applicationdate';
     public String VARIATION = '/variationofrights';
-    // // //
+    // // // // //
     public String VF_PAGE_START = '/StartFramework';
     public String VF_PAGE_COMPANY = '/Company';
     public String VF_PAGE_CONFIRMATION = '/ConfirmationFramework';

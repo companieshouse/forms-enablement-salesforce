@@ -190,7 +190,6 @@
                 <apex:outputPanel id="customPanel-particulars" rendered="{!custompanelView}">
                     <apex:outputPanel rendered='{!showParticulars}'>
                         <div class="form-group">
-
                             <table class="check-your-answers">
                                 <thead>
                                     <tr>
@@ -229,9 +228,9 @@
                 </apex:outputPanel>
                 <apex:outputPanel id="customPanel-variationNotice" rendered="{!variationNotice}">
                     <div class="form-group">
-                       <h1 class="heading-xlarge">
-                        {!headerText1}
-                    </h1>
+                        <h1 class="heading-xlarge">
+                            {!headerText1}
+                        </h1>
                         <table class="check-your-answers">
                             <thead>
                                 <tr>
@@ -290,6 +289,22 @@
                         <br/>
                     </apex:outputPanel>
                 </apex:outputPanel>
+                
+                <!--<apex:outputPanel id="customPanel-Signing" rendered="{!custompanelView}">
+                    <h1 class="heading-xlarge">
+                        {!headerText1}
+                    </h1>
+                    <p class="lede">{!displayText1}
+                    </p>
+                    <div class="form-group">
+                        <p>{!displayText2}</p>
+                        <label class="form-label" for="AppDate">Notice of application
+                        </label>
+                        <p class="lede">
+                            <apex:outputText escape="true" styleClass="form-control" value="{!dateField}" id="AppDate" />
+                        </p>
+                    </div>
+                </apex:outputPanel>-->
                 <apex:commandButton styleClass="button" action="{!nextAction}" value="{!reviewpagebutton}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;

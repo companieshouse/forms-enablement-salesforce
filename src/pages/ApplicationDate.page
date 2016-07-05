@@ -1,8 +1,7 @@
 <apex:page title="Application Date" showHeader="false" sidebar="false" standardStylesheets="false" controller="ApplicationDateController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
-                <apex:outputPanel id="masterPanel">
+            <apex:form>
                     <apex:outputPanel id="errorspanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -15,25 +14,23 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                        <div class="form-group">
-                            <h1 class="heading-xlarge">
-                                {!headerText1}
-                            </h1>
-                            <p class="lede">
-                                {!displayText}
-                            </p>
-                            <fieldset>
-                                <label class="form-label" for="applicationDate">{!displayText2}
-                                    <span class="form-hint" id="dateHint">{!displayText3}</span>
-                                </label>
-                                <apex:input type='date' styleClass="form-control" value="{!applicationDate}" id="applicationDate" />
-                            </fieldset>
-                            <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="button" value="{!continueButtonText}" />
-                        <br/>
-                        <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">
+                       {!headerText1} 
+                        </h1>
+                        <p class="lede">
+                            {!displayText}
                         </p>
-                        </div>
-                </apex:outputPanel>
+                        <fieldset>
+                        <label class="form-label" for="applicationDate">{!displayText2}
+                            <span class="form-hint" id="dateHint">{!displayText3}</span>
+                        </label>
+                        <apex:input type='date' styleClass="form-control" value="{!applicationDate}" id="applicationDate" />
+                        </fieldset>
+                    </div>
+                    <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                    <br/>
+                    <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
             </apex:form>
         </apex:define>
     </apex:composition>

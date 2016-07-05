@@ -31,21 +31,20 @@
                                 <apex:actionFunction action="{!setSelectedShare}" name="setSelectedShare" reRender="none">
                                     <apex:param name="shareParam" value="" id="xyz" assignTo="{!classofshares}" />
                                 </apex:actionFunction>
-                                <label class="form-label" for="numberofshares">Number of shares cancelled
-                                    <span class="form-hint" id="numberofsharesHint">Total number of shares cancelled in this class</span>
+                                <label class="form-label" for="numberofshares">{!labelText}
+                                    <span class="form-hint" id="numberofsharesHint">{!hintText}</span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!numberofshares}" id="numberofshares" />
                                 <label class="form-label" for="AggregateNominalValue">Nominal value of each share
                                     <span class="form-hint" id="AggregateNominalValueHint"></span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!aggregateNominalValue}" id="aggregateNominalValue" />
-                                <apex:outputPanel rendered="{!showDates}" >
-                                                                <br/>
-
-                                <label class="form-label" for="date">What was the date of cancellation of these shares?
-                                    <span class="form-hint" id="date">Date must not be in the future</span>
-                                </label>
-                                <apex:input type='date' styleClass="form-control" value="{!cancellationDate}" id="cancellationDate" />
+                                <apex:outputPanel rendered="{!showDates}">
+                                    <br/>
+                                    <label class="form-label" for="date">{!dateQuestionText}
+                                        <span class="form-hint" id="date">Date must not be in the future</span>
+                                    </label>
+                                    <apex:input type='date' styleClass="form-control" value="{!cancellationDate}" id="cancellationDate" />
                                 </apex:outputPanel>
                                 <br/>
                                 <br/>
