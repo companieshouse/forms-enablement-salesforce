@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>TestStep3</label>
+    <label>SH05-6-7-authorise</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Continue</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -19,15 +19,15 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Display Text 1 Test</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Display Text 2 Test</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">Display Text 3 Test</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Header Text 1 Test</value>
+        <value xsi:type="xsd:string">Authorise and submit your statement</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">3.0</value>
+        <value xsi:type="xsd:double">9.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -87,10 +87,14 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">TestForm</value>
+        <value xsi:type="xsd:string">SH05_6_7</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">TestPage3</value>
+        <value xsi:type="xsd:string">SigningPage</value>
+    </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

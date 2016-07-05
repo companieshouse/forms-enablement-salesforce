@@ -1,7 +1,7 @@
 <apex:page title="Notice" showHeader="false" sidebar="false" standardStylesheets="false" controller="variationRightsController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
                 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
                 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -29,7 +29,7 @@
                             <label class="form-label" for="variationDate">{!dateQuestionText}
                                 <span class="form-hint" id="variationDateID">{!dateQuestionTextHint}</span>
                             </label>
-                            <apex:input type='date' styleClass="form-control" value="{!variationDate}" id="variationDate" />
+                            <apex:input type="date" styleClass="form-control" value="{!variationDate}" id="variationDate" />
                                 <br/>    <br/>
                             <label class="form-label" for="variationInfo">{!variationText}
                                 <span class="form-hint" id="variationInfoSpan">{!variationTextHint}</span>

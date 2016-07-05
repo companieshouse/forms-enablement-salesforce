@@ -98,4 +98,8 @@ How do you want to make the payment?
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">Payment</value>
     </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
 </CustomMetadata>

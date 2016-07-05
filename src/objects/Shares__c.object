@@ -179,6 +179,16 @@
         <type>Currency</type>
     </fields>
     <fields>
+        <fullName>Class_of_Share_new__c</fullName>
+        <externalId>false</externalId>
+        <label>Class of Share new</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Class_of_Shares__c</fullName>
         <externalId>false</externalId>
         <label>Class of Shares</label>
@@ -209,6 +219,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Date__c</fullName>
+        <description>Shares Date field</description>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Number_of_Shares__c</fullName>
         <externalId>false</externalId>
         <label>Number of Shares</label>
@@ -227,6 +246,16 @@
         <trackTrending>false</trackTrending>
         <type>Html</type>
         <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Signatory__c</fullName>
+        <externalId>false</externalId>
+        <label>Signatory</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Total_aggregate_amount_unpaid__c</fullName>
@@ -252,6 +281,14 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
+        <fullName>cancelled_shares__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>cancelled shares</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>totalNumAggregate__c</fullName>
         <externalId>false</externalId>
         <label>totalNumAggregate</label>
@@ -272,6 +309,15 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>varationField__c</fullName>
+        <externalId>false</externalId>
+        <label>varationField</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
     </fields>
     <label>Share</label>
     <listViews>

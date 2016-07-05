@@ -1,12 +1,12 @@
 <apex:page title="{!$Label.UI_Text_Review}" controller="selectShareTypeController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
                 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
                 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                <apex:outputPanel id='masterpanel'>
-                    <apex:outputPanel id='errorpanel' rendered="{!hasPageErrors}">
+                <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                                 An error has occurred.

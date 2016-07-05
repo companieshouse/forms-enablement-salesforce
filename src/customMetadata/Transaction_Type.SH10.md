@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>TestForm</label>
+    <label>SH10</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text3__c</field>
-        <value xsi:type="xsd:string">This is Below Button Text3 Form</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text4__c</field>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Family__c</field>
-        <value xsi:type="xsd:string">Dissolution</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>FeeFastTrack__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:type="xsd:double">100.0</value>
+        <value xsi:type="xsd:double">0.0</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
@@ -79,11 +79,11 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">This is Landing Page Text2 Form</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">This is Landing Page Text3 Form</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
@@ -99,11 +99,14 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">Landing Page Text</value>
+        <value xsi:type="xsd:string">What this form is for &lt;br/&gt;
+- Detailing the variation of rights &lt;br/&gt;
+- Variation in the rights of the class of members &lt;br/&gt;
+-Giving notice of a new class of members</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">This is Landing Page Title</value>
+        <value xsi:type="xsd:string">Variation in class rights</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>

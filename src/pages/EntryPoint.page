@@ -1,7 +1,7 @@
 <apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
                 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
                 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -19,51 +19,48 @@
                 <input class="button" type="button" onclick="selectDocument();" value="Select Form" />
                 <script>
                 var transactionselection = [{
-                        label: "DS01",
-                        value: "DS01"
-                    }, {
-                        label: "SH04",
-                        value: "SH04"
-                    }, {
-                        label: "SH05",
-                        value: "SH05_6_7"
-                    }, {
-                        label: "SH06",
-                        value: "SH05_6_7"
-                    }, {
-                        label: "SH07",
-                        value: "SH05_6_7"
-                    }, {
-                        label: "SH08",
-                        value: "SH08"
-                    }, {
-                        label: "SH09",
-                        value: "SH09"
-                    }, {
-                        label: "SH10",
-                        value: "SH10"
-                    }, {
-                        label: "SH11",
-                        value: "SH11"
-                    }, {
-                        label: "SH12",
-                        value: "SH12"
-                    }, {
-                        label: "SH15",
-                        value: "SH15"
-                    }
-                    /*, {
-                                        label: "SH16",
-                                        value: "SH16"
-                                    }, {
-                                        label: "SH17",
-                                        value: "SH17"
-                                    }*/
-                    , {
-                        label: "SH19",
-                        value: "SH19"
-                    }
-                ];
+                    label: "DS01",
+                    value: "DS01"
+                }, {
+                    label: "SH04",
+                    value: "SH04"
+                }, {
+                    label: "SH05",
+                    value: "SH05_6_7"
+                }, {
+                    label: "SH06",
+                    value: "SH05_6_7"
+                }, {
+                    label: "SH07",
+                    value: "SH05_6_7"
+                }, {
+                    label: "SH08",
+                    value: "SH08"
+                }, {
+                    label: "SH09",
+                    value: "SH09"
+                }, {
+                    label: "SH10",
+                    value: "SH10"
+                }, {
+                    label: "SH11",
+                    value: "SH11"
+                }, {
+                    label: "SH12",
+                    value: "SH12"
+                }, {
+                    label: "SH15",
+                    value: "SH15"
+                }/*, {
+                    label: "SH16",
+                    value: "SH16"
+                }, {
+                    label: "SH17",
+                    value: "SH17"
+                }*/, {
+                    label: "SH19",
+                    value: "SH19"
+                }];
                 $(function() {
                     $("#document-input").autocomplete({
                         source: function(request, response) {
@@ -75,6 +72,7 @@
                 });
 
                 function selectDocument() {
+
                     var completedselection = document.getElementById('document-input').value;
                     // console.log(completedselection);
 

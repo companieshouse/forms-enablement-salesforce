@@ -6,7 +6,7 @@
     </style>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -188,7 +188,7 @@
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel id="customPanel-particulars" rendered="{!custompanelView}">
-                    <apex:outputPanel rendered='{!showParticulars}'>
+                    <apex:outputPanel rendered="{!showParticulars}">
                         <div class="form-group">
                             <table class="check-your-answers">
                                 <thead>

@@ -93,4 +93,8 @@
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">chooseDirector</value>
     </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
 </CustomMetadata>

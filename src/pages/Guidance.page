@@ -19,7 +19,7 @@ Ver. Author             Date        Detail
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="form">
-                <apex:outputPanel id='masterPanel'>
+                <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="empty" />
                     <div class="form-group">
                         <div id="errorList" class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1" hidden="hidden">

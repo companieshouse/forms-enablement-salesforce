@@ -95,4 +95,8 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">ConfirmationFramework</value>
     </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
 </CustomMetadata>

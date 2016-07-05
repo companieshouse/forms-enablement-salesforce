@@ -161,6 +161,14 @@
         <type>Url</type>
     </fields>
     <fields>
+        <fullName>ApplicationDate__c</fullName>
+        <externalId>false</externalId>
+        <label>ApplicationDate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Barcode__c</fullName>
         <description>Represents the barcode of the transaction received from CHIPS</description>
         <externalId>false</externalId>
@@ -804,17 +812,18 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>trueTransactionName__c</fullName>
+        <description>Transaction Name for group transaction processes (e.g. SH05_6_7 need to be submitted as standalone SH05 or SH06, etc. This value will be used on submission for the transaction type. If no value is given then the transaction type will not be changed.</description>
+        <externalId>false</externalId>
+        <label>trueTransactionName</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Transaction</label>
-    <listViews>
-        <fullName>All</fullName>
-        <columns>NAME</columns>
-        <columns>CompanyName__c</columns>
-        <columns>CompanyNumber__c</columns>
-        <columns>Status__c</columns>
-        <columns>Transaction_Type__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <listViews>
         <fullName>All1</fullName>
         <columns>NAME</columns>
@@ -823,6 +832,8 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <columns>SubmissionId__c</columns>
         <columns>Status__c</columns>
         <columns>OfficerCount__c</columns>
+        <columns>Transaction_Type__c</columns>
+        <columns>trueTransactionName__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
