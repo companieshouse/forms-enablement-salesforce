@@ -50,7 +50,7 @@
         <members>DS02Step2Navigator</members>
         <members>DeveloperToolsController</members>
         <members>DirectorDetails</members>
-        <members>DirectorInputListController</members>
+        
         <members>DirectorsListController</members>
         <members>DocStatusController</members>
         <members>DocStatusUrlTriggerHandler</members>
@@ -152,7 +152,6 @@
         <members>CurrencySelection</members>
         <members>DS01</members>
         <members>DeveloperTools</members>
-        <members>DirectorsInputList</members>
         <members>DirectorsList</members>
         <members>DocuSignDeclined</members>
         <members>DocuSignRedirect</members>
