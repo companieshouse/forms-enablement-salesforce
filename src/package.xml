@@ -50,7 +50,6 @@
         <members>DS02Step2Navigator</members>
         <members>DeveloperToolsController</members>
         <members>DirectorDetails</members>
-        
         <members>DirectorsListController</members>
         <members>DocStatusController</members>
         <members>DocStatusUrlTriggerHandler</members>

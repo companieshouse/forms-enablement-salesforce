@@ -1,7 +1,7 @@
 <apex:page title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <h1 class="heading-xlarge">
                     {!headerBox1}
                 </h1>
