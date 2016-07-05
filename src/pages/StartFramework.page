@@ -30,9 +30,7 @@ Ver. Author        Date        Detail
                 <p class="lede">
                     <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
                 </p>
-
-                
-                <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
+                <h1 class="heading-large"><apex:outputText escape="false" value="{!pageText2}"></apex:outputText></h1>
                 <apex:outputText escape="false" value="{!pageText3}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText4}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText5}"></apex:outputText>

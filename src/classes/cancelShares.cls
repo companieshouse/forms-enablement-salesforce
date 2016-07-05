@@ -164,6 +164,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String dateQuestionLabel {get;set;}
     public String pageTitle {get;set;}
     public Boolean cancelledSharesVar {get;set;}
     public cancelShares() {
@@ -194,7 +195,8 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             labelText = 'Number of shares cancelled';
             hintText = 'Total number of shares cancelled in this class';
             dateQuestionText = 'Enter date(s) shares were cancelled';
-            variationText = '';
+            variationText = 'Date(s) shares were cancelled';
+            dateQuestionLabel ='Date(s) shares were cancelled';
             pageTitle = 'Cancel Shares';
             cancelledSharesVar = true;
             showdates = true;

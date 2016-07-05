@@ -108,7 +108,7 @@
                                             <td>Class of shares</td>
                                             <td>Number of shares</td>
                                             <td>Aggregate nominal value</td>
-                                            <td>{!dateQuestionText}</td>
+                                            <td>{!dateQuestionLabel}</td>
                                         </tr>
                                         <br/>
                                         <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">

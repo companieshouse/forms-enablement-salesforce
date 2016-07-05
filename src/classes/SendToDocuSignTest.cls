@@ -41,7 +41,7 @@ public class SendToDocuSignTest {
     static Transaction__c queryTransaction(String txId){
         return [Select Id,Form_Name__c,CompanyName__c, 
                     (Select Id,Name, Email__c,isPresenter__c,isSignatory__c, RecipientId__c,
-                        AuthorizedSigner__c, isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c 
+                        AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c 
                     from Officers__r) 
                 from Transaction__c where Id=:txId];
     }
@@ -120,7 +120,7 @@ public class SendToDocuSignTest {
         Officer__c off = createOfficer(tx);
 
         //Set Officer as Desead, Power Of Attorney or Corporate Director
-        //isDeceased__c, isPowerOfAttorney__c, isCorporateDirector__c
+        // isPowerOfAttorney__c, isCorporateDirector__c
         off.isCorporateDirector__c = true;
         off.AuthorizedSigner__c = recipientName;
         update off;
@@ -157,8 +157,6 @@ public class SendToDocuSignTest {
         //create officer
         Officer__c off = createOfficer(tx);
 
-        //Set Officer as Desead
-        off.isDeceased__c = true;
         off.AuthorizedSigner__c = recipientName;
         update off;
         

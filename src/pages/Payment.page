@@ -1,72 +1,69 @@
 <apex:page title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <h1 class="heading-xlarge">
-              {!headerBox1}
+                    {!headerBox1}
                 </h1>
-                                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
-                <apex:outputPanel id="body">
-                <apex:outputText escape="false"  rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}"/>
-                <apex:outputText escape="false"  rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}"/>
-                </apex:outputPanel>
-                
-                <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
-                    <fieldset class="inline">
-                        <legend class="visuallyhidden">Select a payment method:</legend>
-                        <div id="presenterSelection" class="form-group">
-                        <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
-                            <label class="block-label" for="radio-indent-3">
-                                <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"> Paypal
-                                </input>
-                            </label>
-                            </apex:outputPanel>
-                        <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
-                            <label class="block-label" for="radio-indent-1">
-                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or Debit Card
-                                </input>
-                            </label>
-                            </apex:outputPanel>
-                            <apex:outputPanel id="accountPanel" rendered="{!isAccountPayment}">
-                            <p class="form-block">or</p>
-                            <label class="block-label" for="radio-indent-2">
-                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Payment on Account
-                                </input>
-                            </label>
-                            <apex:outputPanel id="accountInput">
-                            <apex:outputPanel rendered="{!valuePaymentUI == 2}">
-                             <div aria-hidden="false" class="panel panel-border-narrow">
-                                <div class="form-group">
-                                    <label class="form-label" for="accountnumberinput">Account Number:</label>
-                                    <apex:input styleclass="form-control" value="{!accountNumber}" type="text" id="accountnumberinput" />
-                                     <label class="form-label" for="accountAuthCode"></label>
-                                    <apex:input styleclass="form-control" value="{!accountAuthCode}" type="text" id="accountAuthCode" />
-                                </div>
+                    <apex:outputPanel id="body">
+                        <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}" />
+                        <apex:outputText escape="false" rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}" />
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
+                        <fieldset class="inline">
+                            <legend class="visuallyhidden">Select a payment method:</legend>
+                            <div id="presenterSelection" class="form-group">
+                                <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
+                                    <label class="block-label" for="radio-indent-3">
+                                        <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"> Paypal
+                                        </input>
+                                    </label>
+                                </apex:outputPanel>
+                                <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
+                                    <label class="block-label" for="radio-indent-1">
+                                        <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or Debit Card
+                                        </input>
+                                    </label>
+                                </apex:outputPanel>
+                                <apex:outputPanel id="accountPanel" rendered="{!isAccountPayment}">
+                                    <p class="form-block">or</p>
+                                    <label class="block-label" for="radio-indent-2">
+                                        <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Payment on Account
+                                        </input>
+                                    </label>
+                                    <apex:outputPanel id="accountInput">
+                                        <apex:outputPanel rendered="{!valuePaymentUI == 2}">
+                                            <div aria-hidden="false" class="panel panel-border-narrow">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="accountnumberinput">Account Number:</label>
+                                                    <apex:input styleclass="form-control" value="{!accountNumber}" type="text" id="accountnumberinput" />
+                                                    <label class="form-label" for="accountAuthCode">Account Authorisation Code:</label>
+                                                    <apex:input styleclass="form-control" value="{!accountAuthCode}" type="text" id="accountAuthCode" />
+                                                </div>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
                             </div>
-                            </apex:outputPanel>
-                            </apex:outputPanel>
-                            </apex:outputPanel>
-                        </div>
-                    </fieldset>
-                </apex:outputPanel>
-                
-                <apex:outputPanel rendered="{!isSameDayPayment}" >
-                
-                    <fieldset class="inline">
-                        <h3 class="heading-medium">Do you want you application to be proceed on the same day?</h3>
-                        <div id="presenterSelection2" class="form-group">
-                            <label class="block-label" for="radio-indent-4">
-                                <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
-                                </input>
-                            </label>
-                            <label class="block-label" for="radio-indent-5">
-                                <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
-                                </input>
-                            </label>
-                        </div>
-                    </fieldset>
-                </apex:outputPanel>
+                        </fieldset>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!isSameDayPayment}">
+                        <fieldset class="inline">
+                            <h3 class="heading-medium">Do you want you application to be proceed on the same day?</h3>
+                            <div id="presenterSelection2" class="form-group">
+                                <label class="block-label" for="radio-indent-4">
+                                    <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
+                                    </input>
+                                </label>
+                                <label class="block-label" for="radio-indent-5">
+                                    <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
+                                    </input>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:actionFunction action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
                     <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
@@ -79,7 +76,7 @@
                 <apex:outputPanel rendered="{!hasPaymentSuccess}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment is a success!
+                            The payment is a success!
                         </h1>
                         <p>
                             The payment has been succesful.
@@ -89,7 +86,7 @@
                 <apex:outputPanel rendered="{!hasPaid}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment already processed!
+                            The payment already processed!
                         </h1>
                         <p>
                             You have already paid for this transaction.
@@ -99,29 +96,30 @@
                 <apex:outputPanel rendered="{!hasPaymentRejected}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment has been rejected.
+                            The payment has been rejected.
                         </h1>
                         <p>
-                            Do you want to try again? <a onclick="updateLink();" href="#">Try again?</a>
-
+                            Do you want to try again?
+                            <a onclick="updateLink();" href="#">Try again?</a>
                         </p>
                     </div>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentError}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  Barclays has encoutered an issue.
+                            Barclays has encoutered an issue.
                         </h1>
                         <br/>
                         <p>
-                            Do you want to try again (It might not work)?<a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
+                            Do you want to try again (It might not work)?
+                            <a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
                         </p>
                     </div>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentPending}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment is pending.
+                            The payment is pending.
                         </h1>
                         <p>
                             You will have to do further action to validate the payment.
