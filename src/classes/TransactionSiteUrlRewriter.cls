@@ -52,7 +52,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String SELECTSHARETYPE = '/selectsharetype';
     public String CHANGESHARENAME = '/changeshareclassname';
     public String APPLICATIONDATE = '/applicationdate';
+    public String FORMAPPLICATION = '/formapplication';
     public String VARIATION = '/variationofrights';
+    public String PROMOTERS = '/promoterstable';
+    public String RESOLUTIONCHANGE = '/resolutionchange';
     // // // // //
     public String VF_PAGE_START = '/StartFramework';
     public String VF_PAGE_COMPANY = '/Company';
@@ -91,6 +94,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_CHANGESHARENAME = '/ChangeShareClassName';
     public String VF_PAGE_VARIATION = '/VariationOfRights';
     public String VF_PAGE_APPLICATIONDATE = '/ApplicationDate';
+    public String VF_PAGE_FORMAPPLICATION = '/FormApplication';
+    public String VF_PAGE_PROMOTERS = '/PromotersTable';
+    public String VF_PAGE_RESOLUTIONCHANGE = '/ResolutionChange';
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
         System.debug(LoggingLevel.ERROR, 'in mapRequestUrl:' + friendlyUrl);
@@ -171,6 +177,12 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_VARIATION);
         } else if (url.startsWith(APPLICATIONDATE)) {
             pr = new PageReference(VF_PAGE_APPLICATIONDATE);
+        } else if (url.startsWith(FORMAPPLICATION)) {
+            pr = new PageReference(VF_PAGE_FORMAPPLICATION);
+        } else if (url.startsWith(PROMOTERS)) {
+            pr = new PageReference(VF_PAGE_PROMOTERS);
+        } else if (url.startsWith(RESOLUTIONCHANGE)) {
+            pr = new PageReference(VF_PAGE_RESOLUTIONCHANGE);
         }
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -258,6 +270,12 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(VARIATION);
             } else if (url.startsWith(VF_PAGE_APPLICATIONDATE)) {
                 friendlyPageReference = new PageReference(APPLICATIONDATE);
+            } else if (url.startsWith(VF_PAGE_FORMAPPLICATION)) {
+                friendlyPageReference = new PageReference(FORMAPPLICATION);
+            } else if (url.startsWith(VF_PAGE_PROMOTERS)) {
+                friendlyPageReference = new PageReference(PROMOTERS);
+            } else if (url.startsWith(VF_PAGE_RESOLUTIONCHANGE)) {
+                friendlyPageReference = new PageReference(RESOLUTIONCHANGE);
             }
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);

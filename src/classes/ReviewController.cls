@@ -156,6 +156,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public List < Shares__c > sharesforEditing {
+        get;
+        set;
+    }
     public List < Shares__c > sharesforCancelling {
         get;
         set;
@@ -184,6 +188,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String reviewTitle {
+        get;
+        set;
+    }
     public String dateQuestionText {
         get;
         set;
@@ -196,9 +204,22 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Date dateField {get; set;}
-    public Boolean variationNotice {get;set;}
-
+    public String rewviewTitle {
+        get;
+        set;
+    }
+    public String dateText {
+        get;
+        set;
+    }
+    public Date dateField {
+        get;
+        set;
+    }
+    public Boolean variationNotice {
+        get;
+        set;
+    }
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -233,6 +254,7 @@ public class ReviewController extends TransactionStepControllerBase {
         showprevious = true;
         dateField = submissionMgr.submission.ApplicationDate__c;
         sharesforBuilding = new List < Shares__c > ();
+        sharesforEditing = new List < Shares__c > ();
         sharesforCancelling = new List < Shares__c > ();
         requiresStatementofC = new Set < String > {
             'SH19',
@@ -246,7 +268,7 @@ public class ReviewController extends TransactionStepControllerBase {
             showprevious = false;
         }
         buildReviewShares();
-        buildCancelShares();
+        buildOtherShares();
         buildlabels();
         if (submissionMgr.submission.Shares__r.size() > 0) {
             preParticulars = sharesforBuilding;
@@ -263,23 +285,20 @@ public class ReviewController extends TransactionStepControllerBase {
             dateQuestionText = 'Date of variation of rights';
             variationText = 'Details of variation of rights';
             variationNotice = true;
-
         } else if (submissionMgr.submission.Form_Name__c.contains('SH11')) {
             labelText = 'Notice of new class of members';
             dateQuestionText = 'Date of creation of new class of members';
             variationText = 'Rights attached to class of members';
-            variationNotice= true;
+            variationNotice = true;
         } else if (submissionMgr.submission.Form_Name__c.contains('SH12')) {
             labelText = 'Notice of particulars of variation of class rights';
             dateQuestionText = 'Date of variation of class rights';
             variationText = 'Variation in the rights of the class of members';
             variationNotice = true;
         }
-        if(variationNotice == true){
-            
-        }
+        if (variationNotice == true) {}
     }
-    public void buildCancelShares() {
+    public void buildOtherShares() {
         for (Shares__c deadShares: submissionMgr.submission.Shares__r) {
             if (deadShares.cancelled_shares__c == true) {
                 sharesforCancelling.add(deadShares);
@@ -287,6 +306,18 @@ public class ReviewController extends TransactionStepControllerBase {
         }
         if (sharesforCancelling.size() > 0) {
             showCancelledShares = true;
+            dateText = 'Cancellation Date';
+            reviewTitle = 'Shares to cancel';
+        }
+        for (Shares__c liveShares: submissionMgr.submission.Shares__r) {
+            if (liveShares.cancelled_shares__c == false) {
+                sharesforEditing.add(liveShares);
+            }
+        }
+        if (sharesforEditing.size() > 0) {
+            showCancelledShares = true;
+            dateText = 'Date(s) shares were sold or transferred';
+            reviewTitle = 'Treasury shares sold or transferred';
         }
     }
     public void buildReviewShares() {

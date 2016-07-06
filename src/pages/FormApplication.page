@@ -1,0 +1,91 @@
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="FormApplicationController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <div class="form-group entire-wrapper">
+                    <h1 class="heading-xlarge">
+                        {!headerText1}
+                    </h1>
+                    <apex:outputPanel id="emptypanel" />
+                    <apex:outputPanel id="masterPanel">
+                        <fieldset class="inline">
+                            <legend class="visuallyhidden">{!displayText}</legend>
+                            <p>
+                                <h1 class="heading-medium">{!displayText}</h1>
+                                <span id="radio-errors"></span>
+                                <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                                <label class="block-label" for="radio-inline-1">
+                                    <input id="radio-inline-1" onclick="clearErrors()" type="radio" name="signingStatus" value="true" /> Yes
+                                </label>
+                                <label class="block-label" for="radio-inline-2">
+                                    <input id="radio-inline-2" onclick="setErrors()" type="radio" name="signingStatus" value="false" /> No
+                                </label>
+                            </p>
+                        </fieldset>
+                        <fieldset class="inline">
+                            <legend class="visuallyhidden">{!displayText2}</legend>
+                            <p>
+                                <h1 class="heading-medium">{!displayText2}</h1>
+                                <span id="currency-errors"></span>
+                                <label class="block-label" for="radio-1">
+                                    <input id="radio-1" type="radio" name="radio-group" value="Sterling" /> Sterling
+                                </label>
+                                <label class="block-label" for="radio-2">
+                                    <input id="radio-2" type="radio" name="radio-group" value="Euros" /> Euros
+                                </label>
+                            </p>
+                        </fieldset>
+                        <fieldset>
+                            <legend class="visuallyhidden">expenses</legend>
+                            <p>
+                                <h1 class="heading-medium">{!displayText4}</h1>
+                                <span id="expenses-errors"></span>
+                                <label class="block-label" for="expenses-radio-1">
+                                    <input id="expenses-radio-1" type="radio" name="expenses-radio-group" value="amount of preliminary expenses" /> amount of preliminary expenses
+                                </label>
+                                <label class="block-label" for="expenses-radio-2">
+                                    <input id="expenses-radio-2" type="radio" name="expenses-radio-group" value="estimated amount of the preliminary expenses of the company is" /> estimated amount of the preliminary expenses of the company is
+                                </label>
+                            </p>
+                        </fieldset>
+                        <fieldset class='inline'>
+                            <h1 class="heading-medium">{!displayText5}</h1>
+                            <apex:inputText styleClass="form-control" value="{!preliminaryExpenses}" id="preliminaryexpenses" />
+                        </fieldset>
+                        <fieldset class='inline'>
+                            <legend class="visuallyhidden">{!displayText6}</legend>
+                            <p>
+                                <h1 class="heading-medium">{!displayText6}</h1>
+                                <span id="preliminaryexpenses-errors"></span>
+                                <label class="block-label" for="preliminaryexpenses-radio-1">
+                                    <input id="radio-1-promoterpayment" type="radio" name="preliminaryexpenses-radio-group" value="true" /> Yes
+                                </label>
+                                <label class="block-label" for="preliminaryexpenses-radio-2">
+                                    <input id="radio-2-promoterpayment" type="radio" name="preliminaryexpenses-radio-group" value="false" /> No
+                                </label>
+                            </p>
+                        </fieldset>
+                        <script>
+                        function setErrors() {
+                            console.log('working');
+
+                            document.getElementById('radio-errors').innerHTML = '<span class="error-message">You must select yes to continue</span>';
+                        };
+
+                        function clearErrors() {
+
+                            console.log('working');
+                            document.getElementById('radio-errors').innerHTML = '';
+                        };
+                        </script>
+                    </apex:outputPanel>
+                </div>
+                <fieldset>
+                    <apex:commandButton rerender="none" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                    <br/> &nbsp;
+                    <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
+                </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

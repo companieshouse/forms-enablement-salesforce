@@ -22,6 +22,9 @@
                     label: "DS01",
                     value: "DS01"
                 }, {
+                    label: "SH02",
+                    value: "SH02"
+                }, {
                     label: "SH04",
                     value: "SH04"
                 }, {
@@ -49,18 +52,32 @@
                     label: "SH12",
                     value: "SH12"
                 }, {
+                    label: "SH13",
+                    value: "SH13"
+                }, {
+                    label: "SH14",
+                    value: "SH14"
+                },
+                 {
                     label: "SH15",
                     value: "SH15"
+                }, {
+                    label: "SH19",
+                    value: "SH19"
+                },{
+                    label: "SH30",
+                    value: "SH30"
+                },
+                 {
+                    label: "SH50",
+                    value: "SH50"
                 }/*, {
                     label: "SH16",
                     value: "SH16"
                 }, {
                     label: "SH17",
                     value: "SH17"
-                }*/, {
-                    label: "SH19",
-                    value: "SH19"
-                }];
+                }*/];
                 $(function() {
                     $("#document-input").autocomplete({
                         source: function(request, response) {

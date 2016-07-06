@@ -76,12 +76,12 @@
                     </p>
                 </apex:outputPanel>
                 <apex:outputPanel id="innerCancelPanel" rendered="{!custompanelView}">
-                    <apex:outputPanel id="customcancelPanel" rendered="{!ISBLANK(sharesforCancelling)}">
+                    <apex:outputPanel id="customcancelPanel" rendered="{!NOT(ISBLANK(sharesforCancelling))}">
                         <div class="form-group">
                             <table class="check-your-answers">
                                 <thead>
                                     <tr>
-                                        <th colspan="4">Shares to cancel </th>
+                                        <th colspan="4">{!reviewTitle}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +89,8 @@
                                         <td class="table-names">Class of shares</td>
                                         <td class="table-names">No. of shares</td>
                                         <td class="table-names">Aggregate nominal value</td>
+                                        <td class="table-names">{!dateText}</td>
+
                                     </tr>
                                     <apex:repeat value="{!sharesforCancelling}" var="CP">
                                         <tr>
@@ -100,6 +102,25 @@
                                             </td>
                                             <td>
                                                 <apex:outputText value="{!CP.Aggregate_nominal_value__c}" id="cancelcurrency" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!CP.Date__c}" id="cancelDate" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                    <apex:repeat value="{!sharesforEditing}" var="EP">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!EP.Class_of_Shares__c}" id="editClas" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!EP.Number_of_Shares__c}" id="editnumberofshares" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!EP.Aggregate_nominal_value__c}" id="editCurrency" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!EP.Date__c}" id="editDate" />
                                             </td>
                                         </tr>
                                     </apex:repeat>

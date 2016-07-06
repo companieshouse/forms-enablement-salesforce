@@ -205,6 +205,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             hintText = '';
             pageTitle = 'Shares sold';
             dateQuestionText = 'Enter date(s) shares were sold or transferred';
+            dateQuestionLabel = 'Date(s) shares were sold or transferred';
             variationText = '';
             cancelledSharesVar = false;
             showdates = true;
@@ -266,6 +267,12 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             currentErrorMessage = 'Date cannot be in the future';
             return null;
         }
+        if (cancellationDate == null) {
+            hasPageErrors = true;
+            currentErrorMessage = 'Date cannot be empty';
+            return null;
+        }
+
         //if (cancellationDate == null) {
         //    hasPageErrors = true;
         //    currentErrorMessage = 'Must add the cancellation date';
