@@ -185,6 +185,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DigitalSignatureController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DirectorDetails</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -229,7 +233,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>DocusignTecipientTriggerStatusHandler</apexClass>
+        <apexClass>DocusignLibrary</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -246,6 +250,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>EmbedDocuSignController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ExternalEmbedDocuSignController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -536,7 +544,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Officer__c.RecipientId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -892,6 +900,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type__mdt.isDigitalSignatureNeeded__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type__mdt.isMajorityForm__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1177,6 +1190,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.isDigitalSignatureNeeded__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.isLLP__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1213,6 +1231,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.isSameDayProcessing__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.isSigningFinished__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.isSigningStarted__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1390,27 +1418,11 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>DigitalSignature</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>DirectorsList</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignDeclined</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignRedirect</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignSigningCompleted</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignTimeout</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignViewed</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1431,6 +1443,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Exception</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ExternalEmbedDocuSign</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
