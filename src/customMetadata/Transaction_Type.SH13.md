@@ -131,6 +131,10 @@
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
+        <field>isDigitalSignatureNeeded__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>isMajorityForm__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>

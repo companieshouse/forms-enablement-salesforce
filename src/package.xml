@@ -166,6 +166,7 @@
         <members>EmbedDocuSign</members>
         <members>EntryPoint</members>
         <members>Exception</members>
+        <members>ExternalEmbedDocuSign</members>
         <members>FormApplication</members>
         <members>Guidance</members>
         <members>OfficerDetails</members>

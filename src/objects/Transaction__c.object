@@ -876,6 +876,16 @@ to any promoter of the company?</inlineHelpText>
     </fields>
     <label>Transaction</label>
     <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CompanyName__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>Status__c</columns>
+        <columns>Transaction_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
         <fullName>All1</fullName>
         <columns>NAME</columns>
         <columns>CompanyName__c</columns>
