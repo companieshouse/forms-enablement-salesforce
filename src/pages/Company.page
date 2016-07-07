@@ -2652,11 +2652,11 @@ Ver. Author        Date        Detail
                     </div>
                 </apex:outputPanel>
                 <h1 class="heading-xlarge">
-                {!companySearchHeader}
+                    <!--{!companySearchHeader}--> Which company do you wish to file for?
                 </h1>
                 <!-- <div class="form-group {!IF(hasPageErrors,'error', '')}"> -->
-                <label class="form-label" for="text-input">What is the company number?
-                    <span class="form-hint">This is the 8 digit number at the bottom of your company certificate.</span>
+                <label class="form-label" for="text-input">What is the company registration number?
+                    <span class="form-hint">This is the 8-character identification code on your certificate of incorporation.</span>
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
                         </span>
@@ -2667,9 +2667,19 @@ Ver. Author        Date        Detail
                 <apex:outputText escape="false" value="{!currentErrorbottom}" />
                 <!-- </div>   -->
                 <br/>
-                <span class="hypercolorblue"> &#9654;</span>
-                <a href="#"> How do I know what my company number is?</a>
-                <br/>
+                <div class="form-group">
+                    <details>
+                        <summary>
+                            <span class="summary">How do I know what my company number is?</span>
+                        </summary>
+                        <div class="panel panel-border-narrow">
+                            <p>
+                                A company registration number is a unique number issued by Companies House when a limited company or Limited Liability Partnership (LLP) is set up. It's usually abbreviated as CRN and sometimes referred to as a Companies House Number. Your CRN consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this on the company's certificate of incorporation or by using the
+                                <a href="http://beta.companieshouse.gov.uk" target="_blank">WebCheck</a> Service.
+                            </p>
+                        </div>
+                    </details>
+                </div>
                 <br/> &nbsp;
                 <apex:commandButton styleClass="button" action="{!nextAction}" value="Confirm my company details" />
                 <br/>

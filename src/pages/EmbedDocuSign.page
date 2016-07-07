@@ -1,4 +1,12 @@
 <apex:page title="{!$Label.UI_Text_DocuSign}" showHeader="false" sidebar="false" standardStylesheets="false" controller="EmbedDocuSignController" action="{!actionFunction}" docType="html-5.0">
+    <script>
+   if (window.frameElement) {
+       parent.location.href = window.location;
+       console.log("found iframe and reloading")
+   } else {
+       console.log('not finding iframe probably on mobile');
+   }
+   </script>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

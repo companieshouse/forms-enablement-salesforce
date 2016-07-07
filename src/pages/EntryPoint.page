@@ -1,0 +1,111 @@
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <div class="form-group">
+                    <h1 class="heading-xlarge">
+                        Companies House
+                        <br/> Forms Enablement
+                    </h1>
+                    <label class="form-label" for="share-item">Select Form
+                        <span class="error-message" id="errors"></span>
+                    </label>
+                    <input class="form-control" name="document-item" id="document-input" />
+                    <br/>
+                </div>
+                <input class="button" type="button" onclick="selectDocument();" value="Select Form" />
+                <script>
+                var transactionselection = [{
+                    label: "DS01",
+                    value: "DS01"
+                }, {
+                    label: "SH02",
+                    value: "SH02"
+                }, {
+                    label: "SH04",
+                    value: "SH04"
+                }, {
+                    label: "SH05",
+                    value: "SH05_6_7"
+                }, {
+                    label: "SH06",
+                    value: "SH05_6_7"
+                }, {
+                    label: "SH07",
+                    value: "SH05_6_7"
+                }, {
+                    label: "SH08",
+                    value: "SH08"
+                }, {
+                    label: "SH09",
+                    value: "SH09"
+                }, {
+                    label: "SH10",
+                    value: "SH10"
+                }, {
+                    label: "SH11",
+                    value: "SH11"
+                }, {
+                    label: "SH12",
+                    value: "SH12"
+                }, {
+                    label: "SH13",
+                    value: "SH13"
+                }, {
+                    label: "SH14",
+                    value: "SH14"
+                },
+                 {
+                    label: "SH15",
+                    value: "SH15"
+                }, {
+                    label: "SH19",
+                    value: "SH19"
+                },{
+                    label: "SH30",
+                    value: "SH30"
+                },
+                 {
+                    label: "SH50",
+                    value: "SH50"
+                }/*, {
+                    label: "SH16",
+                    value: "SH16"
+                }, {
+                    label: "SH17",
+                    value: "SH17"
+                }*/];
+                $(function() {
+                    $("#document-input").autocomplete({
+                        source: function(request, response) {
+                            var results = $.ui.autocomplete.filter(transactionselection, request.term);
+                            response(results.slice(0, 20));
+                        },
+                        select: function(event, ui) {}
+                    });
+                });
+
+                function selectDocument() {
+
+                    var completedselection = document.getElementById('document-input').value;
+                    // console.log(completedselection);
+
+                    if (completedselection.length < 1) {
+                        document.getElementById('errors').innerHTML = 'Please select a valid document type to proceed';
+                        return;
+                    } else if (completedselection.length > 1) {
+                        // console.log(completedselection);
+                        // if (transactionselection.indexOf(completedselection) >= 0) {
+                        document.getElementById('errors').innerHTML = '';
+                        window.location.href = ('https://lbdev2-chformsfactory.cs83.force.com/start?t=' + completedselection);
+                        //   }
+                    }
+                };
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

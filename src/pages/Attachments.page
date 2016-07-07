@@ -1,4 +1,4 @@
-<apex:page title="Add Attachments" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
+<apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
@@ -14,11 +14,19 @@
                 </apex:outputPanel>
                 <div class="form-group">
                     <h1 class="heading-xlarge">
-                        Add Attachments
+                        {!headerText1}
                     </h1>
                     <p class="lede">
-                        Content about adding attachments to Share Capital Here
+                        <apex:outputText escape="false" value="{!displayText}" id="displayText" />
                     </p>
+                    <p class="lede">
+                        <apex:outputText escape="false" value="{!displayText2}" id="displayText2" />
+                    </p>
+                    <apex:outputText escape="false" value="{!displayText3}" id="displayText3" />
+                    <p class="lede">
+                        <apex:outputText escape="false" value="{!displayText4}" id="displayText4" /> 
+                    </p>
+                    <apex:outputText escape="false" value="{!displayText5}" id="displayText5" />
                     <apex:outputPanel id="newattachmentspanel">
                         <apex:repeat value="{!newAttachments}" var="att">
                             <label class="form-label" for="fileName">
@@ -41,16 +49,13 @@
                         <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp;
                         <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp;
                         <apex:commandLink value="Save" action="{!save}" />
-                        <!--<apex:actionFunction name="deleteAttachment" action="{!DeleteAttachments}">
-                            <apex:param name="attachmentIdParam" value="" assignTo="{!attachmentId}" />
-                        </apex:actionFunction>-->
                     </p>
                 </div>
                 <apex:outputPanel id="BuildTable">
                     <table class="check-your-answers">
                         <thead>
                             <tr>
-                                <th colspan="4">Share Capital Attachments</th>
+                                <th colspan="4">{!headerText2}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,11 +78,27 @@
                                     </td>
                                     <!--
                                     <td>
-                                     <apex:commandLink value="Delete" action="{!DeleteAttachments}" />
-                                    </td>
-                                    -->
+                                        <apex:commandLink value="Delete" onclick="deleter(this)"  />
+                                        <input id="" type="hidden" value="{!sp.Id}"/>
+                                    </td> -->
                                 </tr>
                             </apex:repeat>
+                            <!--
+                            <apex:actionFunction name="deleteAttachment" action="{!DeleteAttachments}">
+                                <apex:param name="attachmentIdParam" value="" assignTo="{!attachmentId}" />
+                            </apex:actionFunction>
+                            <script>
+                                
+                                function deleter(somevalue){
+
+
+                                    alert(somevalue);
+                                    deleteAttachment(somevalue);
+
+                                }
+
+                            </script>
+                            -->
                         </tbody>
                     </table>
                     <br/>

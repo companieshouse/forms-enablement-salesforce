@@ -95,4 +95,8 @@
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">BehalfDecision</value>
     </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
 </CustomMetadata>

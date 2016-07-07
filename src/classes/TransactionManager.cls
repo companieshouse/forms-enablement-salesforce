@@ -31,6 +31,8 @@ public with sharing class TransactionManager {
     private TransactionManager(){}
     
     public TransactionManager(String transactionType){
+    	    	//throw new Form_CustomException('transaction type is ' + transactionType);
+
     	this.transactionType=transactionType;
 		retrieveTransactionType(transactionType);
     }
@@ -39,7 +41,6 @@ public with sharing class TransactionManager {
     	// query the transaction type Id from the stepId then load the transaction def.
     	transactionType = [select Transaction_Type__c from Transaction_Type_Step__mdt where Id=:stepId].Transaction_Type__c;
     	this.transactionType=transactionType;
-    	
 		retrieveTransactionType(transactionType);
 		
 		stepCount = stepsById.size();
@@ -65,7 +66,7 @@ public with sharing class TransactionManager {
 			
 			td = recs[0];
 			
-			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select CustomView__c ,StandardView__c, CompanyNameText__c, Header_Text_2__c, Header_Text_3__c, ContinueButtonText__c,Display_Text_4__c,Display_Text_6__c,Display_Text_5__c,Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
+			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select  CustomView__c, StandardView__c, CompanyNameText__c, Header_Text_2__c, Header_Text_3__c, previousButtonText__c, ContinueButtonText__c,Display_Text_4__c,Display_Text_6__c,Display_Text_5__c,Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
 																		Header_Text_1__c, Display_Text_1__c,Display_Text_2__c,Display_Text_3__c, Is_Active__c, Document_Template_Name__c, SObject_Type__c 
 																	from Transaction_Type_Step__mdt 
 																	where Transaction_Type__c=:td.DeveloperName and Is_Active__c=true order by Step_Number__c asc]);

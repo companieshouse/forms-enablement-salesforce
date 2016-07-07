@@ -15,11 +15,11 @@
     </values>
     <values>
         <field>CustomView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">This is an important notice and should not be ignored. The company named has applied to the Registrar to be struck off the Register and dissolved. Please note that on dissolution any remaining assets will be passed to the Crown.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -27,13 +27,11 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;span class=&quot;bold-medium&quot;&gt;
-We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
-&lt;/span&gt; &lt;/p&gt;</value>
+        <value xsi:type="xsd:string">You&apos;ll need to quote this if you contact us about your submission</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">The reduction in share capital will be processed within 10 working days.</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -49,7 +47,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Warning to all interested parties</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -81,7 +79,7 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">10.0</value>
+        <value xsi:type="xsd:double">9.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -94,5 +92,9 @@ We&apos;ll send you an email confirming your request to strike off COMPANYNAME.
     <values>
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">ConfirmationFramework</value>
+    </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

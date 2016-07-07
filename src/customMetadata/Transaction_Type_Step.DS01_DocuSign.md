@@ -71,7 +71,7 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Transaction__c</value>
     </values>
     <values>
         <field>StandardView__c</field>
@@ -92,5 +92,9 @@
     <values>
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">DigitalSignature</value>
+    </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

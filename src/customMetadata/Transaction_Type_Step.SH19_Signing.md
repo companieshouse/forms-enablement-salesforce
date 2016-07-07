@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Authorise</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">TEST</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">TEST</value>
+        <value xsi:type="xsd:string">Do you wish to authorise and submit your share capital?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">8.0</value>
+        <value xsi:type="xsd:double">7.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -92,5 +92,9 @@
     <values>
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">SigningPage</value>
+    </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

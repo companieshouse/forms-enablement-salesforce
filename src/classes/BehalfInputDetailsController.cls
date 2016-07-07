@@ -34,8 +34,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public String nameAuthorized {get; set;}
     public String emailDirector {get; set;}
 
-    public Integer behalfSelection {get; set;} //0 for nothing 1 poa  3 corp
-
+    public Integer behalfSelection {get; set;} 
     public BehalfInputDetailsController(){
         super();
         if (isPageInitialised) initialiseStep();
@@ -133,6 +132,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         {
             return nextAction();
         }
+
 
         //Initialise the current directors
         for(Officer__c off : submissionMgr.submission.Officers__r){

@@ -13,42 +13,50 @@ Mapping of page name to friendly url should be table or setting driven.
 ======================================================
 History
 ------- 
-Ver. Author        	Date        Detail
-1.0  Mark Cane&    	2016-04-03  Initial development.
+Ver. Author         Date        Detail
+1.0  Mark Cane&     2016-04-03  Initial development.
 1.0  Antonio Bravo  2016-04-25  Add DocuSign Pages.
 */
 global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
-  	
-	public String START 			= '/start';
-	public String COMPANY 			= '/company';
-	public String CONFIRMATION 		= '/Confirmation';
-	public String DYNAMIC 			= '/dynamic';
-	public String DIRECTORS_LIST 	= '/directors';
-	public String SUMMARY 			= '/final-confirmation';
-	public String CALLBACK 			= '/authcallback';
-	public String ERROR 			= '/error';
-	public String PAYMENT 			= '/Payment';
-	public String REVIEW 			= '/review';
-	public String PRESENTER 		= '/presenter';
-	public String OFFICERSEMAIL 	= '/inputEmails';
-	public String GUIDANCE			= '/guidance';
-	public String DETAILSCOMP		= '/detailsCompany';
-	public String STATUS 			= '/status';
-    public String SUBMISSION 		= '/submission';
-    public String UPDATECPD			= '/updateDirectors';
-    public String BEHALFDECISION    = '/behalfDecision';
-    public String SELECTIONBEHALF    = '/selectBDi';
-    public String INPUTBEHALF 	    = '/randomI';
+    public String START = '/start';
+    public String COMPANY = '/company';
+    public String CONFIRMATION = '/Confirmation';
+    public String DYNAMIC = '/dynamic';
+    public String DIRECTORS_LIST = '/directors';
+    public String SUMMARY = '/final-confirmation';
+    public String CALLBACK = '/authcallback';
+    public String ERROR = '/error';
+    public String PAYMENT = '/Payment';
+    public String REVIEW = '/review';
+    public String PRESENTER = '/presenter';
+    public String OFFICERSEMAIL = '/inputEmails';
+    public String GUIDANCE = '/guidance';
+    public String DETAILSCOMP = '/detailsCompany';
+    public String STATUS = '/status';
+    public String SUBMISSION = '/submission';
+    public String UPDATECPD = '/updateDirectors';
+    public String BEHALFDECISION = '/behalfDecision';
+    public String SELECTIONBEHALF = '/selectBDi';
+    public String INPUTBEHALF = '/randomI';
     public String CHOOSEDIRECTOR = '/choosedirector';
     public String WHICHDIRECTOR = '/whichdirector';
     public String OFFICERDETAILS = '/officerdetails';
-	public String SHAREBUILDER = '/shareBuilder';
+    public String SHAREBUILDER = '/shareBuilder';
     public String CURRENCYSELECTION = '/currencySelection';
     public String PREPARTICULARRIGHTS = '/preparticularrights';
     public String ADDSHAREBASE = '/addsharesbase';
-    public String TABULARDATA = '/tabularddata';
+    public String TABULARDATA = '/tabulardata';
     public String ATTACHMENTS = '/attachments';
     public String SIGNINGPAGE = '/signingpage';
+    public String CANCELLEDSHARES = '/cancelledshares';
+    public String SELECTSHARETYPE = '/selectsharetype';
+    public String CHANGESHARENAME = '/changeshareclassname';
+    public String APPLICATIONDATE = '/applicationdate';
+    public String FORMAPPLICATION = '/formapplication';
+    public String VARIATION = '/variationofrights';
+    public String PROMOTERS = '/promoterstable';
+    public String RESOLUTIONCHANGE = '/resolutionchange';
+    public String EDITYSHARESBYTYPE = '/editsharesbytype';
 
 	public String VF_PAGE_START 		= '/StartFramework';
 	public String VF_PAGE_COMPANY 		= '/Company';
@@ -72,17 +80,26 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_UPDATECPD		= '/UpdateCompanyDirectors';
     public String VF_PAGE_BEHALFDECISION = '/BehalfDecision';
     public String VF_PAGE_SELECTIONBEHALF = '/BehalfWhichSignatory';
-    public String VF_PAGE_INPUTBEHALF 	    = '/BehalfInputDetails';
+    public String VF_PAGE_INPUTBEHALF = '/BehalfInputDetails';
     public String VF_PAGE_CHOOSEDIRECTOR = '/chooseDirector';
     public String VF_PAGE_WHICHDIRECTOR = '/whichDirector';
     public String VF_PAGE_OFFICERDETAILS = '/OfficerDetails';
-	public String VF_PAGE_SHAREBUILDER = '/ShareBuilder';
+    public String VF_PAGE_SHAREBUILDER = '/ShareBuilder';
     public String VF_PAGE_CURRENCYSELECTION = '/CurrencySelection';
     public String VF_PAGE_PREPARTICULARRIGHTS = '/PreParticularRights';
     public String VF_PAGE_ADDSHARESBASE = '/AddSharesBase';
     public String VF_PAGE_TABULARDATA = '/TabularData';
     public String VF_PAGE_ATTACHMENTS = '/Attachments';
     public String VF_PAGE_SIGNINGPAGE = '/SigningPage';
+    public String VF_PAGE_CANCELLEDSHARES = '/CancelledShares';
+    public String VF_PAGE_SELECTSHARETYPE = '/selectShareType';
+    public String VF_PAGE_CHANGESHARENAME = '/ChangeShareClassName';
+    public String VF_PAGE_VARIATION = '/VariationOfRights';
+    public String VF_PAGE_APPLICATIONDATE = '/ApplicationDate';
+    public String VF_PAGE_FORMAPPLICATION = '/FormApplication';
+    public String VF_PAGE_PROMOTERS = '/PromotersTable';
+    public String VF_PAGE_RESOLUTIONCHANGE = '/ResolutionChange';
+    public String VF_PAGE_EDITYSHARESBYTYPE = '/EditySharesByType';
 
   
     global PageReference mapRequestUrl(PageReference friendlyUrl){
@@ -119,47 +136,45 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 		else if (url.startsWith(CHOOSEDIRECTOR))
         {
             pr = new PageReference(VF_PAGE_CHOOSEDIRECTOR);
-        }
-        else if (url.startsWith(WHICHDIRECTOR))
-        {
+        } else if (url.startsWith(WHICHDIRECTOR)) {
             pr = new PageReference(VF_PAGE_WHICHDIRECTOR);
-        }
-        else if (url.startsWith(OFFICERDETAILS))
-        {
+        } else if (url.startsWith(OFFICERDETAILS)) {
             pr = new PageReference(VF_PAGE_OFFICERDETAILS);
-        }
-		else if (url.startsWith(SHAREBUILDER))
-        {
+        } else if (url.startsWith(SHAREBUILDER)) {
             pr = new PageReference(VF_PAGE_SHAREBUILDER);
-        }
-        else if (url.startsWith(CURRENCYSELECTION))
-        {
+        } else if (url.startsWith(CURRENCYSELECTION)) {
             pr = new PageReference(VF_PAGE_CURRENCYSELECTION);
-        }
-        else if (url.startsWith(PREPARTICULARRIGHTS))
-        {
+        } else if (url.startsWith(PREPARTICULARRIGHTS)) {
             pr = new PageReference(VF_PAGE_PREPARTICULARRIGHTS);
-        }
-        else if (url.startsWith(ADDSHAREBASE))
-        {
+        } else if (url.startsWith(ADDSHAREBASE)) {
             pr = new PageReference(VF_PAGE_ADDSHARESBASE);
-        }
-
-        else if (url.startsWith(TABULARDATA))
-        {
+        } else if (url.startsWith(TABULARDATA)) {
             pr = new PageReference(VF_PAGE_TABULARDATA);
-        }
-        else if (url.startsWith(SIGNINGPAGE))
-        {
+        } else if (url.startsWith(SIGNINGPAGE)) {
             pr = new PageReference(VF_PAGE_SIGNINGPAGE);
-        }
-        else if (url.startsWith(ATTACHMENTS))
-        {
+        } else if (url.startsWith(ATTACHMENTS)) {
             pr = new PageReference(VF_PAGE_ATTACHMENTS);
+        } else if (url.startsWith(CANCELLEDSHARES)) {
+            pr = new PageReference(VF_PAGE_CANCELLEDSHARES);
+        } else if (url.startsWith(SELECTSHARETYPE)) {
+            pr = new PageReference(VF_PAGE_SELECTSHARETYPE);
+        } else if (url.startsWith(CHANGESHARENAME)) {
+            pr = new PageReference(VF_PAGE_CHANGESHARENAME);
+        } else if (url.startsWith(VARIATION)) {
+            pr = new PageReference(VF_PAGE_VARIATION);
+        } else if (url.startsWith(APPLICATIONDATE)) {
+            pr = new PageReference(VF_PAGE_APPLICATIONDATE);
+        } else if (url.startsWith(FORMAPPLICATION)) {
+            pr = new PageReference(VF_PAGE_FORMAPPLICATION);
+        } else if (url.startsWith(PROMOTERS)) {
+            pr = new PageReference(VF_PAGE_PROMOTERS);
+        } else if (url.startsWith(RESOLUTIONCHANGE)) {
+            pr = new PageReference(VF_PAGE_RESOLUTIONCHANGE);
+        }else if (url.startsWith(EDITYSHARESBYTYPE)) {
+            pr = new PageReference(VF_PAGE_EDITYSHARESBYTYPE);
         }
-
-    	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
-    	return pr;	    
+        if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
+        return pr;
     }
     
     global PageReference[] generateUrlFor(PageReference[] salesforceUrls){
@@ -201,48 +216,47 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	        else if (url.startsWith(VF_PAGE_CHOOSEDIRECTOR))
             {
                 friendlyPageReference = new PageReference(CHOOSEDIRECTOR);
-            }
-            else if (url.startsWith(VF_PAGE_WHICHDIRECTOR))
-            {
+            } else if (url.startsWith(VF_PAGE_WHICHDIRECTOR)) {
                 friendlyPageReference = new PageReference(WHICHDIRECTOR);
-            }
-            else if (url.startsWith(VF_PAGE_OFFICERDETAILS))
-            {
+            } else if (url.startsWith(VF_PAGE_OFFICERDETAILS)) {
                 friendlyPageReference = new PageReference(OFFICERDETAILS);
-            }
-			else if (url.startsWith(VF_PAGE_SHAREBUILDER))
-            {
+            } else if (url.startsWith(VF_PAGE_SHAREBUILDER)) {
                 friendlyPageReference = new PageReference(SHAREBUILDER);
-            }
-            else if (url.startsWith(VF_PAGE_CURRENCYSELECTION))
-            {
+            } else if (url.startsWith(VF_PAGE_CURRENCYSELECTION)) {
                 friendlyPageReference = new PageReference(CURRENCYSELECTION);
-            }
-            else if (url.startsWith(VF_PAGE_PREPARTICULARRIGHTS))
-            {
+            } else if (url.startsWith(VF_PAGE_PREPARTICULARRIGHTS)) {
                 friendlyPageReference = new PageReference(PREPARTICULARRIGHTS);
-            }
-            else if (url.startsWith(VF_PAGE_ADDSHARESBASE))
-            {
+            } else if (url.startsWith(VF_PAGE_ADDSHARESBASE)) {
                 friendlyPageReference = new PageReference(ADDSHAREBASE);
-            }
-            else if (url.startsWith(VF_PAGE_TABULARDATA))
-            {
+            } else if (url.startsWith(VF_PAGE_TABULARDATA)) {
                 friendlyPageReference = new PageReference(TABULARDATA);
-            }
-            else if (url.startsWith(VF_PAGE_SIGNINGPAGE))
-            {
+            } else if (url.startsWith(VF_PAGE_SIGNINGPAGE)) {
                 friendlyPageReference = new PageReference(SIGNINGPAGE);
-            }
-            else if (url.startsWith(VF_PAGE_ATTACHMENTS))
-            {
+            } else if (url.startsWith(VF_PAGE_ATTACHMENTS)) {
                 friendlyPageReference = new PageReference(ATTACHMENTS);
+            } else if (url.startsWith(VF_PAGE_CANCELLEDSHARES)) {
+                friendlyPageReference = new PageReference(CANCELLEDSHARES);
+            } else if (url.startsWith(VF_PAGE_SELECTSHARETYPE)) {
+                friendlyPageReference = new PageReference(SELECTSHARETYPE);
+            } else if (url.startsWith(VF_PAGE_CHANGESHARENAME)) {
+                friendlyPageReference = new PageReference(CHANGESHARENAME);
+            } else if (url.startsWith(VF_PAGE_VARIATION)) {
+                friendlyPageReference = new PageReference(VARIATION);
+            } else if (url.startsWith(VF_PAGE_APPLICATIONDATE)) {
+                friendlyPageReference = new PageReference(APPLICATIONDATE);
+            } else if (url.startsWith(VF_PAGE_FORMAPPLICATION)) {
+                friendlyPageReference = new PageReference(FORMAPPLICATION);
+            } else if (url.startsWith(VF_PAGE_PROMOTERS)) {
+                friendlyPageReference = new PageReference(PROMOTERS);
+            } else if (url.startsWith(VF_PAGE_RESOLUTIONCHANGE)) {
+                friendlyPageReference = new PageReference(RESOLUTIONCHANGE);
+            }else if (url.startsWith(VF_PAGE_EDITYSHARESBYTYPE)) {
+                friendlyPageReference = new PageReference(EDITYSHARESBYTYPE);
             }
-	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
-	    	
-	    	friendlyUrls.add(friendlyPageReference);
-    	}
-    	System.debug(LoggingLevel.ERROR,friendlyUrls);
-    	return friendlyUrls;
+            if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
+            friendlyUrls.add(friendlyPageReference);
+        }
+        System.debug(LoggingLevel.ERROR, friendlyUrls);
+        return friendlyUrls;
     }
 }

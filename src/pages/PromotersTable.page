@@ -1,0 +1,68 @@
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="PromoterController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="form-group entire-wrapper">
+                    <h1 class="heading-xlarge">
+                        {!headerText1}
+                    </h1>
+                    <apex:outputPanel id="emptypanel" />
+                    <apex:outputPanel id="masterPanel">
+                        <label class="form-label" for="amountpaidfor">Amount paid or intended to be paid
+                            <span class="form-hint" id="amountpaidforHint"></span>
+                        </label>
+                        <apex:inputText styleClass="form-control" value="{!amountPaidUp}" id="amountpaidfor" />
+                        <label class="form-label" for="benefitGiven">Any benefit given or intended to be given
+                            <span class="form-hint" id="benefitGivenHint"></span>
+                        </label>
+                        <apex:inputText styleClass="form-control" value="{!benefitGiven}" id="benefitGiven" />
+                        <label class="form-label" for="consideration">Consideration for such payment or benefit
+                            <span class="form-hint" id="considerationHint"></span>
+                        </label>
+                        <apex:inputText styleClass="form-control" value="{!considerationGiven}" id="consideration" />
+                        <br/>
+                        <apex:commandLink value="+ Add Promoter" reRender="emptypanel" action="{!AddShare}" />
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                        <div class="form-group entire-wrapper">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5"> Promoters</th>
+                                        <br/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Amount paid or intended to be paid</td>
+                                        <td>Any benefit given or intended to be given</td>
+                                        <td>Consideration for such payment or benefit</td>
+                                    </tr>
+                                    <br/>
+                                    <apex:repeat value="{!allShares}" var="sp" id="theRepeat">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!sp.amountPaidUp__c}" id="paidUPTable" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.benefitGiven__c}" id="BenefitGivenTable" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.considerationGiven__c}" id="considerationGivenTable" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+                </div>
+                <fieldset>
+                    <apex:commandButton rerender="none" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                    <br/> &nbsp;
+                    <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
+                </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

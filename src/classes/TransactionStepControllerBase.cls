@@ -38,15 +38,19 @@ public virtual class TransactionStepControllerBase {
         
     // Constructors.
     public TransactionStepControllerBase(){
+
     	initialise();
     }
     // End Constructors.
         
     // Initialisation methods.    
     private void initialise(){  
-    	System.debug(LoggingLevel.ERROR,'in initialise'); 		
+
+    	System.debug(LoggingLevel.ERROR,'in initialise'); 	
+        	
     	try {
-    		
+            //throw new Form_CustomException('here');
+
     		isPageAuthenticated=false;
     		isPageInitialised=false;
 

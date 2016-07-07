@@ -1,0 +1,80 @@
+<apex:page title="Notice" showHeader="false" sidebar="false" standardStylesheets="false" controller="variationRightsController" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="buildShares">
+                        <div class="form-group">
+                            <h1 class="heading-xlarge">
+                                {!headerText1}
+                            </h1>
+                            <p class="lede">
+                                <apex:outputText value="{!labelText}" id="labelText" />
+                            </p>
+                            <label class="form-label" for="variationDate">{!dateQuestionText}
+                                <span class="form-hint" id="variationDateID">{!dateQuestionTextHint}</span>
+                            </label>
+                            <apex:input type="date" styleClass="form-control" value="{!variationDate}" id="variationDate" />
+                                <br/>    <br/>
+                            <label class="form-label" for="variationInfo">{!variationText}
+                                <span class="form-hint" id="variationInfoSpan">{!variationTextHint}</span>
+
+                            </label>
+                         
+                            <apex:inputTextArea richText="false" rows="8" cols="40" value="{!variationInfo}" id="variationInfoId" />
+                            <br/>
+                            <apex:commandLink value="+ Add Shares" reRender="masterPanel" action="{!AddShare}" />
+                        </div>
+                        <br/>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                        <div class="form-group entire-wrapper">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5"> {!headerText2} </th>
+                                        <br/> {!headerText3} {!companyName}:
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>Notice information</td>
+                                    </tr>
+                                    <br/>
+                                    <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!sp.Date__c}" id="variationDate" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.varationField__c}" id="variationField" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

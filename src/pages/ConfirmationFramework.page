@@ -20,55 +20,99 @@ Ver. Author        Date        Detail
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <div class="govuk-box-highlight">
-                    <h1 class="bold-large">Submission complete</h1>
+                <apex:outputPanel rendered="{!customView}">
+                    <div class="govuk-box-highlight">
+                        <h1 class="bold-large">You have submitted your statement</h1>
+                        <p>
+                            Your reference number is
+                            <strong class="heading-medium">{!submissionId}</strong>
+                        </p>
+                    </div>
+                    <h2 class="heading-medium">{!confirmationHeading1}</h2>
+                    <apex:outputtext value="{!companyNameText}" escape="false" />
                     <p>
-                        Your reference number is
-                        <strong class="heading-medium">{!submissionId}</strong>
+                        <apex:outputText escape="false" value="{!confirmationContent1}" />
                     </p>
-                </div>
-                <h2 class="heading-medium">{!confirmationHeading1}</h2>
-                <apex:outputtext value="{!companyNameText}" escape="false" />
-                <p>
-                    <apex:outputtext value="{!confirmationContent1}" escape="false" />
-                </p>
-                <p>
-                    <apex:outputtext value="{!confirmationContent2}" escape="false" />
-                </p>
-                <div class="form-group">
-                    <h1>Documents</h1>
-                    <section class="attachment embedded" id="attachment_1365490">
-                        <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
-                            <p>Download the Document:
-                                <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
-                            </p>
-                        </div>
-                        <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
-                            <p>No Documents founds.
-                            </p>
-                        </div>
-                    </section>
-                </div>
-                <p><apex:outputtext value="{!confirmationContent3}" escape="false" /></p>
-                <p>We'll contact you by email if we need more information. </p>
-                <h2 class="heading-medium">Your next steps</h2>
-                <p><apex:outputtext value="{!confirmationNextStepContent}" escape="false" />
-                </p>
-                <div class="notice">
-                    <i class="icon icon-important">
-                        <span><apex:outputtext value="{!ConfirmationWarningTitle}" escape="false" /></span>
-                    </i>
-                    <strong class="bold-small">
-                        <apex:outputtext value="{!confirmationWarningContent1}" escape="false" />
-                    </strong>
-                </div>
-                <h2 class="heading-medium"><apex:outputtext value="{!confirmationHeading2}" escape="false" /></h2>
-                <p>{!confiratmionWarningContent2}</p>
-                <h2 class="heading-medium">How did we do?</h2>
-                <p>
-                    Your feedback will help us make this service better for all our users. It only takes 30 seconds to
-                    <a href="/forms/feedback">tell us what you thought of this service</a>.
-                </p>
+                    <p>
+                        <apex:outputText escape="false" value="{!confirmationContent2}" />
+                    </p>
+                    <p>{!confirmationContent3}</p>
+                    <h2 class="heading-medium">What happens next?</h2>
+                    <p>
+                        <apex:outputText escape="false" value="{!confirmationNextStepContent}" />
+                    </p>
+                    <div class="notice">
+                        <i class="icon icon-important">
+                            <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
+                        </i>
+                        <strong class="bold-small">
+                            <apex:outputText escape="false" value="{!confirmationWarningContent1}" />
+                        </strong>
+                    </div>
+                    <h2 class="heading-medium">{!confirmationHeading2}</h2>
+                    <p>
+                        <apex:outputText escape="false" value="{!confiratmionWarningContent2}" />
+                    </p>
+                    <h2 class="heading-medium">How did we do?</h2>
+                    <p>
+                        Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                        <a href="#" target="_blank">tell us what you thought of this service</a>.
+                    </p>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!standardView}">
+                    <div class="govuk-box-highlight">
+                        <h1 class="bold-large">Submission complete</h1>
+                        <p>
+                            Your reference number is
+                            <strong class="heading-medium">{!submissionId}</strong>
+                        </p>
+                    </div>
+                    <h2 class="heading-medium">What happens now?</h2>
+                    <apex:inputHidden value="{!companyName}" id="theHiddenInput" />
+                    <apex:outputtext value="{!displayText3}" escape="false" />
+                    <p>
+                        The email we send you will contain details of your request, including your reference number and should be kept for your records.
+                    </p>
+                    <div class="form-group">
+                        <h1>Documents</h1>
+                        <section class="attachment embedded" id="attachment_1365490">
+                            <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
+                                <p>Download the Document:
+                                    <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
+                                </p>
+                            </div>
+                            <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                                <p>No Documents founds.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                    <p>Your strike off request will be processed by our dissolution team and after 2 months, {!companyName} will be removed from the register.</p>
+                    <p>We'll contact you by email if we need more information. </p>
+                    <h2 class="heading-medium">Your next steps</h2>
+                    <p>
+                        You must notify all notifiable parties by {!todayThreeMonths} that this submission has been made. For more information, read the guidance on
+                        <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4">who to inform
+                            <span class="visuallyhidden"> when striking off a company</span>
+                        </a>.
+                    </p>
+                    <div class="notice">
+                        <i class="icon icon-important">
+                            <span class="visuallyhidden">Warning</span>
+                        </i>
+                        <strong class="bold-small">
+                            It is an offence not to notify all required parties
+                        </strong>
+                    </div>
+                    <h2 class="heading-medium">How to cancel this request</h2>
+                    <p>If you need to cancel this request so that {!companyName} remains on the register, you can
+                        <a href="">submit a withdrawal to strike off</a>.</p>
+                    <h2 class="heading-medium">How did we do?</h2>
+                    <p>
+                        Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                        <a href="#" target="_blank">tell us what you thought of this service</a>.
+                    </p>
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

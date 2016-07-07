@@ -10,6 +10,7 @@
         <members>AddSharesBaseController</members>
         <members>AddSharesTableController</members>
         <members>AppConstants</members>
+        <members>ApplicationDateController</members>
         <members>AttachmentTriggerHandler</members>
         <members>AttachmentTriggerHandlerTest</members>
         <members>BaseURLHandler</members>
@@ -32,6 +33,7 @@
         <members>CH_SearchControllerClass_Test</members>
         <members>ChApiClient</members>
         <members>ChApiMock</members>
+        <members>ChangeShareClassName</members>
         <members>CompaniesHouse</members>
         <members>CompaniesHouseCalloutsRequest</members>
         <members>CompaniesHouseCalloutsResponse</members>
@@ -49,7 +51,6 @@
         <members>DeveloperToolsController</members>
         <members>DigitalSignatureController</members>
         <members>DirectorDetails</members>
-        <members>DirectorInputListController</members>
         <members>DirectorsListController</members>
         <members>DocStatusController</members>
         <members>DocStatusUrlTriggerHandler</members>
@@ -63,12 +64,14 @@
         <members>DocusignLibrary</members>
         <members>DynamicField</members>
         <members>DynamicTestController</members>
+        <members>EditSharesByTypeController</members>
         <members>EmailTemplatesBuilder</members>
         <members>EmbedDocuSignController</members>
         <members>ExternalEmbedDocuSignController</members>
         <members>Form</members>
         <members>FormAPISubmissionManager</members>
         <members>FormAPISubmissionManagerTest</members>
+        <members>FormApplicationController</members>
         <members>Form_CustomException</members>
         <members>FormsAPIService</members>
         <members>FormsAPIServiceTest</members>
@@ -86,7 +89,9 @@
         <members>PaymentControllerTest</members>
         <members>PreParticularsController</members>
         <members>PresenterDirectorController</members>
+        <members>PromoterController</members>
         <members>RecipientStatusDocusignTriggerHandler</members>
+        <members>ResolutionChangeController</members>
         <members>ReviewController</members>
         <members>ReviewControllerTest</members>
         <members>ReviewNotificationTriggerHandler</members>
@@ -117,8 +122,11 @@
         <members>UpdateCompanyDirectorsController</members>
         <members>Util</members>
         <members>UtilTest</members>
+        <members>cancelShares</members>
         <members>chooseDirector</members>
+        <members>selectShareTypeController</members>
         <members>superSort</members>
+        <members>variationRightsController</members>
         <members>whichDirector</members>
         <name>ApexClass</name>
     </types>
@@ -129,12 +137,15 @@
     <types>
         <members>AccountsAuthCallback</members>
         <members>AddSharesBase</members>
+        <members>ApplicationDate</members>
         <members>Attachments</members>
         <members>BehalfDecision</members>
         <members>BehalfInputDetails</members>
         <members>BehalfWhichSignatory</members>
         <members>CH_ChargesList</members>
         <members>CH_SearchControllerByFilingHistoryClass</members>
+        <members>CancelledShares</members>
+        <members>ChangeShareClassName</members>
         <members>Companies_House_Insolvency</members>
         <members>Companies_House_Officer_List</members>
         <members>Companies_House_Registered_Address</members>
@@ -147,20 +158,23 @@
         <members>DS01</members>
         <members>DeveloperTools</members>
         <members>DigitalSignature</members>
-        <members>DirectorsInputList</members>
         <members>DirectorsList</members>
         <members>DocumentDownload</members>
         <members>Documents</members>
         <members>DynamicTest</members>
+        <members>EditSharesByType</members>
         <members>EmbedDocuSign</members>
+        <members>EntryPoint</members>
         <members>Exception</members>
-        <members>ExternalEmbedDocuSign</members>
+        <members>FormApplication</members>
         <members>Guidance</members>
         <members>OfficerDetails</members>
         <members>PDFGeneration</members>
         <members>Payment</members>
         <members>PreParticularRights</members>
         <members>PresenterDirector</members>
+        <members>PromotersTable</members>
+        <members>ResolutionChange</members>
         <members>Review</members>
         <members>SH19</members>
         <members>SigningPage</members>
@@ -175,7 +189,9 @@
         <members>TransactionPageTemplate</members>
         <members>TransactionSiteRobotsTxt</members>
         <members>UpdateCompanyDirectors</members>
+        <members>VariationOfRights</members>
         <members>chooseDirector</members>
+        <members>selectShareType</members>
         <members>whichDirector</members>
         <name>ApexPage</name>
     </types>

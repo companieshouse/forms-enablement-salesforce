@@ -99,4 +99,8 @@ Email of person approving
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">BehalfInputDetails</value>
     </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
+    </values>
 </CustomMetadata>

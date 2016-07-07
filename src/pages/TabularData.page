@@ -1,7 +1,10 @@
-<apex:page title="Currency Selection" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddSharesTableController" docType="html-5.0">
+<apex:page title="Add Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddSharesTableController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -19,41 +22,90 @@
                         <apex:outputPanel id="buildShares">
                             <div class="form-group">
                                 <h1 class="heading-xlarge">
-                                    Share capital
-                                    <!--<br/> shares here = {!statusvalue} 
-                                    <br/> Current Shares = {!currentShares}
-                                    -->
+                                    {!headerText1} <br/> for: {!selectedCurrency}
                                 </h1>
-                                <p class="lede">Share capital content here
-                                </p>
-                                <label class="form-label" for="text-input">Class of shares
+                                <label class="form-label" for="classofShare-item">Class of shares
+                                    <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
                                 </label>
-                                <apex:inputText styleClass="form-control" value="{!classofshares}" id="classofshare" />
-                                <label class="form-label" for="text-input">Number of shares
+                                <input class="form-control" name="classofShare-item" id="classofsharetypetosearch" />
+                                <apex:actionFunction action="{!setSelectedShare}" name="setSelectedShare" reRender="none">
+                                    <apex:param name="shareParam" value="" id="xyz" assignTo="{!classofshares}" />
+                                </apex:actionFunction>
+                                <label class="form-label" for="numberofshares">Number of shares
+                                    <span class="form-hint" id="numberofsharesHint">Total number of issued shares in this class</span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!numberofshares}" id="numberofshares" />
-                                <label class="form-label" for="text-input">Aggregate nominal value
+                                <label class="form-label" for="AggregateNominalValue">Aggregate nominal value
+                                    <span class="form-hint" id="AggregateNominalValueHint">This is the number of shares issued multiplied by nominal value of each share</span>
                                 </label>
                                 <apex:inputText styleClass="form-control" value="{!aggregateNominalValue}" id="aggregateNominalValue" />
+                                <label class="form-label" for="unpaidamount">Total Amount unpaid on each share (if any)
+                                    <span class="form-hint" id="unpaidamountHint">Including both the nominal value and any share premium</span>
+                                </label>
+                                <apex:inputText styleClass="form-control" value="{!aggregateunpaidAmount}" id="unpaidamount" />
                                 <br/>
                                 <apex:commandLink value="+ Add Shares" reRender="masterPanel" action="{!AddShare}" />
                             </div>
                             <br/>
+                            <script>
+                            var sharetypes = ['Ordinary',
+                                'Ordinary A',
+                                'Ordinary B',
+                                'Ordinary C',
+                                'Preference',
+                                'Deferred',
+                                'Deferred Ordinary'
+                            ];
+
+                            $(function() {
+                                $("#classofsharetypetosearch").autocomplete({
+                                    source: function(request, response) {
+                                        var results = $.ui.autocomplete.filter(sharetypes, request.term);
+                                        response(results.slice(0, 10));
+                                    },
+                                    select: function(event, ui) {
+                                        var completedselection = ui.item.value;
+                                        // console.log('completed selection is ' + completedselection);
+                                        if (completedselection.length < 1) {
+
+                                            return;
+                                        }
+                                        if (completedselection.length > 1) {
+                                            // console.log('share from client = ' + ' ' + completedselection);
+                                            setSelectedShare(completedselection);
+                                        }
+                                    },
+                                    change: function(event, ui) {
+                                        var completedselection = document.getElementById("classofsharetypetosearch").value;
+                                        if (completedselection.length < 1) {
+
+                                            return;
+                                        }
+                                        if (completedselection.length > 1) {
+                                            // console.log('share from client = ' + ' ' + completedselection);
+                                            setSelectedShare(completedselection);
+                                        }
+                                    }
+                                });
+                            });
+                            </script>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!showTable}" id="BuildTable">
-                            <div class="form-group">
+                            <div class="form-group entire-wrapper">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
-                                            <th colspan="4">Statement of Capital </th>
+                                            <th colspan="5"> {!headerText2} </th>
+                                            <br/> {!headerText3} {!companyName}:
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Currency</td>
                                             <td>Class of shares</td>
-                                            <td>No. of shares</td>
-                                            <td>Total value aggregate</td>
+                                            <td>Number of shares</td>
+                                            <td>Aggregate nominal value</td>
+                                            <td>Total Aggregate unpaid amount</td>
                                         </tr>
                                         <br/>
                                         <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
@@ -72,6 +124,8 @@
                                                     <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
                                                     <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" />
                                                 </td>
+                                                <td bgcolor="D3D3D3">
+                                                </td>
                                             </tr>
                                         </apex:repeat>
                                         <tr>
@@ -79,46 +133,57 @@
                                             <td>Total</td>
                                             <td id="totalnumberofshares"></td>
                                             <td id="totalnumberaggregate"></td>
-                                            <td></td>
+                                            <td>
+                                                <apex:outputText value="{!aggregateunpaidAmount}" id="aggregateunpaidAmountTotal" />
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <apex:actionFunction name="numofSharesCalculation" action="{!numofSharesCalculation}" reRender="none">
+                                    <apex:param name="numshareParam" id="x" value="" assignTo="{!totalnumberofShares}" />
+                                </apex:actionFunction>
+                                <apex:actionFunction name="totalNumAggregate" action="{!totalNumAggregate}" reRender="none">
+                                    <apex:param name="totalNumAggParam" id="y" value="" assignTo="{!totalnumberAggregate}" />
+                                </apex:actionFunction>
                             </div>
                             <script>
+                            function updateTotals() {
+                                var sharesum = 0;
+                                var aggsum = 0;
+                                document.getElementById('totalnumberofshares').value = sharesum;
+                                document.getElementById('totalnumberaggregate').value = aggsum;
+                               // console.log('here is your share sum' + sharesum + ' here is your aggsum' + aggsum);
+                                numofSharesCalculation(sharesum);
+                                totalNumAggregate(aggsum);
+                            }
+
                             function numberofshares() {
                                 var sharesum = 0;
                                 var aggsum = 0;
                                 var shareparsed = '';
                                 var aggparsed = '';
                                 var values = document.getElementsByTagName("input");
-                                // console.log('values are here' + values.length);
-
                                 window.sharesvariable = values;
                                 for (var i = 0; i < values.length; i++) {
                                     if (values[i].id == 'shareidentifier') {
-                                        // console.log('values i is ' + values[i]);
                                         shareparsed = values[i].value;
                                         sharesum = sharesum + parseInt(shareparsed);
-                                        // console.log('value of sum' + sharesum);
                                     } else if (values[i].id == 'aggregateidentifier') {
-                                        // console.log('values i is ' + values[i]);
                                         aggparsed = values[i].value;
                                         aggsum = aggsum + parseInt(aggparsed);
-                                        // console.log('value of sum' + aggsum);
-
                                     }
                                 }
                                 document.getElementById('totalnumberofshares').innerHTML = sharesum;
-                                document.getElementById('totalnumberaggregate').innerHTML = aggsum;
-
+                                document.getElementById('totalnumberaggregate').innerHTML = aggsum.toFixed(2);
                             }
                             numberofshares();
+                            //updateTotals();
                             </script>
                             <br/>
                         </apex:outputPanel>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!addPreparticularRights}" value="Add preparticular rights" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" action="{!addPreparticularRights}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink action="{!addtoPreviousShare}" value="Add Shares to another currency" id="addtoPreviousShare" /> &nbsp;
             </apex:form>

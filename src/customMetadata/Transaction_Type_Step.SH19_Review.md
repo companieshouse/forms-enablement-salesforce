@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">continue to signing</value>
+        <value xsi:type="xsd:string">continue</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Share Capital</value>
+        <value xsi:type="xsd:string">Authorise and submit your statement</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">7.0</value>
+        <value xsi:type="xsd:double">6.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -92,5 +92,9 @@
     <values>
         <field>Visualforce_Page_Name__c</field>
         <value xsi:type="xsd:string">Review</value>
+    </values>
+    <values>
+        <field>previousButtonText__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

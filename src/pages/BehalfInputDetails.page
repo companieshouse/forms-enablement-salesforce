@@ -17,55 +17,47 @@
    1.0  SylvainP      2016-06-19  Initial development.
    -->
 <apex:page title="{!$Label.UI_Text_Behalf_Input_Details}" controller="BehalfInputDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-   <apex:composition template="TransactionPageTemplate">
-      <apex:define name="content">
-      <apex:form >
-
-         <div class="form-group">
-         <apex:outputPanel id="emptyPanel"/>
-         <h1 class="heading-xlarge"><apex:outputText value="{!headerBox1}"></apex:outputText></h1>
-
-         <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
-
-        	<div class="form-group">
-	          <label  for="inputName">
-	            <!-- Full name -->
-	          <apex:input styleclass="form-control" id="inputName" type="text" value="{!nameAuthorized}" />
-	          </label>
-	          </div>
-	          
-	          <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
-	          <div class="form-group">
-	          <label for="inputEmail">
-	            <!-- Email -->
-	          <apex:input styleclass="form-control" id="inputEmail" type="email" value="{!emailDirector}" />
-	          </label>
-	        </div>
-         </div>
-                  <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
-
-                  <div class="form-group">
-			          <label class="block-label" for="radio-1">
-			            <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1"/>
-			            They have Power of Attorney to act on behalf of the director
-			          </label>
-			          
-			        
-			        <label class="block-label" for="radio-3">
-			          <input id="radio-3" onchange="updateSelectedBehalf(3);" type="radio" name="radio-group" value="3"/>
-			          They have authority to sign as the Corporate Entity
-			        </label>
-			      </div>
-
-         <br /><br />
-           <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" /><br />
-		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-
-     <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
-			<apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
-		 </apex:actionFunction>
-        
-      </apex:form>  
-      </apex:define>
-   </apex:composition>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="form-group">
+                    <apex:outputPanel id="emptyPanel" />
+                    <h1 class="heading-xlarge">
+                        <apex:outputText value="{!headerBox1}"></apex:outputText>
+                    </h1>
+                    <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+                    <div class="form-group">
+                        <label for="inputName">
+                            <!-- Full name -->
+                            <apex:input styleclass="form-control" id="inputName" type="text" value="{!nameAuthorized}" />
+                        </label>
+                    </div>
+                    <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
+                    <div class="form-group">
+                        <label for="inputEmail">
+                            <!-- Email -->
+                            <apex:input styleclass="form-control" id="inputEmail" type="email" value="{!emailDirector}" />
+                        </label>
+                    </div>
+                </div>
+                <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
+                <div class="form-group">
+                    <label class="block-label" for="radio-1">
+                        <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
+                    </label>
+                    <label class="block-label" for="radio-3">
+                        <input id="radio-3" onchange="updateSelectedBehalf(3);" type="radio" name="radio-group" value="3" /> They have authority to sign as the Corporate Entity
+                    </label>
+                </div>
+                <br />
+                <br />
+                <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                <br />
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+                    <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
+                </apex:actionFunction>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>

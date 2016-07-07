@@ -1,0 +1,37 @@
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="ResolutionChangeController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="form-group entire-wrapper">
+                    <h1 class="heading-xlarge">
+                        {!headerText1}
+                    </h1>
+                    <apex:outputPanel id="emptypanel" />
+                    <apex:outputPanel id="masterPanel">
+                        <apex:outputPanel id="redenomination" rendered="{!showRedenom}">
+                            <label class="form-label" for="redenominateDate">{!displayText2}
+                                <span class="form-hint" id="redenominateDateHint"></span>
+                            </label>
+                            <apex:input type="date" styleClass="form-control" value="{!redenominateDate}" id="redenominateDate" />
+                        </apex:outputPanel>
+                        <apex:outputPanel id="reducecap" rendered="{!showReducedCap}">
+                            <label class="form-label" for="date">{!displayText3}
+                                <span class="form-hint" id="reduceCapDateHint"></span>
+                            </label>
+                            <apex:input type="date" styleClass="form-control" value="{!reduceCapitalDate}" id="reduceCapital" />
+                        </apex:outputPanel>
+                        <apex:outputPanel id="assignedDate" rendered="{!showAssignedDate}">
+                            <label class="form-label" for="assignedDatelabel">{!displayText4}
+                                <span class="form-hint" id="assignedDateHint"></span>
+                            </label>
+                            <apex:input type="date" styleClass="form-control" value="{!assignmentDate}" id="assignedDateField" />
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </div>
+                <apex:commandButton rerender="none" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -128,7 +128,7 @@ public class FormsApiClient {
         
         // Finish with one last boundary
         requestBody += '\n' + '--' + BOUNDARY + '--' +'\n';
-        
+
         return requestBody;
     }
     
@@ -181,6 +181,7 @@ public class FormsApiClient {
         
         //call TransactionSerialiser to get JSON
         String jsonPartBody = TransactionSerialiser.transactionToJSON(tx);
+
         return jsonPartBody;
     }
 

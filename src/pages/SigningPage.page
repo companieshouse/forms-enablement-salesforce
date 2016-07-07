@@ -1,4 +1,4 @@
-<apex:page title="Sign for Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" docType="html-5.0">
+<apex:page title="Authorise Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="SigningForm">
@@ -45,77 +45,62 @@
                 </apex:outputPanel>
                 <div class="form-group">
                     <h1 class="heading-xlarge">
-                        Share Capital Signing
+                        {!headerText1}
                     </h1>
                     <p class="lede">
-                        Legal implications here
-                    </p>
-                    <p>
-                        More Legal Content Here
-                    </p>
-                    <p>
-                        <a href="#">Link to Legal Content</a>
-                    </p>
-                    <p>
-                        <a href="#">Link 2 to more legal content</a>. Information here
-                    </p>
-                    <p>
-                        <a href="#" rel="external">An external Link Here.</a> Information about this external source regarding share capital
                     </p>
                     <p>
                         <fieldset class="inline">
+                            <span id="radio-errors"></span>
                             <apex:outputText escape="false" value="{!currentErrorMessage}" />
                             <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" type="radio"  name="signingStatus" value="true" /> Yes
+                                <input id="radio-inline-1" onclick="clearErrors()" type="radio" name="signingStatus" value="true" /> Yes
                             </label>
                             <label class="block-label" for="radio-inline-2">
-                                <input id="radio-inline-2" type="radio"  name="signingStatus" value="false" /> No
+                                <input id="radio-inline-2" onclick="setErrors()" type="radio" name="signingStatus" value="false" /> No
                             </label>
                             <apex:outputPanel id="emptypanel" />
                         </fieldset>
+                        <script>
+                        function setErrors() {
+                            console.log('working');
+
+                            document.getElementById('radio-errors').innerHTML = '<span class="error-message">You must select yes to authorise and submit</span>';
+                        };
+
+                        function clearErrors() {
+
+                            console.log('working');
+                            document.getElementById('radio-errors').innerHTML = '';
+                        };
+                        </script>
                     </p>
                 </div>
                 <br/>
                 <p>
                     <br/> &nbsp;
-                    <apex:commandButton id="SignButton" reRender="none" styleClass="button" onclick="updateRadio();" value="Sign and continue" />
+                    <apex:commandButton id="SignButton" reRender="none" styleClass="button" onclick="updateRadio();" value="{!continueButtonText}" />
                     <apex:actionFunction action="{!setSigningvalue}" name="setSigningvalue" reRender="SigningForm">
                         <apex:param name="signingParam" value="" id="xyz" assignTo="{!signingchoice}" />
+                    </apex:actionFunction>
+                    <apex:actionFunction action="{!setAuthorizerValue}" name="setAuthorizerValue" reRender="">
+                        <apex:param name="statusparam" value="" id="abc" assignTo="{!whoAuthorised}" />
                     </apex:actionFunction>
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
                 </p>
                 <script>
-                //onclick="setNoButton()"
-                //onclick="setYesButton()"
-                // function setYesButton() {
-                //     document.getElementById("SignButton").disabled = false;
-
-                // };
-
-                // function setNoButton() {
-                //     document.getElementById("SignButton").disabled = true;
-
-                // };
-
                 function updateRadio(selection) {
 
-                    var statuses = document.getElementsByName('signingStatus')
+                    var statuses = document.getElementsByName('signingStatus');
                     for (var i = 0, length = statuses.length; i < length; i++) {
-                        // if (typeof(statuses[i]) == 'undefined') {
-                        //     alert('undefined please select the button yes');
-                        // }
-                        // console.log(status[i].value);
+
+                        console.log(statuses[i].value);
+
                         if (statuses[i].checked) {
                             console.log(statuses[i].value);
 
-                            // do whatever you want with the checked radio
-                            // if (statuses[i].value == 'Yes') {
-                            //     
-                            // } else if (statuses[i].value == 'No') {
 
-                            //     return;
-                            // }
                             setSigningvalue(statuses[i].value);
                         }
                     }

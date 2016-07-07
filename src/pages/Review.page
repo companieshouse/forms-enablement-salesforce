@@ -1,12 +1,9 @@
-<apex:page title="{!$Label.UI_Text_Review}" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-    <script>
-    if (window.frameElement) {
-        parent.location.href = window.location;
-        console.log("found iframe and reloading")
-    } else {
-        console.log('not finding iframe probably on mobile');
+<apex:page title="Review Cancelled Shares" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <style>
+    .table-names {
+        font-weight: bold;
     }
-    </script>
+    </style>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -78,93 +75,202 @@
                         {!displayText3}
                     </p>
                 </apex:outputPanel>
-                <apex:outputPanel id="customPanel" rendered="{!custompanelView}">
-                    <div class="form-group">
-                        <table class="check-your-answers">
-                            <thead>
-                                <tr>
-                                    <th colspan="4">Statement of Capital </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Currency</td>
-                                    <td>Class of shares</td>
-                                    <td>No. of shares</td>
-                                    <td>Total value aggregate</td>
-                                </tr>
-                                <br/>
-                                <apex:repeat value="{!reviewShares}" var="sp" id="shareRepeat">
+                <apex:outputPanel id="innerCancelPanel" rendered="{!custompanelView}">
+                    <apex:outputPanel id="customcancelPanel" rendered="{!NOT(ISBLANK(sharesforCancelling))}">
+                        <div class="form-group">
+                            <table class="check-your-answers">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <apex:outputText value="{!sp.Currency__c}" id="currency" /> </td>
-                                        <td>
-                                            <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" /> </td>
-                                        <td>
-                                            <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
-                                            <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
-                                        <td>
-                                            <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
-                                            <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" /> </td>
+                                        <th colspan="4">{!reviewTitle}</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="table-names">Class of shares</td>
+                                        <td class="table-names">No. of shares</td>
+                                        <td class="table-names">Aggregate nominal value</td>
+                                        <td class="table-names">{!dateText}</td>
+
+                                    </tr>
+                                    <apex:repeat value="{!sharesforCancelling}" var="CP">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!CP.Class_of_Shares__c}" id="cancelclass" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!CP.Number_of_Shares__c}" id="cancelnumberofshares" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!CP.Aggregate_nominal_value__c}" id="cancelcurrency" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!CP.Date__c}" id="cancelDate" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                    <apex:repeat value="{!sharesforEditing}" var="EP">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!EP.Class_of_Shares__c}" id="editClas" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!EP.Number_of_Shares__c}" id="editnumberofshares" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!EP.Aggregate_nominal_value__c}" id="editCurrency" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!EP.Date__c}" id="editDate" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel id="customPanel" rendered="{!custompanelView}">
+                    <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
+                        <div class="form-group">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Statement of Capital </th>
+                                    </tr>
+                                </thead>
+                                <apex:repeat value="{!viewkeys}" var="key">
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-names">Currency</td>
+                                            <td class="table-names">Class of shares</td>
+                                            <td class="table-names">No. of shares</td>
+                                            <td class="table-names">Total value aggregate</td>
+                                        </tr>
+                                        <apex:repeat value="{!viewmap[key]}" var="sp">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Currency__c}" id="currency" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                                    <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
+                                                    <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                        <!--
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(viewmap[key]))}">
+                                            <tr>
+                                            <td></td>
+                                            <td>Total</td>
+                                            <td id="totalnumberofshares"></td>
+                                            <td id="totalnumberaggregate"></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+
+
+                                    </apex:outputPanel>
+                                    -->
+                                    </tbody>
                                 </apex:repeat>
-                                <tr>
-                                    <td></td>
-                                    <td>Total</td>
-                                    <td id="totalnumberofshares"></td>
-                                    <td id="totalnumberaggregate"></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <script>
-                    function numberofshares() {
-                        var sharesum = 0;
-                        var aggsum = 0;
-                        var shareparsed = "";
-                        var aggparsed = "";
-                        var values = document.getElementsByTagName("input");
-                        window.sharesvariable = values;
-                        for (var i = 0; i < values.length; i++) {
-                            if (values[i].id == "shareidentifier") {
-                                shareparsed = values[i].value;
-                                sharesum = sharesum + parseInt(shareparsed);
-                            } else if (values[i].id == "aggregateidentifier") {
-                                aggparsed = values[i].value;
-                                aggsum = aggsum + parseInt(aggparsed);
-                            }
-                        }
-                        document.getElementById("totalnumberofshares").innerHTML = sharesum;
-                        document.getElementById("totalnumberaggregate").innerHTML = aggsum;
-                    }
-                    numberofshares();
-                    </script>
-                    <br/>
+                                <br/>
+                                <br/>
+                            </table>
+                        </div>
+                        <script>
+                        // function numberofshares() {
+                        //     var sharesum = 0;
+                        //     var aggsum = 0;
+                        //     var shareparsed = "";
+                        //     var aggparsed = "";
+                        //     var values = document.getElementsByTagName("input");
+                        //     window.sharesvariable = values;
+                        //     for (var i = 0; i < values.length; i++) {
+                        //         if (values[i].id == "shareidentifier") {
+                        //             shareparsed = values[i].value;
+                        //             sharesum = sharesum + parseInt(shareparsed);
+                        //         } else if (values[i].id == "aggregateidentifier") {
+                        //             aggparsed = values[i].value;
+                        //             aggsum = aggsum + parseInt(aggparsed);
+                        //         }
+                        //     }
+                        //     document.getElementById("totalnumberofshares").innerHTML = sharesum;
+                        //     document.getElementById("totalnumberaggregate").innerHTML = aggsum;
+                        // }
+                        // // numberofshares();
+                        </script>
+                        <br/>
+                    </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel id="customPanel-particulars" rendered="{!custompanelView}">
+                    <apex:outputPanel rendered="{!showParticulars}">
+                        <div class="form-group">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Prescribed particulars</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <apex:outputPanel rendered="{!showCurrency}">
+                                            <td class="table-names">Currency</td>
+                                        </apex:outputPanel>
+                                        <td class="table-names">Class of shares</td>
+                                        <td class="table-names">Prescribed particulars rights</td>
+                                    </tr>
+                                    <br/>
+                                    <apex:repeat value="{!preParticulars}" var="sp" id="shareRepeat-particulars">
+                                        <tr>
+                                            <apex:outputPanel rendered="{!showCurrency}">
+                                                <td>
+                                                    <apex:outputText value="{!sp.Currency__c}" id="particulars-currency" />
+                                                </td>
+                                            </apex:outputPanel>
+                                            <td>
+                                                <apex:outputText value="{!sp.Class_of_Shares__c}" id="particulars-shareclass" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.Prescribed_Particulars__c}" id="particulars" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel id="customPanel-variationNotice" rendered="{!variationNotice}">
                     <div class="form-group">
+                        <h1 class="heading-xlarge">
+                            {!headerText1}
+                        </h1>
                         <table class="check-your-answers">
                             <thead>
                                 <tr>
-                                    <th colspan="4">Pre Particular Rights </th>
+                                    <th colspan="4">{!labelText}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Currency</td>
-                                    <td>Class of shares</td>
-                                    <td>Pre Particular Rights</td>
+                                    <td class="table-names">{!dateQuestionText}</td>
+                                    <td class="table-names">{!variationText}</td>
                                 </tr>
                                 <br/>
-                                <apex:repeat value="{!reviewShares}" var="sp" id="shareRepeat-particulars">
+                                <apex:repeat value="{!preParticulars}" var="sp" id="variations-particulars">
                                     <tr>
                                         <td>
-                                            <apex:outputText value="{!sp.Currency__c}" id="particulars-currency" /> </td>
+                                            <apex:outputText value="{!sp.Date__c}" id="variations-date" />
+                                        </td>
                                         <td>
-                                            <apex:outputText value="{!sp.Class_of_Shares__c}" id="particulars-shareclass" /> </td>
-                                        <td>
-                                            <apex:outputText value="{!sp.Prescribed_Particulars__c}" id="particulars" />
+                                            <apex:outputText value="{!sp.varationField__c}" id="variations-field" />
                                         </td>
                                     </tr>
                                 </apex:repeat>
@@ -174,32 +280,52 @@
                     <br/>
                 </apex:outputPanel>
                 <apex:outputPanel id="customPanel-attachments" rendered="{!custompanelView}">
-                    <div class="form-group">
-                        <table class="check-your-answers">
-                            <thead>
-                                <tr>
-                                    <th colspan="4">Attachments </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Description</td>
-                                </tr>
-                                <br/>
-                                <apex:repeat value="{!reviewAttachments}" var="sp" id="shareRepeat-attachments">
+                    <apex:outputPanel id="show-attachments" rendered="{!NOT(ISBLANK(reviewAttachments))}">
+                        <div class="form-group">
+                            <table class="check-your-answers">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <apex:outputText value="{!sp.Name}" id="attachments-name" /> </td>
-                                        <td>
-                                            <apex:outputText value="{!sp.Description}" id="attachments-description" /> </td>
+                                        <th colspan="4">Supporting documentation </th>
                                     </tr>
-                                </apex:repeat>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br/>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="table-names">Name</td>
+                                        <td class="table-names">Description</td>
+                                    </tr>
+                                    <br/>
+                                    <apex:repeat value="{!reviewAttachments}" var="sp" id="shareRepeat-attachments">
+                                        <tr>
+                                            <td>
+                                                <apex:outputText value="{!sp.Name}" id="attachments-name" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.Description}" id="attachments-description" />
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </apex:outputPanel>
                 </apex:outputPanel>
+                
+                <!--<apex:outputPanel id="customPanel-Signing" rendered="{!custompanelView}">
+                    <h1 class="heading-xlarge">
+                        {!headerText1}
+                    </h1>
+                    <p class="lede">{!displayText1}
+                    </p>
+                    <div class="form-group">
+                        <p>{!displayText2}</p>
+                        <label class="form-label" for="AppDate">Notice of application
+                        </label>
+                        <p class="lede">
+                            <apex:outputText escape="true" styleClass="form-control" value="{!dateField}" id="AppDate" />
+                        </p>
+                    </div>
+                </apex:outputPanel>-->
                 <apex:commandButton styleClass="button" action="{!nextAction}" value="{!reviewpagebutton}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;

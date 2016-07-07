@@ -48,6 +48,11 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
         get;
         set;
     }
+    public String displayText
+    {
+        get;
+        set;
+    }
     public String displayText2
     {
         get;
@@ -58,7 +63,37 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
         get;
         set;
     }
+    public String displayText4
+    {
+        get;
+        set;
+    }
+    public String displayText5
+    {
+        get;
+        set;
+    }
+    public String displayText6
+    {
+        get;
+        set;
+    }
     public String headerText1
+    {
+        get;
+        set;
+    }
+     public String headerText2
+    {
+        get;
+        set;
+    }
+     public String headerText3
+    {
+        get;
+        set;
+    }
+     public String button1
     {
         get;
         set;
@@ -88,23 +123,35 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
     {
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+        displayText = transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
+        displayText4 = transactionMgr.currentStep.Display_Text_4__c;
+        displayText5 = transactionMgr.currentStep.Display_Text_5__c;
+        displayText6 = transactionMgr.currentStep.Display_Text_6__c;
         headerText1 = transactionMgr.currentStep.Header_Text_1__c;
+        headerText2 = transactionMgr.currentStep.Header_Text_2__c;
+        headerText3 = transactionMgr.currentStep.Header_Text_3__c;
+        button1 = transactionMgr.currentStep.ContinueButtonText__c;
+        currentShares = new List<Shares__c>();
         displayresult = new List < String > ();
 
         checkShares();
-
     }
 
     public void checkShares()
     {
+        for(Shares__c sharestoUse: submissionMgr.submission.Shares__r)
+        {
+            if(sharestoUse.cancelled_shares__c == false){
+                currentShares.add(sharestoUse);
+            }
+        }
 
-
-        if (submissionMgr.submission.Shares__r.size() >= 1)
+        if (currentShares.size() >= 1)
         {
             showCurrentShares = true;
-            currentShares = submissionMgr.submission.Shares__r;
+            //currentShares = submissionMgr.submission.Shares__r;
 
             Map < String, Shares__c > mapShares = new Map < String, Shares__c > ();
 
@@ -118,7 +165,7 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
             //throw new Form_CustomException('here is the error' + displayresult);
 
         }
-        else if (submissionMgr.submission.Shares__r.size() < 1)
+        else if (currentShares.size() < 1)
         {
             showCurrentShares = false;
         }

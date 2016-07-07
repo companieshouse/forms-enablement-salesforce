@@ -198,13 +198,13 @@
 
                     var completedselection = document.getElementById('currency-input').value;
                     if (completedselection.length < 1) {
-                        document.getElementById("Hint").innerHTML = '<h4 class="custom-erromessage-medium">Please make a valid selection before going to the next step</h1>';
+                        document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-erromessage-medium">Please make a valid selection before going to the next step</h1>';
                         return;
                     }
                     if (completedselection.length > 1) {
                         if (currencies.indexOf(completedselection) >= 0) {
                             console.log('currency from client = ' + ' ' + completedselection);
-                            document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
+                            // document.getElementById("CurrencyHint").innerHTML = '<h4 class="custom-thanksmessage-medium">Thank you</h1>';
                             setSelectedCurrency(completedselection);
                         } else if (currencies.indexOf(completedselection) < 0) {
 
@@ -247,17 +247,17 @@
                 </style>
                 <apex:outputPanel id="masterpanel">
                     <div class="form-group">
-                        <h1 class="heading-xlarge">Share Capital
+                        <h1 class="heading-xlarge">{!headerText1}
                         </h1>
-                        <p class="lede">Please select your share currency
+                        <p class="lede">{!headerText2}
                         </p>
-                        <label class="form-label" for="currency-item">Currency
+                        <label class="form-label" for="currency-item">{!displayText}
                             <span class="form-hint" id="CurrencyHint"></span>
                         </label>
-                        <input style="form-control" name="currency-item" id="currency-input" />
+                        <input class="form-control" name="currency-item" id="currency-input" />
                         <br/>
                     </div>
-                    <apex:commandButton reRender="none" styleClass="button" onclick="updatecurrency();" value="Select currency and continue" />
+                    <apex:commandButton reRender="none" styleClass="button" onclick="updatecurrency();" value="{!button1}" />
                     <apex:actionFunction action="{!setSelectedCurrency}" name="setSelectedCurrency" reRender="none">
                         <apex:param name="currencyParam" value="" id="y" assignTo="{!selectedCurrency}" />
                     </apex:actionFunction>

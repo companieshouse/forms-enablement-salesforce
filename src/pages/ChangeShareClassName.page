@@ -1,0 +1,151 @@
+<apex:page title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="ChangeShareClassName" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="BuildTablemasterpanel">
+                        <apex:outputPanel id="buildShares">
+                            <div class="form-group">
+                                <h1 class="heading-xlarge">
+                                    {!headerText1}
+                                </h1>
+                                <label class="form-label" for="classofShare-item">Existing class/Description of shares
+                                    <span class="form-hint" name="classofShareHint" id="classHinttypetosearch"></span>
+                                </label>
+                                <input class="form-control" name="classofShare-item" id="shareclassoldName" />
+                                <apex:actionFunction action="{!setOldSelectedShare}" name="setOldSelectedShare" reRender="none">
+                                    <apex:param name="shareParamOld" value="" id="xyz" assignTo="{!classofshares}" />
+                                </apex:actionFunction>
+                                <label class="form-label" for="classofShare-item">Name or new (or new name) or other designation
+                                    <span class="form-hint" name="classofShareHint" id="shareclassNewName"></span>
+                                </label>
+                                <input class="form-control" name="classofShare-item" id="shareclassnewName" />
+                                <apex:actionFunction action="{!setNewSelectedShare}" name="setNewSelectedShare" reRender="none">
+                                    <apex:param name="shareParamNew" value="" id="www" assignTo="{!classofsharesNew}" />
+                                </apex:actionFunction>
+                                <br/>
+                                <apex:commandLink value="+ Add Shares" reRender="masterPanel" action="{!AddShare}" />
+                            </div>
+                            <script>
+                            var sharetypes = ['Ordinary',
+                                'Ordinary A',
+                                'Ordinary B',
+                                'Ordinary C',
+                                'Preference',
+                                'Deferred',
+                                'Deferred Ordinary'
+                            ];
+
+                            $(function() {
+                                $("#shareclassoldName").autocomplete({
+                                    source: function(request, response) {
+                                        var oldResults = $.ui.autocomplete.filter(sharetypes, request.term);
+                                        response(oldResults.slice(0, 10));
+                                    },
+                                    select: function(event, ui) {
+                                        var oldName = ui.item.value;
+                                   console.log('completed selection is ' + oldName);
+                                        if (oldName.length < 1) {
+
+                                            return;
+                                        }
+                                        if (oldName.length > 1) {
+                                            console.log('share from client = ' + ' ' + oldName);
+                                            setOldSelectedShare(oldName);
+                                        }
+                                    },
+                                    change: function(event, ui) {
+                                        var oldName = document.getElementById("shareclassoldName").value;
+                                        if (oldName.length < 1) {
+
+                                            return;
+                                        }
+                                        if (oldName.length > 1) {
+                                             console.log('share from client = ' + ' ' + oldName);
+                                            setOldSelectedShare(oldName);
+                                        }
+                                    }
+                                });
+                                $("#shareclassnewName").autocomplete({
+                                    source: function(request, response) {
+                                        var results = $.ui.autocomplete.filter(sharetypes, request.term);
+                                        response(results.slice(0, 10));
+                                    },
+                                    select: function(event, ui) {
+                                        var newName = ui.item.value;
+                                        console.log('new completed selection is ' + newName);
+                                        if (newName.length < 1) {
+
+                                            return;
+                                        }
+                                        if (newName.length > 1) {
+                                            console.log('share from client = ' + ' ' + newName);
+                                            setNewSelectedShare(newName);
+                                        }
+                                    },
+                                    change: function(event, ui) {
+                                        var newName = document.getElementById("shareclassnewName").value;
+                                        if (newName.length < 1) {
+
+                                            return;
+                                        }
+                                        if (newName.length > 1) {
+                                            console.log('share from client = ' + ' ' + newName);
+                                            setNewSelectedShare(newName);
+                                        }
+                                    }
+                                });
+                            });
+                            </script>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!headerText2} </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Existing class/Description of shares</td>
+                                            <td>Name or new (or new name) or other designation</td>
+                                        </tr>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Share_new__c}" id="shareclassnew" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+                <!-- <apex:commandLink action="{!addtoPreviousShare}" value="Add Shares to another currency" id="addtoPreviousShare" /> &nbsp;-->
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
