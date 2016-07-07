@@ -51,6 +51,7 @@ public class TransactionSerialiser {
 		public payment payment {get; set;}
 		public String barcode {get; set;}
 		public String receiptDate {get; set;}
+		//Signed date
 
 		public filingDetails(){}
 
