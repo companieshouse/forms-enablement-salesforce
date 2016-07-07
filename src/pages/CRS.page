@@ -1,0 +1,74 @@
+<apex:page title="CRS" controller="CRSController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">
+                            {!headerText1}
+                        </h1>
+                        <p class="lede">{!displayText}
+                        </p>
+                        <fieldset >
+                            <span id="radio-errors"></span>
+                            <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                            <label class="block-label" for="radio-inline-1">
+                                <input id="radio-inline-1" type="radio" name="sharetype" value="CONSOLIDATION" /> Consolidation
+                            </label>
+                            <label class="block-label" for="radio-inline-2">
+                                <input id="radio-inline-2" type="radio" name="sharetype" value="SUBDIVISION" /> Sub-division
+                            </label>
+                            <label class="block-label" for="radio-inline-3">
+                                <input id="radio-inline-3" type="radio" name="sharetype" value="REDEMPTION" /> Redemption
+                            </label>
+                            <label class="block-label" for="radio-inline-4">
+                                <input id="radio-inline-3" type="radio" name="sharetype" value="RECONVERSION" /> Re-conversion
+                            </label>
+                            <apex:outputPanel id="emptypanel" />
+                        </fieldset>
+                    </div>
+                    <apex:commandButton reRender="none" styleClass="button" onclick="updateShareType();" value="Select notice type" />
+                    <apex:actionFunction action="{!setSelectedShareType}" name="setSelectedShareType" reRender="none">
+                        <apex:param name="sharetypeParam" value="" id="y" assignTo="{!selectedShareChange}" />
+                    </apex:actionFunction>
+                    <!--<apex:actionFunction action="{!setErrors}" name="setErrors" reRender="masterpanel">
+                        <apex:param name="errorParam" value="" id="z" assignTo="{!hasPageErrors}" />
+                    </apex:actionFunction> -->
+                    <script>
+                    function updateShareType(selection) {
+
+                        var statuses = document.getElementsByName('sharetype');
+                        for (var i = 0, length = statuses.length; i < length; i++) {
+
+                            console.log(statuses[i].value);
+
+                            if (statuses[i].checked) {
+                                console.log(statuses[i].value);
+
+
+                                setSelectedShareType(statuses[i].value);
+                            }
+                        }
+                    };
+                    </script>
+                    <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

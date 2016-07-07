@@ -138,7 +138,7 @@ public with sharing class ChangeShareClassName extends TransactionStepController
                 hasPageErrors = true;
                 currentErrorMessage = 'New share name cannot be the same as the old share name';
             }
-            sharesToAdd.add(new Shares__c(Name = classofshares, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = classofshares, Class_of_Share_new__c = classofsharesNew, ActiveData__c = true));
+            sharesToAdd.add(new Shares__c(ShareType__c = submissionMgr.submission.Form_Name__c, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = classofshares, Class_of_Share_new__c = classofsharesNew, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
         PageReference pg = new PageReference('/ChangeShareClassName');

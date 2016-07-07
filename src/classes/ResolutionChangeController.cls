@@ -133,7 +133,8 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         } else if (submissionMgr.submission.Form_Name__c == 'SH15') {
             showRedenom = true;
             showReducedCap = true;
-            showAssignedDate = true;
+        }else if (submissionMgr.submission.Form_Name__c == 'SH02') {
+            showReducedCap = true;
         }
     }
     private void persistStep() {
