@@ -27,7 +27,34 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 	public void initialiseStep() {
 	}
 
-	public void initSiging(){
+    public PageReference checkSignature(){
+
+            
+        PageReference pg = new PageReference('/DigitalSignature');
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+        pg.setRedirect(true);
+
+        return pg;
+        // Transaction has been declined
+    }
+
+	public PageReference initSiging(){
+
+        if (!ApexPages.currentPage().getParameters().containsKey('c') || 
+            String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
+
+        String paramInput = ApexPages.currentPage().getParameters().get('c');
+
+        if(paramInput.contains(' '))
+        {
+            paramInput = paramInput.replace(' ', '+');
+
+            ApexPages.currentPage().getParameters().put('c',paramInput);
+
+            ApexPages.currentPage().setRedirect(true);
+
+            return ApexPages.currentPage();
+        }
 
         DocuSignSetting__c dsSetting = getDocuSignSettings();
 
@@ -100,8 +127,23 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         String auth = DocusignLibrary.buildAuthString( dsSetting.Username__c, dsSetting.Password__c, dsSetting.IntegratorKey__c);
         Map<String, String> httpHeader = DocusignLibrary.buildHTTPHeaders(auth);
 
-		externalURL = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env);
+        String baseURL = Site.getBaseUrl();
 
+        if(baseURL == '')
+        {   
+            baseURL = ApexPages.currentPage().getUrl();
+            
+        }
+
+        //Here page URL contains Apex/Payment
+        baseURL = baseURL.substringAfter('/apex');
+
+        baseURL = baseURL.substringBefore('?') + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())) ;
+
+
+		externalURL = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+
+        return null;
 	}
 
 	// API is returning last name + first Name

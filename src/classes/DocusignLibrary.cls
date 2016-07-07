@@ -39,7 +39,7 @@ public class DocusignLibrary {
     }
 
     //Return the token for embed signatury if captive is detected
-    public static String sendEnvelope(String endPoint, Map<String, String> httpHeaders, DocuSignAPI.Envelope envelope)
+    public static String sendEnvelope(String endPoint, Map<String, String> httpHeaders, DocuSignAPI.Envelope envelope, String baseURL)
     {
         DocuSignAPI.APIServiceSoap soapService = new DocuSignAPI.APIServiceSoap();
 
@@ -70,13 +70,7 @@ public class DocusignLibrary {
 
         if(embedRecipient != null)
         {
-            String baseURL = Site.getBaseUrl();
-
-            if(baseURL == '')
-            {
-                baseURL =  ApexPages.currentPage().getURL();
-            }
-
+            
             result = getEmbedSignatureURL(soapService ,baseURL, resultEnv.EnvelopeID, embedRecipient);
         }
 
