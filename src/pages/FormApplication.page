@@ -1,7 +1,7 @@
 <apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="FormApplicationController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <div class="form-group entire-wrapper">
                     <h1 class="heading-xlarge">
                         {!headerText1}

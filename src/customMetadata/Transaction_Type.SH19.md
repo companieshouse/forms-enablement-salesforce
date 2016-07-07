@@ -43,7 +43,7 @@
     </values>
     <values>
         <field>FeeFastTrack__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">50.0</value>
     </values>
     <values>
         <field>Fee__c</field>
@@ -149,7 +149,7 @@
     </values>
     <values>
         <field>isPaymentRequired__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isPaypalAllowed__c</field>

@@ -169,6 +169,28 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>AggValueLessAuthMin__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>the aggregate nominal value of the company’s allotted share capital is not
+less than the authorised minimum.
+SH50</description>
+        <externalId>false</externalId>
+        <label>AggValueLessAuthMin</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Aggregate_nominal_value_New__c</fullName>
+        <externalId>false</externalId>
+        <label>Aggregate nominal value New</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Aggregate_nominal_value__c</fullName>
         <externalId>false</externalId>
         <label>Aggregate nominal value</label>
@@ -177,6 +199,14 @@
         <scale>2</scale>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AssignmentDate__c</fullName>
+        <externalId>false</externalId>
+        <label>AssignmentDate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Class_of_Share_new__c</fullName>
@@ -239,6 +269,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>PrelimExpense__c</fullName>
+        <externalId>false</externalId>
+        <label>PrelimExpense</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Prescribed_Particulars__c</fullName>
         <externalId>false</externalId>
         <label>Prescribed Particulars</label>
@@ -248,9 +288,29 @@
         <visibleLines>25</visibleLines>
     </fields>
     <fields>
+        <fullName>SHARETYPE__c</fullName>
+        <externalId>false</externalId>
+        <label>SHARETYPE</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Signatory__c</fullName>
         <externalId>false</externalId>
         <label>Signatory</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_aggregate_amount_paid__c</fullName>
+        <externalId>false</externalId>
+        <label>Total aggregate amount paid</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -281,12 +341,61 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
+        <fullName>amountPaidUp__c</fullName>
+        <externalId>false</externalId>
+        <label>amountPaidUp</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>benefitGiven__c</fullName>
+        <externalId>false</externalId>
+        <label>benefitGiven</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>cancelled_shares__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>cancelled shares</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>considerationGiven__c</fullName>
+        <externalId>false</externalId>
+        <label>considerationGiven</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>redenominateDate__c</fullName>
+        <externalId>false</externalId>
+        <label>redenominateDate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>reduceCapitalDate__c</fullName>
+        <externalId>false</externalId>
+        <label>reduceCapitalDate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>totalNumAggregate__c</fullName>

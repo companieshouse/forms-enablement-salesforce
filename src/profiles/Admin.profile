@@ -249,6 +249,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>EditSharesByTypeController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>EmailTemplatesBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -266,6 +270,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FormAPISubmissionManagerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormApplicationController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -337,7 +345,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>PromoterController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>RecipientStatusDocusignTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ResolutionChangeController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -617,7 +633,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Shares__c.AggValueLessAuthMin__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.Aggregate_nominal_value_New__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Shares__c.Aggregate_nominal_value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.AssignmentDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -652,6 +683,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Shares__c.PrelimExpense__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Shares__c.Prescribed_Particulars__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -662,12 +698,42 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Shares__c.Total_aggregate_amount_paid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Shares__c.Total_aggregate_amount_unpaid__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Shares__c.amountPaidUp__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.benefitGiven__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Shares__c.cancelled_shares__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.considerationGiven__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.redenominateDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.reduceCapitalDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1166,6 +1232,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.Selected_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Transaction__c.SentreviewURL__c</field>
         <readable>false</readable>
@@ -1233,6 +1304,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.hasPaid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.hasPromoter__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1508,6 +1584,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>EditSharesByType</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>EmbedDocuSign</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1517,6 +1597,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Exception</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>FormApplication</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1541,6 +1625,14 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>PresenterDirector</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>PromotersTable</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ResolutionChange</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

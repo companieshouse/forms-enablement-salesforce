@@ -15,7 +15,7 @@
     </values>
     <values>
         <field>CustomView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Display_Text_1__c</field>
