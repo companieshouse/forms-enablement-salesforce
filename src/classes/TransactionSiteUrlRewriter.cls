@@ -56,6 +56,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VARIATION = '/variationofrights';
     public String PROMOTERS = '/promoterstable';
     public String RESOLUTIONCHANGE = '/resolutionchange';
+    public String EDITYSHARESBYTYPE = '/editsharesbytype';
+
     // // // // //
     public String VF_PAGE_START = '/StartFramework';
     public String VF_PAGE_COMPANY = '/Company';
@@ -97,6 +99,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_FORMAPPLICATION = '/FormApplication';
     public String VF_PAGE_PROMOTERS = '/PromotersTable';
     public String VF_PAGE_RESOLUTIONCHANGE = '/ResolutionChange';
+    public String VF_PAGE_EDITYSHARESBYTYPE = '/EditySharesByType';
+
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
         System.debug(LoggingLevel.ERROR, 'in mapRequestUrl:' + friendlyUrl);
@@ -183,6 +187,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_PROMOTERS);
         } else if (url.startsWith(RESOLUTIONCHANGE)) {
             pr = new PageReference(VF_PAGE_RESOLUTIONCHANGE);
+        }else if (url.startsWith(EDITYSHARESBYTYPE)) {
+            pr = new PageReference(VF_PAGE_EDITYSHARESBYTYPE);
         }
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -276,6 +282,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(PROMOTERS);
             } else if (url.startsWith(VF_PAGE_RESOLUTIONCHANGE)) {
                 friendlyPageReference = new PageReference(RESOLUTIONCHANGE);
+            }else if (url.startsWith(VF_PAGE_EDITYSHARESBYTYPE)) {
+                friendlyPageReference = new PageReference(EDITYSHARESBYTYPE);
             }
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);

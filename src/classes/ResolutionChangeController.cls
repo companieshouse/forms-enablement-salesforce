@@ -100,6 +100,10 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         get;
         set;
     }
+    public String shareType {
+        get;
+        set;
+    }
     public ResolutionChangeController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -118,6 +122,7 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
+        shareType = submissionMgr.submission.Form_Name__c;
         buildFields();
     }
     public void buildFields() {
@@ -128,12 +133,11 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         } else if (submissionMgr.submission.Form_Name__c == 'SH15') {
             showRedenom = true;
             showReducedCap = true;
-                        showAssignedDate = true;
-
+            showAssignedDate = true;
         }
     }
     private void persistStep() {
-        if (submissionMgr.submission.Form_Name__c == 'SH15') {} else if (submissionMgr.submission.Form_Name__c == 'SH14') {}
+        List < Shares__c > sharesToAdd = new List < Shares__c > ();
         //if (classofshares == null || classofshares.length() == 0) {
         //    hasPageErrors = true;
         //    currentErrorMessage = 'Must add a class of shares';
@@ -153,9 +157,16 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         //    hasPageErrors = true;
         //    currentErrorMessage = 'Must add the  total amount unpaid on each share (if any)';
         //    return null;
-        //submissionMgr.submission.redenominateDate__c = redenominateDate;
-        //submissionMgr.submission.reduceCapitalDate__c = reduceCapitalDate;
-        // submissiongMgr.submission.AssignmentDate__c = assignmentDate
+        try {
+            if (submissionMgr.submission.Form_Name__c == 'SH13') {
+                sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = shareType, Transaction__c = submissionMgr.submission.Id, AssignmentDate__c = assignmentDate, ActiveData__c = true));
+            } else if (submissionMgr.submission.Form_Name__c == 'SH14') {
+                sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = sharetype, Transaction__c = submissionMgr.submission.Id, redenominateDate__c = redenominateDate, ActiveData__c = true));
+            } else if (submissionMgr.submission.Form_Name__c == 'SH15') {
+                sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = sharetype, Transaction__c = submissionMgr.submission.Id, redenominateDate__c = redenominateDate, reduceCapitalDate__c = reduceCapitalDate, ActiveData__c = true));
+            }
+            insert sharesToAdd;
+        } catch (DmlException e) {} catch (Exception e) {}
         submissionMgr.persist();
     }
     public PageReference nextAction() {
