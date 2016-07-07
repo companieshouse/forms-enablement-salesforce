@@ -37,7 +37,6 @@ public with sharing class AppConstants {
 	//DocuSign Status
     public static final String DOCUSIGN_STATUS_COMPLETED = 'Completed';   
     public static final String DOCUSIGN_STATUS_REJECTED = 'Declined';   
-	public static final String DOCUSIGN_STATUS_DECLINED_SIG = 'DeclinedSig';   
 
 	//Webservice from CHIPS
 	public static final String CHIPS_APPROVED = '0';

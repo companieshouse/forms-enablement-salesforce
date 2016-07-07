@@ -58,7 +58,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	public String VF_PAGE_SUMMARY 		= '/Summary';
 	public String VF_PAGE_CALLBACK 		= '/AccountsAuthCallback';
 	public String VF_PAGE_ERROR 		= '/transactionexception';	
-	public String VF_PAGE_DOCUSIGN 		= '/EmbedDocuSign';
+	public String VF_PAGE_DIGITALSIGNATURE 		= '/DigitalSignature';
+    public String VF_PAGE_EXTDOCUSIGN      = '/ExternalEmbedDocuSign';
 	public String VF_PAGE_PDFGENERATION = '/PDFGeneration';	
 	public String VF_PAGE_PAYMENT 		= '/Payment';	
 	public String VF_PAGE_REVIEW 		= '/Review';
@@ -87,7 +88,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     global PageReference mapRequestUrl(PageReference friendlyUrl){
     	// this method translates a requested frendly url to a physical page.
     	System.debug(LoggingLevel.ERROR,'in mapRequestUrl:'+friendlyUrl);
-    	
 		String url = friendlyUrl.getUrl(); //relative path ignoring domain values e.g. /confirmation
 		System.debug(LoggingLevel.ERROR,url);
 		
@@ -101,7 +101,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 	    else if(url.startsWith(SUMMARY))				{ pr = new PageReference(VF_PAGE_SUMMARY); }
 	    else if(url.startsWith(CALLBACK))				{ pr = new PageReference(VF_PAGE_CALLBACK); }
 	    else if(url.startsWith(ERROR))					{ pr = new PageReference(VF_PAGE_ERROR); }
-	    else if(url.startsWith(VF_PAGE_DOCUSIGN))		{ pr = new PageReference(VF_PAGE_DOCUSIGN); }
+	    else if(url.startsWith(VF_PAGE_DIGITALSIGNATURE))		{ pr = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
+        else if(url.startsWith(VF_PAGE_EXTDOCUSIGN))       { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
 		else if(url.startsWith(VF_PAGE_PDFGENERATION))	{ pr = new PageReference(VF_PAGE_PDFGENERATION); }
 		else if(url.startsWith(PAYMENT))				{ pr = new PageReference(VF_PAGE_PAYMENT); }
 	   	else if(url.startsWith(REVIEW))					{ pr = new PageReference(VF_PAGE_REVIEW); }
@@ -157,7 +158,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_ATTACHMENTS);
         }
 
-
     	if (pr!=null) pr.getParameters().putAll(friendlyUrl.getParameters());
     	return pr;	    
     }
@@ -165,7 +165,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     global PageReference[] generateUrlFor(PageReference[] salesforceUrls){
     	// this method allows translaton of existing page links to pages to their friendly equivalent.    
     	System.debug(LoggingLevel.ERROR,'in generateUrlFor:'+salesforceUrls);
-    	
     	List<PageReference> friendlyUrls = new List<PageReference>();
     	PageReference friendlyPageReference;
     	
@@ -185,7 +184,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 			else if(url.startsWith(VF_PAGE_SUMMARY))		{ friendlyPageReference = new PageReference(SUMMARY); }
 			else if(url.startsWith(VF_PAGE_CALLBACK))		{ friendlyPageReference = new PageReference(CALLBACK); }
 	    	else if(url.startsWith(VF_PAGE_ERROR))			{ friendlyPageReference = new PageReference(ERROR); }
-	    	else if(url.startsWith(VF_PAGE_DOCUSIGN))		{ friendlyPageReference = new PageReference(VF_PAGE_DOCUSIGN); }
+            else if(url.startsWith(VF_PAGE_DIGITALSIGNATURE))  { friendlyPageReference = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
+            else if(url.startsWith(VF_PAGE_EXTDOCUSIGN))       { friendlyPageReference = new PageReference(VF_PAGE_EXTDOCUSIGN); }
 	    	else if(url.startsWith(VF_PAGE_PDFGENERATION))	{ friendlyPageReference = new PageReference(VF_PAGE_PDFGENERATION); }
 	    	else if(url.startsWith(VF_PAGE_PAYMENT))		{ friendlyPageReference = new PageReference(PAYMENT); }
 	        else if(url.startsWith(VF_PAGE_REVIEW))			{ friendlyPageReference = new PageReference(REVIEW); }
@@ -238,7 +238,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             {
                 friendlyPageReference = new PageReference(ATTACHMENTS);
             }
-
 	    	if (friendlyPageReference!=null) friendlyPageReference.getParameters().putAll(pr.getParameters());	    	
 	    	
 	    	friendlyUrls.add(friendlyPageReference);

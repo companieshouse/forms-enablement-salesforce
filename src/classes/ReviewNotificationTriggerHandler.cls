@@ -59,6 +59,7 @@ public class ReviewNotificationTriggerHandler {
 
             Transaction__c transactionshim = new Transaction__c();
             transactionshim.Id = transactionupdater.Id;
+            transactionshim.isSigningFinished__c = true;
             transactionshim.MultipleDirectors__c = transactionupdater.MultipleDirectors__c;
             transactionshim.ReviewRedirect__c = transactionupdater.ReviewRedirect__c;
             transactionsToUpdate.add(transactionshim);

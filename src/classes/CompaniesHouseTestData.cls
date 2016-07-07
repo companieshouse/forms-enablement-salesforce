@@ -57,14 +57,12 @@ public class CompaniesHouseTestData {
                             Forename__c = 'Test',
                             Surname__c = 'Name',
                             Email__c = 'test@test.com',
-                            RecipientId__c = '1',
                             isSignatory__c = true);
 
         off2 = new Officer__c(Name = 'Test2 Name2',
                             Forename__c = 'Test2',
                             Surname__c = 'Name2',
                             Email__c = 'test2@test.com',
-                            RecipientId__c = '2',
                             isSignatory__c = true);
         
         pdf = new Attachment(Name = 'unit test attachment',
