@@ -121,11 +121,19 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>CRSController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ChApiClient</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>ChApiMock</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ChangeCRSController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -678,7 +686,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Shares__c.NewNominalValu__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Shares__c.Number_of_Shares__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.OldNominalValue__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -728,6 +746,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Shares__c.newNumSharesIssued__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.oldNumSharesIssued__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Shares__c.redenominateDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -744,6 +772,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Shares__c.totalNumofShares__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.valOfStock__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1373,6 +1406,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.shareChangeSelection__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.sharecurrencyselection__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1496,7 +1534,15 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>CRS</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>CancelledShares</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ChangeCRS</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
