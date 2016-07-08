@@ -25,6 +25,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 	public Boolean failureSigning {get; set;}
 	public Boolean skipPage {get; set;}
     public Boolean presenterSigning {get; set;}
+    public Boolean multipleDirectors {get; set;}
 
 	public DigitalSignatureController(){
 		super();
@@ -38,18 +39,27 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 		failureSigning = false;
 		skipPage = false;
         presenterSigning = false;
+        multipleDirectors = false;
 		compName = submissionMgr.submission.CompanyName__c;
-		
+		Integer i = 0;
 		listOfDirectors = new List<String>();
 		for(Officer__c off: submissionMgr.submission.Officers__r)
 		{
 			if(off.isSignatory__c)
+            {
+                i++;
 				listOfDirectors.add(off.Name);
+            }
             if(off.IsPresenter__c)
             {
                 presenterSigning = true;
             }
 		}
+
+        if(i > 1  || (i == 1 && !presenterSigning))
+        {
+            multipleDirectors = true;
+        }
 
 		emailPresenter = submissionMgr.submission.Presenter__r.Name;
     }
@@ -82,20 +92,23 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
     	if(submissionMgr.submission.isSigningStarted__c || !presenterSigning)
     	{
     		//Determine if it has been declined or not
-			if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED)
+			if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED && !multipleDirectors)
 			{
 				successSigning = true;
 				return null;
 			}
-			else if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED)
+			else if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED && !multipleDirectors)
 			{
 				failureSigning = true;
 				return null;
 			}
 
             //Send to docusign as no presenter don t load the external embed page
-            ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
-            persistStep();
+            if(!submissionMgr.submission.isSigningStarted__c)
+            {
+                ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
+                persistStep();
+            }
     		pendingPage = true;
             
     		return null;
@@ -115,7 +128,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
     		submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SIGNATURES;
             if(!presenterSigning)
             {
-                submissionMgr.submission.SoleDirectorPresenter__c = true;
+                submissionMgr.submission.MultipleDirectors__c = true;
             }
     	}
 

@@ -30,9 +30,7 @@ public class ReviewNotificationTriggerHandler {
 
 
         List < Transaction__c > transactionsToUpdate = new List < Transaction__c > ();
-
-        List < Transaction__c > transactionListRecords = [Select Id, Valid_Step_Ids__c, Status__c, MultipleDirectors__c From Transaction__c Where Id IN: transactionsList AND Status__c = : AppConstants.REQUEST_STATUS_SIGNED AND (MultipleDirectors__c = true OR SoleDirectorPresenter__c = true)];
-
+        List < Transaction__c > transactionListRecords = [Select Id, Valid_Step_Ids__c, Status__c, MultipleDirectors__c From Transaction__c Where Id IN: transactionsList AND Status__c = : AppConstants.REQUEST_STATUS_SIGNED AND (MultipleDirectors__c = true )];
         for (Transaction__c transactionupdater: transactionListRecords) {
             // list of transactions to update at the end
 
