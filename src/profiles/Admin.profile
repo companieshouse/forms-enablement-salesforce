@@ -309,6 +309,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FreeFormController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>GuidanceController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -682,6 +686,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Shares__c.Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shares__c.FreeForm__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1647,6 +1656,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>FormApplication</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>FreeForm</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

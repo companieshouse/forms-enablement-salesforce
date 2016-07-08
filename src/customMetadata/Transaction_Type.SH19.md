@@ -84,7 +84,10 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Before you start, you will need:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt; 
+&lt;li&gt;reduce the share capital for a private limited company supported by a solvency statement&lt;/li&gt; 
+&lt;li&gt;reduce the share capital for a private or public limited company supported by a court order&lt;/li&gt;
+&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -109,11 +112,7 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;This service is available for:&lt;/p&gt;	
-&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;A private limited company reducing its capital supported by a solvency statement;&lt;/li&gt; 
-&lt;li&gt;Reduce the share capital and re-register a company from public to private.&lt;/li&gt;
-&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You can use this service to:&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
