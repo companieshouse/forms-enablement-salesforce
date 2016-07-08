@@ -57,6 +57,22 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
     public PageReference initSignature(){
         initialiseAction();
 
+        if (!ApexPages.currentPage().getParameters().containsKey('c') || 
+            String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
+
+        String paramInput = ApexPages.currentPage().getParameters().get('c');
+
+        if(paramInput.contains(' '))
+        {
+            paramInput = paramInput.replace(' ', '+');
+
+            ApexPages.currentPage().getParameters().put('c',paramInput);
+
+            ApexPages.currentPage().setRedirect(true);
+
+            return ApexPages.currentPage();
+        }
+
         if(!submissionMgr.submission.isDigitalSignatureNeeded__c )
         {
         	skipPage = true;

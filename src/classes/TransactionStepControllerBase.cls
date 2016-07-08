@@ -47,7 +47,6 @@ public virtual class TransactionStepControllerBase {
     private void initialise(){  
 
     	System.debug(LoggingLevel.ERROR,'in initialise'); 	
-        	
     	try {
             //throw new Form_CustomException('here');
 
@@ -77,6 +76,10 @@ public virtual class TransactionStepControllerBase {
 			
             //Reverse the logic of C parameter for the payment only 
             String paramInput = ApexPages.currentPage().getParameters().get('c');
+            if(paramInput.contains(' '))
+            {
+                paramInput = paramInput.replace(' ', '+');
+            }
             if(paramInput.contains(AppConstants.PERCENTAGE_REPLACEMENT))
             {
                 paramInput = paramInput.replace( AppConstants.PERCENTAGE_REPLACEMENT,'%');

@@ -27,45 +27,9 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 	public void initialiseStep() {
 	}
 
-    public PageReference checkSignature(){
-
-    if(ApexPages.currentPage().getParameters().containsKey('event') && !String.isBlank(ApexPages.currentPage().getParameters().get('event'))) {
-            
-        PageReference pg = new PageReference('/DigitalSignature');
-        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
-        pg.setRedirect(true);
-
-        return pg;
-        // Transaction has been declined
-        }
-
-        return null;
-    }
+    
 
 	public PageReference initSiging(){
-
-        PageReference pr = checkSignature();
-        
-        if(pr != null)
-            return pr;
-
-        if (!ApexPages.currentPage().getParameters().containsKey('c') || 
-            String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
-
-        String paramInput = ApexPages.currentPage().getParameters().get('c');
-
-        if(paramInput.contains(' '))
-        {
-            paramInput = paramInput.replace(' ', '+');
-
-            ApexPages.currentPage().getParameters().put('c',paramInput);
-
-            ApexPages.currentPage().setRedirect(true);
-
-            return ApexPages.currentPage();
-        }
-
-        
 
         DocuSignSetting__c dsSetting = getDocuSignSettings();
 
@@ -138,15 +102,10 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         String auth = DocusignLibrary.buildAuthString( dsSetting.Username__c, dsSetting.Password__c, dsSetting.IntegratorKey__c);
         Map<String, String> httpHeader = DocusignLibrary.buildHTTPHeaders(auth);
 
-        String baseURL = Site.getBaseUrl() + ApexPages.currentPage().getUrl().substringAfter('/apex').substringBefore('?');
+        String baseURL = Site.getBaseUrl() + '/DigitalSignature';
 
-        if(baseURL == '')
-        {   
-            baseURL = ApexPages.currentPage().getHeaders().get('Host') + ApexPages.currentPage().getUrl();
-            
-        }
         //Here page URL contains Apex/Payment
-        baseURL = baseURL.substringBefore('?') + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())) ;
+        baseURL = baseURL + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())) ;
 		externalURL = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
 
         return null;
