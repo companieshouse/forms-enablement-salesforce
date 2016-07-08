@@ -93,6 +93,8 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 				return null;
 			}
     		pendingPage = true;
+            //Send to docusign as no presenter don t load the external embed page
+            ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
     		return null;
     	}
 

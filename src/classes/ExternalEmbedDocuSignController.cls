@@ -31,6 +31,16 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
 	public PageReference initSiging(){
 
+        
+		externalURL = docusignSignature(submissionMgr, transactionMgr);
+
+        return null;
+	}
+
+    public static String docusignSignature(SubmissionManager submissionMgrParam, TransactionManager transactionMgrParam)
+    {
+        SubmissionManager submissionMgr = submissionMgrParam;
+        TransactionManager transactionMgr = transactionMgrParam;
         DocuSignSetting__c dsSetting = getDocuSignSettings();
 
         //Build the unique document for the envelope
@@ -106,14 +116,12 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
         //Here page URL contains Apex/Payment
         baseURL = baseURL + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())) ;
-		externalURL = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
-
-        return null;
-	}
+        return DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+    }
 
 	// API is returning last name + first Name
     // This function set name in the correct order
-    public String convertName(String name) {
+    public static String convertName(String name) {
         String firstName;
         String lastName;
 
@@ -126,7 +134,7 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         return firstName + lastName;
     }
 
-    public String getDate(){
+    public static String getDate(){
         Date d = date.today();
         String day   = d.day()   > 9 ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
         String month = d.month() > 9 ? string.valueOf(d.month()) : '0' + string.valueOf(d.month());
