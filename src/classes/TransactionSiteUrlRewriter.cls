@@ -59,6 +59,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String EDITYSHARESBYTYPE = '/editsharesbytype';
     public String CRS = '/crs';
     public String CHANGECRS = '/changecrs';
+    public String FREEFORM = '/freeform';
     // // // // //
     public String VF_PAGE_START = '/StartFramework';
     public String VF_PAGE_COMPANY = '/Company';
@@ -103,6 +104,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_EDITYSHARESBYTYPE = '/EditySharesByType';
     public String VF_PAGE_CRS = '/CRS';
     public String VF_PAGE_CHANGECRS = '/ChangeCRS';
+    public String VF_PAGE_FREEFORM = '/FreeForm';
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
         System.debug(LoggingLevel.ERROR, 'in mapRequestUrl:' + friendlyUrl);
@@ -195,6 +197,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_CRS);
         } else if (url.startsWith(CHANGECRS)) {
             pr = new PageReference(VF_PAGE_CHANGECRS);
+        } else if (url.startsWith(FREEFORM)) {
+            pr = new PageReference(VF_PAGE_FREEFORM);
         }
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -294,6 +298,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(CHANGECRS);
             } else if (url.startsWith(VF_PAGE_CRS)) {
                 friendlyPageReference = new PageReference(CRS);
+            } else if (url.startsWith(VF_PAGE_FREEFORM)) {
+                friendlyPageReference = new PageReference(FREEFORM);
             }
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);

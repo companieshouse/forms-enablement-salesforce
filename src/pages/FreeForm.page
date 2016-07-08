@@ -1,0 +1,37 @@
+<apex:page title="Free Form" showHeader="false" sidebar="false" standardStylesheets="false" controller="FreeFormController" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <apex:outputPanel id="errorspanel" rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            An error has occurred.
+                        </h1>
+                        <ul class="error-summary-list">
+                            <li>
+                                <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                            </li>
+                        </ul>
+                    </div>
+                </apex:outputPanel>
+                <div class="form-group">
+                    <h1 class="heading-xlarge">
+                        {!headerText1}
+                    </h1>
+                    <p class="lede">
+                        {!displayText}
+                    </p>
+                    <fieldset>
+                        <label class="form-label" for="FreeForm">{!displayText2}
+                            <span class="form-hint" id="FreeFormHint">{!displayText3}</span>
+                        </label>
+                        <apex:inputTextArea richText="false" rows="8" cols="40" value="{!freeFormData}" id="freeFormData" />
+                    </fieldset>
+                </div>
+                <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                <br/>
+                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

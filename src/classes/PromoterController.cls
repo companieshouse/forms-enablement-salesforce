@@ -158,7 +158,7 @@ public with sharing class PromoterController extends TransactionStepControllerBa
                 //    hasPageErrors = true;
                 //    currentErrorMessage = 'Must add the  total amount unpaid on each share (if any)';
                 //    return null;
-                sharesToAdd.add(new Shares__c(SHARETYPE__c = 'promoter', considerationGiven__c = considerationGiven, Transaction__c = submissionMgr.submission.Id, benefitGiven__c = benefitGiven, amountPaidUp__c = amountPaidUp, ActiveData__c = true));
+                sharesToAdd.add(new Shares__c(SHARETYPE__c = 'PROMOTER', considerationGiven__c = considerationGiven, Transaction__c = submissionMgr.submission.Id, benefitGiven__c = benefitGiven, amountPaidUp__c = amountPaidUp, ActiveData__c = true));
                 insert sharesToAdd;
             } catch (DmlException e) {} catch (Exception e) {} finally {
                 PageReference pg = new PageReference('/PromotersTable');
