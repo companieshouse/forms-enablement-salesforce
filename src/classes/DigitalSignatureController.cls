@@ -92,9 +92,12 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 				failureSigning = true;
 				return null;
 			}
-    		pendingPage = true;
+
             //Send to docusign as no presenter don t load the external embed page
             ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
+            persistStep();
+    		pendingPage = true;
+            
     		return null;
     	}
 
@@ -110,6 +113,10 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
     	{
     		submissionMgr.submission.isSigningStarted__c = true;
     		submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SIGNATURES;
+            if(!presenterSigning)
+            {
+                submissionMgr.submission.SoleDirectorPresenter__c = true;
+            }
     	}
 
     	if(successSigning || failureSigning)
