@@ -136,12 +136,13 @@ public with sharing class AddSharesTableController extends TransactionStepContro
         get;
         set;
     }
+    public Decimal sharesnumberVariable {get;set;}
+    public Decimal aggnumberVariable {get;set;}
     public AddSharesTableController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
-
         displayText = transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
@@ -159,6 +160,7 @@ public with sharing class AddSharesTableController extends TransactionStepContro
         currentShares = new List < Shares__c > ();
         allShares = submissionMgr.submission.Shares__r;
         checkFinishedAddingShares();
+        buildTotals();
     }
     public PageReference checkFinishedAddingShares() {
         if (submissionMgr.submission.finishedAddingShares__c) {
@@ -169,11 +171,23 @@ public with sharing class AddSharesTableController extends TransactionStepContro
             return null;
         }
     }
+    public void buildTotals() {
+       sharesnumberVariable = 0;
+       aggnumberVariable = 0;
+        for (Shares__c findTotals: submissionMgr.submission.Shares__r) {
+            if (findTotals.SHARETYPE__c == 'STATEMENTOFCAPITAL' && findTotals.Currency__c == selectedCurrency) {
+                sharesnumberVariable += findTotals.Number_of_Shares__c;
+                aggnumberVariable += findTotals.Aggregate_nominal_value__c;
+            }
+
+        }
+    }
     public void selectCurrentCurrencyTable() {
         //currentShares.clear();
         if (submissionMgr.submission.Shares__r.size() > 0) {
             for (Shares__c previousShares: submissionMgr.submission.Shares__r) {
-                if (previousShares.Currency__c == selectedCurrency && previousShares.cancelled_shares__c == false) {
+                if (previousShares.Currency__c == selectedCurrency && previousShares.cancelled_shares__c == false && previousShares.SHARETYPE__c == 'STATEMENTOFCAPITAL') {
+                   // must unwind ifstatement below??
                     if (previousShares.Total_aggregate_amount_unpaid__c != null && previousShares.Total_aggregate_amount_unpaid__c.toPlainString() != '0') {
                         aggregateunpaidAmount = previousShares.Total_aggregate_amount_unpaid__c;
                     }
@@ -199,7 +213,7 @@ public with sharing class AddSharesTableController extends TransactionStepContro
         //throw New Form_CustomException(' your value for totalnumberofShares is '+ totalnumberofShares);
     }
     public void totalNumAggregate() {
-       // persistStep();
+        // persistStep();
         //throw New Form_CustomException(' your value for totalnumberofShares is '+ totalnumberAggregate);
     }
     private void persistStep() {
@@ -217,18 +231,9 @@ public with sharing class AddSharesTableController extends TransactionStepContro
         // persist stuff here
         submissionMgr.persist();
     }
-    public void resetAddShare() {
-        classofshares = '';
-        numberofshares = null;
-        aggregateNominalValue = null;
-    }
     public PageReference addtoPreviousShare() {
         if (!validatePageState()) return Page.TransactionException;
         return previousStep();
-        //PageReference pg = new PageReference('/AddSharesBase');
-        //pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-        //pg.setRedirect(true);
-        //return pg;
     }
     public PageReference addShare() {
         //List < Shares__c > previousSharesList = submissionMgr.submission.Shares__r;
@@ -259,23 +264,21 @@ public with sharing class AddSharesTableController extends TransactionStepContro
         pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         pg.setRedirect(true);
         return pg;
-        //resetAddShare();
-        //selectCurrentCurrencyTable();
     }
-    public void updateShares() {
-        List < Shares__c > sharestoUpdate = new List < Shares__c > ();
-        for (Shares__c sharesUPDATED: submissionMgr.submission.Shares__r) {
-            if (sharesUPDATED.Id == selectedId) {
-                sharesUPDATED.Name = classofshares;
-                sharesUPDATED.Number_of_Shares__c = numberofshares;
-                sharesUPDATED.Class_of_Shares__c = classofshares;
-                sharesUpdated.Aggregate_nominal_value__c = aggregateNominalValue;
-                shareUpdaterMap.put(sharesUPDATED.Id, sharesUPDATED);
-            }
-        }
-        sharestoUpdate.addAll(shareUpdaterMap.values());
-        update sharestoUpdate;
-    }
+    //public void updateShares() {
+    //    List < Shares__c > sharestoUpdate = new List < Shares__c > ();
+    //    for (Shares__c sharesUPDATED: submissionMgr.submission.Shares__r) {
+    //        if (sharesUPDATED.Id == selectedId) {
+    //            sharesUPDATED.Name = classofshares;
+    //            sharesUPDATED.Number_of_Shares__c = numberofshares;
+    //            sharesUPDATED.Class_of_Shares__c = classofshares;
+    //            sharesUpdated.Aggregate_nominal_value__c = aggregateNominalValue;
+    //            shareUpdaterMap.put(sharesUPDATED.Id, sharesUPDATED);
+    //        }
+    //    }
+    //    sharestoUpdate.addAll(shareUpdaterMap.values());
+    //    update sharestoUpdate;
+    //}
     public PageReference finishAddingShares() {
         if (!validatePageState()) return Page.TransactionException;
         submissionMgr.submission.finishedAddingShares__c = true;

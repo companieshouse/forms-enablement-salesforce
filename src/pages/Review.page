@@ -76,7 +76,7 @@
                     </p>
                 </apex:outputPanel>
                 <apex:outputPanel id="innerCancelPanel" rendered="{!custompanelView}">
-                    <apex:outputPanel id="customcancelPanel" rendered="{!NOT(ISBLANK(sharesforCancelling))}">
+                    <apex:outputPanel id="customcancelPanel" rendered="{!showCancelledShares}">
                         <div class="form-group">
                             <table class="check-your-answers">
                                 <thead>
@@ -264,7 +264,7 @@
                                     <td class="table-names">{!variationText}</td>
                                 </tr>
                                 <br/>
-                                <apex:repeat value="{!preParticulars}" var="sp" id="variations-particulars">
+                                <apex:repeat value="{!variations}" var="sp" id="variations-particulars">
                                     <tr>
                                         <td>
                                             <apex:outputText value="{!sp.Date__c}" id="variations-date" />
@@ -310,7 +310,224 @@
                         <br/>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                
+                <apex:outputPanel id='sh02' rendered="{!custompanelView}">
+                    <apex:outputPanel rendered="{!showSubdivision}" id="subdivision-BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!subdivisiontableHelperText} </th>
+                                            <br/> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <apex:outputPanel id="subdivision-valueofStockPanelHeader" rendered="{!showValueField}">
+                                                <td>Value of Stock</td>
+                                            </apex:outputPanel>
+                                            <td>Class of shares</td>
+                                            <td>Number of issued shares</td>
+                                            <td>Nominal value of each share</td>
+                                            <apex:outputPanel id="subdivision-newStructurePanelHeader" rendered="{!showNewStructure}">
+                                                <td>New Nominal value of each share</td>
+                                                <td>New Number of issued shares</td>
+                                            </apex:outputPanel>
+                                        </tr>
+                                        <br/>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="subdivision-theRepeat">
+                                            <tr>
+                                                <apex:outputPanel id="subdivision-valueofStockPanelRepeat" rendered="{!showValueField}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.valOfStock__c}" id="subdivision-valueofStockRepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="subdivision-classofshareRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.oldNumSharesIssued__c}" id="subdivision-oldNumIssuedRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.OldNominalValue__c}" id="subdivision-oldNomValueRepeat" />
+                                                </td>
+                                                <apex:outputPanel id="subdivision-newStructurePanelRepeat" rendered="{!showNewStructure}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.NewNominalValu__c}" id="subdivision-newNomValueRepeat" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!sp.newNumSharesIssued__c}" id="subdivision-newNumIssuedrepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br/>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!showConsolidation}" id="consolidation-BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!consolodiationtableHelperText} </th>
+                                            <br/> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <apex:outputPanel id="consolidation-valueofStockPanelHeader" rendered="{!showValueField}">
+                                                <td>Value of Stock</td>
+                                            </apex:outputPanel>
+                                            <td>Class of shares</td>
+                                            <td>Number of issued shares</td>
+                                            <td>Nominal value of each share</td>
+                                            <apex:outputPanel id="consolidation-newStructurePanelHeader" rendered="{!showNewStructure}">
+                                                <td>New Nominal value of each share</td>
+                                                <td>New Number of issued shares</td>
+                                            </apex:outputPanel>
+                                        </tr>
+                                        <br/>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="consolidation-theRepeat">
+                                            <tr>
+                                                <apex:outputPanel id="consolidation-valueofStockPanelRepeat" rendered="{!showValueField}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.valOfStock__c}" id="consolidation-valueofStockRepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="consolidation-classofshareRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.oldNumSharesIssued__c}" id="consolidation-oldNumIssuedRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.OldNominalValue__c}" id="consolidation-oldNomValueRepeat" />
+                                                </td>
+                                                <apex:outputPanel id="consolidation-newStructurePanelRepeat" rendered="{!showNewStructure}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.NewNominalValu__c}" id="consolidation-newNomValueRepeat" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!sp.newNumSharesIssued__c}" id="consolidation-newNumIssuedrepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br/>
+                        </apex:outputPanel>
+                         <apex:outputPanel rendered="{!showRedemption}" id="redemption-BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!redemptiontableHelperText} </th>
+                                            <br/> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <apex:outputPanel id="redemption-valueofStockPanelHeader" rendered="{!showValueField}">
+                                                <td>Value of Stock</td>
+                                            </apex:outputPanel>
+                                            <td>Class of shares</td>
+                                            <td>Number of issued shares</td>
+                                            <td>Nominal value of each share</td>
+                                            <apex:outputPanel id="redemption-newStructurePanelHeader" rendered="{!showNewStructure}">
+                                                <td>New Nominal value of each share</td>
+                                                <td>New Number of issued shares</td>
+                                            </apex:outputPanel>
+                                        </tr>
+                                        <br/>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="redemption-theRepeat">
+                                            <tr>
+                                                <apex:outputPanel id="redemption-valueofStockPanelRepeat" rendered="{!showValueField}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.valOfStock__c}" id="redemption-valueofStockRepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="redemption-classofshareRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.oldNumSharesIssued__c}" id="redemption-oldNumIssuedRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.OldNominalValue__c}" id="redemption-oldNomValueRepeat" />
+                                                </td>
+                                                <apex:outputPanel id="redemption-newStructurePanelRepeat" rendered="{!showNewStructure}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.NewNominalValu__c}" id="redemption-newNomValueRepeat" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!sp.newNumSharesIssued__c}" id="redemption-newNumIssuedrepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br/>
+                        </apex:outputPanel>
+                         <apex:outputPanel rendered="{!showreConversion}" id="conversion-BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!reconversiontableHelperText} </th>
+                                            <br/> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <apex:outputPanel id="conversion-valueofStockPanelHeader" rendered="{!showValueField}">
+                                                <td>Value of Stock</td>
+                                            </apex:outputPanel>
+                                            <td>Class of shares</td>
+                                            <td>Number of issued shares</td>
+                                            <td>Nominal value of each share</td>
+                                            <apex:outputPanel id="conversion-newStructurePanelHeader" rendered="{!showNewStructure}">
+                                                <td>New Nominal value of each share</td>
+                                                <td>New Number of issued shares</td>
+                                            </apex:outputPanel>
+                                        </tr>
+                                        <br/>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="conversion-theRepeat">
+                                            <tr>
+                                                <apex:outputPanel id="conversion-valueofStockPanelRepeat" rendered="{!showValueField}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.valOfStock__c}" id="conversion-valueofStockRepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="conversion-classofshareRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.oldNumSharesIssued__c}" id="conversion-oldNumIssuedRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.OldNominalValue__c}" id="conversion-oldNomValueRepeat" />
+                                                </td>
+                                                <apex:outputPanel id="conversion-newStructurePanelRepeat" rendered="{!showNewStructure}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.NewNominalValu__c}" id="conversion-newNomValueRepeat" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!sp.newNumSharesIssued__c}" id="conversion-newNumIssuedrepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br/>
+                        </apex:outputPanel>
+                </apex:outputPanel>                
                 <!--<apex:outputPanel id="customPanel-Signing" rendered="{!custompanelView}">
                     <h1 class="heading-xlarge">
                         {!headerText1}

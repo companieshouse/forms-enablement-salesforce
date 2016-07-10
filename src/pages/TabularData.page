@@ -24,6 +24,8 @@
                                 <h1 class="heading-xlarge">
                                     {!headerText1} <br/> for: {!selectedCurrency}
                                 </h1>
+                                <h1> counting shares: {!sharesnumberVariable}<br/>
+                                counting totalnumber aggregate {!aggnumberVariable} </h1>
                                 <label class="form-label" for="classofShare-item">Class of shares
                                     <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
                                 </label>
@@ -175,6 +177,8 @@
                                 }
                                 document.getElementById('totalnumberofshares').innerHTML = sharesum;
                                 document.getElementById('totalnumberaggregate').innerHTML = aggsum.toFixed(2);
+                                numofSharesCalculation(sharesum);
+                                totalNumAggregate(aggsum);
                             }
                             numberofshares();
                             //updateTotals();

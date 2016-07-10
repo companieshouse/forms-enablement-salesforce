@@ -208,6 +208,43 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public Boolean showreConversion {
+        get;
+        set;
+    }
+    public Boolean showRedemption {
+        get;
+        set;
+    }
+    public Boolean showConsolidation {
+        get;
+        set;
+    }
+    public Boolean showSubdivision {
+        get;
+        set;
+    }
+    public List < Shares__c > rECONVERSION {
+        get;
+        set;
+    }
+    public List < Shares__c > rEDEMPTION {
+        get;
+        set;
+    }
+    public List < Shares__c > cONSOLIDATION {
+        get;
+        set;
+    }
+    public List < Shares__c > sUBDIVISION {
+        get;
+        set;
+    }
+    public String subdivisiontableHelperText {get;set;}
+    public String consolidationtableHelperText {get;set;}
+    public String redtemptionableHelperText {get;set;}
+    public String reconversiontableHelperText {get;set;}
+
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -244,6 +281,10 @@ public class ReviewController extends TransactionStepControllerBase {
         sharesforCancelling = new List < Shares__c > ();
         preParticulars = new List < Shares__c > ();
         variations = new List < Shares__c > ();
+        rECONVERSION = new List < Shares__c > ();
+        rEDEMPTION = new List < Shares__c > ();
+        cONSOLIDATION = new List < Shares__c > ();
+        sUBDIVISION = new List < Shares__c > ();
         showCurrency = true;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
@@ -279,6 +320,14 @@ public class ReviewController extends TransactionStepControllerBase {
                 preParticulars.add(totalShares);
             } else if (totalShares.SHARETYPE__c == 'VARIATIONS') {
                 variations.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'RECONVERSION') {
+                rECONVERSION.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'REDEMPTION') {
+                rEDEMPTION.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'CONSOLIDATION') {
+                cONSOLIDATION.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'SUBDIVISION') {
+                sUBDIVISION.add(totalShares);
             } else if (totalShares.cancelled_shares__c == false) {
                 sharesforEditing.add(totalShares);
                 //this should never happen as we have shares with no type
@@ -301,6 +350,22 @@ public class ReviewController extends TransactionStepControllerBase {
             showCancelledShares = true;
             dateText = 'Date(s) shares were sold or transferred';
             reviewTitle = 'Treasury shares sold or transferred';
+        }
+        if (sUBDIVISION.size() > 0) {
+            showSubdivision = true;
+            subdivisiontableHelperText = '';
+        }
+        if (cONSOLIDATION.size() > 0) {
+            showConsolidation = true;
+            consolidationtableHelperText= '';
+        }
+        if (rECONVERSION.size() > 0) {
+            showreConversion = true;
+            reconversiontableHelperText= '';
+        }
+        if (rEDEMPTION.size() > 0) {
+            showRedemption = true;
+            redtemptionableHelperText= '';
         }
         if (variations.size() > 0) {
             buildLABELS();
