@@ -116,19 +116,11 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public String customPanelHTML {
-        get;
-        set;
-    }
     public Boolean standardPanelView {
         get;
         set;
     }
     public Map < String, Shares__c > shareCurrencyMap {
-        get;
-        set;
-    }
-    public List < Shares__c > shareReviewer {
         get;
         set;
     }
@@ -164,6 +156,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public List < Shares__c > variations {
+        get;
+        set;
+    }
     public Boolean showStatementofCapital {
         get;
         set;
@@ -173,14 +169,6 @@ public class ReviewController extends TransactionStepControllerBase {
         set;
     }
     public Boolean showCancelledShares {
-        get;
-        set;
-    }
-    public Set < String > requiresStatementofC {
-        get;
-        set;
-    }
-    public Set < String > requiresParticulars {
         get;
         set;
     }
@@ -225,14 +213,12 @@ public class ReviewController extends TransactionStepControllerBase {
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
-        shareReviewer = new List < Shares__c > ();
         displayText1 = transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
         headerText1 = transactionMgr.currentStep.Header_Text_1__c;
         standardPanelView = transactionMgr.currentstep.StandardView__c;
         custompanelView = transactionMgr.currentstep.CustomView__c;
-        customPanelHTML = CustomViews.SH19_REVIEW_PAGE;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         presenterEmail = submissionMgr.submission.Presenter__r.Name;
@@ -256,27 +242,13 @@ public class ReviewController extends TransactionStepControllerBase {
         sharesforBuilding = new List < Shares__c > ();
         sharesforEditing = new List < Shares__c > ();
         sharesforCancelling = new List < Shares__c > ();
-        requiresStatementofC = new Set < String > {
-            'SH19',
-            'SH05_6_7'
-        };
-        requiresParticulars = new Set < String > {
-            'SH09'
-        };
+        preParticulars = new List < Shares__c > ();
+        variations = new List < Shares__c > ();
         showCurrency = true;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
         }
-        buildReviewShares();
-        buildOtherShares();
-        buildlabels();
-        if (submissionMgr.submission.Shares__r.size() > 0) {
-            preParticulars = sharesforBuilding;
-        }
-        if (submissionMgr.submission.Attachments.size() > 0) {
-            reviewAttachments = submissionMgr.submission.Attachments;
-            // note need to loop through by currency and build it dynamically
-        }
+        shareRouter();
         return;
     }
     public void buildLABELS() {
@@ -296,36 +268,49 @@ public class ReviewController extends TransactionStepControllerBase {
             variationText = 'Variation in the rights of the class of members';
             variationNotice = true;
         }
-        if (variationNotice == true) {}
     }
-    public void buildOtherShares() {
-        for (Shares__c deadShares: submissionMgr.submission.Shares__r) {
-            if (deadShares.cancelled_shares__c == true) {
-                sharesforCancelling.add(deadShares);
+    public void shareRouter() {
+        for (Shares__c totalShares: submissionMgr.submission.Shares__r) {
+            if (totalShares.SHARETYPE__c == 'STATEMENTOFCAPITAL') {
+                sharesforBuilding.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'CANCELLEDSHARES') {
+                sharesforCancelling.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'PARTICULARS') {
+                preParticulars.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'VARIATIONS') {
+                variations.add(totalShares);
+            } else if (totalShares.cancelled_shares__c == false) {
+                sharesforEditing.add(totalShares);
+                //this should never happen as we have shares with no type
             }
+        }
+        if (sharesforBuilding.size() > 0) {
+            buildCapitalMap();
+            showStatementofCapital = true;
+        }
+        if (preParticulars.size() > 0) {
+            showParticulars = true;
+            showCurrency = false;
         }
         if (sharesforCancelling.size() > 0) {
             showCancelledShares = true;
             dateText = 'Cancellation Date';
             reviewTitle = 'Shares to cancel';
         }
-        for (Shares__c liveShares: submissionMgr.submission.Shares__r) {
-            if (liveShares.cancelled_shares__c == false) {
-                sharesforEditing.add(liveShares);
-            }
-        }
         if (sharesforEditing.size() > 0) {
             showCancelledShares = true;
             dateText = 'Date(s) shares were sold or transferred';
             reviewTitle = 'Treasury shares sold or transferred';
         }
-    }
-    public void buildReviewShares() {
-        for (Shares__c safeShares: submissionMgr.submission.Shares__r) {
-            if (safeShares.cancelled_shares__c == false) {
-                sharesforBuilding.add(safeShares);
-            }
+        if (variations.size() > 0) {
+            buildLABELS();
         }
+        //lastly build attachments
+        if (submissionMgr.submission.Attachments.size() > 0) {
+            reviewAttachments = submissionMgr.submission.Attachments;
+        }
+    }
+    public void buildCapitalMap() {
         if (sharesforBuilding.size() > 0) {
             for (Shares__c sharecurrencylimiter: sharesforBuilding) {
                 shareCurrencyMap.put(sharecurrencylimiter.Currency__c, sharecurrencylimiter);
@@ -342,29 +327,19 @@ public class ReviewController extends TransactionStepControllerBase {
                 }
             }
         } else {
-            //throw new Form_CustomException('You have no shares to iterate over');
-        }
-        if (requiresStatementofC.contains(submissionMgr.submission.Form_Name__c)) {
-            showStatementofCapital = true;
-        }
-        if (requiresParticulars.contains(submissionMgr.submission.Form_Name__c)) {
-            showParticulars = true;
-            showCurrency = false;
+            System.debug('you have no statement of capital to iterate over');
         }
     }
     private void persistStep() {
-            submissionMgr.persist();
-        }
-        // End Instance methods.    
-        // Action methods.     
+        submissionMgr.persist();
+    }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
         return nextStep();
     }
     public PageReference previousAction() {
-            if (!validatePageState()) return Page.TransactionException;
-            return previousStep();
-        }
-        // End Action methods.    
+        if (!validatePageState()) return Page.TransactionException;
+        return previousStep();
+    }
 }

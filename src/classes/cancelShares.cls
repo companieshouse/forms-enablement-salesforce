@@ -278,7 +278,8 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         //    currentErrorMessage = 'Must add the cancellation date';
         //    return null;
         //}
-        sharesToAdd.add(new Shares__c(Date__c = cancellationDate, cancelled_shares__c = cancelledSharesVar, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
+        
+        sharesToAdd.add(new Shares__c(ShareType__c = 'CANCELLEDSHARES', Date__c = cancellationDate, cancelled_shares__c = cancelledSharesVar, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
         insert sharesToAdd;
 
         PageReference pg = new PageReference('/CancelledShares');

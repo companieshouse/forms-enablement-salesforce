@@ -23,6 +23,14 @@ public with sharing class StartFrameworkController {
         get;
         private set;
     }
+     public String pageTitle2 {
+        get;
+        private set;
+    }
+     public String pageTitle3 {
+        get;
+        private set;
+    }
     public String pageText {
         get;
         private set;
@@ -44,6 +52,22 @@ public with sharing class StartFrameworkController {
         private set;
     }
     public String pageText6 {
+        get;
+        private set;
+    }
+    public String pageText7 {
+        get;
+        private set;
+    }public String pageText8 {
+        get;
+        private set;
+    }public String pageText9 {
+        get;
+        private set;
+    }public String pageText10 {
+        get;
+        private set;
+    }public String pageText11 {
         get;
         private set;
     }
@@ -119,12 +143,20 @@ public with sharing class StartFrameworkController {
                 transactionMgr = new TransactionManager(transactionType);
                 // this is not efficient unless start pages follow this format consistently
                 pageTitle = transactionMgr.td.Landing_Page_Title__c;
+                //pageTitle2 = transactionMgr.td.Landing_Page_Title2__c;
+                //pageTitle3 = transactionMgr.td.Landing_Page_Title3__c;
                 pageText = transactionMgr.td.Landing_Page_Text__c;
                 pageText2 = transactionMgr.td.Landing_Page_Text2__c;
                 pageText3 = transactionMgr.td.Landing_Page_Text3__c;
                 pageText4 = transactionMgr.td.Landing_Page_Text4__c;
                 pageText5 = transactionMgr.td.Landing_Page_Text5__c;
                 pageText6 = transactionMgr.td.Landing_Page_Text6__c;
+                //pageText7 = transactionMgr.td.Landing_Page_Text7__c;
+                //pageText8 = transactionMgr.td.Landing_Page_Text8__c;
+                //pageText9 = transactionMgr.td.Landing_Page_Text9__c;
+                //pageText10 = transactionMgr.td.Landing_Page_Text10__c;
+                //pageText11 = transactionMgr.td.Landing_Page_Text11__c;
+
                 abovebuttontext = transactionMgr.td.above_button_text__c;
 
                 belowbuttontitle = transactionMgr.td.Below_Button_Title__c;

@@ -185,7 +185,7 @@ public with sharing class variationRightsController extends TransactionStepContr
         try {
             submissionMgr.submission.trueTransactionName__c = realTransactionName;
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
-            sharesToAdd.add(new Shares__c(varationField__c = variationInfo, Date__c = variationDate, Transaction__c = submissionMgr.submission.Id, ActiveData__c = true));
+            sharesToAdd.add(new Shares__c(ShareType__c = 'VARIATIONS', varationField__c = variationInfo, Date__c = variationDate, Transaction__c = submissionMgr.submission.Id, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
         PageReference pg = new PageReference('/VariationOfRights');
