@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH09- Allotting a new class</label>
+    <label>TestForm</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This is Below Button Text3 Form</value>
     </values>
     <values>
         <field>Below_Button_Text4__c</field>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Family__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Dissolution</value>
     </values>
     <values>
         <field>FeeFastTrack__c</field>
@@ -47,24 +47,19 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">100.0</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">Agree</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;If you are filing for a private limited company, you will also require the following documents:&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;Solvency Statement&lt;/li&gt;
-&lt;li&gt;Special resolution authorising the capital reduction&lt;/li&gt;
-&lt;li&gt;Director&apos;s Statement
-&lt;/li&gt;
-&lt;/ul&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
@@ -76,19 +71,19 @@
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;These documents must be uploaded as attachments in order to complete the submission.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">You cannot use this form to give notice of an allotment of shares by a limited company. To do this please use form SH01.</value>
+        <value xsi:type="xsd:string">This is Landing Page Text2 Form</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This is Landing Page Text3 Form</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
@@ -104,11 +99,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">You may use this form to give notice of an allotment of a new share class by an unlimited company.</value>
+        <value xsi:type="xsd:string">Landing Page Text</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Allotting a new class of shares by an unlimited company</value>
+        <value xsi:type="xsd:string">This is Landing Page Title</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -120,7 +115,7 @@
     </values>
     <values>
         <field>companySearchPageText__c</field>
-        <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

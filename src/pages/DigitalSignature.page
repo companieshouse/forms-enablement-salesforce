@@ -1,0 +1,72 @@
+<!--
+Name:  DigitalSignature
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+
+Page DigitalSignature which control the signing process
+
+======================================================
+======================================================
+History
+
+Ver. Author        Date        Detail
+1.0  Sylvain Picory&    2016-07-04  Initial development.
+-->
+<apex:page title="{!$Label.UI_Text_DocuSign}" controller="DigitalSignatureController" docType="html-5.0" showHeader="false" action="{!initSignature}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<script>
+    if (window.frameElement) {
+        parent.location.href = window.location;
+        console.log("found iframe and reloading")
+    } else {
+        console.log('not finding iframe probably on mobile');
+    }
+</script>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="pendingPage" rendered="{!pendingPage}" >
+                <h1 class="heading-xlarge">
+              		Request Pending
+                </h1>
+
+                <p class="lede">
+                Requests for approval of the application to close {!compName} have been sent to the following directors:
+                </p>
+                <ul class="list list-bullet">
+                	<apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                		<li>
+                			{!director}
+                		</li>
+               		</apex:repeat>
+                </ul>
+                <p class="lede">
+                	A notification will be sent to {!emailPresenter} which will allow you to check the status of the signatures and submit the application.
+                </p>
+                </apex:outputPanel>
+                <apex:outputPanel id="succesSign" rendered="{!successSigning}">
+                	<h1 class="heading-medium" id="heading-example-1">
+                  		Signing has been a success!
+                    </h1>
+                    <p>
+                        The application to close your company has been completed.
+                    </p>
+                    <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+	                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                </apex:outputPanel>
+
+                <apex:outputPanel id="failureSign" rendered="{!failureSigning}">
+                	<h1 class="heading-medium" id="heading-example-2">
+                  		Signing has been a cancelled!
+                    </h1>
+                    <p>
+                        The application to close your company has been cancelled. The application process will need to be restarted if you still wish to close your company.
+                    </p>
+                	<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton2" />
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

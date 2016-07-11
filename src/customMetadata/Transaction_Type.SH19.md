@@ -112,7 +112,15 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
+<<<<<<< HEAD
         <value xsi:type="xsd:string">&lt;p&gt;You can use this service to:&lt;/p&gt;</value>
+=======
+        <value xsi:type="xsd:string">&lt;p&gt;This service is available for:&lt;/p&gt;	
+&lt;ul class=&quot;list list-bullet&quot;&gt; 
+&lt;li&gt;A private limited company reducing its capital supported by a solvency statement;&lt;/li&gt; 
+&lt;li&gt;Reduce the share capital and re-register a company from public to private.&lt;/li&gt;
+&lt;/ul&gt;</value>
+>>>>>>> f24e025710ff33d3af27f68703fd1b4322268a45
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -141,6 +149,10 @@
     <values>
         <field>isCardAllowed__c</field>
         <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDigitalSignatureNeeded__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isMajorityForm__c</field>

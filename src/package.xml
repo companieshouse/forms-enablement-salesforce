@@ -51,6 +51,7 @@
         <members>DS01Serialiser</members>
         <members>DS02Step2Navigator</members>
         <members>DeveloperToolsController</members>
+        <members>DigitalSignatureController</members>
         <members>DirectorDetails</members>
         <members>DirectorsListController</members>
         <members>DocStatusController</members>
@@ -62,12 +63,13 @@
         <members>DocuSignUrlBuilder</members>
         <members>DocumentController</members>
         <members>DocumentDownloadController</members>
-        <members>DocusignTecipientTriggerStatusHandler</members>
+        <members>DocusignLibrary</members>
         <members>DynamicField</members>
         <members>DynamicTestController</members>
         <members>EditSharesByTypeController</members>
         <members>EmailTemplatesBuilder</members>
         <members>EmbedDocuSignController</members>
+        <members>ExternalEmbedDocuSignController</members>
         <members>Form</members>
         <members>FormAPISubmissionManager</members>
         <members>FormAPISubmissionManagerTest</members>
@@ -160,12 +162,8 @@
         <members>CurrencySelection</members>
         <members>DS01</members>
         <members>DeveloperTools</members>
+        <members>DigitalSignature</members>
         <members>DirectorsList</members>
-        <members>DocuSignDeclined</members>
-        <members>DocuSignRedirect</members>
-        <members>DocuSignSigningCompleted</members>
-        <members>DocuSignTimeout</members>
-        <members>DocuSignViewed</members>
         <members>DocumentDownload</members>
         <members>Documents</members>
         <members>DynamicTest</members>
@@ -173,6 +171,7 @@
         <members>EmbedDocuSign</members>
         <members>EntryPoint</members>
         <members>Exception</members>
+        <members>ExternalEmbedDocuSign</members>
         <members>FormApplication</members>
         <members>FreeForm</members>
         <members>Guidance</members>

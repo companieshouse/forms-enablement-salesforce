@@ -91,7 +91,7 @@
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">EmbedDocuSign</value>
+        <value xsi:type="xsd:string">DigitalSignature</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
