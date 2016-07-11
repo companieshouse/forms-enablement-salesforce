@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: PromoterTable
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-06-05  Initial development.
 */
@@ -119,8 +119,8 @@ public with sharing class PromoterController extends TransactionStepControllerBa
     }
     public void checkShares() {
         allShares = new List < Shares__c > ();
-        for (Shares__c currentShares: submissionMgr.submission.Shares__r) {
-            if (currentShares.SHARETYPE__c == 'promoter') {
+        for (Shares__c currentShares : submissionMgr.submission.Shares__r) {
+            if (currentShares.SHARETYPE__c == 'PROMOTER') {
                 allShares.add(currentShares);
             }
         }

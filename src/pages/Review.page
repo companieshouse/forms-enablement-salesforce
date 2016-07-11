@@ -527,34 +527,69 @@
                         <br/>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:outputPanel id='SH08' rendered="{!showSh08}">
-                    <apex:outputPanel rendered="{!showTable}" id="BuildTable">
-                            <div class="form-group entire-wrapper">
-                                <table class="check-your-answers">
-                                    <thead>
+                <apex:outputPanel id='sh08' rendered="{!custompanelView}">
+                    <apex:outputPanel id='SH08Tables' rendered="{!showSh08}">
+                        <div class="form-group entire-wrapper">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5"> {!sh08HelperText} </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Existing class/Description of shares</td>
+                                        <td>Name or new (or new name) or other designation</td>
+                                    </tr>
+                                    <apex:repeat value="{!sh08Family}" var="sp" id="SH08-theRepeat">
                                         <tr>
-                                            <th colspan="5"> {!headerText2} </th>
+                                            <td>
+                                                <apex:outputText value="{!sp.Class_of_Shares__c}" id="oldshareclass" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.Class_of_Share_new__c}" id="newshareclassnew" />
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel id="promoters" rendered="{!custompanelView}">
+                    <apex:outputPanel rendered="{!showPromoters}" id="promoters-BuildTable">
+                        <div class="form-group entire-wrapper">
+                            <table class="check-your-answers">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5"> Promoters</th>
+                                        <br/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Amount paid or intended to be paid</td>
+                                        <td>Any benefit given or intended to be given</td>
+                                        <td>Consideration for such payment or benefit</td>
+                                    </tr>
+                                    <br/>
+                                    <apex:repeat value="{!promoters}" var="sp" id="promoters-theRepeat">
                                         <tr>
-                                            <td>Existing class/Description of shares</td>
-                                            <td>Name or new (or new name) or other designation</td>
+                                            <td>
+                                                <apex:outputText value="{!sp.amountPaidUp__c}" id="promoters-paidUPTable" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.benefitGiven__c}" id="promoters-BenefitGivenTable" />
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{!sp.considerationGiven__c}" id="promoters-considerationGivenTable" />
+                                            </td>
                                         </tr>
-                                        <apex:repeat value="{!sh08Family}" var="sp" id="theRepeat">
-                                            <tr>
-                                                <td>
-                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="oldshareclass" />
-                                                </td>
-                                                <td>
-                                                    <apex:outputText value="{!sp.Class_of_Share_new__c}" id="newshareclassnew" />
-                                                </td>
-                                            </tr>
-                                        </apex:repeat>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </apex:outputPanel>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
                 </apex:outputPanel>
                 <!--<apex:outputPanel id="customPanel-Signing" rendered="{!custompanelView}">
                     <h1 class="heading-xlarge">

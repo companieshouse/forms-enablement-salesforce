@@ -10,248 +10,78 @@ Controller Class for Transaction Review Page
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
 public class ReviewController extends TransactionStepControllerBase {
-    public Boolean hasPageErrors {
-        get;
-        set;
-    }
-    public String currentErrorMessage {
-        get;
-        set;
-    }
-    public String displayText1 {
-        get;
-        set;
-    }
-    public Integer total {
-        get;
-        set;
-    }
-    public String displayText2 {
-        get;
-        set;
-    }
-    public String displayText3 {
-        get;
-        set;
-    }
-    public String headerText1 {
-        get;
-        set;
-    }
-    // dynamic set data
-    public String directorName {
-        get;
-        set;
-    }
-    public String companyName {
-        get;
-        set;
-    }
-    public String companyNumber {
-        get;
-        set;
-    }
-    public String presenterEmail {
-        get;
-        set;
-    }
-    public String presenterName {
-        get;
-        set;
-    }
-    public String presenterPhone {
-        get;
-        set;
-    }
-    public List < Officer__c > companyDirectors {
-        get;
-        set;
-    }
-    public List < Shares__c > preParticulars {
-        get;
-        set;
-    }
-    public String companyAddress {
-        get;
-        set;
-    }
-    public String companyAddress1 {
-        get;
-        set;
-    }
-    public String companyAddress2 {
-        get;
-        set;
-    }
-    public String companyregion {
-        get;
-        set;
-    }
-    public String companypostcode {
-        get;
-        set;
-    }
-    public String companyCountry {
-        get;
-        set;
-    }
-    public String companyLocality {
-        get;
-        set;
-    }
-    public Boolean showprevious {
-        get;
-        set;
-    }
-    public String reviewpagebutton {
-        get;
-        set;
-    }
-    public Boolean custompanelView {
-        get;
-        set;
-    }
-    public Boolean standardPanelView {
-        get;
-        set;
-    }
-    public Map < String, Shares__c > shareCurrencyMap {
-        get;
-        set;
-    }
-    public Map < Id, List < Shares__c >> viewlist {
-        get;
-        set;
-    }
-    public List < Attachment > reviewAttachments {
-        get;
-        set;
-    }
-    public Map < Integer, List < Shares__c >> viewmap {
-        get;
-        set;
-    }
-    public List < Shares__c > matchedShares {
-        get;
-        set;
-    }
-    public Map < Integer, String > viewkeys {
-        get;
-        set;
-    }
-    public List < Shares__c > sharesforBuilding {
-        get;
-        set;
-    }
-    public List < Shares__c > sharesforEditing {
-        get;
-        set;
-    }
-    public List < Shares__c > sharesforCancelling {
-        get;
-        set;
-    }
-    public List < Shares__c > variations {
-        get;
-        set;
-    }
-    public Boolean showStatementofCapital {
-        get;
-        set;
-    }
-    public Boolean showParticulars {
-        get;
-        set;
-    }
-    public Boolean showCancelledShares {
-        get;
-        set;
-    }
-    public String labelText {
-        get;
-        set;
-    }
-    public String reviewTitle {
-        get;
-        set;
-    }
-    public String dateQuestionText {
-        get;
-        set;
-    }
-    public String variationText {
-        get;
-        set;
-    }
-    public Boolean showCurrency {
-        get;
-        set;
-    }
-    public String rewviewTitle {
-        get;
-        set;
-    }
-    public String dateText {
-        get;
-        set;
-    }
-    public Date dateField {
-        get;
-        set;
-    }
-    public Boolean variationNotice {
-        get;
-        set;
-    }
-    public Boolean showreConversion {
-        get;
-        set;
-    }
-    public Boolean showRedemption {
-        get;
-        set;
-    }
-    public Boolean showConsolidation {
-        get;
-        set;
-    }
-    public Boolean showSubdivision {
-        get;
-        set;
-    }
-    public List < Shares__c > rECONVERSION {
-        get;
-        set;
-    }
-    public List < Shares__c > rEDEMPTION {
-        get;
-        set;
-    }
-    public List < Shares__c > cONSOLIDATION {
-        get;
-        set;
-    }
-    public List < Shares__c > sUBDIVISION {
-        get;
-        set;
-    }
-     public List < Shares__c > sh08Family {
-        get;
-        set;
-    }
-    public String sh08HelperText {get;set;}
-    public Boolean showSh08 {get;set;}
-    public Boolean shownewstructure {get;set;}
-    public Boolean showValueField {get;set;}
-    public String subdivisiontableHelperText {get;set;}
-    public String consolidationtableHelperText {get;set;}
-    public String redemptiontableHelperText {get;set;}
-    public String reconversiontableHelperText {get;set;}
+    public Boolean hasPageErrors { get; set; }
+    public String currentErrorMessage {get; set;}
+    public String displayText1 {get; set;}
+    public Integer total {get; set;}
+    public String displayText2 {get; set;}
+    public String displayText3 {get; set;}
+    public String headerText1 {get; set;}
+    public String directorName {get; set;}
+    public String companyName {get; set;}
+    public String companyNumber {get; set;}
+    public String presenterEmail {get; set;}
+    public String presenterName {get; set;}
+    public String presenterPhone {get; set;}
+    public List < Officer__c > companyDirectors {get; set;}
+    public List < Shares__c > preParticulars {get; set;}
+    public String companyAddress {get; set;}
+    public String companyAddress1 {get; set;}
+    public String companyAddress2 {get; set;}
+    public String companyregion {get; set;}
+    public String companypostcode {get; set;}
+    public String companyCountry {get; set;}
+    public String companyLocality {get; set;}
+    public Boolean showprevious {get; set;}
+    public String reviewpagebutton {get; set;}
+    public Boolean custompanelView {get; set;}
+    public Boolean standardPanelView {get; set;}
+    public Map < String, Shares__c > shareCurrencyMap {get; set;}
+    public Map < Id, List < Shares__c >> viewlist {get; set;}
+    public List < Attachment > reviewAttachments {get; set;}
+    public Map < Integer, List < Shares__c >> viewmap {get; set;}
+    public List < Shares__c > matchedShares {get; set;}
+    public Map < Integer, String > viewkeys {get; set;}
+    public List < Shares__c > sharesforBuilding {get; set;}
+    public List < Shares__c > sharesforEditing {get; set;}
+    public List < Shares__c > sharesforCancelling {get; set;}
+    public List < Shares__c > variations {get; set;}
+    public Boolean showStatementofCapital {get; set;}
+    public Boolean showParticulars {get; set;}
+    public Boolean showCancelledShares {get; set;}
+    public String labelText {get; set;}
+    public String reviewTitle {get; set;}
+    public String dateQuestionText {get; set;}
+    public String variationText {get; set;}
+    public Boolean showCurrency {get; set;}
+    public String rewviewTitle {get; set;}
+    public String dateText {get; set;}
+    public Date dateField {get; set;}
+    public Boolean variationNotice {get; set;}
+    public Boolean showreConversion {get; set;}
+    public Boolean showRedemption {get; set;}
+    public Boolean showConsolidation {get; set;}
+    public Boolean showSubdivision {get; set;}
+    public List < Shares__c > rECONVERSION {get; set;}
+    public List < Shares__c > rEDEMPTION {get; set;}
+    public List < Shares__c > cONSOLIDATION {get; set;}
+    public List < Shares__c > sUBDIVISION {get; set;}
+    public List < Shares__c > sh08Family {get; set;}
+    public List < Shares__c > promoters {get; set;}
+    public String sh08HelperText {get; set;}
+    public Boolean showSh08 {get; set;}
+    public Boolean shownewstructure {get; set;}
+    public Boolean showValueField {get; set;}
+    public String subdivisiontableHelperText {get; set;}
+    public String consolidationtableHelperText {get; set;}
+    public String redemptiontableHelperText {get; set;}
+    public String reconversiontableHelperText {get; set;}
+    public Boolean showPromoters {get; set;}
 
     public ReviewController() {
         super();
@@ -293,8 +123,10 @@ public class ReviewController extends TransactionStepControllerBase {
         rEDEMPTION = new List < Shares__c > ();
         cONSOLIDATION = new List < Shares__c > ();
         sUBDIVISION = new List < Shares__c > ();
-        sh08Family = new List <Shares__c> ();
+        sh08Family = new List < Shares__c > ();
+        promoters = new List < Shares__c > ();
         showCurrency = true;
+
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
         }
@@ -320,7 +152,7 @@ public class ReviewController extends TransactionStepControllerBase {
         }
     }
     public void shareRouter() {
-        for (Shares__c totalShares: submissionMgr.submission.Shares__r) {
+        for (Shares__c totalShares : submissionMgr.submission.Shares__r) {
             if (totalShares.SHARETYPE__c == 'STATEMENTOFCAPITAL') {
                 sharesforBuilding.add(totalShares);
             } else if (totalShares.SHARETYPE__c == 'CANCELLEDSHARES') {
@@ -340,7 +172,10 @@ public class ReviewController extends TransactionStepControllerBase {
             } else if (totalShares.SHARETYPE__c == 'SH08') {
                 sh08Family.add(totalShares);
                 //this should never happen as we have shares with no type
-            }else if (totalShares.SHARETYPE__c == 'TRANSFERRED') {
+            } else if (totalShares.SHARETYPE__c == 'PROMOTER') {
+                promoters.add(totalShares);
+                //this should never happen as we have shares with no type
+            } else if (totalShares.SHARETYPE__c == 'TRANSFERRED') {
                 sharesforCancelling.add(totalShares);
                 //this should never happen as we have shares with no type
             }
@@ -353,12 +188,16 @@ public class ReviewController extends TransactionStepControllerBase {
             showParticulars = true;
             showCurrency = false;
         }
-        if (sharesforCancelling.size() > 0 && sharesforCancelling[0].SHARETYPE__c =='CANCELLEDSHARES') {
+        if (promoters.size() > 0) {
+            //showCurrency = false;
+            showPromoters = true;
+        }
+        if (sharesforCancelling.size() > 0 && sharesforCancelling[0].SHARETYPE__c == 'CANCELLEDSHARES') {
             showCancelledShares = true;
             dateText = 'Cancellation Date';
             reviewTitle = 'Shares to cancel';
         }
-        if (sharesforCancelling.size() > 0 && sharesforCancelling[0].SHARETYPE__c =='TRANSFERRED') {
+        if (sharesforCancelling.size() > 0 && sharesforCancelling[0].SHARETYPE__c == 'TRANSFERRED') {
             showCancelledShares = true;
             dateText = 'Date(s) shares were sold or transferred';
             reviewTitle = 'Number of shares sold or transferred';
@@ -373,23 +212,23 @@ public class ReviewController extends TransactionStepControllerBase {
             subdivisiontableHelperText = 'Sub-division';
             shownewstructure = true;
         }
-        if(sh08Family.size >0){
+        if (sh08Family.size() > 0) {
             showSh08 = true;
-            sh08HelperText =''; 
+            sh08HelperText = 'Class(es) of shares';
         }
         if (cONSOLIDATION.size() > 0) {
             showConsolidation = true;
-            consolidationtableHelperText= 'Consolidation';
+            consolidationtableHelperText = 'Consolidation';
             shownewstructure = true;
         }
         if (rECONVERSION.size() > 0) {
             showreConversion = true;
-            reconversiontableHelperText= 'Reconversion';
+            reconversiontableHelperText = 'Reconversion';
             showValueField = true;
         }
         if (rEDEMPTION.size() > 0) {
             showRedemption = true;
-            redemptiontableHelperText= 'Redemption';
+            redemptiontableHelperText = 'Redemption';
         }
         if (variations.size() > 0) {
             buildLABELS();
@@ -401,13 +240,13 @@ public class ReviewController extends TransactionStepControllerBase {
     }
     public void buildCapitalMap() {
         if (sharesforBuilding.size() > 0) {
-            for (Shares__c sharecurrencylimiter: sharesforBuilding) {
+            for (Shares__c sharecurrencylimiter : sharesforBuilding) {
                 shareCurrencyMap.put(sharecurrencylimiter.Currency__c, sharecurrencylimiter);
             }
             List < String > listKeys = new List < String > (shareCurrencyMap.keyset());
             for (Integer i = 0; i < listKeys.size(); i++) {
                 matchedShares = new List < Shares__c > ();
-                for (Shares__c buildShares: sharesforBuilding) {
+                for (Shares__c buildShares : sharesforBuilding) {
                     if (buildShares.Currency__c == listKeys.get(i)) {
                         matchedShares.add(buildShares);
                         viewmap.put(i, matchedShares);

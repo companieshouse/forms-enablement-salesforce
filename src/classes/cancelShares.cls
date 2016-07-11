@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: AddShares
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
@@ -164,10 +164,10 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
-    public String shareTYPE {get;set;}
-    public String dateQuestionLabel {get;set;}
-    public String pageTitle {get;set;}
-    public Boolean cancelledSharesVar {get;set;}
+    public String shareTYPE {get; set;}
+    public String dateQuestionLabel {get; set;}
+    public String pageTitle {get; set;}
+    public Boolean cancelledSharesVar {get; set;}
     public cancelShares() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -197,7 +197,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             hintText = 'Total number of shares cancelled in this class';
             dateQuestionText = 'Enter date(s) shares were cancelled';
             variationText = 'Date(s) shares were cancelled';
-            dateQuestionLabel ='Date(s) shares were cancelled';
+            dateQuestionLabel = 'Date(s) shares were cancelled';
             pageTitle = 'Cancel Shares';
             cancelledSharesVar = true;
             showdates = true;
@@ -222,9 +222,9 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         }
         // used for 4-7;
         //for (Shares__c previouslycancelledshares: submissionMgr.submission.Shares__r) {
-            //if (previouslycancelledshares.cancelled_shares__c == true) {
-            //    currentShares.add(previouslycancelledshares);
-            //}
+        //if (previouslycancelledshares.cancelled_shares__c == true) {
+        //    currentShares.add(previouslycancelledshares);
+        //}
         //}
         currentShares = submissionMgr.submission.Shares__r;
 
@@ -257,12 +257,12 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         }
         if (numberofshares.toPlainString() == '0') {
             hasPageErrors = true;
-            currentErrorMessage = 'Must add the number of shares';
+            currentErrorMessage = 'You must enter the number of shares for this class.';
             return null;
         }
         if (aggregateNominalValue.toPlainString() == '0') {
             hasPageErrors = true;
-            currentErrorMessage = 'Aggregate nominal value must be greater than 0';
+            currentErrorMessage = 'You must enter the nominal value of each share.';
             return null;
         }
         if (cancellationDate > date.today()) {
@@ -272,7 +272,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         }
         if (cancellationDate == null) {
             hasPageErrors = true;
-            currentErrorMessage = 'Date cannot be empty';
+            currentErrorMessage = 'You must enter the date on which the shares were cancelled.';
             return null;
         }
 
@@ -281,7 +281,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         //    currentErrorMessage = 'Must add the cancellation date';
         //    return null;
         //}
-        
+
         sharesToAdd.add(new Shares__c(ShareType__c = shareTYPE, Date__c = cancellationDate, cancelled_shares__c = cancelledSharesVar, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
         insert sharesToAdd;
 

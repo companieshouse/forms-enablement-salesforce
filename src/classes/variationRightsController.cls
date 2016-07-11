@@ -156,9 +156,9 @@ public with sharing class variationRightsController extends TransactionStepContr
     }
     public void buildLABELS() {
         if (submissionMgr.submission.Form_Name__c.contains('SH10')) {
-            labelText = 'Notice of particulars of variation of rights attached to shares';
+            labelText = '';// 'Notice of particulars of variation of rights attached to shares';
             dateQuestionText = 'Date of variation of rights';
-            dateQuestionTextHint = '';
+            dateQuestionTextHint = 'This is the date on which the company\'s Board of Directors approved the variation. This must not be a future date.';
             variationText = 'Details of variation of rights';
             variationTextHint = 'Please give details of the variation of rights attached to shares.';
         } else if (submissionMgr.submission.Form_Name__c.contains('SH11')) {
