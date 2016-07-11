@@ -6,6 +6,9 @@
                     <h1 class="heading-xlarge">
                         {!headerText1}
                     </h1>
+                    <p class='lede'>
+                        {!displayText}
+                    </p>
                     <apex:outputPanel id="emptypanel" />
                     <apex:outputPanel id="masterPanel">
                         <apex:outputPanel id="redenomination" rendered="{!showRedenom}">

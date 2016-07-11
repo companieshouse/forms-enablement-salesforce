@@ -31,13 +31,14 @@ Ver. Author        Date        Detail
                 <h1 class="heading-xlarge">
                     <apex:outputText escape="false" value="{!pageTitle3}"></apex:outputText>
                 </h1>
-
                 <h1 class="heading-large">
                 </h1>
                 <p class="lede">
                     <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
                 </p>
-                <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
+                <p class="lede">
+                    <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
+                </p>
                 <apex:outputText escape="false" value="{!pageText3}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText4}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText5}"></apex:outputText>

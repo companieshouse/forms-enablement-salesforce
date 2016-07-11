@@ -164,6 +164,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String shareTYPE {get;set;}
     public String dateQuestionLabel {get;set;}
     public String pageTitle {get;set;}
     public Boolean cancelledSharesVar {get;set;}
@@ -200,6 +201,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             pageTitle = 'Cancel Shares';
             cancelledSharesVar = true;
             showdates = true;
+            shareTYPE = 'CANCELLEDSHARES';
         } else if (submissionMgr.submission.Form_Name__c.contains('SH04')) {
             labelText = 'Number of shares sold or transferred';
             hintText = '';
@@ -209,6 +211,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             variationText = '';
             cancelledSharesVar = false;
             showdates = true;
+            shareTYPE = 'TRANSFERRED';
         }
     }
 
@@ -279,7 +282,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         //    return null;
         //}
         
-        sharesToAdd.add(new Shares__c(ShareType__c = 'CANCELLEDSHARES', Date__c = cancellationDate, cancelled_shares__c = cancelledSharesVar, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
+        sharesToAdd.add(new Shares__c(ShareType__c = shareTYPE, Date__c = cancellationDate, cancelled_shares__c = cancelledSharesVar, Total_aggregate_amount_unpaid__c = aggregateunpaidAmount, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Number_of_Shares__c = numberofshares, Currency__c = selectedCurrency, Class_of_Shares__c = classofshares, Aggregate_nominal_value__c = aggregateNominalValue, ActiveData__c = true));
         insert sharesToAdd;
 
         PageReference pg = new PageReference('/CancelledShares');

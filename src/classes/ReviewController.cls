@@ -240,9 +240,17 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+     public List < Shares__c > sh08Family {
+        get;
+        set;
+    }
+    public String sh08HelperText {get;set;}
+    public Boolean showSh08 {get;set;}
+    public Boolean shownewstructure {get;set;}
+    public Boolean showValueField {get;set;}
     public String subdivisiontableHelperText {get;set;}
     public String consolidationtableHelperText {get;set;}
-    public String redtemptionableHelperText {get;set;}
+    public String redemptiontableHelperText {get;set;}
     public String reconversiontableHelperText {get;set;}
 
     public ReviewController() {
@@ -285,6 +293,7 @@ public class ReviewController extends TransactionStepControllerBase {
         rEDEMPTION = new List < Shares__c > ();
         cONSOLIDATION = new List < Shares__c > ();
         sUBDIVISION = new List < Shares__c > ();
+        sh08Family = new List <Shares__c> ();
         showCurrency = true;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
@@ -328,8 +337,11 @@ public class ReviewController extends TransactionStepControllerBase {
                 cONSOLIDATION.add(totalShares);
             } else if (totalShares.SHARETYPE__c == 'SUBDIVISION') {
                 sUBDIVISION.add(totalShares);
-            } else if (totalShares.cancelled_shares__c == false) {
-                sharesforEditing.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'SH08') {
+                sh08Family.add(totalShares);
+                //this should never happen as we have shares with no type
+            }else if (totalShares.SHARETYPE__c == 'TRANSFERRED') {
+                sharesforCancelling.add(totalShares);
                 //this should never happen as we have shares with no type
             }
         }
@@ -341,10 +353,15 @@ public class ReviewController extends TransactionStepControllerBase {
             showParticulars = true;
             showCurrency = false;
         }
-        if (sharesforCancelling.size() > 0) {
+        if (sharesforCancelling.size() > 0 && sharesforCancelling[0].SHARETYPE__c =='CANCELLEDSHARES') {
             showCancelledShares = true;
             dateText = 'Cancellation Date';
             reviewTitle = 'Shares to cancel';
+        }
+        if (sharesforCancelling.size() > 0 && sharesforCancelling[0].SHARETYPE__c =='TRANSFERRED') {
+            showCancelledShares = true;
+            dateText = 'Date(s) shares were sold or transferred';
+            reviewTitle = 'Number of shares sold or transferred';
         }
         if (sharesforEditing.size() > 0) {
             showCancelledShares = true;
@@ -353,19 +370,26 @@ public class ReviewController extends TransactionStepControllerBase {
         }
         if (sUBDIVISION.size() > 0) {
             showSubdivision = true;
-            subdivisiontableHelperText = '';
+            subdivisiontableHelperText = 'Sub-division';
+            shownewstructure = true;
+        }
+        if(sh08Family.size >0){
+            showSh08 = true;
+            sh08HelperText =''; 
         }
         if (cONSOLIDATION.size() > 0) {
             showConsolidation = true;
-            consolidationtableHelperText= '';
+            consolidationtableHelperText= 'Consolidation';
+            shownewstructure = true;
         }
         if (rECONVERSION.size() > 0) {
             showreConversion = true;
-            reconversiontableHelperText= '';
+            reconversiontableHelperText= 'Reconversion';
+            showValueField = true;
         }
         if (rEDEMPTION.size() > 0) {
             showRedemption = true;
-            redtemptionableHelperText= '';
+            redemptiontableHelperText= 'Redemption';
         }
         if (variations.size() > 0) {
             buildLABELS();

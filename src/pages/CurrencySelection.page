@@ -251,7 +251,7 @@
                         </h1>
                         <p class="lede">{!headerText2}
                         </p>
-                        <label class="form-label" for="currency-item">{!displayText}
+                        <label class="form-label" for="currency-item"><apex:outputText escape="false" value="{!displayText}"></apex:outputText>
                             <span class="form-hint" id="CurrencyHint"></span>
                         </label>
                         <input class="form-control" name="currency-item" id="currency-input" />
@@ -264,7 +264,9 @@
                     <br/>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showCurrentShares}" id="currentsharestable">
-                <p class="lede">It looks like you have previous share capital?
+                <p class="lede">Did you forget to complete your statement of capital?
+                <br/>
+                You previously told us about the company's shares. Do you wish to update this?
                         </p>
                     <div class="form-group">
                         <table class="check-your-answers">
