@@ -113,13 +113,11 @@
     </fields>
     <fields>
         <fullName>RecipientId__c</fullName>
-        <externalId>false</externalId>
+        <displayFormat>{0}</displayFormat>
+        <externalId>true</externalId>
         <label>Recipient Id</label>
-        <length>5</length>
-        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>AutoNumber</type>
     </fields>
     <fields>
         <fullName>Surname__c</fullName>
