@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -84,7 +84,8 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">You cannot use this form to give notice of an allotment of shares by a limited company. To do this please use form SH01.</value>
+        <value xsi:type="xsd:string">You’ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -104,7 +105,8 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">You may use this form to give notice of an allotment of a new share class by an unlimited company.</value>
+        <value xsi:type="xsd:string">You can use this service to: 
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;give notice of an allotment of a new share class by an unlimited company&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -132,10 +134,6 @@
     </values>
     <values>
         <field>isCardAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
-        <field>isDigitalSignatureNeeded__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>

@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">add content</value>
+        <value xsi:type="xsd:string">Share Capital</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">add content</value>
+        <value xsi:type="xsd:string">Please select your share currency</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

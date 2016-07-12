@@ -245,10 +245,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>DocusignTecipientTriggerStatusHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>DynamicField</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1604,26 +1600,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DirectorsList</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignDeclined</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignRedirect</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignSigningCompleted</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignTimeout</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>DocuSignViewed</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

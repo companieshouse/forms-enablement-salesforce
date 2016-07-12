@@ -142,10 +142,6 @@ Your request will need to be approved by the sole director if there&apos;s only 
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
-        <field>isDigitalSignatureNeeded__c</field>
-        <value xsi:type="xsd:boolean">true</value>
-    </values>
-    <values>
         <field>isMajorityForm__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>

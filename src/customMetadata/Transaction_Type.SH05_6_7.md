@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -79,19 +79,17 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You may use this form to give notice
-of a cancellation of treasury shares.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Before you start&lt;/p&gt;
+You&apos;ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt; What this form is NOT for&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You cannot use this form to give
-notice of a sale or transfer of
-treasury shares. To do this, please
-use form SH04.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
@@ -103,7 +101,8 @@ use form SH04.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">What this form is for</value>
+        <value xsi:type="xsd:string">You can use this service to:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;give notice of a cancellation of shares by a limited company on purchase&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -131,10 +130,6 @@ use form SH04.&lt;/p&gt;</value>
     </values>
     <values>
         <field>isCardAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
-        <field>isDigitalSignatureNeeded__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>

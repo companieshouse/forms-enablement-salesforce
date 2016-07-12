@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -84,7 +84,8 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">You’ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -104,14 +105,13 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">You may use this form to make an
-application by a public company for
-a trading certificate.</value>
+        <value xsi:type="xsd:string">You can use this service to: 
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;to make an application by a public company for a trading certicate
+&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Application for trading certificate
-for a public company</value>
+        <value xsi:type="xsd:string">Application for trading certi cate for a public company</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -135,10 +135,6 @@ for a public company</value>
     </values>
     <values>
         <field>isCardAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
-        <field>isDigitalSignatureNeeded__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>

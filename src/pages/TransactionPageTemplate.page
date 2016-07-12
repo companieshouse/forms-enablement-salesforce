@@ -22,47 +22,34 @@ Ver. Author        Date        Detail
 -->
 <apex:page standardStyleSheets="false">
 
-<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]--> 
-   
-
+<html>
+    
 <head>
 
 
 <c:head />
 </head>
 
-<body class="">
-    <c:bodyScript />
+<body>
+<c:bodyScript />
 
+<div id="body" class="entire-wrapper">
     <c:header />
 
-    <div id="global-header-bar"></div>
-
-    <div id="wrapper">
-    <main id="content" role="main">
-
+    <main id="page-container" class="search" role="main">
         <c:phaseBanner />
-        
         <div class="grid-row">
+            <br/>
             <div class="column-two-thirds">
                 <apex:insert name="content"/>
             </div>
-            <div class="column-third">
+            <div class="column-third features_column">
             </div>
         </div>
     </main>
-    </div>
-    <c:footer />
+</div>
 
-
-    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk-template.js')}" type="text/javascript"></script>
-    <!-- Javascript -->
-    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/details.polyfill.js')}"></script>
-    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/jquery-1.11.3.js')}"></script>
-    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
-    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
-      <!-- GOV.UK Prototype kit v2.1.0 -->
+<c:footer />
 
 </body>
 

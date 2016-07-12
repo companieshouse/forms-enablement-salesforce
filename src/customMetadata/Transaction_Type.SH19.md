@@ -91,16 +91,17 @@
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;The company number&lt;/li&gt; 
-&lt;li&gt;The company authentication code&lt;/li&gt; 
-&lt;li&gt;A credit or debit card 
-&lt;/li&gt; 
-&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;Before you start:&lt;/p&gt;
+&lt;p&gt;It costs £10 to use the standard service or £50 for the same day service (both paid by debit or credit card or PayPal account).&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;A fee is required of £10 for the standard service or £50 for a same day service.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You&apos;ll need:&lt;/p&gt;
+&lt;ul class=&quot;list list-bullet&quot;&gt; 
+&lt;li&gt;the company number&lt;/li&gt; 
+&lt;li&gt;the company authentication code&lt;/li&gt;
+&lt;li&gt;a credit or debit card or PayPal account&lt;/li&gt; 
+&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
@@ -112,15 +113,7 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-<<<<<<< HEAD
         <value xsi:type="xsd:string">&lt;p&gt;You can use this service to:&lt;/p&gt;</value>
-=======
-        <value xsi:type="xsd:string">&lt;p&gt;This service is available for:&lt;/p&gt;	
-&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;A private limited company reducing its capital supported by a solvency statement;&lt;/li&gt; 
-&lt;li&gt;Reduce the share capital and re-register a company from public to private.&lt;/li&gt;
-&lt;/ul&gt;</value>
->>>>>>> f24e025710ff33d3af27f68703fd1b4322268a45
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -132,7 +125,7 @@
     </values>
     <values>
         <field>above_button_text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Additional documents are required within the statement of capital (SH19) to register the reduction of share capital.</value>
     </values>
     <values>
         <field>companySearchPageText__c</field>
@@ -149,10 +142,6 @@
     <values>
         <field>isCardAllowed__c</field>
         <value xsi:type="xsd:boolean">true</value>
-    </values>
-    <values>
-        <field>isDigitalSignatureNeeded__c</field>
-        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isMajorityForm__c</field>

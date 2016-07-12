@@ -51,7 +51,7 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Shares cancelled</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

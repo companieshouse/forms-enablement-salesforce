@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Header Content</value>
+        <value xsi:type="xsd:string">Tell us about the reduction of share capital in</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

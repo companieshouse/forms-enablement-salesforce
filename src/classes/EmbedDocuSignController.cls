@@ -106,7 +106,7 @@ public with sharing class EmbedDocuSignController extends TransactionStepControl
             }
             
         // Transaction has been declined
-        } else if (submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED){
+        } else if (submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_DECLINED_SIG){
             declined = true;
             return null;
         

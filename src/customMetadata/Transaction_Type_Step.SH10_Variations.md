@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This is the date on which the company&apos;s Board of Directors approved the variation. This must not be a future date.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">SH10</value>
+        <value xsi:type="xsd:string">What are the details of the variation of rights attached to shares?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -79,8 +79,8 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">What this form is NOT for &lt;br/&gt;
--You cannot use this form to give notice of redenomination under section 625 of the Companies Act 2006. To do this, please use form SH14.</value>
+        <value xsi:type="xsd:string">You’ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -100,8 +100,9 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">What this form is for&lt;br/&gt;
--You may use this form to give notice of a reduction of capital following redenomination</value>
+        <value xsi:type="xsd:string">You can use this service to: 
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;give notice of a reduction of capital following redenomination 
+&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -129,10 +130,6 @@
     </values>
     <values>
         <field>isCardAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
-        <field>isDigitalSignatureNeeded__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>

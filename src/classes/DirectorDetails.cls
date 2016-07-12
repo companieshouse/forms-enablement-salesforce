@@ -100,7 +100,12 @@ public class DirectorDetails extends TransactionStepControllerBase
     {
 
 
-        
+        if (submissionMgr.submission.Officers__r.size() == 1)
+        {
+            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+
+                return nextAction();
+        }
 
         // must test better against on behalf multiple director flow.
         if (submissionMgr.submission.Officers__r.size() >= 1)

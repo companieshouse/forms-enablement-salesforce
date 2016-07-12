@@ -165,6 +165,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             List<Officer__c> officerList = new List<Officer__c>();
 
+            //We want only director that haven't resign and or will resign in futur 
+            Integer recipientID = 1;
             for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
                 if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
                 {
@@ -174,7 +176,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
                     officerList.add(new Officer__c(Name= officer.name ,Title__c = extractOfficerName(2, officer.name),
                     Forename__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
                     Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), Transaction__c =submissionMgr.submission.Id ));
+                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
+                      recipientID++;
 
                 }else if (officer.officer_role == 'llp-designated-member' && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = true;
@@ -183,7 +186,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
                     officerList.add(new Officer__c(Name= officer.name ,Title__c = extractOfficerName(2, officer.name),
                     Forename__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
                     Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)),  Transaction__c =submissionMgr.submission.Id ));
+                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
+                    recipientID++;
                 }
             }
 

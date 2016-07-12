@@ -576,7 +576,7 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Declined</fullName>
+                <fullName>DeclinedSig</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -722,16 +722,6 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isDigitalSignatureNeeded__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field show if the form contains a digital signature</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Property checked if the form - transaction need to be signed digitally</inlineHelpText>
-        <label>is digital signature needed?</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>isLLP__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -808,26 +798,6 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isSigningFinished__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field shows if the transaction has finished with signing</description>
-        <externalId>false</externalId>
-        <inlineHelpText>If checked then signing process is finished</inlineHelpText>
-        <label>is signing finished</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>isSigningStarted__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field shows if the transaction has started a signing ceremony</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Property showing if the transaction is awaiting signature</inlineHelpText>
-        <label>is signing started?</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>nonofficerPresenter__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -885,16 +855,6 @@ to any promoter of the company?</inlineHelpText>
         <unique>false</unique>
     </fields>
     <label>Transaction</label>
-    <listViews>
-        <fullName>All</fullName>
-        <columns>NAME</columns>
-        <columns>CompanyName__c</columns>
-        <columns>CompanyNumber__c</columns>
-        <columns>Status__c</columns>
-        <columns>Transaction_Type__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <listViews>
         <fullName>All1</fullName>
         <columns>NAME</columns>

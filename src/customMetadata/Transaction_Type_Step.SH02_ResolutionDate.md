@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This is the date on which the Board of the Directors approved the change(s). For example, 10 May 2016. This must not be a future date</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Date of resolution</value>
+        <value xsi:type="xsd:string">What is the date of resolution of the change(s)?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

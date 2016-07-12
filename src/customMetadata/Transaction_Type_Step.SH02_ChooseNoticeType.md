@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Notice of consolidation, sub-division, redemption of shares or re-conversion of stock into shares</value>
+        <value xsi:type="xsd:string">What type of change do you want to report?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

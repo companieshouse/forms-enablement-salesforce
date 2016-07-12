@@ -267,15 +267,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isDigitalSignatureNeeded__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field show if the form need to be signed digitally</description>
-        <externalId>false</externalId>
-        <inlineHelpText>This field show if the form need to be signed digitally</inlineHelpText>
-        <label>is digital signature needed?</label>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>isMajorityForm__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Please select this option if you want the Directors Email screen to be validated with the majority rule</description>

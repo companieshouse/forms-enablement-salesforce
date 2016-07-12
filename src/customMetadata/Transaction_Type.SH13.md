@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -79,7 +79,8 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">You’ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -99,8 +100,8 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">What this form is for &lt;br/&gt;
--You may use this form to give notice of a new (or new name) or other designation of a class of members. You may only use this form for a company without share capital.</value>
+        <value xsi:type="xsd:string">You can use this service to: 
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;give notice of a name (or new name) or other designation of a class of members&lt;/li&gt;&lt;li&gt;You may only use this form for a company without share capital&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -128,10 +129,6 @@
     </values>
     <values>
         <field>isCardAllowed__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
-        <field>isDigitalSignatureNeeded__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
