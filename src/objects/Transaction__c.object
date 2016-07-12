@@ -712,12 +712,42 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isSigningFinished__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows if the transaction has finished with signing</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked then signing process is finished</inlineHelpText>
+        <label>is signing finished</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSigningStarted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows if the transaction has started a signing ceremony</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Property showing if the transaction is awaiting signature</inlineHelpText>
+        <label>is signing started?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isBehalfSignatoryEnable__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to control if we will display the flow of behalf signature selection and input screen</description>
         <externalId>false</externalId>
         <inlineHelpText>TO NO TOUCH THIS FIELD BACK END FIELD ONLY</inlineHelpText>
         <label>is behalf signatory enable?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isDigitalSignatureNeeded__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field show if the form contains a digital signature</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Property checked if the form - transaction need to be signed digitally</inlineHelpText>
+        <label>is digital signature needed?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

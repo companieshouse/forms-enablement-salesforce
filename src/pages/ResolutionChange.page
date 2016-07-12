@@ -1,37 +1,51 @@
 <apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="ResolutionChangeController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
-                <div class="form-group entire-wrapper">
-                    <h1 class="heading-xlarge">
-                        {!headerText1}
-                    </h1>
-                    <p class='lede'>
-                        {!displayText}
-                    </p>
-                    <apex:outputPanel id="emptypanel" />
-                    <apex:outputPanel id="masterPanel">
-                        <apex:outputPanel id="redenomination" rendered="{!showRedenom}">
-                            <label class="form-label" for="redenominateDate">{!displayText2}
-                                <span class="form-hint" id="redenominateDateHint"></span>
-                            </label>
-                            <apex:input type="date" styleClass="form-control" value="{!redenominateDate}" id="redenominateDate" />
+            <apex:form>
+                <apex:outputPanel id="emptypanel" />
+                <apex:outputPanel id="masterPanel">
+                    <div class="form-group entire-wrapper">
+                        <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                    An error has occurred.
+                                </h1>
+                                <ul class="error-summary-list">
+                                    <li>
+                                        <span class="error-message">{!currentErrorMessage}</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </apex:outputPanel>
-                        <apex:outputPanel id="reducecap" rendered="{!showReducedCap}">
-                            <label class="form-label" for="date">{!displayText3}
-                                <span class="form-hint" id="reduceCapDateHint"></span>
-                            </label>
-                            <apex:input type="date" styleClass="form-control" value="{!reduceCapitalDate}" id="reduceCapital" />
+                        <apex:outputPanel id='datepanel'>
+                            <h1 class="heading-xlarge">
+                                {!headerText1}
+                            </h1>
+                            <p class='lede'>
+                                {!displayText}
+                            </p>
+                            <apex:outputPanel id="redenomination" rendered="{!showRedenom}">
+                                <label class="form-label" for="redenominateDate">{!displayText2}
+                                    <span class="form-hint" id="redenominateDateHint"></span>
+                                </label>
+                                <apex:input type="date" styleClass="form-control" value="{!redenominateDate}" id="redenominateDate" />
+                            </apex:outputPanel>
+                            <apex:outputPanel id="reducecap" rendered="{!showReducedCap}">
+                                <label class="form-label" for="date">{!displayText3}
+                                    <span class="form-hint" id="reduceCapDateHint"></span>
+                                </label>
+                                <apex:input type="date" styleClass="form-control" value="{!reduceCapitalDate}" id="reduceCapital" />
+                            </apex:outputPanel>
+                            <apex:outputPanel id="assignedDate" rendered="{!showAssignedDate}">
+                                <label class="form-label" for="assignedDatelabel">{!displayText4}
+                                    <span class="form-hint" id="assignedDateHint"></span>
+                                </label>
+                                <apex:input type="date" styleClass="form-control" value="{!assignmentDate}" id="assignedDateField" />
+                            </apex:outputPanel>
                         </apex:outputPanel>
-                        <apex:outputPanel id="assignedDate" rendered="{!showAssignedDate}">
-                            <label class="form-label" for="assignedDatelabel">{!displayText4}
-                                <span class="form-hint" id="assignedDateHint"></span>
-                            </label>
-                            <apex:input type="date" styleClass="form-control" value="{!assignmentDate}" id="assignedDateField" />
-                        </apex:outputPanel>
-                    </apex:outputPanel>
-                </div>
-                <apex:commandButton rerender="none" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                    </div>
+                </apex:outputPanel>
+                <apex:commandButton rerender="masterPanel" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
             </apex:form>

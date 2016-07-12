@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: ResolutionChange
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-06-05  Initial development.
 */
@@ -133,31 +133,13 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         } else if (submissionMgr.submission.Form_Name__c == 'SH15') {
             showRedenom = true;
             showReducedCap = true;
-        }else if (submissionMgr.submission.Form_Name__c == 'SH02') {
+        } else if (submissionMgr.submission.Form_Name__c == 'SH02') {
             showReducedCap = true;
         }
     }
     private void persistStep() {
         List < Shares__c > sharesToAdd = new List < Shares__c > ();
-        //if (classofshares == null || classofshares.length() == 0) {
-        //    hasPageErrors = true;
-        //    currentErrorMessage = 'Must add a class of shares';
-        //    return null;
-        //}
-        //if (numberofshares.toPlainString() == '0') {
-        //    hasPageErrors = true;
-        //    currentErrorMessage = 'Must add the number of shares';
-        //    return null;
-        //}
-        //if (aggregateNominalValue.toPlainString() == '0') {
-        //    hasPageErrors = true;
-        //    currentErrorMessage = 'Aggregate nominal value must be greater than 0';
-        //    return null;
-        //}
-        //if (aggregateunpaidAmount.toPlainString() == '0') {
-        //    hasPageErrors = true;
-        //    currentErrorMessage = 'Must add the  total amount unpaid on each share (if any)';
-        //    return null;
+
         try {
             if (submissionMgr.submission.Form_Name__c == 'SH13') {
                 sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = shareType, Transaction__c = submissionMgr.submission.Id, AssignmentDate__c = assignmentDate, ActiveData__c = true));
@@ -165,12 +147,69 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
                 sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = sharetype, Transaction__c = submissionMgr.submission.Id, redenominateDate__c = redenominateDate, ActiveData__c = true));
             } else if (submissionMgr.submission.Form_Name__c == 'SH15') {
                 sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = sharetype, Transaction__c = submissionMgr.submission.Id, redenominateDate__c = redenominateDate, reduceCapitalDate__c = reduceCapitalDate, ActiveData__c = true));
+            } else if (submissionMgr.submission.Form_Name__c == 'SH02') {
+                sharesToAdd.add(new Shares__c(ShareType__c = shareType, Name = sharetype, Transaction__c = submissionMgr.submission.Id, redenominateDate__c = redenominateDate, reduceCapitalDate__c = reduceCapitalDate, ActiveData__c = true));
             }
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
         submissionMgr.persist();
     }
     public PageReference nextAction() {
+        if (submissionMgr.submission.Form_Name__c == 'SH13') {
+            if (assignmentDate > date.today()) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Date cannot be in the future';
+                return null;
+            }
+            if (assignmentDate == null) {
+                hasPageErrors = true;
+                currentErrorMessage = 'You must enter the date of assignment.';
+                return null;
+            }
+        } else if (submissionMgr.submission.Form_Name__c == 'SH14') {
+            if (redenominateDate > date.today()) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Date cannot be in the future';
+                return null;
+            }
+            if (redenominateDate == null) {
+                hasPageErrors = true;
+                currentErrorMessage = 'You must enter the date on which the resolution passed.';
+                return null;
+            }
+        } else if (submissionMgr.submission.Form_Name__c == 'SH15') {
+            if (redenominateDate > date.today()) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Redenomination date cannot be in the future';
+                return null;
+            }
+            if (redenominateDate == null) {
+                hasPageErrors = true;
+                currentErrorMessage = 'You must enter the date on which the resolution to redenominate passed.';
+                return null;
+            }
+            if (reduceCapitalDate > date.today()) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Resolution to reduce capital date cannot be in the future';
+                return null;
+            }
+            if (reduceCapitalDate == null) {
+                hasPageErrors = true;
+                currentErrorMessage = 'You must enter the date on which the resolution to reduce capital passed.';
+                return null;
+            }
+        } else if (submissionMgr.submission.Form_Name__c == 'SH02') {
+            if (reduceCapitalDate > date.today()) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Date cannot be in the future';
+                return null;
+            }
+            if (reduceCapitalDate == null) {
+                hasPageErrors = true;
+                currentErrorMessage = 'You must enter a resolution date.';
+                return null;
+            }
+        }
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
         return nextStep();
