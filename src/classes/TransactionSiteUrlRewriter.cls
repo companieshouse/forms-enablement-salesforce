@@ -12,7 +12,7 @@ Mapping of page name to friendly url should be table or setting driven.
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author         Date        Detail
 1.0  Mark Cane&     2016-04-03  Initial development.
 1.0  Antonio Bravo  2016-04-25  Add DocuSign Pages.
@@ -60,6 +60,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String CRS = '/crs';
     public String CHANGECRS = '/changecrs';
     public String FREEFORM = '/freeform';
+    public String SCAP1 = '/SCapital1';
+    public String SCAP2 = '/SCapital2';
+    public String SCAP3 = '/SCapital3';
+
     // // // // //
     public String VF_PAGE_START = '/StartFramework';
     public String VF_PAGE_COMPANY = '/Company';
@@ -105,6 +109,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_CRS = '/CRS';
     public String VF_PAGE_CHANGECRS = '/ChangeCRS';
     public String VF_PAGE_FREEFORM = '/FreeForm';
+    public String VF_PAGE_SCAP1 = '/SCapital1';
+    public String VF_PAGE_SCAP2 = '/SCapital2';
+    public String VF_PAGE_SCAP3 = '/SCapital3';
+
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
         System.debug(LoggingLevel.ERROR, 'in mapRequestUrl:' + friendlyUrl);
@@ -199,16 +207,22 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_CHANGECRS);
         } else if (url.startsWith(FREEFORM)) {
             pr = new PageReference(VF_PAGE_FREEFORM);
+        } else if (url.startsWith(SCAP1)) {
+            pr = new PageReference(VF_PAGE_SCAP1);
+        } else if (url.startsWith(SCAP2)) {
+            pr = new PageReference(VF_PAGE_SCAP2);
+        } else if (url.startsWith(SCAP3)) {
+            pr = new PageReference(VF_PAGE_SCAP3);
         }
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
     }
     global PageReference[] generateUrlFor(PageReference[] salesforceUrls) {
-        // this method allows translaton of existing page links to pages to their friendly equivalent.    
+        // this method allows translaton of existing page links to pages to their friendly equivalent.
         System.debug(LoggingLevel.ERROR, 'in generateUrlFor:' + salesforceUrls);
         List < PageReference > friendlyUrls = new List < PageReference > ();
         PageReference friendlyPageReference;
-        for (PageReference pr: salesforceUrls) {
+        for (PageReference pr : salesforceUrls) {
             String url = pr.getUrl();
             System.debug(LoggingLevel.ERROR, url);
             friendlyPageReference = null;
@@ -300,6 +314,12 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(CRS);
             } else if (url.startsWith(VF_PAGE_FREEFORM)) {
                 friendlyPageReference = new PageReference(FREEFORM);
+            } else if (url.startsWith(VF_PAGE_SCAP1)) {
+                friendlyPageReference = new PageReference(SCAP1);
+            } else if (url.startsWith(VF_PAGE_SCAP2)) {
+                friendlyPageReference = new PageReference(SCAP2);
+            } else if (url.startsWith(VF_PAGE_SCAP3)) {
+                friendlyPageReference = new PageReference(SCAP3);
             }
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);

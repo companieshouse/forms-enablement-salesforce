@@ -1,0 +1,85 @@
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController1" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <apex:outputPanel id="masterpanel">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">{!headerText1}
+                        </h1>
+                        <p class="lede">{!headerText2}
+                        </p>
+                        <div class="form-group">
+                            <fieldset>
+                                <label class="block-label" for="radio-1">
+                                    <input id="ordinary" type="radio" name="radio-group" value="Ordinary" /> Ordinary
+                                </label>
+                                <label class="block-label" for="radio-2">
+                                    <input id="ordinarya" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
+                                </label>
+                                <label class="block-label" for="radio-3">
+                                    <input id="ordinaryb" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
+                                </label>
+                                <label class="block-label" for="radio-4">
+                                    <input id="ordinaryc" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
+                                </label>
+                                <label class="block-label" for="radio-5">
+                                    <input id="preferred" type="radio" name="radio-group" value="Preferred" /> Preferred
+                                </label>
+                                <label class="block-label" for="radio-6" data-target="other-name">
+                                    <input id="other" type="radio" name="radio-group" value="Other" /> Other
+                                </label>
+                            </fieldset>
+                            <div class="panel panel-border-narrow js-hidden" id="other-name">
+                                <label class="form-label" for="other-rights-1"></label>
+                                <input class="form-control" id="otherData" type="text" />
+                            </div>
+                        </div>
+                        <h1 class="heading-medium">What are the rights attached to these shares?</h1>
+                        <div class="form-group">
+                            <fieldset>
+                                <label class="block-label" for="rights-1">
+                                    <input id="rights-1" type="radio" name="radio-group" value="" /> Share has full rights including voting, dividend and distributions
+                                </label>
+                                <label class="block-label" for="rights-2" data-target="other-rights">
+                                    <input id="rights-2" type="radio" name="radio-group" value="" /> I want to define my own rights
+                                </label>
+                            </fieldset>
+                            <div class="panel panel-border-narrow js-hidden" id="other-rights">
+                                <label class="form-label" for="other-rights-1"></label>
+                                <apex:inputTextArea richText="false" rows="8" cols="40" value="{!prescribedParticular}" id="preparticularsrights"></apex:inputTextArea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <apex:commandButton action="{!nextAction}" id="SCapital1button" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                            <br/>
+                            <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
+                        </div>
+                    </div>
+                    <script>
+                    function pickShareClass() {
+                        var a = Document.getElementsBy('')
+
+
+                        var values = document.getElementsByTagName("input");
+                        //     window.sharesvariable = values;
+                        //     for (var i = 0; i < values.length; i++) {
+                        //         if (values[i].getAttribute('type')=='radio') {
+                        //             shareparsed = values[i].value;
+                        //             sharesum = sharesum + parseInt(shareparsed);
+                        //         } else if (values[i].id == "aggregateidentifier") {
+                        //             aggparsed = values[i].value;
+                        //             aggsum = aggsum + parseInt(aggparsed);
+                        //         }
+                        //     }
+
+                    }
+
+                    function assignShareRights() {
+
+                    }
+                    </script>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

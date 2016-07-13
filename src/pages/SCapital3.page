@@ -1,0 +1,70 @@
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController3" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <apex:outputPanel id="masterpanel">
+                    <h1 class="heading-xlarge">Share capital</h1>
+                    <h2 class="heading-large">Ordinary</h2>
+                    <p>Share has full rights including voting, dividends and distributions.</p>
+                    <div class="form-group">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Currency</th>
+                                    <th scope="col" class="numeric">Total number of shares</th>
+                                    <th scope="col" class="numeric">Aggregate nominal value</th>
+                                    <th scope="col" class="numeric">Total amount unpaid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pound sterling</td>
+                                    <td class="numeric">5</td>
+                                    <td class="numeric">£5</td>
+                                    <td class="numeric">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <apex:commandLink value="Add more shares" action="{!previousAction}" reRender="none" id="thePreviousButton" />
+                    <h3 class="heading-medium">Have you finished adding all of your shares?</h3>
+                    <div class="form-group">
+                        <span id='errorHint' class='error-message'>{!currentErrorMessage}</span>
+                        <fieldset class="inline">
+                            <label class="block-label" for="radio-inline-1">
+                                <input id="radio-inline-1" type="radio" name="radio-inline-group" value="true" /> Yes, confirm my share capital
+                            </label>
+                            <label class="block-label" for="radio-inline-3">
+                                <input id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share
+                            </label>
+                        </fieldset>
+                        <apex:actionFunction action="{!choosePath}" name="choosePath" reRender="form">
+                            <apex:param name="shareStatusParam" value="" id="abc" assignTo="{!shareStatus}" />
+                        </apex:actionFunction>
+                    </div>
+                    <div class="form-group">
+                        <script>
+                        function chooseStep() {
+                            var statuses = document.getElementsByName('radio-inline-group');
+
+
+                            for (var i = 0, length = statuses.length; i < length; i++) {
+                                console.log(statuses[i].checked);
+                                if (statuses[i].checked == true) {
+                                    document.getElementById('errorHint').innerHTML = '';
+                                    choosePath(statuses[i].value);
+                                } else if (statuses[i].checked == false) {
+                                    document.getElementById('errorHint').innerHTML = 'You must make a selection';
+                                }
+                            }
+                        }
+                        </script>
+                         <input type="button" class="button" id="nextButton" value="{!continueButtonText}" onclick="chooseStep()" />
+                        <br/>
+                        <!--<apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;-->
+                    </div>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

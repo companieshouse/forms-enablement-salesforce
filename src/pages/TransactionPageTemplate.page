@@ -21,41 +21,53 @@ Ver. Author        Date        Detail
 2.0  SylvainP      2016-04-20  Extension to GDS/Gov style
 -->
 <apex:page standardStyleSheets="false">
-    <!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
-    <!--[if gt IE 8]><!-->
-    <html lang="en">
-    <!--<![endif]-->
 
-    <head>
-        <c:head />
-    </head>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]--> 
+   
 
-    <body class="">
-        <c:bodyScript />
-        <c:header />
-        <div id="global-header-bar"></div>
-        <div id="wrapper">
-            <main id="content" role="main">
-                <c:phaseBanner />
-                <div class="grid-row">
-                    <div class="column-two-thirds">
-                        <apex:insert name="content" />
-                    </div>
-                    <div class="column-third">
-                    </div>
-                </div>
-            </main>
+<head>
+
+
+<c:head />
+</head>
+
+<body class="">
+    <c:bodyScript />
+
+    <c:header />
+
+    <div id="global-header-bar"></div>
+
+    <div id="wrapper">
+    <main id="content" role="main">
+
+        <c:phaseBanner />
+        
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <apex:insert name="content"/>
+            </div>
+            <div class="column-third">
+            </div>
         </div>
-        <c:footer />
-        <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk-template.js')}" type="text/javascript"></script>
-        <!-- Javascript -->
-        <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/details.polyfill.js')}"></script>
-        <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/jquery-1.11.3.js')}"></script>
-        <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
-        <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
-        <!-- GOV.UK Prototype kit v2.1.0 -->
-        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    </body>
+    </main>
+    </div>
 
-    </html>
+
+    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk-template.js')}" type="text/javascript"></script>
+    <!-- Javascript -->
+    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/details.polyfill.js')}"></script>
+    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/jquery-1.11.3.js')}"></script>
+    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
+    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/application.js')}"></script>
+      <!-- GOV.UK Prototype kit v2.1.0 -->
+    <c:footer />
+
+
+</body>
+
+
+</html>
+
 </apex:page>
