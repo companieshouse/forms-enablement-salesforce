@@ -112,12 +112,20 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>
@@ -129,6 +137,10 @@
     </values>
     <values>
         <field>isCardAllowed__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>isDigitalSignatureNeeded__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>

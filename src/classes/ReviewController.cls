@@ -183,7 +183,6 @@ public class ReviewController extends TransactionStepControllerBase {
         if (sharesforBuilding.size() > 0) {
             buildCapitalMap();
             showStatementofCapital = true;
-            rewviewTitle = 'Review your statement of Capital';
         }
         if (preParticulars.size() > 0) {
             showParticulars = true;

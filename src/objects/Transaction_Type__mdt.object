@@ -15,15 +15,6 @@
         <type>TextArea</type>
     </fields>
     <fields>
-        <fullName>isDigitalSignatureNeeded__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field show if the form need to be signed digitally</description>
-        <externalId>false</externalId>
-        <inlineHelpText>This field show if the form need to be signed digitally</inlineHelpText>
-        <label>is digital signature needed?</label>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>Below_Button_Text4__c</fullName>
         <externalId>false</externalId>
         <label>Below Button Text4</label>
@@ -233,6 +224,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>StandardGuidanceView__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes if the Guidance page has a standard view (DS01)</description>
+        <externalId>false</externalId>
+        <label>StandardGuidanceView</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>above_button_text__c</fullName>
         <externalId>false</externalId>
         <label>above button text</label>
@@ -247,6 +246,14 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>customGuidanceView__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes a custom view (e.g. Share capital, unprescribed forms, etc.)</description>
+        <externalId>false</externalId>
+        <label>customGuidanceView</label>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>hasGuidancePage__c</fullName>
@@ -273,6 +280,15 @@
         <externalId>false</externalId>
         <inlineHelpText>Please select this field if your form is going to allow card payment by the user.</inlineHelpText>
         <label>is card for payment allowed?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isDigitalSignatureNeeded__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field show if the form need to be signed digitally</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field show if the form need to be signed digitally</inlineHelpText>
+        <label>is digital signature needed?</label>
         <type>Checkbox</type>
     </fields>
     <fields>

@@ -712,26 +712,6 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isSigningFinished__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field shows if the transaction has finished with signing</description>
-        <externalId>false</externalId>
-        <inlineHelpText>If checked then signing process is finished</inlineHelpText>
-        <label>is signing finished</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>isSigningStarted__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field shows if the transaction has started a signing ceremony</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Property showing if the transaction is awaiting signature</inlineHelpText>
-        <label>is signing started?</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>isBehalfSignatoryEnable__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to control if we will display the flow of behalf signature selection and input screen</description>
@@ -824,6 +804,26 @@ to any promoter of the company?</inlineHelpText>
         <externalId>false</externalId>
         <inlineHelpText>DO NOT TOUCH THIS FIELD, USED BY THE CODE IN THE APPLICATION.</inlineHelpText>
         <label>is same day processing?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSigningFinished__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows if the transaction has finished with signing</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked then signing process is finished</inlineHelpText>
+        <label>is signing finished</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSigningStarted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows if the transaction has started a signing ceremony</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Property showing if the transaction is awaiting signature</inlineHelpText>
+        <label>is signing started?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

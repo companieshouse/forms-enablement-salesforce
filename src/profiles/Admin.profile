@@ -201,6 +201,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DigitalSignatureController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DirectorDetails</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -245,6 +249,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DocusignLibrary</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DynamicField</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -262,6 +270,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>EmbedDocuSignController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>EntryPointController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ExternalEmbedDocuSignController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1031,12 +1047,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type__mdt.StandardGuidanceView__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type__mdt.above_button_text__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction_Type__mdt.companySearchPageText__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.customGuidanceView__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1052,6 +1078,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction_Type__mdt.isCardAllowed__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.isDigitalSignatureNeeded__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1355,6 +1386,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.isDigitalSignatureNeeded__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Transaction__c.isLLP__c</field>
         <readable>true</readable>
@@ -1393,6 +1429,16 @@
         <editable>true</editable>
         <field>Transaction__c.isSameDayProcessing__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.isSigningFinished__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction__c.isSigningStarted__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -1599,6 +1645,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>DigitalSignature</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>DirectorsList</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1628,6 +1678,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Exception</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ExternalEmbedDocuSign</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

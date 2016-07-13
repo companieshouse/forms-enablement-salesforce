@@ -130,12 +130,6 @@
                 </apex:outputPanel>
                 <apex:outputPanel id="customPanel" rendered="{!custompanelView}">
                     <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
-                           <h1 class="heading-xlarge">
-                        {!headerText1}
-                        <!-- {!$Label.UI_Text_Review_page_Title} -->
-                    </h1>
-                    <p class="lede">{!displayText1}
-                    </p>
                         <div class="form-group">
                             <table class="check-your-answers">
                                 <thead>

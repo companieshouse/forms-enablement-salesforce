@@ -124,12 +124,20 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
         <field>above_button_text__c</field>
         <value xsi:type="xsd:string">Additional documents are required within the statement of capital (SH19) to register the reduction of share capital.</value>
     </values>
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>
@@ -142,6 +150,10 @@
     <values>
         <field>isCardAllowed__c</field>
         <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>isDigitalSignatureNeeded__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isMajorityForm__c</field>

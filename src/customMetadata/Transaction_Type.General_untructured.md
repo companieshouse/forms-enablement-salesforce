@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH16</label>
+    <label>General - untructured</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Family__c</field>
-        <value xsi:type="xsd:string">Dissolution</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>FeeFastTrack__c</field>
@@ -47,19 +47,24 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">10.0</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Agree</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;If you are filing for a private limited company, you will also require the following documents:&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
+&lt;li&gt;Solvency Statement&lt;/li&gt;
+&lt;li&gt;Special resolution authorising the capital reduction&lt;/li&gt;
+&lt;li&gt;Director&apos;s Statement
+&lt;/li&gt;
+&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
@@ -71,16 +76,15 @@
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;These documents must be uploaded as attachments in order to complete the submission.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">What this form is NOT for &lt;br/&gt;
--You cannot use this form to give notice by the company of an application to the court to cancel a special resolution approving a redemption or purchase of shares out of capital. To do this, please use form SH17.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -100,12 +104,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">What this form is for &lt;br/&gt;
--You may use this form to give notice by the applicants of an application to hte court to cancel a special resolution approving a redemption of purchase of shares out of capital.</value>
+        <value xsi:type="xsd:string">Unstructured Content here</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Notice by the applicants of application to court  for cancellation of the special resolution approving a redemption or purchase of shares out of capital</value>
+        <value xsi:type="xsd:string">Unstructured Content here</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -121,7 +124,7 @@
     </values>
     <values>
         <field>companySearchPageText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
     </values>
     <values>
         <field>customGuidanceView__c</field>

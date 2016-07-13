@@ -69,6 +69,7 @@
         <members>EditSharesByTypeController</members>
         <members>EmailTemplatesBuilder</members>
         <members>EmbedDocuSignController</members>
+        <members>EntryPointController</members>
         <members>ExternalEmbedDocuSignController</members>
         <members>Form</members>
         <members>FormAPISubmissionManager</members>
