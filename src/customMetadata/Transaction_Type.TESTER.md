@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>RES15</label>
+    <label>TESTER</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
@@ -35,11 +35,11 @@
     </values>
     <values>
         <field>DEF3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;P class=&apos;lede&apos;&gt;</value>
     </values>
     <values>
         <field>DEF4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&apos;heading-xlarge&apos;&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -96,11 +96,11 @@
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">this should be in a &lt;p&gt; tag with class lede</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">this should be in an H1 with a class of heading-xlarge</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
@@ -112,11 +112,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">RES15</value>
+        <value xsi:type="xsd:string">TESTER</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">RES15</value>
+        <value xsi:type="xsd:string">TESTER</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -132,7 +132,7 @@
     </values>
     <values>
         <field>companySearchPageText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
     </values>
     <values>
         <field>customGuidanceView__c</field>
@@ -140,7 +140,7 @@
     </values>
     <values>
         <field>enableHTMLBuilder__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

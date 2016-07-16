@@ -397,6 +397,18 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SCapitalController1</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SCapitalController2</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SCapitalController3</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SecurityManager</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -962,6 +974,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Transaction_Type__mdt.DEF3__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.DEF4__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Transaction_Type__mdt.Expiry_Date_Length__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1063,6 +1085,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Transaction_Type__mdt.customGuidanceView__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Transaction_Type__mdt.enableHTMLBuilder__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1447,6 +1474,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Transaction__c.prescribedParticular__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Transaction__c.selectShareType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Transaction__c.selectedCurrency__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1646,7 +1683,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DigitalSignature</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>DirectorsList</apexPage>
@@ -1682,7 +1719,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>ExternalEmbedDocuSign</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>FormApplication</apexPage>
@@ -1726,6 +1763,18 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Review</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>SCapital1</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>SCapital2</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>SCapital3</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

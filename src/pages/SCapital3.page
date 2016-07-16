@@ -3,29 +3,56 @@
         <apex:define name="content">
             <apex:form>
                 <apex:outputPanel id="masterpanel">
-                    <h1 class="heading-xlarge">Share capital</h1>
-                    <h2 class="heading-large">Ordinary</h2>
-                    <p>Share has full rights including voting, dividends and distributions.</p>
-                    <div class="form-group">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Currency</th>
-                                    <th scope="col" class="numeric">Total number of shares</th>
-                                    <th scope="col" class="numeric">Aggregate nominal value</th>
-                                    <th scope="col" class="numeric">Total amount unpaid</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Pound sterling</td>
-                                    <td class="numeric">5</td>
-                                    <td class="numeric">£5</td>
-                                    <td class="numeric">0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
+                        <h1 class="heading-xlarge">Share capital</h1>
+                        <h2 class="heading-large">{!shareClassType}</h2>
+                        <p>{!prescribedParticular}</p>
+                        <div class="form-group">
+                            <table class="check-your-answers">
+                                    <tbody>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Currency</th>
+                                                <th scope="col" class="numeric">Total number of shares</th>
+                                                <th scope="col" class="numeric">Aggregate nominal value</th>
+                                                <th scope="col" class="numeric">Total amount unpaid</th>
+                                            </tr>
+                                        </thead>
+                                        <apex:repeat value="{!sharesforBuilding}" var="sp">
+                                            <tr>
+                                                <td class="numeric">
+                                                    <apex:outputText value="{!sp.Currency__c}" id="currency" />
+                                                </td>
+                                                <td class="numeric">
+                                                    <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                                    <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
+                                                <td class="numeric">
+                                                    <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
+                                                    <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" />
+                                                </td>
+                                                 <td class="numeric">
+                                                    <apex:outputText value="{!sp.Total_aggregate_amount_unpaid__c}" id="amountunpaid" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                        <!--
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(viewmap[key]))}">
+                                            <tr>
+                                            <td></td>
+                                            <td>Total</td>
+                                            <td id="totalnumberofshares"></td>
+                                            <td id="totalnumberaggregate"></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+
+
+                                    </apex:outputPanel>
+                                    -->
+                                    </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
                     <apex:commandLink value="Add more shares" action="{!previousAction}" reRender="none" id="thePreviousButton" />
                     <h3 class="heading-medium">Have you finished adding all of your shares?</h3>
                     <div class="form-group">
@@ -59,7 +86,7 @@
                             }
                         }
                         </script>
-                         <input type="button" class="button" id="nextButton" value="{!continueButtonText}" onclick="chooseStep()" />
+                        <input type="button" class="button" id="nextButton" value="{!continueButtonText}" onclick="chooseStep()" />
                         <br/>
                         <!--<apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;-->
                     </div>

@@ -836,6 +836,26 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>prescribedParticular__c</fullName>
+        <externalId>false</externalId>
+        <label>prescribedParticular</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>selectShareType__c</fullName>
+        <externalId>false</externalId>
+        <label>selectShareType</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>selectedCurrency__c</fullName>
         <externalId>false</externalId>
         <label>selectedCurrency</label>

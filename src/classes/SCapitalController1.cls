@@ -74,6 +74,19 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		super();
 		if (isPageInitialised) initialiseStep();
 	}
+	public void grabShareType() {
+		if (shareClassType != null) {
+			System.debug('sharetype == ' + ' ' + shareClassType);
+			//throw new Form_CustomException('share class type is ' +shareClassType);
+		}
+	}
+
+	public void grabPrescribedParticular() {
+		if (prescribedParticular != null) {
+			System.debug('sharetype == ' + ' ' + prescribedParticular);
+			//throw new Form_CustomException('prescribed particular is ' +prescribedParticular);
+		}
+	}
 	public void initialiseStep() {
 		companyName = submissionMgr.submission.CompanyName__c;
 		companyNumber = submissionMgr.submission.CompanyNumber__c;
@@ -88,18 +101,37 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		headerText3 = transactionMgr.currentStep.Header_Text_3__c;
 		continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
 		previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
+		checkstatus();
+	}
+	public PageReference checkstatus () {
+		if (submissionMgr.submission.finishedAddingShares__c == true) {
+			return nextStep();
+		}
+		return null;
 	}
 	public PageReference AddtocurrentShare() {
+
 		submissionMgr.persist();
 		return nextStep();
 	}
 	private void persistStep() {
+		if (prescribedParticular != null && shareClassType != null) {
+			//throw new Form_CustomException('share class type and prescribed particular' + ' ' + shareClassType +' new stuff here ' + ' ' + prescribedParticular);
+			submissionMgr.submission.selectShareType__c = shareClassType;
+			submissionMgr.submission.prescribedParticular__c = prescribedParticular;
+		}
 		submissionMgr.persist();
 	}
 	public PageReference nextAction() {
+
+
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
-		return nextStep();
+		PageReference pg = new PageReference('/SCapital2');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
+		//return nextStep();
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;

@@ -57,6 +57,90 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>DEF3__c</fullName>
+        <externalId>false</externalId>
+        <label>DEF3</label>
+        <picklist>
+            <picklistValues>
+                <fullName>&lt;P class=&apos;lede&apos;&gt;</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;p class=&quot;font-xsmall&quot;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-xlarge&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-large&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-medium&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-small&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;ul class=&quot;list list-bullet&quot;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;div class=&quot;notice&quot;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DEF4__c</fullName>
+        <externalId>false</externalId>
+        <label>DEF4</label>
+        <picklist>
+            <picklistValues>
+                <fullName>&lt;P class=&apos;lede&apos;&gt;</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;p class=&quot;font-xsmall&quot;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-xlarge&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-large&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-medium&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;h1 class=&apos;heading-small&apos;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;ul class=&quot;list list-bullet&quot;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt;div class=&quot;notice&quot;&gt;</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Expiry_Date_Length__c</fullName>
         <externalId>false</externalId>
         <label>Expiry Date Length</label>
@@ -253,6 +337,14 @@
         <description>Denotes a custom view (e.g. Share capital, unprescribed forms, etc.)</description>
         <externalId>false</externalId>
         <label>customGuidanceView</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>enableHTMLBuilder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Enable administrators to enable HTML build functionality (e.g. automatically select HTML elements instead of putting them in the custom metadata and rendering them client side)</description>
+        <externalId>false</externalId>
+        <label>enableHTMLBuilder</label>
         <type>Checkbox</type>
     </fields>
     <fields>

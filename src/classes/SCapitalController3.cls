@@ -88,6 +88,12 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		get;
 		set;
 	}
+	public List<Shares__c> sharesforBuilding {get; set;}
+	public Map < String, Shares__c > shareCurrencyMap {get; set;}
+	public List < Shares__c > matchedShares {get; set;}
+	public Map < Integer, List < Shares__c >> viewmap {get; set;}
+	public Map < Integer, String > viewkeys {get; set;}
+	public Boolean showStatementofCapital {get; set;}
 	public SCapitalController3() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -106,6 +112,37 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		headerText3 = transactionMgr.currentStep.Header_Text_3__c;
 		continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
 		previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
+		sharesforBuilding = new List < Shares__c > ();
+		shareCurrencyMap = new map < String, Shares__c > ();
+		matchedShares = new List < Shares__c > ();
+		viewmap = new Map < Integer, List < Shares__c >> ();
+		viewkeys = new Map < Integer, String > ();
+		checkstatus();
+		buildCapitalMap();
+	}
+	public PageReference checkstatus () {
+		if (submissionMgr.submission.finishedAddingShares__c == true) {
+			return nextStep();
+		}
+		return null;
+	}
+	public void buildCapitalMap() {
+
+		if (submissionMgr.submission.Shares__r.size() > 0) {
+			for (Shares__c totalShares : submissionMgr.submission.Shares__r) {
+				if (totalShares.SHARETYPE__c == 'STATEMENTOFCAPITAL' && totalShares.Class_of_Shares__c == submissionMgr.submission.selectShareType__c) {
+					sharesforBuilding.add(totalShares);
+				}
+			}
+			if (sharesforBuilding.size() > 0) {
+				showStatementofCapital = true;
+				prescribedParticular = submissionMgr.submission.prescribedParticular__c;
+				shareClassType = submissionMgr.submission.selectShareType__c;
+			}
+		} else {
+			showStatementofCapital = false;
+			System.debug('you have no statement of capital to iterate over');
+		}
 	}
 	public PageReference AddtocurrentShare() {
 		submissionMgr.persist();
@@ -128,8 +165,11 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 	}
 	public PageReference choosePath() {
 		if (!shareStatus) {
+			submissionMgr.submission.finishedAddingShares__c = false;
+			persistStep();
 			return addnewShares();
 		} else if (shareStatus) {
+			submissionMgr.submission.finishedAddingShares__c = true;
 			return nextAction();
 		} else if (String.valueOf(shareStatus) == 'undefined') {
 			currentErrorMessage = '<span class="error-message">You must make a selection</span>';

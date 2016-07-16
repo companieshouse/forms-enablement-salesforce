@@ -1,8 +1,9 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController1" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel id="emptyPanel" />
                     <div class="form-group">
                         <h1 class="heading-xlarge">{!headerText1}
                         </h1>
@@ -11,19 +12,19 @@
                         <div class="form-group">
                             <fieldset>
                                 <label class="block-label" for="radio-1">
-                                    <input id="ordinary" type="radio" name="radio-group" value="Ordinary" /> Ordinary
+                                    <input id="ordinary" onclick="grabShareType('Ordinary');" type="radio" name="radio-group" value="Ordinary" /> Ordinary
                                 </label>
                                 <label class="block-label" for="radio-2">
-                                    <input id="ordinarya" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
+                                    <input id="ordinarya" onclick="grabShareType('Ordinary A');" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
                                 </label>
                                 <label class="block-label" for="radio-3">
-                                    <input id="ordinaryb" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
+                                    <input id="ordinaryb" onclick="grabShareType('Ordinary B');" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
                                 </label>
                                 <label class="block-label" for="radio-4">
-                                    <input id="ordinaryc" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
+                                    <input id="ordinaryc" onclick="grabShareType('Ordinary C');" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
                                 </label>
                                 <label class="block-label" for="radio-5">
-                                    <input id="preferred" type="radio" name="radio-group" value="Preferred" /> Preferred
+                                    <input id="preferred" onclick="grabShareType('Preferred');" type="radio" name="radio-group" value="Preferred" /> Preferred
                                 </label>
                                 <label class="block-label" for="radio-6" data-target="other-name">
                                     <input id="other" type="radio" name="radio-group" value="Other" /> Other
@@ -31,22 +32,22 @@
                             </fieldset>
                             <div class="panel panel-border-narrow js-hidden" id="other-name">
                                 <label class="form-label" for="other-rights-1"></label>
-                                <input class="form-control" id="otherData" type="text" />
+                                <input onchange="grabShareType(this.value)" class="form-control" id="otherData" type="text" />
                             </div>
                         </div>
                         <h1 class="heading-medium">What are the rights attached to these shares?</h1>
                         <div class="form-group">
                             <fieldset>
                                 <label class="block-label" for="rights-1">
-                                    <input id="rights-1" type="radio" name="radio-group" value="" /> Share has full rights including voting, dividend and distributions
+                                    <input onclick="grabPrescribedParticular('Share has full rights including voting, dividend and distributions')" id="rights-1" type="radio" name="radio-group-preparticulars" value="Share has full rights including voting, dividend and distributions" /> Share has full rights including voting, dividend and distributions
                                 </label>
                                 <label class="block-label" for="rights-2" data-target="other-rights">
-                                    <input id="rights-2" type="radio" name="radio-group" value="" /> I want to define my own rights
+                                    <input id="rights-2" type="radio" name="radio-group-preparticulars" value="" /> I want to define my own rights
                                 </label>
                             </fieldset>
                             <div class="panel panel-border-narrow js-hidden" id="other-rights">
                                 <label class="form-label" for="other-rights-1"></label>
-                                <apex:inputTextArea richText="false" rows="8" cols="40" value="{!prescribedParticular}" id="preparticularsrights"></apex:inputTextArea>
+                                <textarea onchange="grabPrescribedParticular(this.value)" rows="8" cols="40" id="preparticularsrights"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -54,30 +55,13 @@
                             <br/>
                             <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
                         </div>
+                        <apex:actionFunction action="{!grabShareType}" name="grabShareType" reRender="emptyPanel">
+                            <apex:param name="shareclasstype" value="" id="z" assignTo="{!shareClassType}" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!grabPrescribedParticular}" name="grabPrescribedParticular" reRender="emptyPanel">
+                            <apex:param name="grabPrescribedParticular" value="" id="x" assignTo="{!prescribedParticular}" />
+                        </apex:actionFunction>
                     </div>
-                    <script>
-                    function pickShareClass() {
-                        var a = Document.getElementsBy('')
-
-
-                        var values = document.getElementsByTagName("input");
-                        //     window.sharesvariable = values;
-                        //     for (var i = 0; i < values.length; i++) {
-                        //         if (values[i].getAttribute('type')=='radio') {
-                        //             shareparsed = values[i].value;
-                        //             sharesum = sharesum + parseInt(shareparsed);
-                        //         } else if (values[i].id == "aggregateidentifier") {
-                        //             aggparsed = values[i].value;
-                        //             aggsum = aggsum + parseInt(aggparsed);
-                        //         }
-                        //     }
-
-                    }
-
-                    function assignShareRights() {
-
-                    }
-                    </script>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH19 CurrencySelection</label>
+    <label>SH19 CapitalStep1</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">For example, US Dollar or Pound Sterling. Don&apos;t use $ or £</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -91,10 +91,10 @@
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">CurrencySelection</value>
+        <value xsi:type="xsd:string">SCapital1</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Previous</value>
     </values>
 </CustomMetadata>

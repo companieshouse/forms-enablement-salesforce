@@ -1,48 +1,57 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController2" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
                     <h1 class="heading-xlarge">Share capital</h1>
                     <p class="lede"></p>
                     <h2 class="heading-medium">What is the currency?</h2>
-                    <form class="form" method="POST" action="" name="">
                         <div class="form-group">
                             <fieldset>
                                 <label class="block-label" for="radio-7">
-                                    <input id="radio-7" type="radio" name="radio-group" value="" /> Pound sterling
+                                    <input onclick="grabCurrencyType('Pound sterling')" id="radio-7" type="radio" name="radio-group" value="" /> Pound sterling
                                 </label>
                                 <label class="block-label" for="radio-8">
-                                    <input id="radio-8" type="radio" name="radio-group" value="" /> USD
+                                    <input onclick="grabCurrencyType('USD')" id="radio-8" type="radio" name="radio-group" value="" /> USD
                                 </label>
                                 <label class="block-label" for="radio-9">
-                                    <input id="radio-9" type="radio" name="radio-group" value="" /> Euro
+                                    <input onclick="grabCurrencyType('Euro')" id="radio-9" type="radio" name="radio-group" value="" /> Euro
                                 </label>
                                 <label class="block-label" for="radio-10" data-target="other-currency">
                                     <input id="radio-10" type="radio" name="radio-group" value="" /> Other
                                 </label>
                             </fieldset>
                             <div class="panel panel-border-narrow js-hidden" id="other-currency">
-                                <input class="form-control" id="share-class-name" type="text" />
+                                <input onchange="grabCurrencyType(this.value)" class="form-control" id="share-class-name" type="text" />
                             </div>
                         </div>
-                    </form>
                     <div class="form-group">
-                        <label class="label-class" for="full-name-f1">What's the total amount of Ordinary shares in this currency?
+                        <label class="label-class" for="full-name-f1">What's the total amount of {!shareClassType} shares in this currency?
                         </label>
-                        <input class="form-control" id="full-name-f1" type="text" />
+                        <input onchange="grabnumberOfShares(this.value)" class="form-control" id="full-name-f1" type="text" />
                     </div>
                     <div class="form-group">
-                        <label class="label-class" for="full-name-f2">What's the total aggregate nominal value of Ordinary shares in this currency?</label>
+                        <label class="label-class" for="full-name-f2">What's the total aggregate nominal value of {!shareClassType} shares in this currency?</label>
                         <p class="form-hint">This is the total number of shares multiplied by the nominal value.</p>
-                        <input class="form-control" id="full-name-f2" type="text" />
+                        <input class="form-control" id="full-name-f2" type="text" onchange="grabAggNomValue(this.value)" />
                     </div>
                     <div class="form-group">
                         <h3 class="heading-medium">Has the shareholder paid for all of the shares?</h3>
-                        <form>
                             <fieldset class="inline">
                                 <label class="block-label" for="radio-inline-1">
-                                    <input id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes" /> Yes
+                                    <input id="radio-inline-1" onclick="grabAggUnpaid(0)" type="radio" name="radio-inline-group" value="Yes" /> Yes
                                 </label>
                                 <label class="block-label" for="radio-inline-3" data-target="not-paid">
                                     <input id="radio-inline-3" type="radio" name="radio-inline-group" value="No" /> No
@@ -50,14 +59,25 @@
                             </fieldset>
                             <div class="panel panel-border-narrow js-hidden" id="not-paid">
                                 <label class="form-label" for="not-paid-shares">What's the total aggregate amount unpaid?</label>
-                                <input class="form-control" id="share-class-name" type="text" />
+                                <input onchange="grabAggUnpaid(this.value)" class="form-control" id="share-class-name" type="text" />
                             </div>
-                        </form>
                     </div>
                     <div class="form-group">
-                        <apex:commandButton action="{!nextAction}" id="SCapital1button" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                        <apex:commandButton action="{!addnewShares}" id="SCapital1button" reRender="masterpanel" styleClass="button" value="{!continueButtonText}" />
                         <br/>
                         <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
+                        <apex:actionFunction action="{!grabCurrencyType}" name="grabCurrencyType" reRender="emptyPanel">
+                        <apex:param name="grabCurrencyType" value="" id="a" assignTo="{!currencyType}" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!grabnumberOfShares}" name="grabnumberOfShares" reRender="emptyPanel">
+                            <apex:param name="grabnumberOfShares" value="" id="b" assignTo="{!numberofshares}" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!grabAggNomValue}" name="grabAggNomValue" reRender="emptyPanel">
+                            <apex:param name="grabAggNomValue" value="" id="c" assignTo="{!nominalvalue}" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!grabAggUnpaid}" name="grabAggUnpaid" reRender="emptyPanel">
+                            <apex:param name="grabAggUnpaid" value="" id="d" assignTo="{!aggUnpaid}" />
+                        </apex:actionFunction>
                     </div>
                 </apex:outputPanel>
             </apex:form>
