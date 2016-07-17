@@ -1,7 +1,7 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController3" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
                         <h1 class="heading-xlarge">Share capital</h1>
@@ -86,7 +86,10 @@
                             }
                         }
                         </script>
+                        <apex:commandButton styleClass='button' action="{!nextAction}" value="{!continueButtonText}" id="continueButton" /> &nbsp;
+                        <!--
                         <input type="button" class="button" id="nextButton" value="{!continueButtonText}" onclick="chooseStep()" />
+                        -->
                         <br/>
                         <!--<apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;-->
                     </div>

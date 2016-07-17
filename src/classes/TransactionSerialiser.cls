@@ -256,6 +256,10 @@ public class TransactionSerialiser {
 	public static String transactionToJSON(Transaction__c transact) {
 		//We need to convert the transaction record to a JSON object
 		//
+		//List<Transactions__c> transACTIONS
+		//if (transACTIONS.size() > 1) {
+
+		//}
 		if (transact == null) {
 			return  JSON.serialize('Argument cannot be null.');
 

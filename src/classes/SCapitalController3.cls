@@ -185,6 +185,7 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 	public PageReference nextAction() {
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
+		if (!shareStatus) {return addnewShares();}
 		return nextStep();
 	}
 	public PageReference previousAction() {
