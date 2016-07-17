@@ -252,7 +252,7 @@ public class TransactionSerialiser {
 			//this.description = description;
 		}
 	}
-	// DS01 specific
+	// currently DS01 specific
 	public static String transactionToJSON(Transaction__c transact) {
 		//We need to convert the transaction record to a JSON object
 		//
@@ -263,70 +263,123 @@ public class TransactionSerialiser {
 
 		//Build each object for the JSON
 		//
-		metadata met = new metadata(transact.Form_Name__c, 1, transact.Version_Form__c, transact.SubmissionId__c);
 
-		payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : '')) ), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
+		if (transact.Form_Name__c == 'DS01') {
+			// DSO1 specific
+			metadata met = new metadata(transact.Form_Name__c, 1, transact.Version_Form__c, transact.SubmissionId__c);
 
-		filingDetails fil = new filingDetails(transact.Barcode__c, system.today().year() + '-' + system.today().month() + '-' + system.today().day(), pay);
+			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : '')) ), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, system.today().year() + '-' + system.today().month() + '-' + system.today().day(), pay);
+
+			List<Officer__c> lOff = [SELECT Name, Surname__c, Title__c, Middlenames__c, Forename__c, DateSigned__c FROM Officer__c where Transaction__c = :transact.Id];
+			List<officer> lOffSerialized = new List<officer>();
 
 
-		// DSO1 specific if(tx.Form_Name__c == 'DS01'){include officers, etc.}
-		List<Officer__c> lOff = [SELECT Name, Surname__c, Title__c, Middlenames__c, Forename__c, DateSigned__c FROM Officer__c where Transaction__c = :transact.Id];
-		List<officer> lOffSerialized = new List<officer>();
+			//At this point we are sure we have the majority and we will send only the officer that has signed
+			for (Officer__c off : lOff) {
+				if (off.DateSigned__c != null) {
+					Datetime dateSigned = off.DateSigned__c;
 
-		// if (tx.Form_Name__c = 'SH19', etc.) { include share family. note may have to instantiate a new transaction for other transactions}
-		// SH specific select currencycode/suppliedclass/description/number/value for shareclass
-		//List<Shares__c> lShares = [SELECT Name,Surname__c,Title__c,Middlenames__c,Forename__c, DateSigned__c FROM Shares__c where Transaction__c = :transact.Id];
-
-		//At this point we are sure we have the majority and we will send only the officer that has signed
-		for (Officer__c off : lOff) {
-			if (off.DateSigned__c != null) {
-				Datetime dateSigned = off.DateSigned__c;
-
-				lOffSerialized.add(new officer(new personName((off.Title__c == null ? '' : off.Title__c), (off.Forename__c == null ? '' : off.Forename__c), (off.Middlenames__c == null ? '' : off.Middlenames__c), (off.Surname__c == null ? '' : off.Surname__c)), dateSigned.year() + '-' + dateSigned.month() + '-' + dateSigned.day() ));
+					lOffSerialized.add(new officer(new personName((off.Title__c == null ? '' : off.Title__c), (off.Forename__c == null ? '' : off.Forename__c), (off.Middlenames__c == null ? '' : off.Middlenames__c), (off.Surname__c == null ? '' : off.Surname__c)), dateSigned.year() + '-' + dateSigned.month() + '-' + dateSigned.day() ));
+				}
 			}
+
+			officerCollection officerCollection = new officerCollection(lOffSerialized);
+			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, officerCollection);
+
+			formdata form = new formdata(fil, corp);
+
+			//Get the attachment into the attachment object
+			//
+			List<Attachment> attRec = [Select Id, Body from Attachment where parentId = :transact.Id];
+
+			if (attRec == null) {
+				return  JSON.serialize('Transaction must have a form attached.');
+			}
+
+			List<attachments> lAtt = new List<attachments>();
+
+			for (Attachment att : attRec) {
+				lAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+			}
+
+			JSONGenerator gen = JSON.createGenerator(true);
+
+			//if DSO1
+			gen.writeStartObject();
+
+			gen.writeFieldName('metadata');
+
+			gen.writeObject(met);
+
+			gen.writeFieldName('formdata');
+
+			gen.writeObject(form);
+
+			gen.writeFieldName('attachments');
+
+			gen.writeObject(lAtt);
+
+			gen.writeEndObject();
+
+			return gen.getAsString();
 		}
+		// if (tx.Form_Name__c = 'SH19', etc.) { include share family. note may have to instantiate a new transaction for other transactions}
+		if (transact.Form_Name__c == 'SH19') {
+			metadata met = new metadata(transact.Form_Name__c, 1, transact.Version_Form__c, transact.SubmissionId__c);
 
-		officerCollection officerCollection = new officerCollection(lOffSerialized);
+			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : '')) ), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
 
-		corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, officerCollection);
+			filingDetails fil = new filingDetails(transact.Barcode__c, system.today().year() + '-' + system.today().month() + '-' + system.today().day(), pay);
 
-		formdata form = new formdata(fil, corp);
+			List<Shares__c> lShares = [SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__c where Transaction__c = :transact.Id];
 
-		//Get the attachment into the attachment object
-		//
-		List<Attachment> attRec = [Select Id, Body from Attachment where parentId = :transact.Id];
+			List<shareValues> shareValues = new List<shareValues>();
+			List<shareClasses> shareClasses = new List<shareClasses>();
+			List<latestSOCInd> latestSOCInd = new List<latestSOCInd>();
+			List<grandTotals> grandTotals = new List<grandTotals>();
+			statementOfCapital statementOfCapital = new statementOfCapital(shareValues, shareClasses, latestSOCInd, grandTotals);
+			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, statementOfCapital);
+			formdata form = new formdata(fil, corp);
 
-		if (attRec == null) {
-			return  JSON.serialize('Transaction must have a form attached.');
+			//Get the attachment into the attachment object
+			//
+			List<Attachment> attRec = [Select Id, Body from Attachment where parentId = :transact.Id];
+
+			if (attRec == null) {
+				return  JSON.serialize('Transaction must have a form attached.');
+			}
+
+			List<attachments> lAtt = new List<attachments>();
+
+			for (Attachment att : attRec) {
+				lAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+			}
+
+			JSONGenerator gen = JSON.createGenerator(true);
+
+			//if DSO1
+			gen.writeStartObject();
+
+			gen.writeFieldName('metadata');
+
+			gen.writeObject(met);
+
+			gen.writeFieldName('formdata');
+
+			gen.writeObject(form);
+
+			gen.writeFieldName('attachments');
+
+			gen.writeObject(lAtt);
+
+			gen.writeEndObject();
+
+			return gen.getAsString();
 		}
-
-		List<attachments> lAtt = new List<attachments>();
-
-		for (Attachment att : attRec) {
-			lAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
-		}
-
-		JSONGenerator gen = JSON.createGenerator(true);
-
-		//if DSO1
-		gen.writeStartObject();
-
-		gen.writeFieldName('metadata');
-
-		gen.writeObject(met);
-
-		gen.writeFieldName('formdata');
-
-		gen.writeObject(form);
-
-		gen.writeFieldName('attachments');
-
-		gen.writeObject(lAtt);
-
-		gen.writeEndObject();
-
-		return gen.getAsString();
+		String valtoReturn = 'NoFormtoSerializeFound';
+		return valtoReturn;
 	}
 
 }
