@@ -96,7 +96,6 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 		previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
 		shareClassType = submissionMgr.submission.selectShareType__c;
 		prescribedParticular = submissionMgr.submission.prescribedParticular__c;
-		checkstatus();
 	}
 	public PageReference checkstatus () {
 		if (submissionMgr.submission.finishedAddingShares__c == true) {

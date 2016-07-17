@@ -101,7 +101,6 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		headerText3 = transactionMgr.currentStep.Header_Text_3__c;
 		continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
 		previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
-		checkstatus();
 	}
 	public PageReference checkstatus () {
 		if (submissionMgr.submission.finishedAddingShares__c == true) {

@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: AddAttachment
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoy&    2016-06-07  Initial development.
 note: attachment size limited to 5MB
@@ -144,40 +144,39 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         if (submissionMgr.submission.Attachments.size() > 0) {
             attachments = submissionMgr.submission.Attachments;
         }
-        newAttachments = new List < Attachment > {
-            new Attachment()
-        };
+        newAttachments = new List < Attachment > {new Attachment(name = 'CAP SS', description = 'a solvency statement'), new Attachment(name = 'Resolution', description = 'a special resolution authorising the capital reduction'), new Attachment(name = 'SH20', description = 'directors\' statement')};
         return;
     }
-    public void addMore() {
-        for (Integer idx = 0; idx < NUMOFATTACHMENTSALLOWED; idx++) {
-            newAttachments.add(new Attachment());
-        }
-        hasPageErrors = false;
-    }
-    public void remove() {
-        if (newAttachments.size() == 0) {
-            hasPageErrors = true;
-            currentErrors = 'You have no new attachments to remove';
-        } else if (newAttachments.size() > 0) {
-            newAttachments.remove(0);
-        }
-    }
+    //public void addMore() {
+
+    //    for (Integer attachmentvar = 0; attachmentvar < NUMOFATTACHMENTSALLOWED; attachmentvar++) {
+    //        newAttachments.add(new Attachment());
+    //    }
+    //    hasPageErrors = false;
+    //}
+    //public void remove() {
+    //    if (newAttachments.size() == 0) {
+    //        hasPageErrors = true;
+    //        currentErrors = 'You have no new attachments to remove';
+    //    } else if (newAttachments.size() > 0) {
+    //        newAttachments.remove(0);
+    //    }
+    //}
     public void DeleteAttachments() {
-throw new Form_CustomException(' your attachment ID is ' + attachmentId);
-        for (Attachment attachmentToDelete: submissionMgr.submission.Attachments) {
+        throw new Form_CustomException(' your attachment ID is ' + attachmentId);
+        for (Attachment attachmentToDelete : submissionMgr.submission.Attachments) {
             if (attachmentToDelete.Id == attachmentId) {
                 try {
                     throw new Form_CustomException(' your attachment ID is ' + attachmentToDelete);
                     delete attachmentToDelete;
-                } catch (DmlException e) {} catch (Exception e) {}finally{
-                            persistStep();
+                } catch (DmlException e) {} catch (Exception e) {} finally {
+                    persistStep();
 
                 }
             }
         }
 
-       // throw new Form_CustomException(' your attachment ID is ' + attachmentId);
+        // throw new Form_CustomException(' your attachment ID is ' + attachmentId);
         //for (Attachment deletedAttachment: submissionMgr.submission.Attachments) {
         //    if (deletedAttachment.Id == attachmenttoDeleteId) {
         //        try {
@@ -202,7 +201,7 @@ throw new Form_CustomException(' your attachment ID is ' + attachmentId);
     }
     public PageReference save() {
         List < Attachment > toInsert = new List < Attachment > ();
-        for (Attachment newAtt: newAttachments) {
+        for (Attachment newAtt : newAttachments) {
             if (newAtt.Body != null) {
                 newAtt.parentId = attachmentId;
                 toInsert.add(newAtt);

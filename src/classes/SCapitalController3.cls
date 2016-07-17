@@ -117,7 +117,6 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		matchedShares = new List < Shares__c > ();
 		viewmap = new Map < Integer, List < Shares__c >> ();
 		viewkeys = new Map < Integer, String > ();
-		checkstatus();
 		buildCapitalMap();
 	}
 	public PageReference checkstatus () {
@@ -149,7 +148,14 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		return nextStep();
 	}
 	private void persistStep() {
+		if (!shareStatus)
+		{submissionMgr.submission.finishedAddingShares__c = false;}
+		else if (shareStatus) {submissionMgr.submission.finishedAddingShares__c = true;}
+
 		submissionMgr.persist();
+	}
+	public void confirmShares() {
+
 	}
 	public PageReference addnewShares() {
 		PageReference pg = new PageReference('/SCapital1');
@@ -165,11 +171,9 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 	}
 	public PageReference choosePath() {
 		if (!shareStatus) {
-			submissionMgr.submission.finishedAddingShares__c = false;
 			persistStep();
 			return addnewShares();
 		} else if (shareStatus) {
-			submissionMgr.submission.finishedAddingShares__c = true;
 			return nextAction();
 		} else if (String.valueOf(shareStatus) == 'undefined') {
 			currentErrorMessage = '<span class="error-message">You must make a selection</span>';

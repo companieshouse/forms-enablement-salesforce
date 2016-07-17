@@ -1,4 +1,4 @@
-<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController3" docType="html-5.0">
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController3" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form>
@@ -53,19 +53,19 @@
                             </table>
                         </div>
                     </apex:outputPanel>
-                    <apex:commandLink value="Add more shares" action="{!previousAction}" reRender="none" id="thePreviousButton" />
+                    <apex:commandLink value="Add more shares" action="{!addsameShare}" reRender="none" id="addSameShares" />
                     <h3 class="heading-medium">Have you finished adding all of your shares?</h3>
                     <div class="form-group">
                         <span id='errorHint' class='error-message'>{!currentErrorMessage}</span>
                         <fieldset class="inline">
                             <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" type="radio" name="radio-inline-group" value="true" /> Yes, confirm my share capital
+                                <input onclick="confirmShares(true)" id="radio-inline-1" type="radio" name="radio-inline-group" value="true" /> Yes, confirm my share capital
                             </label>
                             <label class="block-label" for="radio-inline-3">
-                                <input id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share
+                                <input onclick="confirmShares(false)" id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share
                             </label>
                         </fieldset>
-                        <apex:actionFunction action="{!choosePath}" name="choosePath" reRender="form">
+                        <apex:actionFunction action="{!confirmShares}" name="confirmShares" reRender="form">
                             <apex:param name="shareStatusParam" value="" id="abc" assignTo="{!shareStatus}" />
                         </apex:actionFunction>
                     </div>
