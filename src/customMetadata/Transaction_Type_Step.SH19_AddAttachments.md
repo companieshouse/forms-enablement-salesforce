@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Submit documents</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -19,26 +19,23 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Unless previously submitted, you&apos;ll need to provide the related documents before you can submit your statement.</value>
+        <value xsi:type="xsd:string">You can upload additional documents with this application, or it can be submitted by itself.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">If you&apos;re filing for a private limited company, you need to upload:</value>
+        <value xsi:type="xsd:string">Documents you can also submit</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;a solvency statement&lt;/li&gt;
-&lt;li&gt;a special resolution authorising the capital reduction&lt;/li&gt;
-&lt;li&gt;directors&apos; statement&lt;/li&gt;&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">If you wish to use the same day service, we will need all these documents. If you have already sent one of these documents, you do not need to send it again.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">If you&apos;re filing for a public limited company (PLC), you need to upload:</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;directors&apos; statement&lt;/li&gt;&lt;li&gt;a special resolution authorising the capital reduction&lt;/li&gt;&lt;/ul&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -50,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Add supporting documentation</value>
+        <value xsi:type="xsd:string">Additional documents</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

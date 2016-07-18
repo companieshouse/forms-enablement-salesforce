@@ -117,6 +117,7 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String previousButtonText {get; set;}
     public static final Integer NUMOFATTACHMENTSALLOWED = 1;
     public AddAttachmentsController() {
         super();
@@ -134,6 +135,7 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         headerText2 = transactionMgr.currentStep.Header_Text_2__c;
         headerText3 = transactionMgr.currentStep.Header_Text_3__c;
         continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
+        previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         presenterEmail = submissionMgr.submission.Presenter__r.Name;

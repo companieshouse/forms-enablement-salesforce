@@ -39,8 +39,10 @@ Ver. Author        Date        Detail
                 <p class="lede">
                     <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
                 </p>
-                <span id='DEF3' name='dynamicelements'>"{!pageText3}"</span>
-                <span id='DEF4' name='dynamicelements'>{!pageText4}"</span>
+                <!--<span id='DEF3' name='dynamicelements'>"{!pageText3}"</span>
+                <span id='DEF4' name='dynamicelements'>{!pageText4}"</span>-->
+                <apex:outputText escape="false" value="{!pageText3}"></apex:outputText>
+                <apex:outputText escape="false" value="{!pageText4}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText5}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText6}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageText7}"></apex:outputText>

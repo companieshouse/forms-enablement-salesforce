@@ -19,9 +19,9 @@
                     <p class="lede">
                         <apex:outputText escape="false" value="{!displayText}" id="displayText" />
                     </p>
-                    <p class="lede">
+                    <h2 class="heading-large">
                         <apex:outputText escape="false" value="{!displayText2}" id="displayText2" />
-                    </p>
+                    </h2>
                     <apex:outputText escape="false" value="{!displayText3}" id="displayText3" />
                     <p class="lede">
                         <apex:outputText escape="false" value="{!displayText4}" id="displayText4" />
@@ -140,9 +140,9 @@
                     </table>
                     <br/>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
                 <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
             </apex:form>
         </apex:define>
     </apex:composition>

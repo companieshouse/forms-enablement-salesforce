@@ -38,7 +38,7 @@ public class ReviewController extends TransactionStepControllerBase {
     public String companyCountry {get; set;}
     public String companyLocality {get; set;}
     public Boolean showprevious {get; set;}
-    public String reviewpagebutton {get; set;}
+    public String continueButtonText {get; set;}
     public Boolean custompanelView {get; set;}
     public Boolean standardPanelView {get; set;}
     public Map < String, Shares__c > shareCurrencyMap {get; set;}
@@ -82,7 +82,9 @@ public class ReviewController extends TransactionStepControllerBase {
     public String redemptiontableHelperText {get; set;}
     public String reconversiontableHelperText {get; set;}
     public Boolean showPromoters {get; set;}
-
+    public String previousButtonText {get; set;}
+    public Boolean confirmationVal {get; set;}
+    public String showError {get; set;}
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -99,7 +101,8 @@ public class ReviewController extends TransactionStepControllerBase {
         presenterEmail = submissionMgr.submission.Presenter__r.Name;
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
-        reviewpagebutton = transactionMgr.currentStep.ContinueButtonText__c;
+        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
+        previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         shareCurrencyMap = new map < String, Shares__c > ();
         viewmap = new Map < Integer, List < Shares__c >> ();
@@ -126,12 +129,15 @@ public class ReviewController extends TransactionStepControllerBase {
         sh08Family = new List < Shares__c > ();
         promoters = new List < Shares__c > ();
         showCurrency = true;
-
+        confirmationVal = false;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
         }
         shareRouter();
         return;
+    }
+    public void confirmReviewPage() {
+
     }
     public void buildLABELS() {
         if (submissionMgr.submission.Form_Name__c.contains('SH10')) {
@@ -262,6 +268,12 @@ public class ReviewController extends TransactionStepControllerBase {
         submissionMgr.persist();
     }
     public PageReference nextAction() {
+        if (!confirmationVal) {
+            showError = 'error';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must confirm to continue';
+            return null;
+        }
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
         return nextStep();

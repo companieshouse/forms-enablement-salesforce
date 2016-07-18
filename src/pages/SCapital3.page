@@ -86,7 +86,7 @@
                             }
                         }
                         </script>
-                        <apex:commandButton styleClass='button' action="{!nextAction}" value="{!continueButtonText}" id="continueButton" /> &nbsp;
+                        <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" id="continueButton" /> &nbsp;
                         <!--
                         <input type="button" class="button" id="nextButton" value="{!continueButtonText}" onclick="chooseStep()" />
                         -->
