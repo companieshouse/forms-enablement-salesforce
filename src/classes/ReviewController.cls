@@ -139,6 +139,23 @@ public class ReviewController extends TransactionStepControllerBase {
     public void confirmReviewPage() {
 
     }
+    public void buildPDF() {
+        //Build the unique document for the envelope
+        Blob pdfBlob;
+
+        PageReference pageRef = new PageReference('/apex/' + submissionMgr.submission.Form_Name__c);
+        pageRef.getParameters().put('id', submissionMgr.submission.Id);
+        if (Test.IsRunningTest())
+            pdfBlob = Blob.valueOf('This is a test');
+        else
+            pdfBlob = pageRef.getContent();
+        Attachment pdfDoc = new Attachment();
+        pdfDoc.parentId = submissionMgr.submission.Id;
+        pdfDoc.Body = pdfBlob;
+        try {
+            insert(pdfDoc);
+        } catch (DmlException e) {} catch (Exception e) {}
+    }
     public void buildLABELS() {
         if (submissionMgr.submission.Form_Name__c.contains('SH10')) {
             labelText = 'Notice of particulars of variation of rights attached to shares';

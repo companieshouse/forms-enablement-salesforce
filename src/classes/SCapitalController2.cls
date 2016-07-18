@@ -127,9 +127,14 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 			currentErrorMessage = 'Aggregate nominal value must be greater than 0';
 			return null;
 		}
-		if (aggUnpaid > 0) {
+		if (aggUnpaid == 0) {
 			hasPageErrors = true;
 			currentErrorMessage = 'numeric';
+		}
+		if (shareClassType.length() < 1) {
+			hasPageErrors = true;
+			currentErrorMessage = 'You are missing the Share Class Type';
+			return null;
 		}
 		//if (aggUnpaid == 0 || aggUnpaid == null)  {
 		//    hasPageErrors = true;

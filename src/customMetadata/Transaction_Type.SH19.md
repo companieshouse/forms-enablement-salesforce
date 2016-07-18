@@ -92,19 +92,7 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;reduce the share capital for a private limited company supported by a solvency statement&lt;/li&gt; 
-&lt;li&gt;reduce the share capital for a private or public limited company supported by a court order&lt;/li&gt;
-&lt;/ul&gt;</value>
-    </values>
-    <values>
-        <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Before you start:&lt;/p&gt;
-&lt;p&gt;It costs £10 to use the standard service or £50 for the same day service (both paid by debit or credit card or PayPal account).&lt;/p&gt;</value>
-    </values>
-    <values>
-        <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You&apos;ll need:&lt;/p&gt;
+        <value xsi:type="xsd:string">&lt;p&gt;You will need:&lt;/p&gt;
 &lt;ul class=&quot;list list-bullet&quot;&gt; 
 &lt;li&gt;the company number&lt;/li&gt; 
 &lt;li&gt;the company authentication code&lt;/li&gt;
@@ -112,8 +100,18 @@
 &lt;/ul&gt;</value>
     </values>
     <values>
+        <field>Landing_Page_Text3__c</field>
+        <value xsi:type="xsd:string">&lt;p&gt;The fee is £10 for standard service or £50 for same day.&lt;/p&gt;
+&lt;p&gt;It normally takes 10 minutes to complete this process.
+&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>Landing_Page_Text4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Additional documents are required with the Statement of Capital (SH19), in order to register the reduction of share capital.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
@@ -121,11 +119,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can use this service to:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">This service is used to complete your Statement of Capital following an administrative reduction in share capital.</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Reduction of Share Capital</value>
+        <value xsi:type="xsd:string">Updating your share capital (SH19)</value>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
@@ -137,7 +135,7 @@
     </values>
     <values>
         <field>above_button_text__c</field>
-        <value xsi:type="xsd:string">Additional documents are required within the statement of capital (SH19) to register the reduction of share capital.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>companySearchPageText__c</field>

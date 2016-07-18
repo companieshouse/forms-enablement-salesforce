@@ -68,8 +68,34 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		get;
 		set;
 	}
-	public String prescribedParticular {get; set;}
-	public String shareClassType {get; set;}
+	public String prescribedParticular {
+		get;
+		set;
+	}
+	public String shareClassType {
+		get;
+		set;
+	}
+	public Boolean rightsErrors {
+		get;
+		set;
+	}
+	public Boolean shareClassErrors {
+		get;
+		set;
+	}
+	public Boolean hasPageErrors {
+		get;
+		set;
+	}
+	public String currentErrorMessage {
+		get;
+		set;
+	}
+	public String errorsClass {
+		get;
+		set;
+	}
 	public SCapitalController1() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -80,7 +106,6 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 			//throw new Form_CustomException('share class type is ' +shareClassType);
 		}
 	}
-
 	public void grabPrescribedParticular() {
 		if (prescribedParticular != null) {
 			System.debug('sharetype == ' + ' ' + prescribedParticular);
@@ -102,14 +127,13 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
 		previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
 	}
-	public PageReference checkstatus () {
+	public PageReference checkstatus() {
 		if (submissionMgr.submission.finishedAddingShares__c == true) {
 			return nextStep();
 		}
 		return null;
 	}
 	public PageReference AddtocurrentShare() {
-
 		submissionMgr.persist();
 		return nextStep();
 	}
@@ -123,7 +147,26 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 	}
 	public PageReference nextAction() {
 
-
+		if (shareClassType == null) {
+			errorsClass = 'error';
+			shareClassErrors = true;
+			hasPageErrors = true;
+			currentErrorMessage = 'You are missing the class of share';
+			return null;
+		} else if (shareClassType != null) {
+			shareClassErrors = false;
+			errorsClass = '';
+		}
+		if (prescribedParticular == null) {
+			errorsClass = 'error';
+			rightsErrors = true;
+			hasPageErrors = true;
+			currentErrorMessage = 'You are missing the rights attached to these shares';
+			return null;
+		} else if (prescribedParticular != null) {
+			rightsErrors = false;
+			errorsClass = '';
+		}
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
 		PageReference pg = new PageReference('/SCapital2');

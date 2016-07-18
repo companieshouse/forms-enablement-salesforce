@@ -38,12 +38,12 @@
                             </div>
                         </div>
                     <div class="form-group">
-                        <label class="label-class" for="full-name-f1">What's the total amount of {!shareClassType} shares in this currency?
+                        <label class="form-label-bold" for="full-name-f1">What's the total amount of {!shareClassType} shares in this currency?
                         </label>
                         <input onchange="grabnumberOfShares(this.value)" class="form-control" id="full-name-f1" type="text" />
                     </div>
                     <div class="form-group">
-                        <label class="label-class" for="full-name-f2">What's the total aggregate nominal value of {!shareClassType} shares in this currency?</label>
+                        <label class="form-label-bold" for="full-name-f2">What's the total aggregate nominal value of {!shareClassType} shares in this currency?</label>
                         <p class="form-hint">This is the total number of shares multiplied by the nominal value.</p>
                         <input class="form-control" id="full-name-f2" type="text" onchange="grabAggNomValue(this.value)" />
                     </div>

@@ -1,16 +1,38 @@
-<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController1"  action="{!checkstatus}" docType="html-5.0">
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController1" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel id="emptyPanel" />
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <p>
+                            </p>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a href="#">{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
                     <div class="form-group">
                         <h1 class="heading-xlarge">{!headerText1}
                         </h1>
+                        <!--
                         <p class="lede">{!headerText2}
                         </p>
-                        <div class="form-group">
+                        -->
+                        <h3 class="heading-medium">What is the class of share?</h3>
+                        <div class="form-group {!errorsClass}">
                             <fieldset>
+                                <legend class="visuallyhidden">What is the class of share?</legend>
+                                <apex:outputPanel rendered="{!shareClassErrors}">
+                                    <span class="error-message" id='shareclass-errors'>
+                                        {!currentErrorMessage}</span>
+                                </apex:outputPanel>
                                 <label class="block-label" for="radio-1">
                                     <input id="ordinary" onclick="grabShareType('Ordinary');" type="radio" name="radio-group" value="Ordinary" /> Ordinary
                                 </label>
@@ -36,8 +58,13 @@
                             </div>
                         </div>
                         <h1 class="heading-medium">What are the rights attached to these shares?</h1>
-                        <div class="form-group">
+                        <div class="form-group {!errorsClass}">
                             <fieldset>
+                                <legend class="visuallyhidden"></legend>
+                                <apex:outputPanel rendered="{!rightsErrors}">
+                                    <span class="error-message" id='rights-errors'>
+                                        {!currentErrorMessage}</span>
+                                </apex:outputPanel>
                                 <label class="block-label" for="rights-1">
                                     <input onclick="grabPrescribedParticular('Share has full rights including voting, dividend and distributions')" id="rights-1" type="radio" name="radio-group-preparticulars" value="Share has full rights including voting, dividend and distributions" /> Share has full rights including voting, dividend and distributions
                                 </label>
@@ -51,7 +78,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <apex:commandButton action="{!nextAction}" id="SCapital1button" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                            <apex:commandButton action="{!nextAction}" id="SCapital1button" reRender="masterpanel" styleClass="button" value="{!continueButtonText}" />
                             <br/>
                             <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
                         </div>

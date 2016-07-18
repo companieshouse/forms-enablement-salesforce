@@ -53,7 +53,7 @@
                             </table>
                         </div>
                     </apex:outputPanel>
-                    <apex:commandLink value="Add more shares" action="{!addsameShare}" reRender="none" id="addSameShares" />
+                    <apex:commandLink value="Add more {!shareClassType} shares  in a different currency" action="{!addsameShare}" reRender="none" id="addSameShares" />
                     <h3 class="heading-medium">Have you finished adding all of your shares?</h3>
                     <div class="form-group">
                         <span id='errorHint' class='error-message'>{!currentErrorMessage}</span>
