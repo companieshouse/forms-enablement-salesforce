@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: SigningController
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
@@ -124,6 +124,8 @@ public with sharing class SigningController extends TransactionStepControllerBas
     private void persistStep() {
         if (signingchoice) {
             submissionMgr.submission.Status__c = 'Signed';
+
+
         }
         // persist stuff here
         submissionMgr.persist();
@@ -143,6 +145,14 @@ public with sharing class SigningController extends TransactionStepControllerBas
             hasPageErrors = true;
             return null;
         }
+
+
+        FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+        submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+
+
+        system.debug('Before save tx: ' + submissionMgr.submission);
+
         persistStep();
         return nextStep();
     }

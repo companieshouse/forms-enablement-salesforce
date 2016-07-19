@@ -129,14 +129,23 @@ public class ReviewController extends TransactionStepControllerBase {
         sh08Family = new List < Shares__c > ();
         promoters = new List < Shares__c > ();
         showCurrency = true;
-        confirmationVal = false;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = false;
         }
+        buildVal();
         shareRouter();
         return;
     }
     public void confirmReviewPage() {
+
+    }
+    public void buildVal() {
+
+        if (submissionMgr.submission.Form_Name__c == 'DS01')
+        {confirmationVal = true;}
+        else {
+            confirmationVal = false;
+        }
 
     }
     public void buildPDF() {

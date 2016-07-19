@@ -42,6 +42,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
     public String companyCountry {get; set;}
     public String companyLocality {get; set;}
     public Boolean showprevious {get; set;}
+    public String shim {get; set;}
 
     public CompanyDetailsController() {
         super();
@@ -67,8 +68,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
         companyStatus = compProf.company_status.capitalize();
         companyDateOfCreation = compProf.date_of_creation;
         companyName = compProf.company_name;
-        companyType = compProf.type;
-        companyType = companyType.toUpperCase();
+        companyType = compProf.type.toUpperCase();
         showprevious = true;
 
         companyAddress = (companyAddress1 ==  null ? '' : companyAddress1 + '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2 + '<br/>')  + (companyregion ==  null ? '' : companyregion + '<br/>')  + (companyLocality ==  null ? '' : companyLocality + '<br/>')  + (companypostcode ==  null ? '' : companypostcode + '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
