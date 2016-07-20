@@ -1,4 +1,11 @@
 //Class used to translate to JSON the transaction
+/*
+Ver. Author        Date        Detail
+1.0  Sylvain Picory&    2016-07-04  Initial development.
+1.5 Leo Bitoy 2016-07-07 (Packages)
+1.5 Leo Bitoy 2016-07-07 (SH02, SH19, SH10, Sh08, Dynamic Elements)
+*/
+
 public class TransactionSerialiser {
 	public final static String MIMETYPESTRING = 'application/pdf';
 	public final static String CATEGORYSTRING = 'FORM IMAGE PDF';
