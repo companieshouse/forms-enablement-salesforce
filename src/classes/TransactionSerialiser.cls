@@ -711,19 +711,19 @@ public class TransactionSerialiser {
 			List < formdata > packagesform = new List < formdata > ();
 			if (transact.containsPackage__c == true) {
 				//  BUILD RES15
-				packagesmeta.add(new metadata('RES15', 1, 1, transact.SubmissionId__c));
+				packagesmeta.add(new metadata('RES15', 2, 1, transact.SubmissionId__c));
 				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
 				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[0]));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[0], packagescorp[0]));
 				//  BUILD CAPSS
-				packagesmeta.add(new metadata('CAPSS', 1, 1, transact.SubmissionId__c));
+				packagesmeta.add(new metadata('CAPSS', 3, 1, transact.SubmissionId__c));
 				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
 				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[1]));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[1], packagescorp[1]));
 				//  BUILD SH20
-				packagesmeta.add(new metadata('SH20', 1, 1, transact.SubmissionId__c));
+				packagesmeta.add(new metadata('SH20', 4, 1, transact.SubmissionId__c));
 				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
 				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[2]));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
