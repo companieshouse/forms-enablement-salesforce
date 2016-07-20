@@ -66,7 +66,7 @@ Ver. Author        Date        Detail
                 <br/>
                 <br/>
                 <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
-                <script>
+                <script>/*
                 $(Document).ready(function enableBuilder() {
                     if ({!enableHTMLBuilder}) {
                         var DEF3 = "{!def3}";
@@ -99,6 +99,7 @@ Ver. Author        Date        Detail
 
 
                 enableBuilder();
+                */
                 </script>
             </apex:form>
         </apex:define>

@@ -332,9 +332,10 @@
         <externalId>false</externalId>
         <inlineHelpText>API call errors will be presented here</inlineHelpText>
         <label>Error Description</label>
-        <required>false</required>
+        <length>131072</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
     </fields>
     <fields>
         <fullName>ExpiryDate__c</fullName>
@@ -678,6 +679,15 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Warning Confirmation Flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>containsPackage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes that a particular transactions contains multiple transactions as attachments to be turned into packages upon submission</description>
+        <externalId>false</externalId>
+        <label>containsPackage</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

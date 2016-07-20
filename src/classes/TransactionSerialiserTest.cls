@@ -3,7 +3,7 @@ private class TransactionSerialiserTest {
 
 	//Class test to test the convertion of a transaction record into JSON
 	@IsTest
-	static void test_method_transactionToJSON(){
+	static void test_method_transactionToJSON() {
 		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
 
 		Transaction__c transac = testData.tx;
@@ -54,14 +54,14 @@ private class TransactionSerialiserTest {
 		//Test form
 		system.assertEquals(form.formdata.filingDetails.barcode, transac.Barcode__c);
 		system.assertEquals(form.formdata.filingDetails.receiptDate, system.today().year() + '-' + system.today().month() + '-' + system.today().day());
-		system.assertEquals(form.formdata.corporateBody.incorporationNumber ,transac.CompanyNumber__c );
-		system.assertEquals(form.formdata.corporateBody.corporateBodyName ,transac.CompanyName__c );
+		system.assertEquals(form.formdata.corporateBody.incorporationNumber , transac.CompanyNumber__c );
+		system.assertEquals(form.formdata.corporateBody.corporateBodyName , transac.CompanyName__c );
 
 		//Test Attachments
 		system.assertEquals(lAtt.attachments.size(), 1);
-		system.assertEquals(lAtt.attachments[0].data ,resultBody );
+		system.assertEquals(lAtt.attachments[0].data , resultBody );
 
 
 	}
-	
+
 }

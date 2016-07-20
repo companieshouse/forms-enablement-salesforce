@@ -59,7 +59,7 @@
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">8.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

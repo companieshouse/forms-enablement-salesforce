@@ -27,7 +27,7 @@ public class TransactionSerialiser {
 			get;
 			set;
 		}
-		public Decimal version {
+		public String version {
 			get;
 			set;
 		}
@@ -36,7 +36,7 @@ public class TransactionSerialiser {
 			set;
 		}
 		public metadata() {}
-		public metadata(String type, Integer packageindex, Decimal version, String submissionReference) {
+		public metadata(String type, Integer packageindex, String version, String submissionReference) {
 			this.type = type;
 			this.packageindex = packageindex;
 			this.version = version;
@@ -597,7 +597,7 @@ public class TransactionSerialiser {
 
 			detailsOfVariationOfRights variationforChips = new detailsOfVariationOfRights(variationString);
 
-			metadata met = new metadata(transact.Form_Name__c, 1, 1, transact.SubmissionId__c);
+			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
 			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
 			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
 			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, variationforChips);
@@ -637,7 +637,7 @@ public class TransactionSerialiser {
 
 			shareAssignments  shareAssignmentsVals = new shareAssignments(shareAssignmentLISTS);
 
-			metadata met = new metadata(transact.Form_Name__c, 1, 1, transact.SubmissionId__c);
+			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
 			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
 			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
 			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, shareAssignmentsVals);
@@ -666,7 +666,7 @@ public class TransactionSerialiser {
 		}
 		if (transact.Form_Name__c == 'DS01') {
 			// DSO1 specific
-			metadata met = new metadata(transact.Form_Name__c, 1, 1, transact.SubmissionId__c);
+			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
 			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
 			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
 			List < Officer__c > lOff = [SELECT Name, Surname__c, Title__c, Middlenames__c, Forename__c, DateSigned__c FROM Officer__c where Transaction__c = : transact.Id];
@@ -711,19 +711,19 @@ public class TransactionSerialiser {
 			List < formdata > packagesform = new List < formdata > ();
 			if (transact.containsPackage__c == true) {
 				//  BUILD RES15
-				packagesmeta.add(new metadata('RES15', 2, 1, transact.SubmissionId__c));
+				packagesmeta.add(new metadata('RES15', 2, '1', transact.SubmissionId__c));
 				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
 				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[0]));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[0], packagescorp[0]));
 				//  BUILD CAPSS
-				packagesmeta.add(new metadata('CAPSS', 3, 1, transact.SubmissionId__c));
+				packagesmeta.add(new metadata('CAPSS', 3, '1', transact.SubmissionId__c));
 				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
 				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[1]));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[1], packagescorp[1]));
 				//  BUILD SH20
-				packagesmeta.add(new metadata('SH20', 4, 1, transact.SubmissionId__c));
+				packagesmeta.add(new metadata('SH20', 4, '1', transact.SubmissionId__c));
 				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
 				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[2]));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
@@ -743,7 +743,7 @@ public class TransactionSerialiser {
 				}
 			}
 			//throw new Form_CustomException('here are your tasty little booleans' + 'capss' + '' + showCappSS + ' sh20' + showSH20 + ' res15' + showRES15);
-			metadata met = new metadata(transact.Form_Name__c, 1, 1, transact.SubmissionId__c);
+			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
 			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
 			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
 			List < Shares__c > lShares = [SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c, ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__c where Transaction__c = : transact.Id];
@@ -850,7 +850,7 @@ public class TransactionSerialiser {
 
 			shares sharesSH02 = new shares (redeemedShares, consolidatedShares, reconvertedShares, subdividedShares);
 
-			metadata met = new metadata(transact.Form_Name__c, 1, 1, transact.SubmissionId__c);
+			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
 			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
 			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
 			List < Shares__c > lShares = [SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c, ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__c where Transaction__c = : transact.Id];
