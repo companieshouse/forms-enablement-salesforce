@@ -22,7 +22,7 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -36,21 +36,20 @@ Ver. Author        Date        Detail
                     </div>
                 </apex:outputPanel>
                 <h1 class="heading-xlarge">
-                    <!--{!companySearchHeader}--> Which company do you wish to file for?
+                    <!--{!companySearchHeader}-->Which company do you wish to file for?
                 </h1>
-                <!-- <div class="form-group {!IF(hasPageErrors,'error', '')}"> -->
-                <label class="form-label" for="text-input">What is the company registration number?
-                    <span class="form-hint">This is the 8-character identification code on your certificate of incorporation.</span>
-                    <apex:outputPanel rendered="{!hasPageErrors}">
-                        <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
-                        </span>
-                    </apex:outputPanel>
-                </label>
-                <apex:outputText escape="false" value="{!currentErrortop}" />
-                <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                <apex:outputText escape="false" value="{!currentErrorbottom}" />
-                <!-- </div>   -->
-                <br/>
+                <div class="form-group {!currentError}">
+                    <label class="form-label" for="text-input">What is the company registration number?
+                        <span class="form-hint">This is the 8-character identification code on your certificate of incorporation.</span>
+                        <apex:outputPanel rendered="{!hasPageErrors}">
+                            <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                            </span>
+                        </apex:outputPanel>
+                    </label>
+                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
+                    <!-- </div>   -->
+                    <br/>
+                </div>
                 <div class="form-group">
                     <details>
                         <summary>
