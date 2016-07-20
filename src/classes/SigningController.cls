@@ -112,6 +112,29 @@ public with sharing class SigningController extends TransactionStepControllerBas
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
     }
+    public void buildDocument() {
+
+        Attachment pdfAttachment = new Attachment();
+        Blob pdfBlob;
+        PageReference pageRef = new PageReference('/apex/' + submissionMgr.submission.Form_Name__c);
+        pageRef.getParameters().put('id', submissionMgr.submission.Id);
+        if (Test.IsRunningTest())
+            pdfBlob = Blob.valueOf('This is a test');
+        else
+            pdfBlob = pageRef.getContent();
+        pdfAttachment.ParentId = submissionMgr.submission.Id;
+        pdfAttachment.Name = submissionMgr.submission.Form_Name__c;
+        pdfAttachment.Description = submissionMgr.submission.Form_Name__c;
+        pdfAttachment.Body = pdfBlob;
+
+        try {
+            insert pdfAttachment;
+        } catch (DmlException e) {
+            System.debug('DML Error in inserting' + submissionMgr.submission.Form_Name__c + 'Error Details are' + ' ' + e.getMessage() );
+        } catch (Exception e) {
+            System.debug('General Error in inserting' + submissionMgr.submission.Form_Name__c + 'Error Details are' + ' ' + e.getMessage() );
+        }
+    }
     public List < SelectOption > getItems() {
         List < SelectOption > options = new List < SelectOption > ();
         options.add(new SelectOption('True', 'Yes'));

@@ -29,7 +29,7 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
 
 
-    public PageReference initSiging() {
+    public PageReference initSigning() {
 
 
         externalURL = docusignSignature(submissionMgr, transactionMgr);
@@ -44,7 +44,8 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
         //Build the unique document for the envelope
         Blob pdfBlob;
-        PageReference pageRef = new PageReference('/apex/' + submissionMgr.submission.Form_Name__c);
+        // pass reference to form to make it dynamic
+        PageReference pageRef = new PageReference('/apex/PDFGeneration');
         pageRef.getParameters().put('id', submissionMgr.submission.Id);
         if (Test.IsRunningTest())
             pdfBlob = Blob.valueOf('This is a test');

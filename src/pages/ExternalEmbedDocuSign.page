@@ -1,4 +1,4 @@
-<apex:page title="{!$Label.UI_Text_DocuSign}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
+<apex:page title="{!$Label.UI_Text_DocuSign}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSigning}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

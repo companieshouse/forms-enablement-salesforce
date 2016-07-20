@@ -73,6 +73,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_SUMMARY = '/Summary';
     public String VF_PAGE_CALLBACK = '/AccountsAuthCallback';
     public String VF_PAGE_ERROR = '/transactionexception';
+    public String VF_PAGE_DIGITALSIGNATURE      = '/DigitalSignature';
+    public String VF_PAGE_EXTDOCUSIGN      = '/ExternalEmbedDocuSign';
     public String VF_PAGE_DOCUSIGN = '/EmbedDocuSign';
     public String VF_PAGE_PDFGENERATION = '/PDFGeneration';
     public String VF_PAGE_PAYMENT = '/Payment';
@@ -213,7 +215,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_SCAP2);
         } else if (url.startsWith(SCAP3)) {
             pr = new PageReference(VF_PAGE_SCAP3);
-        }
+        } else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))     { pr = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
+        else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))       { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
+
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
     }
@@ -320,7 +324,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(SCAP2);
             } else if (url.startsWith(VF_PAGE_SCAP3)) {
                 friendlyPageReference = new PageReference(SCAP3);
-            }
+            } else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))  { friendlyPageReference = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
+            else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))       { friendlyPageReference = new PageReference(VF_PAGE_EXTDOCUSIGN); }
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);
         }
