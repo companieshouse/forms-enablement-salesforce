@@ -1,5 +1,5 @@
 <apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
-    <apex:composition template="reviewPageTemplate">
+    <apex:composition template="transactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
                 <apex:outputPanel rendered="{!hasPageErrors}">

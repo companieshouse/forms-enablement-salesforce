@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: AddShares
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
@@ -36,7 +36,11 @@ public with sharing class ChangeShareClassName extends TransactionStepController
         get;
         set;
     }
-    public String currentErrorMessage {
+    public String newcurrentErrorMessage {
+        get;
+        set;
+    }
+    public String oldcurrentErrorMessage {
         get;
         set;
     }
@@ -88,6 +92,14 @@ public with sharing class ChangeShareClassName extends TransactionStepController
         get;
         set;
     }
+    public String olderrorsClass {
+        get;
+        set;
+    }
+    public String newerrorsClass {
+        get;
+        set;
+    }
     public ChangeShareClassName() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -126,25 +138,35 @@ public with sharing class ChangeShareClassName extends TransactionStepController
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
             if (classofshares == null || classofshares.length() == 0) {
                 hasPageErrors = true;
-                currentErrorMessage = 'Must add the old class of shares name';
+                olderrorsClass = 'error';
+                oldcurrentErrorMessage = 'Must add the old class of shares name';
+                newerrorsClass = '';
+                newcurrentErrorMessage = '';
                 return null;
             }
             if (classofsharesNew == null || classofsharesNew.length() == 0) {
                 hasPageErrors = true;
-                currentErrorMessage = 'Must add a new class of shares name';
+                newerrorsClass = 'error';
+                newcurrentErrorMessage = 'Must add a new class of shares name';
+                olderrorsClass = '';
+                oldcurrentErrorMessage = '';
                 return null;
             }
             if (classofshares == classofsharesNew) {
                 hasPageErrors = true;
-                currentErrorMessage = 'New share name cannot be the same as the old share name';
+                olderrorsClass = 'error';
+                newerrorsClass = 'error';
+                oldcurrentErrorMessage = 'Old share name cannot be the same as the new share name';
+                newcurrentErrorMessage = 'New share name cannot be the same as the old share name';
+                return null;
             }
             sharesToAdd.add(new Shares__c(ShareType__c = submissionMgr.submission.Form_Name__c, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = classofshares, Class_of_Share_new__c = classofsharesNew, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
-        PageReference pg = new PageReference('/ChangeShareClassName');
-        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-        pg.setRedirect(true);
-        return pg;
+        //PageReference pg = new PageReference('/ChangeShareClassName');
+        //pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        //pg.setRedirect(true);
+        return nextAction();
     }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;

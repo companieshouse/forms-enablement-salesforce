@@ -63,6 +63,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String SCAP1 = '/SCapital1';
     public String SCAP2 = '/SCapital2';
     public String SCAP3 = '/SCapital3';
+    public String SHOWSHARECHANGE = '/showClassChanges';
 
     // // // // //
     public String VF_PAGE_START = '/StartFramework';
@@ -114,6 +115,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_SCAP1 = '/SCapital1';
     public String VF_PAGE_SCAP2 = '/SCapital2';
     public String VF_PAGE_SCAP3 = '/SCapital3';
+    public String VF_PAGE_SHOWCHANGE = '/ShowClassChanges';
 
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
@@ -217,6 +219,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             pr = new PageReference(VF_PAGE_SCAP3);
         } else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))     { pr = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
         else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))       { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
+        else if (url.startsWith(VF_PAGE_SHOWCHANGE))       { pr = new PageReference(SHOWSHARECHANGE); }
 
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -326,6 +329,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(SCAP3);
             } else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))  { friendlyPageReference = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
             else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))       { friendlyPageReference = new PageReference(VF_PAGE_EXTDOCUSIGN); }
+            else if (url.startsWith(VF_PAGE_SHOWCHANGE))       { friendlyPageReference = new PageReference(SHOWSHARECHANGE); }
+
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);
         }

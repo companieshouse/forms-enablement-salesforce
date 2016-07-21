@@ -135,6 +135,7 @@
 		<members>superSort</members>
 		<members>variationRightsController</members>
 		<members>whichDirector</members>
+		<members>showClassCHangeController</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -212,6 +213,7 @@
 		<members>selectShareType</members>
 		<members>whichDirector</members>
 		<members>reviewPageTemplate</members>
+		<members>ShowClassChanges</members>
 		<name>ApexPage</name>
 	</types>
 	<types>

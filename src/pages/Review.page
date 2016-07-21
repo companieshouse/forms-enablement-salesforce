@@ -1,10 +1,5 @@
 <apex:page title="Review Cancelled Shares" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-    <style>
-    .table-names {
-        font-weight: bold;
-    }
-    </style>
-    <apex:composition template="reviewPageTemplate">
+    <apex:composition template="transactionPageTemplate">
         <apex:define name="content">
             <apex:form>
                 <apex:outputPanel id="masterPanel">
@@ -25,7 +20,6 @@
                     <apex:outputPanel id="standardPanel" rendered="{!standardPanelView}">
                         <h1 class="heading-xlarge">
                             {!headerText1}
-                            <!-- {!$Label.UI_Text_Review_page_Title} -->
                         </h1>
                         <p class="lede">{!displayText1}
                         </p>
@@ -324,7 +318,7 @@
                         <br/>
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel-attachments" rendered="{!custompanelView}">
-                        <apex:outputPanel id="show-attachments" rendered="{!NOT(ISBLANK(reviewAttachments))}">
+                        <apex:outputPanel id="show-attachments" rendered="{!showAttachments}">
                             <div class="form-group">
                                 <table class="check-your-answers">
                                     <thead>
@@ -574,19 +568,21 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="sh08" rendered="{!custompanelView}">
                         <apex:outputPanel id="SH08Tables" rendered="{!showSh08}">
-                            <div class="form-group entire-wrapper">
+                            <h1 class="heading-xlarge">
+                                {!headerText1}</h1>
+                            <p class="lede">{!displayText1}</p>
+                            <h2 class="heading-large">{!headerText2}</h2>
+                            <div class="form-group">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
-                                            <th colspan="5"> {!sh08HelperText} </th>
+                                            <th scope="col">Previous name</th>
+                                            <th scope="col">New name</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Existing class/Description of shares</td>
-                                            <td>Name or new (or new name) or other designation</td>
-                                        </tr>
-                                        <apex:repeat value="{!sh08Family}" var="sp" id="SH08-theRepeat">
+                                    <apex:repeat value="{!sh08Family}" var="sp" id="SH08-theRepeat">
+                                        <tbody>
                                             <tr>
                                                 <td>
                                                     <apex:outputText value="{!sp.Class_of_Shares__c}" id="oldshareclass" />
@@ -595,8 +591,8 @@
                                                     <apex:outputText value="{!sp.Class_of_Share_new__c}" id="newshareclassnew" />
                                                 </td>
                                             </tr>
-                                        </apex:repeat>
-                                    </tbody>
+                                        </tbody>
+                                    </apex:repeat>
                                 </table>
                             </div>
                         </apex:outputPanel>
@@ -636,14 +632,14 @@
                             </div>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!custompanelView}">
-                            <apex:outputPanel id="confirmation-statementPanel" rendered="{!showStatementofCapital}">
+                            <apex:outputPanel id="confirmation-statementPanel">
                                 <div class="form-group {!showError}">
                                     <fieldset>
                                         <legend class="visuallyhidden"></legend>
                                         <span class="error-message" id='confirmation-errors'>
                                             {!currentErrorMessage}</span>
                                         <label class="block-label" for="I-understand">
-                                            <input onclick='confirmReviewPage(this.value)' id="I-understand" name="approve-application" type="checkbox" value="true" /> I confirm that the information above is correct and this is the latest statement of capital
+                                            <input onclick='confirmReviewPage(this.value)' id="I-understand" name="approve-application" type="checkbox" value="true" /> {!displayText3}
                                         </label>
                                     </fieldset>
                                 </div>
@@ -653,21 +649,6 @@
                             </apex:outputPanel>
                         </apex:outputPanel>
                     </apex:outputPanel>
-                    <!--<apex:outputPanel id="customPanel-Signing" rendered="{!custompanelView}">
-                    <h1 class="heading-xlarge">
-                        {!headerText1}
-                    </h1>
-                    <p class="lede">{!displayText1}
-                    </p>
-                    <div class="form-group">
-                        <p>{!displayText2}</p>
-                        <label class="form-label" for="AppDate">Notice of application
-                        </label>
-                        <p class="lede">
-                            <apex:outputText escape="true" styleClass="form-control" value="{!dateField}" id="AppDate" />
-                        </p>
-                    </div>
-                </apex:outputPanel>-->
                     <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
                     <br/> &nbsp;
                     <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;

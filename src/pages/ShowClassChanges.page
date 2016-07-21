@@ -1,0 +1,62 @@
+<apex:page title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="showClassCHangeController" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="changeClassName">
+                        <h1 class="heading-xlarge">
+                            {!headerText1}
+                        </h1>
+                        <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                            <div class="form-group">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Existing name</th>
+                                            <th scope="col">New name or other designation</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Share_new__c}" id="shareclassnew" />
+                                                </td>
+                                                <td>
+                                                    <a href='#' id='{!sp.Id}' onclick="deleteShare('{!sp.Id}')">Change</a>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <apex:actionFunction action="{!deleteShare}" name="deleteShare" reRender="masterpanel">
+                                <apex:param name="shareID" value="" id="MNO" assignTo="{!shareID}" />
+                            </apex:actionFunction>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <div class="form-group">
+                    <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="changemoreshares" /> &nbsp;</div>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
