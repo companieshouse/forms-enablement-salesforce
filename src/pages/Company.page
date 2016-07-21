@@ -30,7 +30,7 @@ Ver. Author        Date        Detail
                         </h1>
                         <ul class="error-summary-list">
                             <li>
-                                <span class="error-message">{!currentErrorMessage}</span>
+                                <a>{!currentErrorMessage}</a>
                             </li>
                         </ul>
                     </div>

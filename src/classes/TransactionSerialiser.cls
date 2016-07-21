@@ -769,12 +769,24 @@ public class TransactionSerialiser {
 
 			//Get the attachment into the attachment object
 			List < Attachment > attRec = [Select Id, Body from Attachment where parentId = : transact.Id];
+
 			if (attRec == null) {
 				return JSON.serialize('Transaction must have a form attached.');
 			}
-			List < attachments > lAtt = new List < attachments > ();
+			List < attachments > sh19Att = new List < attachments > ();
+			List < attachments > sh20Att = new List < attachments > ();
+			List < attachments > res15Att = new List < attachments > ();
+			List < attachments > capSSAtt = new List < attachments > ();
 			for (Attachment att : attRec) {
-				lAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+				if (att.Name == 'STATEMENTOFCAPITAL') {
+					sh19Att.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+				} else if (att.Name == 'SH20') {
+					sh20Att.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+				} else if (att.Name == 'RES15') {
+					res15Att.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+				} else if (att.Name == 'CAPSS') {
+					capSSAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+				}
 			}
 			JSONGenerator gen = JSON.createGenerator(true);
 			//if SH19
@@ -784,14 +796,14 @@ public class TransactionSerialiser {
 			gen.writeFieldName('formdata');
 			gen.writeObject(form);
 			gen.writeFieldName('attachments');
-			gen.writeObject(lAtt);
+			gen.writeObject(sh19Att);
 			if (showSH20) {
 				gen.writeFieldName('metadata');
 				gen.writeObject(packagesmeta[0]);
 				gen.writeFieldName('formdata');
 				gen.writeObject(packagesform[0]);
 				gen.writeFieldName('attachments');
-				gen.writeObject(lAtt);
+				gen.writeObject(sh20Att);
 			}
 			if (showRES15) {
 				gen.writeFieldName('metadata');
@@ -799,7 +811,7 @@ public class TransactionSerialiser {
 				gen.writeFieldName('formdata');
 				gen.writeObject(packagesform[1]);
 				gen.writeFieldName('attachments');
-				gen.writeObject(lAtt);
+				gen.writeObject(res15Att);
 			}
 			if (showCappSS) {
 				gen.writeFieldName('metadata');
@@ -807,7 +819,7 @@ public class TransactionSerialiser {
 				gen.writeFieldName('formdata');
 				gen.writeObject(packagesform[2]);
 				gen.writeFieldName('attachments');
-				gen.writeObject(lAtt);
+				gen.writeObject(capSSAtt);
 			}
 			gen.writeEndObject();
 			//gen.replace('"sNumber":', '"number":');
