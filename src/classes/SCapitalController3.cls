@@ -229,7 +229,10 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		if (!shareStatus) {
 			return addnewShares();
 		}
-		return nextStep();
+		PageReference pg = new PageReference('/Attachments');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;

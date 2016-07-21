@@ -80,7 +80,7 @@
                                     <input onclick="confirmShares(false)" id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share
                                 </label>
                             </fieldset>
-                            <apex:actionFunction action="{!confirmShares}" name="confirmShares" reRender="masterpanel">
+                            <apex:actionFunction action="{!confirmShares}" name="confirmShares" reRender="emptypanel">
                                 <apex:param name="shareStatusParam" value="" id="abc" assignTo="{!shareStatus}" />
                             </apex:actionFunction>
                         </div>

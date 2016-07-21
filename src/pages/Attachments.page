@@ -1,5 +1,5 @@
 <apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
-    <apex:composition template="TransactionPageTemplate">
+    <apex:composition template="reviewPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
                 <apex:outputPanel rendered="{!hasPageErrors}">
@@ -67,8 +67,9 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="doc-name">Document name</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" class="doc-name">Document</th>
+                                        <th scope="col">File name</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

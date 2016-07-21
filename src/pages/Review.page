@@ -4,9 +4,9 @@
         font-weight: bold;
     }
     </style>
-    <apex:composition template="TransactionPageTemplate">
+    <apex:composition template="reviewPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -144,18 +144,18 @@
                                         </tr>
                                     </thead>
                                     <apex:repeat value="{!viewkeys}" var="key">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Currency</th>
+                                                <th scope="col" class="numeric">Class of shares</th>
+                                                <th scope="col" class="numeric">No. of shares</th>
+                                                <th scope="col" class="numeric">Total value aggregate</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Currency</th>
-                                                    <th scope="col" class="numeric">Class of shares</th>
-                                                    <th scope="col" class="numeric">No. of shares</th>
-                                                    <th scope="col" class="numeric">Total value aggregate</th>
-                                                </tr>
-                                            </thead>
                                             <apex:repeat value="{!viewmap[key]}" var="sp">
                                                 <tr>
-                                                    <td class="numeric">
+                                                    <td class="col">
                                                         <apex:outputText value="{!sp.Currency__c}" id="currency" />
                                                     </td>
                                                     <td class="numeric">
@@ -211,7 +211,7 @@
                                         <apex:repeat value="{!sharesforBuilding}" var="sp" id="review-particulars">
                                             <tr>
                                                 <apex:outputPanel rendered="{!showCurrency}">
-                                                    <td class="numeric">
+                                                    <td class="col">
                                                         <apex:outputText value="{!sp.Currency__c}" id="particulars-currency" />
                                                     </td>
                                                 </apex:outputPanel>
@@ -640,11 +640,11 @@
                                 <div class="form-group {!showError}">
                                     <fieldset>
                                         <legend class="visuallyhidden"></legend>
-                                            <span class="error-message" id='confirmation-errors'>
-                                                {!currentErrorMessage}</span>
-                                            <label class="block-label" for="I-understand">
-                                                <input onclick='confirmReviewPage(this.value)' id="I-understand" name="approve-application" type="checkbox" value="true" /> I confirm that the information above is correct and this is the latest statement of capital
-                                            </label>
+                                        <span class="error-message" id='confirmation-errors'>
+                                            {!currentErrorMessage}</span>
+                                        <label class="block-label" for="I-understand">
+                                            <input onclick='confirmReviewPage(this.value)' id="I-understand" name="approve-application" type="checkbox" value="true" /> I confirm that the information above is correct and this is the latest statement of capital
+                                        </label>
                                     </fieldset>
                                 </div>
                                 <apex:actionFunction action="{!confirmReviewPage}" name="confirmReviewPage" reRender="emptyPanel">
