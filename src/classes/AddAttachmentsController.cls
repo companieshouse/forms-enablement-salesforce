@@ -5,9 +5,7 @@ Copyright © 2016  Methods Digital
 ======================================================
 Purpose:
 -------
-
 Controller class for the Visualforce Page: AddAttachment
-
 ======================================================
 ======================================================
 History

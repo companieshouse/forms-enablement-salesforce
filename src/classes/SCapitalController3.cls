@@ -88,12 +88,34 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		get;
 		set;
 	}
-	public List<Shares__c> sharesforBuilding {get; set;}
-	public Map < String, Shares__c > shareCurrencyMap {get; set;}
-	public List < Shares__c > matchedShares {get; set;}
-	public Map < Integer, List < Shares__c >> viewmap {get; set;}
-	public Map < Integer, String > viewkeys {get; set;}
-	public Boolean showStatementofCapital {get; set;}
+	public Id shareID {
+		get;
+		set;
+	}
+	public List < Shares__c > sharesforBuilding {
+		get;
+		set;
+	}
+	public Map < String, Shares__c > shareCurrencyMap {
+		get;
+		set;
+	}
+	public List < Shares__c > matchedShares {
+		get;
+		set;
+	}
+	public Map < Integer, List < Shares__c >> viewmap {
+		get;
+		set;
+	}
+	public Map < Integer, String > viewkeys {
+		get;
+		set;
+	}
+	public Boolean showStatementofCapital {
+		get;
+		set;
+	}
 	public SCapitalController3() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -119,14 +141,34 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		viewkeys = new Map < Integer, String > ();
 		buildCapitalMap();
 	}
-	public PageReference checkstatus () {
+	public PageReference checkstatus() {
 		if (submissionMgr.submission.finishedAddingShares__c == true) {
 			return nextStep();
 		}
 		return null;
 	}
+	public PageReference deleteShare() {
+		try {
+			List < Shares__c > deletedrecord = [SELECT Id, Name, Currency__c From Shares__c where ID = : shareID];
+			//throw new Form_CustomException('record you are deleting is' + deletedrecord);
+			delete deletedrecord[0];
+		} catch (DmlException e) {
+			System.debug('DML Error with ' + e.getMessage());
+		} catch (Exception e) {
+			System.debug('DML Error with ' + e.getMessage());
+		}
+		PageReference pg = new PageReference('/SCapital3');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
+	}
+	public PageReference restartJourney() {
+		PageReference pg = new PageReference('/SCapital1');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
+	}
 	public void buildCapitalMap() {
-
 		if (submissionMgr.submission.Shares__r.size() > 0) {
 			for (Shares__c totalShares : submissionMgr.submission.Shares__r) {
 				if (totalShares.SHARETYPE__c == 'STATEMENTOFCAPITAL' && totalShares.Class_of_Shares__c == submissionMgr.submission.selectShareType__c) {
@@ -148,15 +190,14 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		return nextStep();
 	}
 	private void persistStep() {
-		if (!shareStatus)
-		{submissionMgr.submission.finishedAddingShares__c = false;}
-		else if (shareStatus) {submissionMgr.submission.finishedAddingShares__c = true;}
-
+		if (!shareStatus) {
+			submissionMgr.submission.finishedAddingShares__c = false;
+		} else if (shareStatus) {
+			submissionMgr.submission.finishedAddingShares__c = true;
+		}
 		submissionMgr.persist();
 	}
-	public void confirmShares() {
-
-	}
+	public void confirmShares() {}
 	public PageReference addnewShares() {
 		PageReference pg = new PageReference('/SCapital1');
 		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
@@ -185,7 +226,9 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 	public PageReference nextAction() {
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
-		if (!shareStatus) {return addnewShares();}
+		if (!shareStatus) {
+			return addnewShares();
+		}
 		return nextStep();
 	}
 	public PageReference previousAction() {
