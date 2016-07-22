@@ -703,6 +703,7 @@ public class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
+
 		if (transact.Form_Name__c == 'SH19') {
 			List < metadata > packagesmeta = new List < metadata > ();
 			List < payment > packagespayment = new List < payment > ();
@@ -758,7 +759,7 @@ public class TransactionSerialiser {
 				}
 			}
 			shareValueGrandTotals gTS = new shareValueGrandTotals(serializedGT);
-			Decimal sVGT = 1;
+			Decimal sVGT = 1; // todo transact sValue Grand Total Number of sHares
 			shareValues sV = new shareValues(serialzedSHARE);
 			shareClasses sC = new shareClasses(serializedCLASS);
 			latestSOCInd lS = new latestSOCInd('true');

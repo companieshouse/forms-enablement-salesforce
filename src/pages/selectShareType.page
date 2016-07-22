@@ -1,69 +1,85 @@
-<apex:page title="{!$Label.UI_Text_Review}" controller="selectShareTypeController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="selectShareTypeController" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <apex:form>
                 <apex:outputPanel id="masterpanel">
-                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                    <apex:outputPanel id="emptyPanel" />
+                    <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
+                            <p>
+                            </p>
                             <ul class="error-summary-list">
                                 <li>
-                                    <span class="error-message">{!currentErrorMessage}</span>
+                                    <a href="#">{!currentErrorMessage}</a>
                                 </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
                     <div class="form-group">
-                        <h1 class="heading-xlarge">
-                            {!headerText1}
+                        <h1 class="heading-xlarge">{!headerText1}
                         </h1>
-                        <p class="lede">{!displayText}
+                        <!--
+                        <p class="lede">{!headerText2}
                         </p>
-                        <fieldset >
-                            <span id="radio-errors"></span>
-                            <apex:outputText escape="false" value="{!currentErrorMessage}" />
-                            <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" type="radio" name="sharetype" value="Normal" /> Give notice of cancellation of shares by a limited or public company on purchase
-                            </label>
-                            <label class="block-label" for="radio-inline-2">
-                                <input id="radio-inline-2" type="radio" name="sharetype" value="Treasury" /> Give notice of cancellation of Treasury shares
-                            </label>
-                            <label class="block-label" for="radio-inline-3">
-                                <input id="radio-inline-3" type="radio" name="sharetype" value="Public Company" /> Give notice of cancellation of shares by or from a public company due to forfeiture of shares
-                            </label>
-                            <apex:outputPanel id="emptypanel" />
-                        </fieldset>
+                        -->
+                        <h3 class="heading-medium">Class of shares</h3>
+                        <div class="form-group {!errorsClass}">
+                            <fieldset>
+                                <legend class="visuallyhidden">Class of shares</legend>
+                                <apex:outputPanel rendered="{!shareClassErrors}">
+                                    <span class="error-message" id='shareclass-errors'>
+                                        {!currentErrorMessage}</span>
+                                </apex:outputPanel>
+                                <label class="block-label" for="radio-1">
+                                    <input id="ordinary" onclick="grabShareType('Ordinary');" type="radio" name="radio-group" value="Ordinary" /> Ordinary
+                                </label>
+                                <label class="block-label" for="radio-2">
+                                    <input id="ordinarya" onclick="grabShareType('Ordinary A');" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
+                                </label>
+                                <label class="block-label" for="radio-3">
+                                    <input id="ordinaryb" onclick="grabShareType('Ordinary B');" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
+                                </label>
+                                <label class="block-label" for="radio-4">
+                                    <input id="ordinaryc" onclick="grabShareType('Ordinary C');" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
+                                </label>
+                                <label class="block-label" for="radio-5">
+                                    <input id="preferred" onclick="grabShareType('Preferred');" type="radio" name="radio-group" value="Preferred" /> Preferred
+                                </label>
+                                <label class="block-label" for="radio-6" data-target="other-name">
+                                    <input id="other" type="radio" name="radio-group" value="Other" /> Other
+                                </label>
+                            </fieldset>
+                            <div class="panel panel-border-narrow js-hidden" id="other-name">
+                                <label class="form-label" for="other-rights-1"></label>
+                                <input onchange="grabShareType(this.value)" class="form-control" id="otherData" type="text" />
+                            </div>
+                        </div>
+                     
+                        <div class="form-group {!errorsClass}">
+                            <fieldset>
+                                <legend class="visuallyhidden">Shares Cancelled</legend>
+                                <div class="form-group">
+                                    <label class="form-label-bold" for="number-of-shares">Number of shares cancelled
+                                    </label>
+                                    <apex:inputText styleClass="form-control" id="number-of-shares" value="{!numberofshares}" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label-bold" for="aggnominal-val">Nominal value of each share</label>
+                                    <p class="form-hint">This is the value per each share.</p>
+                                    <apex:inputText styleClass="form-control" id="aggnominal-val" value="{!nominalvalue}" />
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <apex:commandButton action="{!addnewShares}" id="selectShareType" reRender="masterpanel" styleClass="button" value="{!continueButtonText}" />
+                        </div>
+                        <apex:actionFunction action="{!grabShareType}" name="grabShareType" reRender="emptyPanel">
+                            <apex:param name="shareclasstype" value="" id="z" assignTo="{!shareClassType}" />
+                        </apex:actionFunction>
                     </div>
-                    <apex:commandButton reRender="none" styleClass="button" onclick="updateShareType();" value="Select Share" />
-                    <apex:actionFunction action="{!selectShareType}" name="selectShareType" reRender="none">
-                        <apex:param name="sharetypeParam" value="" id="y" assignTo="{!selectedTransactionType}" />
-                    </apex:actionFunction>
-                    <apex:actionFunction action="{!setErrors}" name="setErrors" reRender="masterpanel">
-                        <apex:param name="errorParam" value="" id="z" assignTo="{!hasPageErrors}" />
-                    </apex:actionFunction>
-                    <script>
-                    function updateShareType(selection) {
-
-                        var statuses = document.getElementsByName('sharetype');
-                        for (var i = 0, length = statuses.length; i < length; i++) {
-
-                            console.log(statuses[i].value);
-
-                            if (statuses[i].checked) {
-                                console.log(statuses[i].value);
-
-
-                                selectShareType(statuses[i].value);
-                            }
-                        }
-                    };
-                    </script>
-                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
                 </apex:outputPanel>
             </apex:form>
         </apex:define>
