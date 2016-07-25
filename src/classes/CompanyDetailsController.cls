@@ -42,7 +42,6 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
     public String companyCountry {get; set;}
     public String companyLocality {get; set;}
     public Boolean showprevious {get; set;}
-    public String shim {get; set;}
 
     public CompanyDetailsController() {
         super();
