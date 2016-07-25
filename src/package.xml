@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>AccountApiClient</members>
-        <members>AccountApiClientTest</members>
         <members>AccountsAPIHelper</members>
         <members>AccountsAuthCallbackController</members>
         <members>AddAttachmentsController</members>
         <members>AddAttachmentsControllerTest</members>
-        <members>AddSharesBaseController</members>
         <members>AddSharesTableController</members>
         <members>AppConstants</members>
         <members>ApplicationDateController</members>
-        <members>AttachmentTriggerHandler</members>
-        <members>AttachmentTriggerHandlerTest</members>
-        <members>BaseURLHandler</members>
         <members>BehalfDecisionController</members>
         <members>BehalfInputDetailsController</members>
         <members>BehalfWhichSignatoryController</members>
@@ -31,7 +25,6 @@
         <members>CH_SearchControllerByRegAddress_Test</members>
         <members>CH_SearchControllerClass</members>
         <members>CH_SearchControllerClass_Test</members>
-        <members>ChApiClient</members>
         <members>ChApiMock</members>
         <members>ChangeShareClassName</members>
         <members>CompaniesHouse</members>
@@ -46,29 +39,18 @@
         <members>ConfirmationFrameworkController</members>
         <members>CurrencyController</members>
         <members>CustomViews</members>
-        <members>DS01Serialiser</members>
-        <members>DS02Step2Navigator</members>
-        <members>DeveloperToolsController</members>
         <members>DigitalSignatureController</members>
         <members>DirectorDetails</members>
         <members>DirectorsListController</members>
         <members>DocStatusController</members>
-        <members>DocStatusUrlTriggerHandler</members>
         <members>DocuSignAPI</members>
         <members>DocuSignAPITest</members>
         <members>DocuSignStatusTriggerHandler</members>
         <members>DocuSignStatusTriggerHandlerTest</members>
-        <members>DocuSignUrlBuilder</members>
         <members>DocumentController</members>
-        <members>DocumentDownloadController</members>
         <members>DocusignLibrary</members>
-        <members>DynamicField</members>
-        <members>DynamicTestController</members>
         <members>EditSharesByTypeController</members>
-        <members>EmailTemplatesBuilder</members>
-        <members>EmbedDocuSignController</members>
         <members>ExternalEmbedDocuSignController</members>
-        <members>Form</members>
         <members>FormAPISubmissionManager</members>
         <members>FormAPISubmissionManagerTest</members>
         <members>FormApplicationController</members>
@@ -79,7 +61,6 @@
         <members>FormsApiClientTest</members>
         <members>FormsApiMock</members>
         <members>GuidanceController</members>
-        <members>ISerialisable</members>
         <members>IStepNavigable</members>
         <members>MockHttpResponseGenerator</members>
         <members>MockWebServiceResponseGenerator</members>
@@ -94,49 +75,47 @@
         <members>ResolutionChangeController</members>
         <members>ReviewController</members>
         <members>ReviewControllerTest</members>
-        <members>ReviewNotificationTriggerHandler</members>
-        <members>ReviewNotificationTriggerHandlerTest</members>
         <members>SecurityManager</members>
-        <members>SendToDocuSign</members>
-        <members>SendToDocuSignTest</members>
-        <members>Session</members>
         <members>SigningController</members>
-        <members>SmartPayNotificationController</members>
-        <members>SmartPayNotificationControllerTest</members>
         <members>SmartPayUrl</members>
         <members>SmartPayUrlTest</members>
         <members>StartFrameworkController</members>
         <members>SubmissionController</members>
         <members>SubmissionManager</members>
         <members>SubmissionManagerTest</members>
-        <members>SubmissionURLTriggerHandler</members>
-        <members>SummaryController</members>
         <members>TrackUserClass</members>
         <members>TransactionCleanup</members>
         <members>TransactionCleanupTest</members>
         <members>TransactionManager</members>
+        <members>TransactionManagerTest</members>
         <members>TransactionSerialiser</members>
         <members>TransactionSerialiserTest</members>
         <members>TransactionSiteUrlRewriter</members>
         <members>TransactionStepControllerBase</members>
+        <members>TransactionStepControllerBaseTest</members>
+        <members>TransactionTriggerHandler</members>
+        <members>UnitTestCoverage</members>
+        <members>UnitTestCoverageTest</members>
         <members>UpdateCompanyDirectorsController</members>
-        <members>Util</members>
-        <members>UtilTest</members>
+        <members>UpdateCompanyDirectorsControllerTest</members>
         <members>cancelShares</members>
         <members>chooseDirector</members>
         <members>selectShareTypeController</members>
-        <members>superSort</members>
         <members>variationRightsController</members>
         <members>whichDirector</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>*</members>
+        <members>LoadingBox</members>
+        <members>bodyScript</members>
+        <members>footer</members>
+        <members>head</members>
+        <members>header</members>
+        <members>phaseBanner</members>
         <name>ApexComponent</name>
     </types>
     <types>
         <members>AccountsAuthCallback</members>
-        <members>AddSharesBase</members>
         <members>ApplicationDate</members>
         <members>Attachments</members>
         <members>BehalfDecision</members>
@@ -156,16 +135,11 @@
         <members>ConfirmationFramework</members>
         <members>CurrencySelection</members>
         <members>DS01</members>
-        <members>DeveloperTools</members>
         <members>DigitalSignature</members>
         <members>DirectorsList</members>
-        <members>DocumentDownload</members>
         <members>Documents</members>
-        <members>DynamicTest</members>
         <members>EditSharesByType</members>
-        <members>EmbedDocuSign</members>
         <members>EntryPoint</members>
-        <members>Exception</members>
         <members>ExternalEmbedDocuSign</members>
         <members>FormApplication</members>
         <members>Guidance</members>
@@ -179,12 +153,10 @@
         <members>Review</members>
         <members>SH19</members>
         <members>SigningPage</members>
-        <members>SmartPayNotification</members>
         <members>StartFramework</members>
         <members>Status</members>
         <members>StdExceptionTemplate</members>
         <members>Submission</members>
-        <members>Summary</members>
         <members>TabularData</members>
         <members>TransactionException</members>
         <members>TransactionPageTemplate</members>
@@ -197,13 +169,9 @@
         <name>ApexPage</name>
     </types>
     <types>
-        <members>AttachmentTrigger</members>
-        <members>BaseURLTransactionHandler</members>
-        <members>DocStatusURLBuilder</members>
         <members>DocuSignStatusTrigger</members>
         <members>RecipientStatusTrigger</members>
-        <members>ReviewStatusTrigger</members>
-        <members>SubmissionLinkTrigger</members>
+        <members>TransactionTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
@@ -216,20 +184,16 @@
     </types>
     <types>
         <members>API_Org_Settings__c</members>
-        <members>Access_Token__c</members>
+        <members>Account</members>
         <members>Account_API_Settings__c</members>
         <members>Company_Authorisation__c</members>
+        <members>Contact</members>
         <members>CryptoSettings__c</members>
         <members>DocuSignSetting__c</members>
         <members>Environment_Variables_Hierarchy__c</members>
-        <members>Environment_Variables__c</members>
         <members>Forms_API_Service__c</members>
-        <members>Officer__c</members>
-        <members>Session__c</members>
         <members>Shares__c</members>
         <members>SmartPay_Settings__c</members>
-        <members>Transaction_Type_Step__mdt</members>
-        <members>Transaction_Type__mdt</members>
         <members>Transaction__c</members>
         <members>User_Authorisation__c</members>
         <name>CustomObject</name>
@@ -247,19 +211,17 @@
         <name>EmailTemplate</name>
     </types>
     <types>
-        <members>Admin</members>
-        <members>Default Profile</members>
-        <name>Profile</name>
-    </types>
-    <types>
         <members>*</members>
         <name>RemoteSiteSetting</name>
     </types>
     <types>
-        <members>*</members>
+        <members>FORMS</members>
+        <members>Logo</members>
+        <members>jQueryv1102</members>
         <name>StaticResource</name>
     </types>
     <types>
+        <members>Officer__c</members>
         <members>Transaction__c</members>
         <name>Workflow</name>
     </types>

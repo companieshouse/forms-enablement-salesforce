@@ -108,6 +108,10 @@
         <value xsi:type="xsd:string">Notice by the company of application to court for cancellation of special resolution approving a redemption or purchase of shares out of capital</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

@@ -55,7 +55,7 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         DocuSignAPI.Document doc = DocusignLibrary.getDocument(1, EncodingUtil.base64Encode(pdfBlob), submissionMgr.submission.Form_Name__c + '_'+ submissionMgr.submission.CompanyName__c + '_'+ getDate(), 'pdf');
 
         DocuSignAPI.CustomField custF1 = DocusignLibrary.getCustomField( 'DSFSSourceObjectId', submissionMgr.submission.Id + '~Transaction__c', 'Text');
-        DocuSignAPI.CustomField custF2 = DocusignLibrary.getCustomField( 'OfficerSigner1', submissionMgr.submission.Officers__r[0].Id + '~Officer__c', 'Text');
+        //DocuSignAPI.CustomField custF2 = DocusignLibrary.getCustomField( 'OfficerSigner1', submissionMgr.submission.Officers__r[0].Id + '~Officer__c', 'Text');
 
         String emailBlurb = '<h1 class="page-title-style-email">Application to close'+' '+submissionMgr.submission.CompanyName__c+' '+'</h1><p>An application to close'+' '+submissionMgr.submission.CompanyName__c+' '+'needs your approval before it can be submitted to Companies House for processing. </p> <h2 class="second-level-heading">What to do next</h2> <p class="paragraphs-regular"> Please ensure that you have read and understood your responsibilities as a director in this process before approving the application. Guidance on the process of voluntarily closing a company can be found on the Companies House website. Once the application has been submitted you will receive an email containing a link to the submitted application. It is your responsibility as a director to ensure that copies of the application have been sent to all notifiable parties within 7 days of submitting the completed application. This includes <ul> <li>Creditors</li> <li>Employees</li> <li>Shareholders</li> <li>Pension managers or trustees</li> </ul> </p> <p class="paragraphs-regular"> Note: Please check the guidance notes which contain a full list of those who must be notified. </p> <p> <b>Failure to notify interested parties is an offence. It is advisable to obtain and retain some proof of delivery or posting of copies to notifiable parties.</b> </p> <p> If the application has not been signed by all required directors by'+ ' '+submissionMgr.submission.ExpiryDate__c+' '+ ', the application will be automatically cancelled. </p>';        
         DocuSignAPI.Envelope env = DocusignLibrary.getEnvelope(dsSetting.AccountId__c, submissionMgr.submission.Form_Name__c + ' - application for ' + submissionMgr.submission.CompanyName__c,  emailBlurb);
@@ -64,33 +64,62 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         env = DocusignLibrary.initDocs(env, 1);
         env = DocusignLibrary.initCustomFields(env, 2);
 
-        env = DocusignLibrary.initRecipients(env, submissionMgr.submission.Officers__r.size());
+        env = DocusignLibrary.initRecipients(env, submissionMgr.submission.Contacts__r.size());
 
-        env = DocusignLibrary.initTabs(env, submissionMgr.submission.Officers__r.size() * 2);
+        env = DocusignLibrary.initTabs(env, submissionMgr.submission.Contacts__r.size() * 2);
         env = DocusignLibrary.addDocs(env, doc);
 
         env = DocusignLibrary.addCustomFields(env, custF1);
-        env = DocusignLibrary.addCustomFields(env, custF2);
+        //env = DocusignLibrary.addCustomFields(env, custF2);
 
         DocuSignAPI.Notification notif = DocusignLibrary.getNotification(true);
 
         env = DocusignLibrary.addNotification(env, notif);
 
-        for(Integer i = 0; i < submissionMgr.submission.Officers__r.size(); i++)
+        List<Officer__c> offToUpdate = new List<Officer__c>();
+
+        for(Integer i = 0; i < submissionMgr.submission.Contacts__r.size(); i++)
         {
-            Officer__c off = submissionMgr.submission.Officers__r[i];
+            Contact off = submissionMgr.submission.Contacts__r[i];
+            
+            
             if(off.isSignatory__c)
             {
+                //Get the corresponding officer
+                Officer__c offRec = new Officer__c();
+                
+                for(Officer__c offRecord :submissionMgr.submission.Officers__r)
+                {
+                    if(String.valueOf(off.RecipientId__c) == offRecord.RecipientId__c)
+                    {
+                        offRec.Id = offRecord.Id;
+                    }
+                }
                 DocuSignAPI.RecipientCaptiveInfo capInfo;
 
                 if(off.IsPresenter__c)
                 {
-                    capInfo = DocusignLibrary.getCaptiveInfo(off.Email__c);
+                    capInfo = DocusignLibrary.getCaptiveInfo(off.Email);
                 }
 
-                String recName = (off.isCorporateDirector__c == true ? off.AuthorizedSigner__c : (off.isPowerOfAttorney__c == true ? off.AuthorizedSigner__c : convertName(off.Name)));
 
-                DocuSignAPI.Recipient rec = DocusignLibrary.getRecipient(Integer.valueOf(off.RecipientId__c), 'Signer', 1, off.Email__c, recName, capInfo, false);
+                String offName = (off.Title != null ? off.Title : '' ) + ' ' +  off.LastName.toLowerCase().capitalize() + ' ' + (off.FirstName != null ? off.FirstName.capitalize() : '') + ' ' + (off.Middlenames__c != null ? off.Middlenames__c : '');
+                String recName = (off.isCorporateDirector__c == true ? off.AuthorizedSigner__c : (off.isPowerOfAttorney__c == true ? off.AuthorizedSigner__c : offName));
+
+                //Update off with the sent name to Docusign 
+                offRec.DocusignName__c = recName;
+                if(offRec.Id != null)
+                {
+                    offToUpdate.add(offRec);
+                }
+
+                DocuSignAPI.ArrayOfString1 arrayOfString = new DocuSignAPI.ArrayOfString1();
+
+                arrayOfString.CustomField = new String[1];
+
+                arrayOfString.CustomField[0] = '##SFContact:'+ off.Id + ':'+off.Name+'';
+
+                DocuSignAPI.Recipient rec = DocusignLibrary.getRecipient(Integer.valueOf(off.RecipientId__c), 'Signer', 1, off.Email, recName, capInfo, false, arrayOfString);
 
                 DocuSignAPI.AnchorTab anch = DocusignLibrary.getAnchorTab('/s' + Integer.valueOf(off.RecipientId__c) + '/');
 
@@ -108,6 +137,8 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
             }
         }
 
+        
+
         //Build httpHeader
         String auth = DocusignLibrary.buildAuthString( dsSetting.Username__c, dsSetting.Password__c, dsSetting.IntegratorKey__c);
         Map<String, String> httpHeader = DocusignLibrary.buildHTTPHeaders(auth);
@@ -116,24 +147,15 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
         //Here page URL contains Apex/Payment
         baseURL = baseURL + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())) ;
-        return DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+        String result = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+
+        //Update the sending name of each off
+        update offToUpdate;
+
+        return result;
     }
 
-	// API is returning last name + first Name
-    // This function set name in the correct order
-    public static String convertName(String name) {
-        String firstName;
-        String lastName;
-
-        firstName = name.substringAfter(',') + ' ';
-        
-        lastName = name.substringBefore(',');
-        lastName = lastName.toLowerCase();
-        lastName = lastName.capitalize();
-
-        return firstName + lastName;
-    }
-
+	
     public static String getDate(){
         Date d = date.today();
         String day   = d.day()   > 9 ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
@@ -163,7 +185,6 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
                                                     AccountId__c        = 'unitTestAccountId',
                                                     IntegratorKey__c    = 'unitTestIntegratorKey',
                                                     URL__c              = 'unitTestURL',
-                                                    RecordIdPrefix__c   = dsPrefix,
                                                     Active__c           = true);
             return dsSettTest;
         }

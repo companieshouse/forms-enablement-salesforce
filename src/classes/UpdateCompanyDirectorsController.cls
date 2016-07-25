@@ -27,9 +27,9 @@ public with sharing class UpdateCompanyDirectorsController extends TransactionSt
     
     // Instance methods.
     private void initialiseStep(){
-   	
     	return;
     }
+    
     // End Instance methods.
            
 }

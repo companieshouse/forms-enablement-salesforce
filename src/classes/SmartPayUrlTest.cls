@@ -12,7 +12,7 @@ public class SmartPayUrlTest {
 
             system.assertNotEquals(null, settings);
             system.assertEquals('TEST', settings.Environment__c);
-            system.assertEquals('unitTestHmacKey', settings.HMAC_key__c);
+            system.assertEquals('F753AB5DF230962A00919ECE6458489E43FF867F6D613A7BDC80B42BCCF4EDC4', settings.HMAC_key__c);
             system.assertEquals('unitTestMerchantAccount', settings.Merchant_account__c);
 
         Test.stopTest();
@@ -23,7 +23,7 @@ public class SmartPayUrlTest {
     public static void testGetResultUrl(){
 
         PageReference pg = Page.Payment;
-        pg.getParameters().put('Test', 'Test');
+        pg.getParameters().put('c', EncodingUtil.urlDecode('DMFqXZ1DKpZWfHg%2B%2F32FnufP%2BYlEoZ2WrKsL1cEunogIXH4ovhXFbmyg%2BvFpcw054xWEJS5oPbvIXepJZ6x4rlicOUpOsZJjfnmZBVUQMmc%3D', 'UTF-8'));
         Test.setCurrentPage(pg);
 
         SmartPayUrl smt = new SmartPayUrl();
@@ -31,8 +31,7 @@ public class SmartPayUrlTest {
         Test.startTest();
 
             String result = smt.getResultUrl();
-
-            system.assertEquals(true, result.contains('?Test=Test'));
+            system.assertEquals(true, result.contains('?c=DMFqXZ1DKpZWfHg%2B%2F32FnufP%2BYlEoZ2WrKsL1cEunogIXH4ovhXFbmyg%2BvFpcw054xWEJS5oPbvIXepJZ6x4rlicOUpOsZJjfnmZBVUQMmc%3D'));
 
             system.assertEquals(true, result.contains('/payment?'));
 
@@ -42,6 +41,10 @@ public class SmartPayUrlTest {
     @isTest
     public static void testToString()
     {
+        PageReference pg = Page.Payment;
+        pg.getParameters().put('c', EncodingUtil.urlDecode('DMFqXZ1DKpZWfHg%2B%2F32FnufP%2BYlEoZ2WrKsL1cEunogIXH4ovhXFbmyg%2BvFpcw054xWEJS5oPbvIXepJZ6x4rlicOUpOsZJjfnmZBVUQMmc%3D', 'UTF-8'));
+        Test.setCurrentPage(pg);
+
         SmartPayUrl smt = new SmartPayUrl();
 
         smt.merchantAccount = 'TestMerchantAccount';
@@ -54,5 +57,16 @@ public class SmartPayUrlTest {
 
         Test.stopTest();
 
+    }
+
+    @isTest
+    public static void testBuilderSmartPayURL()
+    {
+        SmartPayUrl url = new SmartPayUrl.Builder()
+                .merchantReference('WDIHAWIDHAIH')
+                .paymentAmount(50)
+                .customerEmail('myEmail@jddmdm.com')
+                .customerMethodsPayment(false)
+                .build();
     }
 }

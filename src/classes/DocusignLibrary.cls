@@ -59,11 +59,15 @@ public class DocusignLibrary {
         DocuSignAPI.Recipient embedRecipient;
         for(DocuSignAPI.Recipient rec : envelope.Recipients.Recipient)
         {
-            //We got him, he is the 'presenter'
-            if(rec.CaptiveInfo != null)
-            {  
-                embedRecipient = rec;
+            if(rec != null)
+            {
+                //We got him, he is the 'presenter'
+                if(rec.CaptiveInfo != null)
+                {  
+                    embedRecipient = rec;
+                }
             }
+                
         }
 
         String result = 'SENT';
@@ -219,7 +223,7 @@ public class DocusignLibrary {
         return document;
 	}
 
-    public static DocuSignAPI.Recipient getRecipient(Integer id, String type, Integer routingOrder, String email, String userName, DocuSignAPI.RecipientCaptiveInfo repCapInfo, Boolean requireIDLookup) {
+    public static DocuSignAPI.Recipient getRecipient(Integer id, String type, Integer routingOrder, String email, String userName, DocuSignAPI.RecipientCaptiveInfo repCapInfo, Boolean requireIDLookup,DocuSignAPI.ArrayOfString1 arrayOfString) {
         
         DocuSignAPI.Recipient recipient = new DocuSignAPI.Recipient();
         recipient.Id = id;
@@ -229,7 +233,7 @@ public class DocusignLibrary {
         recipient.UserName = username;
         recipient.CaptiveInfo = repCapInfo;
         recipient.RequireIDLookup = requireIDLookup;
-        
+        recipient.CustomFields = arrayOfString;
         return recipient;
     }
 

@@ -235,7 +235,7 @@ public class ReviewController extends TransactionStepControllerBase {
         customPanelHTML = CustomViews.SH19_REVIEW_PAGE;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
-        presenterEmail = submissionMgr.submission.Presenter__r.Name;
+        presenterEmail = submissionMgr.submission.Presenter__r.PersonEmail;
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
         reviewpagebutton = transactionMgr.currentStep.ContinueButtonText__c;

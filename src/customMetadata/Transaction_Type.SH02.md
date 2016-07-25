@@ -108,6 +108,10 @@
         <value xsi:type="xsd:string">Notice of consolidation, subdivision, redemption of shares or re-conversion of stock into shares.</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

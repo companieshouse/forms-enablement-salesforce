@@ -106,6 +106,10 @@
         <value xsi:type="xsd:string">SH30 Title needed</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

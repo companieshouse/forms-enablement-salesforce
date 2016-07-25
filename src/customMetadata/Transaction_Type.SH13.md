@@ -107,6 +107,10 @@
         <value xsi:type="xsd:string">Notice of name or other designation of class of members</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

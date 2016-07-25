@@ -14,7 +14,7 @@ trigger DocuSignStatusTrigger on dsfs__DocuSign_Status__c (before insert, before
 	if(trigger.isInsert){
 
 		if(trigger.isBefore)
-			DocuSignStatusTriggerHandler.beforeUpdate(trigger.new);
+			DocuSignStatusTriggerHandler.beforeInsert(trigger.new);
 	}
 
 }

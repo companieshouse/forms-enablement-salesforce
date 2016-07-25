@@ -47,7 +47,7 @@ public class PreParticularsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public List < Officer__c > companyDirectors {
+    public List < Contact > companyDirectors {
         get;
         set;
     }

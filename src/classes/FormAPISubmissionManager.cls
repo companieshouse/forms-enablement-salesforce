@@ -48,7 +48,7 @@ public class FormAPISubmissionManager {
 
                 } else {
                     tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
-                    tx.ErrorDescription__c = output;
+                    tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output) ;
                 }
 
            // }
@@ -77,7 +77,7 @@ public class FormAPISubmissionManager {
                 tx.ErrorDescription__c = '';
             } else {
                 tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
-                tx.ErrorDescription__c = output;
+                tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output);
             }
                 
         //}

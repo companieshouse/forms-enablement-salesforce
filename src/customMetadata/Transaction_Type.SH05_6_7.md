@@ -110,6 +110,10 @@ use form SH04.&lt;/p&gt;</value>
         <value xsi:type="xsd:string">Notice of cancellation of shares</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

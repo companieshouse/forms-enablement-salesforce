@@ -2,10 +2,10 @@ trigger RecipientStatusTrigger on dsfs__DocuSign_Recipient_Status__c (after upda
 
     if(trigger.isUpdate)
         if(trigger.isAfter)
-            RecipientStatusDocusignTriggerHandler.dateSigned(trigger.new, trigger.oldMap);
+            RecipientStatusDocusignTriggerHandler.dateSigned(trigger.new);
     
     if(trigger.isInsert)
         if(trigger.isAfter)
-            RecipientStatusDocusignTriggerHandler.dateSigned(trigger.new, trigger.oldMap);
+            RecipientStatusDocusignTriggerHandler.dateSigned(trigger.new);
     
 }

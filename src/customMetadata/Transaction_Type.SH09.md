@@ -111,6 +111,10 @@
         <value xsi:type="xsd:string">Allotting a new class of shares by an unlimited company</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

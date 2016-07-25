@@ -113,7 +113,7 @@ public class whichDirector extends TransactionStepControllerBase
             {
                 selectingOfficer.IsPresenter__c = true;
                 selectingOfficer.isSignatory__c = true;
-                selectingOfficer.Email__c = submissionMgr.submission.Presenter__r.Name;
+                selectingOfficer.Email__c = submissionMgr.submission.Presenter__r.PersonEmail;
                 officerUpdaterMap.put(selectingOfficer.Name, selectingOfficer);
             }
             else if (selectingOfficer.Id != selectedId)

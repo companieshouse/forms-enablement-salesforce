@@ -108,6 +108,10 @@
         <value xsi:type="xsd:string">Notice of sale or transfer of treasury shares</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>

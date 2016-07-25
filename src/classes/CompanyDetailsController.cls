@@ -65,18 +65,22 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
         companyCountry = compProf.registered_office_address.country;
         companyLocality = compProf.registered_office_address.locality;
         companyStatus = compProf.company_status.capitalize();
-        companyDateOfCreation = compProf.date_of_creation;
+        String[] split = compProf.date_of_creation.split('-');
+        Datetime tempDate = Datetime.newInstance(Integer.valueOf(split[0]), Integer.valueOf(split[1]), Integer.valueOf(split[2]));
+        companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
+
 		companyName = compProf.company_name;
 		companyType = compProf.type;
         companyType = companyType.toUpperCase();
         showprevious = true;
 
-        companyAddress = (companyAddress1 ==  null ? '' : companyAddress1+ '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2+ '<br/>')  + (companyregion ==  null ? '' : companyregion+ '<br/>')  + (companyLocality ==  null ? '' : companyLocality+ '<br/>')  + (companypostcode ==  null ? '' : companypostcode+ '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
+        companyAddress = (companyAddress1 ==  null ? '' : companyAddress1+ '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2+ '<br/>')  + (companyLocality ==  null ? '' : companyLocality+ '<br/>')  + (companyregion ==  null ? '' : companyregion+ '<br/>') + (companypostcode ==  null ? '' : companypostcode+ '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
         
         return;
     }
 
     private void persistStep(){
+
     	submissionMgr.submission.CompanyName__c = companyName;
     	submissionMgr.submission.CompanyStatus__c = companyStatus;
     	submissionMgr.submission.CompanyIncorporationDate__c = companyDateOfCreation;

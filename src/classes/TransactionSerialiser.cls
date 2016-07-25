@@ -19,12 +19,12 @@ public class TransactionSerialiser {
 	public class metadata{
 		public String type {get; set;}
 		public Integer packageindex {get; set;}
-		public String version {get; set;}
+		public Integer version {get; set;}
 		public String submissionReference {get; set;}
 
 		public metadata(){}
 
-		public metadata(String type, Integer packageindex, String version, String submissionReference)
+		public metadata(String type, Integer packageindex, Integer version, String submissionReference)
 		{
 			this.type = type;
 			this.packageindex = packageindex;
@@ -37,29 +37,52 @@ public class TransactionSerialiser {
 	public class payment{
 		public String paymentMethod {get; set;}
 		public String referenceNumber {get; set;}
+		public String accountNumber {get; set;}
 
 		public payment(){}
 
-		public payment(String paymentMethod, String referenceNumber)
+		public payment(String paymentMethod, String referenceNumber, String accountNumber)
 		{
 			this.paymentMethod = paymentMethod;
 			this.referenceNumber = referenceNumber;
+			this.accountNumber = accountNumber;
 		}
 	}
+
+	public class presenterDetails{
+		public String presenterEmailIn {get; set;}
+		public String presenterEmailOut {get; set;}
+
+		public presenterDetails(){}
+
+		public presenterDetails(String presenterEmailIn, String presenterEmailOut)
+		{
+			this.presenterEmailIn = presenterEmailIn;
+			this.presenterEmailOut = presenterEmailOut;
+		}
+	}
+
 
 	public class filingDetails{
 		public payment payment {get; set;}
 		public String barcode {get; set;}
 		public String receiptDate {get; set;}
+		public presenterDetails presenterDetails {get; set;}
+		public String presenterDocumentReference {get; set;}
+		public String signDate {get; set;}
+
 		//Signed date
 
 		public filingDetails(){}
 
-		public filingDetails(String barcode, String receiptDate, payment payment)
+		public filingDetails(String barcode, String receiptDate, payment payment, presenterDetails presenterDetails, String presenterDocumentReference, String signDate)
 		{
 			this.barcode = barcode;
 			this.receiptDate = receiptDate;
 			this.payment = payment;
+			this.presenterDetails = presenterDetails;
+			this.presenterDocumentReference = presenterDocumentReference;
+			this.signDate = signDate;
 		}
 	}
 
@@ -174,26 +197,28 @@ public class TransactionSerialiser {
 
 		//Build each object for the JSON
 		//
-		metadata met = new metadata(transact.Form_Name__c, 1, transact.Version_Form__c, transact.SubmissionId__c);
+		metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.Id);
 
 		payment pay = new payment();
 
 		if(transact.isPaymentRequired__c)
-			pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
+			pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c),(transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));
 
-		filingDetails fil = new filingDetails(transact.Barcode__c, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),pay);
+		presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
-		List<Officer__c> lOff = [SELECT Name,Surname__c,Title__c,Middlenames__c,Forename__c, DateSigned__c FROM Officer__c where Transaction__c = :transact.Id];
+		filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(system.now()),pay, pDetails, transact.Id,getFormatedDate(system.today()));
+
+		List<Contact> lOff = [SELECT Name,LastName,Title,Middlenames__c,FirstName, DateSigned__c FROM Contact where Transaction__c = :transact.Id];
 		List<officer> lOffSerialized = new List<officer>();
 
 		//At this point we are sure we have the majority and we will send only the officer that has signed
-		for(Officer__c off:lOff)
+		for(Contact off:lOff)
 		{
 			if(off.DateSigned__c != null)
 			{
 				Datetime dateSigned = off.DateSigned__c;
 
-				lOffSerialized.add(new officer(new personName((off.Title__c == null ? '' : off.Title__c), (off.Forename__c == null ? '' : off.Forename__c), (off.Middlenames__c == null ? '' :off.Middlenames__c), (off.Surname__c == null ? '' : off.Surname__c)),dateSigned.year() + '-' + dateSigned.month() + '-' + dateSigned.day() ));
+				lOffSerialized.add(new officer(new personName((off.Title == null ? '' : off.Title), (off.FirstName == null ? '' : off.FirstName), (off.Middlenames__c == null ? '' :off.Middlenames__c), (off.LastName == null ? '' : off.LastName)),getFormatedDate(dateSigned) ));
 			}
 		}
 
@@ -236,8 +261,15 @@ public class TransactionSerialiser {
 		gen.writeObject(lAtt);
 
 		gen.writeEndObject();
+
+		System.debug(LoggingLevel.ERROR,'JSON:' + gen.getAsString());
 		
 		return gen.getAsString();
 	}
 
+
+	public static String getFormatedDate(Datetime dateToFormat)
+	{
+		return dateToFormat.format('yyyy-MM-dd');
+	}
 }
