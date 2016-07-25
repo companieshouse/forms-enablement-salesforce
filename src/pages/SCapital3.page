@@ -1,7 +1,7 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController3" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel id="no-Shares-Panel" rendered="{!NOT(showStatementofCapital)}">
                         <h1 class="heading-xlarge">
@@ -85,7 +85,7 @@
                             </apex:actionFunction>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputPanel id='buttonPanel' rendered="{!showStatementofCapital}">
+                    <apex:outputPanel id="buttonPanel" rendered="{!showStatementofCapital}">
                         <div class="form-group">
                             <script>
                             function chooseStep() {

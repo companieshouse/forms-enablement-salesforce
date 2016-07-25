@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Continue</value>
+        <value xsi:type="xsd:string">Continue to share capital</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Add shares to Cancel</value>
+        <value xsi:type="xsd:string">Cancelling company shares</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Shares cancelled</value>
+        <value xsi:type="xsd:string">Date of cancellation</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -95,6 +95,6 @@
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Change share type to cancel</value>
+        <value xsi:type="xsd:string">Cancel more shares</value>
     </values>
 </CustomMetadata>

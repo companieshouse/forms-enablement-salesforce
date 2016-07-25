@@ -525,6 +525,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>showClassCHangeController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>superSort</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1803,6 +1807,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>ShowClassChanges</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>SigningPage</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1856,6 +1864,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>chooseDirector</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>reviewPageTemplate</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

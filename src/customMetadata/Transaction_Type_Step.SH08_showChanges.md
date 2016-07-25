@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH08-attachments</label>
+    <label>SH08-showChanges</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Continue</value>
+        <value xsi:type="xsd:string">Finish changing shares</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Add supporting documents</value>
+        <value xsi:type="xsd:string">Changing classes of shares</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -91,10 +91,10 @@
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">Attachments</value>
+        <value xsi:type="xsd:string">ShowClassChanges</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Change more classes of shares</value>
     </values>
 </CustomMetadata>

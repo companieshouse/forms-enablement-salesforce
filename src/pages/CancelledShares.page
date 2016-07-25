@@ -1,7 +1,7 @@
 <apex:page title="Cancelled Shares Summary" showHeader="false" sidebar="false" standardStylesheets="false" controller="cancelShares" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -45,7 +45,7 @@
                         </div>
                         <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
                     </apex:outputPanel>
-                    <apex:outputPanel id='datePanel'>
+                    <apex:outputPanel id="datePanel">
                         <fieldset class="form-group">
                             <h2 class="heading-large">{!headerText2}</h2>
                             <legend class="visuallyhidden">{!headerText2}</legend>

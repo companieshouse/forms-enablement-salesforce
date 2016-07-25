@@ -129,9 +129,6 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             showTable = true;
         }
     }
-    public PageReference checkFinishedAddingShares() {
-        return null;
-    }
     private void persistStep() {
         submissionMgr.persist();
     }

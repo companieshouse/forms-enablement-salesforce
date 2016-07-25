@@ -1,7 +1,7 @@
 <apex:page title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="ChangeShareClassName" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -26,14 +26,14 @@
                             <span id='errorHint' class='error-message'>{!oldcurrentErrorMessage}</span>
                             <label class="form-label-bold" for="classofShare-item">Existing name of the class of shares
                             </label>
-                            <apex:inputText styleClass="form-control" id='shareclsasoldname' value='{!classofshares}' />
+                            <apex:inputText styleClass="form-control" id="shareclsasoldname" value="{!classofshares}" />
                         </div>
                         <div class="form-group {!newerrorsClass}">
                             <span id='errorHint' class='error-message'>{!newcurrentErrorMessage}</span>
                             <label class="form-label-bold" for="classofShare-item">New name of class of shares or other designation
                                 <span class="form-hint" name="classofShareHint" id="shareclassNewName"></span>
                             </label>
-                            <apex:inputText styleClass="form-control" id='classofsharesNew' value='{!classofsharesNew}' />
+                            <apex:inputText styleClass="form-control" id="classofsharesNew" value="{!classofsharesNew}" />
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>

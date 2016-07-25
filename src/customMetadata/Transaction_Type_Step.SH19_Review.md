@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">SC review page content 2</value>
+        <value xsi:type="xsd:string">I confirm that the information above is correct and this is the latest statement of capital</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>

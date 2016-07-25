@@ -1,7 +1,7 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="selectShareTypeController" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!hasPageErrors}">

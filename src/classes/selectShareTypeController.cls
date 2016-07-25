@@ -1,4 +1,3 @@
-
 /*
 Name:  selectShareTypeController.cls
 Copyright © 2016  Methods Digital

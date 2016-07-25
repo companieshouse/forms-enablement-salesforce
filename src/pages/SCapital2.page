@@ -1,7 +1,7 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController2" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -15,7 +15,7 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputPanel id='centralPanel'>
+                    <apex:outputPanel id="centralPanel">
                         <div class="form-group">
                             <h1 class="heading-xlarge">Share capital</h1>
                             <h2 class="heading-medium">What is the currency?</h2>
@@ -32,10 +32,10 @@
                                 <label class="block-label" for="radio-other" data-target="other-currency">
                                     <input id="radio-other" type="radio" onclick="showCurrencyOther()" name="radio-group" value="" /> Other
                                 </label>
-                                <apex:outputPanel id='outerpanelCurrency'>
-                                    <apex:outputPanel id='currency' rendered="{!showCurrency}">
+                                <apex:outputPanel id="outerpanelCurrency">
+                                    <apex:outputPanel id="currency" rendered="{!showCurrency}">
                                         <div class="panel panel-border-narrow" id="other-currency" name='other-currency'>
-                                            <apex:selectList styleClass="form-control" size='1' value="{!currencyType}" multiselect="false">
+                                            <apex:selectList styleClass="form-control" size="1" value="{!currencyType}" multiselect="false">
                                                 <apex:selectOptions value="{!currencies}" />
                                             </apex:selectList>
                                         </div>
