@@ -197,7 +197,7 @@ public class TransactionSerialiser {
 
 		//Build each object for the JSON
 		//
-		metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.Id);
+		metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
 
 		payment pay = new payment();
 
@@ -206,7 +206,7 @@ public class TransactionSerialiser {
 
 		presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
-		filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(system.now()),pay, pDetails, transact.Id,getFormatedDate(system.today()));
+		filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(system.now()),pay, pDetails, transact.SubmissionId__c,getFormatedDate(system.today()));
 
 		List<Contact> lOff = [SELECT Name,LastName,Title,Middlenames__c,FirstName, DateSigned__c FROM Contact where Transaction__c = :transact.Id];
 		List<officer> lOffSerialized = new List<officer>();

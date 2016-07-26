@@ -88,6 +88,15 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
         	skipPage = true;
         	return nextAction();
         }
+
+        if(submissionMgr.submission.isSigningStarted__c && presenterSigning)
+        {
+            PageReference pg = new PageReference('/ExternalEmbedDocuSign');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+
+            return pg;
+        }
     	
     	if(submissionMgr.submission.isSigningStarted__c || !presenterSigning)
     	{

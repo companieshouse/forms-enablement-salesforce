@@ -42,9 +42,6 @@ public class CompaniesHouseTestData {
     // Prevent construction by making this private. Use getInstance() instead (singleton).  
     private CompaniesHouseTestData() {
 
-        Blob b = Crypto.GenerateAESKey(128);
-        String h = EncodingUtil.ConvertTohex(b);
-        String guid = h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
         
 		tx = new Transaction__c(Status__c = AppConstants.REQUEST_STATUS_DRAFT,
                                 Transaction_Type__c = 'DS01',
@@ -53,8 +50,8 @@ public class CompaniesHouseTestData {
                                 CompanyName__c = 'Test Company LTD', 
                                 CompanyNumber__c = '0987654321', 
                                 Form_Name__c = 'DS01',
-                                Version_Form__c = '1', 
-                                SubmissionId__c = guid);
+                                Version_Form__c = '1');
+
 
         off = new Officer__c(Forename__c = 'Test',
                             Surname__c = 'Name',

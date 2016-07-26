@@ -147,7 +147,7 @@ public with sharing class SubmissionManager {
                 
         // todo - validation, error handling etc.
         
-        Map<Id, Transaction__c> idToSubmission = new Map<Id, Transaction__c>( [select Id, Valid_Step_Ids__c,Historical_Valid_Step_Ids__c from Transaction__c where Id=:submissionId ] );
+        Map<Id, Transaction__c> idToSubmission = new Map<Id, Transaction__c>( [select Id,Status__c, Valid_Step_Ids__c,Historical_Valid_Step_Ids__c from Transaction__c where Id=:submissionId ] );
         
         Transaction__c s = idToSubmission.values()[0];
         
@@ -262,8 +262,12 @@ public with sharing class SubmissionManager {
         }
         
         s.Historical_Valid_Step_Ids__c = historicalSteps;
-        s.Valid_Step_Ids__c=newValidStepIdPath; 
-		s.MultipleDirectors__c = false;    
+        s.Valid_Step_Ids__c=newValidStepIdPath;
+        if(s.Status__c == AppConstants.REQUEST_STATUS_SIGNED) 
+        {
+            s.MultipleDirectors__c = false;        
+        }
+	
         update s;
     }
 

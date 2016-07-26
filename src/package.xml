@@ -34,6 +34,7 @@
         <members>DocuSignSetting__c</members>
         <members>Environment_Variables_Hierarchy__c</members>
         <members>Forms_API_Service__c</members>
+        <members>Officer__c</members>
         <members>Shares__c</members>
         <members>SmartPay_Settings__c</members>
         <members>Transaction_Type_Step__mdt</members>
