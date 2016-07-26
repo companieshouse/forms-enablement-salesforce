@@ -12,6 +12,8 @@ public class PaymentController extends TransactionStepControllerBase {
     
     private static final String QUERY_STRING_PARAM_AUTH_RESULT = 'authResult';
 
+    private static final String QUERY_STRING_PARAM_PSP_REFERENCE = 'pspReference';
+
     // AUTHORISED: Authorisation was successfully completed.
     private static final String AUTH_RESULT_AUTHORISED = 'AUTHORISED';
 
@@ -66,6 +68,8 @@ public class PaymentController extends TransactionStepControllerBase {
     public Decimal fastTrackFee {get; set;}
     public Decimal normalFee {get; set;}
 
+    public String paymentReference {get; set;}
+
     public String accountNumber {get; set;}
     //public String accountAuthCode {get; set;}
 
@@ -90,6 +94,7 @@ public class PaymentController extends TransactionStepControllerBase {
         hasPaymentPending = false;
         previousClicked = false;
         accountNumber = '';
+        paymentReference = '';
 
         isCardPayment = (transactionMgr.td.isCardAllowed__c == null ? false : transactionMgr.td.isCardAllowed__c);
         isPaypalPayment = (transactionMgr.td.isPaypalAllowed__c == null ? false : transactionMgr.td.isPaypalAllowed__c);
@@ -169,6 +174,7 @@ public class PaymentController extends TransactionStepControllerBase {
         return pg;
     } 
 
+    @TestVisible
     private void persistStep(){
         if(hasPaymentSuccess || hasPaid)
         {
@@ -176,11 +182,17 @@ public class PaymentController extends TransactionStepControllerBase {
             submissionMgr.submission.hasPaid__c = true;
         }
 
+        if(String.isBlank(paymentReference))
+        {
+            paymentReference = submissionMgr.submission.Id;
+        }
+
         if(isAccountSelected)
         {
             submissionMgr.submission.isPaymentAccount__c = true;
             submissionMgr.submission.hasPaid__c = true;
             submissionMgr.submission.AccountNumber__c = Integer.valueOf(accountNumber);
+            paymentReference = accountNumber;
             //submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
         }
 
@@ -202,6 +214,7 @@ public class PaymentController extends TransactionStepControllerBase {
         if(submissionMgr.submission.Amount__c == null)
             submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
         
+        submissionMgr.submission.paymentReference__c = paymentReference;
         submissionMgr.persist();    
     }
     // End Instance methods.    
@@ -308,7 +321,7 @@ public class PaymentController extends TransactionStepControllerBase {
       * TODO: (BETA) Store the pspReference on the Transaction record. Admin bods would need this if
       * they ever needed to query a transation with Barclays.
      */
-    private void parseQueryString() {
+    public void parseQueryString() {
         merchantReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_REFERENCE);
         merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);        
         authResult = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_RESULT);
@@ -319,6 +332,7 @@ public class PaymentController extends TransactionStepControllerBase {
             // Valid params for the result URL back to us after payment. Now check authResult.
             if (authResult == AUTH_RESULT_AUTHORISED) {
                 //change the status of the payment page
+                paymentReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PSP_REFERENCE);
                 hasPaid = false;
                 hasPaymentSuccess = true;
                 hasPaymentRejected = false;

@@ -215,6 +215,17 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Product_Code__c</fullName>
+        <description>Product code as defined by finance for this transaction. Will only need a product code if a payment is required.</description>
+        <externalId>false</externalId>
+        <label>Product Code</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Serialisation_Class_Name__c</fullName>
         <externalId>false</externalId>
         <label>Serialisation Class Name</label>
@@ -222,6 +233,14 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StandardGuidanceView__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes if the Guidance page has a standard view (DS01)</description>
+        <externalId>false</externalId>
+        <label>StandardGuidanceView</label>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>above_button_text__c</fullName>
@@ -238,6 +257,14 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>customGuidanceView__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes a custom view (e.g. Share capital, unprescribed forms, etc.)</description>
+        <externalId>false</externalId>
+        <label>customGuidanceView</label>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>hasGuidancePage__c</fullName>

@@ -54,71 +54,6 @@
     <enableReports>true</enableReports>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <fieldSets>
-        <fullName>DS01_Persist</fullName>
-        <description>DS01 User Flow VF Pages</description>
-        <displayedFields>
-            <field>Text_1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS01 Persist</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS01_Query</fullName>
-        <description>DS01 User Flow VF Pages</description>
-        <displayedFields>
-            <field>Text_1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Number_1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS01 Query</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS01_Query_Dynamic2</fullName>
-        <description>DS01 User Flow VF Pages Dynamic 2</description>
-        <displayedFields>
-            <field>Text_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Status__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS01_Query_Dynamic2</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS02_Persist</fullName>
-        <description>DS02 User Flow VF Pages</description>
-        <label>DS02 Persist</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS02_Query</fullName>
-        <description>DS02 User Flow Dynamic VF Pages</description>
-        <displayedFields>
-            <field>Text_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Number_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Date_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS02 Query</label>
-    </fieldSets>
     <fields>
         <fullName>AccountAuthorisationCode__c</fullName>
         <description>This field contains the auth code to reconcile if the Account number input by the presenter is authorised.</description>
@@ -303,22 +238,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Date_1__c</fullName>
-        <externalId>false</externalId>
-        <label>Date 1</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
-    </fields>
-    <fields>
-        <fullName>Date_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Date 2</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
-    </fields>
-    <fields>
         <fullName>DownloadLink__c</fullName>
         <description>Link to download your attachment with authentication</description>
         <externalId>false</externalId>
@@ -332,9 +251,10 @@
         <externalId>false</externalId>
         <inlineHelpText>API call errors will be presented here</inlineHelpText>
         <label>Error Description</label>
-        <required>false</required>
+        <length>10000</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <fields>
         <fullName>ExpiryDate__c</fullName>
@@ -402,28 +322,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>Number_1__c</fullName>
-        <externalId>false</externalId>
-        <label>Number 1</label>
-        <precision>6</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Number_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Number 2</label>
-        <precision>6</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>OfficerCount__c</fullName>
         <externalId>false</externalId>
         <label>OfficerCount</label>
@@ -463,6 +361,18 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Product_Code__c</fullName>
+        <description>For the finance reconciliation report</description>
+        <externalId>false</externalId>
+        <label>Product Code</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>RequiredOfficerSign__c</fullName>
         <externalId>false</externalId>
         <formula>IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c)</formula>
@@ -481,27 +391,6 @@
 Developer note: This is the encrypted C value parameter to be added as a merged field in the Email correspondence</description>
         <externalId>false</externalId>
         <label>ReviewRedirect</label>
-        <length>255</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>SF_ConfirmationID__c</fullName>
-        <description>Internal ID to signify completion of transaction in salesforce. Id will only be shown if FormsAPI/CH doesn&apos;t respond in time on the confirmation page</description>
-        <externalId>false</externalId>
-        <label>SF ConfirmationID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Selected_Type__c</fullName>
-        <externalId>false</externalId>
-        <label>Selected Type</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -600,41 +489,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>Text_1__c</fullName>
-        <externalId>false</externalId>
-        <label>Text 1</label>
-        <length>100</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Text_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Text 2</label>
-        <length>100</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>TransactionPath__c</fullName>
         <description>Path Back to beginning of Transaction with Transaction Type</description>
         <externalId>false</externalId>
         <label>TransactionPath</label>
-        <length>255</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>TransactionState__c</fullName>
-        <description>Keeps track of encrypted state value for parsing after multiple directors have signed</description>
-        <externalId>false</externalId>
-        <label>TransactionState</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -674,10 +532,11 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Warning_Confirmation_Flag__c</fullName>
+        <fullName>containsPackage__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>Denotes that a particular transactions contains multiple transactions as attachments to be turned into packages upon submission</description>
         <externalId>false</externalId>
-        <label>Warning Confirmation Flag</label>
+        <label>containsPackage</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -828,17 +687,29 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>nonofficerPresenter__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>nonofficerPresenter</label>
+        <fullName>paymentReference__c</fullName>
+        <externalId>true</externalId>
+        <label>payment reference</label>
+        <length>255</length>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
-        <fullName>selectedCurrency__c</fullName>
+        <fullName>prescribedParticular__c</fullName>
         <externalId>false</externalId>
-        <label>selectedCurrency</label>
+        <label>prescribedParticular</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>selectShareType__c</fullName>
+        <externalId>false</externalId>
+        <label>selectShareType</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -852,6 +723,16 @@ to any promoter of the company?</inlineHelpText>
         <label>sentsignerstatus</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>shareChangeSelection__c</fullName>
+        <externalId>false</externalId>
+        <label>shareChangeSelection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>sharecurrencyselection__c</fullName>
@@ -878,23 +759,11 @@ to any promoter of the company?</inlineHelpText>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
-        <columns>CompanyName__c</columns>
-        <columns>CompanyNumber__c</columns>
-        <columns>Status__c</columns>
         <columns>Transaction_Type__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
-    <listViews>
-        <fullName>All1</fullName>
-        <columns>NAME</columns>
         <columns>CompanyName__c</columns>
+        <columns>Status__c</columns>
         <columns>ContactEmail__c</columns>
-        <columns>SubmissionId__c</columns>
-        <columns>Status__c</columns>
-        <columns>OfficerCount__c</columns>
-        <columns>Transaction_Type__c</columns>
-        <columns>trueTransactionName__c</columns>
+        <columns>Barcode__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -906,48 +775,4 @@ to any promoter of the company?</inlineHelpText>
     <pluralLabel>Transactions</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
-    <webLinks>
-        <fullName>Create_PDF</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <height>600</height>
-        <linkType>page</linkType>
-        <masterLabel>Create PDF</masterLabel>
-        <openType>sidebar</openType>
-        <page>PDFGeneration</page>
-        <protected>false</protected>
-    </webLinks>
-    <webLinks>
-        <fullName>Send_pdf</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <height>600</height>
-        <linkType>page</linkType>
-        <masterLabel>Send pdf</masterLabel>
-        <openType>sidebar</openType>
-        <page>PaymentPage</page>
-        <protected>false</protected>
-    </webLinks>
-    <webLinks>
-        <fullName>Send_with_DocuSign</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <linkType>javascript</linkType>
-        <masterLabel>Send with DocuSign</masterLabel>
-        <openType>onClickJavaScript</openType>
-        <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/apex/dsfs__DocuSign_JavaScript&quot;)}
-DocuSign_CreateEnvelope();</url>
-    </webLinks>
-    <webLinks>
-        <fullName>Sign_Here</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <height>600</height>
-        <linkType>page</linkType>
-        <masterLabel>Sign Here</masterLabel>
-        <openType>sidebar</openType>
-        <page>EmbedDocuSign</page>
-        <protected>false</protected>
-    </webLinks>
 </CustomObject>

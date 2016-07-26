@@ -43,7 +43,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 		compName = submissionMgr.submission.CompanyName__c;
 		Integer i = 0;
 		listOfDirectors = new List<String>();
-		for(Officer__c off: submissionMgr.submission.Officers__r)
+		for(Contact off: submissionMgr.submission.Contacts__r)
 		{
 			if(off.isSignatory__c)
             {
@@ -61,7 +61,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
             multipleDirectors = true;
         }
 
-		emailPresenter = submissionMgr.submission.Presenter__r.Name;
+		emailPresenter = submissionMgr.submission.Presenter__r.PersonEmail;
     }
 
     public PageReference initSignature(){

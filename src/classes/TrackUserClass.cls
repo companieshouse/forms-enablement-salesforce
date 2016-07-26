@@ -86,9 +86,15 @@ public with sharing class TrackUserClass {
         // note remove if/else statement and uncomment cookie reset parameter
 
         //if (searched_company == null) {
+        Account acc = new Account();
+        //Do an API call to get the company name
+        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+        acc.Name = compProf.company_name;
 
-        upsert new Account(Name = companyNumber);
-
+        acc.AccountNumber = companyNumber;
+        acc.CompanyNumber__c = companyNumber;
+        Schema.SObjectField f = Account.Fields.CompanyNumber__c;
+        Database.UpsertResult cr = Database.upsert(acc,f,false);
         // for testing
         //companyNumber = null;
         // this will be initialized on  the company controller
@@ -116,30 +122,23 @@ public with sharing class TrackUserClass {
         return s;
     }
 
-    Public Id returnCurrentCompany() {
-        Cookie current_searchedCompany = ApexPages.currentPage().getCookies().get('searched_company');
-        String searchedCompany = SecurityManager.decryptText(current_searchedCompany.getValue());
-        List < Account > recs = [select Id, Name from Account where Name = : searchedCompany];
-
-        return recs[0].Id;
-
-    }
-
     Public Sobject returnCurrentCompanyObject() {
         Cookie current_searchedCompany = ApexPages.currentPage().getCookies().get('searched_company');
         String searchedCompany = SecurityManager.decryptText(current_searchedCompany.getValue());
-        List < Account > recs = [select Id, Name from Account where Name = : searchedCompany];
+        List < Account > recs = [select Id, Name, AccountNumber,CompanyNumber__c from Account where CompanyNumber__c = : searchedCompany];
 
         return recs[0];
 
     }
 
     Public SObject returnCurrentUser() {
+        System.debug(LoggingLevel.ERROR,'Get current user');
         Cookie current_userEmail = ApexPages.currentPage().getCookies().get('user_Email');
+        System.debug(LoggingLevel.ERROR,'User EMAIL:' + current_userEmail);
         //   throw new AccountsAuthCallbackException('presenter info' + presenterInfo);
 
         String userNameEmail = SecurityManager.decryptText(current_userEmail.getValue());
-        List < Account > recs = [select Id, Name from Account where Name = : userNameEmail];
+        List < Account > recs = [select Id, Name, PersonEmail from Account where PersonEmail = : userNameEmail];
 
         return recs[0];
     }

@@ -156,9 +156,9 @@ public with sharing class variationRightsController extends TransactionStepContr
     }
     public void buildLABELS() {
         if (submissionMgr.submission.Form_Name__c.contains('SH10')) {
-            labelText = 'Notice of particulars of variation of rights attached to shares';
+            labelText = '';// 'Notice of particulars of variation of rights attached to shares';
             dateQuestionText = 'Date of variation of rights';
-            dateQuestionTextHint = '';
+            dateQuestionTextHint = 'This is the date on which the company\'s Board of Directors approved the variation. This must not be a future date.';
             variationText = 'Details of variation of rights';
             variationTextHint = 'Please give details of the variation of rights attached to shares.';
         } else if (submissionMgr.submission.Form_Name__c.contains('SH11')) {
@@ -185,7 +185,7 @@ public with sharing class variationRightsController extends TransactionStepContr
         try {
             submissionMgr.submission.trueTransactionName__c = realTransactionName;
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
-            sharesToAdd.add(new Shares__c(varationField__c = variationInfo, Date__c = variationDate, Transaction__c = submissionMgr.submission.Id, ActiveData__c = true));
+            sharesToAdd.add(new Shares__c(ShareType__c = 'VARIATIONS', varationField__c = variationInfo, Date__c = variationDate, Transaction__c = submissionMgr.submission.Id, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
         PageReference pg = new PageReference('/VariationOfRights');

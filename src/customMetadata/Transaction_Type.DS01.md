@@ -3,13 +3,11 @@
     <label>DS01 - Dissolution</label>
     <values>
         <field>Below_Button_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-        &lt;li&gt;ensure the directors of the company are aware this application is going to be made&lt;/li&gt;
-        &lt;li&gt;read the guidance on &lt;a href=&quot;#&quot;&gt; closing your company&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text4__c</field>
@@ -17,7 +15,7 @@
     </values>
     <values>
         <field>Below_Button_Text5__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;This service is also available in &lt;a href=&quot;#&quot;&gt;Welsh (Cymraeg).&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text6__c</field>
@@ -25,15 +23,15 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Before you start this application, you should:&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
-        <value xsi:type="xsd:string">Other ways to close a company</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Title__c</field>
-        <value xsi:type="xsd:string">Before you begin</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -49,7 +47,7 @@
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:type="xsd:double">1.0</value>
+        <value xsi:type="xsd:double">8.0</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
@@ -118,8 +116,16 @@ Your request will need to be approved by the sole director if there&apos;s only 
         <value xsi:type="xsd:string">Closing a limited company or limited liability partnership</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:type="xsd:double">16032.0</value>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:type="xsd:string">DS01Serialiser</value>
+    </values>
+    <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>above_button_text__c</field>
@@ -128,6 +134,10 @@ Your request will need to be approved by the sole director if there&apos;s only 
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:type="xsd:string">Tell us which company you would like to close</value>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

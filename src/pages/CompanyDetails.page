@@ -8,14 +8,16 @@
                </h1>
                 <p class="lede">{!displayText1}
                 </p>
+                      <h2 class="heading-large">{!companyName}</h2>
+
                 <table class="check-your-answers">
-                    <thead>
+                   <!-- <thead>
                         <tr>
                             <th colspan="3">
                                 <h2 class="heading-medium">{!companyName}</h2>
                             </th>
                         </tr>
-                    </thead>
+                    </thead> -->
                     <tbody>
                         <tr>
                             <td>Company Number</td>

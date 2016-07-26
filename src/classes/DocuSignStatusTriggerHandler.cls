@@ -11,6 +11,16 @@ public class DocuSignStatusTriggerHandler{
 
     public static void beforeUpdate(List<dsfs__DocuSign_Status__c> newList){
         
+        updateDocusignStatus(newList);
+    }
+
+    public static void beforeInsert(List<dsfs__DocuSign_Status__c> newList){
+        
+        updateDocusignStatus(newList);
+    }    
+
+    public static void updateDocusignStatus(List<dsfs__DocuSign_Status__c> newList)
+    {
         List<Transaction__c> transactionToUpdate = new List<Transaction__c>();
         
         //Iterate the list of envelope   
@@ -23,7 +33,7 @@ public class DocuSignStatusTriggerHandler{
             }
             else if (dss.dsfs__Envelope_Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED)
             { 
-                transactionToUpdate.add(new Transaction__c(Id = dss.Transaction__c, Status__c = AppConstants.REQUEST_STATUS_SIGNED));
+                transactionToUpdate.add(new Transaction__c(Id = dss.Transaction__c, Status__c = AppConstants.DOCUSIGN_STATUS_REJECTED));
             }
         }
 
@@ -32,5 +42,4 @@ public class DocuSignStatusTriggerHandler{
             update transactionToUpdate;
 
     }
-
 }

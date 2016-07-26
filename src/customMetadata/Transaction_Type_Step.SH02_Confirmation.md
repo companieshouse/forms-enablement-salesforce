@@ -47,15 +47,15 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Header 1</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Header2</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">header 3</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Is_Active__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">8.0</value>
+        <value xsi:type="xsd:double">10.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

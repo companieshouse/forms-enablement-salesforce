@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Please confirm that the information you&apos;ve provided us for COMPANYNAME is correct</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">I confirm that the information above is correct</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Review</value>
+        <value xsi:type="xsd:string">Review your changes</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Classes of shares</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

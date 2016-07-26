@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">continue</value>
+        <value xsi:type="xsd:string">Submit share capital</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">SC review page content</value>
+        <value xsi:type="xsd:string">Please confirm that the information you&apos;ve provided us for</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">SC review page content 2</value>
+        <value xsi:type="xsd:string">I confirm that the information above is correct and this is the latest statement of capital</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Authorise and submit your statement</value>
+        <value xsi:type="xsd:string">Review your share capital</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

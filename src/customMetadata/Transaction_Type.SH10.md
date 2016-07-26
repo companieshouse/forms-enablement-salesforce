@@ -79,7 +79,9 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&apos;lede&apos;&gt;Before you start&lt;/p&gt;
+You&apos;ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -99,18 +101,24 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">What this form is for &lt;br/&gt;
-- Detailing the variation of rights &lt;br/&gt;
-- Variation in the rights of the class of members &lt;br/&gt;
--Giving notice of a new class of members</value>
+        <value xsi:type="xsd:string">You can use this service to:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;give notice of particulars of variation of rights attached to shares&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Variation in class rights</value>
+        <value xsi:type="xsd:string">Notice of particulars of variation of rights attached to shares</value>
+    </values>
+    <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>above_button_text__c</field>
@@ -119,6 +127,10 @@
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

@@ -27,16 +27,18 @@ public with sharing class SubmissionManager {
     public SubmissionManager(){}
     
     public SubmissionManager(Id submissionId){      
-        List<Transaction__c> recs = [select hasPromoter__c, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c,isDigitalSignatureNeeded__c,isSigningStarted__c,sharecurrencyselection__c,Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
+        List<Transaction__c> recs = [select containsPackage__c,Product_Code__c,paymentReference__c,isPaymentAccount__c,isPaymentCard__c,isPaymentPaypal__c,AccountNumber__c,hasPromoter__c,Version_Form__c,Presenter__r.PersonEmail,Company__c,Company__r.Name,Company__r.Id, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c,isDigitalSignatureNeeded__c,isSigningStarted__c,sharecurrencyselection__c,Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Id,Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c, Expiry_Date_Length__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c, Name,Historical_Valid_Step_Ids__c,CompanyNumber__c, finishedAddingShares__c,
-                                        Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c, Warning_Confirmation_Flag__c,Amount__c, isLLP__c,
-                                        (SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT Aggregate_nominal_value_New__c, AssignmentDate__c,redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c,totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
-                                        (Select Id,Name, Email__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
+                                        Status__c,CompanyName__c,SubmissionId__c, Valid_Step_Ids__c,Amount__c, isLLP__c,
+                                        (Select Id,Name, Email__c,DocusignName__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
                                             AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
-                                        From Officers__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
+                                        From Officers__r),
+                                        (SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT Aggregate_nominal_value_New__c, AssignmentDate__c,redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c,totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
+                                        (Select Id,Name, Email,DocusignName__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
+                                            AuthorizedSigner__c,Title,Middlenames__c,FirstName, LastName,isPowerOfAttorney__c, isCorporateDirector__c
+                                        From Contacts__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c where Id=:submissionId];
-
         if (recs.size()==1) submission = recs[0];   
         
         System.debug(LoggingLevel.ERROR, submission);   
@@ -44,7 +46,7 @@ public with sharing class SubmissionManager {
     
     public SubmissionManager(Id submissionId, String SObjectType, String fieldSetName){
 
-        String q='select Id, Name';
+        String q='select Id,Product_Code__c,containsPackage__c,Company__r.Name,Company__r.Id, Name,(SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT Aggregate_nominal_value_New__c, AssignmentDate__c,redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c,totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),(Select Id,Name, Email,DocusignName__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c From Contacts__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r)';
 
         Schema.DescribeSObjectResult d = Schema.getGlobalDescribe().get(SObjectType).getDescribe();                     
         //if (!d.isAccessible()) continue; //& todo add object access/fls security checks. 
@@ -70,15 +72,18 @@ public with sharing class SubmissionManager {
     // Instance methods.
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td){
         
-        // Only initialise with pending submissions.
-        List<Transaction__c> recs = [select hasPromoter__c, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c,isDigitalSignatureNeeded__c,isSigningStarted__c,sharecurrencyselection__c,Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
+         //Only initialise with pending submissions.
+        List<Transaction__c> recs = [select containsPackage__c,Product_Code__c,paymentReference__c,isPaymentAccount__c,isPaymentCard__c,isPaymentPaypal__c,AccountNumber__c,hasPromoter__c,Version_Form__c,Presenter__r.PersonEmail,Company__c,Company__r.Name, Company__r.Id, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c,isDigitalSignatureNeeded__c,isSigningStarted__c,sharecurrencyselection__c,Barcode__c,isBehalfSignatoryEnable__c,isPresenterMultipleDirectors__c,SoleDirectorPresenter__c,OfficerCount__c,Id,hasPaid__c,isPaymentRequired__c,CompanyLocality__c,CompanyCountry__c,CompanyPostCode__c,CompanyRegion__c,CompanyAddress1__c,CompanyAddress2__c,Presenter__c,Form_Name__c, ExpiryDate__c, Presenter__r.Name,isMajorityRequired__c,
                                         PresenterName__c,PresenterPhoneNumber__c,RequiredOfficerSign__c,ContactEmail__c, 
                                         MultipleDirectors__c,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c,CompanyName__c,CompanyNumber__c,
                                         Status__c,Amount__c, isLLP__c, SubmissionId__c,finishedAddingShares__c,
+                                        (Select Id,Name, Email__c,DocusignName__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,
+                                            AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
+                                        From Officers__r),
                                         (SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT Aggregate_nominal_value_New__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c,PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c,  Date__c, cancelled_shares__c, totalNumAggregate__c,totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
-                                        (Select Id,Name, Email__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c, 
-                                            AuthorizedSigner__c,hasInputBehalfDetails__c,  isPowerOfAttorney__c, isCorporateDirector__c 
-                                        From Officers__r),(SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
+                                        (Select Id,Name,LastName, Email,DocusignName__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c, 
+                                            AuthorizedSigner__c,Title,Middlenames__c,FirstName,hasInputBehalfDetails__c,  isPowerOfAttorney__c, isCorporateDirector__c 
+                                        From Contacts__r),(SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r) 
                                     from Transaction__c 
                                     where Presenter__c=:presenterId 
                                         and Form_Name__c = :td.DeveloperName
@@ -102,7 +107,7 @@ public with sharing class SubmissionManager {
         if(isDigitalSigning)
             expiryDate = td.Expiry_Date_Length__c; // set the expiry date
 
-        submission = new Transaction__c(Expiry_Date_Length__c=expiryDate, isDigitalSignatureNeeded__c=isDigitalSigning ,Presenter__c=presenterId,ContactEmail__c=presenterEmail,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).Name, Transaction_Type__c=transactionType);
+        submission = new Transaction__c(Product_Code__c = td.Product_Code__c,Version_Form__c = '1', Expiry_Date_Length__c=expiryDate, isDigitalSignatureNeeded__c=isDigitalSigning ,Presenter__c=presenterId,ContactEmail__c=presenterEmail,isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName,isMajorityRequired__c= td.isMajorityForm__c, Company__c=((Account)companyId).Id, CompanyNumber__c=((Account)companyId).CompanyNumber__c, Transaction_Type__c=transactionType);
         insert submission;
         return submission.Id;       
     }

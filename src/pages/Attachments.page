@@ -19,15 +19,15 @@
                     <p class="lede">
                         <apex:outputText escape="false" value="{!displayText}" id="displayText" />
                     </p>
-                    <p class="lede">
+                    <h2 class="heading-large">
                         <apex:outputText escape="false" value="{!displayText2}" id="displayText2" />
-                    </p>
+                    </h2>
                     <apex:outputText escape="false" value="{!displayText3}" id="displayText3" />
                     <p class="lede">
-                        <apex:outputText escape="false" value="{!displayText4}" id="displayText4" /> 
+                        <apex:outputText escape="false" value="{!displayText4}" id="displayText4" />
                     </p>
                     <apex:outputText escape="false" value="{!displayText5}" id="displayText5" />
-                    <apex:outputPanel id="newattachmentspanel">
+                    <!--<apex:outputPanel id="newattachmentspanel">
                         <apex:repeat value="{!newAttachments}" var="att">
                             <label class="form-label" for="fileName">
                                 File Name
@@ -42,17 +42,64 @@
                             </label>
                             <apex:inputFile value="{!att.body}" filename="{!att.name}" id="file" />
                         </apex:repeat>
+                    </apex:outputPanel> -->
+                    <apex:outputPanel id="prototypeAttachments">
+                        <style>
+                        .SI-FILES-STYLIZED label.cabinet {
+                            width: 79px;
+                            height: 22px;
+                            background: url(btn-choose-file.gif) 0 0 no-repeat;
+                            display: block;
+                            overflow: hidden;
+                            cursor: pointer;
+                        }
+                        
+                        .SI-FILES-STYLIZED label.cabinet input.file {
+                            position: relative;
+                            height: 100%;
+                            width: auto;
+                            opacity: 0;
+                            -moz-opacity: 0;
+                            filter: progid: DXImageTransform.Microsoft.Alpha(opacity=0);
+                        }
+                        </style>
+                        <div class="form-group">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="doc-name">Document</th>
+                                        <th scope="col">File name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!newAttachments}" var="att">
+                                        <tr>
+                                            <td>{!att.name}</td>
+                                            <td>
+                                                <label class="cabinet">
+                                                    <apex:inputFile accept="PDF, pdf" value="{!att.body}" filename="{!att.name}" id="file" styleclass="file" />
+                                                </label>
+                                                <!--                                                <label for="file">Add document</label>
+
+                                                <input type='File' value="{!att.body}" id="file" />-->
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </div>
                     </apex:outputPanel>
                     <p>
                         <br/>
                         <br/>
-                        <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp;
-                        <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp;
-                        <apex:commandLink value="Save" action="{!save}" />
+                        <!-- <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp; 
+                        <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp; 
+                        <apex:commandLink value="Save" action="{!save}" />-->
                     </p>
                 </div>
-                <apex:outputPanel id="BuildTable">
-                    <table class="check-your-answers">
+                <apex:outputPanel id="BuildTable" rendered="false">
+                    <table class="check-your-answers" render='false'>
                         <thead>
                             <tr>
                                 <th colspan="4">{!headerText2}</th>
@@ -103,9 +150,9 @@
                     </table>
                     <br/>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
                 <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
             </apex:form>
         </apex:define>
     </apex:composition>

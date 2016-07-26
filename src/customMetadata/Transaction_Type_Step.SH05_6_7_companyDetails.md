@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Review the information below</value>
+        <value xsi:type="xsd:string">Review the information below and confirm that this is the company you want to file for.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Cancellation of shares for:</value>
+        <value xsi:type="xsd:string">Confirm your company details</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

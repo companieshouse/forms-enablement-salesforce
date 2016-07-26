@@ -1,0 +1,173 @@
+<apex:page title="" showHeader="false" sidebar="false" standardStylesheets="false" controller="ChangeCRSController" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="BuildTablemasterpanel">
+                        <apex:outputPanel id="buildShares">
+                            <div class="form-group">
+                                <h1 class="heading-xlarge">
+                                    {!headerText1}
+                                </h1>
+                                <p class="lede"> {!helpText}</p>
+                                <apex:outputPanel id="valueofStockPanel" rendered="{!showValueField}">
+                                    <label class="form-label" for="numberofshares">Value of Stock
+                                        <span class="form-hint" id="classofSharesHint"></span>
+                                    </label>
+                                    <apex:inputText styleClass="form-control" value="{!valOfStock}" id="valOfStockId" />
+                                </apex:outputPanel>
+                                <!-- -->
+                                <label class="form-label" for="classofShare-item">Class of shares
+                                    <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
+                                </label>
+                                <input class="form-control" name="classofShare-item" id="classofsharetypetosearch" />
+                                <apex:actionFunction action="{!setSelectedShare}" name="setSelectedShare" reRender="none">
+                                    <apex:param name="shareParam" value="" id="xyz" assignTo="{!classofshares}" />
+                                </apex:actionFunction>
+                                <!-- -->
+                                <label class="form-label" for="oldIssuedShares">Number of issued shares
+                                    <span class="form-hint" id="oldIssuedSharesHint"> Previous share structure</span>
+                                </label>
+                                <apex:inputText styleClass="form-control" value="{!oldIssuedShares}" id="oldIssuedSharesId" />
+                                <!-- -->
+                                <label class="form-label" for="oldNomVal">Nominal value of each share
+                                    <span class="form-hint" id="oldNomValHint">Previous share structure</span>
+                                </label>
+                                <apex:inputText styleClass="form-control" value="{!oldNomVal}" id="oldNomValId" />
+                                <!-- -->
+                                <apex:outputPanel id="newStructurePanel" rendered="{!showNewStructure}">
+                                    <label class="form-label" for="newIssuedShares">New Number of issued shares
+                                        <span class="form-hint" id="newIssuedSharesHint"> New share structure</span>
+                                    </label>
+                                    <apex:inputText styleClass="form-control" value="{!newIssuedShares}" id="newIssuedSharesID" />
+                                    <!-- -->
+                                    <label class="form-label" for="newNomVal">New Nominal value of each share
+                                        <span class="form-hint" id="newNomValHint">New share structure</span>
+                                    </label>
+                                    <apex:inputText styleClass="form-control" value="{!newNomVal}" id="newNomValID" />
+                                </apex:outputPanel>
+                                <br/>
+                                <apex:commandLink value="+ Add Shares" reRender="masterPanel" action="{!AddShare}" />
+                            </div>
+                            <br/>
+                            <script>
+                            var sharetypes = ['Ordinary',
+                                'Ordinary A',
+                                'Ordinary B',
+                                'Ordinary C',
+                                'Preference',
+                                'Deferred',
+                                'Deferred Ordinary'
+                            ];
+
+                            $(function() {
+                                $("#classofsharetypetosearch").autocomplete({
+                                    source: function(request, response) {
+                                        var results = $.ui.autocomplete.filter(sharetypes, request.term);
+                                        response(results.slice(0, 10));
+                                    },
+                                    select: function(event, ui) {
+                                        var completedselection = ui.item.value;
+                                        // console.log('completed selection is ' + completedselection);
+                                        if (completedselection.length < 1) {
+
+                                            return;
+                                        }
+                                        if (completedselection.length > 1) {
+                                            // console.log('share from client = ' + ' ' + completedselection);
+                                            setSelectedShare(completedselection);
+                                        }
+                                    },
+                                    change: function(event, ui) {
+                                        var completedselection = document.getElementById("classofsharetypetosearch").value;
+                                        if (completedselection.length < 1) {
+
+                                            return;
+                                        }
+                                        if (completedselection.length > 1) {
+                                            // console.log('share from client = ' + ' ' + completedselection);
+                                            setSelectedShare(completedselection);
+                                        }
+                                    }
+                                });
+                            });
+                            </script>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                            <div class="form-group entire-wrapper">
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5"> {!tableHelperText} </th>
+                                            <br/> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <apex:outputPanel id="valueofStockPanelHeader" rendered="{!showValueField}">
+                                                <td>Value of Stock</td>
+                                            </apex:outputPanel>
+                                            <td>Class of shares</td>
+                                            <td>Number of issued shares</td>
+                                            <td>Nominal value of each share</td>
+                                            <apex:outputPanel id="newStructurePanelHeader" rendered="{!showNewStructure}">
+                                                <td>New Nominal value of each share</td>
+                                                <td>New Number of issued shares</td>
+                                            </apex:outputPanel>
+                                        </tr>
+                                        <br/>
+                                        <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
+                                            <tr>
+                                                <apex:outputPanel id="valueofStockPanelRepeat" rendered="{!showValueField}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.valOfStock__c}" id="valueofStockRepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Class_of_Shares__c}" id="classofshareRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.oldNumSharesIssued__c}" id="oldNumIssuedRepeat" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.OldNominalValue__c}" id="oldNomValueRepeat" />
+                                                </td>
+                                                <apex:outputPanel id="newStructurePanelRepeat" rendered="{!showNewStructure}">
+                                                    <td>
+                                                        <apex:outputText value="{!sp.NewNominalValu__c}" id="newNomValueRepeat" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!sp.newNumSharesIssued__c}" id="newNumIssuedrepeat" />
+                                                    </td>
+                                                </apex:outputPanel>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br/>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:commandButton styleClass="button" action="{!addStatementofCapital}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <br/> &nbsp;
+                <apex:commandLink action="{!addAnotherNotice}" value="{!previousButtonText}" id="addAnotherNotice" /> &nbsp;
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
