@@ -117,8 +117,6 @@ public with sharing class StartFrameworkController {
         get;
         set;
     }
-    public String def3 {get; set;}
-    public String def4 {get; set;}
     // Private class members.
     Boolean isPageInitialised = false;
     SecurityManager securityMgr;
@@ -148,9 +146,6 @@ public with sharing class StartFrameworkController {
             pageText4 = transactionMgr.td.Landing_Page_Text4__c;
             pageText5 = transactionMgr.td.Landing_Page_Text5__c;
             pageText6 = transactionMgr.td.Landing_Page_Text6__c;
-            enableHTMLBuilder = transactionMgr.td.enableHTMLBuilder__c;
-            def3 = transactionMgr.td.DEF3__c;
-            def4 = transactionMgr.td.DEF4__c;
             //pageText7 = transactionMgr.td.Landing_Page_Text7__c;
             //pageText8 = transactionMgr.td.Landing_Page_Text8__c;
             //pageText9 = transactionMgr.td.Landing_Page_Text9__c;

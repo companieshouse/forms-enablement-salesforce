@@ -532,6 +532,15 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>containsPackage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes that a particular transactions contains multiple transactions as attachments to be turned into packages upon submission</description>
+        <externalId>false</externalId>
+        <label>containsPackage</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>finishedAddingShares__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Boolean to set once Shares are finished to bypass the Adding Shares Table and call the next Step</description>
@@ -688,12 +697,42 @@ to any promoter of the company?</inlineHelpText>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>prescribedParticular__c</fullName>
+        <externalId>false</externalId>
+        <label>prescribedParticular</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>selectShareType__c</fullName>
+        <externalId>false</externalId>
+        <label>selectShareType</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>sentsignerstatus__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>sentsignerstatus</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>shareChangeSelection__c</fullName>
+        <externalId>false</externalId>
+        <label>shareChangeSelection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>sharecurrencyselection__c</fullName>

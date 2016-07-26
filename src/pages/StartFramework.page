@@ -66,41 +66,7 @@ Ver. Author        Date        Detail
                 <br/>
                 <br/>
                 <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
-                <script>/*
-                $(Document).ready(function enableBuilder() {
-                    if ({!enableHTMLBuilder}) {
-                        var DEF3 = "{!def3}";
-                        var DEF4 = "{!def4}";
-                        var elementDef = [DEF3, DEF4];
-                        var DEF3Label = "{!$ObjectType.Transaction_Type__mdt.fields.DEF3__c.Label}"
-                        var DEF4Label = "{!$ObjectType.Transaction_Type__mdt.fields.DEF4__c.Label}"
-                        var elementLabels = [DEF3Label, DEF4Label];
-                        console.log(elementDef);
-                        console.log('label is ' + DEF3Label);
-                        var elements = document.getElementsByName('dynamicelements');
-                        var elementsIDarray = [elements[0].id, elements[1].id];
-                        for (i = 0; i < elements.length; i++) {
-                            console.log('my element id is ' + ' ' + elements[i].id);
-                        
-                            if (_.intersection(elementLabels, elementsIDarray).length > 0) {
-                                console.log('your found value(s) is/are' + ' ' + elements[i].id);
-                                   $(elements[i].id).wrap(_.intersection(elementLabels, elementsIDarray).value);
-                            } else {
-                                console.log('nothing found');
-                            }
-                        }
-
-                        console.log('Builder initialized');
-                    } else if (!{!enableHTMLBuilder}) {
-                        console.log('Builder not initialized');
-                    }
-
-                })
-
-
-                enableBuilder();
-                */
-                </script>
+                
             </apex:form>
         </apex:define>
     </apex:composition>
