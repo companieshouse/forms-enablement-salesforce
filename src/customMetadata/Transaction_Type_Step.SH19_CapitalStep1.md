@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH08-attachments</label>
+    <label>SH19 CapitalStep1</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Add supporting documents</value>
+        <value xsi:type="xsd:string">Share capital</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">What is the share currency?</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">3.0</value>
+        <value xsi:type="xsd:double">2.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -87,14 +87,14 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">SH08</value>
+        <value xsi:type="xsd:string">SH19</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">Attachments</value>
+        <value xsi:type="xsd:string">SCapital1</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Previous</value>
     </values>
 </CustomMetadata>

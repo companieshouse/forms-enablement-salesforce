@@ -1,110 +1,61 @@
-<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                <div class="form-group">
-                    <h1 class="heading-xlarge">
-                        Companies House
-                        <br/> Forms Enablement
-                    </h1>
-                    <label class="form-label" for="share-item">Select Form
-                        <span class="error-message" id="errors"></span>
-                    </label>
-                    <input class="form-control" name="document-item" id="document-input" />
+                <apex:outputPanel id="masterpanel">
+                    <div class="form-group">
+                        <h1 class="heading-xlarge">
+                            Companies House
+                            <br/> Transactions Enablement
+                        </h1>
+                        <label class="form-label" for="share-item">Select Form
+                            <span class="error-message" id="errors"></span>
+                        </label>
+                        <select class="form-control" name="document-item" id="document-input">
+                            <option value="DS01">DS01</option>
+                            <option value="SH02">SH02</option>
+                            <option value="SH04">SH04</option>
+                            <option value="SH05_6_7">SH05</option>
+                            <option value="SH05_6_7">SH06</option>
+                            <option value="SH05_6_7">SH07</option>
+                            <option value="SH08">SH08</option>
+                            <option value="SH09">SH09</option>
+                            <option value="SH10">SH10</option>
+                            <option value="SH11">SH11</option>
+                            <option value="SH12">SH12</option>
+                            <option value="SH13">SH13</option>
+                            <option value="SH14">SH14</option>
+                            <option value="SH15">SH15</option>
+                            <option value="SH19">SH19</option>
+                            <option value="SH30">SH30</option>
+                            <option value="SH50">SH50</option>
+                        </select>
+                        <br/>
+                    </div>
+                    <input class="button" type="button" onclick="selectDocument();" value="Select Form" />
                     <br/>
-                </div>
-                <input class="button" type="button" onclick="selectDocument();" value="Select Form" />
-                <script>
-                var transactionselection = [{
-                    label: "DS01",
-                    value: "DS01"
-                }, {
-                    label: "SH02",
-                    value: "SH02"
-                }, {
-                    label: "SH04",
-                    value: "SH04"
-                }, {
-                    label: "SH05",
-                    value: "SH05_6_7"
-                }, {
-                    label: "SH06",
-                    value: "SH05_6_7"
-                }, {
-                    label: "SH07",
-                    value: "SH05_6_7"
-                }, {
-                    label: "SH08",
-                    value: "SH08"
-                }, {
-                    label: "SH09",
-                    value: "SH09"
-                }, {
-                    label: "SH10",
-                    value: "SH10"
-                }, {
-                    label: "SH11",
-                    value: "SH11"
-                }, {
-                    label: "SH12",
-                    value: "SH12"
-                }, {
-                    label: "SH13",
-                    value: "SH13"
-                }, {
-                    label: "SH14",
-                    value: "SH14"
-                },
-                 {
-                    label: "SH15",
-                    value: "SH15"
-                }, {
-                    label: "SH19",
-                    value: "SH19"
-                },{
-                    label: "SH30",
-                    value: "SH30"
-                },
-                 {
-                    label: "SH50",
-                    value: "SH50"
-                }/*, {
-                    label: "SH16",
-                    value: "SH16"
-                }, {
-                    label: "SH17",
-                    value: "SH17"
-                }*/];
-                $(function() {
-                    $("#document-input").autocomplete({
-                        source: function(request, response) {
-                            var results = $.ui.autocomplete.filter(transactionselection, request.term);
-                            response(results.slice(0, 20));
-                        },
-                        select: function(event, ui) {}
-                    });
-                });
+                    <br/>
+                    <apex:commandLink rerender="masterpanel" action="{!cleanTransactions}" value="Clear Transactions" id="clearTransactions" />
+                    <script>
+                    var environment = window.location.hostname;
+                    console.log(environment);
 
-                function selectDocument() {
-
-                    var completedselection = document.getElementById('document-input').value;
-                    // console.log(completedselection);
-
-                    if (completedselection.length < 1) {
-                        document.getElementById('errors').innerHTML = 'Please select a valid document type to proceed';
-                        return;
-                    } else if (completedselection.length > 1) {
+                    function selectDocument() {
+                        var environment = window.location.hostname;
+                        var completedselection = document.getElementById('document-input').value;
                         // console.log(completedselection);
-                        // if (transactionselection.indexOf(completedselection) >= 0) {
-                        document.getElementById('errors').innerHTML = '';
-                        window.location.href = ('https://lbdev2-chformsfactory.cs83.force.com/start?t=' + completedselection);
-                        //   }
-                    }
-                };
-                </script>
+
+                        if (completedselection.length < 1) {
+                            document.getElementById('errors').innerHTML = 'Please select a valid document type to proceed';
+                            return;
+                        } else if (completedselection.length > 1) {
+
+                            document.getElementById('errors').innerHTML = '';
+                            window.location.href = ('/start?t=' + completedselection);
+                        }
+                    };
+                    </script>
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

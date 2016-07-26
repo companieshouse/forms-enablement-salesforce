@@ -6,7 +6,7 @@ Copyright © 2016  Methods Digital
 Purpose:
 
 
-Controller which is link to the guidance page 
+Controller which is link to the guidance page
 ======================================================
 ======================================================
 History
@@ -44,9 +44,12 @@ public with sharing class GuidanceController {
         get;
         set;
     }
+    public Boolean standardGuidanceView {get; set;}
+    public Boolean customGuidanceView {get; set;}
     Boolean isPageInitialised = false;
     SecurityManager securityMgr;
     TransactionManager transactionMgr;
+
     public GuidanceController() {
         initialiseStep();
     }
@@ -60,6 +63,8 @@ public with sharing class GuidanceController {
             transactionMgr = new TransactionManager(transactionType);
             // this is not efficient unless start pages follow this format consistently
             warningAgreeBox = false;
+            customGuidanceView = transactionMgr.td.customGuidanceView__c;
+            standardGuidanceView = transactionMgr.td.standardGuidanceView__c;
             // display text
             displayText0 = '';
             displayText0 += (transactionMgr.td.Guidance_Text_1__c == null ? '' : transactionMgr.td.Guidance_Text_1__c);
@@ -89,38 +94,38 @@ public with sharing class GuidanceController {
     //    return;
     //}
     public PageReference setAgreeValue() {
-            if (!agreeBoxChoice) {
-                currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
-                hasPageErrors = true;
-                return null;
-            } else if (agreeBoxChoice) {
-                currentErrorMessage = '';
-                hasPageErrors = false;
-            } else if (String.valueOf(agreeBoxChoice) == 'undefined') {
-                currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
-                hasPageErrors = true;
-                return null;
-            }
-            return nextAction();
+        if (!agreeBoxChoice) {
+            currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
+            hasPageErrors = true;
+            return null;
+        } else if (agreeBoxChoice) {
+            currentErrorMessage = '';
+            hasPageErrors = false;
+        } else if (String.valueOf(agreeBoxChoice) == 'undefined') {
+            currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
+            hasPageErrors = true;
+            return null;
         }
-        // End Instance methods.    
-        // Action methods.     
+        return nextAction();
+    }
+    // End Instance methods.
+    // Action methods.
     public PageReference nextAction() {
         //We don't redirect to the next step but to the auth
         userTracker = new TrackUserClass();
         //userTracker.setBooleanGuidanceAgreeBox(warningAgreeBox);
         // persist  warning box in cookie here
         // todo - the code below forces reauthentication.
-        // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).        
+        // todo - code should check for non-expired User_Authorisation__c record (record Id stored in user_auth cookie).
         userTracker.saveUserDocumentInfo();
         //userTracker.getUserDocument();
         // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
         return securityMgr.getUserAuthRedirect();
     }
     public PageReference previousAction() {
-            userTracker = new TrackUserClass();
-            userTracker.saveUserDocumentInfo();
-            return new PageReference('/?t=' + transactionType);
-        }
-        // End Action methods.    
+        userTracker = new TrackUserClass();
+        userTracker.saveUserDocumentInfo();
+        return new PageReference('/?t=' + transactionType);
+    }
+    // End Action methods.
 }

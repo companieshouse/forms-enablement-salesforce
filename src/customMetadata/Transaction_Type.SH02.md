@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -31,6 +31,14 @@
     </values>
     <values>
         <field>Below_Button_Title__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DEF3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DEF4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
@@ -79,8 +87,8 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">What this form is NOT for &lt;br/&gt;
--You cannot use this form to give notice of a conversion of shares into stock</value>
+        <value xsi:type="xsd:string">You&apos;ll need: &lt;br/&gt;
+&lt;ul  class=&quot;list list-bullet&quot;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the compan authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -100,8 +108,8 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">What this form is for &lt;br/&gt;
--You may use this form to give notice of consolidation, sub-division, redemption of shares or re-conversion of stock into shares</value>
+        <value xsi:type="xsd:string">You can use this service to: &lt;br/&gt;
+&lt;ul  class=&quot;list list-bullet&quot;&gt;&lt;li&gt;give notice of consolidation, subdivision, redemption of shares&lt;/li&gt;&lt;li&gt;give notice of re-conversion of stock into shares&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -116,12 +124,24 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>enableHTMLBuilder__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

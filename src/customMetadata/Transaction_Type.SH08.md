@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -31,6 +31,14 @@
     </values>
     <values>
         <field>Below_Button_Title__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DEF3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DEF4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
@@ -79,7 +87,8 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">You cannot use this form to give notice of name or other designations of class of members. To do this, please use form SH13</value>
+        <value xsi:type="xsd:string">You&apos;ll need:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -99,7 +108,8 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">You may use this form to give notice of name or other designation of class of shares.</value>
+        <value xsi:type="xsd:string">You can use this service to:
+&lt;ul class=&apos;list list-bullet&apos;&gt;&lt;li&gt;give notice of name or other designation of class of shares&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
@@ -114,12 +124,24 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>enableHTMLBuilder__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

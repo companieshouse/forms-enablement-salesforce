@@ -1,4 +1,4 @@
-<apex:page title="Authorise Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" docType="html-5.0">
+<apex:page title="Authorise Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" action="{!buildDocument}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="SigningForm">

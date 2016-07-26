@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Change share designation</value>
+        <value xsi:type="xsd:string">Changing the name of a class of shares</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Class(es) of shares</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -95,6 +95,6 @@
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Previous</value>
     </values>
 </CustomMetadata>

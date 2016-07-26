@@ -1,0 +1,114 @@
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController3" action="{!checkstatus}" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel id="no-Shares-Panel" rendered="{!NOT(showStatementofCapital)}">
+                        <h1 class="heading-xlarge">
+                            Statement of capital is empty
+                        </h1>
+                        <p class='lede'>You must have valid shares to continue your journey. To add shares and continue this journey please click  <apex:commandLink action="{!restartJourney}" value="here" id="restartJourney" />
+                        </p>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
+                        <h1 class="heading-xlarge">Share capital</h1>
+                        <h2 class="heading-large">{!shareClassType}</h2>
+                        <p>{!prescribedParticular}</p>
+                        <div class="form-group">
+                            <table class="check-your-answers">
+                                <tbody>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Currency</th>
+                                            <th scope="col" class="numeric">Total number of shares</th>
+                                            <th scope="col" class="numeric">Aggregate nominal value</th>
+                                            <th scope="col" class="numeric">Total amount unpaid</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <apex:repeat value="{!sharesforBuilding}" var="sp">
+                                        <tr>
+                                            <td class="numeric">
+                                                <apex:outputText value="{!sp.Currency__c}" id="currency" />
+                                            </td>
+                                            <td class="numeric">
+                                                <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                                <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
+                                            <td class="numeric">
+                                                <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
+                                                <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" />
+                                            </td>
+                                            <td class="numeric">
+                                                <apex:outputText value="{!sp.Total_aggregate_amount_unpaid__c}" id="amountunpaid" />
+                                            </td>
+                                            <td class="numeric">
+                                                <a href='#' id='{!sp.Id}' onclick="deleteShare('{!sp.Id}')">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                    <!--
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(viewmap[key]))}">
+                                            <tr>
+                                            <td></td>
+                                            <td>Total</td>
+                                            <td id="totalnumberofshares"></td>
+                                            <td id="totalnumberaggregate"></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+
+
+                                    </apex:outputPanel>
+                                    -->
+                                </tbody>
+                            </table>
+                            <apex:actionFunction action="{!deleteShare}" name="deleteShare" reRender="masterpanel">
+                                <apex:param name="shareID" value="" id="MNO" assignTo="{!shareID}" />
+                            </apex:actionFunction>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="confirm-Panel" rendered="{!showStatementofCapital}">
+                        <apex:commandLink value="Add more {!shareClassType} shares  in a different currency" action="{!addsameShare}" reRender="none" id="addSameShares" />
+                        <h3 class="heading-medium">Have you finished adding all of your shares?</h3>
+                        <div class="form-group">
+                            <span id='errorHint' class='error-message'>{!currentErrorMessage}</span>
+                            <fieldset class="inline">
+                                <label class="block-label" for="radio-inline-1">
+                                    <input onclick="confirmShares(true)" id="radio-inline-1" type="radio" name="radio-inline-group" value="true" /> Yes, confirm my share capital
+                                </label>
+                                <label class="block-label" for="radio-inline-3">
+                                    <input onclick="confirmShares(false)" id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share
+                                </label>
+                            </fieldset>
+                            <apex:actionFunction action="{!confirmShares}" name="confirmShares" reRender="emptypanel">
+                                <apex:param name="shareStatusParam" value="" id="abc" assignTo="{!shareStatus}" />
+                            </apex:actionFunction>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="buttonPanel" rendered="{!showStatementofCapital}">
+                        <div class="form-group">
+                            <script>
+                            function chooseStep() {
+                                var statuses = document.getElementsByName('radio-inline-group');
+
+
+                                for (var i = 0, length = statuses.length; i < length; i++) {
+                                    console.log(statuses[i].checked);
+                                    if (statuses[i].checked == true) {
+                                        document.getElementById('errorHint').innerHTML = '';
+                                        choosePath(statuses[i].value);
+                                    } else if (statuses[i].checked == false) {
+                                        document.getElementById('errorHint').innerHTML = 'You must make a selection';
+                                    }
+                                }
+                            }
+                            </script>
+                            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" id="continueButton" /> &nbsp;
+                            <br/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

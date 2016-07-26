@@ -30,27 +30,26 @@ Ver. Author        Date        Detail
                         </h1>
                         <ul class="error-summary-list">
                             <li>
-                                <span class="error-message">{!currentErrorMessage}</span>
+                                <a>{!currentErrorMessage}</a>
                             </li>
                         </ul>
                     </div>
                 </apex:outputPanel>
                 <h1 class="heading-xlarge">
-                    <!--{!companySearchHeader}--> Which company do you wish to file for?
+                    <!--{!companySearchHeader}-->Which company do you wish to file for?
                 </h1>
-                <!-- <div class="form-group {!IF(hasPageErrors,'error', '')}"> -->
-                <label class="form-label" for="text-input">What is the company registration number?
-                    <span class="form-hint">This is the 8-character identification code on your certificate of incorporation.</span>
-                    <apex:outputPanel rendered="{!hasPageErrors}">
-                        <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
-                        </span>
-                    </apex:outputPanel>
-                </label>
-                <apex:outputText escape="false" value="{!currentErrortop}" />
-                <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                <apex:outputText escape="false" value="{!currentErrorbottom}" />
-                <!-- </div>   -->
-                <br/>
+                <div class="form-group {!currentError}">
+                    <label class="form-label" for="text-input">What is the company registration number?
+                        <span class="form-hint">This is the 8-character identification code on your certificate of incorporation.</span>
+                        <apex:outputPanel rendered="{!hasPageErrors}">
+                            <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                            </span>
+                        </apex:outputPanel>
+                    </label>
+                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
+                    <!-- </div>   -->
+                    <br/>
+                </div>
                 <div class="form-group">
                     <details>
                         <summary>

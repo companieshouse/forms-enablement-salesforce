@@ -25,7 +25,10 @@
         <members>CH_SearchControllerByRegAddress_Test</members>
         <members>CH_SearchControllerClass</members>
         <members>CH_SearchControllerClass_Test</members>
+        <members>CRSController</members>
+        <members>ChApiClient</members>
         <members>ChApiMock</members>
+        <members>ChangeCRSController</members>
         <members>ChangeShareClassName</members>
         <members>CompaniesHouse</members>
         <members>CompaniesHouseCalloutsRequest</members>
@@ -50,6 +53,7 @@
         <members>DocumentController</members>
         <members>DocusignLibrary</members>
         <members>EditSharesByTypeController</members>
+        <members>EntryPointController</members>
         <members>ExternalEmbedDocuSignController</members>
         <members>FormAPISubmissionManager</members>
         <members>FormAPISubmissionManagerTest</members>
@@ -60,6 +64,7 @@
         <members>FormsApiClient</members>
         <members>FormsApiClientTest</members>
         <members>FormsApiMock</members>
+        <members>FreeFormController</members>
         <members>GuidanceController</members>
         <members>IStepNavigable</members>
         <members>MockHttpResponseGenerator</members>
@@ -75,6 +80,9 @@
         <members>ResolutionChangeController</members>
         <members>ReviewController</members>
         <members>ReviewControllerTest</members>
+        <members>SCapitalController1</members>
+        <members>SCapitalController2</members>
+        <members>SCapitalController3</members>
         <members>SecurityManager</members>
         <members>SigningController</members>
         <members>SmartPayUrl</members>
@@ -101,6 +109,7 @@
         <members>cancelShares</members>
         <members>chooseDirector</members>
         <members>selectShareTypeController</members>
+        <members>showClassCHangeController</members>
         <members>variationRightsController</members>
         <members>whichDirector</members>
         <name>ApexClass</name>
@@ -123,7 +132,9 @@
         <members>BehalfWhichSignatory</members>
         <members>CH_ChargesList</members>
         <members>CH_SearchControllerByFilingHistoryClass</members>
+        <members>CRS</members>
         <members>CancelledShares</members>
+        <members>ChangeCRS</members>
         <members>ChangeShareClassName</members>
         <members>Companies_House_Insolvency</members>
         <members>Companies_House_Officer_List</members>
@@ -142,6 +153,7 @@
         <members>EntryPoint</members>
         <members>ExternalEmbedDocuSign</members>
         <members>FormApplication</members>
+        <members>FreeForm</members>
         <members>Guidance</members>
         <members>OfficerDetails</members>
         <members>PDFGeneration</members>
@@ -151,7 +163,15 @@
         <members>PromotersTable</members>
         <members>ResolutionChange</members>
         <members>Review</members>
+        <members>SCapital1</members>
+        <members>SCapital2</members>
+        <members>SCapital3</members>
+        <members>SH02</members>
+        <members>SH06</members>
+        <members>SH08</members>
+        <members>SH10</members>
         <members>SH19</members>
+        <members>ShowClassChanges</members>
         <members>SigningPage</members>
         <members>StartFramework</members>
         <members>Status</members>
@@ -194,6 +214,8 @@
         <members>Forms_API_Service__c</members>
         <members>Shares__c</members>
         <members>SmartPay_Settings__c</members>
+        <members>Transaction_Type_Step__mdt</members>
+        <members>Transaction_Type__mdt</members>
         <members>Transaction__c</members>
         <members>User_Authorisation__c</members>
         <name>CustomObject</name>

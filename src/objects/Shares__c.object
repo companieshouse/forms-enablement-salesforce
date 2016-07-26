@@ -153,12 +153,43 @@ SH50</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>FreeForm__c</fullName>
+        <externalId>false</externalId>
+        <label>FreeForm</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>NewNominalValu__c</fullName>
+        <externalId>false</externalId>
+        <label>NewNominalValue</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Number_of_Shares__c</fullName>
         <externalId>false</externalId>
         <label>Number of Shares</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OldNominalValue__c</fullName>
+        <externalId>false</externalId>
+        <label>OldNominalValue</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -277,6 +308,28 @@ SH50</description>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>newNumSharesIssued__c</fullName>
+        <externalId>false</externalId>
+        <label>newNumSharesIssued</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>oldNumSharesIssued__c</fullName>
+        <externalId>false</externalId>
+        <label>oldNumSharesIssued</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>redenominateDate__c</fullName>
         <externalId>false</externalId>
         <label>redenominateDate</label>
@@ -310,6 +363,17 @@ SH50</description>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>valOfStock__c</fullName>
+        <externalId>false</externalId>
+        <label>valOfStock</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>

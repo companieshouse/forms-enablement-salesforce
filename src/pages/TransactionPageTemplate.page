@@ -53,7 +53,6 @@ Ver. Author        Date        Detail
         </div>
     </main>
     </div>
-    <c:footer />
 
 
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk-template.js')}" type="text/javascript"></script>
@@ -61,7 +60,7 @@ Ver. Author        Date        Detail
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/details.polyfill.js')}"></script>
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/jquery-1.11.3.js')}"></script>
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
-    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
+    <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/application.js')}"></script>
     <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];
@@ -78,6 +77,8 @@ Ver. Author        Date        Detail
     <noscript><p><img src="http://piwik.companieshouse.gov.uk/piwik.php?idsite=7" style="border:0;" alt="" /></p></noscript>
     <!-- End Piwik Code -->
       <!-- GOV.UK Prototype kit v2.1.0 -->
+    <c:footer />
+
 
 </body>
 

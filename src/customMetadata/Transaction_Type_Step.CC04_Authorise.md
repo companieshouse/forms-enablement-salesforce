@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH19 CurrencySelection</label>
+    <label>CC04 -Authorise</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">For example, US Dollar or Pound Sterling. Don&apos;t use $ or £</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Tell us about the reduction in share capital</value>
+        <value xsi:type="xsd:string">Authorise and submit</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">What is the share currency?</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -79,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">2.0</value>
+        <value xsi:type="xsd:double">6.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -87,14 +87,14 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">SH19</value>
+        <value xsi:type="xsd:string">CC04</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">CurrencySelection</value>
+        <value xsi:type="xsd:string">SigningPage</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Previous</value>
     </values>
 </CustomMetadata>

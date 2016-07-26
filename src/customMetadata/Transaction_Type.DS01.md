@@ -34,6 +34,14 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>DEF3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DEF4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Expiry_Date_Length__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -124,12 +132,24 @@ Your request will need to be approved by the sole director if there&apos;s only 
         <value xsi:type="xsd:string">DS01Serialiser</value>
     </values>
     <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
         <field>companySearchPageText__c</field>
         <value xsi:type="xsd:string">Tell us which company you would like to close</value>
+    </values>
+    <values>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>enableHTMLBuilder__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>

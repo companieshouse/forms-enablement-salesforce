@@ -34,6 +34,14 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>DEF3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>DEF4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Expiry_Date_Length__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -84,24 +92,26 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Before you start, you will need:&lt;/p&gt;</value>
-    </values>
-    <values>
-        <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;The company number&lt;/li&gt; 
-&lt;li&gt;The company authentication code&lt;/li&gt; 
-&lt;li&gt;A credit or debit card 
-&lt;/li&gt; 
+        <value xsi:type="xsd:string">&lt;p&gt;You will need:&lt;/p&gt;
+&lt;ul class=&quot;list list-bullet&quot;&gt; 
+&lt;li&gt;the company number&lt;/li&gt; 
+&lt;li&gt;the company authentication code&lt;/li&gt;
+&lt;li&gt;a credit or debit card or PayPal account&lt;/li&gt; 
 &lt;/ul&gt;</value>
     </values>
     <values>
+        <field>Landing_Page_Text3__c</field>
+        <value xsi:type="xsd:string">&lt;p&gt;The fee is £10 for standard service or £50 for same day.&lt;/p&gt;
+&lt;p&gt;It normally takes 10 minutes to complete this process.
+&lt;/p&gt;</value>
+    </values>
+    <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;A fee is required of £10 for the standard service or £50 for a same day service.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Additional documents are required with the Statement of Capital (SH19), in order to register the reduction of share capital.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
@@ -109,15 +119,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;This service is available for:&lt;/p&gt;	
-&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;A private limited company reducing its capital supported by a solvency statement;&lt;/li&gt; 
-&lt;li&gt;Reduce the share capital and re-register a company from public to private.&lt;/li&gt;
-&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">This service is used to complete your Statement of Capital following an administrative reduction in share capital.</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Reduction of Share Capital</value>
+        <value xsi:type="xsd:string">Updating your share capital (SH19)</value>
     </values>
     <values>
         <field>Product_Code__c</field>
@@ -128,6 +134,10 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>StandardGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>above_button_text__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -136,8 +146,16 @@
         <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
     </values>
     <values>
-        <field>hasGuidancePage__c</field>
+        <field>customGuidanceView__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>enableHTMLBuilder__c</field>
         <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>hasGuidancePage__c</field>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isAccountPayment__c</field>

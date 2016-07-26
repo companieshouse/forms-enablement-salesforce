@@ -19,7 +19,8 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Currency</value>
+        <value xsi:type="xsd:string">What is the currency of the shares?&lt;br/&gt;
+For example, US Dollar or UK Pound Sterling. Don&apos;t use $ or £</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,11 +48,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Select Currency</value>
+        <value xsi:type="xsd:string">Tell us about the company&apos;s issued share capital</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">This is the currency of the type of shares you wish to cancel</value>
+        <value xsi:type="xsd:string">You need to give us details of the company&apos;s share capital by currency immediately following the cancellation.</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

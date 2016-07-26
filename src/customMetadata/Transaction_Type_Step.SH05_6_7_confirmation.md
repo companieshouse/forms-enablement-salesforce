@@ -31,7 +31,7 @@
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">You&apos;ll need to quote this if you contact us about your submission.</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
