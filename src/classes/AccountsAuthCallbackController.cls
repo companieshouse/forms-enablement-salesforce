@@ -118,10 +118,25 @@ public with sharing class AccountsAuthCallbackController {
             // 6. Drop a cookie (user_auth) - value equal to the encrypted value of the User Auth record Id.
             // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
             String userProfileName = userProfileApiResponse.email;
-            u.getCurrentUser(userProfileName);
+            System.debug(LoggingLevel.ERROR,'Cookies Saving:' + userProfileName);
+            u.getCurrentUser(userProfileName); ///=> useless code as there is no usage of the return... setting the cookies...
             // throw new AccountsAuthCallbackException('presenter info' + userProfileName);
-
-            upsert new Account(Name = userProfileName);
+            /*        public String surname;
+        public String forename;
+        public String email;
+        public String id;
+        public String locale;*/
+            RecordType personAccountRecordType =  [SELECT Id FROM RecordType WHERE Name = 'Person Account' and SObjectType = 'Account'];
+            
+            Account newPersonAccount = new Account();
+            newPersonAccount.userIDChips__c = userProfileApiResponse.id;
+            newPersonAccount.PersonEmail = userProfileApiResponse.email;
+            newPersonAccount.FirstName = (userProfileApiResponse.forename== null ? '' :userProfileApiResponse.forename );
+            newPersonAccount.LastName = userProfileApiResponse.id;//userProfileApiResponse.surname; 
+            newPersonAccount.RecordType = personAccountRecordType;
+            
+            Schema.SObjectField f = Account.Fields.userIDChips__c;
+            Database.UpsertResult cr = Database.upsert(newPersonAccount,f,false);
 
 
             transactionType = u.getUserDocument();
@@ -163,7 +178,7 @@ public with sharing class AccountsAuthCallbackController {
 
             presenterID = presenterInfo.Id; // will get from cookie
 
-            presenterEmail = String.valueof(presenterInfo.get('Name')); //presenterInfo.Name;
+            presenterEmail = String.valueof(presenterInfo.get('PersonEmail')); //presenterInfo.Name;
 
             companyNumberId = u.returnCurrentCompanyObject(); //will get from cookie
 

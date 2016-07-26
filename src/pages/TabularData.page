@@ -22,12 +22,8 @@
                         <apex:outputPanel id="buildShares">
                             <div class="form-group">
                                 <h1 class="heading-xlarge">
-                                    {!headerText1} {!selectedCurrency}
+                                    {!headerText1} <br/> for: {!selectedCurrency}
                                 </h1>
-                                <!--
-                                <h1> counting shares: {!sharesnumberVariable}<br/>
-                                counting totalnumber aggregate {!aggnumberVariable} </h1>
-                                -->
                                 <label class="form-label" for="classofShare-item">Class of shares
                                     <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
                                 </label>
@@ -110,7 +106,6 @@
                                             <td>Number of shares</td>
                                             <td>Aggregate nominal value</td>
                                             <td>Total Aggregate unpaid amount</td>
-                                            <!--<td> TESTING {!currentShares}</td>-->
                                         </tr>
                                         <br/>
                                         <apex:repeat value="{!currentShares}" var="sp" id="theRepeat">
@@ -180,8 +175,6 @@
                                 }
                                 document.getElementById('totalnumberofshares').innerHTML = sharesum;
                                 document.getElementById('totalnumberaggregate').innerHTML = aggsum.toFixed(2);
-                                // numofSharesCalculation(sharesum);
-                                // totalNumAggregate(aggsum);
                             }
                             numberofshares();
                             //updateTotals();

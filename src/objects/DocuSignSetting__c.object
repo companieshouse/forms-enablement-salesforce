@@ -42,18 +42,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>RecordIdPrefix__c</fullName>
-        <description>This field is to store DocuSign Status Record Id Prefix</description>
-        <externalId>false</externalId>
-        <inlineHelpText>This field is to store DocuSign Status Record Id Prefix</inlineHelpText>
-        <label>Record Id Prefix</label>
-        <length>3</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>URL__c</fullName>
         <externalId>false</externalId>
         <label>URL</label>

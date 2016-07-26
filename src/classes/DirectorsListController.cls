@@ -30,6 +30,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
     public DirectorsListController(){
         super();
+        System.debug(LoggingLevel.ERROR,'After Super Call:' + isPageInitialised);
         hasAlreadyLoadedOfficers = false;
         if (isPageInitialised) initialiseStep();
 
@@ -38,7 +39,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
     
     
     public void initialiseStep() {
-        
+        System.debug(LoggingLevel.ERROR,'Start of Initialise Step');
         //Set up the company name
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
@@ -56,26 +57,38 @@ public with sharing class DirectorsListController extends TransactionStepControl
             {
                 hasAlreadyLoadedOfficers = false;
             }
+            else{
+                hasAlreadyLoadedOfficers = true;
+            }
         }
 
         nbOfOfficers = 0;
+        System.debug(LoggingLevel.ERROR,'End of Initialise Step');
         return;
        
     }
 
     private void persistStep(){
+        System.debug(LoggingLevel.ERROR,'Start of Persist Step');
+
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
 		submissionMgr.submission.isLLP__c = isLLPCompany;
         submissionMgr.persist();    
+        System.debug(LoggingLevel.ERROR,'End of Persist Step');
+
     }
     // End Instance methods.    
     
     // Action methods.     
     public PageReference nextAction(){ 
+        System.debug(LoggingLevel.ERROR,'NextAction before If ValidatePageState');
         if (!validatePageState()) return Page.TransactionException;
-        
+        System.debug(LoggingLevel.ERROR,'NextAction before If validateStep');
+
         hasPageErrors=!validateStep();
+        System.debug(LoggingLevel.ERROR,'Has page Error:' + hasPageErrors);
+
         if (hasPageErrors) {
 
             return null;
@@ -92,10 +105,12 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
         persistStep();      
 
+        System.debug(LoggingLevel.ERROR,'Before return of NextStep');
         return nextStep();      
     }
 
     private Boolean validateStep(){
+        System.debug(LoggingLevel.ERROR,'Start of Validate Step:' + validationDirector);
         if(validationDirector == null)
             return false;
 
@@ -103,11 +118,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
     }
     
     public void updateDirectorList(){
+        System.debug(LoggingLevel.ERROR,'Clicked yes or no:' + validationDirector);
         if(validationDirector == false)
             showNoError = true;
         else
             showNoError = false;
         hasPageErrors = false;
+        System.debug(LoggingLevel.ERROR,'End of Click yes or no:' + validationDirector);
+
     }
 
     public PageReference previousAction(){
@@ -134,6 +152,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
     }
 
     public void populateDirectorList(){
+        System.debug(LoggingLevel.ERROR,'Start of Populating Directors');
+
         initialiseAction();
         if(companyNumber == null)
         {
@@ -144,6 +164,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         
         if(hasAlreadyLoadedOfficers)
         {
+            System.debug(LoggingLevel.ERROR,'Already Loaded officer');
 			isLLPCompany = submissionMgr.submission.isLLP__c; 
             //Get the list officer already created
             if(submissionMgr.submission.Officers__r != null)
@@ -159,43 +180,50 @@ public with sharing class DirectorsListController extends TransactionStepControl
         }
         else
         {
-
+            System.debug(LoggingLevel.ERROR,'Get the director list from API');
             //Make the call to the list of directors
             List<CompaniesHouse.OfficerDetails> directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
 
             List<Officer__c> officerList = new List<Officer__c>();
+            List<Contact> contactList = new List<Contact>();
 
-            //We want only director that haven't resign and or will resign in futur 
-            Integer recipientID = 1;
             for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
                 if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
                 {
+                    contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
 					isLLPCompany = false;
                     listOfDirectors.add(officer.name);
                     //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name= officer.name ,Title__c = extractOfficerName(2, officer.name),
-                    Forename__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
+                    officerList.add(new Officer__c(Name = officer.name, Title__c = extractOfficerName(2, officer.name),
+                    Forename__c  = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
                     Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
-                      recipientID++;
+                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), Transaction__c =submissionMgr.submission.Id ));
 
                 }else if (officer.officer_role == 'llp-designated-member' && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = true;
                     listOfDirectors.add(officer.name);
+                    contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id,AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
                     //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name= officer.name ,Title__c = extractOfficerName(2, officer.name),
-                    Forename__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
+                    officerList.add(new Officer__c(Name = officer.name, Title__c = extractOfficerName(2, officer.name),
+                    Forename__c  = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
                     Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), RecipientId__c = String.valueOf(recipientID), Transaction__c =submissionMgr.submission.Id ));
-                    recipientID++;
+                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)),  Transaction__c =submissionMgr.submission.Id ));
                 }
             }
 
             nbOfOfficers = listOfDirectors.size();
-
+            //Insert the contact
+            insert contactList;
+        
+            //Update the Officer List with contact ID list
+            for(Integer i = 0; i< contactList.size(); i++)
+            {
+                officerList[i].Contact__c = contactList[i].Id;
+            }
             //Insert the officer
             insert officerList;
         }
+        System.debug(LoggingLevel.ERROR,'end of List of directors');
         
     }
 }

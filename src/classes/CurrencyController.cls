@@ -143,7 +143,7 @@ public with sharing class CurrencyController extends TransactionStepControllerBa
     {
         for(Shares__c sharestoUse: submissionMgr.submission.Shares__r)
         {
-            if(sharestoUse.cancelled_shares__c == false && sharestoUse.SHARETYPE__c == 'STATEMENTOFCAPITAL'){
+            if(sharestoUse.cancelled_shares__c == false){
                 currentShares.add(sharestoUse);
             }
         }

@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: PromoterTable
 ======================================================
 ======================================================
 History
--------
+------- 
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-06-05  Initial development.
 */
@@ -119,8 +119,8 @@ public with sharing class PromoterController extends TransactionStepControllerBa
     }
     public void checkShares() {
         allShares = new List < Shares__c > ();
-        for (Shares__c currentShares : submissionMgr.submission.Shares__r) {
-            if (currentShares.SHARETYPE__c == 'PROMOTER') {
+        for (Shares__c currentShares: submissionMgr.submission.Shares__r) {
+            if (currentShares.SHARETYPE__c == 'promoter') {
                 allShares.add(currentShares);
             }
         }
@@ -158,7 +158,7 @@ public with sharing class PromoterController extends TransactionStepControllerBa
                 //    hasPageErrors = true;
                 //    currentErrorMessage = 'Must add the  total amount unpaid on each share (if any)';
                 //    return null;
-                sharesToAdd.add(new Shares__c(SHARETYPE__c = 'PROMOTER', considerationGiven__c = considerationGiven, Transaction__c = submissionMgr.submission.Id, benefitGiven__c = benefitGiven, amountPaidUp__c = amountPaidUp, ActiveData__c = true));
+                sharesToAdd.add(new Shares__c(SHARETYPE__c = 'promoter', considerationGiven__c = considerationGiven, Transaction__c = submissionMgr.submission.Id, benefitGiven__c = benefitGiven, amountPaidUp__c = amountPaidUp, ActiveData__c = true));
                 insert sharesToAdd;
             } catch (DmlException e) {} catch (Exception e) {} finally {
                 PageReference pg = new PageReference('/PromotersTable');

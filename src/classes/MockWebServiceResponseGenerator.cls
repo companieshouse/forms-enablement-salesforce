@@ -12,9 +12,9 @@
 @isTest
 global class MockWebServiceResponseGenerator implements WebServiceMock {
   
-  private static String TOKEN_URL = SendToDocuSignTest.TOKEN_URL;
-  private static String SUCCESS_STATUS = SendToDocuSignTest.SUCCESS_STATUS;
-  private static String ERROR_STATUS = SendToDocuSignTest.ERROR_STATUS;
+  private static String TOKEN_URL = 'https://demo.docusign.net/Signing/xxxx';
+  private static String SUCCESS_STATUS = 'Success';
+  private static String ERROR_STATUS = 'Error';
 
   // Public variables to be set on SendToDocuSignTest for checking Authorized Recipient signing on behalf of
   public static boolean isSigningOnBehalf = false; //default value is false

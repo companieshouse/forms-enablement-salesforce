@@ -136,7 +136,7 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
-        presenterEmail = submissionMgr.submission.Presenter__r.Name;
+        presenterEmail = submissionMgr.submission.Presenter__r.PersonEmail;
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
         //attachments = submissionMgr.submission.Attachments;

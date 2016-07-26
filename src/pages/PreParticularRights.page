@@ -3,18 +3,17 @@
         <apex:define name="content">
             <apex:form id="formPanel">
                 <apex:outputPanel id="masterPanel">
-                    <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                                An error has occurred.
-                            </h1>
-                            <p>
-                                <span class="error-message"> {!currentErrorMessage}</span>
-                            </p>
-                        </div>
-                    </apex:outputPanel>
-                    <!-- note this needs to be set to true to show (inputs should be built already)  no need to change class of share as the dependency is already built -->
-                    <apex:outputPanel rendered="{!hasStatementofCapital}">
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            An error has occurred.
+                        </h1>
+                        <p>
+                            <span class="error-message"> {!currentErrorMessage}</span>
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                    <apex:outputPanel rendered="{!NOT(preparticulardependency)}">
                         <div class="form-group">
                             <h1 class="heading-xlarge"> {!headerText1}</h1>
                             <table class="check-your-answers">
@@ -37,19 +36,13 @@
                                 <tbody>
                                     <apex:repeat value="{!displayresult}" var="sp" id="theRepeat">
                                         <tr>
-                                            <td>
-                                                <h1>Class of shares</h1>
-                                            </td>
-                                            <td>
-                                                <h1>Prescribed particulars</h1>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td scope="col">
+                                                <h1>Class of shares</h1>
                                                 <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
                                             </td>
                                             <td scope="col">
-                                                <apex:inputTextArea richText="false" rows="8" cols="40" value="{!sp.Prescribed_Particulars__c}" id="preparticularrights" />
+                                                <h1>Prescribed particulars</h1>
+                                                <apex:inputTextArea richText="false" rows="8" cols="40" value="{!sp.Prescribed_Particulars__c}"  id="preparticularrights" />
                                             </td>
                                         </tr>
                                     </apex:repeat>
@@ -69,7 +62,7 @@
                             <label class="form-label" for="classofShare-item">Class of shares
                                 <span class="form-hint" name="classofShareHint" id="classHinttypetosearch">For example, Ordinary, Preference</span>
                             </label>
-                            <input class="form-control" name="classofShare-item" id="dependencyShare" />
+                            <input  class="form-control" name="classofShare-item" id="dependencyShare" />
                             <apex:actionFunction action="{!setSelectedShare}" name="setSelectedShare" reRender="none">
                                 <apex:param name="shareParam" value="" id="xyz" assignTo="{!classofshares}" />
                             </apex:actionFunction>
@@ -104,7 +97,7 @@
                                         return;
                                     }
                                     if (completedselection.length > 1) {
-                                        console.log('share from client = ' + ' ' + completedselection);
+                                     console.log('share from client = ' + ' ' + completedselection);
                                         setSelectedShare(completedselection);
                                     }
                                 },
@@ -115,7 +108,7 @@
                                         return;
                                     }
                                     if (completedselection.length > 1) {
-                                        console.log('share from client = ' + ' ' + completedselection);
+                                     console.log('share from client = ' + ' ' + completedselection);
                                         setSelectedShare(completedselection);
                                     }
                                 }

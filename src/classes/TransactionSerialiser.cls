@@ -27,7 +27,7 @@ public class TransactionSerialiser {
 			get;
 			set;
 		}
-		public String version {
+		public Integer version {
 			get;
 			set;
 		}
@@ -36,7 +36,7 @@ public class TransactionSerialiser {
 			set;
 		}
 		public metadata() {}
-		public metadata(String type, Integer packageindex, String version, String submissionReference) {
+		public metadata(String type, Integer packageindex, Integer version, String submissionReference) {
 			this.type = type;
 			this.packageindex = packageindex;
 			this.version = version;
@@ -52,10 +52,17 @@ public class TransactionSerialiser {
 			get;
 			set;
 		}
+		public String accountNumber {
+			get;
+			set;
+		}
+
 		public payment() {}
-		public payment(String paymentMethod, String referenceNumber) {
+		public payment(String paymentMethod, String referenceNumber, String accountNumber) {
 			this.paymentMethod = paymentMethod;
 			this.referenceNumber = referenceNumber;
+			this.accountNumber = accountNumber;
+
 		}
 	}
 	public class shareAssignments {
@@ -83,30 +90,44 @@ public class TransactionSerialiser {
 			this.nameOrOtherDesignation = nameOrOtherDesignation;
 		}
 	}
-	public class filingDetails {
-		public payment payment {
-			get;
-			set;
+
+	public class presenterDetails {
+		public String presenterEmailIn {get; set;}
+		public String presenterEmailOut {get; set;}
+
+		public presenterDetails() {}
+
+		public presenterDetails(String presenterEmailIn, String presenterEmailOut) {
+			this.presenterEmailIn = presenterEmailIn;
+			this.presenterEmailOut = presenterEmailOut;
 		}
-		public String barcode {
-			get;
-			set;
-		}
-		public String receiptDate {
-			get;
-			set;
-		}
-		public String signDate {
-			get;
-			set;
-		}
+	}
+	public class filingDetails { // changes
+		public payment payment {get; set;}
+		public String barcode {get; set;}
+		public String receiptDate {get; set;}
+		public presenterDetails presenterDetails {get; set;}
+		public String presenterDocumentReference {get; set;}
+		public String signDate {get; set;}
+
+		//Signed date
+
 		public filingDetails() {}
-		public filingDetails(String barcode, String dateOutput, payment payment) { //, String signDate
+
+		public filingDetails(String barcode, String receiptDate, payment payment, presenterDetails presenterDetails, String presenterDocumentReference, String signDate) {
 			this.barcode = barcode;
-			this.receiptDate = dateOutput;
+			this.receiptDate = receiptDate;
 			this.payment = payment;
-			//this.feeStatus = feeStatus;
-			this.signDate = dateOutput;
+			this.presenterDetails = presenterDetails;
+			this.presenterDocumentReference = presenterDocumentReference;
+			this.signDate = signDate;
+		}
+		public filingDetails(String barcode, String receiptDate, payment payment, presenterDetails presenterDetails, String presenterDocumentReference) {
+			this.barcode = barcode;
+			this.receiptDate = receiptDate;
+			this.payment = payment;
+			this.presenterDetails = presenterDetails;
+			this.presenterDocumentReference = presenterDocumentReference;
 		}
 	}
 	public class officer {
@@ -349,10 +370,9 @@ public class TransactionSerialiser {
 			get;
 			set;
 		}
-
 		public reconvertedClasses reconvertedClasses {get; set;}
 		public redeemedClasses redeemedClasses {get; set;}
-		public  subdividedClasses subdividedClasses {get; set;}
+		public subdividedClasses subdividedClasses {get; set;}
 		public consolidatedClasses consolidatedClasses {get; set;}
 		public shares shares {get; set;}
 		public detailsOfVariationOfRights detailsOfVariationOfRights {get; set;}
@@ -568,23 +588,16 @@ public class TransactionSerialiser {
 
 	}
 
-	// currently DS01 specific
 	public static String transactionToJSON(Transaction__c transact) {
 		//We need to convert the transaction record to a JSON object
-		//
-		//List<Transactions__c> transACTIONS
-		//if (transACTIONS.size() > 1) {
-		//}
 		Boolean showRES15 = false;
 		Boolean showCappSS = false;
 		Boolean showSH20 = false;
-		Datetime yourDate = Datetime.now();
-		String dateOutput = yourDate.format('yyyy-MM-dd');
+
 		if (transact == null) {
 			return JSON.serialize('Argument cannot be null.');
 		}
 		//Build each object for the JSON
-		//
 		if (transact.Form_Name__c == 'SH10') {
 			// SH10 specific
 
@@ -597,13 +610,19 @@ public class TransactionSerialiser {
 
 			detailsOfVariationOfRights variationforChips = new detailsOfVariationOfRights(variationString);
 
-			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
-			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
-			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
+			metadata met = new metadata(transact.Form_Name__c, 1,  Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
+
+			payment pay = new payment();
+
+			if (transact.isPaymentRequired__c)
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+
+			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(Date.today()), pay, pDetails, transact.SubmissionId__c);
 			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, variationforChips);
 			formdata form = new formdata(fil, corp);
-			//Get the attachment into the attachment object
-			//
+
 			List < Attachment > attRec = [Select Id, Body from Attachment where parentId = : transact.Id];
 			if (attRec == null) {
 				return JSON.serialize('Transaction must have a form attached.');
@@ -625,25 +644,28 @@ public class TransactionSerialiser {
 			return gen.getAsString();
 		}
 		if (transact.Form_Name__c == 'SH08') {
-			// SH08 specific
 			List<shareAssignment> shareAssignmentLISTS = new List<shareAssignment>();
-
 			for (Shares__c assignedShares : transact.Shares__r) {
 				if (assignedShares.SHARETYPE__c == 'SH08') {
 					shareAssignmentLISTS.add(new shareAssignment(assignedShares.Class_of_Shares__c, assignedShares.Class_of_Share_new__c));
 				}
 			}
 
-
 			shareAssignments  shareAssignmentsVals = new shareAssignments(shareAssignmentLISTS);
 
-			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
-			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
-			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
+			metadata met = new metadata(transact.Form_Name__c, 1,  Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
+
+			payment pay = new payment();
+
+			if (transact.isPaymentRequired__c)
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+
+			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(Date.today()), pay, pDetails, transact.SubmissionId__c);
 			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, shareAssignmentsVals);
 			formdata form = new formdata(fil, corp);
-			//Get the attachment into the attachment object
-			//
+
 			List < Attachment > attRec = [Select Id, Body from Attachment where parentId = : transact.Id];
 			if (attRec == null) {
 				return JSON.serialize('Transaction must have a form attached.');
@@ -665,21 +687,33 @@ public class TransactionSerialiser {
 			return gen.getAsString();
 		}
 		if (transact.Form_Name__c == 'DS01') {
-			// DSO1 specific
-			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
-			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
-			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
-			List < Officer__c > lOff = [SELECT Name, Surname__c, Title__c, Middlenames__c, Forename__c, DateSigned__c FROM Officer__c where Transaction__c = : transact.Id];
-			List < officer > lOffSerialized = new List < officer > ();
-			//At this point we are sure we have the majority and we will send only the officer that has signed
-			for (Officer__c off : lOff) {
+
+			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
+
+			payment pay = new payment();
+
+			if (transact.isPaymentRequired__c)
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+
+			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c);
+			List<Contact> lOff = [SELECT Name, LastName, Title, Middlenames__c, FirstName, DateSigned__c FROM Contact where Transaction__c = :transact.Id];
+			List<officer> lOffSerialized = new List<officer>();
+
+			for (Contact off : lOff) {
 				if (off.DateSigned__c != null) {
+					// change
 					Datetime dateSigned = off.DateSigned__c;
-					lOffSerialized.add(new officer(new personName((off.Title__c == null ? '' : off.Title__c), (off.Forename__c == null ? '' : off.Forename__c), (off.Middlenames__c == null ? '' : off.Middlenames__c), (off.Surname__c == null ? '' : off.Surname__c)), dateOutput));
+
+					lOffSerialized.add(new officer(new personName((off.Title == null ? '' : off.Title), (off.FirstName == null ? '' : off.FirstName), (off.Middlenames__c == null ? '' : off.Middlenames__c), (off.LastName == null ? '' : off.LastName)), getFormatedDate(date.today()) ));
 				}
 			}
+
 			officerCollection officerCollection = new officerCollection(lOffSerialized);
+
 			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, officerCollection);
+
 			formdata form = new formdata(fil, corp);
 			//Get the attachment into the attachment object
 			//
@@ -703,33 +737,41 @@ public class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
-
 		if (transact.Form_Name__c == 'SH19') {
 			List < metadata > packagesmeta = new List < metadata > ();
 			List < payment > packagespayment = new List < payment > ();
+
+
+
+			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
+
 			List < filingDetails > packagesfil = new List < filingDetails > ();
 			List < corporateBody > packagescorp = new List < corporateBody > ();
 			List < formdata > packagesform = new List < formdata > ();
 			if (transact.containsPackage__c == true) {
 				//  BUILD RES15
-				packagesmeta.add(new metadata('RES15', 2, '1', transact.SubmissionId__c));
-				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
-				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[0]));
+				packagesmeta.add(new metadata('RES15', 2, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c));
+				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : '')));
+
+				packagesfil.add(new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), packagespayment[0], pDetails, transact.SubmissionId__c));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[0], packagescorp[0]));
 				//  BUILD CAPSS
-				packagesmeta.add(new metadata('CAPSS', 3, '1', transact.SubmissionId__c));
-				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
-				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[1]));
+				packagesmeta.add(new metadata('CAPSS', 3, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c));
+				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : '')));
+
+				packagesfil.add(new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), packagespayment[1], pDetails, transact.SubmissionId__c));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[1], packagescorp[1]));
 				//  BUILD SH20
-				packagesmeta.add(new metadata('SH20', 4, '1', transact.SubmissionId__c));
-				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id)));
-				packagesfil.add(new filingDetails(transact.Barcode__c, dateOutput, packagespayment[2]));
+				packagesmeta.add(new metadata('SH20', 4, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c));
+				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : '')));
+
+				packagesfil.add(new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), packagespayment[2], pDetails, transact.SubmissionId__c));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[2], packagescorp[2]));
 			}
+
 			if (packagesmeta.size() > 0) {
 				for (metadata metaContains : packagesmeta) {
 					if (metaContains.type == 'CAPSS') {
@@ -743,10 +785,10 @@ public class TransactionSerialiser {
 					}
 				}
 			}
-			//throw new Form_CustomException('here are your tasty little booleans' + 'capss' + '' + showCappSS + ' sh20' + showSH20 + ' res15' + showRES15);
-			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
-			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
-			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
+			metadata met = new metadata(transact.Form_Name__c, 1,  Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
+			payment pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c);
 			List < Shares__c > lShares = [SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c, ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__c where Transaction__c = : transact.Id];
 			List < shareValue > serialzedSHARE = new List < shareValue > ();
 			List < shareClass > serializedCLASS = new List < shareClass > ();
@@ -860,12 +902,18 @@ public class TransactionSerialiser {
 			subdividedClasses  submitSubdivided = new subdividedClasses(subdividedClassSH02);
 			redeemedClasses  submitRedeemed = new redeemedClasses(redeemedClassSH02);
 			reconvertedClasses  submitReconverted = new reconvertedClasses(reconvertedClassSH02);
+			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
 			shares sharesSH02 = new shares (redeemedShares, consolidatedShares, reconvertedShares, subdividedShares);
 
-			metadata met = new metadata(transact.Form_Name__c, 1, '1', transact.SubmissionId__c);
-			payment pay = new payment((transact.isPaymentAccount__c == true ? 'Account' : (transact.isPaymentCard__c == true ? 'Card' : (transact.isPaymentPaypal__c == true ? 'Paypal' : ''))), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : transact.Id));
-			filingDetails fil = new filingDetails(transact.Barcode__c, dateOutput, pay); //, system.today().year() + '-' + system.today().month() + '-' + system.today().day(),
+			metadata met = new metadata(transact.Form_Name__c, 1,  Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
+			payment pay = new payment();
+			if (transact.isPaymentRequired__c)
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+
+
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c);
 			List < Shares__c > lShares = [SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c, ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__c where Transaction__c = : transact.Id];
 			List < shareValue > serialzedSHARE = new List < shareValue > ();
 			List < shareClass > serializedCLASS = new List < shareClass > ();
@@ -877,6 +925,7 @@ public class TransactionSerialiser {
 					serializedGT.add(new shareValueGrandTotal(shareValueShares.Currency__c, shareValueShares.Total_aggregate_amount_unpaid__c, shareValueShares.valOfStock__c));
 				}
 			}
+
 			shareValueGrandTotals gTS = new shareValueGrandTotals(serializedGT);
 			Decimal sVGT = 1;
 			shareValues sV = new shareValues(serialzedSHARE);
@@ -911,5 +960,9 @@ public class TransactionSerialiser {
 		}
 		String valtoReturn = 'NoFormtoSerializeFound';
 		return valtoReturn;
+	}
+
+	public static String getFormatedDate(Datetime dateToFormat) {
+		return dateToFormat.format('yyyy-MM-dd');
 	}
 }

@@ -182,7 +182,7 @@ public class SmartPayUrl {
 		}
 
         return (result == null ? (Test.isRunningTest() ? new SmartPay_Settings__c (Environment__c  = 'TEST',
-                    HMAC_key__c  = 'unitTestHmacKey', Merchant_account__c  = 'unitTestMerchantAccount',
+                    HMAC_key__c  = 'F753AB5DF230962A00919ECE6458489E43FF867F6D613A7BDC80B42BCCF4EDC4', Merchant_account__c  = 'unitTestMerchantAccount',
                     Active__c = true) : null ) : result);
 		
 	}

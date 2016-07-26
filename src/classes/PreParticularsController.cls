@@ -47,7 +47,7 @@ public class PreParticularsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public List < Officer__c > companyDirectors {
+    public List < Contact > companyDirectors {
         get;
         set;
     }
@@ -143,10 +143,6 @@ public class PreParticularsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Boolean hasStatementofCapital {
-        get;
-        set;
-    }
     public PreParticularsController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -171,34 +167,20 @@ public class PreParticularsController extends TransactionStepControllerBase {
         return;
     }
     public void createCurrentShares() {
-        // note refactor
-        // set statement of capital = to true when  that sharetype is found and then build preparticular inputs as the dependency.
-        // set sharecapital to false if solely using preparticulars as a standalone module 
         if (submissionMgr.submission.Shares__r.size() > 0) {
             for (Shares__c sharestoTest: submissionMgr.submission.Shares__r) {
                 if (sharestoTest.cancelled_shares__c == false) {
-                    if (sharestoTest.SHARETYPE__c == 'STATEMENTOFCAPITAL') {
-                        currentShares.add(sharestoTest);
-                    }
+                    currentShares.add(sharestoTest);
                 }
             }
-            // new code starts here
-            if (currentShares.size() > 0) {
+            if (submissionMgr.submission.Form_Name__c == 'SH19') {
                 createPreParticularInputs();
-                if (currentShares[0].SHARETYPE__c == 'STATEMENTOFCAPITAL') {
-                    hasStatementofCapital = true;
-                    preparticulardependency = false;
-                }
-            } else if (currentShares.size() == 0) {
-                // note this encapsulates all instances of a form where a statement of capital was required
-                // hence the depencency is true
-                // this is a standalone module as the statement of capital was not initialized
-                // view state needs to change
+            } else {
+                // a form that requires preparticulars is found and there are particulars stored
                 preparticulardependency = true;
-                hasStatementofCapital = false;
-                dependencyfulfilled = false;
+                dependencyfulfilled = true;
             }
-        } else if (submissionMgr.submission.Shares__r.size() == 0) {
+        } else if (submissionMgr.submission.Shares__r.size() == 0 && submissionMgr.submission.Form_Name__c != 'SH19') {
             preparticulardependency = true;
         }
     }
@@ -208,10 +190,6 @@ public class PreParticularsController extends TransactionStepControllerBase {
             mapShares.put(sortedshares.Class_of_Shares__c, sortedshares);
         }
         displayresult.addAll(mapShares.values());
-        if (displayresult[0].SHARETYPE__c == 'STATEMENTOFCAPITAL') {
-            hasStatementofCapital = true;
-            //proceed with adding preparticulars
-        }
     }
     private void persistStep() {
         if (displayresult == null && preparticulardependency == false) {
@@ -245,7 +223,7 @@ public class PreParticularsController extends TransactionStepControllerBase {
                 currentErrorMessage = 'You must add a Prescribed Particular';
                 return null;
             }
-            sharesToAdd.add(new Shares__c(SHARETYPE__c = 'PARTICULARS', Prescribed_Particulars__c = prescribedParticular, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = classofshares, ActiveData__c = true));
+            sharesToAdd.add(new Shares__c(Prescribed_Particulars__c = prescribedParticular, Name = classofshares, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = classofshares, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {
             hasPageErrors = true;
@@ -253,7 +231,7 @@ public class PreParticularsController extends TransactionStepControllerBase {
             return null;
         } catch (Exception e) {
             hasPageErrors = true;
-            currentErrorMessage = 'Sorry we have an Error' + ' ' + e.getMessage();
+            currentErrorMessage = 'Sorry we have an Error' + ' '+ e.getMessage();
             return null;
         }
         PageReference pg = new PageReference('/PreParticularRights');

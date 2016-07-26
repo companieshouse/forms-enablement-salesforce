@@ -4,51 +4,109 @@
 @IsTest
 public class PaymentControllerTest {
 
-    /**
-     * Go for coverage only until BETA, since we can't even functionally test notificaitons until
-     * they're configured in the SmartPay backend. No assertions yet.
-     */
     @IsTest
-    public static void getCoverageForNewPayment() {
-        /*
-        Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
-        insert tx;
-        
-        Test.startTest();
-        PageReference ref = new PageReference('/apex/Payment');
-        Test.setCurrentPage(ref);
-        
-        ApexPages.currentPage().getParameters().put('txId', tx.Id);
-        
-        PaymentController controller = new PaymentController();
-        controller.init();
-        controller.submit();
-        Test.stopTest();
-            */
-    }
+    public static void testPayment(){
+        CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
 
-    /**
-     * Go for coverage only until BETA, since we can't even functionally test notificaitons until
-     * they're configured in the SmartPay backend. No assertions yet.
-     */
-    @IsTest
-    public static void getCoverageForPaid() {
-        /*
-        Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
-        insert tx;
-        
-        Test.startTest();
-        PageReference ref = new PageReference('/apex/Payment');
-        Test.setCurrentPage(ref);
+        Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
 
-        ApexPages.currentPage().getParameters().put('merchantReference', tx.Id);
-        ApexPages.currentPage().getParameters().put('authResult', 'AUTHORISED');
-        ApexPages.currentPage().getParameters().put('merchantSig', 'unit_test_sig');
+        Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
+        Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+
+        Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+
+        insert testPresenter;
+
+        insert testCompany;
+
+        Transaction__c transac = testData.tx;
+
+        transac.Company__c = testCompany.Id;
+        transac.Valid_Step_Ids__c = testStep1.Id;
+
+        insert transac;
+
         
-        PaymentController controller = new PaymentController();
-        controller.init();
-        Test.stopTest();
-            */
+
+        PageReference pg = Page.Payment;
+        pg.getParameters().put('c', SecurityManager.encryptText(transac.Id+AppConstants.ID_DELIM_CHAR+testStep1.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+        Test.setCurrentPage(pg);
+
+        PaymentController pay = new PaymentController();
+
+        pay.checkPaymentResult();
+
+        transac.isPaymentRequired__c = true;
+        update transac;
+
+        pay = new PaymentController();
+        pay.checkPaymentResult();
+
+        transac.hasPaid__c = true;
+        update transac;
+
+        pay = new PaymentController();
+        pay.checkPaymentResult();
+
+        transac.hasPaid__c = false;
+        update transac;
+
+        pay = new PaymentController();
+        pay.checkPaymentResult();
+
+        pay.submit();
+
+        pay.valuePaymentUI = 1;
+        pay.updatePayment();
+
+        pay.valuePaymentUI = 2;
+        pay.updatePayment();
+
+        pay.valuePaymentUI = 3;
+        pay.updatePayment();
+        
+
+        pg.getParameters().put('authResult', 'AUTHORISED');
+        pg.getParameters().put('merchantReference', 'AUTHORISED');
+
+        pay.parseQueryString();
+
+        pg.getParameters().put('authResult', 'AUTHORISED');
+        pg.getParameters().put('merchantReference', 'REFUSED');
+
+        pay.parseQueryString();
+
+        pg.getParameters().put('authResult', 'AUTHORISED');
+        pg.getParameters().put('merchantReference', 'CANCELLED');
+
+        pay.parseQueryString();
+
+        pg.getParameters().put('authResult', 'AUTHORISED');
+        pg.getParameters().put('merchantReference', 'PENDING');
+
+        pay.parseQueryString();
+
+        pg.getParameters().put('authResult', 'AUTHORISED');
+        pg.getParameters().put('merchantReference', 'ERROR');
+
+        pay.parseQueryString();
+
+        pay.updateLink();
+
+        pay.isAccountSelected = true;
+        pay.accountNumber = '02020';
+        pay.persistStep();
+
+        pay.isPaypalSelected = true;
+        pay.persistStep();
+
+        pay.isCardSelected = true;
+        pay.persistStep();
+
+        pay.isSameDaySelected = true;
+        pay.persistStep();
+
+
     }
     
 }

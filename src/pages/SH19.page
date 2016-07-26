@@ -136,11 +136,7 @@
         <div style="container">
             <header>
                 <div class="primary_header">
-                    <p>
-                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        <strong class="headerText">{!Transaction__c.Form_Name__c}</strong>
-                        <strong class="HeaderText2">(ef)</strong>
-                    </p>
+                    <p><img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong class="headerText">{!Transaction__c.Form_Name__c}</strong><strong class="HeaderText2">(ef)</strong></p>
                 </div>
                 <div id="test" class="PDFBody">
                     <div id="rectangle">
@@ -156,12 +152,10 @@
             <div>
                 <!-- Company Details -->
                 <apex:panelGrid columns="2" width="70%">
-                    <apex:outputLabel>Company Name:</apex:outputLabel>
+                    <apex:outputLabel >Company Name:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-                    <apex:outputLabel>Company Number:</apex:outputLabel>
+                    <apex:outputLabel >Company Number:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
-                    <apex:outputLabel>Received for filing in Electronic Format on the:</apex:outputLabel>
-                    <apex:outputText value="{!today()}" />
                 </apex:panelGrid>
             </div>
             <br/>
@@ -169,7 +163,7 @@
             <!-- warning message -->
             <div class="warningText">
                 <br />
-                <p style="text-align:center; font-weight: 300; font-size: 20px;">Statement of Capital (Share Capital)</p>
+                <p style="text-align:center; font-weight: 300; font-size: 20px;">Important notice for all interested parties</p>
                 <br />
                 <p>SHARE CAPITAL IMPORTANT NOTICE CONTENT HERE</p>
                 <br />
@@ -210,34 +204,26 @@
                 </apex:panelGrid>
                 <br />
                 <hr/>
-                <p style="text-align:left; font-weight: 300; font-size: 20px;">Statement of Capital (Totals)</p>
-                <hr/>
-                <apex:panelGrid>
-                    <apex:repeat value="{!Transaction__c.Shares__r}" var="total">
-                        <tbody>
-                            <tr>
-                                <td>Currency: </td>
-                                <td>Total number of shares:{!total.totalNumofShares__c}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Total Aggregate nominal value: {!total.totalNumAggregate__c}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Total aggregate amount unpaid:{!total.Total_aggregate_amount_unpaid__c} </td>
-                            </tr>
-                        </tbody>
-                    </apex:repeat>
-                </apex:panelGrid>
-                <br />
-                <hr/>
-                <p style="text-align:center; font-weight: 300; font-size: 20px;">Authorisation</p>
-                <apex:panelGrid>
-                    Authenticated
-                    <br/> This form was authorised by one of the following:
-                    <br/> Director, Secretary, Person Authorised, Administrator, Administrative Receiver, Receiver Manager, CIC Manager
-                </apex:panelGrid>
+                <h4>Authorising Company Director:</h4>
+                <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+                    <apex:panelGrid columns="3" styleClass="panelGrid" >
+                        <td class="col1" align="left">
+                            <div>{!off.name}</div>
+                        </td>
+                        <td class="col2">
+                        </td>
+                        <td class="col3">
+                            <!--  Signature -->
+                            <div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
+                            <div style='float:center;'>___________________________________</div>
+                            <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">{!$Label.PDF_Power_Of_Attorney_On_Behalf_Of}</div>
+                            <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_The_Corporate_Director}</div>
+                            <!--  Signature date -->
+                            <div style='float:left;'>Signature Date:</div>
+                            <div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>
+                        </td>
+                    </apex:panelGrid>
+                </apex:repeat>
             </div>
         </div>
     </body>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH30 - AddAttachments</label>
+    <label>SH19 Add Shares</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Add prescribed particulars</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -47,15 +47,15 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Add supporting documentation</value>
+        <value xsi:type="xsd:string">Tell us about the reduction of share capital in</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Statement of share capital</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">You are reporting the following reduction in share capital of</value>
     </values>
     <values>
         <field>Is_Active__c</field>
@@ -87,11 +87,11 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">SH30</value>
+        <value xsi:type="xsd:string">SH19</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">Attachments</value>
+        <value xsi:type="xsd:string">TabularData</value>
     </values>
     <values>
         <field>previousButtonText__c</field>

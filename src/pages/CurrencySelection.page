@@ -3,6 +3,8 @@
         <apex:define name="content">
             <apex:form >
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                 <script>
                 var currencies = ['Pound Sterling',
                     'Euro',
@@ -249,7 +251,7 @@
                         </h1>
                         <p class="lede">{!headerText2}
                         </p>
-                        <label class="form-label" for="currency-item"><apex:outputText escape="false" value="{!displayText}"></apex:outputText>
+                        <label class="form-label" for="currency-item">{!displayText}
                             <span class="form-hint" id="CurrencyHint"></span>
                         </label>
                         <input class="form-control" name="currency-item" id="currency-input" />
@@ -262,9 +264,7 @@
                     <br/>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showCurrentShares}" id="currentsharestable">
-                <p class="lede">Did you forget to complete your statement of capital?
-                <br/>
-                You previously told us about the company's shares. Do you wish to update this?
+                <p class="lede">It looks like you have previous share capital?
                         </p>
                     <div class="form-group">
                         <table class="check-your-answers">

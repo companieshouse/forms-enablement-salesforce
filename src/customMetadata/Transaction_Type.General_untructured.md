@@ -34,14 +34,6 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>DEF3__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
-        <field>DEF4__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
         <field>Expiry_Date_Length__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -119,6 +111,10 @@
         <value xsi:type="xsd:string">Unstructured Content here</value>
     </values>
     <values>
+        <field>Product_Code__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Serialisation_Class_Name__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -136,10 +132,6 @@
     </values>
     <values>
         <field>customGuidanceView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
-    </values>
-    <values>
-        <field>enableHTMLBuilder__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
