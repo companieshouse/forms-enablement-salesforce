@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                         	<td>Company Type</td>
-                        	<td>{!companyType}</td>
+                        	<td>{!companyTypeText}</td>
                         </tr>
                         <tr>
                             <td>Registered Address</td>

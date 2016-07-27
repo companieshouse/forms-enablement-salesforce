@@ -1,7 +1,7 @@
 <apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterpanel">
                     <div class="form-group">
                         <h1 class="heading-xlarge">
@@ -13,22 +13,15 @@
                         </label>
                         <select class="form-control" name="document-item" id="document-input">
                             <option value="DS01">DS01</option>
+                            <option value="DS02">DS02</option>
                             <option value="SH02">SH02</option>
-                            <option value="SH04">SH04</option>
-                            <option value="SH05_6_7">SH05</option>
                             <option value="SH05_6_7">SH06</option>
-                            <option value="SH05_6_7">SH07</option>
                             <option value="SH08">SH08</option>
-                            <option value="SH09">SH09</option>
                             <option value="SH10">SH10</option>
-                            <option value="SH11">SH11</option>
-                            <option value="SH12">SH12</option>
-                            <option value="SH13">SH13</option>
-                            <option value="SH14">SH14</option>
-                            <option value="SH15">SH15</option>
                             <option value="SH19">SH19</option>
-                            <option value="SH30">SH30</option>
-                            <option value="SH50">SH50</option>
+                            <option value="CC04">CC04</option>
+                            <option value="RES15">RES15</option>
+                            <option value="General_untructured">UNSTRUCTURED</option>
                         </select>
                         <br/>
                     </div>

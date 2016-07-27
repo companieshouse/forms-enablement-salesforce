@@ -599,6 +599,22 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isLP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is LP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLtdPlc__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Ltd Plc</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isMajorityRequired__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -687,6 +703,26 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>officerTerminology__c</fullName>
+        <externalId>false</externalId>
+        <label>Officer Terminology</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>paymentDate__c</fullName>
+        <externalId>false</externalId>
+        <label>paymentDate</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>paymentReference__c</fullName>
         <externalId>true</externalId>
         <label>payment reference</label>
@@ -738,6 +774,26 @@ to any promoter of the company?</inlineHelpText>
         <fullName>sharecurrencyselection__c</fullName>
         <externalId>false</externalId>
         <label>sharecurrencyselection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>submissionDate__c</fullName>
+        <externalId>false</externalId>
+        <label>submissionDate</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>submissionTime__c</fullName>
+        <externalId>false</externalId>
+        <label>submissionTime</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>

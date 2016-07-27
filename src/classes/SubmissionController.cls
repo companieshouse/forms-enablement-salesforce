@@ -11,12 +11,12 @@ Controller class for the Visualforce Page: Submission
 ======================================================
 ======================================================
 History
--------
+------- 
 Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-05-27  Initial development.
 */
 public with sharing class SubmissionController extends TransactionStepControllerBase {
-
+    
     // Public properties.
 
     public String title {get; private set;}
@@ -35,28 +35,26 @@ public with sharing class SubmissionController extends TransactionStepController
     public String displayText1 {get; set;}
     public String displayText2 {get; set;}
     public String displayText3 {get; set;}
-    public String subDate {get; set;}
-    public String subTime {get; set;}
 
+            
     // Constructors.
-    public SubmissionController() {
-        super();
-        if (isPageInitialised) initialiseStep();
+    public SubmissionController(){
+      super();
+      if (isPageInitialised) initialiseStep();
     }
     // End Constructors.
-
+    
     // Instance methods.
-    private void initialiseStep() {
-        try {
+    private void initialiseStep(){
+      try {
 
-            if (submissionMgr.submission.SubmissionId__c == null) {
-                // we need to submit the transaction to chips..... or change the status
+            if(submissionMgr.submission.SubmissionId__c == null)
+            {
+                // we need to submit the transaction to chips..... or change the status 
                 // we need to change the submissionID__c to be our internal ID: SF ConfirmationID
                 // the SubmissionID__c will generated from CHIPS and passed back to us eventually
-                Blob b = Crypto.GenerateAESKey(128);
-                String h = EncodingUtil.ConvertTohex(b);
-                String guid = h.SubString(0, 8) + '-' + h.SubString(8, 12) + '-' + h.SubString(12, 16) + '-' + h.SubString(16, 20) + '-' + h.substring(20);
-                submissionMgr.submission.SubmissionId__c =  guid;
+                
+                submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
                 submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
             }
 
@@ -67,7 +65,8 @@ public with sharing class SubmissionController extends TransactionStepController
             displayText2 = transactionMgr.currentStep.Display_Text_2__c;
             displayText3 = transactionMgr.currentStep.Display_Text_3__c;
 
-            if (displayText3.contains('COMPANYNAME')) {
+            if(displayText3.contains('COMPANYNAME'))
+            {
                 displayText3 = displayText3.replace('COMPANYNAME', companyName);
             }
 
@@ -75,22 +74,21 @@ public with sharing class SubmissionController extends TransactionStepController
             todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' +  system.today().year();
 
 
-        } catch (Exception e) { return; }
+      } catch (Exception e){ return; } 
 
-
-        return;
+        
+      return;
     }
-    // End Instance methods.
-
-
-    private void persistStep() {
-        submissionMgr.submission.submissionTime__c = String.valueOf(system.today());
-        submissionMgr.submission.submissionDate__c = String.valueOf(system.now().time());
-        submissionMgr.persist();
+    // End Instance methods.  
+  
+  
+    private void persistStep(){
+        submissionMgr.persist();    
     }
-
-    public PageReference nextAction() {
-        if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SUBMISSION) {
+  
+  
+    public PageReference nextAction(){ 
+        if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SUBMISSION){
             FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
             submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
         }
@@ -98,16 +96,16 @@ public with sharing class SubmissionController extends TransactionStepController
         system.debug('Before save tx: ' + submissionMgr.submission);
 
         persistStep();
-        // if(!validatePageState() || submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
-        //   return Page.TransactionException;
+       // if(!validatePageState() || submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
+         //   return Page.TransactionException;
 
-        return nextStep();
+        return nextStep();      
     }
 
-    public PageReference previousAction() {
-        if (!validatePageState()) return Page.TransactionException;
-
-        return previousStep();
+    public PageReference previousAction(){
+      if (!validatePageState()) return Page.TransactionException;
+            
+      return previousStep();
     }
-    // End Action methods.
+    // End Action methods.    
 }

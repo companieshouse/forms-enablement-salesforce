@@ -113,6 +113,7 @@ public class DocusignLibrary {
         envelope.Subject = subject;
         envelope.EmailBlurb = emailBlurb;
         envelope.AccountId = accountId;
+        envelope.EnvelopeIdStamping = false;
 
         return envelope;
 	}

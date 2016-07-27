@@ -110,10 +110,8 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 // we need to submit the transaction to chips..... or change the status 
                 // we need to change the submissionID__c to be our internal ID: SF ConfirmationID
                 // the SubmissionID__c will generated from CHIPS and passed back to us eventually
-                Blob b = Crypto.GenerateAESKey(128);
-                String h = EncodingUtil.ConvertTohex(b);
-                String guid = h.SubString(0, 8) + '-' + h.SubString(8, 12) + '-' + h.SubString(12, 16) + '-' + h.SubString(16, 20) + '-' + h.substring(20);
-                submissionMgr.submission.SubmissionId__c = guid;
+                
+                submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
                 submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
             }
             submissionId = submissionMgr.submission.SubmissionId__c;

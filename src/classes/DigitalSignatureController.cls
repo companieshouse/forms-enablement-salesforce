@@ -56,11 +56,6 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
             }
 		}
 
-        if(i > 1  || (i == 1 && !presenterSigning))
-        {
-            multipleDirectors = true;
-        }
-
 		emailPresenter = submissionMgr.submission.Presenter__r.PersonEmail;
     }
 
@@ -88,20 +83,24 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
         	skipPage = true;
         	return nextAction();
         }
+
+        
     	
     	if(submissionMgr.submission.isSigningStarted__c || !presenterSigning)
     	{
     		//Determine if it has been declined or not
-			if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED && !multipleDirectors)
+			if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED)
 			{
 				successSigning = true;
 				return null;
 			}
-			else if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED && !multipleDirectors)
+			else if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED)
 			{
 				failureSigning = true;
 				return null;
 			}
+
+
 
             //Send to docusign as no presenter don t load the external embed page
             if(!submissionMgr.submission.isSigningStarted__c)
@@ -118,6 +117,20 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 
         return nextAction();    
         
+    }
+
+    public PageReference restartPresenterSigning()
+    {
+        if(submissionMgr.submission.isSigningStarted__c && presenterSigning && submissionMgr.submission.Status__c != AppConstants.REQUEST_STATUS_SIGNED)
+        {
+            PageReference pg = new PageReference('/ExternalEmbedDocuSign');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+
+            return pg;
+        }
+
+        return null;
     }
     
     private void persistStep(){
