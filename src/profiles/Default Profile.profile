@@ -17,10 +17,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AddSharesTableController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>AppConstants</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -153,10 +149,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>CurrencyController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>CustomViews</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -285,15 +277,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>PreParticularsController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>PresenterDirectorController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>PromoterController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1508,15 +1492,7 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>PreParticularRights</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>PresenterDirector</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>PromotersTable</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -1581,10 +1557,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Submission</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>TabularData</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
