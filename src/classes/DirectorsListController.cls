@@ -31,6 +31,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean isPLCLTDCompany {get; set;}
     public Boolean isLPCompany {get; set;}
     public String officerTerm {get; set;}
+    public Boolean noOfficers {get; set;}
 
     public DirectorsListController() {
         super();
