@@ -20,60 +20,60 @@
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
 <apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-   <apex:composition template="TransactionPageTemplate">
-      <apex:define name="content">
-      <apex:form >
-
-         <div class="form-group">
-         <h1 class="heading-xlarge"><apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
-
-                  <apex:outputText rendered="{!isLLPCompany}"  value="Request approval from company members"></apex:outputText></h1>
-         <p class="lede">
-            {!companyName} has the following director listed on the public register.
-         </p>
-         <ul class="list list-bullet">
-            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-               <li>{!director}</li>
-            </apex:repeat>
-         </ul>
-
-
-        <fieldset class="inline">
-
-              <legend>Is this information correct?</legend>
-              <apex:outputPanel id="error">
-                <apex:outputPanel rendered="{!hasPageErrors}">
-                    <span  class="error-message" id="error-message-full-name">Please select one of the options below</span>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="OfficersPanel" rendered="{!NOT(noOfficers)}">
+                        <h1 class="heading-xlarge">
+                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
+                            <apex:outputText rendered="{!isLLPCompany}" value="Request approval from company members"></apex:outputText>
+                        </h1>
+                        <p class="lede">
+                            {!companyName} has the following director listed on the public register.
+                        </p>
+                        <div class="form-group {!errorVal}">
+                            <ul class="list list-bullet">
+                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                    <li>{!director}</li>
+                                </apex:repeat>
+                            </ul>
+                            <fieldset class="inline">
+                                <legend>Is this information correct?</legend>
+                                <apex:outputPanel id="error">
+                                    <apex:outputPanel rendered="{!hasPageErrors}">
+                                        <span class="error-message" id="error-message-full-name">Please select one of the options below</span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <br/>
+                                <label class="block-label" for="radio-inline-1">
+                                    <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"> Yes
+                                    </input>
+                                </label>
+                                <label class="block-label" for="radio-inline-2">
+                                    <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"> No
+                                    </input>
+                                </label>
+                            </fieldset>
+                        </div>
+                        <br />
+                        <br />
+                        <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        <br />
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                        <apex:actionFunction action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+                            <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
+                        </apex:actionFunction>
                     </apex:outputPanel>
-                    
+                    <apex:outputPanel id="NoOffPanel" rendered="{!noOfficers}">
+                        <h1 class="heading-xlarge">
+                            Appoint company director(s)
+                        </h1>
+                        <p>This company currently has no directors appointed. This application process cannot be completed as directors are needed to approve the application. Go to
+                            <a href="https://www.gov.uk/government/publications/appoint-a-director-ap01"> Appoint company director(s) </a>for information on appointing directors </p>
                     </apex:outputPanel>
-                    <br/>
-              <label class="block-label" for="radio-inline-1">
-              
-                <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio"  name="radio-inline-group" value="Yes">
-                Yes
-                </input>
-              </label>
-              <label class="block-label" for="radio-inline-2">
-                <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
-                No
-                </input>
-              </label>
-
-              </fieldset>
-         </div>
-         <br /><br />
-          <!--&nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> &nbsp;-->   
-
-         <!-- &nbsp;<apex:commandButton styleClass="button" action="{!previousAction}" value="{!$Label.UI_Text_Previous}" /> -->          
-         <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error" /><br />
-		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-
-     <apex:actionFunction action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
-               <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
-         </apex:actionFunction>
-
-      </apex:form>  
-      </apex:define>
-   </apex:composition>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>

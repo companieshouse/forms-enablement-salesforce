@@ -52,7 +52,6 @@ public class CompaniesHouseTestData {
                                 Form_Name__c = 'DS01',
                                 Version_Form__c = '1');
 
-
         off = new Officer__c(Forename__c = 'Test',
                             Surname__c = 'Name',
                             Email__c = 'test@test.com',

@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: BehalfDecision
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  SylvainP      2016-06-16  Initial development.
 */
@@ -25,18 +25,17 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
 
     public String textBox1 {get; set;}
     public String headerBox1 {get; set;}
+    public String currentErrorMessage {get; set;}
+    public String errorVal {get; set;}
 
-    public BehalfDecisionController(){
+    public BehalfDecisionController() {
         super();
         if (isPageInitialised) initialiseStep();
 
     }
 
-    
-    
     public void initialiseStep() {
-        
-       
+
         showNoError = false;
         isLLPCompany = submissionMgr.submission.isLLP__c;
 
@@ -45,8 +44,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
 
 
-        if(isLLPCompany)
-        {
+        if (isLLPCompany) {
             headerBox1 = headerBox1.replace('Director', 'Member');
             headerBox1 = headerBox1.replace('Directors', 'Members');
 
@@ -58,42 +56,45 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
 
             textBox1 = textBox1.replace('director', 'member');
             textBox1 = textBox1.replace('directors', 'members');
-        }        
+        }
 
         return;
-       
     }
 
-    private void persistStep(){
-        if(behalfValidation != null)
+    private void persistStep() {
+        if (behalfValidation != null)
             submissionMgr.submission.isBehalfSignatoryEnable__c = behalfValidation;
-        submissionMgr.persist();    
+        submissionMgr.persist();
     }
-    // End Instance methods.    
-    
-    // Action methods.     
-    public PageReference nextAction(){ 
+
+    public PageReference nextAction() {
+        if (behalfValidation == null) {
+            hasPageErrors = true;
+            currentErrorMessage = 'Please make a selection to continue';
+            errorVal = 'error';
+            return null;
+        }
         if (!validatePageState()) return Page.TransactionException;
 
-        persistStep();      
+        persistStep();
 
-        return nextStep();      
-    }
-    
-    public void updateDirectorList(){
+        return nextStep();
     }
 
-    public PageReference previousAction(){
+    public void updateDirectorList() {
+
+    }
+
+    public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
-                
+
         return previousStep();
     }
 
-    public PageReference initPage(){
+    public PageReference initPage() {
         initialiseAction();
 
-        if(submissionMgr.submission.SoleDirectorPresenter__c)
-        {
+        if (submissionMgr.submission.SoleDirectorPresenter__c) {
             return nextAction();
         }
 

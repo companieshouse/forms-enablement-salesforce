@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: DirectorsList
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-02-04  Initial development.
 */
@@ -20,7 +20,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}
     public Boolean hasAlreadyLoadedOfficers {get; set;}
-
+    public String currentErrorMessage {get; set;}
+    public String errorVal {get; set;}
     public String companyName {get; set;}
     public String companyNumber {get; set;}
     public Boolean validationDirector {get; set;}
@@ -31,18 +32,18 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean isLPCompany {get; set;}
     public String officerTerm {get; set;}
 
-    public DirectorsListController(){
+    public DirectorsListController() {
         super();
-        System.debug(LoggingLevel.ERROR,'After Super Call:' + isPageInitialised);
+        System.debug(LoggingLevel.ERROR, 'After Super Call:' + isPageInitialised);
         hasAlreadyLoadedOfficers = false;
         if (isPageInitialised) initialiseStep();
 
     }
 
-    
-    
+
+
     public void initialiseStep() {
-        System.debug(LoggingLevel.ERROR,'Start of Initialise Step');
+        System.debug(LoggingLevel.ERROR, 'Start of Initialise Step');
         //Set up the company name
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
@@ -58,25 +59,22 @@ public with sharing class DirectorsListController extends TransactionStepControl
             hasAlreadyLoadedOfficers = true;
         }
         //Get the list officer already created
-        if(submissionMgr.submission.Officers__r != null)
-        {
-            if(submissionMgr.submission.Officers__r.size() == 0)
-            {
+        if (submissionMgr.submission.Officers__r != null) {
+            if (submissionMgr.submission.Officers__r.size() == 0) {
                 hasAlreadyLoadedOfficers = false;
-            }
-            else{
+            } else {
                 hasAlreadyLoadedOfficers = true;
             }
         }
 
         nbOfOfficers = 0;
-        System.debug(LoggingLevel.ERROR,'End of Initialise Step');
+        System.debug(LoggingLevel.ERROR, 'End of Initialise Step');
         return;
-       
+
     }
 
-    private void persistStep(){
-        System.debug(LoggingLevel.ERROR,'Start of Persist Step');
+    private void persistStep() {
+        System.debug(LoggingLevel.ERROR, 'Start of Persist Step');
 
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
@@ -88,72 +86,65 @@ public with sharing class DirectorsListController extends TransactionStepControl
         System.debug(LoggingLevel.ERROR,'End of Persist Step');
 
     }
-    // End Instance methods.    
-    
-    // Action methods.     
-    public PageReference nextAction(){ 
-        System.debug(LoggingLevel.ERROR,'NextAction before If ValidatePageState');
-        if (!validatePageState()) return Page.TransactionException;
-        System.debug(LoggingLevel.ERROR,'NextAction before If validateStep');
+    // End Instance methods.
 
-        hasPageErrors=!validateStep();
-        System.debug(LoggingLevel.ERROR,'Has page Error:' + hasPageErrors);
+    // Action methods.
+    public PageReference nextAction() {
 
-        if (hasPageErrors) {
-
+        if (validationDirector == null) {
+            hasPageErrors = true;
+            currentErrorMessage = 'Please select one of the options below';
+            errorVal = 'error';
             return null;
         }
+        if (!validatePageState()) return Page.TransactionException;
 
-        if(validationDirector == false)
-        {
-                        PageReference pg = new PageReference('/UpdateCompanyDirectors');
+        if (validationDirector == false) {
+            PageReference pg = new PageReference('/UpdateCompanyDirectors');
 
-            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id+AppConstants.ID_DELIM_CHAR+transactionMgr.currentStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
             pg.setRedirect(true);
             return pg;
         }
 
-        persistStep();      
+        persistStep();
 
-        System.debug(LoggingLevel.ERROR,'Before return of NextStep');
-        return nextStep();      
+        System.debug(LoggingLevel.ERROR, 'Before return of NextStep');
+        return nextStep();
     }
 
-    private Boolean validateStep(){
-        System.debug(LoggingLevel.ERROR,'Start of Validate Step:' + validationDirector);
-        if(validationDirector == null)
+    private Boolean validateStep() {
+        System.debug(LoggingLevel.ERROR, 'Start of Validate Step:' + validationDirector);
+        if (validationDirector == null)
             return false;
 
         return true;
     }
-    
-    public void updateDirectorList(){
-        System.debug(LoggingLevel.ERROR,'Clicked yes or no:' + validationDirector);
-        if(validationDirector == false)
+
+    public void updateDirectorList() {
+        System.debug(LoggingLevel.ERROR, 'Clicked yes or no:' + validationDirector);
+        if (validationDirector == false)
             showNoError = true;
         else
             showNoError = false;
         hasPageErrors = false;
-        System.debug(LoggingLevel.ERROR,'End of Click yes or no:' + validationDirector);
+        System.debug(LoggingLevel.ERROR, 'End of Click yes or no:' + validationDirector);
 
     }
 
-    public PageReference previousAction(){
+    public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
-                
+
         return previousStep();
     }
 
     //Method used to extract the title from the name of an officer, return null if no title found
     // 0 = surname 1= forename and middlename 2 = title null incorrect module value or corporate name -_-
-    public String extractOfficerName(Integer module, String name)
-    {
-        if(name.contains(','))
-        {
+    public String extractOfficerName(Integer module, String name) {
+        if (name.contains(',')) {
             String[] extract = name.split(',');
-            if(extract.size()-1 >= module)
-                if(!String.isBlank(extract[module]))
-                {
+            if (extract.size() - 1 >= module)
+                if (!String.isBlank(extract[module])) {
                     return extract[module];
                 }
         }
@@ -161,36 +152,29 @@ public with sharing class DirectorsListController extends TransactionStepControl
         return null;
     }
 
-    public void populateDirectorList(){
-        System.debug(LoggingLevel.ERROR,'Start of Populating Directors');
+    public void populateDirectorList() {
+        System.debug(LoggingLevel.ERROR, 'Start of Populating Directors');
 
         initialiseAction();
-        if(companyNumber == null)
-        {
+        if (companyNumber == null) {
             listOfDirectors.add('No Officers found.');
             return;
         }
-        
-        
-        if(hasAlreadyLoadedOfficers)
-        {
-            System.debug(LoggingLevel.ERROR,'Already Loaded officer');
-			isLLPCompany = submissionMgr.submission.isLLP__c; 
+
+
+        if (hasAlreadyLoadedOfficers) {
+            System.debug(LoggingLevel.ERROR, 'Already Loaded officer');
+            isLLPCompany = submissionMgr.submission.isLLP__c;
             //Get the list officer already created
-            if(submissionMgr.submission.Officers__r != null)
-            {
-                if(submissionMgr.submission.Officers__r.size() > 0)
-                {
-                    for(Officer__c off :submissionMgr.submission.Officers__r)
-                    {
+            if (submissionMgr.submission.Officers__r != null) {
+                if (submissionMgr.submission.Officers__r.size() > 0) {
+                    for (Officer__c off : submissionMgr.submission.Officers__r) {
                         listOfDirectors.add(off.Name);
                     }
                 }
             }
-        }
-        else
-        {
-            System.debug(LoggingLevel.ERROR,'Get the director list from API');
+        } else {
+            System.debug(LoggingLevel.ERROR, 'Get the director list from API');
             //Make the call to the list of directors
             List<CompaniesHouse.OfficerDetails> directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
 
@@ -238,16 +222,16 @@ public with sharing class DirectorsListController extends TransactionStepControl
             nbOfOfficers = listOfDirectors.size();
             //Insert the contact
             insert contactList;
-        
+
             //Update the Officer List with contact ID list
-            for(Integer i = 0; i< contactList.size(); i++)
-            {
+            for (Integer i = 0; i < contactList.size(); i++) {
                 officerList[i].Contact__c = contactList[i].Id;
             }
             //Insert the officer
             insert officerList;
+            if (contactList.size() == 0) {noOfficers = true;} else if (contactList.size() > 0) {noOfficers = false;}
         }
-        System.debug(LoggingLevel.ERROR,'end of List of directors');
-        
+        System.debug(LoggingLevel.ERROR, 'end of List of directors');
+
     }
 }

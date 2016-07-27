@@ -10,113 +10,79 @@ Controller Class for Choose Director  Page
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-06-16  Initial development.
 */
-public class chooseDirector extends TransactionStepControllerBase
-{
-    public Boolean hasPageErrors
-    {
+public class chooseDirector extends TransactionStepControllerBase {
+    public Boolean hasPageErrors {
+        get;
+        set;
+    }
+    public String currentErrorMessage {
+        get;
+        set;
+    }
+    public String errorVal {get; set;}
+    public String companyName {
+        get;
+        set;
+    }
+    public List < Officer__c > companyDirectors {
+        get;
+        set;
+    }
+    public List < Officer__c > builtDirectors {
+        get;
+        set;
+    }
+    public Boolean isLLPCompany {
+        get;
+        set;
+    }
+    public Integer majoritytosign {
         get;
         set;
     }
 
-    public String companyName
-    {
-        get;
-        set;
-    }
-
-    public List < Officer__c > companyDirectors
-    {
-        get;
-        set;
-    }
-
-    public List < Officer__c > builtDirectors
-    {
-        get;
-        set;
-    }
-    public Boolean isLLPCompany
-    {
-        get;
-        set;
-    }
-    public Integer majoritytosign
-    {
-        get;
-        set;
-    }
-
-    public List < DirectorWrapper > directorWrapper
-    {
-        get;
-        set;
-    }
-    public String majoritySignError
-    {
+    public List < DirectorWrapper > directorWrapper {
         get;
         set;
     }
 
 
-    public chooseDirector()
-    {
+    public chooseDirector() {
         super();
         if (isPageInitialised) initialiseStep();
 
     }
 
-
-    public void initialiseStep()
-    {
-
-        //if (submissionMgr.submission.Officers__r.size() == 1)
-        //{  if(submissionMgr.submission.Officers__r[0].isSignatory__c)
-        //      nextAction();
-        //}
-
+    public void initialiseStep() {
         majoritytosign = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();
         isLLPCompany = submissionMgr.submission.isLLP__c;
-        majoritySignError = 'form-label-bold';
         buildDirectorsList();
-        //checkDirectorStatus();
         return;
     }
 
-    public PageReference checkDirectorStatus()
-   {
+    public PageReference checkDirectorStatus() {
 
-    if (submissionMgr.submission.Officers__r.size() == 1)
-        {  if(submissionMgr.submission.Officers__r[0].isSignatory__c)
-          return nextAction();
+        if (submissionMgr.submission.Officers__r.size() == 1) {
+            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
+                return nextAction();
         }
         return null;
-       //if (submissionMgr.submission.SoleDirectorPresenter__c ==true)
-       //{
-       //    return nextStep();
-       //}
-       //return null;
-   }
+    }
 
 
-    public void buildDirectorsList()
-    {
-        for (Officer__c chosenOfficer: companyDirectors)
-        {
-            if (chosenOfficer.isPresenter__c == False)
-            {
+    public void buildDirectorsList() {
+        for (Officer__c chosenOfficer : companyDirectors) {
+            if (chosenOfficer.isPresenter__c == False) {
                 builtDirectors.add(chosenOfficer);
-            }
-            else if (chosenOfficer.IsPresenter__c == true)
-            {
-                if (chosenOfficer.isSignatory__c == true)
-                {
+            } else if (chosenOfficer.IsPresenter__c == true) {
+                if (chosenOfficer.isSignatory__c == true) {
                     majoritytosign = majoritytosign - 1;
                 }
             }
@@ -125,28 +91,25 @@ public class chooseDirector extends TransactionStepControllerBase
 
 
 
-    private void persistStep()
-    {
+    private void persistStep() {
 
         saveWrappedDirectorsSelection();
         submissionMgr.persist();
-
     }
 
-    public PageReference nextAction()
-    {
+    public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
 
-        if (submissionMgr.submission.isMajorityRequired__c)
-        {
-            if (isSignatureNumberOK())
-            {
-                majoritySignError = 'form-label-bold';
-            }
-            else if (!isSignatureNumberOK())
-            {
-                majoritySignError = 'error-message';
+        if (submissionMgr.submission.isMajorityRequired__c) {
+            if (isSignatureNumberOK()) {
+                hasPageErrors = false;
+                currentErrorMessage = '';
+                errorVal = '';
 
+            } else if (!isSignatureNumberOK()) {
+                currentErrorMessage = '';
+                hasPageErrors = true;
+                errorVal = 'error';
                 return null;
             }
         }
@@ -155,57 +118,46 @@ public class chooseDirector extends TransactionStepControllerBase
         return nextStep();
     }
 
-    public PageReference previousAction()
-    {
+    public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
 
         return previousStep();
     }
 
-    public Boolean isSignatureNumberOK()
-    {
+    public Boolean isSignatureNumberOK() {
         Integer i = 0;
 
-        for (Officer__c off: submissionMgr.submission.Officers__r)
-        {
-            if (off.isPresenter__c)
-            {
-                if (off.isSignatory__c)
-                {
+        for (Officer__c off : submissionMgr.submission.Officers__r) {
+            if (off.isPresenter__c) {
+                if (off.isSignatory__c) {
                     i++;
                 }
             }
         }
 
 
-        for (DirectorWrapper directorstoAddtoSignatoryChecklist: getWrappedDirectors())
-        {
+        for (DirectorWrapper directorstoAddtoSignatoryChecklist : getWrappedDirectors()) {
             if (directorstoAddtoSignatoryChecklist.selected)
                 i++;
         }
 
-        if (Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c) > i)
-        {
+        if (Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c) > i) {
             return false;
         }
         return true;
     }
 
-    public with sharing class directorWrapper
-    {
-        public Officer__c off
-        {
+    public with sharing class directorWrapper {
+        public Officer__c off {
             get;
             set;
         }
-        public boolean selected
-        {
+        public boolean selected {
             get;
             set;
         }
 
-        public directorWrapper(Officer__c wrappedofficer)
-        {
+        public directorWrapper(Officer__c wrappedofficer) {
 
             off = wrappedofficer;
             selected = false;
@@ -213,14 +165,11 @@ public class chooseDirector extends TransactionStepControllerBase
         }
     }
 
-    public List < directorWrapper > getWrappedDirectors()
-    {
-        if (directorWrapper == null)
-        {
+    public List < directorWrapper > getWrappedDirectors() {
+        if (directorWrapper == null) {
             directorWrapper = new List < directorWrapper > ();
 
-            for (Officer__c loopedOfficers: builtDirectors)
-            {
+            for (Officer__c loopedOfficers : builtDirectors) {
 
                 directorWrapper happyDirectors = new directorWrapper(loopedOfficers);
                 directorWrapper.add(happyDirectors);
@@ -230,14 +179,10 @@ public class chooseDirector extends TransactionStepControllerBase
         return directorWrapper;
     }
 
-    public Void saveWrappedDirectorsSelection()
-    {
-        for (Officer__c off: submissionMgr.submission.Officers__r)
-        {
-            for (directorWrapper directorstoUPDATE: getWrappedDirectors())
-            {
-                if (off.Id == directorstoUPDATE.off.Id)
-                {
+    public Void saveWrappedDirectorsSelection() {
+        for (Officer__c off : submissionMgr.submission.Officers__r) {
+            for (directorWrapper directorstoUPDATE : getWrappedDirectors()) {
+                if (off.Id == directorstoUPDATE.off.Id) {
                     off.isSignatory__c = directorstoUPDATE.selected;
 
                 }

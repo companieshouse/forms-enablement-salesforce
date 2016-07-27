@@ -7,85 +7,140 @@
 public class PaymentController extends TransactionStepControllerBase {
     //Payment properties
     private static final String QUERY_STRING_PARAM_MERCHANT_REFERENCE = 'merchantReference';
-    
     private static final String QUERY_STRING_PARAM_MERCHANT_SIG = 'merchantSig';
-    
     private static final String QUERY_STRING_PARAM_AUTH_RESULT = 'authResult';
-
     private static final String QUERY_STRING_PARAM_PSP_REFERENCE = 'pspReference';
-
     // AUTHORISED: Authorisation was successfully completed.
     private static final String AUTH_RESULT_AUTHORISED = 'AUTHORISED';
-
     // REFUSED: Authorisation was unsuccessful, Declined by issuer.
     private static final String AUTH_RESULT_REFUSED = 'REFUSED';
-    
     // CANCELLED: Shopper cancelled payment or used back button on initial page to
     // return to merchants website.
     private static final String AUTH_RESULT_CANCELLED = 'CANCELLED';
-
-    // PENDING: Final status of the payment could not be established at the time, 
+    // PENDING: Final status of the payment could not be established at the time,
     // this can be due to the payment method (e.g PayPal) or requiring the shopper
     // to take further action.
     private static final String AUTH_RESULT_PENDING = 'PENDING';
-
     // ERROR: An error occurred during the payment process.
-    private static final String AUTH_RESULT_ERROR = 'ERROR';   
-
+    private static final String AUTH_RESULT_ERROR = 'ERROR';
     private String merchantReference;
     private String merchantSig;
     private String authResult;
-
-
     // Public properties.
-
-    public String externalURL {get; set;}
-
-    public Boolean hasPaid {get; set;}
-    public Boolean hasPaymentSuccess {get; set;}
-    public Boolean hasPaymentRejected {get; set;}
-    public Boolean hasPaymentError {get; set;} 
-    public Boolean hasPaymentPending {get; set;}
-    public Boolean previousClicked {get; set;}
-
-    public Boolean isCardPayment {get; set;}
-    public Boolean isPaypalPayment {get; set;}
-    public Boolean isAccountPayment {get; set;}
-    public Boolean isSameDayPayment {get; set;}
-
-    public Boolean isCardSelected {get; set;}
-    public Boolean isPaypalSelected {get; set;}
-    public Boolean isAccountSelected {get; set;}
-
-    public Boolean isSameDaySelected {get; set;}
-
-    public Integer valuePaymentUI {get; set;}
-
-    public String headerBox1 {get; set;}
-    public String textBox1NormalFee {get; set;}
-    public String textBox1FastTrackFee {get; set;}
-
-    public Decimal fastTrackFee {get; set;}
-    public Decimal normalFee {get; set;}
-
-    public String paymentReference {get; set;}
-
-    public String accountNumber {get; set;}
-    //public String accountAuthCode {get; set;}
-
+    public String externalURL {
+        get;
+        set;
+    }
+    public Boolean hasPaid {
+        get;
+        set;
+    }
+    public Boolean hasPaymentSuccess {
+        get;
+        set;
+    }
+    public Boolean hasPaymentRejected {
+        get;
+        set;
+    }
+    public Boolean hasPaymentError {
+        get;
+        set;
+    }
+    public Boolean hasPaymentPending {
+        get;
+        set;
+    }
+    public Boolean previousClicked {
+        get;
+        set;
+    }
+    public Boolean isCardPayment {
+        get;
+        set;
+    }
+    public Boolean isPaypalPayment {
+        get;
+        set;
+    }
+    public Boolean isAccountPayment {
+        get;
+        set;
+    }
+    public Boolean isSameDayPayment {
+        get;
+        set;
+    }
+    public Boolean isCardSelected {
+        get;
+        set;
+    }
+    public Boolean isPaypalSelected {
+        get;
+        set;
+    }
+    public Boolean isAccountSelected {
+        get;
+        set;
+    }
+    public Boolean isSameDaySelected {
+        get;
+        set;
+    }
+    public Integer valuePaymentUI {
+        get;
+        set;
+    }
+    public String headerBox1 {
+        get;
+        set;
+    }
+    public String textBox1NormalFee {
+        get;
+        set;
+    }
+    public String textBox1FastTrackFee {
+        get;
+        set;
+    }
+    public Decimal fastTrackFee {
+        get;
+        set;
+    }
+    public Decimal normalFee {
+        get;
+        set;
+    }
+    public String paymentReference {
+        get;
+        set;
+    }
+    public String accountNumber {
+        get;
+        set;
+    }
+    public Boolean hasPageErrors {
+        get;
+        set;
+    }
+    public String currentErrorMessage {
+        get;
+        set;
+    }
+    public String errorVal {
+        get;
+        set;
+    }
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
-
-    public Boolean hasPaid(){
-        if(submissionMgr.submission.hasPaid__c)
-        {
+    public Boolean hasPaid() {
+        if (submissionMgr.submission.hasPaid__c) {
             return true;
         }
         return false;
     }
-    
     public void initialiseStep() {
         hasPaid = false;
         hasPaymentSuccess = false;
@@ -93,242 +148,170 @@ public class PaymentController extends TransactionStepControllerBase {
         hasPaymentError = false;
         hasPaymentPending = false;
         previousClicked = false;
-        accountNumber = '';
         paymentReference = '';
-
         isCardPayment = (transactionMgr.td.isCardAllowed__c == null ? false : transactionMgr.td.isCardAllowed__c);
         isPaypalPayment = (transactionMgr.td.isPaypalAllowed__c == null ? false : transactionMgr.td.isPaypalAllowed__c);
         isAccountPayment = (transactionMgr.td.isAccountPayment__c == null ? false : transactionMgr.td.isAccountPayment__c);
         isSameDayPayment = (transactionMgr.td.isSameDayPayment__c == null ? false : transactionMgr.td.isSameDayPayment__c);
-
         normalFee = (transactionMgr.td.Fee__c == null ? 0 : transactionMgr.td.Fee__c);
         fastTrackFee = (transactionMgr.td.FeeFastTrack__c == null ? 0 : transactionMgr.td.FeeFastTrack__c);
-
         textBox1NormalFee = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
-
         textBox1FastTrackFee = textBox1NormalFee.replace('FEE', fastTrackFee + '');
         textBox1NormalFee = textBox1NormalFee.replace('FEE', normalFee + '');
-
         isCardSelected = false;
         isPaypalSelected = false;
         isAccountSelected = false;
         isSameDaySelected = false;
-
-        //accountAuthCode = '';
-
     }
-
-    public PageReference checkPaymentResult(){
+    public PageReference checkPaymentResult() {
         initialiseAction();
-        parseQueryString(); 
-
+        parseQueryString();
         //If there is no payment associated we need to protect the page to be displayed
-        if(!submissionMgr.submission.isPaymentRequired__c) 
-        {
+        if (!submissionMgr.submission.isPaymentRequired__c) {
             hasPaid = true;
-            PageReference nextPage = nextAction();
+            PageReference nextPage = nextStep();
             nextPage.setRedirect(true);
             return nextPage;
         }
-
-        if(hasPaid())
-        {
+        if (hasPaid()) {
             hasPaid = true;
             return null;
         }
-        
         // Transaction context.
-        if (!ApexPages.currentPage().getParameters().containsKey('c') || 
-            String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
-
+        if (!ApexPages.currentPage().getParameters().containsKey('c') || String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
         String paramInput = ApexPages.currentPage().getParameters().get('c');
-
-
-
-        if(paramInput.contains(' '))
-        {
+        if (paramInput.contains(' ')) {
             paramInput = paramInput.replace(' ', '+');
-
-            ApexPages.currentPage().getParameters().put('c',paramInput);
-
+            ApexPages.currentPage().getParameters().put('c', paramInput);
             ApexPages.currentPage().setRedirect(true);
-
             return ApexPages.currentPage();
         }
-
-        if(previousClicked)
-        {
+        if (previousClicked) {
             return previousAction();
         }
-
         //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
         return null;
-        
-        
     }
-    public PageReference updateLink(){
+    public PageReference updateLink() {
         submit();
         PageReference pg = new PageReference(externalURL);
         pg.setRedirect(true);
         return pg;
-    } 
-
+    }
     @TestVisible
-    private void persistStep(){
-        if(hasPaymentSuccess || hasPaid)
-        {
+    private void persistStep() {
+        if (hasPaymentSuccess || hasPaid) {
             submissionMgr.submission.Status__c = 'Paid';
             submissionMgr.submission.hasPaid__c = true;
         }
-
-        if(String.isBlank(paymentReference))
-        {
+        if (String.isBlank(paymentReference)) {
             paymentReference = submissionMgr.submission.Id;
         }
-
-        if(isAccountSelected)
-        {
+        if (isAccountSelected) {
             submissionMgr.submission.isPaymentAccount__c = true;
             submissionMgr.submission.hasPaid__c = true;
             submissionMgr.submission.AccountNumber__c = Integer.valueOf(accountNumber);
             paymentReference = accountNumber;
             //submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
         }
-
-        if(isPaypalSelected)
-        {
+        if (isPaypalSelected) {
             submissionMgr.submission.isPaymentPaypal__c = true;
         }
-
-        if(isCardSelected)
-        {
+        if (isCardSelected) {
             submissionMgr.submission.isPaymentCard__c = true;
         }
-
-        if(isSameDaySelected)
-        {
-            submissionMgr.submission.isSameDayProcessing__c = true;   
+        if (isSameDaySelected) {
+            submissionMgr.submission.isSameDayProcessing__c = true;
         }
-
-        if(submissionMgr.submission.Amount__c == null)
-            submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
-        
+        if (submissionMgr.submission.Amount__c == null) submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
         submissionMgr.submission.paymentReference__c = paymentReference;
-        submissionMgr.persist();    
+        submissionMgr.persist();
     }
-    // End Instance methods.    
-
-    // Action methods.     
-    public PageReference nextAction(){ 
+    // End Instance methods.
+    // Action methods.
+    public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
-
-        persistStep(); 
-
-        if(isCardSelected || isPaypalSelected)
-        {
+        if (valuePaymentUI == 2 && accountNumber == null) {
+            hasPageErrors = true;
+            currentErrorMessage = 'Please provide an account number for payment';
+            errorVal = 'error';
+            return null;
+        }
+        persistStep();
+        if (isCardSelected || isPaypalSelected) {
             submit();
             PageReference pg = new PageReference(externalURL);
             pg.setRedirect(true);
             return pg;
         }
-            
-
-        if(!hasPaid())
-            return null;
-
-        return nextStep();      
+        if (!hasPaid()) return null;
+        return nextStep();
     }
-    
-    public PageReference previousAction(){
+    public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
-                
         return previousStep();
     }
-    // End Action methods.    
-    
-    public void updatePayment()
-    {
-        if(valuePaymentUI == null) return;
-
-        if(valuePaymentUI == 1) 
-        {
+    // End Action methods.
+    public void updatePayment() {
+        if (valuePaymentUI == null) return;
+        if (valuePaymentUI == 1) {
             isCardSelected = true;
             isAccountSelected = false;
             isPaypalSelected = false;
-        }
-        else if(valuePaymentUI == 2)
-        {
+        } else if (valuePaymentUI == 2) {
             isCardSelected = false;
             isPaypalSelected = false;
             isAccountSelected = true;
-        }
-        else if(valuePaymentUI == 3)
-        {
+        } else if (valuePaymentUI == 3) {
             isCardSelected = false;
             isAccountSelected = false;
             isPaypalSelected = true;
         }
     }
-    
-    public void updateSameDay(){
-
-    }
-    
+    public void updateSameDay() {}
     /**
      * Off we go to a SmartPay URL.
      */
     public void submit() {
         // Let's use a transaction ID as the merchant reference on the payment. It's then
         // guaranteed to be unique.
-        
         // Get a URL for SmartPay, the payment processor. Whether this is on TEST or LIVE is
         // driven by the active custom setting record.
-        
         //CODE FOR PRODUCTION WHEN Submission manager will be in sync with Transaction Object
-        SmartPayUrl url = new SmartPayUrl.Builder()
-                .merchantReference(submissionMgr.submission.Id)
-                .paymentAmount(isSameDaySelected == true ? fastTrackFee : normalFee)
-                .customerEmail(submissionMgr.submission.ContactEmail__c)
-                .customerMethodsPayment(isPaypalSelected)
-                .build();
+        SmartPayUrl url = new SmartPayUrl.Builder().merchantReference(submissionMgr.submission.Id).paymentAmount(isSameDaySelected == true ? fastTrackFee : normalFee).customerEmail(submissionMgr.submission.ContactEmail__c).customerMethodsPayment(isPaypalSelected).build();
         String redirectUrl = url.toString();
         externalURL = redirectUrl;
-
         //CSBeginMod: Sylvain Picory 14 April 2016: We don't want to redirect to the payement page anymore
         //PageReference pageReference = new PageReference(redirectUrl);
         //pageReference.setRedirect(true);
         //return pageReference;
         //CSEndMod: Sylvain Picory 14 April 2016
     }
-
     /**
-      * Figure out, based on query string params, whether we've paid already or not. If we have, the
-      * URL will look like:
-      * 
-      * https://c.cs83.visual.force.com/apex/payment
-      *   ?merchantReference=a034E000000qrsCQAQ
-      *   &skinCode=rDzAns5W
-      *   &shopperLocale=en_GB
-      *   &paymentMethod=visa
-      *   &authResult=AUTHORISED
-      *   &pspReference=7914593350745514
-      *   &merchantSig=c96mrZtROXInJlVRWfzMGvRx6vY%3D
-      * 
-      * TODO: (BETA) Validate the merchantSig passed over. If it's invalid, that could mean a
-      * malicious user has simply hacked the URL together in order to avoid paying.
-      * 
-      * TODO: (BETA) Store the pspReference on the Transaction record. Admin bods would need this if
-      * they ever needed to query a transation with Barclays.
+     * Figure out, based on query string params, whether we've paid already or not. If we have, the
+     * URL will look like:
+     *
+     * https://c.cs83.visual.force.com/apex/payment
+     *   ?merchantReference=a034E000000qrsCQAQ
+     *   &skinCode=rDzAns5W
+     *   &shopperLocale=en_GB
+     *   &paymentMethod=visa
+     *   &authResult=AUTHORISED
+     *   &pspReference=7914593350745514
+     *   &merchantSig=c96mrZtROXInJlVRWfzMGvRx6vY%3D
+     *
+     * TODO: (BETA) Validate the merchantSig passed over. If it's invalid, that could mean a
+     * malicious user has simply hacked the URL together in order to avoid paying.
+     *
+     * TODO: (BETA) Store the pspReference on the Transaction record. Admin bods would need this if
+     * they ever needed to query a transation with Barclays.
      */
     public void parseQueryString() {
         merchantReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_REFERENCE);
-        merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);        
+        merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);
         authResult = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_RESULT);
-        
         if (merchantReference != null && merchantReference.length() > 0) {
-            
-
             // Valid params for the result URL back to us after payment. Now check authResult.
             if (authResult == AUTH_RESULT_AUTHORISED) {
                 //change the status of the payment page
@@ -339,8 +322,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = false;
-            }
-            else if(authResult == AUTH_RESULT_REFUSED) {
+            } else if (authResult == AUTH_RESULT_REFUSED) {
                 //Go To refused Payment page ?
                 hasPaymentSuccess = false;
                 hasPaid = false;
@@ -348,8 +330,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = false;
-            }
-            else if(authResult == AUTH_RESULT_PENDING) {
+            } else if (authResult == AUTH_RESULT_PENDING) {
                 //Nothing to do?
                 hasPaymentSuccess = false;
                 hasPaid = false;
@@ -357,16 +338,14 @@ public class PaymentController extends TransactionStepControllerBase {
                 hasPaymentPending = true;
                 previousClicked = false;
                 hasPaymentError = false;
-            }
-            else if(authResult == AUTH_RESULT_CANCELLED) {
+            } else if (authResult == AUTH_RESULT_CANCELLED) {
                 hasPaymentSuccess = false;
                 hasPaid = false;
                 hasPaymentRejected = false;
                 hasPaymentPending = false;
                 previousClicked = true;
                 hasPaymentError = false;
-            }
-            else if(authResult == AUTH_RESULT_ERROR) {
+            } else if (authResult == AUTH_RESULT_ERROR) {
                 hasPaymentSuccess = false;
                 hasPaid = false;
                 hasPaymentRejected = false;
@@ -374,9 +353,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 previousClicked = false;
                 hasPaymentError = true;
             }
-            
-        }
-        else{
+        } else {
             hasPaymentSuccess = false;
             hasPaid = false;
             hasPaymentRejected = false;
@@ -385,5 +362,4 @@ public class PaymentController extends TransactionStepControllerBase {
             hasPaymentError = false;
         }
     }
-    
 }

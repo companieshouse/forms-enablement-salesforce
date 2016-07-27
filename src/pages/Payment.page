@@ -2,10 +2,23 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
+            <apex:outputPanel id="masterPanel">
+            <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            An error has occurred.
+                        </h1>
+                        <ul class="error-summary-list">
+                            <li>
+                                <a>{!currentErrorMessage}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </apex:outputPanel>
                 <h1 class="heading-xlarge">
               {!headerBox1}
                 </h1>
-                                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
                 <apex:outputPanel id="body">
                 <apex:outputText escape="false"  rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}"/>
@@ -37,11 +50,10 @@
                             <apex:outputPanel id="accountInput">
                             <apex:outputPanel rendered="{!valuePaymentUI == 2}">
                              <div aria-hidden="false" class="panel panel-border-narrow">
-                                <div class="form-group">
+                                <div class="form-group {!errorVal}">
+                                    <span class='error-message'>{!currentErrorMessage}</span>
                                     <label class="form-label" for="accountnumberinput">Account Number:</label>
-                                    <apex:input styleclass="form-control" value="{!accountNumber}" type="text" id="accountnumberinput" />
-                                     <!-- <label class="form-label" for="accountAuthCode">Account Authorisation Code:</label>
-                                    <apex:input styleclass="form-control" value="{!accountAuthCode}" type="text" id="accountAuthCode" /> -->
+                                    <apex:inputText styleclass="form-control" value="{!accountNumber}"  id="accountnumberinput" />
                                 </div>
                             </div>
                             </apex:outputPanel>
@@ -128,9 +140,10 @@
                         </p>
                     </div>
                 </apex:outputPanel>
-                <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                 <br />
                 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>
