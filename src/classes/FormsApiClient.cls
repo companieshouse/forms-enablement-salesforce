@@ -184,7 +184,7 @@ public class FormsApiClient {
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');
         jsonPartBody = jsonPartBody.remove('"officers" : null,');
-        //throw new Form_CustomException('here is your garbage string' + jsonPartBody);
+        system.debug(LoggingLevel.ERROR, 'Json ready to be sent:' + jsonPartBody);
         return jsonPartBody;
     }
 

@@ -1,7 +1,7 @@
 <apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <div class="form-group">
                         <h1 class="heading-xlarge">

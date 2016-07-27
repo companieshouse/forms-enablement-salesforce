@@ -786,7 +786,6 @@ public class TransactionSerialiser {
 			gen.writeFieldName('attachments');
 			gen.writeObject(lAtt);
 			gen.writeEndObject();
-			system.debug(LoggingLevel.ERROR,'Json ready to be sent:' + gen.getAsString());
 			return gen.getAsString();
 		}
 		if (transact.Form_Name__c == 'SH19') {
@@ -917,7 +916,6 @@ public class TransactionSerialiser {
 				gen.writeObject(capSSAtt);
 			}
 			gen.writeEndObject();
-			//gen.replace('"sNumber":', '"number":');
 			return gen.getAsString();
 		}
 
@@ -1006,7 +1004,6 @@ public class TransactionSerialiser {
 			gen.writeObject(form);
 			gen.writeFieldName('attachments');
 			gen.writeObject(lAtt);
-
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
