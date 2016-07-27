@@ -17,8 +17,8 @@
 <apex:page title="Closing a limited company" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
-                <apex:outputPanel id='masterPanel'>
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -46,12 +46,12 @@
                             </label>
                             <span class="form-hint">Email Address </span>
                             <span class="error-message">{!director.validationErrors}</span>
-                            <apex:inputText styleClass='form-control' value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                            <apex:inputText styleClass="form-control" value="{!director.email}" id="email" html-name="email"></apex:inputText>
                             <label class="form-label" for="emailconfirmation">
                             </label>
                             <span class="form-hint">Confirm email address</span>
                             <span class="error-message">{!director.confirmationErrors}</span>
-                            <apex:inputText styleClass='form-control' value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
+                            <apex:inputText styleClass="form-control" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
                         </apex:repeat>
                     </div>
                     <br />

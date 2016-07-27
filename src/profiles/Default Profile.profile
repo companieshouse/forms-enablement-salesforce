@@ -1452,10 +1452,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>CurrencySelection</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>DS01</apexPage>
         <enabled>true</enabled>
     </pageAccesses>

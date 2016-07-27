@@ -17,8 +17,8 @@
 <apex:page title="Closing a limited company" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
-                <apex:outputPanel id='masterPanel'>
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -46,8 +46,8 @@
                             <apex:outputText rendered="{!isLLPCompany}" value="To close a company, you first need the majority of members to approve the application"></apex:outputText>
                         </p>
                         <h3 class="heading-small">
-                            <apex:outputText styleClass='{!errorVal}-message' rendered="{!NOT(isLLPCompany)}" value="Please select at least {!majoritytosign} of the directors below."></apex:outputText>
-                            <apex:outputText styleClass='{!errorVal}-message' rendered="{!isLLPCompany}" value="Please select at least {!majoritytosign} of the members below."></apex:outputText>
+                            <apex:outputText styleClass="{!errorVal}-message" rendered="{!NOT(isLLPCompany)}" value="Please select at least {!majoritytosign} of the directors below."></apex:outputText>
+                            <apex:outputText styleClass="{!errorVal}-message" rendered="{!isLLPCompany}" value="Please select at least {!majoritytosign} of the members below."></apex:outputText>
                         </h3>
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
                             <label class="block-label">

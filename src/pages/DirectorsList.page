@@ -22,9 +22,9 @@
 <apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
-                <apex:outputPanel id='masterPanel'>
-                    <apex:outputPanel id='OfficersPanel' rendered="{!NOT(noOfficers)}">
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="OfficersPanel" rendered="{!NOT(noOfficers)}">
                         <h1 class="heading-xlarge">
                             <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Request approval from company directors"></apex:outputText>
                             <apex:outputText rendered="{!isLLPCompany}" value="Request approval from company members"></apex:outputText>
@@ -65,7 +65,7 @@
                             <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
                         </apex:actionFunction>
                     </apex:outputPanel>
-                    <apex:outputPanel id='NoOffPanel' rendered="{!noOfficers}">
+                    <apex:outputPanel id="NoOffPanel" rendered="{!noOfficers}">
                         <h1 class="heading-xlarge">
                             Appoint company director(s)
                         </h1>

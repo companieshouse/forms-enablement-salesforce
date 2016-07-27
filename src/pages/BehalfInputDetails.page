@@ -19,8 +19,8 @@
 <apex:page title="{!$Label.UI_Text_Behalf_Input_Details}" controller="BehalfInputDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
-                <apex:outputPanel id='masterPanel'>
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -41,7 +41,7 @@
                     <div class="form-group {!nameErrorVal}">
                         <label for="inputName">
                             <span class='error-message'>
-                                <apex:outputText rendered='{!nameError}' id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                                <apex:outputText rendered="{!nameError}" id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
                             </span>
                             <!-- Full name -->
                             <apex:inputText styleclass="form-control" id="inputName" value="{!nameAuthorized}" />
@@ -51,7 +51,7 @@
                     <div class="form-group {!emailErrorVal}">
                         <label for="inputEmail">
                             <span class='error-message'>
-                                <apex:outputText rendered='{!emailError}' styleClass='error-mesage' id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                                <apex:outputText rendered="{!emailError}" styleClass="error-mesage" id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
                             </span>
                             <!-- Email -->
                             <apex:inputText styleclass="form-control" id="inputEmail" value="{!emailDirector}" />
@@ -61,7 +61,7 @@
                         <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
                     </span>
                     <div class="form-group {!behalfSelectionerrorVal}">
-                        <apex:outputText rendered='{!behalfError}' styleClass='error-mesage' id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        <apex:outputText rendered="{!behalfError}" styleClass="error-mesage" id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
                         <label class="block-label" for="radio-1">
                             <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
                         </label>
