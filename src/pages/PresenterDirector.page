@@ -20,11 +20,22 @@
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
 <apex:page title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
-                <div id="masterDiv" class="form-group">
+            <apex:form>
+                <apex:outputPanel id='masterPanel'>
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentPageError}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
                     <h1 class="heading-xlarge">
                         <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you a director?"></apex:outputText>
                         <apex:outputText rendered="{!isLLPCompany}" value="Are you a member?"></apex:outputText>
@@ -33,44 +44,50 @@
                         <apex:outputText rendered="{!NOT(isLLPCompany)}" value=" {!companyName} has the following directors listed on the public register"></apex:outputText>
                         <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following members listed on the public register"></apex:outputText>
                     </p>
-                    <ul class="list list-bullet">
-                        <apex:repeat value="{!listOfDirectors}" var="director" id="directorslistID">
-                            <li>{!director.officerTXT}</li>
-                        </apex:repeat>
-                    </ul>
-                    <fieldset class="inline">
-                        <legend class="visuallyhidden">
-                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you the sole director listed above?"></apex:outputText>
-                            <apex:outputText rendered="{!isLLPCompany}" value="Are you the sole member listed above?"></apex:outputText>
-                        </legend>
-                        <div id="presenterSelection" class="form-group">
-                            <label class="block-label" for="radio-indent-1">
-                                <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"> Yes
-                                </input>
-                            </label>
-                            <label class="block-label" for="radio-indent-2">
-                                <input class="presenterNO" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"> No
-                                </input>
-                            </label>
-                        </div>
-                    </fieldset>
+                    <div class="form-group {!errorVal}">
+                      <span class="error-message" id="error-message-full-name">{!currentPageError}</span>
+                        <ul class="list list-bullet">
+                            <apex:repeat value="{!listOfDirectors}" var="director" id="directorslistID">
+                                <li>{!director.officerTXT}</li>
+                            </apex:repeat>
+                        </ul>
+                        <fieldset class="inline">
+
+                            <legend class="visuallyhidden">
+                                <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you the sole director listed above?"></apex:outputText>
+                                <apex:outputText rendered="{!isLLPCompany}" value="Are you the sole member listed above?"></apex:outputText>
+                            </legend>
+                            <div id="presenterSelection" class="form-group">
+                                <label class="block-label" for="radio-indent-1">
+                                    <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"> Yes
+                                    </input>
+                                </label>
+                                <label class="block-label" for="radio-indent-2">
+                                    <input class="presenterNO" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"> No
+                                    </input>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
                     <apex:outputPanel id="emptyPanel"></apex:outputPanel>
                     <apex:outputPanel id="SecondDiv">
-                        <apex:outputPanel rendered="{!!directorPresenter}" id="divPresenter">
-                            <div aria-hidden="false" class="panel panel-border-narrow">
-                                <p>
-                                    <apex:outputText rendered="{!NOT(isLLPCompany)}" value="
+                        <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
+                            <div class="form-group">
+                                <div aria-hidden="false" class="panel panel-border-narrow">
+                                    <p>
+                                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="
                                 To apply to close this company we will need to know your details to help the director(s) recognise your request. We'll also contact you through the email address used with this account."></apex:outputText>
-                                    <apex:outputText rendered="{!isLLPCompany}" value="
+                                        <apex:outputText rendered="{!isLLPCompany}" value="
                                     To apply to close this company we will need to know your details to help the member(s) recognise your request. We'll also contact you through the email address used with this account."></apex:outputText>
-                                </p>
-                                <div class="form-group">
-                                    <label class="form-label" for="directors-name">Your full name</label>
-                                    <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="directors-confirm-phone">Phone number</label>
-                                    <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                                    </p>
+                                    <div class="form-group ">
+                                        <label class="form-label" for="directors-name">Your full name</label>
+                                        <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="directors-confirm-phone">Phone number</label>
+                                        <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                                    </div>
                                 </div>
                             </div>
                         </apex:outputPanel>
@@ -78,12 +95,12 @@
                     <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
                         <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
                     </apex:actionFunction>
-                </div>
-                <br />
-                <br /> &nbsp;
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                    <br />
+                    <br /> &nbsp;
+                    <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    <br /> &nbsp;
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

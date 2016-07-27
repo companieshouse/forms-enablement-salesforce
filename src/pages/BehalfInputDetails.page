@@ -19,44 +19,65 @@
 <apex:page title="{!$Label.UI_Text_Behalf_Input_Details}" controller="BehalfInputDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
-                <div class="form-group">
+            <apex:form>
+                <apex:outputPanel id='masterPanel'>
                     <apex:outputPanel id="emptyPanel" />
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
                     <h1 class="heading-xlarge">
                         <apex:outputText value="{!headerBox1}"></apex:outputText>
                     </h1>
                     <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
-                    <div class="form-group">
+                    <div class="form-group {!nameErrorVal}">
                         <label for="inputName">
+                            <span class='error-message'>
+                                <apex:outputText rendered='{!nameError}' id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                            </span>
                             <!-- Full name -->
-                            <apex:input styleclass="form-control" id="inputName" type="text" value="{!nameAuthorized}" />
+                            <apex:inputText styleclass="form-control" id="inputName" value="{!nameAuthorized}" />
                         </label>
                     </div>
                     <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
-                    <div class="form-group">
+                    <div class="form-group {!emailErrorVal}">
                         <label for="inputEmail">
+                            <span class='error-message'>
+                                <apex:outputText rendered='{!emailError}' styleClass='error-mesage' id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                            </span>
                             <!-- Email -->
-                            <apex:input styleclass="form-control" id="inputEmail" type="email" value="{!emailDirector}" />
+                            <apex:inputText styleclass="form-control" id="inputEmail" value="{!emailDirector}" />
                         </label>
                     </div>
-                </div>
-                <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
-                <div class="form-group">
-                    <label class="block-label" for="radio-1">
-                        <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
-                    </label>
-                    <label class="block-label" for="radio-3">
-                        <input id="radio-3" onchange="updateSelectedBehalf(3);" type="radio" name="radio-group" value="3" /> They have authority to sign as the Corporate Entity
-                    </label>
-                </div>
-                <br />
-                <br />
-                <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                <br />
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
-                <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
-                    <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
-                </apex:actionFunction>
+                    <span class='error-message'>
+                        <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
+                    </span>
+                    <div class="form-group {!behalfSelectionerrorVal}">
+                        <apex:outputText rendered='{!behalfError}' styleClass='error-mesage' id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        <label class="block-label" for="radio-1">
+                            <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
+                        </label>
+                        <label class="block-label" for="radio-3">
+                            <input id="radio-3" onchange="updateSelectedBehalf(2);" type="radio" name="radio-group" value="2" /> They have authority to sign as the Corporate Entity
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                        <br />
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    </div>
+                    <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+                        <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
+                    </apex:actionFunction>
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: BehalfWhichSignatory
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  SylvainP      2016-06-17  Initial development.
 */
@@ -19,7 +19,8 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
 
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}
-
+    public String currentErrorMessage {get; set;}
+    public String errorVal {get; set;}
     public Boolean behalfValidation {get; set;}
     public Boolean isLLPCompany {get; set;}
 
@@ -29,23 +30,22 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public Id selectedId {get; set;}
     public List<officerContainer> listOfDirectors {get; set;}
 
-    public BehalfWhichSignatoryController(){
+    public BehalfWhichSignatoryController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
 
-    
-    
+
+
     public void initialiseStep() {
-       
+
         showNoError = false;
         isLLPCompany = submissionMgr.submission.isLLP__c;
 
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
 
-        if(isLLPCompany)
-        {
+        if (isLLPCompany) {
             headerBox1 = headerBox1.replace('Director', 'Member');
             headerBox1 = headerBox1.replace('Directors', 'Members');
 
@@ -57,88 +57,86 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
 
             textBox1 = textBox1.replace('director', 'member');
             textBox1 = textBox1.replace('directors', 'members');
-        }  
+        }
 
-        return; 
+        return;
     }
 
-    private void persistStep(){
-        if(listOfDirectors == null)
+    private void persistStep() {
+        if (listOfDirectors == null)
             return;
-            
-    	for(Officer__c off :submissionMgr.submission.Officers__r)
-        {
-            for(officerContainer offCont :listOfDirectors)
-            {
-                if(off.Id == offCont.officer.Id)
-                {
-                    if(offCont.isSignatoryBehalf)
-		    		{
-		    			off.isSignatoryBehalf__c = offCont.isSignatoryBehalf;
-		    		}
+
+        for (Officer__c off : submissionMgr.submission.Officers__r) {
+            for (officerContainer offCont : listOfDirectors) {
+                if (off.Id == offCont.officer.Id) {
+                    if (offCont.isSignatoryBehalf) {
+                        off.isSignatoryBehalf__c = offCont.isSignatoryBehalf;
+                    }
                 }
             }
         }
 
-        submissionMgr.persist();    
+        submissionMgr.persist();
     }
-    // End Instance methods.    
-    
-    // Action methods.     
-    public PageReference nextAction(){ 
+    // End Instance methods.
+
+    // Action methods.
+    public PageReference nextAction() {
+        if (selectedId == null) {
+            hasPageErrors = true;
+            currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
+            errorVal = 'error';
+            return null;
+        }
         if (!validatePageState()) return Page.TransactionException;
 
-        persistStep();      
+        persistStep();
 
-        return nextStep();      
-    }
-    
-    public void updateDirectorList(){
+        return nextStep();
     }
 
-    public PageReference previousAction(){
+    public void updateDirectorList() {
+    }
+
+    public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
-                
+
         return previousStep();
     }
 
-    public PageReference initPage(){
+    public PageReference initPage() {
         initialiseAction();
 
-        if(submissionMgr.submission.SoleDirectorPresenter__c || !submissionMgr.submission.isBehalfSignatoryEnable__c)
-        {
-            return nextAction();
+        if (submissionMgr.submission.SoleDirectorPresenter__c || !submissionMgr.submission.isBehalfSignatoryEnable__c) {
+            persistStep();
+
+            return nextStep();
         }
 
         listOfDirectors = new List<officerContainer>();
         //Initialise the list of directors
-        for(Officer__c off : submissionMgr.submission.Officers__r){
-        	if(off.isSignatory__c && !off.IsPresenter__c)
-        	{
-        		listOfDirectors.add(new officerContainer(off));
-        	}
+        for (Officer__c off : submissionMgr.submission.Officers__r) {
+            if (off.isSignatory__c && !off.IsPresenter__c) {
+                listOfDirectors.add(new officerContainer(off));
+            }
         }
 
         return null;
     }
 
-    public PageReference updateSelectedPresenter()
-    {
-    	if(selectedId != null)
-    	{
-    		for(officerContainer off :listOfDirectors)
-            {
-                if(off.officer.Id == selectedId)
-                {
-                	off.isSignatoryBehalf = true;
+    public PageReference updateSelectedPresenter() {
+        if (selectedId != null) {
+            for (officerContainer off : listOfDirectors) {
+                if (off.officer.Id == selectedId) {
+                    off.isSignatoryBehalf = true;
                 }
             }
-    	}
+        }
 
-    	return null;
+        return null;
     }
 
-    public with sharing class officerContainer{
+    public with sharing class officerContainer {
 
         public Officer__c officer {get; set;}
         public String officerTXT {get; set;}
@@ -147,8 +145,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         public Boolean isSignatory {get; set;}
         public Boolean isSignatoryBehalf {get; set;}
 
-        public officerContainer(Officer__c off)
-        {
+        public officerContainer(Officer__c off) {
             officer = off;
             officerTXT = off.Name;
             email = off.Email__c;
