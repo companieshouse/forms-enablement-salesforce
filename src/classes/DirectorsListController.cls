@@ -27,6 +27,9 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public List<String> listOfDirectors {get; set;}
     public Integer nbOfOfficers {get; set;}
 	public Boolean isLLPCompany {get; set;}
+    public Boolean isPLCLTDCompany {get; set;}
+    public Boolean isLPCompany {get; set;}
+    public String officerTerm {get; set;}
 
     public DirectorsListController(){
         super();
@@ -46,6 +49,10 @@ public with sharing class DirectorsListController extends TransactionStepControl
         listOfDirectors = new List<String>();
         showNoError = false;
 		isLLPCompany = submissionMgr.submission.isLLP__c;
+        isPLCLTDCompany = false;
+        isLPCompany = false;
+        officerTerm = '';
+
         if(isPageAlreadyValidStep)
         {
             hasAlreadyLoadedOfficers = true;
@@ -74,6 +81,9 @@ public with sharing class DirectorsListController extends TransactionStepControl
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
 		submissionMgr.submission.isLLP__c = isLLPCompany;
+        submissionMgr.submission.isLP__c = isLPCompany;
+        submissionMgr.submission.officerTerminology__c = officerTerm;
+        submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
         submissionMgr.persist();    
         System.debug(LoggingLevel.ERROR,'End of Persist Step');
 
@@ -188,27 +198,41 @@ public with sharing class DirectorsListController extends TransactionStepControl
             List<Contact> contactList = new List<Contact>();
 
             for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
-                if(officer.officer_role == 'director' && (officer.resigned_on == null || officer.resigned_on > date.today()))
+                Boolean addOff = false;
+                if( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today()))
+                {   
+                    addOff = true;
+					isLLPCompany = false; 
+                    isLPCompany = false;
+                    isPLCLTDCompany = true;
+                    officerTerm = 'Director(s)';
+
+                }else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-designated-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    addOff = true;
+                    isLLPCompany = true;
+                    isPLCLTDCompany = false;
+                    isLPCompany = false;
+                    officerTerm = 'Member(s)';
+                   
+                }else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    isLLPCompany = false;
+                    isPLCLTDCompany = false;
+                    isLPCompany = true;
+                    officerTerm = 'Partner(s)';
+                }   
+
+
+                if(addOff)
                 {
-                    contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
-					isLLPCompany = false;
+                    contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));    
                     listOfDirectors.add(officer.name);
-                    //Temporary save an address email against each officer and save officer to the transaction
                     officerList.add(new Officer__c(Name = officer.name, Title__c = extractOfficerName(2, officer.name),
                     Forename__c  = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
                     Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
                       Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), Transaction__c =submissionMgr.submission.Id ));
-
-                }else if (officer.officer_role == 'llp-designated-member' && (officer.resigned_on == null || officer.resigned_on > date.today())) {
-                    isLLPCompany = true;
-                    listOfDirectors.add(officer.name);
-                    contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id,AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
-                    //Temporary save an address email against each officer and save officer to the transaction
-                    officerList.add(new Officer__c(Name = officer.name, Title__c = extractOfficerName(2, officer.name),
-                    Forename__c  = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
-                    Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)),  Transaction__c =submissionMgr.submission.Id ));
                 }
+                
+
             }
 
             nbOfOfficers = listOfDirectors.size();

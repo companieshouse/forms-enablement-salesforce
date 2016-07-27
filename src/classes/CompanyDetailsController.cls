@@ -28,7 +28,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
     // dynamic set data
     public String companyName {get; set;}
     public String companyNumber {get; set;}
-    public String companyType {get; set;}
+    public String companyTypeText {get; set;}
     public String companyStatus {get; set;}
     public String companyDateOfCreation {get; set;}
 
@@ -43,6 +43,8 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
     public String companyLocality {get;set;}
     public Boolean showprevious {get; set;}
 
+    public Map<String, String> companyType {get; set;}
+
     public CompanyDetailsController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -55,6 +57,34 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
         displayText3 = transactionMgr.currentStep.Display_Text_3__c;
         headerText1 = transactionMgr.currentStep.Header_Text_1__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+        companyType = new Map<String, String>();
+
+        companyType.put('private-unlimited','Private unlimited company');
+        companyType.put('ltd','Private limited company');
+        companyType.put('plc','Public limited company');
+        companyType.put('old-public-company','Old public company');
+        companyType.put('private-limited-guarant-nsc-limited-exemption','Private Limited Company by guarantee without share capital, use of \'Limited\'exemption');
+        companyType.put('limited-partnership','Limited partnership');
+        companyType.put('private-limited-guarant-nsc','Private limited by guarantee without share capital');
+        companyType.put('converted-or-closed','Converted / closed');
+        companyType.put('private-unlimited-nsc','Private unlimited company without share capital');
+        companyType.put('private-limited-shares-section-30-exemption','Private Limited Company, use of \'Limited\'exemption');
+        companyType.put('assurance-company','Assurance company');
+        companyType.put('oversea-company','Overseas company');
+        companyType.put('eeig','European economic interest grouping (EEIG)');
+        companyType.put('icvc-securities','Investment company with variable capital');
+        companyType.put('icvc-warrant','Investment company with variable capital');
+        companyType.put('icvc-umbrella','Investment company with variable capital');
+        companyType.put('industrial-and-provident-society','Industrial and provident society');
+        companyType.put('northern-ireland','Northern Ireland company');
+        companyType.put('northern-ireland-other','Credit union (Northern Ireland)');
+        companyType.put('llp','Limited liability partnership');
+        companyType.put('royal-charter','Royal charter company');
+        companyType.put('investment-company-with-variable-capital','Investment company with variable capital');
+        companyType.put('unregistered-company','Unregistered company');
+        companyType.put('other','Other company type');
+        companyType.put('european-public-limited-liability-company-se','European public limited liability company (SE)');
+        companyType.put('uk-establishment','UK establishment company');
        
 
         CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
@@ -70,8 +100,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
         companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
 
 		companyName = compProf.company_name;
-		companyType = compProf.type;
-        companyType = companyType.toUpperCase();
+		companyTypeText = companyType.get(compProf.type);
         showprevious = true;
 
         companyAddress = (companyAddress1 ==  null ? '' : companyAddress1+ '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2+ '<br/>')  + (companyLocality ==  null ? '' : companyLocality+ '<br/>')  + (companyregion ==  null ? '' : companyregion+ '<br/>') + (companypostcode ==  null ? '' : companypostcode+ '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
@@ -84,7 +113,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
     	submissionMgr.submission.CompanyName__c = companyName;
     	submissionMgr.submission.CompanyStatus__c = companyStatus;
     	submissionMgr.submission.CompanyIncorporationDate__c = companyDateOfCreation;
-    	submissionMgr.submission.CompanyType__c = companyType;
+    	submissionMgr.submission.CompanyType__c = companyTypeText;
     	submissionMgr.submission.CompanyAddress1__c = companyAddress1;
     	submissionMgr.submission.CompanyAddress2__c = companyAddress2;
     	submissionMgr.submission.CompanyCountry__c = companyCountry;
