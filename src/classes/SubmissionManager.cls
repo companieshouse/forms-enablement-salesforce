@@ -240,10 +240,8 @@ public with sharing class SubmissionManager {
 
         s.Historical_Valid_Step_Ids__c = historicalSteps;
         s.Valid_Step_Ids__c=newValidStepIdPath;
-        if(s.Status__c == AppConstants.REQUEST_STATUS_SIGNED) 
-        {
-            s.MultipleDirectors__c = false;        
-        }
+        
+        s.MultipleDirectors__c = false;        
 	
         update s;
     }

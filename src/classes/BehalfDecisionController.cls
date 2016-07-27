@@ -95,7 +95,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         initialiseAction();
 
         if (submissionMgr.submission.SoleDirectorPresenter__c) {
-            return nextAction();
+            return nextStep();
         }
 
         return null;
