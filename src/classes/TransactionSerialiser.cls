@@ -917,7 +917,6 @@ public class TransactionSerialiser {
 				gen.writeObject(capSSAtt);
 			}
 			gen.writeEndObject();
-			//gen.replace('"sNumber":', '"number":');
 			return gen.getAsString();
 		}
 
@@ -1006,7 +1005,6 @@ public class TransactionSerialiser {
 			gen.writeObject(form);
 			gen.writeFieldName('attachments');
 			gen.writeObject(lAtt);
-
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
