@@ -17,7 +17,7 @@
 <apex:page title="Closing a limited company" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -32,17 +32,16 @@
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="directorsList">
-                    <h1 class="heading-xlarge">
-                                <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Which director are you?"></apex:outputText>
-                                <apex:outputText rendered="{!isLLPCompany}" value="which member are you?"></apex:outputText>
-                            </h1>
+                        <h1 class="heading-xlarge">
+                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Which director are you?"></apex:outputText>
+                            <apex:outputText rendered="{!isLLPCompany}" value="which member are you?"></apex:outputText>
+                        </h1>
                         <div class="form-group {!errorVal}">
-                            
                             <p class="lede">
-                             <apex:outputPanel rendered="{!hasPageErrors}">
-                            <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
-                            </span>
-                        </apex:outputPanel>
+                                <apex:outputPanel rendered="{!hasPageErrors}">
+                                    <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                                    </span>
+                                </apex:outputPanel>
                                 <apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director(s) listed on the public register."></apex:outputText>
                                 <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member(s) listed on the public register."></apex:outputText>
                             </p>
@@ -56,14 +55,13 @@
                             <apex:actionFunction name="selectPresenter" action="{!selectPresenter}" reRender="none">
                                 <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
                             </apex:actionFunction>
-                            
                         </div>
                         <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br /> &nbsp;
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br /> &nbsp;
                         <div class="form-group">
                             <apex:commandButton reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                             <br /> &nbsp;

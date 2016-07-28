@@ -598,6 +598,57 @@ public class TransactionSerialiser {
 			return JSON.serialize('Argument cannot be null.');
 		}
 		//Build each object for the JSON
+		if (transact.Form_Name__c == 'SH20') {
+
+			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
+
+			payment pay = new payment();
+
+			if (transact.isPaymentRequired__c)
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+
+			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
+
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c);
+			List<Contact> lOff = [SELECT Name, LastName, Title, Middlenames__c, FirstName, DateSigned__c FROM Contact where Transaction__c = :transact.Id];
+			List<officer> lOffSerialized = new List<officer>();
+
+			for (Contact off : lOff) {
+				if (off.DateSigned__c != null) {
+					// change
+					Datetime dateSigned = off.DateSigned__c;
+
+					lOffSerialized.add(new officer(new personName((off.Title == null ? '' : off.Title), (off.FirstName == null ? '' : off.FirstName), (off.Middlenames__c == null ? '' : off.Middlenames__c), (off.LastName == null ? '' : off.LastName)), getFormatedDate(date.today()) ));
+				}
+			}
+
+			officerCollection officerCollection = new officerCollection(lOffSerialized);
+
+			corporateBody corp = new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c, officerCollection);
+
+			formdata form = new formdata(fil, corp);
+			//Get the attachment into the attachment object
+			//
+			List < Attachment > attRec = [Select Id, Body from Attachment where parentId = : transact.Id];
+			if (attRec == null) {
+				return JSON.serialize('Transaction must have a form attached.');
+			}
+			List < attachments > lAtt = new List < attachments > ();
+			for (Attachment att : attRec) {
+				lAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));
+			}
+			JSONGenerator gen = JSON.createGenerator(true);
+			//if DSO1
+			gen.writeStartObject();
+			gen.writeFieldName('metadata');
+			gen.writeObject(met);
+			gen.writeFieldName('formdata');
+			gen.writeObject(form);
+			gen.writeFieldName('attachments');
+			gen.writeObject(lAtt);
+			gen.writeEndObject();
+			return gen.getAsString();
+		}
 		if (transact.Form_Name__c == 'SH10') {
 			// SH10 specific
 
