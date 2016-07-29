@@ -211,11 +211,16 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 if(addOff)
                 {
                     contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));    
-                    listOfDirectors.add(officer.name);
-                    officerList.add(new Officer__c(Name = officer.name, Title__c = extractOfficerName(2, officer.name),
-                    Forename__c  = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
-                    Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), Transaction__c =submissionMgr.submission.Id ));
+                    String offFirstName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : '');
+                    String offLastName = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name));
+                    String offTitle = (extractOfficerName(2, officer.name) == null ? '' : extractOfficerName(2, officer.name));
+                    String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): '');
+                    String offName = offTitle + (offTitle == '' ? '' : ' ') + offFirstName + (offFirstName == '' ? '' : ' ' ) + offLastName;
+                    listOfDirectors.add(offName);
+                    officerList.add(new Officer__c(Name = offName, Title__c = offTitle,
+                    Forename__c  = offFirstName,
+                    Middlenames__c = offMiddleName,
+                      Surname__c =  offLastName, Transaction__c =submissionMgr.submission.Id ));
                 }
                 
 
