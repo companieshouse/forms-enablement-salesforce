@@ -78,6 +78,7 @@ Ver. Author             Date        Detail
                         <div class="form-group">
                             <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
                             <br />
+                            <br />
                             <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonCustom" />
                         </div>
                     </apex:outputPanel>
