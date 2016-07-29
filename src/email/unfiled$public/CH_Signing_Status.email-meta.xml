@@ -8,14 +8,33 @@
     <subject>Review your transaction</subject>
     <textOnly>Companies House
 
-Application to close {!Transaction__c.CompanyName__c}
+Request to close {!Transaction__c.CompanyName__c}
 
-Dear {!Transaction__c.PresenterName__c}
+{!Transaction__c.PresenterName__c}
 
-Your Companies House Form {!Transaction__c.Form_Name__c} is awaiting signatures from multiple directors. If you would like to keep track of this process please click on the link here  {!Transaction__c.SignerStatus__c} .
+The request to close the following company has been sent to the directors and/or anyone authorised to act on their behalf for signing:
 
-Regards,
+Company name: {!Transaction__c.CompanyName__c}
+Company number: {!Transaction__c.CompanyNumber__c}
+Registered address:  {!Transaction__c.CompanyAddress1__c}
+         {!Transaction__c.CompanyAddress2}
+         {!Transaction__c.CompanyLocality__c}
+         {!Transaction__c.CompanyRegion__c}
+         {!Transaction__c.CompanyPostCode__c}
+         {!Transaction__c.CompanyCountry__c}
 
-Companies House</textOnly>
+The status of the request can be viewed using the following link:{!Transaction__c.SignerStatus__c}.
+
+The request will be deleted if it&apos;s not approved and completed by {!Transaction__c.ExpiryDate__c}.
+
+Your reference number is  FE{!Transaction__c.Id}. You&apos;ll need to quote this if you contact us about your request.
+
+
+
+
+
+This is an automated email, please do not reply. Forward any enquiries to the following:
+Email: enquiries@companieshouse.gov.uk
+Service Desk: +44 (0)303 1234 500</textOnly>
     <type>custom</type>
 </EmailTemplate>

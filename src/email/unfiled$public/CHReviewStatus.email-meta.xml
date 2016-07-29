@@ -5,15 +5,34 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>CH Review Status</name>
     <style>none</style>
-    <subject>Review your transaction</subject>
+    <subject>Signing complete</subject>
     <textOnly>Companies House
 
-Dear {!Transaction__c.Presenter__c}, 
+Request to close {!Transaction__c.CompanyName__c}
 
-Your Companies House form {!Transaction__c.Form_Name__c} has been signed and is awaiting your review for completion. If you would like to finish this process please click on the link &lt;a href=&quot;{!Transaction__c.ReviewRedirect__c}&quot;&gt;Here&lt;/a&gt; 
+{!Transaction__c.PresenterName__c}
 
-Regards, 
+The request to close the following company has been approved by everyone required:
 
-Companies House</textOnly>
+Company name: {!Transaction__c.CompanyName__c}
+Company number: {!Transaction__c.CompanyNumber__c}
+Registered address:  {!Transaction__c.CompanyAddress1__c}
+         {!Transaction__c.CompanyAddress2}
+         {!Transaction__c.CompanyLocality__c}
+         {!Transaction__c.CompanyRegion__c}
+         {!Transaction__c.CompanyPostCode__c}
+         {!Transaction__c.CompanyCountry__c}
+
+You can review, complete and submit the request using the following link: {!Transaction__c.ReviewRedirect__c}.
+
+Your reference number is  FE{!Transaction__c.Id}. You&apos;ll need to quote this if you contact us about your request.
+
+
+
+
+
+This is an automated email, please do not reply. Forward any enquiries to the following:
+Email: enquiries@companieshouse.gov.uk
+Service Desk: +44 (0)303 1234 500</textOnly>
     <type>custom</type>
 </EmailTemplate>

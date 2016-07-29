@@ -88,6 +88,17 @@
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/CH_Signing_Status</template>
     </alerts>
+    <alerts>
+        <fullName>Transaction_inactive_deleted</fullName>
+        <description>Transaction inactive/deleted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_Application_Deleted</template>
+    </alerts>
     <fieldUpdates>
         <fullName>TransactionPathBuilder</fullName>
         <field>TransactionPath__c</field>
@@ -192,6 +203,16 @@
         </criteriaItems>
         <description>Notify presenter when Transaction Status is update with &apos;Declined&apos;.
 Email should contain a URL to start a new journey</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>DeclineforDirectors</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Declined</value>
+        </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -319,6 +340,21 @@ Email should contain a URL to start a new journey</description>
             <operation>equals</operation>
             <value>Submitted</value>
         </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>applicationDeleted</fullName>
+        <actions>
+            <name>Transaction_inactive_deleted</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.InActiveTransaction__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
