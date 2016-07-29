@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;We&apos;ll use this to request their approval.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;What&apos;s the email address of the director?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

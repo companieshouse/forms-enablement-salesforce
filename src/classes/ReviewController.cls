@@ -312,11 +312,11 @@ public class ReviewController extends TransactionStepControllerBase {
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
-        displayText1 = transactionMgr.currentStep.Display_Text_1__c;
-        displayText2 = transactionMgr.currentStep.Display_Text_2__c;
-        displayText3 = transactionMgr.currentStep.Display_Text_3__c;
-        headerText1 = transactionMgr.currentStep.Header_Text_1__c;
-        headerText2 = transactionMgr.currentStep.Header_Text_2__c;
+        displayText1 = transactionMgr.currentStep.Display_Text_1__c == null ? '' :transactionMgr.currentStep.Display_Text_1__c ;
+        displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' :transactionMgr.currentStep.Display_Text_2__c;
+        displayText3 = transactionMgr.currentStep.Display_Text_3__c == null ? '' :transactionMgr.currentStep.Display_Text_3__c;
+        headerText1 = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
+        headerText2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' :transactionMgr.currentStep.Header_Text_2__c;
         standardPanelView = transactionMgr.currentstep.StandardView__c;
         custompanelView = transactionMgr.currentstep.CustomView__c;
         companyName = submissionMgr.submission.CompanyName__c;

@@ -19,13 +19,20 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
 
 	public Boolean pendingPage {get; set;}
 	public String compName {get; set;}
-	public List<String> listOfDirectors {get; set;}
+	public List<wrapperDirector> listOfDirectors {get; set;}
 	public String emailPresenter {get; set;}
 	public Boolean successSigning {get; set;}
 	public Boolean failureSigning {get; set;}
 	public Boolean skipPage {get; set;}
     public Boolean presenterSigning {get; set;}
     public Boolean multipleDirectors {get; set;}
+    public String pageTitle {get; set;}
+    public String pageTitle2 {get; set;}
+    public String pageTitle3 {get; set;}
+    public String pageBody {get; set;}
+    public String pageBody2 {get; set;}
+    public String pageBodySuccess {get; set;}
+    public String pageBodyFailure {get; set;}
 
 	public DigitalSignatureController(){
 		super();
@@ -42,13 +49,22 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
         multipleDirectors = false;
 		compName = submissionMgr.submission.CompanyName__c;
 		Integer i = 0;
-		listOfDirectors = new List<String>();
+		listOfDirectors = new List<wrapperDirector>();
+
+        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageTitle2 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
+        pageTitle3 = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        pageBody = pageBody.replace('COMPANYNAME', compName);
+        pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        pageBodySuccess = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
+        pageBodyFailure = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
 		for(Contact off: submissionMgr.submission.Contacts__r)
 		{
 			if(off.isSignatory__c)
             {
                 i++;
-				listOfDirectors.add(off.Name);
+				listOfDirectors.add(new wrapperDirector(off.Name, off.Email));
             }
             if(off.IsPresenter__c)
             {
@@ -182,6 +198,17 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
         if (!validatePageState()) return Page.TransactionException;
                 
         return previousStep();
+    }
+
+    public with sharing class wrapperDirector{
+        public String name {get; set;}
+        public String email {get; set;}
+
+        public wrapperDirector(String name, String email)
+        {
+            this.name = name;
+            this.email = email;
+        }
     }
     // End Action methods.
 }

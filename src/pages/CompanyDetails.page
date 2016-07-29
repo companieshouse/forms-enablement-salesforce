@@ -3,21 +3,13 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <h1 class="heading-xlarge">
-                {!headerText1}
-               </h1>
-                <p class="lede">{!displayText1}
-                </p>
-                      <h2 class="heading-large">{!companyName}</h2>
+                <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
+                
+                <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
+                
+                <p class="heading-large">{!companyName}</p>
 
                 <table class="check-your-answers">
-                   <!-- <thead>
-                        <tr>
-                            <th colspan="3">
-                                <h2 class="heading-medium">{!companyName}</h2>
-                            </th>
-                        </tr>
-                    </thead> -->
                     <tbody>
                         <tr>
                             <td>Company Number</td>
@@ -45,6 +37,7 @@
                 </table>
                 <br/>
                 <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" rendered="{!NOT(isLastPage)}" />
+                <br/>
                 <br/>
                 <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Not_Your_Company}" id="thePreviousButton" /> 
             </apex:form>

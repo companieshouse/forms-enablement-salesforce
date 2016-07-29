@@ -57,6 +57,62 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Company_Page_Body_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page Body 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page Body 2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page Body 3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_4__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page Body 4</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_HiddenT1__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page HiddenT1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_HiddenT2__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page HiddenT2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_HiddenT3__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page HiddenT3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Page Title</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Expiry_Date_Length__c</fullName>
         <externalId>false</externalId>
         <label>Expiry Date Length</label>

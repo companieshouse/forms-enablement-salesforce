@@ -22,7 +22,6 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public String currentErrorMessage {get; set;}
     public String errorVal {get; set;}
     public Boolean behalfValidation {get; set;}
-    public Boolean isLLPCompany {get; set;}
 
     public String textBox1 {get; set;}
     public String headerBox1 {get; set;}
@@ -40,24 +39,9 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public void initialiseStep() {
 
         showNoError = false;
-        isLLPCompany = submissionMgr.submission.isLLP__c;
 
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
-
-        if (isLLPCompany) {
-            headerBox1 = headerBox1.replace('Director', 'Member');
-            headerBox1 = headerBox1.replace('Directors', 'Members');
-
-            headerBox1 = headerBox1.replace('director', 'member');
-            headerBox1 = headerBox1.replace('directors', 'members');
-
-            textBox1 = textBox1.replace('Director', 'Member');
-            textBox1 = textBox1.replace('Directors', 'Members');
-
-            textBox1 = textBox1.replace('director', 'member');
-            textBox1 = textBox1.replace('directors', 'members');
-        }
 
         return;
     }

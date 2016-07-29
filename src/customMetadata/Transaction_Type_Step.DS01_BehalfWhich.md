@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;To request approval from the directors, we need to know if someone else will be approving this as them.&lt;/p&gt;&lt;p&gt;Select all that apply:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Select all that apply&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Which directors need someone to approve this on their behalf?</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which director need someone to approve your request on their behalf?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

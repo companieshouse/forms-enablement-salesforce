@@ -18,6 +18,8 @@ Ver. Author        Date        Detail
 public class ExternalEmbedDocuSignController extends TransactionStepControllerBase {
 
 	public String externalURL {get; set;}
+    public String officerTerm {get; set;}
+    public String compName {get; set;}
 
 	public ExternalEmbedDocuSignController(){
 		super();
@@ -25,6 +27,8 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 	}
 
 	public void initialiseStep() {
+        officerTerm = submissionMgr.submission.officerTerminology__c == null ? 'Director(s)' : submissionMgr.submission.officerTerminology__c;
+        compName = submissionMgr.submission.CompanyName__c == null ? 'Default Name' : submissionMgr.submission.CompanyName__c;
 	}
 
     

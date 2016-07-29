@@ -62,6 +62,7 @@ public with sharing class SubmissionController extends TransactionStepController
             companyName = submissionMgr.submission.CompanyName__c;
             displayHeader = transactionMgr.currentStep.Header_Text_1__c;
             displayText1 = transactionMgr.currentStep.Display_Text_1__c;
+            displayText1 = displayText1.replace('PAYMENTREF', submissionMgr.submission.paymentReference__c);
             displayText2 = transactionMgr.currentStep.Display_Text_2__c;
             displayText3 = transactionMgr.currentStep.Display_Text_3__c;
 

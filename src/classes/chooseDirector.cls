@@ -36,10 +36,6 @@ public class chooseDirector extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Boolean isLLPCompany {
-        get;
-        set;
-    }
     public Integer majoritytosign {
         get;
         set;
@@ -49,6 +45,12 @@ public class chooseDirector extends TransactionStepControllerBase {
         get;
         set;
     }
+
+    public String errorMsg1 {get; set;}
+
+    public String pageTitle {get; set;}
+
+    public String pageBody {get; set;}
 
 
     public chooseDirector() {
@@ -62,7 +64,13 @@ public class chooseDirector extends TransactionStepControllerBase {
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();
-        isLLPCompany = submissionMgr.submission.isLLP__c;
+        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        pageBody += transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        errorMsg1 = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
+
+        pageBody = pageBody.replace('X', String.valueOf(majoritytosign));
+        errorMsg1 = errorMsg1.replace('X', String.valueOf(majoritytosign));
         buildDirectorsList();
         return;
     }

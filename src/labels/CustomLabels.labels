@@ -62,7 +62,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Behalf Decision</shortDescription>
-        <value>Approving on behalf of a director</value>
+        <value>Please inform us is there is someone approving on behalf for this form.</value>
     </labels>
     <labels>
         <fullName>UI_Text_Behalf_Input_Details</fullName>
@@ -70,7 +70,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Behalf Input Details</shortDescription>
-        <value>Inputs details</value>
+        <value>Please input the name, the email and the reason of the approving person</value>
     </labels>
     <labels>
         <fullName>UI_Text_Behalf_Which_Signatory</fullName>
@@ -78,15 +78,15 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Behalf Which Signatory</shortDescription>
-        <value>Behalf which selection</value>
+        <value>Please select which person is going to be sign on behalf.</value>
     </labels>
     <labels>
         <fullName>UI_Text_Company</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>UI Text Company</shortDescription>
-        <value>Company</value>
+        <value>Search a Company</value>
     </labels>
     <labels>
         <fullName>UI_Text_Company_Details</fullName>
@@ -94,7 +94,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Company Details</shortDescription>
-        <value>Company Details</value>
+        <value>The details of your company</value>
     </labels>
     <labels>
         <fullName>UI_Text_Company_Page_Display_Text</fullName>
@@ -158,7 +158,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Directors List</shortDescription>
-        <value>Directors</value>
+        <value>Are you a director?</value>
     </labels>
     <labels>
         <fullName>UI_Text_DocuSign</fullName>
@@ -166,7 +166,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text DocuSign</shortDescription>
-        <value>Signing Page</value>
+        <value>The page redirecting to the digital signature or presenting the result of the signature or information page if you have multiple director.</value>
     </labels>
     <labels>
         <fullName>UI_Text_DocuSignPending</fullName>
@@ -206,7 +206,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Guidance Page</shortDescription>
-        <value>Guidance Page</value>
+        <value>Guidance Page of the form</value>
     </labels>
     <labels>
         <fullName>UI_Text_Landing_Page</fullName>
@@ -302,7 +302,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Start</shortDescription>
-        <value>Start now</value>
+        <value>Start page of the form.</value>
     </labels>
     <labels>
         <fullName>UI_Text_Submit</fullName>

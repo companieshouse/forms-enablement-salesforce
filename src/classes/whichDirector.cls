@@ -28,10 +28,6 @@ public class whichDirector extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Boolean isLLPCompany {
-        get;
-        set;
-    }
     public Id selectedId {
         get;
         set;
@@ -56,6 +52,10 @@ public class whichDirector extends TransactionStepControllerBase {
         get;
         set;
     }
+
+    public String pageTitle {get; set;}
+    public String pageBody {get; set;}
+
     public whichDirector() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -74,7 +74,9 @@ public class whichDirector extends TransactionStepControllerBase {
         officerUpdaterMap = new Map < String, Officer__c > ();
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
-        isLLPCompany = submissionMgr.submission.isLLP__c;
+        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
         return;
     }
     public void selectPresenter() {

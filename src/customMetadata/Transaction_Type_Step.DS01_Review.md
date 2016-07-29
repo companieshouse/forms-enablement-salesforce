@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Review the information entered for the application to close your company.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Review your application</value>
+        <value xsi:type="xsd:string">Check your details</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

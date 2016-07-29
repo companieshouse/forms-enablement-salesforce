@@ -53,11 +53,12 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         get;
         set;
     }
-    public Boolean isLLPCompany {
-        get;
-        set;
-    }
+
+    public String pageTitle {get; set;}
+    public String pageBody {get; set;}
+    public String pageHiddenText {get; set;}
     public Boolean showMorePresenterInfo {get; set;}
+
     public PresenterDirectorController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -71,7 +72,11 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List < officerContainer > ();
-        isLLPCompany = submissionMgr.submission.isLLP__c;
+        pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;        
+        pageBody = pageBody.replace('COMPANYNAME', companyName);
+        pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;        
+
         return;
     }
     private void persistStep() {

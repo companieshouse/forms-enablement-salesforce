@@ -32,6 +32,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean isLPCompany {get; set;}
     public String officerTerm {get; set;}
     public Boolean noOfficers {get; set;}
+    public String pageTitle {get; set;}
+    public String pageText {get; set;}
 
     public DirectorsListController() {
         super();
@@ -54,6 +56,9 @@ public with sharing class DirectorsListController extends TransactionStepControl
         isPLCLTDCompany = false;
         isLPCompany = false;
         officerTerm = '';
+        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
 
         if(isPageAlreadyValidStep)
         {
@@ -79,10 +84,6 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
-		submissionMgr.submission.isLLP__c = isLLPCompany;
-        submissionMgr.submission.isLP__c = isLPCompany;
-        submissionMgr.submission.officerTerminology__c = officerTerm;
-        submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
         submissionMgr.persist();    
         System.debug(LoggingLevel.ERROR,'End of Persist Step');
 
@@ -231,6 +232,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
             //Insert the officer
             insert officerList;
             if (contactList.size() == 0) {noOfficers = true;} else if (contactList.size() > 0) {noOfficers = false;}
+
+            submissionMgr.submission.officerTerminology__c = officerTerm;
+            submissionMgr.submission.isLLP__c = isLLPCompany;
+            submissionMgr.submission.isLP__c = isLPCompany;
+            submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
+
+            update submissionMgr.submission;
+
         }
         System.debug(LoggingLevel.ERROR, 'end of List of directors');
 

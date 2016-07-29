@@ -37,9 +37,9 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="choicePanel">
                         <div class="form-group">
-                            <h1 class="heading-xlarge">
-                                <apex:outputText value="{!headerBox1}"></apex:outputText>
-                            </h1>
+                            
+                                <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                           
                             <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
                             <fieldset class="inline">
                                 <div class="form-group {!errorVal}">
@@ -58,6 +58,7 @@
                         </div>
                         <div class="form-group">
                             <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                            <br />
                             <br />
                             <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                         </div>

@@ -24,7 +24,6 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public String emailErrorVal {get; set;}
     public String behalfSelectionerrorVal {get; set;}
     public Boolean behalfValidation {get; set;}
-    public Boolean isLLPCompany {get; set;}
 
     public String textBox1 {get; set;}
     public String textBox2 {get; set;}
@@ -49,7 +48,6 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public void initialiseStep() {
 
         showNoError = false;
-        isLLPCompany = submissionMgr.submission.isLLP__c;
 
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
@@ -164,32 +162,6 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
 
         textBox3 = textBox3.replace('DIRECTORNAME', currentOfficer.Name);
 
-        if (isLLPCompany) {
-
-            headerBox1 = headerBox1.replace('Director', 'Member');
-            headerBox1 = headerBox1.replace('Directors', 'Members');
-
-            headerBox1 = headerBox1.replace('director', 'member');
-            headerBox1 = headerBox1.replace('directors', 'members');
-
-            textBox1 = textBox1.replace('Director', 'Member');
-            textBox1 = textBox1.replace('Directors', 'Members');
-
-            textBox1 = textBox1.replace('director', 'member');
-            textBox1 = textBox1.replace('directors', 'members');
-
-            textBox2 = textBox2.replace('Director', 'Member');
-            textBox2 = textBox2.replace('Directors', 'Members');
-
-            textBox2 = textBox2.replace('director', 'member');
-            textBox2 = textBox2.replace('directors', 'members');
-
-            textBox3 = textBox1.replace('Director', 'Member');
-            textBox3 = textBox1.replace('Directors', 'Members');
-
-            textBox3 = textBox1.replace('director', 'member');
-            textBox3 = textBox1.replace('directors', 'members');
-        }
 
         return null;
     }

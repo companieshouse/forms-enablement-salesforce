@@ -26,7 +26,7 @@
                 </apex:outputPanel>
                 
                 <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
-                    <fieldset class="inline">
+                    <fieldset >
                         <legend class="visuallyhidden">Select a payment method:</legend>
                         <div id="presenterSelection" class="form-group">
                         <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
@@ -35,16 +35,21 @@
                                 </input>
                             </label>
                             </apex:outputPanel>
+                            <br/>
+                            <br/>
+                            <br/>
                         <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
                             <label class="block-label" for="radio-indent-1">
-                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or Debit Card
+                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or debit Card
                                 </input>
                             </label>
                             </apex:outputPanel>
+                            <br/>
+                            <br/>
+                            <br/>
                             <apex:outputPanel id="accountPanel" rendered="{!isAccountPayment}">
-                            <p class="form-block">or</p>
                             <label class="block-label" for="radio-indent-2">
-                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Payment on Account
+                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Payment on account
                                 </input>
                             </label>
                             <apex:outputPanel id="accountInput">
@@ -52,7 +57,7 @@
                              <div aria-hidden="false" class="panel panel-border-narrow">
                                 <div class="form-group {!errorVal}">
                                     <span class='error-message'>{!currentErrorMessage}</span>
-                                    <label class="form-label" for="accountnumberinput">Account Number:</label>
+                                    <label class="form-label" for="accountnumberinput">Account number:</label>
                                     <apex:inputText styleclass="form-control" value="{!accountNumber}"  id="accountnumberinput" />
                                 </div>
                             </div>
@@ -91,7 +96,7 @@
                 <apex:outputPanel rendered="{!hasPaymentSuccess}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment is a success!
+                            Successfully paid.
                         </h1>
                         <p>
                             The payment has been succesful.
@@ -101,7 +106,7 @@
                 <apex:outputPanel rendered="{!hasPaid}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment already processed!
+                            The payment has been already processed.
                         </h1>
                         <p>
                             You have already paid for this transaction.
@@ -111,7 +116,7 @@
                 <apex:outputPanel rendered="{!hasPaymentRejected}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment has been rejected.
+                            The payment has been rejected.
                         </h1>
                         <p>
                             Do you want to try again? <a onclick="updateLink();" href="#">Try again?</a>
@@ -122,7 +127,7 @@
                 <apex:outputPanel rendered="{!hasPaymentError}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  Barclays has encoutered an issue.
+                            Payment issuer has encoutered an issue.
                         </h1>
                         <br/>
                         <p>
@@ -133,15 +138,16 @@
                 <apex:outputPanel rendered="{!hasPaymentPending}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                  The payment is pending.
+                            The payment is pending.
                         </h1>
                         <p>
-                            You will have to do further action to validate the payment.
+                            You might have to do further action to validate the payment.
                         </p>
                     </div>
                 </apex:outputPanel>
                 <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                 <br />
+                <br/>
                 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
             </apex:form>

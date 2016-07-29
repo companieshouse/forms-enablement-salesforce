@@ -20,11 +20,11 @@
     <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-It costs £FEE to close your company. Your application will not be submitted until you have made this payment.
+You need to pay £FEE before you can submit your request to close the company.
 &lt;/p&gt;
-&lt;h3 class=&quot;heading-medium&quot;&gt;
+&lt;p class=&quot;heading-medium&quot;&gt;
 How do you want to make the payment?
-&lt;/h3&gt;</value>
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -52,7 +52,7 @@ How do you want to make the payment?
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Paying to close your company</value>
+        <value xsi:type="xsd:string">Pay to close your company</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
