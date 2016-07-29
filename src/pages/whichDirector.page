@@ -47,13 +47,13 @@
                                     </label>
                                 </apex:repeat>
                             </fieldset>
-                            <apex:actionFunction name="selectPresenter" action="{!selectPresenter}" reRender="none">
+                            <apex:actionFunction status="status" name="selectPresenter" action="{!selectPresenter}" reRender="none">
                                 <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
                             </apex:actionFunction>
                         </div>
                         
                         <div class="form-group">
-                            <apex:commandButton reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                            <apex:commandButton status="status" reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                             <br /> 
                             <br />
                             <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />

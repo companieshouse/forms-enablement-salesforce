@@ -53,11 +53,11 @@
                         </div>
                         <br />
                         <br />
-                        <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
                         <br />
                         <br />
                         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
-                        <apex:actionFunction action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+                        <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
                             <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
                         </apex:actionFunction>
                     </apex:outputPanel>

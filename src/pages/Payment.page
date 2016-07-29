@@ -85,13 +85,13 @@
                     </fieldset>
                 </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
+                <apex:actionFunction status="status" action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
                     <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
                 </apex:actionFunction>
-                <apex:actionFunction action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel,body">
+                <apex:actionFunction status="status" action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel,body">
                     <apex:param name="paramBool" value="" id="y" assignTo="{!isSameDaySelected}" />
                 </apex:actionFunction>
-                <apex:actionFunction action="{!updateLink}" name="updateLink" reRender="emptyPanel">
+                <apex:actionFunction status="status" action="{!updateLink}" name="updateLink" reRender="emptyPanel">
                 </apex:actionFunction>
                 <apex:outputPanel rendered="{!hasPaymentSuccess}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -145,7 +145,7 @@
                         </p>
                     </div>
                 </apex:outputPanel>
-                <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                 <br />
                 <br/>
                 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />

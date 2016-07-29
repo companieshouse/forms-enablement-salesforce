@@ -77,12 +77,12 @@
                             </div>
                         </apex:outputPanel>
                     </apex:outputPanel>
-                    <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
+                    <apex:actionFunction status="status" action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
                         <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
                     </apex:actionFunction>
                     <br />
                     <br /> 
-                    <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                     <br />
                     <br />
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />

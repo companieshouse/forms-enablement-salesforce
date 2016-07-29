@@ -46,6 +46,7 @@ Ver. Author        Date        Detail
         
         <div class="grid-row">
             <div class="column-two-thirds">
+                <c:statusComponent />
                 <apex:insert name="content"/>
             </div>
             <div class="column-third">

@@ -37,7 +37,7 @@ Ver. Author         Date        Detail
              <p class="lede">{!displayText1}</p>
              <p class="lede">{!displayText2}</p>
             
-            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
+            <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
 
             
           </apex:form>

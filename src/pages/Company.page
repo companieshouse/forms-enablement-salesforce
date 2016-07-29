@@ -55,7 +55,7 @@ Ver. Author        Date        Detail
                  <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
 
                 <br/> 
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Confirm my company details" />
+                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Confirm my company details" />
                 <br/>
                 <!--
                 &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 

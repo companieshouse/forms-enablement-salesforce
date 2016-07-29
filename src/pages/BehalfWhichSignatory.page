@@ -52,12 +52,12 @@
                             </apex:outputPanel>
                         </div>
                     <div class='form-group'>
-                        <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
                         <br />
                         <br />
                         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                     </div>
-                    <apex:actionFunction action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
+                    <apex:actionFunction status="status" action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
                         <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
                     </apex:actionFunction>
                     <script type="text/javascript">
