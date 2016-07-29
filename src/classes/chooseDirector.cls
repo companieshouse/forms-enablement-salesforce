@@ -71,6 +71,10 @@ public class chooseDirector extends TransactionStepControllerBase {
 
         pageBody = pageBody.replace('X', String.valueOf(majoritytosign));
         errorMsg1 = errorMsg1.replace('X', String.valueOf(majoritytosign));
+
+        pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        errorMsg1 = errorMsg1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         buildDirectorsList();
         return;
     }

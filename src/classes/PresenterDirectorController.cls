@@ -77,6 +77,10 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         pageBody = pageBody.replace('COMPANYNAME', companyName);
         pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;        
 
+        pageTitle = pageTitle.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageHiddenText = pageHiddenText.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+
         return;
     }
     private void persistStep() {

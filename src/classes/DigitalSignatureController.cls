@@ -59,6 +59,12 @@ public class DigitalSignatureController extends TransactionStepControllerBase{
         pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         pageBodySuccess = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
         pageBodyFailure = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
+
+        pageTitle = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBody = pageBody.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+
+        pageBodySuccess = pageBodySuccess.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBodyFailure = pageBodyFailure.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 		for(Contact off: submissionMgr.submission.Contacts__r)
 		{
 			if(off.isSignatory__c)

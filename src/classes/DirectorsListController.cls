@@ -59,7 +59,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
         pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 
-
+        pageText = pageText.replace('COMPANYNAME', companyName);
         if(isPageAlreadyValidStep)
         {
             hasAlreadyLoadedOfficers = true;
@@ -191,20 +191,20 @@ public with sharing class DirectorsListController extends TransactionStepControl
 					isLLPCompany = false; 
                     isLPCompany = false;
                     isPLCLTDCompany = true;
-                    officerTerm = 'Director(s)';
+                    officerTerm = 'director(s)';
 
                 }else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-designated-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
                     isLLPCompany = true;
                     isPLCLTDCompany = false;
                     isLPCompany = false;
-                    officerTerm = 'Member(s)';
+                    officerTerm = 'member(s)';
                    
                 }else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = false;
                     isPLCLTDCompany = false;
                     isLPCompany = true;
-                    officerTerm = 'Partner(s)';
+                    officerTerm = 'partner(s)';
                 }   
 
 
@@ -237,6 +237,9 @@ public with sharing class DirectorsListController extends TransactionStepControl
             submissionMgr.submission.isLLP__c = isLLPCompany;
             submissionMgr.submission.isLP__c = isLPCompany;
             submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
+
+            pageText = pageText.replace('directors', officerTerm);
+            pageTitle = pageTitle.replace('directors', officerTerm);
 
             update submissionMgr.submission;
 

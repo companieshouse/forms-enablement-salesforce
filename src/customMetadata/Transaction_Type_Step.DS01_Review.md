@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Continue to payment</value>
+        <value xsi:type="xsd:string">Confirm</value>
     </values>
     <values>
         <field>CustomView__c</field>

@@ -144,7 +144,7 @@ Before you start
         <field>Landing_Page_Text3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
 You must:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell all directors director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability</value>
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell all director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>

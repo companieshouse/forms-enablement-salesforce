@@ -307,6 +307,8 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+
+    public String officerTerm {get; set;}
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -331,6 +333,7 @@ public class ReviewController extends TransactionStepControllerBase {
         viewmap = new Map < Integer, List < Shares__c >> ();
         matchedShares = new List < Shares__c > ();
         viewkeys = new Map < Integer, String > ();
+        officerTerm = (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c);
         companyAddress1 = submissionMgr.submission.CompanyAddress1__c;
         companyAddress2 = submissionMgr.submission.CompanyAddress2__c;
         companyregion = submissionMgr.submission.CompanyRegion__c;
