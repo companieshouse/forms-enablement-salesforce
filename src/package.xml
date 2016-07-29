@@ -49,8 +49,10 @@
         <members>unfiled$public/CHExpiryReminder</members>
         <members>unfiled$public/CHReviewStatus</members>
         <members>unfiled$public/CH_3monthExpiry_Transaction</members>
+        <members>unfiled$public/CH_Application_Deleted</members>
         <members>unfiled$public/CH_Approved_Transaction</members>
         <members>unfiled$public/CH_Director_Decline</members>
+        <members>unfiled$public/CH_Director_Decline_for_Director</members>
         <members>unfiled$public/CH_Rejected_Transaction</members>
         <members>unfiled$public/CH_Signing_Status</members>
         <name>EmailTemplate</name>
