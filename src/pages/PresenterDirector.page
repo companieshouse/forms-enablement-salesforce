@@ -46,6 +46,7 @@
                                 <li>{!director.officerTXT}</li>
                             </apex:repeat>
                         </ul>
+                        <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
                         <fieldset class="inline">
                             <div id="presenterSelection" class="form-group">
                                 <label class="block-label" for="radio-indent-1">

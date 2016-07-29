@@ -56,6 +56,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
     public String pageTitle {get; set;}
     public String pageBody {get; set;}
+    public String pageBody2 {get; set;}
     public String pageHiddenText {get; set;}
     public Boolean showMorePresenterInfo {get; set;}
 
@@ -76,6 +77,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;        
         pageBody = pageBody.replace('COMPANYNAME', companyName);
         pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;        
+        pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;        
 
         pageTitle = pageTitle.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
