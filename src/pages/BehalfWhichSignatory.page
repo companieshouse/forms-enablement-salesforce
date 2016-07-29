@@ -68,13 +68,6 @@
 
                         updateSelectedPresenter(radioClicked.name);
 
-                        $('.radioButtonRepeat').each(function() {
-                            if (this.name == radioClicked.name) {
-                                this.checked = true;
-                            } else {
-                                this.checked = false;
-                            }
-                        });
                     }
                     </script>
                 </apex:outputPanel>

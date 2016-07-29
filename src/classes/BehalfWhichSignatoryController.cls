@@ -114,11 +114,13 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         if (selectedId != null) {
             for (officerContainer off : listOfDirectors) {
                 if (off.officer.Id == selectedId) {
-                    off.isSignatoryBehalf = true;
+                    if(off.isSignatoryBehalf)
+                        off.isSignatoryBehalf = false;
+                    else
+                        off.isSignatoryBehalf = true;
                 }
             }
         }
-
         return null;
     }
 
