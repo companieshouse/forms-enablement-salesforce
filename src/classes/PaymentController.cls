@@ -127,10 +127,12 @@ public class PaymentController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String accountcurrentErrorMessage {get; set;}
     public String errorVal {
         get;
         set;
     }
+    public String accounterrorVal {get; set;}
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -226,18 +228,30 @@ public class PaymentController extends TransactionStepControllerBase {
         }
         if (submissionMgr.submission.Amount__c == null) submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
         submissionMgr.submission.paymentReference__c = paymentReference;
+        submissionMgr.submission.paymentDate__c = String.valueOf(system.today());
+
         submissionMgr.persist();
     }
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
-        if (!validatePageState()) return Page.TransactionException;
-        if (valuePaymentUI == 2 && accountNumber == null) {
+        if (valuePaymentUI == 2) {
+            if (accountNumber.length() == 0) {
+                hasPageErrors = true;
+                accountcurrentErrorMessage = 'Please provide an account number for payment';
+                accounterrorVal = 'error';
+                return null;
+            }
+        }
+        if (valuePaymentUI == null ) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please provide an account number for payment';
+            currentErrorMessage = 'Please provide a method of payment';
             errorVal = 'error';
             return null;
         }
+
+        if (!validatePageState()) return Page.TransactionException;
+
         persistStep();
         if (isCardSelected || isPaypalSelected) {
             submit();
