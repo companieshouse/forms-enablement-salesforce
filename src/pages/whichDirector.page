@@ -14,7 +14,7 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page title="Closing a limited company" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="Please select which director you are" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -32,42 +32,31 @@
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="directorsList">
-                    <h1 class="heading-xlarge">
-                                <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Which director are you?"></apex:outputText>
-                                <apex:outputText rendered="{!isLLPCompany}" value="which member are you?"></apex:outputText>
-                            </h1>
+                        
+                            <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                            <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
                         <div class="form-group {!errorVal}">
-                            
-                            <p class="lede">
-                             <apex:outputPanel rendered="{!hasPageErrors}">
-                            <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
-                            </span>
-                        </apex:outputPanel>
-                                <apex:outputText rendered="{!NOT(isLLPCompany)}" value="{!companyName} has the following director(s) listed on the public register."></apex:outputText>
-                                <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following member(s) listed on the public register."></apex:outputText>
-                            </p>
+                                <apex:outputPanel rendered="{!hasPageErrors}">
+                                    <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                                    </span>
+                                </apex:outputPanel>                            
                             <fieldset>
                                 <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
-                                    <label class="block-label" for="radio-1">
+                                    <label class="block-label" for="radio-{!director}">
                                         <input id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}" /> {!director.Name}
                                     </label>
                                 </apex:repeat>
                             </fieldset>
-                            <apex:actionFunction name="selectPresenter" action="{!selectPresenter}" reRender="none">
+                            <apex:actionFunction status="status" name="selectPresenter" action="{!selectPresenter}" reRender="none">
                                 <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
                             </apex:actionFunction>
-                            
                         </div>
-                        <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br /> &nbsp;
+                        
                         <div class="form-group">
-                            <apex:commandButton reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                            <br /> &nbsp;
-                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                            <apex:commandButton status="status" reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                            <br /> 
+                            <br />
+                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>

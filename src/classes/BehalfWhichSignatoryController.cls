@@ -27,7 +27,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public String textBox1 {get; set;}
     public String headerBox1 {get; set;}
 
-    public Id selectedId {get; set;}
+    public String selectedId {get; set;}
     public List<officerContainer> listOfDirectors {get; set;}
 
     public BehalfWhichSignatoryController() {
@@ -82,16 +82,15 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
 
     // Action methods.
     public PageReference nextAction() {
-        if (selectedId == null) {
+        if (selectedId == 'null' || selectedId == null) {
             hasPageErrors = true;
             currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
             errorVal = 'error';
             return null;
         }
+        //throw new Form_CustomException('the selectedID is ' + selectedId);
         if (!validatePageState()) return Page.TransactionException;
-
         persistStep();
-
         return nextStep();
     }
 
@@ -120,19 +119,17 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
                 listOfDirectors.add(new officerContainer(off));
             }
         }
-
         return null;
     }
 
     public PageReference updateSelectedPresenter() {
-        if (selectedId != null) {
+        if (selectedId != 'null') {
             for (officerContainer off : listOfDirectors) {
-                if (off.officer.Id == selectedId) {
+                if ( String.valueOf(off.officer.Id) == selectedId) {
                     off.isSignatoryBehalf = true;
                 }
             }
         }
-
         return null;
     }
 
@@ -152,7 +149,6 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
             isSignatory = (off.isSignatory__c == null ? false : off.isSignatory__c);
             isSignatoryBehalf = (off.isSignatoryBehalf__c == null ? false : off.isSignatoryBehalf__c);
-
         }
     }
 }

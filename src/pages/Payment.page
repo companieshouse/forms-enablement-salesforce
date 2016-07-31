@@ -24,7 +24,7 @@
 
                                 <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}" />
                                 <apex:outputText escape="false" rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}" />
-                                <span style='color:#b10e1e;'>{!currentErrorMessage}</span>
+                                <span style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
                             </apex:outputPanel>
 
                             <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">

@@ -34,9 +34,7 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <h1 class="heading-xlarge">
-                        <apex:outputText value="{!headerBox1}"></apex:outputText>
-                    </h1>
+                        <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                     <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
                     <div class="form-group {!nameErrorVal}">
                         <label for="inputName">
@@ -61,7 +59,7 @@
                         <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
                     </span>
                     <div class="form-group {!behalfSelectionerrorVal}">
-                        <apex:outputText rendered="{!behalfError}" styleClass="error-mesage" id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        <apex:outputText rendered="{!behalfError}" style='color:#b10e1e;font-weight: bold;' id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
                         <label class="block-label" for="radio-1">
                             <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
                         </label>
@@ -70,11 +68,12 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                        <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                        <br />
                         <br />
                         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                     </div>
-                    <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+                    <apex:actionFunction status="status" action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
                         <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
                     </apex:actionFunction>
                 </apex:outputPanel>

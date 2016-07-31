@@ -235,20 +235,28 @@ public class PaymentController extends TransactionStepControllerBase {
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
-        if (valuePaymentUI == 2) {
-            if (accountNumber.length() == 0) {
-                hasPageErrors = true;
-                accountcurrentErrorMessage = 'Please provide an account number for payment';
-                accounterrorVal = 'error';
-                return null;
-            }
-        }
         if (valuePaymentUI == null ) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
             errorVal = 'error';
             return null;
         }
+        if (valuePaymentUI == 2) {
+            if (accountNumber.length() == 0) {
+                hasPageErrors = true;
+                accountcurrentErrorMessage = 'Please provide an account number or select another method of payment';
+                accounterrorVal = 'error';
+                return null;
+            }
+            if (!accountNumber.isNumeric()) {
+                hasPageErrors = true;
+                accountcurrentErrorMessage = 'Please provide an account number containing only numbers';
+                accounterrorVal = 'error';
+                return null;
+            }
+        }
+
+
 
         if (!validatePageState()) return Page.TransactionException;
 
