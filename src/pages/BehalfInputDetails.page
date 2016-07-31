@@ -59,7 +59,7 @@
                         <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
                     </span>
                     <div class="form-group {!behalfSelectionerrorVal}">
-                        <apex:outputText rendered="{!behalfError}" style='color:#b10e1e;font-weight: bold;' id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        <apex:outputText rendered="{!behalfError}" style="color:#b10e1e;font-weight: bold;" id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
                         <label class="block-label" for="radio-1">
                             <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
                         </label>

@@ -111,16 +111,8 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public PageReference updateSelectedPresenter() {
         if (selectedId != 'null') {
             for (officerContainer off : listOfDirectors) {
-<<<<<<< HEAD
-                if (off.officer.Id == selectedId) {
-                    if(off.isSignatoryBehalf)
-                        off.isSignatoryBehalf = false;
-                    else
-                        off.isSignatoryBehalf = true;
-=======
                 if ( String.valueOf(off.officer.Id) == selectedId) {
                     off.isSignatoryBehalf = true;
->>>>>>> d9b6e74a7bb65b1a4948de590c9d50bda564c105
                 }
             }
         }

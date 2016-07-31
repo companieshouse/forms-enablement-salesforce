@@ -25,10 +25,10 @@ Ver. Author        Date        Detail
     </script>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel id="pendingPage" rendered="{!pendingPage}">
-                    <apex:actionPoller enabled='{!pollServer}' action="{!initSignature}" status="status" reRender="masterPanel" interval="5" />
+                    <apex:actionPoller enabled="{!pollServer}" action="{!initSignature}" status="status" reRender="masterPanel" interval="5" />
                     <apex:outputText escape="false" value="{!pageTitle}" />
                     <apex:outputText escape="false" value="{!pageBody}" />
                     <table class="table-spacing">
