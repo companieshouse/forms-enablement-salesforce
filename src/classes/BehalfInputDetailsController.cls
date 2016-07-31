@@ -48,15 +48,10 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public void initialiseStep() {
 
         showNoError = false;
-
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
         textBox3 = (transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
-
-        //nameAuthorized = '';
-        //emailDirector = '';
-        //behalfSelection = 0;
 
         return;
     }
@@ -85,11 +80,15 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
 
     // Action methods.
     public PageReference nextAction() {
-        if (nameAuthorized == null) {
+        if (nameAuthorized.length() == 0) {
             hasPageErrors = true;
-            nameError = true;
             currentErrorMessage = 'Please provide the name of person approving';
             nameErrorVal = 'error';
+            nameError = true;
+            emailError = false;
+            behalfError = false;
+            behalfSelectionerrorVal = '';
+            emailErrorVal = '';
             return null;
         }
         if (emailDirector == null) {
@@ -97,13 +96,45 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             currentErrorMessage = 'Please provide the email of the person approving';
             emailErrorVal = 'error';
             emailError = true;
+            nameError = false;
+            behalfError = false;
+            nameErrorVal = '';
+            behalfSelectionerrorVal = '';
+            return null;
+        }
+        if (emailDirector.contains('@')) {
+            // check for "."
+            if (!emailDirector.contains('.')) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
+                emailErrorVal = 'error';
+                emailError = true;
+                nameError = false;
+                behalfError = false;
+                nameErrorVal = '';
+                behalfSelectionerrorVal = '';
+                return null;
+            }
+        } else {
+            hasPageErrors = true;
+            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' must be valid and contain an @';
+            emailErrorVal = 'error';
+            emailError = true;
+            nameError = false;
+            behalfError = false;
+            nameErrorVal = '';
+            behalfSelectionerrorVal = '';
             return null;
         }
         if (behalfSelection == null) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please select how are they acting on behalf of' + currentOfficer.Name;
+            currentErrorMessage = 'Please select how are they acting on behalf of' + ' ' + currentOfficer.Name;
             behalfSelectionerrorVal = 'error';
             behalfError = true;
+            emailError = false;
+            nameError = false;
+            nameErrorVal = '';
+            emailErrorVal = '';
             return null;
         }
         if (!validatePageState()) return Page.TransactionException;
@@ -161,7 +192,6 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         headerBox1 = headerBox1.replace('DIRECTORNAME', currentOfficer.Name);
 
         textBox3 = textBox3.replace('DIRECTORNAME', currentOfficer.Name);
-
 
         return null;
     }

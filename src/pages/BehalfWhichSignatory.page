@@ -19,7 +19,7 @@
 <apex:page title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -34,23 +34,21 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                        
-                        <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
-                        
-                        <div class="form-group {!errorVal}">
-                            <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
-                            <apex:outputPanel id="divDirector">
-                                <fieldset>
-                                    <span class='error-message' id='error-span'>{!currentErrorMessage}</span>
-                                    <legend class='visuallyhidden'>Please select who you will sign on behalf</legend>
-                                    <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-                                        <label class="block-label" for="radio-{!director.officer.Id}">
-                                            <input class="radioButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isPresenter}" onchange="changeValue(this);">{!director.officerTXT}</input>
-                                        </label>
-                                    </apex:repeat>
-                                </fieldset>
-                            </apex:outputPanel>
-                        </div>
+                    <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                    <div class="form-group {!errorVal}">
+                        <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+                        <apex:outputPanel id="divDirector">
+                            <fieldset>
+                                <span class='error-message' id='error-span'>{!currentErrorMessage}</span>
+                                <legend class='visuallyhidden'>Please select who you will sign on behalf</legend>
+                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                    <label class="block-label" for="radio-{!director.officer.Id}">
+                                        <input class="radioButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isPresenter}" onchange="changeValue(this);">{!director.officerTXT}</input>
+                                    </label>
+                                </apex:repeat>
+                            </fieldset>
+                        </apex:outputPanel>
+                    </div>
                     <div class='form-group'>
                         <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
                         <br />
@@ -61,12 +59,13 @@
                         <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
                     </apex:actionFunction>
                     <script type="text/javascript">
-                    //$j = jQuery.noConflict();
-
                     function changeValue(out) {
                         var radioClicked = document.getElementById(out.id);
-
-                        updateSelectedPresenter(radioClicked.name);
+                        if (radioClicked.checked) {
+                            updateSelectedPresenter(radioClicked.name);
+                        } else if (radioClicked.checked == false) {
+                            updateSelectedPresenter('null');
+                        }
 
                     }
                     </script>

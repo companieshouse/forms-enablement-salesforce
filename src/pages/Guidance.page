@@ -33,11 +33,15 @@ Ver. Author             Date        Detail
                                 </ul>
                             </div>
                             <apex:outputText escape="false" value="{!displayText0}" />
-                                <span id='errorHint' class='error-message'>{!currentErrorMessage}</span>
-                                <label class="block-label" for="agree">
-                                    <input id="agree" name="agree" type="checkbox" value="true" /> {!checkboxText0}
-                                </label>
-                            <apex:actionFunction action="{!setAgreeValue}" name="setAgreeValue" reRender="form">
+                            <fieldset>
+                                <div class='form-group' id='checkboxArea'>
+                                    <span id='errorHint' style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
+                                    <label class="block-label" for="agree">
+                                        <input id="agree" name="agree" type="checkbox" value="true" /> {!checkboxText0}
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <apex:actionFunction status="status" action="{!setAgreeValue}" name="setAgreeValue" reRender="content">
                                 <apex:param name="agreeboxparam" value="" id="cde" assignTo="{!agreeBoxChoice}" />
                             </apex:actionFunction>
                         </div>
@@ -52,18 +56,20 @@ Ver. Author             Date        Detail
                                 if (statuses[i].checked == true) {
                                     document.getElementById('errorHint').innerHTML = '';
                                     document.getElementById('errorList').setAttribute('hidden', true);
+                                    document.getElementById('checkboxArea').removeAttribute('class', 'error');
                                     setAgreeValue(statuses[i].value);
                                 } else if (statuses[i].checked == false) {
                                     document.getElementById('errorList').removeAttribute('hidden');
                                     document.getElementById('errorLI').innerHTML = 'You must agree to proceed';
                                     document.getElementById('errorHint').innerHTML = 'You must agree to proceed';
+                                    document.getElementById('checkboxArea').setAttribute('class', 'form-group error');
                                 }
                             }
                         };
                         </script>
                         <input type="button" class="button" id="nextButton" value="{!$Label.UI_Text_Continue}" onclick="updateField()" />
-                        <br />
-                        <br />
+                        <br/><br/>
+
                         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                     </apex:outputPanel>
                     <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
@@ -76,9 +82,9 @@ Ver. Author             Date        Detail
                         </ul>
                         <p>Any of these documents may be filed in separately in advance. Only the director's statement can be filed afterwards.</p>
                         <div class="form-group">
-                            <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
-                            <br />
-                            <br />
+                            <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
+                            <br /> <br/>
+
                             <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonCustom" />
                         </div>
                     </apex:outputPanel>

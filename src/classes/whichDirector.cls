@@ -112,12 +112,7 @@ public class whichDirector extends TransactionStepControllerBase {
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
-        List < Officer__c > officersPresenter = new List < Officer__c > ();
-        for (Officer__c checkOff : submissionMgr.submission.Officers__r) {
-            if (checkOff.IsPresenter__c) {
-                officersPresenter.add(checkOff);
-            }
-        }
+
         if (selectedid == null) {
             hasPageErrors = true;
             currentErrorMessage = 'You must select an officer';

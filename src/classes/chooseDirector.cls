@@ -119,7 +119,7 @@ public class chooseDirector extends TransactionStepControllerBase {
                 errorVal = '';
 
             } else if (!isSignatureNumberOK()) {
-                currentErrorMessage = '';
+                currentErrorMessage = 'Please select the correct amount of officers';
                 hasPageErrors = true;
                 errorVal = 'error';
                 return null;
