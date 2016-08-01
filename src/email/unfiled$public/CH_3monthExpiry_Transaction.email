@@ -146,14 +146,14 @@
                 <h1 class="page-title-style-email">Request  to close {!Transaction__c.CompanyName__c}</h1>
                 <p>{!Transaction__c.PresenterName__c},</p>
                 <p>
-                The Request  to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Transaction__c.ExpiryDate__c} .
+                The Request  to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Today()+30} .
 
                     </p>
 
                     <p>The status of the directors signing is located at the following link: {!Transaction__c.SignerStatus__c}</p>
 <p>What happens next</p>
 
-<p>To avoid the request being deleted, it's important that you ask those who have not approved to approve this request before {!Transaction__c.ExpiryDate__c}.</p>
+<p>To avoid the request being deleted, it's important that you ask those who have not approved to approve this request before {!Today()+30}.</p>
 <p>Your reference number is FE{!Transaction__c.Id}. You'll need to quote this if you contact us about your request.</p>
            
             </td>

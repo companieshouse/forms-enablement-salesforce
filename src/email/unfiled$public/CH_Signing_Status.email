@@ -163,7 +163,7 @@ Company number: {!Transaction__c.CompanyNumber__c}<br/>
 The status of the request can be viewed using the following <a href="{!Transaction__c.SignerStatus__c}">link</a>.
 </p>
 <p>
-The request will be deleted if it's not approved and completed by {!Transaction__c.ExpiryDate__c}.
+The request will be deleted if it's not approved and completed by {!Today()+30}.
 </p>
 <p>
 Your reference number is  FE{!Transaction__c.Id}. You'll need to quote this if you contact us about your request.

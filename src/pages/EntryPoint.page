@@ -1,34 +1,66 @@
-<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="EntryPointController">
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" action='{!findData}' controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterpanel">
-                    <div class="form-group">
-                        <h1 class="heading-xlarge">
-                            Companies House
-                            <br/> Transactions Enablement
-                        </h1>
-                        <label class="form-label" for="share-item">Select Form
-                            <span class="error-message" id="errors"></span>
-                        </label>
-                        <select class="form-control" name="document-item" id="document-input">
-                            <option value="DS01">DS01</option>
-                            <option value="DS02">DS02</option>
-                            <option value="SH02">SH02</option>
-                            <option value="SH05_6_7">SH06</option>
-                            <option value="SH08">SH08</option>
-                            <option value="SH10">SH10</option>
-                            <option value="SH19">SH19</option>
-                            <option value="CC04">CC04</option>
-                            <option value="RES15">RES15</option>
-                            <option value="General_untructured">UNSTRUCTURED</option>
-                        </select>
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <p>
+                            </p>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a href="#">{!currentError}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="formPanel">
+                        <div class="form-group">
+                            <h1 class="heading-xlarge">
+                                Companies House
+                                <br/> Transactions Enablement
+                            </h1>
+                            <label class="form-label" for="share-item">Select Form
+                                <span class="error-message" id="errors"></span>
+                            </label>
+                            <select class="form-control" name="document-item" id="document-input">
+                                <option value="DS01">DS01</option>
+                                <option value="DS02">DS02</option>
+                                <option value="SH02">SH02</option>
+                                <option value="SH05_6_7">SH06</option>
+                                <option value="SH08">SH08</option>
+                                <option value="SH10">SH10</option>
+                                <option value="SH19">SH19</option>
+                                <option value="CC04">CC04</option>
+                                <option value="RES15">RES15</option>
+                                <option value="General_untructured">UNSTRUCTURED</option>
+                            </select>
+                            <br/>
+                        </div>
+                        <input class="button" type="button" onclick="selectDocument();" value="Select Form" />
                         <br/>
-                    </div>
-                    <input class="button" type="button" onclick="selectDocument();" value="Select Form" />
+                        <br/>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!showTransactionClearer}">
+                        <apex:commandLink status="status" title="Clicking on this will remove Transactions, Accounts and Contacts" rerender="masterpanel" action="{!cleanTransactions}" value="Clear Transactions" id="clearTransactions" />
+                        <br/> number of transactions: &nbsp;
+                        <apex:outputText value="{!transactionssize}" />
+                    </apex:outputPanel>
                     <br/>
+                    <apex:outputPanel rendered="{!showContactClearer}">
+                        <apex:commandLink status="status" title="Clicking on this will remove Contacts and Accounts" rerender="masterpanel" action="{!cleanContacts}" value="Clear Contacts" id="clearContacts" />
+                        <br/> number of contacts: &nbsp;
+                        <apex:outputText value="{!contactssize}" />
+                    </apex:outputPanel>
                     <br/>
-                    <apex:commandLink rerender="masterpanel" action="{!cleanTransactions}" value="Clear Transactions" id="clearTransactions" />
+                    <apex:outputPanel rendered="{!showAccountClearer}">
+                        <apex:commandLink status="status" title="Clicking on this will remove Contacts and Accounts" rerender="masterpanel" action="{!cleanAccounts}" value="Clear Accounts" id="clearAccounts" />
+                        <br/> number of accounts: &nbsp;
+                        <apex:outputText value="{!accountssize}" />
+                    </apex:outputPanel>
                     <script>
                     var environment = window.location.hostname;
                     console.log(environment);
