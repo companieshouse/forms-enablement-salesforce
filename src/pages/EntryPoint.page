@@ -1,4 +1,4 @@
-<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" action='{!findData}' controller="EntryPointController">
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" action="{!findData}" controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
