@@ -83,8 +83,8 @@ public with sharing class SubmissionController extends TransactionStepController
 
 
     private void persistStep() {
-        submissionMgr.submission.submissionTime__c = String.valueOf(system.today());
-        submissionMgr.submission.submissionDate__c = String.valueOf(system.now().time());
+        submissionMgr.submission.submissionTime__c = String.valueOf(system.now().time());
+        submissionMgr.submission.submissionDate__c = String.valueOf(system.today().format());
         submissionMgr.persist();
     }
 
