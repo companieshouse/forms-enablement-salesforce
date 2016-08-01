@@ -25,7 +25,7 @@ Registered address:  {!Transaction__c.CompanyAddress1__c}
 
 The status of the request can be viewed using the following link:{!Transaction__c.SignerStatus__c}.
 
-The request will be deleted if it&apos;s not approved and completed by {!Transaction__c.ExpiryDate__c}.
+The request will be deleted if it&apos;s not approved and completed by {!Today()+30}.
 
 Your reference number is  FE{!Transaction__c.Id}. You&apos;ll need to quote this if you contact us about your request.
 

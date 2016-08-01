@@ -19,7 +19,7 @@ Your Reference number is
 
 What to do next
 
-Once the application has been submitted you will receive an email containing the submitted application. It is the director’s responsibility to ensure that copies of the application have been sent to all notifiable parties by {!Transaction__c.ExpiryDate__c}. This includes:
+Once the application has been submitted you will receive an email containing the submitted application. It is the director’s responsibility to ensure that copies of the application have been sent to all notifiable parties by {!Today()+30}. This includes:
 
 Creditors
 Employees
