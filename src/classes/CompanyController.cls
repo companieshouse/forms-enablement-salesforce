@@ -159,17 +159,7 @@ public with sharing class CompanyController {
 
         //Merged From Leo 03 May 2016
         trackuser.getSearchedCompany(companyNumber);
-        //TEMP FIX FOR COMPANY SEARCH
-        String nn = getNonce();
-        insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nn, Transaction_Type__c=transactionType);
-
-        PageReference pg = new PageReference('/AccountsAuthCallback');
-        pg.setRedirect(true);
-        pg.getParameters().put('state',nn);
-        pg.getParameters().put('code','222222');
-        Cookie searched_company = new Cookie('searched_company', SecurityManager.encryptText(companyNumber), null, -1, true);
-        return pg;
-        //return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+        return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
         //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );
         //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }

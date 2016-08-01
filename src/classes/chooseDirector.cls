@@ -61,6 +61,14 @@ public class chooseDirector extends TransactionStepControllerBase {
 
     public void initialiseStep() {
         majoritytosign = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
+        //We need to minus if we have already select one of the director because we don't print it !
+        for(Officer__c off :submissionMgr.submission.Officers__r)
+        {
+            if(off.IsPresenter__c && off.isSignatory__c)
+            {
+                majoritytosign = majoritytosign - 1;
+            }
+        }
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();

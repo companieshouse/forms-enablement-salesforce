@@ -97,8 +97,8 @@ public with sharing class AccountsAuthCallbackController {
         // Call out to account.companieshouse.gov.uk to swap our auth code for an access token.
         System.debug('authcode should b e ' + authcode);
 
-        //TEMPFIX
-        //accessTokenApiResponse = h.getAccessToken(authCode);
+        
+        accessTokenApiResponse = h.getAccessToken(authCode);
 
         System.debug('api response is ' + accessTokenApiResponse);
 

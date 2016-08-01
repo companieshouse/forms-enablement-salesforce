@@ -63,11 +63,11 @@ You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-
 &lt;/summary&gt;
 &lt;div class=&quot;panel panel-border-narrow&quot;&gt;
 &lt;p&gt;
-A company registration number is a unique number issued by Companies House</value>
+A company registration number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">when a limited company or Limited Liability Partnership (LLP) is set up. It&apos;s usually abbreviated as CRN and sometimes referred to as a Companies House Number. Your CRN consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this on the</value>
+        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. It&apos;s usually abbreviated as CRN and sometimes referred to as a Companies House Number. Your CRN consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this on the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
