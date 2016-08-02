@@ -26,9 +26,9 @@
                 <h2 class="heading-large">Requested Approvals</h2>
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <h2 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                             An error has occurred.
-                        </h1>
+                        </h2>
                         <p>
                             {!statusErrors}
                         </p>

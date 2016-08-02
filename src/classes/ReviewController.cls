@@ -307,16 +307,18 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+
+    public String officerTerm {get; set;}
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
-        displayText1 = transactionMgr.currentStep.Display_Text_1__c;
-        displayText2 = transactionMgr.currentStep.Display_Text_2__c;
-        displayText3 = transactionMgr.currentStep.Display_Text_3__c;
-        headerText1 = transactionMgr.currentStep.Header_Text_1__c;
-        headerText2 = transactionMgr.currentStep.Header_Text_2__c;
+        displayText1 = transactionMgr.currentStep.Display_Text_1__c == null ? '' :transactionMgr.currentStep.Display_Text_1__c ;
+        displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' :transactionMgr.currentStep.Display_Text_2__c;
+        displayText3 = transactionMgr.currentStep.Display_Text_3__c == null ? '' :transactionMgr.currentStep.Display_Text_3__c;
+        headerText1 = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
+        headerText2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' :transactionMgr.currentStep.Header_Text_2__c;
         standardPanelView = transactionMgr.currentstep.StandardView__c;
         custompanelView = transactionMgr.currentstep.CustomView__c;
         companyName = submissionMgr.submission.CompanyName__c;
@@ -331,6 +333,7 @@ public class ReviewController extends TransactionStepControllerBase {
         viewmap = new Map < Integer, List < Shares__c >> ();
         matchedShares = new List < Shares__c > ();
         viewkeys = new Map < Integer, String > ();
+        officerTerm = (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c);
         companyAddress1 = submissionMgr.submission.CompanyAddress1__c;
         companyAddress2 = submissionMgr.submission.CompanyAddress2__c;
         companyregion = submissionMgr.submission.CompanyRegion__c;

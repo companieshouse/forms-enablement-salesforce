@@ -31,10 +31,6 @@ public class DirectorDetails extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Boolean isLLPCompany {
-        get;
-        set;
-    }
     public List < DirectorWrapper > directorWrapper {
         get;
         set;
@@ -51,6 +47,9 @@ public class DirectorDetails extends TransactionStepControllerBase {
         get;
         set;
     }
+
+    public String pageTitle {get; set;}
+    public String pageBody {get; set;}
     public DirectorDetails() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -59,7 +58,10 @@ public class DirectorDetails extends TransactionStepControllerBase {
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();
-        isLLPCompany = submissionMgr.submission.isLLP__c;
+        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
+        pageTitle = pageTitle.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         buildDirectorsList();
         return;
     }

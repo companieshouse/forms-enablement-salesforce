@@ -19,11 +19,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Sign</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;We have emailed the following director to request their approval to close COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">the application to close</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;They will need to approve the request within 2 months. Once they approve the request, we will email you with a link to check and submit your request.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -35,11 +35,11 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;All director(s) successfully signed the application.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;One or more director(s)  has declined to sign. Please start a new application to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -47,15 +47,15 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">DS01 DocuSign</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director approval(s) requested&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director(s) has signed successfully&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director(s) has declined to signed&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Is_Active__c</field>

@@ -19,21 +19,21 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium closer&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
 Name of person approving
-&lt;/h3&gt;
+&lt;/p&gt;
 &lt;p class=&quot;form-hint&quot;&gt;For example, John Smith&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium closer&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
 Email of person approving
-&lt;/h3&gt;
+&lt;/p&gt;
 &lt;p class=&quot;form-hint&quot;&gt;For example, john.smith@example.co.uk&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/h3&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -53,7 +53,7 @@ Email of person approving
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Approving on behalf of DIRECTORNAME</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving on behalf of DIRECTORNAME&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

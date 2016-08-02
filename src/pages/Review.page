@@ -1,4 +1,4 @@
-<apex:page title="Review Cancelled Shares" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -27,27 +27,27 @@
                             <thead>
                                 <tr>
                                     <th colspan="3">
-                                        <h2 class="heading-medium">Application details</h2>
+                                        <h2 class="heading-medium">Request details</h2>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Company Name</td>
+                                    <td>Company name</td>
                                     <td>{!companyName}</td>
                                 </tr>
                                 <tr>
-                                    <td>Company Number</td>
+                                    <td>Company number</td>
                                     <td>{!companyNumber}</td>
                                 </tr>
                                 <tr>
-                                    <td>Registered Address</td>
+                                    <td>Registered address</td>
                                     <td>
                                         <apex:outputText escape="false" value="{!companyAddress}" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Directors</td>
+                                    <td>Approving {!officerTerm}</td>
                                     <td>
                                         <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
                                             <apex:outputText value="{!Director.Name}" id="theValue" />
@@ -650,8 +650,9 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
-                    <br/> &nbsp;
-                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
+                    <br/> 
+                    <br/> 
+                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> 
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

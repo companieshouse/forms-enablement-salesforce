@@ -19,15 +19,17 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">asdf</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+The directors listed on the public register for COMPANYNAME are:
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">asdf</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">asdf</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -47,7 +49,8 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">test TExt</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Are these the company directors?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

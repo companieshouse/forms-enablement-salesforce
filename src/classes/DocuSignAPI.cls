@@ -603,7 +603,7 @@ public class DocuSignAPI {
         private String[] AllowMarkup_type_info = new String[]{'AllowMarkup','http://www.docusign.net/API/3.0',null,'0','1','false'};
         private String[] EventNotification_type_info = new String[]{'EventNotification','http://www.docusign.net/API/3.0',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://www.docusign.net/API/3.0','true','false'};
-        private String[] field_order_type_info = new String[]{'TransactionID','Asynchronous','AccountId','Documents','Recipients','Tabs','Subject','EmailBlurb','SigningLocation','CustomFields','VaultingOptions','AutoNavigation','EnvelopeIdStamping','AuthoritativeCopy','Notification','EnvelopeAttachment','EnforceSignerVisibility','EnableWetSign','AllowMarkup','EventNotification'};
+        private String[] field_order_type_info = new String[]{'TransactionID','Asynchronous','AccountId','Documents','Recipients','Tabs','Subject','EmailBlurb','SigningLocation','CustomFields','VaultingOptions','AutoNavigation','AuthoritativeCopy','Notification','EnvelopeAttachment','EnforceSignerVisibility','EnableWetSign','AllowMarkup','EventNotification'};
     }
     public class ArrayOfAttachment {
         public DocuSignAPI.Attachment[] Attachment;
@@ -1204,6 +1204,7 @@ public class DocuSignAPI {
         }
         public DocuSignAPI.EnvelopeStatus CreateEnvelope(DocuSignAPI.Envelope Envelope) {
             DocuSignAPI.CreateEnvelope_element request_x = new DocuSignAPI.CreateEnvelope_element();
+
             request_x.Envelope = Envelope;
             DocuSignAPI.CreateEnvelopeResponse_element response_x;
             Map<String, DocuSignAPI.CreateEnvelopeResponse_element> response_map_x = new Map<String, DocuSignAPI.CreateEnvelopeResponse_element>();

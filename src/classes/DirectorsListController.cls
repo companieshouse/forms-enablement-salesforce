@@ -32,6 +32,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean isLPCompany {get; set;}
     public String officerTerm {get; set;}
     public Boolean noOfficers {get; set;}
+    public String pageTitle {get; set;}
+    public String pageText {get; set;}
 
     public DirectorsListController() {
         super();
@@ -54,7 +56,10 @@ public with sharing class DirectorsListController extends TransactionStepControl
         isPLCLTDCompany = false;
         isLPCompany = false;
         officerTerm = '';
+        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 
+        pageText = pageText.replace('COMPANYNAME', companyName);
         if(isPageAlreadyValidStep)
         {
             hasAlreadyLoadedOfficers = true;
@@ -79,10 +84,6 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
-		submissionMgr.submission.isLLP__c = isLLPCompany;
-        submissionMgr.submission.isLP__c = isLPCompany;
-        submissionMgr.submission.officerTerminology__c = officerTerm;
-        submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
         submissionMgr.persist();    
         System.debug(LoggingLevel.ERROR,'End of Persist Step');
 
@@ -190,31 +191,36 @@ public with sharing class DirectorsListController extends TransactionStepControl
 					isLLPCompany = false; 
                     isLPCompany = false;
                     isPLCLTDCompany = true;
-                    officerTerm = 'Director(s)';
+                    officerTerm = 'director(s)';
 
                 }else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-designated-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
                     isLLPCompany = true;
                     isPLCLTDCompany = false;
                     isLPCompany = false;
-                    officerTerm = 'Member(s)';
+                    officerTerm = 'member(s)';
                    
                 }else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = false;
                     isPLCLTDCompany = false;
                     isLPCompany = true;
-                    officerTerm = 'Partner(s)';
+                    officerTerm = 'partner(s)';
                 }   
 
 
                 if(addOff)
                 {
                     contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));    
-                    listOfDirectors.add(officer.name);
-                    officerList.add(new Officer__c(Name = officer.name, Title__c = extractOfficerName(2, officer.name),
-                    Forename__c  = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : null),
-                    Middlenames__c = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): null),
-                      Surname__c = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name)), Transaction__c =submissionMgr.submission.Id ));
+                    String offFirstName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : '');
+                    String offLastName = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name));
+                    String offTitle = (extractOfficerName(2, officer.name) == null ? '' : extractOfficerName(2, officer.name));
+                    String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): '');
+                    String offName = offTitle + (offTitle == '' ? '' : ' ') + offFirstName + (offFirstName == '' ? '' : ' ' ) + offLastName;
+                    listOfDirectors.add(offName);
+                    officerList.add(new Officer__c(Name = offName, Title__c = offTitle,
+                    Forename__c  = offFirstName,
+                    Middlenames__c = offMiddleName,
+                      Surname__c =  offLastName, Transaction__c =submissionMgr.submission.Id ));
                 }
                 
 
@@ -231,6 +237,17 @@ public with sharing class DirectorsListController extends TransactionStepControl
             //Insert the officer
             insert officerList;
             if (contactList.size() == 0) {noOfficers = true;} else if (contactList.size() > 0) {noOfficers = false;}
+
+            submissionMgr.submission.officerTerminology__c = officerTerm;
+            submissionMgr.submission.isLLP__c = isLLPCompany;
+            submissionMgr.submission.isLP__c = isLPCompany;
+            submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
+
+            pageText = pageText.replace('directors', officerTerm);
+            pageTitle = pageTitle.replace('directors', officerTerm);
+
+            update submissionMgr.submission;
+
         }
         System.debug(LoggingLevel.ERROR, 'end of List of directors');
 

@@ -19,13 +19,12 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Some directors may need someone to sign on behalf of them if they:&lt;/p&gt;
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;Are deceased&lt;/li&gt;&lt;li&gt;Need a Power of Attorney to act on their behalf&lt;/li&gt;
-&lt;li&gt;Are a Corporate Entity&lt;/li&gt;&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A director may need someone to sign on their behalf if they:&lt;/p&gt;
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;need a power of attorney to act on their behalf&lt;/li&gt;&lt;li&gt;are a corporate entity&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h2 class=&quot;heading-medium&quot;&gt;Do any of your company directors need someone to sign on their behalf?&lt;/h2&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -49,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Approving on behalf of another director</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Do any directors need someone to sign on their behalf?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

@@ -34,6 +34,38 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>Company_Page_Body_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Title__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Expiry_Date_Length__c</field>
         <value xsi:nil="true"/>
     </values>

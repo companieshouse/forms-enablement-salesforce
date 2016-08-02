@@ -40,6 +40,11 @@ public with sharing class CompanyController {
     }
     public String companySearchHeader {get; set;}
 
+    public String pageTitle {get; set;}
+    public String pageBody {get; set;}
+    public String pageBody2 {get; set;}
+
+
     // Private class members.
     Boolean isPageInitialised = false;
     Boolean isUserAuthenticated = false;
@@ -76,6 +81,16 @@ public with sharing class CompanyController {
             transactionMgr = new TransactionManager(transactionType);
             companySearchHeader = transactionMgr.td.companySearchPageText__c;
             isPageInitialised = true;
+            pageTitle = transactionMgr.td.Company_Page_Title__c == null ? '' : transactionMgr.td.Company_Page_Title__c;
+
+            pageBody = transactionMgr.td.Company_Page_Body_1__c == null ? '' : transactionMgr.td.Company_Page_Body_1__c;
+            pageBody += transactionMgr.td.Company_Page_Body_2__c == null ? '' : transactionMgr.td.Company_Page_Body_2__c;
+
+            pageBody2 = transactionMgr.td.Company_Page_HiddenT1__c == null ? '' : transactionMgr.td.Company_Page_HiddenT1__c;
+            pageBody2 += transactionMgr.td.Company_Page_HiddenT2__c == null ? '' : transactionMgr.td.Company_Page_HiddenT2__c;
+            pageBody2 += transactionMgr.td.Company_Page_HiddenT3__c == null ? '' : transactionMgr.td.Company_Page_HiddenT3__c;
+
+
         } catch (Exception e) {
             return;
         }
@@ -147,6 +162,22 @@ public with sharing class CompanyController {
         return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
         //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );
         //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
+    }
+
+    private String getNonce() {
+        
+        final Integer NONCE_LENGTH = 16;
+        
+        final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+        
+        String nonce = '';
+        
+        while (nonce.length() < NONCE_LENGTH) {
+           Integer i = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
+           nonce += chars.substring(i, i + 1);
+        }
+        
+        return nonce; 
     }
 
     public PageReference previousAction() {

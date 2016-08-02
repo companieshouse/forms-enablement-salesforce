@@ -16,99 +16,9 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-02  Initial development.
 */
 public with sharing class StartFrameworkController {
-    // Public properties.
-    public String pageTitle {
-        get;
-        private set;
-    }
-    public String pageTitle2 {
-        get;
-        private set;
-    }
-    public String pageTitle3 {
-        get;
-        private set;
-    }
-    public String pageText {
-        get;
-        private set;
-    }
-    public String pageText2 {
-        get;
-        private set;
-    }
-    public String pageText3 {
-        get;
-        private set;
-    }
-    public String pageText4 {
-        get;
-        private set;
-    }
-    public String pageText5 {
-        get;
-        private set;
-    }
-    public String pageText6 {
-        get;
-        private set;
-    }
-    public String pageText7 {
-        get;
-        private set;
-    }
-    public String pageText8 {
-        get;
-        private set;
-    }
-    public String pageText9 {
-        get;
-        private set;
-    }
-    public String pageText10 {
-        get;
-        private set;
-    }
-    public String pageText11 {
-        get;
-        private set;
-    }
-    public String abovebuttontext {
-        get;
-        private set;
-    }
-    public String belowbuttontitle2 {
-        get;
-        private set;
-    }
-    public String belowbuttontitle {
-        get;
-        private set;
-    }
-    public String belowbuttontext {
-        get;
-        private set;
-    }
-    public String belowbuttontext2 {
-        get;
-        private set;
-    }
-    public String belowbuttontext3 {
-        get;
-        private set;
-    }
-    public String belowbuttontext4 {
-        get;
-        private set;
-    }
-    public String belowbuttontext5 {
-        get;
-        private set;
-    }
-    public String belowbuttontext6 {
-        get;
-        private set;
-    }
+    public String pageTitle {get; set;}
+    public String pageText {get; set;}
+    public String pageTextAfterButton {get; set;}
     public String transactionType {
         get;
         set;
@@ -137,29 +47,23 @@ public with sharing class StartFrameworkController {
             transactionType = ApexPages.currentPage().getParameters().get('t');
             transactionMgr = new TransactionManager(transactionType);
             // this is not efficient unless start pages follow this format consistently
-            pageTitle = transactionMgr.td.Landing_Page_Title__c;
-            //pageTitle2 = transactionMgr.td.Landing_Page_Title2__c;
-            //pageTitle3 = transactionMgr.td.Landing_Page_Title3__c;
-            pageText = transactionMgr.td.Landing_Page_Text__c;
-            pageText2 = transactionMgr.td.Landing_Page_Text2__c;
-            pageText3 = transactionMgr.td.Landing_Page_Text3__c;
-            pageText4 = transactionMgr.td.Landing_Page_Text4__c;
-            pageText5 = transactionMgr.td.Landing_Page_Text5__c;
-            pageText6 = transactionMgr.td.Landing_Page_Text6__c;
-            //pageText7 = transactionMgr.td.Landing_Page_Text7__c;
-            //pageText8 = transactionMgr.td.Landing_Page_Text8__c;
-            //pageText9 = transactionMgr.td.Landing_Page_Text9__c;
-            //pageText10 = transactionMgr.td.Landing_Page_Text10__c;
-            //pageText11 = transactionMgr.td.Landing_Page_Text11__c;
-            abovebuttontext = transactionMgr.td.above_button_text__c;
-            belowbuttontitle = transactionMgr.td.Below_Button_Title__c;
-            belowbuttontitle2 = transactionMgr.td.Below_Button_Title2__c;
-            belowbuttontext = transactionMgr.td.Below_Button_Text__c;
-            belowbuttontext2 = transactionMgr.td.Below_Button_Text2__c;
-            belowbuttontext3 = transactionMgr.td.Below_Button_Text3__c;
-            belowbuttontext4 = transactionMgr.td.Below_Button_Text4__c;
-            belowbuttontext5 = transactionMgr.td.Below_Button_Text5__c;
-            belowbuttontext6 = transactionMgr.td.Below_Button_Text6__c;
+            pageTitle = (transactionMgr.td.Landing_Page_Title__c == null ? '' : transactionMgr.td.Landing_Page_Title__c);
+            //pageTitle = (transactionMgr.td.Landing_Page_Title2__c == null ? '' : transactionMgr.td.Landing_Page_Title2__c);
+            //pageTitle = (transactionMgr.td.Landing_Page_Title3__c == null ? '' : transactionMgr.td.Landing_Page_Title3__c);
+            
+            pageText = transactionMgr.td.Landing_Page_Text__c == null ? '' : transactionMgr.td.Landing_Page_Text__c;
+            pageText += transactionMgr.td.Landing_Page_Text2__c == null ? '' : transactionMgr.td.Landing_Page_Text2__c;
+            pageText += transactionMgr.td.Landing_Page_Text3__c == null ? '' : transactionMgr.td.Landing_Page_Text3__c;
+            pageText += transactionMgr.td.Landing_Page_Text4__c == null ? '' : transactionMgr.td.Landing_Page_Text4__c;
+            pageText += transactionMgr.td.Landing_Page_Text5__c == null ? '' : transactionMgr.td.Landing_Page_Text5__c;
+            pageText += transactionMgr.td.Landing_Page_Text6__c == null ? '' : transactionMgr.td.Landing_Page_Text6__c;
+            //pageText = transactionMgr.td.Landing_Page_Text7__c == null ? '' : transactionMgr.td.Landing_Page_Text7__c;
+            //pageText = transactionMgr.td.Landing_Page_Text8__c == null ? '' : transactionMgr.td.Landing_Page_Text8__c;
+            //pageText = transactionMgr.td.Landing_Page_Text9__c == null ? '' : transactionMgr.td.Landing_Page_Text9__c;
+            //pageText = transactionMgr.td.Landing_Page_Text10__c == null ? '' : transactionMgr.td.Landing_Page_Text10__c;
+            //pageText = transactionMgr.td.Landing_Page_Text11__c == null ? '' : transactionMgr.td.Landing_Page_Text11__c;
+            
+            pageTextAfterButton = transactionMgr.td.Below_Button_Text__c == null ? '' : transactionMgr.td.Below_Button_Text__c;
             hasGuidancePage = transactionMgr.td.hasGuidancePage__c;
             isPageInitialised = true;
         } catch (Exception e) {

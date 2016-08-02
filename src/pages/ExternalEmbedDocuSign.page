@@ -1,10 +1,11 @@
-<apex:page title="{!$Label.UI_Text_DocuSign}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
+<apex:page title="Please sign the form" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
             	<h1 class="heading-xlarge">
-                        {!$Label.UI_Text_DocuSign}
+                        Provide your signature
                 </h1>
+                <p class="lede">As the {!officerTerm} of {!compName}, you need to provide your signature to strike the company off the Register and dissolve it.</p>
                 <div id="doculoader"></div>
                 <script>
                 // window.open('{!externalURL}','_self'); 

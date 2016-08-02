@@ -34,14 +34,11 @@ Ver. Author         Date        Detail
                 <strong class="heading-medium">{!submissionId}</strong>  
                 </p>-->
              </div>
-             <h2 class="heading-medium">{!displayText2}</h2>
-             <apex:outputtext value="{!displayText3}" escape="false"/>
+             <p class="lede">{!displayText1}</p>
+             <p class="lede">{!displayText2}</p>
             
-            <br/> 
-            <br/>
-            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
+            <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
 
-            <br/>
             
           </apex:form>
        </apex:define>

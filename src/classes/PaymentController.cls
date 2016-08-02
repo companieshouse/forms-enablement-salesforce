@@ -168,7 +168,6 @@ public class PaymentController extends TransactionStepControllerBase {
     }
     public PageReference checkPaymentResult() {
         initialiseAction();
-        parseQueryString();
         //If there is no payment associated we need to protect the page to be displayed
         if (!submissionMgr.submission.isPaymentRequired__c) {
             hasPaid = true;
@@ -180,6 +179,8 @@ public class PaymentController extends TransactionStepControllerBase {
             hasPaid = true;
             return null;
         }
+        parseQueryString();
+
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
         String paramInput = ApexPages.currentPage().getParameters().get('c');
@@ -235,13 +236,13 @@ public class PaymentController extends TransactionStepControllerBase {
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
-        if (valuePaymentUI == null ) {
+        if (!hasPaid() && valuePaymentUI == null ) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
             errorVal = 'error';
             return null;
         }
-        if (valuePaymentUI == 2) {
+        if (!hasPaid()  && valuePaymentUI == 2) {
             if (accountNumber.length() == 0) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number or select another method of payment';
@@ -344,6 +345,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = false;
+                persistStep();
             } else if (authResult == AUTH_RESULT_REFUSED) {
                 //Go To refused Payment page ?
                 hasPaymentSuccess = false;
