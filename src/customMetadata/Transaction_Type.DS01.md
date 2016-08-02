@@ -59,11 +59,11 @@ You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-
         <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
 &lt;details&gt;
 &lt;summary&gt;
-&lt;span class=&quot;summary&quot;&gt;Help with company registration number&lt;/span&gt;
+&lt;span class=&quot;summary&quot;&gt;Help with company number&lt;/span&gt;
 &lt;/summary&gt;
 &lt;div class=&quot;panel panel-border-narrow&quot;&gt;
 &lt;p&gt;
-A company registration number is a unique number issued by Companies House whe</value>
+A company number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
@@ -71,7 +71,7 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck Service&lt;/a&gt; Service.
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; WebCheck Service&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/details&gt;
@@ -143,11 +143,11 @@ Before you start
         <field>Landing_Page_Text3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
 You must:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell all director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability</value>
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell all director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability pa</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">partnership&lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">rtnership&lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
 It costs £8 to submit a request to close a company or limited liability partnership (paid by debit or credit card or PayPal account).
