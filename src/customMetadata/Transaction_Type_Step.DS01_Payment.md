@@ -20,7 +20,7 @@
     <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You need to pay £FEE before you can submit your request to close the company.
+You need to pay £FEE before you can submit your request to close the company/LLP.
 &lt;/p&gt;
 &lt;p class=&quot;heading-medium&quot;&gt;
 How do you want to make the payment?
@@ -52,7 +52,7 @@ How do you want to make the payment?
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Pay to close your company</value>
+        <value xsi:type="xsd:string">Pay to close your company/LLP</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

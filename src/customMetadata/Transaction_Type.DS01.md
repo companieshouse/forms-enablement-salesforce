@@ -67,12 +67,11 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. It&apos;s usually abbreviated as CRN and sometimes referred to as a Companies House Number. Your CRN consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this on the</value>
+        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">company&apos;s certificate of incorporation or by using the
-&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck&lt;/a&gt; Service.
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck Service&lt;/a&gt; Service.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/details&gt;
@@ -102,27 +101,27 @@ Tell us which company you want to close
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">I understand that I&apos;m responsible for ensuring all interested parties are notified.</value>
+        <value xsi:type="xsd:string">The directors / members understand that they are responsible for ensuring all interested parties are notified.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Your responsibilities&lt;/h1&gt;</value>
+Directors&apos; / members&apos; responsibilities&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
-Who to tell about your company or partnership closing&lt;/p&gt;</value>
+Who to tell about your company or limited liability partnership closing&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-A company or partnership must inform all interested parties that it&apos;s going to close within 7 days after you submit the request.&lt;/p&gt;</value>
+A company or limited liability partnership must inform all interested parties that it&apos;s going to close within 7 days after you submit the request.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-Interested parties may include:
+Interested parties include:
 &lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
     </values>
     <values>

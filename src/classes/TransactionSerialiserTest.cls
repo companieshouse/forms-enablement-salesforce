@@ -13,6 +13,9 @@ private class TransactionSerialiserTest {
 		transac.ContactEmail__c = 'sylvain.picory@methodsdigital.co.uk';
 		insert transac;
 
+		transac.SubmissionId__c = 'FE' + transac.Id;
+		update transac;
+
 		Contact testCont = CompaniesHouseTestData.getInstance().contact1;
 		Contact testCont2 = CompaniesHouseTestData.getInstance().contact2;
 
@@ -72,7 +75,7 @@ private class TransactionSerialiserTest {
 		TransactionSerialiser.attachmentsWraper lAtt = (TransactionSerialiser.attachmentsWraper) JSON.deserialize(result, TransactionSerialiser.attachmentsWraper.class);
 
 		//Test metadata
-		system.assertEquals(mat.metadata.submissionReference, transac.Id);
+		system.assertEquals(mat.metadata.submissionReference, 'FE' + transac.Id);
 		system.assertEquals(mat.metadata.version, Integer.valueOf(transac.Version_Form__c));
 
 		//Test form

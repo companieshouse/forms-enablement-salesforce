@@ -268,8 +268,16 @@
         <fullName>UI_Text_Previous</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>UI Text Previous</shortDescription>
+        <value>Start again</value>
+    </labels>
+    <labels>
+        <fullName>UI_Text_Previous_B</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Previous B</shortDescription>
         <value>Previous</value>
     </labels>
     <labels>

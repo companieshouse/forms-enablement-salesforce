@@ -192,7 +192,9 @@ public with sharing class AccountsAuthCallbackController {
             System.debug('companyNumberId  is  ' + companyNumberId);
             System.debug('transactionMgr.td  is  ' + transactionMgr.td);
 
-            if (submissionMgr.submission.Valid_Step_Ids__c != null) {
+            if (submissionMgr.submission.Valid_Step_Ids__c != null)
+            {
+
                 String split = submissionMgr.submission.Valid_Step_Ids__c;
 
                 String[] res = split.split(AppConstants.ID_DELIM_SPLIT_CHAR);

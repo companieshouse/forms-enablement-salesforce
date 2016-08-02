@@ -28,11 +28,11 @@ You can track the status of your filing by viewing the company’s filing histor
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">You must inform all interested parties that it&apos;s going to close within 7 days after you submit the request.</value>
+        <value xsi:type="xsd:string">The directors/members must inform all interested parties of the request to close within 7 days of it being submitted.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Interested parties can include:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;Interested parties include:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>

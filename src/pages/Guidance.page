@@ -70,7 +70,7 @@ Ver. Author             Date        Detail
                         <input type="button" class="button" id="nextButton" value="{!$Label.UI_Text_Continue}" onclick="updateField()" />
                         <br/><br/>
 
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
                     </apex:outputPanel>
                     <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
                         <h1 class="heading-xlarge">Additional information</h1>
@@ -85,7 +85,7 @@ Ver. Author             Date        Detail
                             <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
                             <br /> <br/>
 
-                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonCustom" />
+                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" />
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>

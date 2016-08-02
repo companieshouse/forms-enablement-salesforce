@@ -104,7 +104,7 @@ Ver. Author        Date        Detail
                         </strong>
                     </div>
                     <h2 class="heading-medium">How to cancel this request</h2>
-                    <p>If you need to cancel your request so that {!companyName} stays on the Register, you can submit a withdrawal to strike off.</p>
+                    <p>If you need to cancel your request so that {!companyName} stays on the Register, you can submit a <a href="https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02" target="_blank">withdrawal to strike off.</a></p>
                     
                 </apex:outputPanel>
             </apex:form>

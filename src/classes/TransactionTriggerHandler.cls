@@ -22,6 +22,16 @@ public with sharing class TransactionTriggerHandler {
 
         for (Transaction__c transactionupdater: transactionsList) {
             // list of transactions to update at the end
+            if( transactionupdater.Status__c == 'deleteContact')
+            {
+                //Get the associated contacts as I know there will be only one contact then I can do a DML in a for loop
+                List<Transaction__c> tCont = [Select Id, (SELECT Id FROM Contacts__r) From Transaction__c where Id = :transactionupdater.Id];
+
+                if(tCont[0].Contacts__r != null)  
+                {
+                    delete tCont[0].Contacts__r;
+                }
+            }
             if (transactionupdater.Status__c == AppConstants.REQUEST_STATUS_PENDING_SIGNATURES) {
                 // loop through transactions from trigger and find the signed status
 

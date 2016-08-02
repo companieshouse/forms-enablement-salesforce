@@ -21,6 +21,7 @@ public class UpdateCompanyDirectorsControllerTest {
 
         transac.Company__c = testCompany.Id;
         transac.Valid_Step_Ids__c = testStep1.Id;
+        transac.officerTerminology__c = 'Test';
 
         insert transac;
 
