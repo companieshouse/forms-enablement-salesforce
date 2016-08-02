@@ -135,8 +135,14 @@ public class CompanyDetailsController extends TransactionStepControllerBase{
     
     public PageReference previousAction(){
         if (!validatePageState()) return Page.TransactionException;
-                
-        return previousStep();
+          
+        PageReference pg = new PageReference('/Company');
+
+        pg.getParameters().put('t', submissionMgr.submission.Form_Name__c);
+        pg.setRedirect(true);
+        delete submissionMgr.submission;
+        return pg;      
+        //return previousStep();
     }
     // End Action methods.    
     

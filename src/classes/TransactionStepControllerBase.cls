@@ -203,11 +203,12 @@ public virtual class TransactionStepControllerBase {
                     update submissionMgr.submission;
                     delete submissionMgr.submission;
                     Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
-                    return transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
+                    PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
 
+                    pg.setRedirect(true);
+                    return pg;
                 }
             }
-
         return null;
     }
 	// End navigation methods.    

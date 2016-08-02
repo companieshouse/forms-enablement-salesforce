@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A director/member may need someone to sign on their behalf if they:&lt;/p&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A director may need someone to sign on their behalf if they:&lt;/p&gt;
 &lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;need a power of attorney to act on their behalf&lt;/li&gt;&lt;li&gt;are a corporate entity&lt;/li&gt;&lt;/ul&gt;</value>
     </values>
     <values>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Do any directors/members need someone to sign on their behalf?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Do any directors need someone to sign on their behalf?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

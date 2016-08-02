@@ -20,7 +20,7 @@
     <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-The directors/members listed on the public register for COMPANYNAME are:
+The directors listed on the public register for COMPANYNAME are:
 &lt;/p&gt;</value>
     </values>
     <values>
@@ -50,7 +50,7 @@ The directors/members listed on the public register for COMPANYNAME are:
     <values>
         <field>Header_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Are these the company directors or the limited liability partnership’s members?&lt;/h1&gt;</value>
+Are these the company directors?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
