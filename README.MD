@@ -24,7 +24,7 @@ In order to run this service you will need the following:
  or
 - [Eclipse](https://eclipse.org/), [Salesforce Eclipse plugin](https://developer.salesforce.com/page/Force.com_IDE_Installation) and [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
-or
+ or
 - [Force.com IDE package instructions](https://developer.salesforce.com/page/Force.com_IDE_Installation)
 
 ### Getting Started
