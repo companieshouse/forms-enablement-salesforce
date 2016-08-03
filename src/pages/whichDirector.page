@@ -17,7 +17,7 @@
 <apex:page title="Please select which director you are" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -32,14 +32,13 @@
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="directorsList">
-                        
-                            <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
-                            <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
                         <div class="form-group {!errorVal}">
-                                <apex:outputPanel rendered="{!hasPageErrors}">
-                                    <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
-                                    </span>
-                                </apex:outputPanel>                            
+                            <apex:outputPanel rendered="{!hasPageErrors}">
+                                <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                                </span>
+                            </apex:outputPanel>
                             <fieldset>
                                 <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
                                     <label class="block-label" for="radio-{!director}">
@@ -51,15 +50,29 @@
                                 <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
                             </apex:actionFunction>
                         </div>
-                        
                         <div class="form-group">
                             <apex:commandButton status="status" reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                            <br /> 
+                            <br />
                             <br />
                             <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('{!stepValidator}');
+                    if ('{!stepValidator}') {
+                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
+                            console.log('wrong state starting redirection');
+                            redirectUser();
+                        } else {
+                            console.log('correct state no redirection');
+                        }
+                    }
+                }
+                </script>
             </apex:form>
         </apex:define>
     </apex:composition>

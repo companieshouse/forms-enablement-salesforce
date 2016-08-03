@@ -59,12 +59,18 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public String pageBody2 {get; set;}
     public String pageHiddenText {get; set;}
     public Boolean showMorePresenterInfo {get; set;}
+    public Boolean stepValidator {get; set;}
+    public Boolean sigNeeded {get; set;}
+    public Boolean signingFinished {get; set;}
 
     public PresenterDirectorController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
+        stepValidator = isPageAlreadyValidStep;
+        sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
+        signingFinished = submissionMgr.submission.isSigningFinished__c;
         //Set up the company name
         showMorePresenterInfo = false;
         //directorPresenter = true;
@@ -74,10 +80,10 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List < officerContainer > ();
         pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
-        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;        
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         pageBody = pageBody.replace('COMPANYNAME', companyName);
-        pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;        
-        pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;        
+        pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
+        pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
 
         pageTitle = pageTitle.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
@@ -157,5 +163,29 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             officerTXT = off.Name;
             isPresenter = (off.isPresenter__c == null ? false : off.isPresenter__c);
         }
+    }
+
+    public PageReference redirectUser() {
+        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+        if (isPageAlreadyValidStep)
+            if (submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) {
+                if (submissionMgr.submission.Id != null) {
+                    //update the transaction first
+                    submissionMgr.submission.Status__c = 'deleteContact';
+                    //Save the transaction type
+                    String transactionType = submissionMgr.submission.Transaction_Type__c;
+                    Id presenterID = submissionMgr.submission.Presenter__c;
+                    String presenterEmail = submissionMgr.submission.ContactEmail__c;
+                    Account companyId = submissionMgr.submission.Company__r;
+                    update submissionMgr.submission;
+                    delete submissionMgr.submission;
+                    Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
+                    PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
+
+                    pg.setRedirect(true);
+                    return pg;
+                }
+            }
+        return null;
     }
 }
