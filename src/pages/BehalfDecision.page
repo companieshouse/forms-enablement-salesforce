@@ -67,6 +67,21 @@
                         <apex:param name="paramBoolean" value="" id="x" assignTo="{!behalfValidation}" />
                     </apex:actionFunction>
                 </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('{!stepValidator}');
+                    if ('{!stepValidator}') {
+                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
+                            console.log('wrong state starting redirection');
+                            redirectUser();
+                        } else {
+                            console.log('correct state no redirection');
+                        }
+                    }
+                }
+                </script>
             </apex:form>
         </apex:define>
     </apex:composition>

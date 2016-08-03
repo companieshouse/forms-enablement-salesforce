@@ -51,7 +51,9 @@ public class chooseDirector extends TransactionStepControllerBase {
     public String pageTitle {get; set;}
 
     public String pageBody {get; set;}
-
+    public Boolean stepValidator {get; set;}
+    public Boolean sigNeeded {get; set;}
+    public Boolean signingFinished {get; set;}
 
     public chooseDirector() {
         super();
@@ -60,12 +62,13 @@ public class chooseDirector extends TransactionStepControllerBase {
     }
 
     public void initialiseStep() {
+        stepValidator = isPageAlreadyValidStep;
+        sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
+        signingFinished = submissionMgr.submission.isSigningFinished__c;
         majoritytosign = Integer.valueOf(submissionMgr.submission.RequiredOfficerSign__c);
         //We need to minus if we have already select one of the director because we don't print it !
-        for(Officer__c off :submissionMgr.submission.Officers__r)
-        {
-            if(off.IsPresenter__c && off.isSignatory__c)
-            {
+        for (Officer__c off : submissionMgr.submission.Officers__r) {
+            if (off.IsPresenter__c && off.isSignatory__c) {
                 majoritytosign = majoritytosign - 1;
             }
         }
@@ -208,5 +211,28 @@ public class chooseDirector extends TransactionStepControllerBase {
                 }
             }
         }
+    }
+    public PageReference redirectUser() {
+        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+        if (isPageAlreadyValidStep)
+            if (submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) {
+                if (submissionMgr.submission.Id != null) {
+                    //update the transaction first
+                    submissionMgr.submission.Status__c = 'deleteContact';
+                    //Save the transaction type
+                    String transactionType = submissionMgr.submission.Transaction_Type__c;
+                    Id presenterID = submissionMgr.submission.Presenter__c;
+                    String presenterEmail = submissionMgr.submission.ContactEmail__c;
+                    Account companyId = submissionMgr.submission.Company__r;
+                    update submissionMgr.submission;
+                    delete submissionMgr.submission;
+                    Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
+                    PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
+
+                    pg.setRedirect(true);
+                    return pg;
+                }
+            }
+        return null;
     }
 }

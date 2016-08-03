@@ -27,14 +27,17 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean validationDirector {get; set;}
     public List<String> listOfDirectors {get; set;}
     public Integer nbOfOfficers {get; set;}
-	public Boolean isLLPCompany {get; set;}
+    public Boolean isLLPCompany {get; set;}
     public Boolean isPLCLTDCompany {get; set;}
     public Boolean isLPCompany {get; set;}
     public String officerTerm {get; set;}
     public Boolean noOfficers {get; set;}
     public String pageTitle {get; set;}
     public String pageText {get; set;}
+    public Boolean stepValidator {get; set;}
+    public Boolean sigNeeded {get; set;}
 
+    public Boolean signingFinished {get; set;}
     public DirectorsListController() {
         super();
         System.debug(LoggingLevel.ERROR, 'After Super Call:' + isPageInitialised);
@@ -48,11 +51,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public void initialiseStep() {
         System.debug(LoggingLevel.ERROR, 'Start of Initialise Step');
         //Set up the company name
+        stepValidator = isPageAlreadyValidStep;
+        sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
+        signingFinished = submissionMgr.submission.isSigningFinished__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List<String>();
         showNoError = false;
-		isLLPCompany = submissionMgr.submission.isLLP__c;
+        isLLPCompany = submissionMgr.submission.isLLP__c;
         isPLCLTDCompany = false;
         isLPCompany = false;
         officerTerm = '';
@@ -60,8 +66,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 
         pageText = pageText.replace('COMPANYNAME', companyName);
-        if(isPageAlreadyValidStep)
-        {
+        if (isPageAlreadyValidStep) {
             hasAlreadyLoadedOfficers = true;
         }
         //Get the list officer already created
@@ -84,8 +89,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
-        submissionMgr.persist();    
-        System.debug(LoggingLevel.ERROR,'End of Persist Step');
+        submissionMgr.persist();
+        System.debug(LoggingLevel.ERROR, 'End of Persist Step');
 
     }
     // End Instance methods.
@@ -183,46 +188,44 @@ public with sharing class DirectorsListController extends TransactionStepControl
             List<Officer__c> officerList = new List<Officer__c>();
             List<Contact> contactList = new List<Contact>();
 
-            for(CompaniesHouse.OfficerDetails officer : directorDetailsList){
+            for (CompaniesHouse.OfficerDetails officer : directorDetailsList) {
                 Boolean addOff = false;
-                if( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today()))
-                {   
+                if ( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
-					isLLPCompany = false; 
+                    isLLPCompany = false;
                     isLPCompany = false;
                     isPLCLTDCompany = true;
                     officerTerm = 'director(s)';
 
-                }else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-designated-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-designated-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
                     isLLPCompany = true;
                     isPLCLTDCompany = false;
                     isLPCompany = false;
                     officerTerm = 'member(s)';
-                   
-                }else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+
+                } else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = false;
                     isPLCLTDCompany = false;
                     isLPCompany = true;
                     officerTerm = 'partner(s)';
-                }   
+                }
 
 
-                if(addOff)
-                {
-                    contactList.add(new Contact(Transaction__c =submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));    
+                if (addOff) {
+                    contactList.add(new Contact(Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
                     String offFirstName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : '');
                     String offLastName = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name));
                     String offTitle = (extractOfficerName(2, officer.name) == null ? '' : extractOfficerName(2, officer.name));
-                    String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')): '');
+                    String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')) : '');
                     String offName = offTitle + (offTitle == '' ? '' : ' ') + offFirstName + (offFirstName == '' ? '' : ' ' ) + offLastName;
                     listOfDirectors.add(offName);
                     officerList.add(new Officer__c(Name = offName, Title__c = offTitle,
-                    Forename__c  = offFirstName,
-                    Middlenames__c = offMiddleName,
-                      Surname__c =  offLastName, Transaction__c =submissionMgr.submission.Id ));
+                                                   Forename__c  = offFirstName,
+                                                   Middlenames__c = offMiddleName,
+                                                   Surname__c =  offLastName, Transaction__c = submissionMgr.submission.Id ));
                 }
-                
+
 
             }
 
@@ -251,5 +254,28 @@ public with sharing class DirectorsListController extends TransactionStepControl
         }
         System.debug(LoggingLevel.ERROR, 'end of List of directors');
 
+    }
+    public PageReference redirectUser() {
+        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+        if (isPageAlreadyValidStep)
+            if (submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) {
+                if (submissionMgr.submission.Id != null) {
+                    //update the transaction first
+                    submissionMgr.submission.Status__c = 'deleteContact';
+                    //Save the transaction type
+                    String transactionType = submissionMgr.submission.Transaction_Type__c;
+                    Id presenterID = submissionMgr.submission.Presenter__c;
+                    String presenterEmail = submissionMgr.submission.ContactEmail__c;
+                    Account companyId = submissionMgr.submission.Company__r;
+                    update submissionMgr.submission;
+                    delete submissionMgr.submission;
+                    Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
+                    PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
+
+                    pg.setRedirect(true);
+                    return pg;
+                }
+            }
+        return null;
     }
 }

@@ -22,12 +22,11 @@
 <apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="OfficersPanel" rendered="{!NOT(noOfficers)}">
-                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
-                
-                          <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
                         <div class="form-group {!errorVal}">
                             <ul class="list list-bullet">
                                 <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
@@ -69,6 +68,21 @@
                             <a href="https://www.gov.uk/government/publications/appoint-a-director-ap01"> Appoint company director(s) </a>for information on appointing directors </p>
                     </apex:outputPanel>
                 </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('{!stepValidator}');
+                    if ('{!stepValidator}') {
+                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
+                            console.log('wrong state starting redirection');
+                            redirectUser();
+                        } else {
+                            console.log('correct state no redirection');
+                        }
+                    }
+                }
+                </script>
             </apex:form>
         </apex:define>
     </apex:composition>
