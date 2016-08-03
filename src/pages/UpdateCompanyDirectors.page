@@ -18,7 +18,7 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Update_Company_Directors}" showHeader="false" sidebar="false" standardStylesheets="false" controller="UpdateCompanyDirectorsController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <h1 class="heading-xlarge">
                     Update company directors
                 </h1>
