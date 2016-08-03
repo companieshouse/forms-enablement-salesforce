@@ -30,8 +30,6 @@
                                         <apex:outputText escape="false" value="{!errorMsg1}"></apex:outputText>
                                     </a>
                                 </li>
-                                <li> <a>  <apex:outputText escape="false" value="{!currentErrorMessage}"></apex:outputText> </a>
-                                </li>
                             </ul>
                         </div>
                     </apex:outputPanel>

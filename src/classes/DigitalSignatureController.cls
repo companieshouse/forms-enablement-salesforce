@@ -5,9 +5,7 @@ Copyright © 2016  Methods Digital
 ======================================================
 Purpose:
 -------
-
 Controller class for the Visualforce Page: DigitalSignature
-
 ======================================================
 ======================================================
 History
@@ -34,8 +32,8 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
     public String pageBodySuccess {get; set;}
     public String pageBodyFailure {get; set;}
     public Boolean pollServer {get; set;}
-    public Integer waittime = 0;
-    public String statustoshow {get; set;}
+    public Integer waittime {get; set;}
+
     public DigitalSignatureController() {
         super();
 
@@ -44,8 +42,10 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
 
     public void initialiseStep() {
         pendingPage = false;
+        waittime = 0;
         successSigning = false;
         failureSigning = false;
+        pollServer =true;
         skipPage = false;
         presenterSigning = false;
         multipleDirectors = false;
@@ -125,43 +125,63 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             }
             pendingPage = true;
 
-            List<Transaction__c> recs = [select Id, Name, Status__c from Transaction__c where ID = :submissionMgr.submission.Id];
-            if (submissionMgr.submission.officers__r.size() == 1) {
-
-                if (recs[0].Status__c == 'Signed') {
-                    pollServer = false;
-                    PageReference pg = new PageReference('/DigitalSignature');
-                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                    pg.setRedirect(false);
-                    return pg;
-                }
-            }
-            pollServer = true;
-            waittime++;
-            statustoshow = recs[0].Status__c;
-            if (waittime == 8) {
-                if (submissionMgr.submission.officers__r.size() == 1) {
-                    //sole presenter signing and docusign not responding after ten seconds
-                    if (submissionMgr.submission.officers__r[0].IsPresenter__c == true) {
-                        pollServer = false;
-
-                        return restartPresenterSigning();
-                    }
-                } else if (submissionMgr.submission.officers__r.size() > 1) {
-                    // presenter signed and docusign still outstanding with other signatories
-                    // presenter will receive a status email to track the progress
-                    // stop polling server
-
-                    pollServer = false;
-                    return null;
-                }
-            }
+            
             return null;
         }
 
 
 
         return nextAction();
+
+    }
+
+    public PageReference pollMethods(){
+        if(!presenterSigning)
+        {
+            pollServer = false;
+            return null;
+        }
+
+        List<Contact> lCont = [Select Id,DateSigned__c, isPresenter__c  From Contact Where Transaction__c = :submissionMgr.submission.Id];
+        for(Contact off :lCont)
+        {
+            if(off.isPresenter__c)
+            {
+                if(off.DateSigned__c == null)
+                {
+                    waittime++;
+                }
+                else{
+                    pollServer = false;
+                    PageReference pg = initSignature();
+                    if(pg == null)
+                    {
+                        if(pendingPage == false)
+                        {
+                            pg = new PageReference('/DigitalSignature');
+                            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                            pg.setRedirect(true);
+                            return pg;
+                        }
+                        else{
+                            return null;
+                        }
+
+                    }
+
+                    pg.setRedirect(true);
+
+                    return pg;
+                }
+            }
+        }
+
+        if(waittime == 8 )
+        {
+            pollServer = false;
+            return this.restartPresenterSigning();
+        }
+        return null;
 
     }
 

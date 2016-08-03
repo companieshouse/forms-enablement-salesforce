@@ -99,8 +99,8 @@
                         <apex:actionFunction status="status" action="{!updateLink}" name="updateLink" reRender="emptyPanel">
                         </apex:actionFunction>
                         <apex:outputPanel rendered="{!hasPaymentSuccess}">
-                            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            <div  role="group" tabindex="-1">
+                                <h1 class="heading-medium ">
                                     Successfully paid.
                                 </h1>
                                 <p>
@@ -109,8 +109,8 @@
                             </div>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!hasPaid}">
-                            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            <div role="group" tabindex="-1">
+                                <h1 class="heading-medium" >
                                     The payment has been already processed.
                                 </h1>
                                 <p>
@@ -119,8 +119,8 @@
                             </div>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!hasPaymentRejected}">
-                            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            <div  role="group" tabindex="-1">
+                                <h1 class="heading-medium">
                                     The payment has been rejected.
                                 </h1>
                                 <p>
@@ -130,8 +130,8 @@
                             </div>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!hasPaymentError}">
-                            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            <div role="group" tabindex="-1">
+                                <h1 class="heading-medium">
                                     Payment issuer has encoutered an issue.
                                 </h1>
                                 <br/>
@@ -142,8 +142,8 @@
                             </div>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!hasPaymentPending}">
-                            <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                            <div role="group" tabindex="-1">
+                                <h1 class="heading-medium">
                                     The payment is pending.
                                 </h1>
                                 <p>
