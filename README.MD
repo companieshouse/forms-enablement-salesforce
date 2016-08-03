@@ -14,8 +14,8 @@ This application is written in [APEX](https://developer.salesforce.com/docs/atla
 In order to run this service you will need the following:
 
 - [Salesforce Account](https://developer.salesforce.com/signup)
-- [Docusign for Salesforce](https://maven.apache.org/download.cgi)
-- [Docusign Account](https://github.com/docusign/docusign-soap-sdk)
+- [Docusign for Salesforce](https://github.com/docusign/docusign-soap-sdk)
+- [Docusign Account](https://www.docusign.com/developer-center)
 - [Git](https://git-scm.com/downloads)
 - [ANT](http://ant.apache.org/)
 - [Force Migration Tool](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_deploying_ant.htm)
