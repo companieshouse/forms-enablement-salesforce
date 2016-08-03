@@ -39,7 +39,6 @@
                     <div class="form-group {!errorVal}">
                             <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
                             <apex:outputText rendered="{!hasPageErrors}" escape="false" value="{!errorMsg1}"></apex:outputText>
-                             <apex:outputText rendered="{!hasPageErrors}" escape="false" value="{!currentErrorMessage}"></apex:outputText>
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
                             <label class="block-label">
                                 <apex:inputCheckbox value="{!director.selected}">{!director.off.Name}</apex:inputCheckbox>

@@ -19,10 +19,7 @@ public class chooseDirector extends TransactionStepControllerBase {
         get;
         set;
     }
-    public String currentErrorMessage {
-        get;
-        set;
-    }
+    
     public String errorVal {get; set;}
     public String companyName {
         get;
@@ -126,11 +123,9 @@ public class chooseDirector extends TransactionStepControllerBase {
         if (submissionMgr.submission.isMajorityRequired__c) {
             if (isSignatureNumberOK()) {
                 hasPageErrors = false;
-                currentErrorMessage = '';
                 errorVal = '';
 
             } else if (!isSignatureNumberOK()) {
-                currentErrorMessage = 'Please select the correct amount of officers';
                 hasPageErrors = true;
                 errorVal = 'error';
                 return null;

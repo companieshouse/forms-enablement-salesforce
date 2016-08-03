@@ -167,7 +167,7 @@ The request to close the following company has been sent to the directors and/or
     </tr>
     <tr>
         <th class='basic' >Status</th>
-        <th class='basic' >{!Transaction__c.Status__c}</th>
+        <th class='basic' >{!Transaction__c.CompanyStatus__c}</th>
     </tr>
     <tr>
         <th class='basic' >Incorporation date</th>
