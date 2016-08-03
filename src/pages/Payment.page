@@ -155,7 +155,7 @@
                         <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                         <br />
                         <br/>
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
                     </div>
                 </apex:outputPanel>
             </apex:form>

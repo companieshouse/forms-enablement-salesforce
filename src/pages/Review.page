@@ -649,10 +649,7 @@
                             </apex:outputPanel>
                         </apex:outputPanel>
                     </apex:outputPanel>
-                    <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
-                    <br/> 
-                    <br/> 
-                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> 
+                    <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" /> 
                 </apex:outputPanel>
             </apex:form>
         </apex:define>
