@@ -11,7 +11,7 @@ This application is written in [APEX](https://developer.salesforce.com/docs/atla
 
 ### Prerequisites
 
-In order to run this service you will need the following.
+In order to run this service you will need the following:
 
 - [Salesforce Account](https://developer.salesforce.com/signup)
 - [Docusign for Salesforce](https://maven.apache.org/download.cgi)
@@ -20,8 +20,10 @@ In order to run this service you will need the following.
 - [ANT](http://ant.apache.org/)
 - [Force Migration Tool](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_deploying_ant.htm)
 - [Sublime Text](https://www.sublimetext.com/) and [Mavens Mate](http://mavensmate.com/)
+
  or
 - [Eclipse](https://eclipse.org/), [Salesforce Eclipse plugin](https://developer.salesforce.com/page/Force.com_IDE_Installation) and [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
 or
 - [Force.com IDE package instructions](https://developer.salesforce.com/page/Force.com_IDE_Installation)
 
@@ -38,4 +40,4 @@ cd forms-enablement-salesforce
 
 ### Running the application
 
-To run the application you have to first install the DocuSign API and then deploy this repository to your sandbox. This is a publically facing application so to run this application [Force.com Sites](https://developer.salesforce.com/page/Sites) has to be enabled to use this product.
+To run the application you have to first create a salesforce developer account or a Salesforce Sandbox Account. Then install the DocuSign API and then deploy this repository to your sandbox. This is a publically facing application so to run this application publically you will need to enable [Force.com Sites](https://developer.salesforce.com/page/Sites).
