@@ -1,7 +1,7 @@
 <apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController2" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -17,17 +17,18 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="centralPanel">
                         <div class="form-group">
-                            <h1 class="heading-xlarge">Share capital</h1>
+                            <h1 class="heading-xlarge">Statement of capital</h1>
                             <h2 class="heading-medium">What is the currency?</h2>
                             <fieldset>
                                 <label class="block-label" for="radio-pound">
+                                    <legend class='visuallyhidden'>What is the currency?</legend>
                                     <input onclick="grabCurrencyType('Pound sterling')" id="radio-pound" type="radio" name="radio-group" value="" /> Pound sterling
-                                </label>
-                                <label class="block-label" for="radio-usd">
-                                    <input onclick="grabCurrencyType('USD')" id="radio-usd" type="radio" name="radio-group" value="" /> USD
                                 </label>
                                 <label class="block-label" for="radio-euro">
                                     <input onclick="grabCurrencyType('Euro')" id="radio-euro" type="radio" name="radio-group" value="" /> Euro
+                                </label>
+                                <label class="block-label" for="radio-usd">
+                                    <input onclick="grabCurrencyType('USD')" id="radio-usd" type="radio" name="radio-group" value="" /> USD
                                 </label>
                                 <label class="block-label" for="radio-other" data-target="other-currency">
                                     <input id="radio-other" type="radio" onclick="showCurrencyOther()" name="radio-group" value="" /> Other
@@ -44,33 +45,39 @@
                             </fieldset>
                         </div>
                         <div class="form-group">
-                            <label class="form-label-bold" for="number-of-shares">What's the total amount of {!shareClassType} shares in this currency?
+                            <label class="form-label-bold" for="number-of-shares">What's the total number of {!shareClassType} shares in this currency?
                             </label>
                             <apex:inputText styleClass="form-control" id="number-of-shares" value="{!numberofshares}" />
                         </div>
                         <div class="form-group">
                             <label class="form-label-bold" for="aggnominal-val">What's the total aggregate nominal value of {!shareClassType} shares in this currency?</label>
-                            <p class="form-hint">This is the total number of shares multiplied by the nominal value.</p>
+                            <p class="form-hint">This is the total number of shares multiplied by their nominal values. The nominal value is the value for each share.</p>
                             <apex:inputText styleClass="form-control" id="aggnominal-val" value="{!nominalvalue}" />
                         </div>
                         <div class="form-group">
-                            <h3 class="heading-medium">Has the shareholder paid for all of the shares?</h3>
-                            <fieldset class="inline">
+                            <h3 class="heading-medium">Have the shares been paid for in full?</h3>
+                            <fieldset class="inline" id='aggFieldset'>
+                                <legend class='visuallyhidden'>Have the shares been paid for in full?</legend>
                                 <label class="block-label" for="shareholder-paid-yes">
-                                    <input id="shareholder-paid-yes" onclick="grabAggUnpaid(0)" type="radio" name="share-holderpaid-yes" value="Yes" /> Yes
+                                    <input id="shareholder-paid-yes" onclick="changeshareholderState1(this.value)" type="radio" name="share-holderpaid-yes" value="Yes" /> Yes
                                 </label>
-                                <label class="block-label" for="shareholder-paid-no" data-target="not-paid">
-                                    <input id="shareholder-paid-no" type="radio" name="shareholder-paid-no" value="No" /> No
+                                <label class="block-label" for="shareholder-paid-no">
+                                    <input id="shareholder-paid-no" onclick='changeshareholderState2()' type="radio" name="shareholder-paid-no" value="No" /> No
                                 </label>
+                                <apex:outputPanel id="outerpanelOtherAgg">
+                                    <apex:outputPanel id="otherAggID" rendered="{!otherAgg}">
+                                        <div class="panel panel-border-narrow" id="not-paid">
+                                            <label class="form-label" for="not-paid-shares">What's the total aggregate amount unpaid?</label>
+                                            <input onchange="grabAggUnpaid(this.value)" class="form-control" id="not-paid-shares" type="text" />
+                                        </div>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
                             </fieldset>
-                            <div class="panel panel-border-narrow js-hidden" id="not-paid">
-                                <label class="form-label" for="not-paid-shares">What's the total aggregate amount unpaid?</label>
-                                <input onchange="grabAggUnpaid(this.value)" class="form-control" id="not-paid-shares" type="text" />
-                            </div>
                         </div>
                     </apex:outputPanel>
                     <div class="form-group">
                         <apex:commandButton action="{!addnewShares}" id="SCapital1button" reRender="masterpanel,currency" styleClass="button" value="{!continueButtonText}" />
+                        <br/>
                         <br/>
                         <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
                         <apex:actionFunction action="{!grabCurrencyType}" name="grabCurrencyType" reRender="emptyPanel">
@@ -82,12 +89,36 @@
                         <apex:actionFunction action="{!grabAggNomValue}" name="grabAggNomValue" reRender="emptyPanel">
                             <apex:param name="grabAggNomValue" value="" id="c" assignTo="{!nominalvalue}" />
                         </apex:actionFunction>
-                        <apex:actionFunction action="{!grabAggUnpaid}" name="grabAggUnpaid" reRender="emptyPanel">
+                        <apex:actionFunction action="{!grabAggUnpaid}" name="grabAggUnpaid" reRender="emptyPanel, outerpanelOtherAgg">
                             <apex:param name="grabAggUnpaid" value="" id="d" assignTo="{!aggUnpaid}" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!showOtherAgg}" name="showOtherAgg" reRender="outerpanelOtherAgg">
+                            <apex:param name="showOtherAgg" value="" id="jlk" assignTo="{!otherAgg}" />
                         </apex:actionFunction>
                         <apex:actionFunction action="{!showCurrencyOther}" name="showCurrencyOther" reRender="outerpanelCurrency">
                         </apex:actionFunction>
                     </div>
+                    <script>
+                    function changeshareholderState1() {
+                        var a = document.getElementById('shareholder-paid-yes');
+                        var b = document.getElementById('shareholder-paid-no');
+                        // console.log('a == ' + JSON.stringify(a) );
+                        grabAggUnpaid(0);
+                        if (a.checked == true) {
+                            b.checked = false;
+                        }
+                    }
+
+                    function changeshareholderState2() {
+                        var a = document.getElementById('shareholder-paid-yes');
+                        var b = document.getElementById('shareholder-paid-no');
+                        // console.log('b == ' + JSON.stringify(b) );
+                        showOtherAgg();
+                        if (b.checked == true) {
+                            a.checked = false;
+                        }
+                    }
+                    </script>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>
