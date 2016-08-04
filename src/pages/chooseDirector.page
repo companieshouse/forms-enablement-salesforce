@@ -50,20 +50,43 @@
                     <br />
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> 
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
-                </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log('{!stepValidator}');
-                    if ('{!stepValidator}') {
-                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
-                            console.log('wrong state starting redirection');
-                            redirectUser();
-                        } else {
-                            console.log('correct state no redirection');
-                        }
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        chooseDirector.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
                     }
-                }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
                 </script>
             </apex:form>
         </apex:define>

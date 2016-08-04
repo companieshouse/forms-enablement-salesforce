@@ -109,9 +109,11 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         if (submissionMgr.submission.isSigningStarted__c || !presenterSigning) {
             //Determine if it has been declined or not
             if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED) {
+                pollServer = false;
                 successSigning = true;
                 return null;
             } else if (submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                pollServer = false;
                 failureSigning = true;
                 return null;
             }
@@ -125,7 +127,6 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             }
             pendingPage = true;
 
-            
             return null;
         }
 
@@ -143,43 +144,103 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         }
 
         List<Contact> lCont = [Select Id,DateSigned__c, isPresenter__c  From Contact Where Transaction__c = :submissionMgr.submission.Id];
+
+        Boolean hasSigned = false;
         for(Contact off :lCont)
         {
             if(off.isPresenter__c)
             {
-                if(off.DateSigned__c == null)
-                {
-                    waittime++;
-                }
-                else{
-                    pollServer = false;
-                    PageReference pg = initSignature();
-                    if(pg == null)
-                    {
-                        if(pendingPage == false)
-                        {
-                            pg = new PageReference('/DigitalSignature');
-                            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                            pg.setRedirect(true);
-                            return pg;
-                        }
-                        else{
-                            return null;
-                        }
-
-                    }
-
-                    pg.setRedirect(true);
-
-                    return pg;
+                if(off.DateSigned__c != null){
+                    hasSigned = true;
                 }
             }
         }
 
-        if(waittime == 8 )
+        if(hasSigned)
         {
-            pollServer = false;
-            return this.restartPresenterSigning();
+            if(lCont.size() == 1)
+            {
+                submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SIGNED;
+                update submissionMgr.submission;
+
+                PageReference pg = new PageReference('/DigitalSignature');
+                pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                pg.setRedirect(true);
+                return pg;
+
+            }
+            else{
+                if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+                else if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED)
+                {
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+
+                pendingPage = true;
+                pollServer = false;
+            }
+        }
+        else
+        {
+            if(lCont.size() == 1)
+            {
+                if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+
+                waittime++;
+                pollServer = true;
+            }
+            else{
+                waittime++;
+                pollServer = true;
+            }
+        }
+
+        if(waittime == 8)
+        {
+            if(lCont.size() == 1)
+            {
+                if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+                else if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED)
+                {
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+
+                pollServer = false;
+                return this.restartPresenterSigning();
+            }
+            else{
+                if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+                pollServer = false;
+                return this.restartPresenterSigning();
+
+            }
+            
         }
         return null;
 

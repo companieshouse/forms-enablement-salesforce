@@ -71,7 +71,6 @@ public with sharing class SubmissionManager {
 
     // Instance methods.
     public Id initialise(String transactionType, String presenterId, String presenterEmail, SObject companyId, Transaction_Type__mdt td) {
-
         //Only initialise with pending submissions.
         List<Transaction__c> recs = [select Transaction_Type__c,Company__r.CompanyNumber__c,CompanyType__c,CompanyStatus__c,CompanyIncorporationDate__c,officerTerminology__c,isLtdPlc__c,isLP__c,submissionDate__c, submissionTime__c, paymentDate__c, containsPackage__c, Product_Code__c, paymentReference__c, isPaymentAccount__c, isPaymentCard__c, isPaymentPaypal__c, AccountNumber__c, hasPromoter__c, Version_Form__c, Presenter__r.PersonEmail, Company__c, Company__r.Name, Company__r.Id, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c, isDigitalSignatureNeeded__c, isSigningStarted__c, sharecurrencyselection__c, Barcode__c, isBehalfSignatoryEnable__c, isPresenterMultipleDirectors__c, SoleDirectorPresenter__c, OfficerCount__c, Id, hasPaid__c, isPaymentRequired__c, CompanyLocality__c, CompanyCountry__c, CompanyPostCode__c, CompanyRegion__c, CompanyAddress1__c, CompanyAddress2__c, Presenter__c, Form_Name__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c,
                                      PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
@@ -240,7 +239,7 @@ public with sharing class SubmissionManager {
 
         s.Historical_Valid_Step_Ids__c = historicalSteps;
         s.Valid_Step_Ids__c=newValidStepIdPath;
-        
+        System.debug('TURNITTOFALSE');
         s.MultipleDirectors__c = false;        
 	
         update s;

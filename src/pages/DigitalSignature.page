@@ -29,8 +29,7 @@ Ver. Author        Date        Detail
                 <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel id="pendingPage" rendered="{!pendingPage}">
                     
-
-                    <apex:actionPoller enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5" />
+                    <apex:actionPoller enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5"  />
                     <apex:outputText escape="false" value="{!pageTitle}" />
                     <apex:outputText escape="false" value="{!pageBody}" />
                     <table class="table-spacing">

@@ -100,7 +100,7 @@ public with sharing class TransactionTriggerHandler {
     public static void afterUpdate(List <Transaction__c> transactionsList)
     {
 
-
+        System.debug('LISTDEBUG' + transactionsList);
         List < Transaction__c > transactionsToUpdate = new List < Transaction__c > ();
         List < Transaction__c > transactionListRecords = [Select Id, ApplicationBaseURL__c,Valid_Step_Ids__c, Status__c, MultipleDirectors__c From Transaction__c Where Id IN: transactionsList AND Status__c = : AppConstants.REQUEST_STATUS_SIGNED AND (MultipleDirectors__c = true )];
         for (Transaction__c transactionupdater: transactionListRecords) {

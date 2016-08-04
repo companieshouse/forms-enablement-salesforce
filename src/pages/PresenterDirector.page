@@ -20,6 +20,7 @@
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
 <apex:page title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:outputPanel id="testEmpty"/>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -87,20 +88,45 @@
                     <br />
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
-                <apex:actionFunction action="{!returnToStart}" name="checkSteps">
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none">
                 </apex:actionFunction>
                 <script>
-                  function checkSteps() {
-                    console.log('{!stepValidator}');
-                    if ('{!stepValidator}') {
-                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
-                            console.log('wrong state starting redirection');
-                            returnToStart();
-                        } else {
-                            console.log('correct state no redirection');
-                        }
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        PresenterDirectorController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
                     }
-                }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
                 </script>
             </apex:form>
         </apex:define>

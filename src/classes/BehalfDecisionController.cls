@@ -88,27 +88,84 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
 
         return null;
     }
-    public PageReference redirectUser() {
-        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
-        if (isPageAlreadyValidStep)
-            if (submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) {
-                if (submissionMgr.submission.Id != null) {
-                    //update the transaction first
-                    submissionMgr.submission.Status__c = 'deleteContact';
-                    //Save the transaction type
-                    String transactionType = submissionMgr.submission.Transaction_Type__c;
-                    Id presenterID = submissionMgr.submission.Presenter__c;
-                    String presenterEmail = submissionMgr.submission.ContactEmail__c;
-                    Account companyId = submissionMgr.submission.Company__r;
-                    update submissionMgr.submission;
-                    delete submissionMgr.submission;
-                    Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
-                    PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
 
-                    pg.setRedirect(true);
-                    return pg;
+    @RemoteAction
+    public static Boolean refreshBoolean(String paramfunction){
+        String paramInput = paramfunction;
+
+        String paramValue = SecurityManager.decryptText(EncodingUtil.urlDecode(paramInput, 'UTF-8'));                    
+
+        // Submission state.
+        String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+        String stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
+        
+        List<Transaction__c> transac = [Select Id, Historical_Valid_Step_Ids__c From Transaction__c Where Id = :submissionId Limit 1];
+        if( transac.size() == 0)
+            return false;
+        //We need to detect if the page has been loaded more than 1 time
+        String historicalValidStepId = transac[0].Historical_Valid_Step_Ids__c;
+        String stepIdTXT = stepId;
+        Boolean isPageAlreadyValidStep = false;
+        if(historicalValidStepId != null)
+            if(historicalValidStepId.contains(stepIdTXT))
+            {
+                //We need to check if the value associated is 0 if not 0 then it is true
+                List<String> histStep = historicalValidStepId.split(AppConstants.DELIM_HISTORICAL_STEP);
+                for(Integer i = 0; i <= histStep.size()-1; i++)
+                {
+                    if(histStep[i] == stepIdTXT)
+                    {
+                        if(Integer.valueOf(histStep[i+1]) == 0)
+                        {
+                            isPageAlreadyValidStep = false;
+                            break;
+                        }
+                        else
+                        {
+                            isPageAlreadyValidStep = true;
+                            break;
+                        }
+                    }
                 }
             }
+            else
+                isPageAlreadyValidStep = false;
+
+            System.debug('TESTD' + isPageAlreadyValidStep);
+            return isPageAlreadyValidStep;
+    }
+
+    public PageReference redirectUser() {
+        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+        String paramInput = ApexPages.currentPage().getParameters().get('c');
+        String paramValue = SecurityManager.decryptText(paramInput);                    
+
+        // Submission state.
+        String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+        Id stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
+        List<Transaction__c> transac = [Select Id,Transaction_Type__c,Presenter__c,ContactEmail__c,Company__r.Id,Company__r.Name,Company__r.CompanyNumber__c, Status__c,Historical_Valid_Step_Ids__c,isDigitalSignatureNeeded__c,isSigningFinished__c From Transaction__c Where Id = :submissionId Limit 1];
+        if(transac.size() == 0)
+            return null;
+
+        if (transac[0].isDigitalSignatureNeeded__c && !transac[0].isSigningFinished__c) {
+            if (transac[0].Id != null) {
+                //update the transaction first
+                transac[0].Status__c = 'deleteContact';
+                //Save the transaction type
+                String transactionType = transac[0].Transaction_Type__c;
+                Id presenterID = transac[0].Presenter__c;
+                String presenterEmail = transac[0].ContactEmail__c;
+                Account companyId = transac[0].Company__r;
+                update transac[0];
+                delete transac[0];
+                TransactionManager transactionMgr2 = new TransactionManager(transactionType);
+                Id submissionId2 = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr2.td);
+                PageReference pg = transactionMgr2 == null ? null : transactionMgr2.firstStep(submissionId2);
+
+                pg.setRedirect(true);
+                return pg;
+            }
+        }
         return null;
     }
 }
