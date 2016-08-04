@@ -22,7 +22,7 @@
 <apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="OfficersPanel" rendered="{!NOT(noOfficers)}">
                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
@@ -76,6 +76,7 @@
                     if ('{!stepValidator}') {
                         if ('{!sigNeeded}' && !!'{!signingFinished}') {
                             console.log('wrong state starting redirection');
+                              super();
                             redirectUser();
                         } else {
                             console.log('correct state no redirection');

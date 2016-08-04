@@ -87,7 +87,7 @@
                     <br />
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
-                <apex:actionFunction action="{!returnToStart}" name="checkSteps">
+                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
                 </apex:actionFunction>
                 <script>
                   function checkSteps() {
@@ -95,7 +95,7 @@
                     if ('{!stepValidator}') {
                         if ('{!sigNeeded}' && !!'{!signingFinished}') {
                             console.log('wrong state starting redirection');
-                            returnToStart();
+                            redirectUser();
                         } else {
                             console.log('correct state no redirection');
                         }

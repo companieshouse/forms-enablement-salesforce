@@ -69,6 +69,8 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 		set;
 	}
 	public String  currencyHidden {get; set;}
+	public String  aggHidden {get; set;}
+
 	public String prescribedParticular {get; set;}
 	public String shareClassType {get; set;}
 	public String currencyType {get; set;}
@@ -78,6 +80,7 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 	public String currentErrorMessage {get; set;}
 	public Decimal aggUnpaid {get; set;}
 	public Boolean showCurrency {get; set;}
+	public Boolean otherAgg {get; set;}
 	public SCapitalController2() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -113,10 +116,13 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 	private void persistStep() {
 		submissionMgr.persist();
 	}
+	public void showOtherAgg() {
+		otherAgg = true;
+	}
 	public void showCurrencyOther() {
 
 		//if (currencyHidden == 'js-hidden') {
-		currencyHidden = '';
+		//currencyHidden = '';
 		showCurrency = true;
 
 		//} else if (currencyHidden == '') {
@@ -345,7 +351,7 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 	}
 
 	public void grabCurrencyType () {
-		currencyHidden = 'js-hidden';
+		//currencyHidden = 'js-hidden';
 		showCurrency = false;
 		//throw new Form_CustomException('here is the currency type'+ currencyType);
 	}
@@ -358,6 +364,12 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 
 	}
 	public void grabAggUnpaid () {
+		//throw new Form_CustomException(' agg unpaid is ' + aggUnpaid);
+		if (aggUnpaid == 0) {
+			otherAgg = false;
+		} else if (aggUnpaid != 0) {
+			otherAgg = true;
+		}
 		//throw new Form_CustomException('here is the agg unpaid '+ aggUnpaid);
 
 	}

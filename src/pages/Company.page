@@ -40,7 +40,7 @@ Ver. Author        Date        Detail
                 <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
 
                  <div class="form-group {!currentError}">
-                    <label class="form-label" for="text-input">What's the company registration number?
+                    <label class="form-label" for="text-input">What's the company number?
                         <span class="form-hint">This is an 8-digit number issued by Companies House when the company was set up.</span>
                         <apex:outputPanel rendered="{!hasPageErrors}">
                             <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
@@ -48,7 +48,6 @@ Ver. Author        Date        Detail
                         </apex:outputPanel>
                     </label>
                     <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                    <!-- </div>   -->
                     <br/>
                 </div>
 
@@ -57,9 +56,7 @@ Ver. Author        Date        Detail
                 <br/> 
                 <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Confirm my company details" />
                 <br/>
-                <!--
-                &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-                &nbsp; -->
+               
             </apex:form>
         </apex:define>
     </apex:composition>

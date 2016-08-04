@@ -54,9 +54,6 @@ Ver. Author        Date        Detail
         </div>
     </main>
     </div>
-    <apex:form>
-        <apex:actionFunction status="status" action="{!returnToStart}" name="returnerFunction" />
-    </apex:form>
 
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk-template.js')}" type="text/javascript"></script>
     <!-- Javascript -->

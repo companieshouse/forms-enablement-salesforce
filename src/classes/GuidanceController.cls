@@ -44,11 +44,19 @@ public with sharing class GuidanceController {
         get;
         set;
     }
+    public String guidanceTitle {get; set;}
+    public String guidanceText1 {get; set;}
+    public String guidanceText2 {get; set;}
+    public String guidanceText3 {get; set;}
+    public String guidanceText4 {get; set;}
+    public String guidanceText5 {get; set;}
+
     public Boolean standardGuidanceView {get; set;}
     public Boolean customGuidanceView {get; set;}
     Boolean isPageInitialised = false;
     SecurityManager securityMgr;
     TransactionManager transactionMgr;
+
 
     public GuidanceController() {
         initialiseStep();
@@ -66,13 +74,22 @@ public with sharing class GuidanceController {
             customGuidanceView = transactionMgr.td.customGuidanceView__c;
             standardGuidanceView = transactionMgr.td.standardGuidanceView__c;
             // display text
-            displayText0 = '';
-            displayText0 += (transactionMgr.td.Guidance_Text_1__c == null ? '' : transactionMgr.td.Guidance_Text_1__c);
-            displayText0 += (transactionMgr.td.Guidance_Text_2__c == null ? '' : transactionMgr.td.Guidance_Text_2__c);
-            displayText0 += (transactionMgr.td.Guidance_Text_3__c == null ? '' : transactionMgr.td.Guidance_Text_3__c);
-            displayText0 += (transactionMgr.td.Guidance_Text_4__c == null ? '' : transactionMgr.td.Guidance_Text_4__c);
-            displayText0 += (transactionMgr.td.Guidance_Text_5__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
-            displayText0 += (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_6__c);
+            if (standardGuidanceView) {
+                displayText0 = '';
+                displayText0 += (transactionMgr.td.Guidance_Text_1__c == null ? '' : transactionMgr.td.Guidance_Text_1__c);
+                displayText0 += (transactionMgr.td.Guidance_Text_2__c == null ? '' : transactionMgr.td.Guidance_Text_2__c);
+                displayText0 += (transactionMgr.td.Guidance_Text_3__c == null ? '' : transactionMgr.td.Guidance_Text_3__c);
+                displayText0 += (transactionMgr.td.Guidance_Text_4__c == null ? '' : transactionMgr.td.Guidance_Text_4__c);
+                displayText0 += (transactionMgr.td.Guidance_Text_5__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
+                displayText0 += (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_6__c);
+            } else if (customGuidanceView) {
+                guidanceTitle =  transactionMgr.td.Guidance_Text_1__c;
+                guidanceText1 = transactionMgr.td.Guidance_Text_2__c;
+                guidanceText2 = transactionMgr.td.Guidance_Text_3__c;
+                guidanceText3 = transactionMgr.td.Guidance_Text_4__c;
+                guidanceText4 = transactionMgr.td.Guidance_Text_5__c;
+                guidanceText5 = transactionMgr.td.Guidance_Text_6__c;
+            }
             // checkbox text
             checkboxText0 = transactionMgr.td.GuidanceWarningText__c;
             // System.debug('while in initialize' + warningAgreeBox);
@@ -83,16 +100,16 @@ public with sharing class GuidanceController {
         }
         return;
     }
-    //public PageReference initializeBox() {
-    //    initialiseStep();
-    //    // warningAgreeBox = userTracker.GuidanceAgreeBox();
-    //    return null;
-    //}
-    //public void updateBox() {
-    //    if (warningAgreeBox == true) warningAgreeBox = false;
-    //    else warningAgreeBox = true;
-    //    return;
-    //}
+//public PageReference initializeBox() {
+//    initialiseStep();
+//    // warningAgreeBox = userTracker.GuidanceAgreeBox();
+//    return null;
+//}
+//public void updateBox() {
+//    if (warningAgreeBox == true) warningAgreeBox = false;
+//    else warningAgreeBox = true;
+//    return;
+//}
     public PageReference setAgreeValue() {
         if (!agreeBoxChoice) {
             currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
@@ -108,8 +125,8 @@ public with sharing class GuidanceController {
         }
         return nextAction();
     }
-    // End Instance methods.
-    // Action methods.
+// End Instance methods.
+// Action methods.
     public PageReference nextAction() {
         //We don't redirect to the next step but to the auth
         userTracker = new TrackUserClass();
@@ -127,5 +144,5 @@ public with sharing class GuidanceController {
         userTracker.saveUserDocumentInfo();
         return new PageReference('/?t=' + transactionType);
     }
-    // End Action methods.
+// End Action methods.
 }

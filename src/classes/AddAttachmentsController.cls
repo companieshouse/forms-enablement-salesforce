@@ -118,6 +118,12 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
     public String solvencyStatus {get; set;}
     public String resolutionStatus {get; set;}
     public String previousButtonText {get; set;}
+    public Blob attBody {get; set;}
+    public Blob resBody {get; set;}
+    public Blob solvencyBody {get; set;}
+
+    public String attName {get; set;}
+    public String attDescription {get; set;}
     public static final Integer NUMOFATTACHMENTSALLOWED = 1;
     public AddAttachmentsController() {
         super();
@@ -141,14 +147,11 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         presenterEmail = submissionMgr.submission.Presenter__r.PersonEmail;
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
-        //attachments = submissionMgr.submission.Attachments;
         attachmentId = submissionMgr.submission.Id;
         if (submissionMgr.submission.Attachments.size() > 0) {
             attachments = submissionMgr.submission.Attachments;
         }
-        //, new Attachment(name = 'SH20', description = 'directors\' statement')
-        newAttachments = new List < Attachment > {new Attachment(name = 'Solvency statement ', description = 'a solvency statement'), new Attachment(name = 'Resolution', description = 'a special resolution authorising the capital reduction')};
-        //goForward();
+        checkAttachmentStatus();
         return;
     }
     public PageReference goForward() {
@@ -158,101 +161,69 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         }
         return null;
     }
-    //public void addMore() {
 
-    //    for (Integer attachmentvar = 0; attachmentvar < NUMOFATTACHMENTSALLOWED; attachmentvar++) {
-    //        newAttachments.add(new Attachment());
-    //    }
-    //    hasPageErrors = false;
-    //}
-    //public void remove() {
-    //    if (newAttachments.size() == 0) {
-    //        hasPageErrors = true;
-    //        currentErrors = 'You have no new attachments to remove';
-    //    } else if (newAttachments.size() > 0) {
-    //        newAttachments.remove(0);
-    //    }
-    //}
     public void DeleteAttachments() {
-        throw new Form_CustomException(' your attachment ID is ' + attachmentId);
+        //throw new Form_CustomException(' your attachment ID is ' + attachmentId);
         for (Attachment attachmentToDelete : submissionMgr.submission.Attachments) {
             if (attachmentToDelete.Id == attachmentId) {
                 try {
-                    throw new Form_CustomException(' your attachment ID is ' + attachmentToDelete);
+                    //throw new Form_CustomException(' your attachment ID is ' + attachmentToDelete);
                     delete attachmentToDelete;
                 } catch (DmlException e) {} catch (Exception e) {} finally {
-                    persistStep();
-
+                    //persistStep();
                 }
             }
         }
     }
     public void checkAttachmentStatus() {
-
-        for (Attachment checkedAttachments : submissionMgr.submission.Attachments) {
-            if (checkedAttachments.Name == 'Resolution') {
-                resolutionStatus = 'Uploaded';
-            } else if (checkedAttachments.Name != 'Resolution') {
-                resolutionStatus = 'Not yet uploaded';
+        if (submissionMgr.submission.Attachments.size() > 0) {
+            for (Attachment checkedAttachments : submissionMgr.submission.Attachments) {
+                if (checkedAttachments.Name == 'Resolution') {
+                    resolutionStatus = 'Uploaded';
+                } else if (checkedAttachments.Name != 'Resolution') {
+                    resolutionStatus = 'Not yet uploaded';
+                }
+                if (checkedAttachments.Name == 'Solvency statement') {
+                    solvencyStatus = 'Uploaded';
+                } else if (checkedAttachments.Name != 'Solvency statement') {
+                    solvencyStatus = 'Not yet uploaded';
+                }
             }
-            if (checkedAttachments.Name == 'Solvency statement') {
-                solvencyStatus = 'Uploaded';
-
-            } else if (checkedAttachments.Name != 'Solvency statement') {
-                solvencyStatus = 'Not yet uploaded';
-            }
-
+        } else {
+            solvencyStatus = 'Not yet uploaded';
+            resolutionStatus = 'Not yet uploaded';
         }
     }
+
+
+
+
+
     public void addSolvencyStatement() {
 
 
     }
-    public void addResolution() {
 
+    public PageReference uploadaTT() {
+        Attachment aTT = new Attachment();
 
-    }
-    // throw new Form_CustomException(' your attachment ID is ' + attachmentId);
-    //for (Attachment deletedAttachment: submissionMgr.submission.Attachments) {
-    //    if (deletedAttachment.Id == attachmenttoDeleteId) {
-    //        try {
-    //            //deletedAttachment.delete();
-    //        } catch (DmlException e) {
-    //            hasPageErrors = true;
-    //            currentErrors = 'Attachment Deletion Error' + e.getMessage();
-    //            console.log('DML error in removing attachment' + e.getMessage());
-    //        } catch (Exception e) {
-    //            hasPageErrors = true;
-    //            currentErrors = 'Attachment Deletion Error' + e.getMessage();
-    //            console.log('error in removing attachment' + e.getMessage());
-    //        } finally {
-    //            //PageReference pg = new PageReference('/Attachments');
-    //            //pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-    //            //pg.setRedirect(true);
-    //            //return pg;
-    //            refresh();
-    //        }
-    //    }
-    //}
+        aTT.parentId = attachmentId;
+        aTT.body = attBody;
+        aTT.description = attDescription;
+        aTT.name = attName;
 
-    public PageReference save() {
-        List < Attachment > toInsert = new List < Attachment > ();
-        for (Attachment newAtt : newAttachments) {
-            if (newAtt.Body != null) {
-                newAtt.parentId = attachmentId;
-                toInsert.add(newAtt);
-            }
+        try {
+            insert aTT;
+
+        } catch (DmlException e) {
+            System.debug('DML Error with this upload' + e.getMessage());
+        } catch (Exception e) {
+            System.debug('General Exception' + e.getMessage());
         }
-        insert toInsert;
-        newAttachments.clear();
-        newAttachments.add(new Attachment());
-        attachments = null;
-        PageReference pg = new PageReference('/Attachments');
-        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-        pg.setRedirect(true);
-        return pg;
-        //refresh();
+        checkAttachmentStatus();
+        return null;
     }
+
     private void persistStep() {
         submissionMgr.persist();
     }

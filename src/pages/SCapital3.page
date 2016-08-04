@@ -11,7 +11,7 @@
                         </p>
                     </apex:outputPanel>
                     <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
-                        <h1 class="heading-xlarge">Share capital</h1>
+                        <h1 class="heading-xlarge">Statement of capital</h1>
                         <h2 class="heading-large">{!shareClassType}</h2>
                         <p>{!prescribedParticular}</p>
                         <div class="form-group">
@@ -77,7 +77,7 @@
                                     <input onclick="confirmShares(true)" id="radio-inline-1" type="radio" name="radio-inline-group" value="true" /> Yes, confirm my share capital
                                 </label>
                                 <label class="block-label" for="radio-inline-3">
-                                    <input onclick="confirmShares(false)" id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share
+                                    <input onclick="confirmShares(false)" id="radio-inline-3" type="radio" name="radio-inline-group" value="false" /> No, I need to add a different class of share (in the same or different currency)
                                 </label>
                             </fieldset>
                             <apex:actionFunction action="{!confirmShares}" name="confirmShares" reRender="emptypanel">

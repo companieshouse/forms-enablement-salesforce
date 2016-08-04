@@ -1,7 +1,7 @@
 <apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -126,24 +126,25 @@
                         <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
                             <h1 class="heading-xlarge">
                                 {!headerText1}
-                                <!-- {!$Label.UI_Text_Review_page_Title} -->
                             </h1>
                             <p class="lede">{!displayText1} {!companyName} share capital is correct
                             </p>
-                            <div class="form-group">
-                                <table class="check-your-answers">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="4">Statement of Capital</th>
-                                        </tr>
-                                    </thead>
-                                    <apex:repeat value="{!viewkeys}" var="key">
+                            <apex:repeat value="{!viewkeys}" var="key">
+                                <h2 class="heading-large">{!viewkeys[key]}</h2>
+                                <apex:repeat value="{!viewmap[key]}" var="prp" rows='1'>
+                                    <p>
+                                        <apex:outputText value="{!prp.Prescribed_Particulars__c}" id="shareclass" />
+                                    </p>
+                                </apex:repeat>
+                                <div class='form-group'>
+                                    <table class="check-your-answers">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Currency</th>
-                                                <th scope="col" class="numeric">Class of shares</th>
-                                                <th scope="col" class="numeric">No. of shares</th>
-                                                <th scope="col" class="numeric">Total value aggregate</th>
+                                                <th scope="col" class="numeric">Total number of shares</th>
+                                                <th scope="col" class="numeric">Aggregate nominal value</th>
+                                                <th scope="col" class="numeric">Amount unpaid</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -153,14 +154,22 @@
                                                         <apex:outputText value="{!sp.Currency__c}" id="currency" />
                                                     </td>
                                                     <td class="numeric">
-                                                        <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                                        <apex:outputText value="{!sp.Number_of_Shares__c}" id="shareclass" />
                                                     </td>
-                                                    <td class="numeric">
-                                                        <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
-                                                        <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
                                                     <td class="numeric">
                                                         <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
                                                         <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.Total_aggregate_amount_unpaid__c}" id="amountUnpaidTotal" />
+                                                    </td>
+                                                    <!--
+                                                      <td class="numeric">
+                                                        <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                                        <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
+                                                        -->
+                                                    <td class="numeric">
+                                                        <a href='#' onclick='changeValue("{!sp.Id}")'>Change</a>
                                                     </td>
                                                 </tr>
                                             </apex:repeat>
@@ -179,11 +188,96 @@
                                     </apex:outputPanel>
                                     -->
                                         </tbody>
+                                    </table>
+                                </div>
+                            </apex:repeat>
+                            <script>
+                            function changeValue() {
+                                // call update method and set finished adding shares to false
+                                deleteShare();
+                            }
+                            </script>
+                            <apex:actionFunction action="{!deleteShare}" name="changeValue" reRender="emptyPanel">
+                                <apex:param name="changeValue" value="" id="zzz" assignTo="{!shareID}" />
+                            </apex:actionFunction>
+                            <div class="form-group">
+                                <h2 class="heading-large">Total amount unpaid</h2>
+                                <p>This is the total amount unpaid for each currency across all the classes of shares.</p>
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Currency</th>
+                                            <th scope="col" class="numeric">Total amount unpaid</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <apex:repeat value='{!dummyShares}' var='Tau'>
+                                        <tr>
+                                            <td><apex:outputText value="{!Tau.Currency__c}" id="currency-unpaid" /></td>
+                                            <td class="numeric"><apex:outputText value="{!Tau.Total_aggregate_amount_unpaid__c}" id="aggamount-unpaid" /></td>
+                                        </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--  <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5">Statement of Capital</th>
+                                        </tr>
+                                    </thead>
+                                    <apex:repeat value="{!viewkeys}" var="key">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Currency</th>
+                                                <th scope="col" class="numeric">Class of shares</th>
+                                                <th scope="col" class="numeric">No. of shares</th>
+                                                <th scope="col" class="numeric">Total value aggregate</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <apex:repeat value="{!viewmap[key]}" var="sp">
+                                                <tr>
+                                                    <td class="col">
+                                                        <apex:outputText value="{!sp.Currency__c}" id="currency" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.Class_of_Shares__c}" id="shareclass" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.Number_of_Shares__c}" id="numberofshares" />
+                                                        <input type="hidden" value="{!sp.Number_of_Shares__c}" name="numid" id="shareidentifier" /> </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.Aggregate_nominal_value__c}" id="aggregate" />
+                                                        <input type="hidden" value="{!sp.Aggregate_nominal_value__c}" name="numid" id="aggregateidentifier" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <a href='#' onclick='changeValue("{!sp.Id}")'>Change</a>
+                                                    </td>
+                                                </tr>
+                                            </apex:repeat>
+                                            
+                                    <apex:outputPanel rendered="{!NOT(ISBLANK(viewmap[key]))}">
+                                            <tr>
+                                            <td></td>
+                                            <td>Total</td>
+                                            <td id="totalnumberofshares"></td>
+                                            <td id="totalnumberaggregate"></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+
+
+                                    </apex:outputPanel>
+                                    
+                                        </tbody>
                                     </apex:repeat>
                                     <br/>
                                     <br/>
-                                </table>
-                            </div>
+                                </table> -->
+                            
+                            <!--
                             <div class="form-group">
                                 <table class="check-your-answers">
                                     <thead>
@@ -219,9 +313,9 @@
                                         </apex:repeat>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>-->
                             <br/>
-                            <script>
+                            <script> 
                             // function numberofshares() {
                             //     var sharesum = 0;
                             //     var aggsum = 0;
@@ -323,12 +417,12 @@
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
-                                            <th colspan="4">Supporting documentation </th>
+                                            <th colspan="4">Supporting documents </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="table-names">Name</td>
+                                            <td class="table-names">Document</td>
                                             <td class="table-names">Description</td>
                                         </tr>
                                         <br/>
@@ -649,10 +743,12 @@
                             </apex:outputPanel>
                         </apex:outputPanel>
                     </apex:outputPanel>
+                    <div class='form-group'>
                     <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
-                    <br/> 
-                    <br/> 
-                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> 
+                    <br/>
+                    <br/>
+                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
+                    </div>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

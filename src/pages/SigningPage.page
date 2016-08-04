@@ -1,111 +1,47 @@
-<apex:page title="Authorise Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" action="{!buildDocument}" docType="html-5.0">
+<apex:page title="Authorise Share Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SigningController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="SigningForm">
-                <style>
-                .custom-erromessage-medium {
-                    font-family: "nta", Arial, sans-serif;
-                    font-size: 18px;
-                    line-height: 1.2;
-                    font-weight: 700;
-                    text-transform: none;
-                    font-size-adjust: 0.525;
-                    margin-top: 1.25em;
-                    margin-bottom: 0.5em;
-                    color: #b10e1e;
-                    font-weight: bold;
-                    text-decoration: underline;
-                }
-                
-                .custom-thanksmessage-medium {
-                    font-family: "nta", Arial, sans-serif;
-                    font-size: 18px;
-                    line-height: 1.2;
-                    font-weight: 700;
-                    text-transform: none;
-                    font-size-adjust: 0.525;
-                    margin-top: 1.25em;
-                    margin-bottom: 0.5em;
-                    color: #00B300;
-                    font-weight: bold;
-                    text-decoration: underline;
-                }
-                </style>
-                <apex:outputPanel id="errorspanel" rendered="{!hasPageErrors}">
-                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                            An error has occurred.
-                        </h1>
-                        <ul class="error-summary-list">
-                            <li>
-                                <apex:outputText escape="false" value="{!currentErrorMessage}" />
-                            </li>
-                        </ul>
-                    </div>
-                </apex:outputPanel>
-                <div class="form-group">
+                <apex:outputPanel id='masterPanel'>
+                    <apex:outputPanel id="errorspanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
                     <h1 class="heading-xlarge">
                         {!headerText1}
                     </h1>
-                    <p class="lede">
-                    </p>
                     <p>
                         <fieldset class="inline">
-                            <span id="radio-errors"></span>
-                            <apex:outputText escape="false" value="{!currentErrorMessage}" />
-                            <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" onclick="clearErrors()" type="radio" name="signingStatus" value="true" /> Yes
-                            </label>
-                            <label class="block-label" for="radio-inline-2">
-                                <input id="radio-inline-2" onclick="setErrors()" type="radio" name="signingStatus" value="false" /> No
-                            </label>
-                            <apex:outputPanel id="emptypanel" />
+                            <legend class='visuallyhidden'>Authorise your request</legend>
+                            <div class="form-group  {!signingError}">
+                                <apex:outputText escape="false" styleClass="error-message" value="{!currentErrorMessage}" />
+                                <label class="block-label" for="radio-inline-1">
+                                    <input onclick="setAuthorizerValue(true)" id="radio-inline-1"  type="radio" name="signingStatus" value="true" /> Yes
+                                </label>
+                                <label class="block-label" for="radio-inline-2">
+                                    <input id="radio-inline-2" onclick="setAuthorizerValue(false)" type="radio" name="signingStatus" value="false" /> No
+                                </label>
+                            </div>
                         </fieldset>
-                        <script>
-                        function setErrors() {
-                            console.log('working');
-
-                            document.getElementById('radio-errors').innerHTML = '<span class="error-message">You must select yes to authorise and submit</span>';
-                        };
-
-                        function clearErrors() {
-
-                            console.log('working');
-                            document.getElementById('radio-errors').innerHTML = '';
-                        };
-                        </script>
                     </p>
-                </div>
-                <br/>
-                <p>
-                    <br/> &nbsp;
-                    <apex:commandButton id="SignButton" reRender="none" styleClass="button" onclick="updateRadio();" value="{!continueButtonText}" />
-                    <apex:actionFunction action="{!setSigningvalue}" name="setSigningvalue" reRender="SigningForm">
-                        <apex:param name="signingParam" value="" id="xyz" assignTo="{!signingchoice}" />
-                    </apex:actionFunction>
-                    <apex:actionFunction action="{!setAuthorizerValue}" name="setAuthorizerValue" reRender="">
-                        <apex:param name="statusparam" value="" id="abc" assignTo="{!whoAuthorised}" />
-                    </apex:actionFunction>
-                    <br/>
-                    <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
-                </p>
-                <script>
-                function updateRadio(selection) {
-
-                    var statuses = document.getElementsByName('signingStatus');
-                    for (var i = 0, length = statuses.length; i < length; i++) {
-
-                        console.log(statuses[i].value);
-
-                        if (statuses[i].checked) {
-                            console.log(statuses[i].value);
-
-
-                            setSigningvalue(statuses[i].value);
-                        }
-                    }
-                };
-                </script>
+                    <apex:actionFunction reRender="none" action="{!setAuthorizerValue}" name="setAuthorizerValue" >
+                            <apex:param name="setAuthorizerValue" value="" id="authValue" assignTo="{!signingchoice}" />
+                        </apex:actionFunction>
+                    <div class='form-group'>
+                        <apex:commandButton id="SignButton" styleClass="button" reRender="masterPanel" action="{!nextAction}" value="{!continueButtonText}" />
+                        <br/>
+                        <br/> &nbsp;
+                        <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
+                    </div>
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>
