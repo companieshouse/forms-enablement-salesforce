@@ -115,6 +115,8 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String solvencyStatus {get; set;}
+    public String resolutionStatus {get; set;}
     public String previousButtonText {get; set;}
     public static final Integer NUMOFATTACHMENTSALLOWED = 1;
     public AddAttachmentsController() {
@@ -144,8 +146,17 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         if (submissionMgr.submission.Attachments.size() > 0) {
             attachments = submissionMgr.submission.Attachments;
         }
-        newAttachments = new List < Attachment > {new Attachment(name = 'CAP SS', description = 'a solvency statement'), new Attachment(name = 'Resolution', description = 'a special resolution authorising the capital reduction'), new Attachment(name = 'SH20', description = 'directors\' statement')};
+        //, new Attachment(name = 'SH20', description = 'directors\' statement')
+        newAttachments = new List < Attachment > {new Attachment(name = 'Solvency statement ', description = 'a solvency statement'), new Attachment(name = 'Resolution', description = 'a special resolution authorising the capital reduction')};
+        //goForward();
         return;
+    }
+    public PageReference goForward() {
+
+        if (submissionMgr.submission.finishedAttachments__c == true) {
+            return nextStep();
+        }
+        return null;
     }
     //public void addMore() {
 
@@ -175,30 +186,55 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
                 }
             }
         }
-
-        // throw new Form_CustomException(' your attachment ID is ' + attachmentId);
-        //for (Attachment deletedAttachment: submissionMgr.submission.Attachments) {
-        //    if (deletedAttachment.Id == attachmenttoDeleteId) {
-        //        try {
-        //            //deletedAttachment.delete();
-        //        } catch (DmlException e) {
-        //            hasPageErrors = true;
-        //            currentErrors = 'Attachment Deletion Error' + e.getMessage();
-        //            console.log('DML error in removing attachment' + e.getMessage());
-        //        } catch (Exception e) {
-        //            hasPageErrors = true;
-        //            currentErrors = 'Attachment Deletion Error' + e.getMessage();
-        //            console.log('error in removing attachment' + e.getMessage());
-        //        } finally {
-        //            //PageReference pg = new PageReference('/Attachments');
-        //            //pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-        //            //pg.setRedirect(true);
-        //            //return pg;
-        //            refresh();
-        //        }
-        //    }
-        //}
     }
+    public void checkAttachmentStatus() {
+
+        for (Attachment checkedAttachments : submissionMgr.submission.Attachments) {
+            if (checkedAttachments.Name == 'Resolution') {
+                resolutionStatus = 'Uploaded';
+            } else if (checkedAttachments.Name != 'Resolution') {
+                resolutionStatus = 'Not yet uploaded';
+            }
+            if (checkedAttachments.Name == 'Solvency statement') {
+                solvencyStatus = 'Uploaded';
+
+            } else if (checkedAttachments.Name != 'Solvency statement') {
+                solvencyStatus = 'Not yet uploaded';
+            }
+
+        }
+    }
+    public void addSolvencyStatement() {
+
+
+    }
+    public void addResolution() {
+
+
+    }
+    // throw new Form_CustomException(' your attachment ID is ' + attachmentId);
+    //for (Attachment deletedAttachment: submissionMgr.submission.Attachments) {
+    //    if (deletedAttachment.Id == attachmenttoDeleteId) {
+    //        try {
+    //            //deletedAttachment.delete();
+    //        } catch (DmlException e) {
+    //            hasPageErrors = true;
+    //            currentErrors = 'Attachment Deletion Error' + e.getMessage();
+    //            console.log('DML error in removing attachment' + e.getMessage());
+    //        } catch (Exception e) {
+    //            hasPageErrors = true;
+    //            currentErrors = 'Attachment Deletion Error' + e.getMessage();
+    //            console.log('error in removing attachment' + e.getMessage());
+    //        } finally {
+    //            //PageReference pg = new PageReference('/Attachments');
+    //            //pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+    //            //pg.setRedirect(true);
+    //            //return pg;
+    //            refresh();
+    //        }
+    //    }
+    //}
+
     public PageReference save() {
         List < Attachment > toInsert = new List < Attachment > ();
         for (Attachment newAtt : newAttachments) {
@@ -222,12 +258,21 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
     }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
+        submissionMgr.submission.finishedAttachments__c = true;
+
         persistStep();
         return nextStep();
     }
     public PageReference previousAction() {
+        submissionMgr.submission.finishedAddingShares__c = false;
+        persistStep();
+
         if (!validatePageState()) return Page.TransactionException;
-        return previousStep();
+
+        PageReference pg = new PageReference('/SCapital3');
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        pg.setRedirect(true);
+        return pg;
     }
     public PageReference refresh() {
         PageReference pg = new PageReference('/Attachments');
