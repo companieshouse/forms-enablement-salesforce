@@ -584,6 +584,18 @@ public class ReviewController extends TransactionStepControllerBase {
         }
         return null;
     }
+    private void attachmentpersistStep() {
+        submissionMgr.submission.finishedAddingShares__c = false;
+        submissionMgr.submission.finishedAttachments__c = true;
+
+        submissionMgr.persist();
+    }
+    public PageReference changeAttachments() {
+        if (!validatePageState()) return Page.TransactionException;
+        attachmentpersistStep();
+
+        return previousStep();
+    }
     public PageReference nextAction() {
         if (!confirmationVal) {
             showError = 'error';
