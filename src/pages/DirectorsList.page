@@ -68,7 +68,7 @@
                             <a href="https://www.gov.uk/government/publications/appoint-a-director-ap01"> Appoint company director(s) </a>for information on appointing directors </p>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none">
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {

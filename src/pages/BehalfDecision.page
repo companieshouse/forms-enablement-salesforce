@@ -67,6 +67,8 @@
                         <apex:param name="paramBoolean" value="" id="x" assignTo="{!behalfValidation}" />
                     </apex:actionFunction>
                 </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
                 <script>
                 function checkSteps() {
                     console.log('The value of boolean is:'+{!stepValidator} );

@@ -58,6 +58,8 @@
                     <apex:actionFunction status="status" action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
                         <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
                     </apex:actionFunction>
+                    <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
                     <script type="text/javascript">
                     function changeValue(out) {
                         var radioClicked = document.getElementById(out.id);

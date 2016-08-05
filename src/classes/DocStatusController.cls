@@ -276,7 +276,7 @@ public with sharing class DocStatusController
 
         //System.debug('your envelope ids are '  + envelopeID);
 
-        List < dsfs__DocuSign_Status__c > records = [SELECT dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Name, Id, (SELECT dsfs__DocuSign_Recipient_Company__c, dsfs__DocuSign_Recipient_Email__c, Name, dsfs__DocuSign_Recipient_Id__c, dsfs__Recipient_Status__c, Id FROM dsfs__R00NS0000000WUO2MAO__r) FROM dsfs__DocuSign_Status__c WHERE Transaction__c = : transactionID]; //and Transaction__r.Name = :'SUB0145'];
+        List < dsfs__DocuSign_Status__c > records = [SELECT dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Name, Id, (SELECT dsfs__DocuSign_Recipient_Company__c, dsfs__DocuSign_Recipient_Email__c, Name, dsfs__DocuSign_Recipient_Id__c, dsfs__Recipient_Status__c, Id FROM dsfs__R00NS0000000WUO2MAO__r Order by CreatedDate DESC) FROM dsfs__DocuSign_Status__c WHERE Transaction__c = : transactionID Order by CreatedDate DESC]; //and Transaction__r.Name = :'SUB0145'];
         if (records.size() > 0)
         {
             hasPageErrors = false;

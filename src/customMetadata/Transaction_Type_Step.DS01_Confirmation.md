@@ -24,7 +24,7 @@
     <values>
         <field>Display_Text_2__c</field>
         <value xsi:type="xsd:string">COMPNAME will be removed from the Register after &lt;b&gt;2 months&lt;/b&gt;.&lt;br/&gt;&lt;br/&gt;
-You can track the status of your filing by viewing the company’s filing history on: &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck service&lt;/a&gt;.</value>
+You can track the status of your filing by viewing the company’s filing history on: &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;Companies House Service&lt;/a&gt;.</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>

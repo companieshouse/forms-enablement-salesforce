@@ -58,6 +58,8 @@
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
                 <script>
                 function checkSteps() {
                     console.log('The value of boolean is:'+{!stepValidator} );

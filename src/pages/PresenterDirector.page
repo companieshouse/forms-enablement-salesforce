@@ -88,7 +88,7 @@
                     <br />
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none">
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
