@@ -12,28 +12,27 @@
                                 <li>
                                     <a>{!currentErrorMessage}</a>
                                 </li>
+                                <li>
+                                    <a>{!accountcurrentErrorMessage}</a>
+                                </li>
+                                <li>
+                                    <a>{!sameDayErrorMessage}</a>
+                                </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <h1 class="heading-xlarge">
-                        {!headerBox1}
-                    </h1>
-                        <apex:outputPanel id="emptyPanel" />
-                        <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
-                            <apex:outputPanel id="body">
-
-                                <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}" />
-                                <apex:outputText escape="false" rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}" />
-                                <span style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
-                            </apex:outputPanel>
-
-                            <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
-                                                                    <div class='form-group {!errorVal}'>
-
+                    <apex:outputText value="{!headerBox1}" escape="false"></apex:outputText>
+                    <apex:outputPanel id="emptyPanel" />
+                    <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
+                        <apex:outputPanel id="body">
+                            <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}" />
+                            <apex:outputText escape="false" rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}" />
+                            <span style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
+                            <div class='form-group {!errorVal}'>
                                 <fieldset>
                                     <legend class="visuallyhidden">Select a payment method:</legend>
-
-
                                     <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
                                         <div class='form-group'>
                                             <label class="block-label" for="radio-indent-3">
@@ -59,33 +58,35 @@
                                         </div>
                                     </apex:outputPanel>
                                 </fieldset>
-                                  <apex:outputPanel id="accountInput">
-                            <apex:outputPanel rendered="{!valuePaymentUI == 2}">
-                             <div aria-hidden="false" class="panel panel-border-narrow">
-                                <div class="form-group {!accounterrorVal}">
-                                    <span class='error-message'>{!accountcurrentErrorMessage}</span>
-                                    <label class="form-label" for="accountnumberinput">Account number:</label>
-                                    <apex:inputText styleclass="form-control" value="{!accountNumber}"  id="accountnumberinput" />
-                                </div>
+                                <apex:outputPanel id="accountInput">
+                                    <apex:outputPanel rendered="{!valuePaymentUI == 2}">
+                                        <div aria-hidden="false" class="panel panel-border-narrow">
+                                            <div class="form-group {!accounterrorVal}">
+                                                <span class='error-message'>{!accountcurrentErrorMessage}</span>
+                                                <label class="form-label" for="accountnumberinput">Account number:</label>
+                                                <apex:inputText styleclass="form-control" value="{!accountNumber}" id="accountnumberinput" />
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
                             </div>
                             </apex:outputPanel>
                             </apex:outputPanel>
-                                                                    </div>
-
-                               
+                            </div>
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!isSameDayPayment}">
                                 <fieldset class="inline">
                                     <h3 class="heading-medium">Do you want your application to be proceed on the same day?</h3>
                                     <div id="presenterSelection2" class="form-group">
-                                        <label class="block-label" for="radio-indent-4">
-                                            <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
-                                            </input>
-                                        </label>
-                                        <label class="block-label" for="radio-indent-5">
-                                            <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
-                                            </input>
-                                        </label>
+                                        <span class='error-message'>{!sameDayErrorMessage}</span>
+                                    <label class="block-label" for="radio-indent-4">
+                                        <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
+                                        </input>
+                                    </label>
+                                    <label class="block-label" for="radio-indent-5">
+                                        <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
+                                        </input>
+                                    </label>
                                     </div>
                                 </fieldset>
                             </apex:outputPanel>

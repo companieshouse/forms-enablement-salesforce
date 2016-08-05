@@ -50,7 +50,7 @@
                         <apex:outputText value="{!transactionssize}" />
                     </apex:outputPanel>
                     <br/>
-                    <apex:outputPanel rendered="{!showContactClearer}">
+                    <!-- <apex:outputPanel rendered="{!showContactClearer}">
                         <apex:commandLink status="status" title="Clicking on this will remove Contacts and Accounts" rerender="masterpanel" action="{!cleanContacts}" value="Clear Contacts" id="clearContacts" />
                         <br/> number of contacts: &nbsp;
                         <apex:outputText value="{!contactssize}" />
@@ -60,7 +60,7 @@
                         <apex:commandLink status="status" title="Clicking on this will remove Contacts and Accounts" rerender="masterpanel" action="{!cleanAccounts}" value="Clear Accounts" id="clearAccounts" />
                         <br/> number of accounts: &nbsp;
                         <apex:outputText value="{!accountssize}" />
-                    </apex:outputPanel>
+                    </apex:outputPanel> -->
                     <script>
                     var environment = window.location.hostname;
                     console.log(environment);

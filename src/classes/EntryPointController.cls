@@ -82,22 +82,22 @@ public with sharing class EntryPointController {
 		pg.setRedirect(true);
 		return pg;
 	}
-	public PageReference cleanTransactions() {
+	public void cleanTransactions() {
 		try {
-			delete[select Name from Contact];
 			delete[select Name from Account];
+			delete[select Name from Contact];
 			delete[select Name from Transaction__c];
 		} catch (DmlException e) {
 			currentError = ' DML Error:' + e.getMessage();
 			hasPageErrors = true;
-			return null;
+			//return null;
 		} catch (Exception e) {
 			currentError = ' Error:' + e.getMessage();
 			hasPageErrors = true;
-			return null;
+			//return null;
 		}
-		PageReference pg = new PageReference('/entrypoint');
-		pg.setRedirect(true);
-		return pg;
+		//PageReference pg = new PageReference('/entrypoint');
+		//pg.setRedirect(true);
+		//return pg;
 	}
 }

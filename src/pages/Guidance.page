@@ -68,23 +68,21 @@ Ver. Author             Date        Detail
                         };
                         </script>
                         <input type="button" class="button" id="nextButton" value="{!$Label.UI_Text_Continue}" onclick="updateField()" />
-                        <br/><br/>
-
+                        <br/>
+                        <br/>
                         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
                     </apex:outputPanel>
                     <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
-                        <h1 class="heading-xlarge">Additional information</h1>
-                        <p class="lede">You'll need the file the following documents:</p>
-                        <ul class="list list-bullet">
-                            <li>special resolution authorising the capital reduction</li>
-                            <li>solvency statement (CAP SS)</li>
-                            <li>directors’ statement of compliance (SH20)</li>
-                        </ul>
-                        <p>Any of these documents may be filed in separately in advance. Only the director's statement can be filed afterwards.</p>
+                        <apex:outputText escape="false" value="{!guidanceTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText1}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText2}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText3}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText4}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText5}"></apex:outputText>
                         <div class="form-group">
                             <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
-                            <br /> <br/>
-
+                            <br />
+                            <br/>
                             <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" />
                         </div>
                     </apex:outputPanel>

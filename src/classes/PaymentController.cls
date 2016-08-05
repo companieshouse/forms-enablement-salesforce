@@ -127,6 +127,8 @@ public class PaymentController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String samedayError {get; set;}
+    public String sameDayErrorMessage {get; set;}
     public String accountcurrentErrorMessage {get; set;}
     public String errorVal {
         get;
@@ -164,7 +166,7 @@ public class PaymentController extends TransactionStepControllerBase {
         isCardSelected = false;
         isPaypalSelected = false;
         isAccountSelected = false;
-        isSameDaySelected = false;
+        // isSameDaySelected = false;
     }
     public PageReference checkPaymentResult() {
         initialiseAction();
@@ -256,7 +258,19 @@ public class PaymentController extends TransactionStepControllerBase {
                 return null;
             }
         }
+        if (transactionMgr.td.isSameDayPayment__c == true) {
 
+            if (isSameDaySelected == null) {
+                hasPageErrors = true;
+                sameDayErrorMessage = 'Please choose application processing time (Same Day or Normal)';
+                accountcurrentErrorMessage = '';
+                currentErrorMessage = '';
+                errorVal = '';
+                accounterrorVal = '';
+                samedayError = 'error';
+                return null;
+            }
+        }
 
 
         if (!validatePageState()) return Page.TransactionException;

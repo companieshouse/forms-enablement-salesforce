@@ -48,7 +48,6 @@ Ver. Author        Date        Detail
                         </apex:outputPanel>
                     </label>
                     <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                    <!-- </div>   -->
                     <br/>
                 </div>
 
@@ -57,9 +56,7 @@ Ver. Author        Date        Detail
                 <br/> 
                 <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Confirm my company details" />
                 <br/>
-                <!--
-                &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-                &nbsp; -->
+               
             </apex:form>
         </apex:define>
     </apex:composition>

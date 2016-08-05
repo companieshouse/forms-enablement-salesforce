@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Share capital</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Statement of capital&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">What is the share currency?</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Tell us what the share capital will be following the reduction.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

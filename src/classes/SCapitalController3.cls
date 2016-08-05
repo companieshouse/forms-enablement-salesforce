@@ -190,15 +190,17 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		return nextStep();
 	}
 	private void persistStep() {
-		if (!shareStatus) {
-			submissionMgr.submission.finishedAddingShares__c = false;
-		} else if (shareStatus) {
-			submissionMgr.submission.finishedAddingShares__c = true;
+		if (shareStatus != null) {
+			if (!shareStatus) {
+				submissionMgr.submission.finishedAddingShares__c = false;
+			} else if (shareStatus) {
+				submissionMgr.submission.finishedAddingShares__c = true;
+			}
+			submissionMgr.persist();
 		}
-		submissionMgr.persist();
 	}
 	public void confirmShares() {}
-	public PageReference addnewShares() {
+	public PageReference addmoreShares() {
 		PageReference pg = new PageReference('/SCapital1');
 		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		pg.setRedirect(true);
@@ -213,7 +215,7 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 	public PageReference choosePath() {
 		if (!shareStatus) {
 			persistStep();
-			return addnewShares();
+			return addmoreShares();
 		} else if (shareStatus) {
 			return nextAction();
 		} else if (String.valueOf(shareStatus) == 'undefined') {
@@ -226,9 +228,13 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 	public PageReference nextAction() {
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
-		if (!shareStatus) {
-			return addnewShares();
+		if (shareStatus != null) {
+			if (!shareStatus) {
+				return addmoreShares();
+			}
 		}
+		submissionMgr.submission.finishedAttachments__c = false;
+		submissionMgr.persist();
 		PageReference pg = new PageReference('/Attachments');
 		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		pg.setRedirect(true);

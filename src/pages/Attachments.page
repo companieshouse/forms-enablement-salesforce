@@ -1,4 +1,4 @@
-<apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
+<apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" action="{!goForward}" applyHtmlTag="false" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
@@ -12,147 +12,96 @@
                         </p>
                     </div>
                 </apex:outputPanel>
-                <div class="form-group">
-                    <h1 class="heading-xlarge">
-                        {!headerText1}
-                    </h1>
-                    <p class="lede">
-                        <apex:outputText escape="false" value="{!displayText}" id="displayText" />
-                    </p>
-                    <h2 class="heading-large">
-                        <apex:outputText escape="false" value="{!displayText2}" id="displayText2" />
-                    </h2>
-                    <apex:outputText escape="false" value="{!displayText3}" id="displayText3" />
-                    <p class="lede">
-                        <apex:outputText escape="false" value="{!displayText4}" id="displayText4" />
-                    </p>
-                    <apex:outputText escape="false" value="{!displayText5}" id="displayText5" />
-                    <!--<apex:outputPanel id="newattachmentspanel">
-                        <apex:repeat value="{!newAttachments}" var="att">
-                            <label class="form-label" for="fileName">
-                                File Name
-                            </label>
-                            <apex:inputText value="{!att.name}" id="fileName" />
-                            <label class="form-label" for="description">
-                                Description
-                            </label>
-                            <apex:inputText value="{!att.description}" id="description" />
-                            <label class="form-label" for="file">
-                                File
-                            </label>
-                            <apex:inputFile value="{!att.body}" filename="{!att.name}" id="file" />
-                        </apex:repeat>
-                    </apex:outputPanel> -->
-                    <apex:outputPanel id="prototypeAttachments">
-                        <style>
-                        .SI-FILES-STYLIZED label.cabinet {
-                            width: 79px;
-                            height: 22px;
-                            background: url(btn-choose-file.gif) 0 0 no-repeat;
-                            display: block;
-                            overflow: hidden;
-                            cursor: pointer;
-                        }
-                        
-                        .SI-FILES-STYLIZED label.cabinet input.file {
-                            position: relative;
-                            height: 100%;
-                            width: auto;
-                            opacity: 0;
-                            -moz-opacity: 0;
-                            filter: progid: DXImageTransform.Microsoft.Alpha(opacity=0);
-                        }
-                        </style>
-                        <div class="form-group">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="doc-name">Document</th>
-                                        <th scope="col">File name</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <apex:repeat value="{!newAttachments}" var="att">
-                                        <tr>
-                                            <td>{!att.name}</td>
-                                            <td>
-                                                <label class="cabinet">
-                                                    <apex:inputFile accept="PDF, pdf" value="{!att.body}" filename="{!att.name}" id="file" styleclass="file" />
-                                                </label>
-                                                <!--                                                <label for="file">Add document</label>
-
-                                                <input type='File' value="{!att.body}" id="file" />-->
-                                            </td>
-                                        </tr>
-                                    </apex:repeat>
-                                </tbody>
-                            </table>
-                        </div>
-                    </apex:outputPanel>
-                    <p>
-                        <br/>
-                        <br/>
-                        <!-- <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp; 
-                        <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp; 
-                        <apex:commandLink value="Save" action="{!save}" />-->
-                    </p>
-                </div>
-                <apex:outputPanel id="BuildTable" rendered="false">
-                    <table class="check-your-answers" render='false'>
-                        <thead>
-                            <tr>
-                                <th colspan="4">{!headerText2}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Download</td>
-                                <td>Name</td>
-                                <td>Description</td>
-                            </tr>
-                            <br/>
-                            <apex:repeat value="{!attachments}" var="sp" id="theRepeat">
+                <h1 class="heading-xlarge">
+                    Additional documents
+                </h1>
+                <p class="lede">
+                    You need to file additional documents before the company’s capital can be reduced. If these documents have already been filed, there is no need to file them again.
+                </p>
+                <h1 class="heading-xlarge">
+                </h1>
+                <apex:outputPanel id="prototypeAttachments">
+                    <style>
+                    .dontshowButton {
+                        display: none;
+                    }
+                    </style>
+                    <div class="form-group">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <apex:outputLink value="{!URLFOR($Action.Attachment.Download, sp.Id)}" target="_blank">Download</apex:outputLink>
-                                    </td>
-                                    <td>
-                                        <apex:outputText value="{!sp.Name}" id="Name" />
-                                    </td>
-                                    <td>
-                                        <apex:outputText value="{!sp.Description}" id="Description" />
-                                    </td>
-                                    <!--
-                                    <td>
-                                        <apex:commandLink value="Delete" onclick="deleter(this)"  />
-                                        <input id="" type="hidden" value="{!sp.Id}"/>
-                                    </td> -->
+                                    <th scope="col" class="doc-name">Document name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col"></th>
                                 </tr>
-                            </apex:repeat>
-                            <!--
-                            <apex:actionFunction name="deleteAttachment" action="{!DeleteAttachments}">
-                                <apex:param name="attachmentIdParam" value="" assignTo="{!attachmentId}" />
-                            </apex:actionFunction>
-                            <script>
-                                
-                                function deleter(somevalue){
+                            </thead>
+                            <tbody id='attachmentBody'>
+                                <tr>
+                                    <td>Solvency statement</td>
+                                    <td>{!solvencyStatus}</td>
+                                    <td>
+                                        <a href='' onclick='addDoc("b")'>Add document</a>
+                                        <apex:inputFile onchange="updateSolvency(this.value)" styleclass="dontshowButton" accept="pdf" fileName="SolvencyStatement" id="SolvencyStatement" value="{!solvencyBody}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Resolution</td>
+                                    <td>{!resolutionStatus}</td>
+                                    <td>
+                                        <a href='' onclick='addDoc("a")'>Add document</a>
+                                        <apex:inputFile onchange="updateResolution(this.value)" styleclass="dontshowButton" accept="pdf" fileName="Resolution" id="Resolution" value="{!resBody}" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <apex:actionFunction action="{!uploadSolvency}" name="addSolvency">
+                            <apex:param name="solvencyvalue" value="abcm" id="solvbodyfile" assignTo="{!solvencyBody}" />
+                        </apex:actionFunction>
+                         <apex:actionFunction action="{!uploadResolution}" name="addResolution">
+                            <apex:param name="solvencyvalue" value="xyzd" id="resbodyfile" assignTo="{!resBody}" />
+                        </apex:actionFunction>
+                    </div>
+                    <script>
+                    function addDoc(x) {
+                        console.log(x);
+                        if (x == "a") {
+                            console.log('adding resolution');
+                            var a = document.getElementById('{!$Component.Resolution}');
+                            console.log('a ==' + JSON.stringify(a));
+                            a.click();
 
+                        } else if (x == "b") {
+                            console.log('adding solvency');
+                            var b = document.getElementById('{!$Component.SolvencyStatement}');
+                            console.log('b ==' + JSON.stringify(b));
+                            b.click();
+                        }
+                    }
 
-                                    alert(somevalue);
-                                    deleteAttachment(somevalue);
+                    function updateSolvency(x) {
+                        console.log('function called 1'+ x);
+                        
+                            addSolvency(x);
+                    
+                    }
 
-                                }
+                    function updateResolution(y) {
+                        console.log('function called 2'+ y);
 
-                            </script>
-                            -->
-                        </tbody>
-                    </table>
-                    <br/>
+                   
+                            addResolution(y);
+                
+                    }
+                    </script>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
-                <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
+                <div class="form-group">
+                    <p>You must also file a directors’ statement of compliance within 15 days of the date of the resolution. You must file this document on paper.</p>
+                    <p>If you wish to use the same-day service, we will need all these documents.</p>
+                </div>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Submit documents" rendered="{!NOT(isLastPage)}" />
+                <br />
+                <br/>&nbsp;
+                <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
             </apex:form>
         </apex:define>
     </apex:composition>
