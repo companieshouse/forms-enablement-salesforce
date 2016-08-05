@@ -61,6 +61,10 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>Header_Text_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Is_Active__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>

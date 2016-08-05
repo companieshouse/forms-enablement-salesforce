@@ -673,6 +673,14 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isReviewTrigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isReviewTrigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isSameDayProcessing__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field mark if the user has paid the extra to make Companies House processing the transaction on the same day</description>

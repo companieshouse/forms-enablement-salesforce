@@ -31,7 +31,7 @@
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The emails of one or more director(s) has been rejected. Please check the spelling or contact the director if his address email has any issues. Please start a new application to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -51,11 +51,15 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director(s) has signed successfully&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director has signed successfully&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director(s) has declined to signed&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director has declined to signed&lt;/h1&gt;</value>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Emails delivery failed&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Is_Active__c</field>

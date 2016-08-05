@@ -88,7 +88,7 @@ public virtual class TransactionStepControllerBase {
             }
 
 			String paramValue = SecurityManager.decryptText(paramInput);    				
-
+            System.debug(paramValue);
 			// Submission state.
 			submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
 			if (!SubmissionManager.isValidSubmissionId(submissionId)) return;

@@ -36,7 +36,7 @@ public with sharing class SubmissionManager {
                                       From Officers__r),
                                      (SELECT Id, BodyLength, Description, Name FROM Attachments), (SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
                                      (Select Id, Name, Email, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
-                                      AuthorizedSigner__c, Title, Middlenames__c, FirstName, LastName, isPowerOfAttorney__c, isCorporateDirector__c
+                                      AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, LastName, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
                                      from Transaction__c where Id = :submissionId];
         if (recs.size() == 1) submission = recs[0];
@@ -81,7 +81,7 @@ public with sharing class SubmissionManager {
                                       From Officers__r),
                                      (SELECT Id, BodyLength, Description, Name FROM Attachments), (SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c,  Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
                                      (Select Id, Name, LastName, Email, DocusignName__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
-                                      AuthorizedSigner__c, Title, Middlenames__c, FirstName, hasInputBehalfDetails__c,  isPowerOfAttorney__c, isCorporateDirector__c
+                                      AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, hasInputBehalfDetails__c,  isPowerOfAttorney__c, isCorporateDirector__c
                                       From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
                                      from Transaction__c
                                      where Presenter__c = :presenterId
@@ -239,7 +239,6 @@ public with sharing class SubmissionManager {
 
         s.Historical_Valid_Step_Ids__c = historicalSteps;
         s.Valid_Step_Ids__c=newValidStepIdPath;
-        System.debug('TURNITTOFALSE');
         s.MultipleDirectors__c = false;        
 	
         update s;

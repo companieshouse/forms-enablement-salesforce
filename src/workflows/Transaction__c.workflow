@@ -271,6 +271,11 @@ Email should contain a URL to start a new journey</description>
             <operation>equals</operation>
             <value>False</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.isReviewTrigger__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
         <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>

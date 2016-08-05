@@ -71,7 +71,7 @@ A company number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; WebCheck Service&lt;/a&gt;.
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/details&gt;
@@ -137,27 +137,29 @@ Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov
         <field>Landing_Page_Text2__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
 Before you start
-&lt;/p&gt;</value>
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+You must:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;te</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You must:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell all director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability pa</value>
+        <value xsi:type="xsd:string">ll all director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability partnership&lt;/li&gt;&lt;/ul&gt;
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+It costs £8 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">rtnership&lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">quest to close a company or limited liability partnership (paid by debit or credit card or PayPal account or Companies House account).
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
-It costs £8 to submit a request to close a company or limited liability partnership (paid by debit or credit card or PayPal account).
-&lt;/p&gt;</value>
+You&apos;ll need:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;th</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You&apos;ll need:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director or member&lt;/li&gt;&lt;li&gt;a credit or debit card or PayPal account&lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">e company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director or member&lt;/li&gt;&lt;li&gt;a credit or debit card or PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;</value>
     </values>
     <values>

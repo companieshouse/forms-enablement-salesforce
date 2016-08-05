@@ -51,7 +51,7 @@ Ver. Author        Date        Detail
                     <br/>
                     <apex:outputText escape="false" value="{!pageBody2}" />
                 </apex:outputPanel>
-                <apex:outputPanel id="succesSign" rendered="{!successSigning}">
+                <apex:outputPanel id="failureContact" rendered="{!successSigning}">
                     <apex:outputText escape="false" value="{!pageTitle2}" />
                     <apex:outputText escape="false" value="{!pageBodySuccess}" />
                     <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
@@ -59,10 +59,35 @@ Ver. Author        Date        Detail
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
+                <apex:outputPanel id="succesSign" rendered="{!failureEmail}">
+                    <apex:outputText escape="false" value="{!pageTitle4}" />
+                    <apex:outputText escape="false" value="{!pageBodyFailureContact}" />
+                    <table class="table-spacing">
+                        <thead>
+                            <tr>
+                                <th scope="col">Director name</th>
+                                <th scope="col" class="director-email">Email address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat2">
+                                <tr>
+                                    <td>{!director.name}</td>
+                                    <td>{!director.email}</td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    <apex:commandButton action="{!resetTransaction}" styleClass="button" value="{!$Label.UI_Text_Previous}" />
+                </apex:outputPanel>
                 <apex:outputPanel id="failureSign" rendered="{!failureSigning}">
                     <apex:outputText escape="false" value="{!pageTitle3}" />
                     <apex:outputText escape="false" value="{!pageBodyFailure}" />
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton2" />
+                    <br/>
+                    <br/>
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton2" />
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

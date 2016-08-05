@@ -312,6 +312,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>RecipientStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Recipient Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>ReportsToId</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Lookup</type>
