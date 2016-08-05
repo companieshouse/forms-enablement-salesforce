@@ -19,9 +19,9 @@
                         </div>
                     </apex:outputPanel>
                     <div class="form-group">
-                       <apex:outputText escape='false' value='{!headerText1}'></apex:outputText>
+                       <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
 
-                        <apex:outputText escape='false' value='{!headerText2}'></apex:outputText>
+                        <apex:outputText escape="false" value="{!headerText2}"></apex:outputText>
                         
                       
                         <h3 class="heading-medium">What is the class of share?</h3>

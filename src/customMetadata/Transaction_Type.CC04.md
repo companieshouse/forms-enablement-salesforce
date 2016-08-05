@@ -51,19 +51,30 @@
     </values>
     <values>
         <field>Company_Page_HiddenT1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
+&lt;details&gt;
+&lt;summary&gt;
+&lt;span class=&quot;summary&quot;&gt;Help with company registration number&lt;/span&gt;
+&lt;/summary&gt;
+&lt;div class=&quot;panel panel-border-narrow&quot;&gt;
+&lt;p&gt;
+A company registration number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck Service&lt;/a&gt; Service.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;/div&gt;</value>
     </values>
     <values>
         <field>Company_Page_Title__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>

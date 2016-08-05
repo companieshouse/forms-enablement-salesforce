@@ -19,7 +19,9 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+    Your application will not be submitted until you have made this payment.
+  &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +49,9 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+    How will you be paying
+  &lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

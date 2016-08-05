@@ -1,7 +1,7 @@
 <apex:page title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -21,7 +21,7 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText value='{!headerBox1}' escape='false'></apex:outputText>
+                    <apex:outputText value="{!headerBox1}" escape="false"></apex:outputText>
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
                         <apex:outputPanel id="body">

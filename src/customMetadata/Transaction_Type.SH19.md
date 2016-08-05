@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p &gt;If you wish to file a reduction in capital by court order or one which requires a re-registration of the company, you must file on paper.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -51,19 +51,30 @@
     </values>
     <values>
         <field>Company_Page_HiddenT1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
+&lt;details&gt;
+&lt;summary&gt;
+&lt;span class=&quot;summary&quot;&gt;Help with company registration number&lt;/span&gt;
+&lt;/summary&gt;
+&lt;div class=&quot;panel panel-border-narrow&quot;&gt;
+&lt;p&gt;
+A company registration number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck Service&lt;/a&gt; Service.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;/div&gt;</value>
     </values>
     <values>
         <field>Company_Page_Title__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -87,32 +98,31 @@
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;If you are filing for a private limited company, you will also require the following documents:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Required documents&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;Solvency Statement&lt;/li&gt;
-&lt;li&gt;Special resolution authorising the capital reduction&lt;/li&gt;
-&lt;li&gt;Director&apos;s Statement
-&lt;/li&gt;
-&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;You must also file the following documents:&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
+          &lt;li&gt;special resolution authorising the capital reduction&lt;/li&gt;
+          &lt;li&gt;solvency statement&lt;/li&gt;
+          &lt;li&gt;directors’ statement of compliance (to be submitted by post)&lt;/li&gt;
+        &lt;/ul&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;You can file any of these documents separately in advance. Only the directors&apos; statement may be filed afterwards.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;These documents must be uploaded as attachments in order to complete the submission.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
@@ -125,7 +135,7 @@
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;The fee is £10 for standard service or £50 for same day.&lt;/p&gt;
+        <value xsi:type="xsd:string">&lt;p&gt;The fee is £10 for the standard service (up to 2 working days) or £50 for the same-day service.&lt;/p&gt;
 &lt;p&gt;It normally takes 10 minutes to complete this process.
 &lt;/p&gt;</value>
     </values>
@@ -143,11 +153,11 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">This service is used to complete your Statement of Capital following an administrative reduction in share capital.</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;You can use this service to submit a Statement of Capital following an administrative reduction in share capital for a private limited company.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Updating your share capital (SH19)</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Updating your share capital &lt;/h1&gt;</value>
     </values>
     <values>
         <field>Product_Code__c</field>
@@ -163,11 +173,11 @@
     </values>
     <values>
         <field>above_button_text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">What is the company number?</value>
     </values>
     <values>
         <field>companySearchPageText__c</field>
-        <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>customGuidanceView__c</field>

@@ -37,9 +37,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="choicePanel">
                         <div class="form-group">
-                            
-                                <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
-                           
+                            <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                             <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
                             <fieldset class="inline">
                                 <div class="form-group {!errorVal}">
@@ -67,15 +65,15 @@
                         <apex:param name="paramBoolean" value="" id="x" assignTo="{!behalfValidation}" />
                     </apex:actionFunction>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
+                <apex:actionFunction action="{!redirectUser}" name="redirecter">
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log('{!stepValidator}');
-                    if ('{!stepValidator}') {
-                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
+                    console.log({!stepValidator});
+                    if ({!stepValidator}) {
+                        if ({!sigNeeded} && !{!signingFinished}) {
                             console.log('wrong state starting redirection');
-                            redirectUser();
+                            redirecter();
                         } else {
                             console.log('correct state no redirection');
                         }

@@ -32,7 +32,7 @@ Ver. Author        Date        Detail
 <c:head />
 </head>
 
-<body class="" onload='checkSteps()'>
+<body class="">
     <c:bodyScript />
 
     <c:header />

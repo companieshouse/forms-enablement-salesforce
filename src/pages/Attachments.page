@@ -41,7 +41,7 @@
                                     <td>{!solvencyStatus}</td>
                                     <td>
                                         <a href='' onclick='addDoc("b")'>Add document</a>
-                                        <apex:inputFile onchange="whatshappening(this.value, 'Solvency Statement','Solvency Statement')" styleclass="dontshowButton" accept='pdf, PDF' fileName='SolvencyStatement' id="SolvencyStatement" value='{!solvencyBody}' />
+                                        <apex:inputFile onchange="updateSolvency(this.value)" styleclass="dontshowButton" accept="pdf" fileName="SolvencyStatement" id="SolvencyStatement" value="{!solvencyBody}" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -49,22 +49,21 @@
                                     <td>{!resolutionStatus}</td>
                                     <td>
                                         <a href='' onclick='addDoc("a")'>Add document</a>
-                                        <apex:inputFile onchange="whatshappening(this.value, 'Resolution','Resolution')" styleclass="dontshowButton" accept='pdf, PDF' fileName='Resolution' id="Resolution" value='{!resBody}' />
+                                        <apex:inputFile onchange="updateResolution(this.value)" styleclass="dontshowButton" accept="pdf" fileName="Resolution" id="Resolution" value="{!resBody}" />
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <apex:actionFunction action="{!uploadaTT}" name="uploadaTT" >
-                            <apex:param name="uploadaTT" value="" id="bodyfile" assignTo="{!attBody}" />
-                            <apex:param name="uploadaTT" value="" id="namefile" assignTo="{!attName}" />
-                            <apex:param name="uploadaTT" value="" id="descriptionfile" assignTo="{!attDescription}" />
-
+                        <apex:actionFunction action="{!uploadSolvency}" name="addSolvency">
+                            <apex:param name="solvencyvalue" value="abcm" id="solvbodyfile" assignTo="{!solvencyBody}" />
+                        </apex:actionFunction>
+                         <apex:actionFunction action="{!uploadResolution}" name="addResolution">
+                            <apex:param name="solvencyvalue" value="xyzd" id="resbodyfile" assignTo="{!resBody}" />
                         </apex:actionFunction>
                     </div>
-                    
                     <script>
-                    //onchange='uploadResolution()'
                     function addDoc(x) {
+                        console.log(x);
                         if (x == "a") {
                             console.log('adding resolution');
                             var a = document.getElementById('{!$Component.Resolution}');
@@ -74,18 +73,24 @@
                         } else if (x == "b") {
                             console.log('adding solvency');
                             var b = document.getElementById('{!$Component.SolvencyStatement}');
-                            console.log('b ==' + b);
+                            console.log('b ==' + JSON.stringify(b));
                             b.click();
                         }
                     }
-                    function whatshappening(x,y,z){
-                        console.log('function called');
-                        if(x){
 
-                            console.log('value ==' + x);
-                            uploadaTT(x,y,z);
-                        }
+                    function updateSolvency(x) {
+                        console.log('function called 1'+ x);
+                        
+                            addSolvency(x);
+                    
+                    }
 
+                    function updateResolution(y) {
+                        console.log('function called 2'+ y);
+
+                   
+                            addResolution(y);
+                
                     }
                     </script>
                 </apex:outputPanel>
@@ -93,7 +98,7 @@
                     <p>You must also file a directors’ statement of compliance within 15 days of the date of the resolution. You must file this document on paper.</p>
                     <p>If you wish to use the same-day service, we will need all these documents.</p>
                 </div>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value='Submit documents' rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Submit documents" rendered="{!NOT(isLastPage)}" />
                 <br />
                 <br/>&nbsp;
                 <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;

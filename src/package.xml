@@ -36,6 +36,7 @@
         <members>CompaniesHouseTestData</members>
         <members>CompanyController</members>
         <members>CompanyDetailsController</members>
+        <members>CompanyObjectsController</members>
         <members>CompanyQueryAction</members>
         <members>ConfirmationFrameworkController</members>
         <members>CustomViews</members>
@@ -83,6 +84,7 @@
         <members>SmartPayUrl</members>
         <members>SmartPayUrlTest</members>
         <members>StartFrameworkController</members>
+        <members>StartFrameworkControllerTest</members>
         <members>SubmissionController</members>
         <members>SubmissionManager</members>
         <members>SubmissionManagerTest</members>
@@ -115,6 +117,7 @@
         <members>BehalfDecision</members>
         <members>BehalfInputDetails</members>
         <members>BehalfWhichSignatory</members>
+        <members>CC04</members>
         <members>CH_ChargesList</members>
         <members>CH_SearchControllerByFilingHistoryClass</members>
         <members>CRS</members>
@@ -128,6 +131,7 @@
         <members>Companies_House_Search_Number</members>
         <members>Company</members>
         <members>CompanyDetails</members>
+        <members>CompanyObjects</members>
         <members>ConfirmationFramework</members>
         <members>DS01</members>
         <members>DigitalSignature</members>

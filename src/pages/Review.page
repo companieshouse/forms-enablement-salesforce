@@ -1,7 +1,7 @@
 <apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -131,7 +131,7 @@
                             </p>
                             <apex:repeat value="{!viewkeys}" var="key">
                                 <h2 class="heading-large">{!viewkeys[key]}</h2>
-                                <apex:repeat value="{!viewmap[key]}" var="prp" rows='1'>
+                                <apex:repeat value="{!viewmap[key]}" var="prp" rows="1">
                                     <p>
                                         <apex:outputText value="{!prp.Prescribed_Particulars__c}" id="shareclass" />
                                     </p>
@@ -211,11 +211,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <apex:repeat value='{!dummyShares}' var='Tau'>
-                                        <tr>
-                                            <td><apex:outputText value="{!Tau.Currency__c}" id="currency-unpaid" /></td>
-                                            <td class="numeric"><apex:outputText value="{!Tau.Total_aggregate_amount_unpaid__c}" id="aggamount-unpaid" /></td>
-                                        </tr>
+                                        <apex:repeat value="{!dummyShares}" var="Tau">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!Tau.Currency__c}" id="currency-unpaid" />
+                                                </td>
+                                                <td class="numeric">
+                                                    <apex:outputText value="{!Tau.Total_aggregate_amount_unpaid__c}" id="aggamount-unpaid" />
+                                                </td>
+                                            </tr>
                                         </apex:repeat>
                                     </tbody>
                                 </table>
@@ -276,7 +280,6 @@
                                     <br/>
                                     <br/>
                                 </table> -->
-                            
                             <!--
                             <div class="form-group">
                                 <table class="check-your-answers">
@@ -315,7 +318,7 @@
                                 </table>
                             </div>-->
                             <br/>
-                            <script> 
+                            <script>
                             // function numberofshares() {
                             //     var sharesum = 0;
                             //     var aggsum = 0;
@@ -413,7 +416,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel-attachments" rendered="{!custompanelView}">
                         <apex:outputPanel id="show-attachments" rendered="{!showAttachments}">
-                            <div class="form-group">
+                           <!--  <div class="form-group">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
@@ -438,8 +441,34 @@
                                         </apex:repeat>
                                     </tbody>
                                 </table>
+                            </div> -->
+                            <div class="form-group">
+                                <h2 class="heading-large">Supporting documents</h2>
+                                <table class="check-your-answers">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Document</th>
+                                            <th scope="col">File name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   <apex:repeat value="{!reviewAttachments}" var="sp" id="shareRepeat-attachments">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Name}" id="attachments-name" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputText value="{!sp.Description}" id="attachments-description" />
+                                                </td>
+                                                <td>
+                                                <apex:commandLink action="{!changeAttachments}" status="status" value="Change"/>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
                             </div>
-                            <br/>
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <apex:outputPanel id="sh02" rendered="{!custompanelView}">
@@ -744,10 +773,10 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <div class='form-group'>
-                    <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
-                    <br/>
-                    <br/>
-                    <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
+                        <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
+                        <br/>
+                        <br/>
+                        <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
                     </div>
                 </apex:outputPanel>
             </apex:form>

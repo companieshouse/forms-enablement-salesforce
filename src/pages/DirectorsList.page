@@ -68,21 +68,20 @@
                             <a href="https://www.gov.uk/government/publications/appoint-a-director-ap01"> Appoint company director(s) </a>for information on appointing directors </p>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
+                <apex:actionFunction action="{!redirectUser}" name="redirecter">
                 </apex:actionFunction>
                 <script>
-                function checkSteps() {
-                    console.log('{!stepValidator}');
-                    if ('{!stepValidator}') {
-                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
+                setTimeout(function checkSteps() {
+                    console.log({!stepValidator});
+                    if ({!stepValidator}) {
+                        if ({!sigNeeded} && !{!signingFinished}) {
                             console.log('wrong state starting redirection');
-                              super();
-                            redirectUser();
+                            redirecter();
                         } else {
                             console.log('correct state no redirection');
                         }
                     }
-                }
+                }, 3000);
                 </script>
             </apex:form>
         </apex:define>

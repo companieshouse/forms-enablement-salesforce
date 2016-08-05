@@ -70,15 +70,15 @@
                     }
                     </script>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="checkSteps">
+                <apex:actionFunction action="{!redirectUser}" name="redirecter">
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log('{!stepValidator}');
-                    if ('{!stepValidator}') {
-                        if ('{!sigNeeded}' && !!'{!signingFinished}') {
+                    console.log({!stepValidator});
+                    if ({!stepValidator}) {
+                        if ({!sigNeeded} && !{!signingFinished}) {
                             console.log('wrong state starting redirection');
-                            redirectUser();
+                            redirecter();
                         } else {
                             console.log('correct state no redirection');
                         }
