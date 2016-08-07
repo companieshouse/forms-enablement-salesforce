@@ -70,94 +70,92 @@
                                     </apex:outputPanel>
                                 </apex:outputPanel>
                             </div>
-                            </apex:outputPanel>
-                            </apex:outputPanel>
-                            </div>
-                            </apex:outputPanel>
-                            <apex:outputPanel rendered="{!isSameDayPayment}">
-                                <fieldset class="inline">
-                                    <h3 class="heading-medium">Do you want your application to be proceed on the same day?</h3>
-                                    <div id="presenterSelection2" class="form-group">
-                                        <span class='error-message'>{!sameDayErrorMessage}</span>
-                                    <label class="block-label" for="radio-indent-4">
-                                        <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
-                                        </input>
-                                    </label>
-                                    <label class="block-label" for="radio-indent-5">
-                                        <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
-                                        </input>
-                                    </label>
-                                    </div>
-                                </fieldset>
-                            </apex:outputPanel>
                         </apex:outputPanel>
-                        <apex:actionFunction status="status" action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
-                            <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
-                        </apex:actionFunction>
-                        <apex:actionFunction status="status" action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel,body">
-                            <apex:param name="paramBool" value="" id="y" assignTo="{!isSameDaySelected}" />
-                        </apex:actionFunction>
-                        <apex:actionFunction status="status" action="{!updateLink}" name="updateLink" reRender="emptyPanel">
-                        </apex:actionFunction>
-                        <apex:outputPanel rendered="{!hasPaymentSuccess}">
-                            <div  role="group" tabindex="-1">
-                                <h1 class="heading-medium ">
+                    </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isSameDayPayment}">
+                    <fieldset class="inline">
+                        <h3 class="heading-medium">Do you want your application to be proceed on the same day?</h3>
+                        <div id="presenterSelection2" class="form-group">
+                            <span class='error-message'>{!sameDayErrorMessage}</span>
+                            <label class="block-label" for="radio-indent-4">
+                                <input class="sameDayYes" id="radio-indent-4" type="radio" name="paymentSelectDay" value="Yes" onchange="updateSameDay(true);"> Yes
+                                </input>
+                            </label>
+                            <label class="block-label" for="radio-indent-5">
+                                <input class="sameDayNo" id="radio-indent-5" type="radio" name="paymentSelectDay" value="No" onchange="updateSameDay(false);"> No
+                                </input>
+                            </label>
+                        </div>
+                    </fieldset>
+                </apex:outputPanel>
+                <apex:actionFunction status="status" action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
+                    <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
+                </apex:actionFunction>
+                <apex:actionFunction status="status" action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel,body">
+                    <apex:param name="paramBool" value="" id="y" assignTo="{!isSameDaySelected}" />
+                </apex:actionFunction>
+                <apex:actionFunction status="status" action="{!updateLink}" name="updateLink" reRender="emptyPanel">
+                </apex:actionFunction>
+                <apex:outputPanel rendered="{!hasPaymentSuccess}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="heading-medium ">
                                     Successfully paid.
                                 </h1>
-                                <p>
-                                    The payment has been succesful.
-                                </p>
-                            </div>
-                        </apex:outputPanel>
-                        <apex:outputPanel rendered="{!hasPaid}">
-                            <div role="group" tabindex="-1">
-                                <h1 class="heading-medium" >
+                        <p>
+                            The payment has been succesful.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaid}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="heading-medium">
                                     The payment has been already processed.
                                 </h1>
-                                <p>
-                                    You have already paid for this transaction.
-                                </p>
-                            </div>
-                        </apex:outputPanel>
-                        <apex:outputPanel rendered="{!hasPaymentRejected}">
-                            <div  role="group" tabindex="-1">
-                                <h1 class="heading-medium">
+                        <p>
+                            You have already paid for this transaction.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentRejected}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="heading-medium">
                                     The payment has been rejected.
                                 </h1>
-                                <p>
-                                    Do you want to try again?
-                                    <a onclick="updateLink();" href="#">Try again?</a>
-                                </p>
-                            </div>
-                        </apex:outputPanel>
-                        <apex:outputPanel rendered="{!hasPaymentError}">
-                            <div role="group" tabindex="-1">
-                                <h1 class="heading-medium">
+                        <p>
+                            Do you want to try again?
+                            <a onclick="updateLink();" href="#">Try again?</a>
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentError}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="heading-medium">
                                     Payment issuer has encoutered an issue.
                                 </h1>
-                                <br/>
-                                <p>
-                                    Do you want to try again (It might not work)?
-                                    <a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
-                                </p>
-                            </div>
-                        </apex:outputPanel>
-                        <apex:outputPanel rendered="{!hasPaymentPending}">
-                            <div role="group" tabindex="-1">
-                                <h1 class="heading-medium">
+                        <br/>
+                        <p>
+                            Do you want to try again (It might not work)?
+                            <a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentPending}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="heading-medium">
                                     The payment is pending.
                                 </h1>
-                                <p>
-                                    You might have to do further action to validate the payment.
-                                </p>
-                            </div>
-                        </apex:outputPanel>
-                    <div class="form-group">
-                        <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
-                        <br />
-                        <br/>
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+                        <p>
+                            You might have to do further action to validate the payment.
+                        </p>
                     </div>
+                </apex:outputPanel>
+                <div class="form-group">
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    <br />
+                    <br/>
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+                </div>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

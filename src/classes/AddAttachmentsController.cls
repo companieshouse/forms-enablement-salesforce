@@ -180,9 +180,10 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         return;
     }
     public PageReference goForward() {
-        if (submissionMgr.submission.finishedAttachments__c == true && submissionMgr.submission.finishedAddingShares__c == true) {
-            return nextStep();
-        }
+        //COMMENTED FOR FIELD NOT EXISTING IN OBJECT
+        //if (submissionMgr.submission.finishedAttachments__c == true && submissionMgr.submission.finishedAddingShares__c == true) {
+        //    return nextStep();
+        //}
         return null;
     }
     public void DeleteAttachments() {
@@ -275,7 +276,8 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
     }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
-        submissionMgr.submission.finishedAttachments__c = true;
+        //COMMENTED FOR FIELD NOT EXIST in OBJECT
+        //submissionMgr.submission.finishedAttachments__c = true;
         persistStep();
         return nextStep();
     }

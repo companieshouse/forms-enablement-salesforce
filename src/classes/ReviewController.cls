@@ -586,7 +586,8 @@ public class ReviewController extends TransactionStepControllerBase {
     }
     private void attachmentpersistStep() {
         submissionMgr.submission.finishedAddingShares__c = false;
-        submissionMgr.submission.finishedAttachments__c = true;
+        //FIELD COMMENTED CAUSE NOT IN OBJECT
+        //submissionMgr.submission.finishedAttachments__c = true;
 
         submissionMgr.persist();
     }
