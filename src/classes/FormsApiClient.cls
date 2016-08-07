@@ -19,6 +19,7 @@ public class FormsApiClient {
 
     private String SUBMISSION_ENDPOINT = '/submission';
     private String BARCODE_ENDPOINT = '/barcode';
+    private String PRESENTERAPI = '/presenterauth';
 
 
 
@@ -43,6 +44,44 @@ public class FormsApiClient {
 
         // Get request body
         String requestBody = getBarcodeBody();
+        request.setBody(requestBody);
+
+        // Debug request
+        System.debug(LoggingLevel.INFO, 'Request header: ' + request);
+        System.debug(LoggingLevel.INFO, 'Request body: ' + request.getBody());
+
+
+        // Send the request
+        Http http = new Http();
+        HTTPResponse response = http.send(request);
+
+        // Debug response
+        System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
+        System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
+
+        return response;
+
+    }
+
+    public HttpResponse requestPresenterAPI(String presenterId, String authCode){
+        //  Don't forget to add a Remote Site record for the server as well as the custom setting
+        //  record.
+        Forms_API_Service__c connection = getConnection();
+        // Create Http request
+        HttpRequest request = new HttpRequest();
+
+        request.setEndpoint(connection.URL__c + PRESENTERAPI);
+        request.setMethod('GET');
+        request.setHeader('Content-Type', 'application/json');
+        request.setHeader('Accept', '*/*');
+        request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+
+        Map<String,object> mapEmp = new Map<String,object>();
+        mapEmp.put('id',presenterId);
+        mapEmp.put('auth',authCode);
+        
+        // Get request body
+        String requestBody = JSON.serialize(mapEmp);  
         request.setBody(requestBody);
 
         // Debug request

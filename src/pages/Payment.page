@@ -65,6 +65,14 @@
                                                 <span class='error-message'>{!accountcurrentErrorMessage}</span>
                                                 <label class="form-label" for="accountnumberinput">Account number:</label>
                                                 <apex:inputText styleclass="form-control" value="{!accountNumber}" id="accountnumberinput" />
+                                                <br/>
+                                                <br/>
+                                                <!-- <label class="form-label" for="presenterID">Presenter ID:</label>
+                                                <apex:inputText styleclass="form-control" value="{!presenterId}" id="presenterID" />
+                                                <br/>
+                                                <br/> -->
+                                                <label class="form-label" for="accouthAuthCode">Authentication code:</label>
+                                                <apex:inputText styleclass="form-control" value="{!accountAuthCode}" id="accouthAuthCode" />
                                             </div>
                                         </div>
                                     </apex:outputPanel>
@@ -75,7 +83,7 @@
                 
                 <apex:outputPanel rendered="{!isSameDayPayment}">
                     <fieldset class="inline">
-                        <h3 class="heading-medium">Do you want your application to be proceed on the same day?</h3>
+                        <h3 class="heading-medium">Do you want your application to be proceed on the same day?(It will cost you £{!fastTrackFee})</h3>
                         <div id="presenterSelection2" class="form-group">
                             <span class='error-message'>{!sameDayErrorMessage}</span>
                             <label class="block-label" for="radio-indent-4">
@@ -98,6 +106,17 @@
                 <apex:actionFunction status="status" action="{!updateLink}" name="updateLink" reRender="emptyPanel">
                 </apex:actionFunction>
                 <apex:outputPanel rendered="{!hasPaymentSuccess}">
+                    <apex:outputPanel rendered="{!accountSuccess}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="heading-medium ">
+                                    Account informations validated.
+                                </h1>
+                        <p>
+                            {!accountSuccessMsg}
+                        </p>
+                    </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!!accountSuccess}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-medium ">
                                     Successfully paid.
@@ -105,7 +124,7 @@
                         <p>
                             The payment has been succesful.
                         </p>
-                    </div>
+                    </div></apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaid}">
                     <div role="group" tabindex="-1">
@@ -129,6 +148,23 @@
                     </div>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentError}">
+                    <apex:outputPanel rendered="{!accountFailure}">
+                        <div role="group" tabindex="-1">
+                        <h1 class="heading-medium">
+                                    Account informations incorrect.
+                                </h1>
+                        <br/>
+                        <p>
+                            {!accountFailureMsg}
+                        </p>
+                        <apex:commandButton action="{!resetTransaction}" styleClass="button" value="{!$Label.UI_Text_Previous}" />
+                        <br/>
+                        <br/>
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+
+                    </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!!accountFailure}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-medium">
                                     Payment issuer has encoutered an issue.
@@ -139,6 +175,7 @@
                             <a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
                         </p>
                     </div>
+                    </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentPending}">
                     <div role="group" tabindex="-1">
@@ -151,10 +188,7 @@
                     </div>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
-                    <br />
-                    <br/>
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!hasPaid}" />
                 </div>
                 </apex:outputPanel>
             </apex:form>

@@ -52,7 +52,7 @@ How do you want to make the payment?
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Pay to close your company/LLP</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Pay to close your company/LLP&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
