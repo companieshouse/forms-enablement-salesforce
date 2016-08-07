@@ -127,6 +127,7 @@
                     </div></apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaid}">
+                    <apex:outputPanel rendered="{!!accountSuccess}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-medium">
                                     The payment has been already processed.
@@ -135,6 +136,7 @@
                             You have already paid for this transaction.
                         </p>
                     </div>
+                    </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentRejected}">
                     <div role="group" tabindex="-1">
@@ -188,7 +190,7 @@
                     </div>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!hasPaid}" />
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
                 </div>
                 </apex:outputPanel>
             </apex:form>

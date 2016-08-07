@@ -70,19 +70,13 @@ public class FormsApiClient {
         // Create Http request
         HttpRequest request = new HttpRequest();
 
-        request.setEndpoint(connection.URL__c + PRESENTERAPI);
+        request.setEndpoint(connection.URL__c + PRESENTERAPI + '?id='+presenterId + '&auth=' +authCode);
         request.setMethod('GET');
         request.setHeader('Content-Type', 'application/json');
         request.setHeader('Accept', '*/*');
         request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
 
-        Map<String,object> mapEmp = new Map<String,object>();
-        mapEmp.put('id',presenterId);
-        mapEmp.put('auth',authCode);
         
-        // Get request body
-        String requestBody = JSON.serialize(mapEmp);  
-        request.setBody(requestBody);
 
         // Debug request
         System.debug(LoggingLevel.INFO, 'Request header: ' + request);
