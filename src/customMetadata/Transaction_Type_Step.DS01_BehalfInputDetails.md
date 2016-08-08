@@ -27,7 +27,7 @@ Name of person approving
     <values>
         <field>Display_Text_2__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
-Email of person approving
+Email address of person approving
 &lt;/p&gt;
 &lt;p class=&quot;form-hint&quot;&gt;For example, john.smith@example.co.uk&lt;/p&gt;</value>
     </values>

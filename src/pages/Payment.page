@@ -21,7 +21,7 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText value="{!headerBox1}" escape="false"></apex:outputText>
+                    <apex:outputText rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" value="{!headerBox1}" escape="false"></apex:outputText>
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
                         <apex:outputPanel id="body">
@@ -44,7 +44,7 @@
                                     <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
                                         <div class='form-group'>
                                             <label class="block-label" for="radio-indent-1">
-                                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or debit Card
+                                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or debit card
                                                 </input>
                                             </label>
                                         </div>
@@ -108,7 +108,7 @@
                 <apex:outputPanel rendered="{!hasPaymentSuccess}">
                     <apex:outputPanel rendered="{!accountSuccess}">
                     <div role="group" tabindex="-1">
-                        <h1 class="heading-medium ">
+                        <h1 class="heading-xlarge">
                                     Account informations validated.
                                 </h1>
                         <p>
@@ -118,7 +118,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel rendered="{!!accountSuccess}">
                     <div role="group" tabindex="-1">
-                        <h1 class="heading-medium ">
+                        <h1 class="heading-xlarge">
                                     Successfully paid.
                                 </h1>
                         <p>
@@ -129,7 +129,7 @@
                 <apex:outputPanel rendered="{!hasPaid}">
                     <apex:outputPanel rendered="{!!accountSuccess}">
                     <div role="group" tabindex="-1">
-                        <h1 class="heading-medium">
+                        <h1 class="heading-xlarge">
                                     The payment has been already processed.
                                 </h1>
                         <p>
@@ -140,7 +140,7 @@
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentRejected}">
                     <div role="group" tabindex="-1">
-                        <h1 class="heading-medium">
+                        <h1 class="heading-xlarge">
                                     The payment has been rejected.
                                 </h1>
                         <p>
@@ -152,7 +152,7 @@
                 <apex:outputPanel rendered="{!hasPaymentError}">
                     <apex:outputPanel rendered="{!accountFailure}">
                         <div role="group" tabindex="-1">
-                        <h1 class="heading-medium">
+                        <h1 class="heading-xlarge">
                                     Account informations incorrect.
                                 </h1>
                         <br/>
@@ -168,7 +168,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel rendered="{!!accountFailure}">
                     <div role="group" tabindex="-1">
-                        <h1 class="heading-medium">
+                        <h1 class="heading-xlarge">
                                     Payment issuer has encoutered an issue.
                                 </h1>
                         <br/>
@@ -181,7 +181,7 @@
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!hasPaymentPending}">
                     <div role="group" tabindex="-1">
-                        <h1 class="heading-medium">
+                        <h1 class="heading-xlarge">
                                     The payment is pending.
                                 </h1>
                         <p>

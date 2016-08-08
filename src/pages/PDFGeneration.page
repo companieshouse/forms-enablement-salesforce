@@ -167,7 +167,7 @@
 		        	<br />
 		        	<p>We as the majority of {!Transaction__c.officerTerminology__c} apply for this company to be struck off the Register and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006 (being circumstances in which the {!Transaction__c.officerTerminology__c} would otherwise be prohibited under those sections from making an application) exists in relation to the company.</p>
 		        	<br />
-		        	<h4>Authorising Company Director:</h4>
+		        	<h4>Authorising company {!Transaction__c.officerTerminology__c}:</h4>
 			    	<apex:repeat value="{!Transaction__c.Officers__r}" var="off">
 			            <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
 			                <td class="col1" align="left">

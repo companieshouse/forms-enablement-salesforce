@@ -67,11 +67,11 @@
                                 <div aria-hidden="false" class="panel panel-border-narrow">
                                     <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
                                     <div class="form-group ">
-                                        <label class="form-label" for="directors-name">Your full name</label>
+                                        <label class="form-label" for="directors-name">Your full name (optional)</label>
                                         <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="directors-confirm-phone">Phone number</label>
+                                        <label class="form-label" for="directors-confirm-phone">Phone number (optional)</label>
                                         <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
                                     </div>
                                 </div>

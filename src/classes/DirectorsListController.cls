@@ -180,6 +180,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
                     }
                 }
             }
+            nbOfOfficers = listOfDirectors.size();
         } else {
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
             //Make the call to the list of directors
@@ -195,20 +196,20 @@ public with sharing class DirectorsListController extends TransactionStepControl
                     isLLPCompany = false;
                     isLPCompany = false;
                     isPLCLTDCompany = true;
-                    officerTerm = 'director(s)';
+                    officerTerm = 'director';
 
                 } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-designated-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
                     isLLPCompany = true;
                     isPLCLTDCompany = false;
                     isLPCompany = false;
-                    officerTerm = 'member(s)';
+                    officerTerm = 'member';
 
                 } else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     isLLPCompany = false;
                     isPLCLTDCompany = false;
                     isLPCompany = true;
-                    officerTerm = 'partner(s)';
+                    officerTerm = 'partner';
                 }
 
 
@@ -230,6 +231,10 @@ public with sharing class DirectorsListController extends TransactionStepControl
             }
 
             nbOfOfficers = listOfDirectors.size();
+            if(nbOfOfficers > 1)
+            {
+                officerTerm += 's';
+            }
             //Insert the contact
             insert contactList;
 
