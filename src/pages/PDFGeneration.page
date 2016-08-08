@@ -163,9 +163,9 @@
 		        	<p>This company has applied to be struck off and dissolved. The registrar will proceed unless there is reasonable cause not to, and on dissolution any assets remaining in the company will be passed to the Crown. Guidance is available on grounds for objection. If in doubt seek professional advice.</p>
 		        	<br />
 		        	<hr/>
-		        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director</p>
+		        	<p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of {!Transaction.officerTerminology__c}</p>
 		        	<br />
-		        	<p>We as the majority of directors apply for this company to be struck off the Register and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006 (being circumstances in which the directors would otherwise be prohibited under those sections from making an application) exists in relation to the company.</p>
+		        	<p>We as the majority of {!Transaction.officerTerminology__c} apply for this company to be struck off the Register and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006 (being circumstances in which the {!Transaction.officerTerminology__c} would otherwise be prohibited under those sections from making an application) exists in relation to the company.</p>
 		        	<br />
 		        	<h4>Authorising Company Director:</h4>
 			    	<apex:repeat value="{!Transaction__c.Officers__r}" var="off">
