@@ -83,12 +83,12 @@ public with sharing class GuidanceController {
                 displayText0 += (transactionMgr.td.Guidance_Text_5__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
                 displayText0 += (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_6__c);
             } else if (customGuidanceView) {
-                guidanceTitle =  transactionMgr.td.Guidance_Text_1__c;
-                guidanceText1 = transactionMgr.td.Guidance_Text_2__c;
-                guidanceText2 = transactionMgr.td.Guidance_Text_3__c;
-                guidanceText3 = transactionMgr.td.Guidance_Text_4__c;
-                guidanceText4 = transactionMgr.td.Guidance_Text_5__c;
-                guidanceText5 = transactionMgr.td.Guidance_Text_6__c;
+                guidanceTitle = (transactionMgr.td.Guidance_Text_1__c == null ? '' : transactionMgr.td.Guidance_Text_1__c);
+                guidanceText1 = (transactionMgr.td.Guidance_Text_2__c == null ? '' : transactionMgr.td.Guidance_Text_2__c);
+                guidanceText2 = (transactionMgr.td.Guidance_Text_3__c == null ? '' : transactionMgr.td.Guidance_Text_3__c);
+                guidanceText3 = (transactionMgr.td.Guidance_Text_4__c == null ? '' : transactionMgr.td.Guidance_Text_4__c);
+                guidanceText4 = (transactionMgr.td.Guidance_Text_5__c == null ? '' : transactionMgr.td.Guidance_Text_5__c);
+                guidanceText5 = (transactionMgr.td.Guidance_Text_6__c == null ? '' : transactionMgr.td.Guidance_Text_6__c);
             }
             // checkbox text
             checkboxText0 = transactionMgr.td.GuidanceWarningText__c;
@@ -100,16 +100,7 @@ public with sharing class GuidanceController {
         }
         return;
     }
-//public PageReference initializeBox() {
-//    initialiseStep();
-//    // warningAgreeBox = userTracker.GuidanceAgreeBox();
-//    return null;
-//}
-//public void updateBox() {
-//    if (warningAgreeBox == true) warningAgreeBox = false;
-//    else warningAgreeBox = true;
-//    return;
-//}
+
     public PageReference setAgreeValue() {
         if (!agreeBoxChoice) {
             currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';

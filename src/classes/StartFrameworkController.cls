@@ -16,14 +16,19 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-02  Initial development.
 */
 public with sharing class StartFrameworkController {
-    public String pageTitle {get; set;}
-    public String pageText {get; set;}
-    public String pageTextAfterButton {get; set;}
-    public String transactionType {
+    public String pageTitle {
         get;
         set;
     }
-    public Boolean enableHTMLBuilder {
+    public String pageText {
+        get;
+        set;
+    }
+    public String pageTextAfterButton {
+        get;
+        set;
+    }
+    public String transactionType {
         get;
         set;
     }
@@ -32,7 +37,7 @@ public with sharing class StartFrameworkController {
     SecurityManager securityMgr;
     TransactionManager transactionMgr;
     TrackUserClass userTracker;
-    Boolean hasGuidancePage = false;
+    public Boolean hasGuidancePage {get; set;}
     //String transactionType;
     // Constructors.
     public StartFrameworkController() {
@@ -50,7 +55,6 @@ public with sharing class StartFrameworkController {
             pageTitle = (transactionMgr.td.Landing_Page_Title__c == null ? '' : transactionMgr.td.Landing_Page_Title__c);
             //pageTitle = (transactionMgr.td.Landing_Page_Title2__c == null ? '' : transactionMgr.td.Landing_Page_Title2__c);
             //pageTitle = (transactionMgr.td.Landing_Page_Title3__c == null ? '' : transactionMgr.td.Landing_Page_Title3__c);
-            
             pageText = transactionMgr.td.Landing_Page_Text__c == null ? '' : transactionMgr.td.Landing_Page_Text__c;
             pageText += transactionMgr.td.Landing_Page_Text2__c == null ? '' : transactionMgr.td.Landing_Page_Text2__c;
             pageText += transactionMgr.td.Landing_Page_Text3__c == null ? '' : transactionMgr.td.Landing_Page_Text3__c;
@@ -62,7 +66,6 @@ public with sharing class StartFrameworkController {
             //pageText = transactionMgr.td.Landing_Page_Text9__c == null ? '' : transactionMgr.td.Landing_Page_Text9__c;
             //pageText = transactionMgr.td.Landing_Page_Text10__c == null ? '' : transactionMgr.td.Landing_Page_Text10__c;
             //pageText = transactionMgr.td.Landing_Page_Text11__c == null ? '' : transactionMgr.td.Landing_Page_Text11__c;
-            
             pageTextAfterButton = transactionMgr.td.Below_Button_Text__c == null ? '' : transactionMgr.td.Below_Button_Text__c;
             hasGuidancePage = transactionMgr.td.hasGuidancePage__c;
             isPageInitialised = true;

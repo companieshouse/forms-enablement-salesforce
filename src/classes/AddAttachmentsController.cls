@@ -15,22 +15,6 @@ Ver. Author        Date        Detail
 note: attachment size limited to 5MB
 */
 public class AddAttachmentsController extends TransactionStepControllerBase {
-    public Boolean hasPageErrors {
-        get;
-        set;
-    }
-    public Boolean showTable {
-        get;
-        set;
-    }
-    public List < Attachment > attachments {
-        get;
-        set;
-    }
-    public List < Attachment > newAttachments {
-        get;
-        set;
-    }
     public String companyName {
         get;
         set;
@@ -60,10 +44,6 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         set;
     }
     public String attachmentName {
-        get;
-        set;
-    }
-    public String currentErrors {
         get;
         set;
     }
@@ -131,23 +111,12 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Blob attBody {
-        get;
-        set;
-    }
+
     public Blob resBody {
         get;
         set;
     }
     public Blob solvencyBody {
-        get;
-        set;
-    }
-    public String attName {
-        get;
-        set;
-    }
-    public String attDescription {
         get;
         set;
     }
@@ -173,9 +142,6 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
         attachmentId = submissionMgr.submission.Id;
-        if (submissionMgr.submission.Attachments.size() > 0) {
-            attachments = submissionMgr.submission.Attachments;
-        }
         checkAttachmentStatus();
         return;
     }

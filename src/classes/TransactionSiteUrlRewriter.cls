@@ -64,7 +64,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String SCAP2 = '/SCapital2';
     public String SCAP3 = '/SCapital3';
     public String SHOWSHARECHANGE = '/showClassChanges';
-    public String COMPANYOBJECTS = '/ObjectsCompany';
+    public String OBJECTSCOMPANY = '/ObjectsCompany';
     ///// VF Strings
     public String VF_PAGE_START         = '/StartFramework';
     public String VF_PAGE_COMPANY       = '/Company';
@@ -115,7 +115,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_SCAP2 = '/SCapital2';
     public String VF_PAGE_SCAP3 = '/SCapital3';
     public String VF_PAGE_SHOWCHANGE = '/ShowClassChanges';
-    public String VF_PAGE_COMPANYOBJECTS = '/ObjectsCompany';
+    public String VF_PAGE_OBJECTSCOMPANY = '/ObjectsCompany';
 
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
@@ -204,8 +204,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
         else if (url.startsWith(VF_PAGE_SHOWCHANGE))
         { pr = new PageReference(SHOWSHARECHANGE); }
-        else if (url.startsWith(VF_PAGE_COMPANYOBJECTS))
-        { pr = new PageReference(COMPANYOBJECTS); }
+        else if (url.startsWith(VF_PAGE_OBJECTSCOMPANY))
+        { pr = new PageReference(OBJECTSCOMPANY); }
 
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -297,8 +297,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(SCAP2);
             } else if (url.startsWith(VF_PAGE_SCAP3)) {
                 friendlyPageReference = new PageReference(SCAP3);
-            } else if (url.startsWith(VF_PAGE_COMPANYOBJECTS)) {
-                friendlyPageReference = new PageReference(COMPANYOBJECTS);
+            } else if (url.startsWith(VF_PAGE_OBJECTSCOMPANY)) {
+                friendlyPageReference = new PageReference(OBJECTSCOMPANY);
+            } else if (url.startsWith(VF_PAGE_SHOWCHANGE)) {
+                friendlyPageReference = new PageReference(SHOWSHARECHANGE);
             }
 
 

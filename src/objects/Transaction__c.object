@@ -550,6 +550,14 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>finishedAttachments__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>finishedAttachments</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>hasPaid__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to notify the transaction has been paid.</description>

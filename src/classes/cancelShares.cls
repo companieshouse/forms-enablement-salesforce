@@ -93,10 +93,24 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
-    public String dayVal {get; set;}
-    public String monthVal {get; set;}
-    public String yearVal {get; set;}
-
+    public Datetime shareCancelDate {
+        get;
+        set;
+    }
+    public Integer varDay {
+        get;
+        set;
+    }
+    public Integer varYear {
+        get;
+        set;
+    }
+    public Integer varMonth {
+        get;
+        set;
+    }
+    public String errorVal1 {get; set;}
+    public String errormessage1 {get; set;}
 
     public cancelShares() {
         super();
@@ -133,6 +147,42 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         submissionMgr.persist();
     }
     public PageReference nextAction() {
+        if (varDay == null || varDay == 0 || varDay > 31) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct day';
+            return null;
+        }
+        if (varMonth == null || varMonth == 0 || varMonth > 12) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct Month';
+            return null;
+        }
+        if (varYear == null || varyear == 0 ) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct Year';
+            return null;
+        }
+        Datetime shareCancelDate = Datetime.newInstance(varYear, varMonth, varDay);
+        shareCancelDate.format('dd MMMMM yyyy');
+        if (shareCancelDate > Date.Today()) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Date must not be in the future';
+            return null;
+        }
+        Date savedDate = shareCancelDate.date();
+        List<shares__c> sharestoSave = new List<Shares__c>();
+        for (Shares__c sharestoAddDatesto : submissionMgr.submission.Shares__r) {
+            if (sharestoAddDatesto.SHARETYPE__c == submissionMgr.submission.Form_Name__c) {
+                sharestoAddDatesto.Date__c = savedDate;
+                sharestoSave.add(sharestoAddDatesto);
+            }
+        }
+        update sharestoSave;
+        // persist and save if validaiton passes
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
         return nextStep();
