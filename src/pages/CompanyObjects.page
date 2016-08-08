@@ -44,10 +44,10 @@ Ver. Author         Date        Detail
                         </label>
                     </fieldset>
                 </div>
-                <div class='form-group'>
-                    <apex:commandButton onclick='getValues()' status="status" styleClass="button" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
+                <div class='form-group'> <!-- onclick='getValues()' -->
+                    <apex:commandButton  status="status" styleClass="button" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
                 </div>
-                <script>
+                <script> 
                 function getValues() {
                     var values = document.getElementsByTagName("input");
 

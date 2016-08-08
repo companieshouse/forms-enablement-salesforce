@@ -99,11 +99,11 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public String solvencyStatus {
+    public String docStatus2 {
         get;
         set;
     }
-    public String resolutionStatus {
+    public String docStatus1 {
         get;
         set;
     }
@@ -168,26 +168,45 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         Integer attSize = submissionMgr.submission.Attachments.size();
         if (attSize > 0) {
             for (Attachment checkedAttachments : submissionMgr.submission.Attachments) {
-                if (attSize == 1 ) {
-                    if (checkedAttachments.Name == 'Resolution') {
-                        resolutionStatus = 'Uploaded';
-                        solvencyStatus = 'Not yet uploaded';
+                if (submissionMgr.submission.Form_Name__c == 'SH06') {
+                    if (attSize == 1 ) {
+                        if (checkedAttachments.Name == 'Resolution') {
+                            docStatus1 = 'Uploaded';
+                            docStatus2 = 'Not yet uploaded';
+                        }
+                        if (checkedAttachments.Name == 'Solvency') {
+                            docStatus2 = 'Uploaded';
+                            docStatus1 = 'Not yet uploaded';
+                        }
+                    } else if (attSize == 2 ) {
+                        if (checkedAttachments.Name == 'Resolution') {
+                            docStatus1 = 'Uploaded';
+                        } else if (checkedAttachments.Name == 'Solvency') {
+                            docStatus2 = 'Uploaded';
+                        }
                     }
-                    if (checkedAttachments.Name == 'Solvency') {
-                        solvencyStatus = 'Uploaded';
-                        resolutionStatus = 'Not yet uploaded';
-                    }
-                } else if (attSize == 2 ) {
-                    if (checkedAttachments.Name == 'Resolution') {
-                        resolutionStatus = 'Uploaded';
-                    } else if (checkedAttachments.Name == 'Solvency') {
-                        solvencyStatus = 'Uploaded';
+                } else if (submissionMgr.submission.Form_Name__c == 'CC04') {
+                    if (attSize == 1 ) {
+                        if (checkedAttachments.Name == 'Resolution agreeing change') {
+                            docStatus1 = 'Uploaded';
+                            docStatus2 = 'Not yet uploaded';
+                        }
+                        if (checkedAttachments.Name == 'Revised Articles') {
+                            docStatus2 = 'Uploaded';
+                            docStatus1 = 'Not yet uploaded';
+                        }
+                    } else if (attSize == 2 ) {
+                        if (checkedAttachments.Name == 'Resolution agreeing change') {
+                            docStatus1 = 'Uploaded';
+                        } else if (checkedAttachments.Name == 'Revised Articles') {
+                            docStatus2 = 'Uploaded';
+                        }
                     }
                 }
             }
         } else {
-            solvencyStatus = 'Not yet uploaded';
-            resolutionStatus = 'Not yet uploaded';
+            docStatus2 = 'Not yet uploaded';
+            docStatus1 = 'Not yet uploaded';
         }
     }
     public void checkDocs(String docsType) {

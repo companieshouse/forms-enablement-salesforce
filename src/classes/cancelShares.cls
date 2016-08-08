@@ -133,6 +133,12 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         currentShares = new List < Shares__c > ();
         checkSharestoCancel();
     }
+    public PageReference goForward() {
+        if (submissionMgr.submission.finishedPart1__c == true) {
+            return nextStep();
+        }
+        return null;
+    }
     public void checkSharestoCancel() {
         for (Shares__c previouslycancelledshares : submissionMgr.submission.Shares__r) {
             if (previouslycancelledshares.SHARETYPE__c == 'SH06') {
@@ -144,6 +150,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         }
     }
     private void persistStep() {
+        submissionMgr.submission.finishedPart1__c = true;
         submissionMgr.persist();
     }
     public PageReference nextAction() {
@@ -176,11 +183,12 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         Date savedDate = shareCancelDate.date();
         List<shares__c> sharestoSave = new List<Shares__c>();
         for (Shares__c sharestoAddDatesto : submissionMgr.submission.Shares__r) {
-            if (sharestoAddDatesto.SHARETYPE__c == submissionMgr.submission.Form_Name__c) {
+            if (sharestoAddDatesto.SHARETYPE__c == 'SH06') {
                 sharestoAddDatesto.Date__c = savedDate;
                 sharestoSave.add(sharestoAddDatesto);
             }
         }
+
         update sharestoSave;
         // persist and save if validaiton passes
         if (!validatePageState()) return Page.TransactionException;

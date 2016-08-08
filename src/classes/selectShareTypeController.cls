@@ -102,6 +102,12 @@ public with sharing class selectShareTypeController extends TransactionStepContr
         super();
         if (isPageInitialised) initialiseStep();
     }
+    public PageReference goForward() {
+        if (submissionMgr.submission.finishedPart1__c == true) {
+            return nextStep();
+        }
+        return null;
+    }
     public void grabShareType() {
         if (shareClassType != null) {
             System.debug('sharetype == ' + ' ' + shareClassType);
@@ -122,12 +128,6 @@ public with sharing class selectShareTypeController extends TransactionStepContr
         headerText3 = transactionMgr.currentStep.Header_Text_3__c;
         continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
         previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
-    }
-    public PageReference checkstatus() {
-        if (submissionMgr.submission.finishedAddingShares__c == true) {
-            return nextStep();
-        }
-        return null;
     }
     public PageReference AddtocurrentShare() {
         submissionMgr.persist();
@@ -165,7 +165,6 @@ public with sharing class selectShareTypeController extends TransactionStepContr
         pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         pg.setRedirect(true);
         return pg;
-
     }
 
     public PageReference nextAction() {
