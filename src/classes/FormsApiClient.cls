@@ -181,6 +181,16 @@ public class FormsApiClient {
 
         //call TransactionSerialiser to get JSON
         String jsonPartBody = TransactionSerialiser.transactionToJSON(tx);
+        if (tx.Form_Name__c == 'DS01') {
+            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
+            jsonPartBody = jsonPartBody.remove('"shares" : null,');
+            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
+            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
+            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+        }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');
         jsonPartBody = jsonPartBody.remove('"officers" : null,');

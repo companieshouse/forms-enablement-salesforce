@@ -60,52 +60,85 @@ Ver. Author        Date        Detail
                     </p>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!standardView}">
-                    <div class="govuk-box-highlight">
-                        <h1 class="bold-large">{!pageTitle}</h1>
+                    <apex:outputPanel rendered="{!isDS01}">
+                        <div class="govuk-box-highlight">
+                            <h1 class="bold-large">{!pageTitle}</h1>
+                            <p>
+                                <apex:outputText escape="false" value="{!pageTitle2}" />
+                            </p>
+                        </div>
+                        <h2 class="heading-medium">What happens next</h2>
                         <p>
-                            <apex:outputText escape="false" value="{!pageTitle2}"/>
+                            <apex:outputtext value="{!pageBody}" escape="false" />
                         </p>
-                    </div>
-                    <h2 class="heading-medium">What happens next</h2>
-                    
-                    <p>
-                    <apex:outputtext value="{!pageBody}" escape="false" />
-                    </p>
-                    <div class="form-group">
-                        <p class="heading-medium">Documents</p>
-                        <section class="attachment embedded" id="attachment_1365490">
-                            <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
-                                <p>Download the Document:
-                                    <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
-                                </p>
-                            </div>
-                            <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
-                                <p>No Documents founds.
-                                </p>
-                            </div>
-                        </section>
-                    </div>
-                    <p><apex:outputText escape="false" value="{!pageBody1}"/></p>
-                    
-                    <h2 class="heading-medium">Your next steps</h2>
-                    <p>
-
-                        <apex:outputText escape="false" value="{!pageBody2}"/>
-                        Read the full list of 
-                        <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration" target="_blank">who to tell.
-                        </a>.
-                    </p>
-                    <div class="notice">
-                        <i class="icon icon-important">
-                            <span class="visuallyhidden">Warning</span>
-                        </i>
-                        <strong class="bold-small">
-                           {!warningText}
-                        </strong>
-                    </div>
-                    <h2 class="heading-medium">How to cancel this request</h2>
-                    <p>If you need to cancel your request so that {!companyName} stays on the Register, you can submit a <a href="https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02" target="_blank">withdrawal to strike off.</a></p>
-                    
+                        <div class="form-group">
+                            <p class="heading-medium">Documents</p>
+                            <section class="attachment embedded" id="attachment_1365490">
+                                <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
+                                    <p>Download the Document:
+                                        <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
+                                    </p>
+                                </div>
+                                <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                                    <p>No Documents founds.
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                        <p>
+                            <apex:outputText escape="false" value="{!pageBody1}" />
+                        </p>
+                        <h2 class="heading-medium">Your next steps</h2>
+                        <p>
+                            <apex:outputText escape="false" value="{!pageBody2}" /> Read the full list of
+                            <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration" target="_blank">who to tell.
+                            </a>.
+                        </p>
+                        <div class="notice">
+                            <i class="icon icon-important">
+                                <span class="visuallyhidden">Warning</span>
+                            </i>
+                            <strong class="bold-small">
+                                {!warningText}
+                            </strong>
+                        </div>
+                        <h2 class="heading-medium">How to cancel this request</h2>
+                        <p>If you need to cancel your request so that {!companyName} stays on the register, you can submit a
+                            <a href="https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02" target="_blank">withdrawal to strike off.</a>
+                        </p>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!isDS02}">
+                        <div class="govuk-box-highlight">
+                            <h1 class="bold-large">Submission complete</h1>
+                            <p>
+                                Your submission has been recieved. Your reference number is
+                                <br/>
+                                <strong class="heading-medium">{!submissionId}</strong>
+                            </p>
+                        </div>
+                        <h2 class="heading-medium">What happens now?</h2>
+                        <p>We'll send you an email confirming your request to withdraw the application to close {!companyName}.</p>
+                        <div class="form-group">
+                            <section class="attachment embedded" id="attachment_1365490">
+                                <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
+                                    <p>
+                                        <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">Download a copy of your submitted request {!title}
+                                        </a> (PDF, {!size}B)
+                                    </p>
+                                </div>
+                                <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                                    <p>No Documents founds.
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                        <p>When your application has been processed, we will send you a further email to tell you whether it has been accepted or rejected. If it has been rejected, we will explain the reasons why.</p>
+                        <p>You can track the status of your application by
+                            <a href="www.gov.uk/get-information-about-a-company">viewing the company’s filing history</a>.</p>
+                        <h3 class="heading-medium">How did we do?</h3>
+                        <p>Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                            <a href="v">tell us what you thought of this service</a>.</p>
+                    </apex:outputPanel>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>CC04 -Authorise</label>
+    <label>SH05-6-7-SCapital2</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Authorise and submit</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Statement of capital&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -59,7 +59,7 @@
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -87,14 +87,14 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">CC04</value>
+        <value xsi:type="xsd:string">SH05_6_7</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">SigningPage</value>
+        <value xsi:type="xsd:string">SCapital2</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Previous</value>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

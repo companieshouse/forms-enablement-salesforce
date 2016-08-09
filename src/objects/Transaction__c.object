@@ -541,6 +541,24 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>errorsMessage__c</fullName>
+        <externalId>false</externalId>
+        <label>errorsMessage</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>errors__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>errors</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>finishedAddingShares__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Boolean to set once Shares are finished to bypass the Adding Shares Table and call the next Step</description>
@@ -554,6 +572,14 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>finishedAttachments</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>finishedPart1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>finishedPart1</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

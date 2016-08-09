@@ -91,7 +91,7 @@
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">CompanyObjects</value>
+        <value xsi:type="xsd:string">ObjectsCompany</value>
     </values>
     <values>
         <field>previousButtonText__c</field>

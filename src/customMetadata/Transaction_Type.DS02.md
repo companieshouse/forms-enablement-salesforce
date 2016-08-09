@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>CC04</label>
+    <label>DS02 - Dissolution</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -74,7 +74,8 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Company_Page_Title__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Tell us which company you want to file for&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -82,7 +83,7 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Family__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Dissolution</value>
     </values>
     <values>
         <field>FeeFastTrack__c</field>
@@ -90,30 +91,27 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Fee__c</field>
-        <value xsi:type="xsd:double">10.0</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">Agree</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Required documents&lt;/h1&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;You must also file the following documents:&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt; 
-&lt;li&gt;a copy of the resolution agreeing the change (within 15 days of the resolution being passed)&lt;/li&gt; 
-&lt;li&gt;a copy of the revised articles (within 15 days of the change in your company’s objects being acc</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">epted by Companies House)&lt;/li&gt; 
-&lt;/ul&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
@@ -125,11 +123,15 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&apos;lede&apos;&gt;It normally takes a few minutes to complete this process.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You will need:&lt;/p&gt;
+      &lt;ul class=&quot;list list-bullet&quot;&gt;
+        &lt;li&gt;the company number&lt;/li&gt;
+        &lt;li&gt;the company authentication code&lt;/li&gt;
+      &lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;It normally takes 5 minutes to complete this process.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
@@ -146,17 +148,14 @@ A company registration number is a unique number issued by Companies House whe</
     <values>
         <field>Landing_Page_Text__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You can use this service to notify a change in your company’s objects.&lt;/p
-&lt;p class=&apos;lede&apos;&gt; You will need:
-&lt;ul class=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;the company number&lt;/li&gt;
-&lt;li&gt;the company authentication code&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/p&gt;</value>
+        This service is used to withdraw a company&apos;s application to close.
+      &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Changing your company’s objects&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Cancel your application to close a company
+&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Product_Code__c</field>
@@ -176,15 +175,15 @@ You can use this service to notify a change in your company’s objects.&lt;/p
     </values>
     <values>
         <field>companySearchPageText__c</field>
-        <value xsi:type="xsd:string">Tell us the company for which you wish to file a Statement of Capital</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>customGuidanceView__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isAccountPayment__c</field>
@@ -200,7 +199,7 @@ You can use this service to notify a change in your company’s objects.&lt;/p
     </values>
     <values>
         <field>isMajorityForm__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isPaymentRequired__c</field>

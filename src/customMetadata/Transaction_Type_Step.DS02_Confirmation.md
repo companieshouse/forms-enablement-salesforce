@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH08-attachments</label>
+    <label>DS02 - Confirmation</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Continue</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Add supporting documents</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -71,11 +71,11 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Step_Number__c</field>
@@ -87,11 +87,11 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">SH08</value>
+        <value xsi:type="xsd:string">DS02</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">Attachments</value>
+        <value xsi:type="xsd:string">ConfirmationFramework</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
