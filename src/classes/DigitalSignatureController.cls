@@ -69,20 +69,12 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         pageBodyFailureContact = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
 
 
-        pageTitle = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageTitle = pageTitle.replace('director(s)', 'Director(s)');
-        pageTitle = pageTitle.replace('partner(s)', 'Partner(s)');
-        pageTitle = pageTitle.replace('member(s)', 'Member(s)');
+        pageTitle = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
 
-        pageTitle2 = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageTitle2 = pageTitle.replace('director(s)', 'Director(s)');
-        pageTitle2 = pageTitle.replace('partner(s)', 'Partner(s)');
-        pageTitle2 = pageTitle.replace('member(s)', 'Member(s)');
+        pageTitle2 = pageTitle2.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
 
-        pageTitle3 = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageTitle3 = pageTitle.replace('director(s)', 'Director(s)');
-        pageTitle3 = pageTitle.replace('partner(s)', 'Partner(s)');
-        pageTitle3 = pageTitle.replace('member(s)', 'Member(s)');
+        pageTitle3 = pageTitle3.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+
         pageBody = pageBody.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 
         pageBodySuccess = pageBodySuccess.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
@@ -197,7 +189,6 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
 
 
     public PageReference pollMethods(){
-        
 
         List<Contact> lCont = [Select Id,DateSigned__c,RecipientStatus__c,Email, isPresenter__c  From Contact Where Transaction__c = :submissionMgr.submission.Id];
 
@@ -260,6 +251,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
 
                     pendingPage = true;
                     pollServer = false;
+
                 }
             }
             else
@@ -330,6 +322,10 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
                 pollServer = false;
                 return null;
             }
+        }
+        else{
+            if(!presenterSigning)
+                waittime++;
         }
         return null;
 

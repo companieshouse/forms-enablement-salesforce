@@ -24,10 +24,12 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public String emailErrorVal {get; set;}
     public String behalfSelectionerrorVal {get; set;}
     public Boolean behalfValidation {get; set;}
+    public Boolean emailConfirmError {get; set;}
 
     public String textBox1 {get; set;}
     public String textBox2 {get; set;}
     public String textBox3 {get; set;}
+    public String textBox4 {get; set;}
 
     public String headerBox1 {get; set;}
 
@@ -35,6 +37,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
 
     public String nameAuthorized {get; set;}
     public String emailDirector {get; set;}
+    public String emailConfirmDirector {get; set;}
     public Integer behalfSelection {get; set;}
     public Boolean  nameError {get; set;}
     public Boolean emailError {get; set;}
@@ -55,6 +58,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
         textBox3 = (transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c);
+        textBox4 = (transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
 
         return;
@@ -124,6 +128,59 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' must be valid and contain an @';
             emailErrorVal = 'error';
             emailError = true;
+            nameError = false;
+            behalfError = false;
+            nameErrorVal = '';
+            behalfSelectionerrorVal = '';
+            return null;
+        }
+
+        if (emailConfirmDirector == null) {
+            hasPageErrors = true;
+            currentErrorMessage = 'Please provide the email of the person approving';
+            emailErrorVal = 'error';
+            emailError = false;
+            emailConfirmError = true;
+            nameError = false;
+            behalfError = false;
+            nameErrorVal = '';
+            behalfSelectionerrorVal = '';
+            return null;
+        }
+        if (emailConfirmDirector.contains('@')) {
+            // check for "."
+            if (!emailConfirmDirector.contains('.')) {
+                hasPageErrors = true;
+                currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
+                emailErrorVal = 'error';
+                emailError = false;
+                emailConfirmError = true;
+                nameError = false;
+                behalfError = false;
+                nameErrorVal = '';
+                behalfSelectionerrorVal = '';
+                return null;
+            }
+        } else {
+            hasPageErrors = true;
+            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' must be valid and contain an @';
+            emailErrorVal = 'error';
+            emailError = false;
+            emailConfirmError = true;
+            nameError = false;
+            behalfError = false;
+            nameErrorVal = '';
+            behalfSelectionerrorVal = '';
+            return null;
+        }
+
+        if(emailDirector != emailConfirmDirector)
+        {
+            hasPageErrors = true;
+            currentErrorMessage = 'Email Addresses' + ' ' + emailDirector + ' ' + 'does not match' + ' ' + emailConfirmDirector + ' ' + 'for' + ' ' + currentOfficer.Name;
+            emailErrorVal = 'error';
+            emailError = true;
+            emailConfirmError = true;
             nameError = false;
             behalfError = false;
             nameErrorVal = '';

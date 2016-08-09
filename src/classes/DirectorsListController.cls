@@ -181,6 +181,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 }
             }
             nbOfOfficers = listOfDirectors.size();
+            pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
+            pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
         } else {
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
             //Make the call to the list of directors

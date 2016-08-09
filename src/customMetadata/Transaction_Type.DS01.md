@@ -105,7 +105,7 @@ Tell us which company you want to close
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
 Who to tell about the company or LLP closing&lt;/h1&gt;</value>
     </values>
     <values>
@@ -115,7 +115,7 @@ Who to tell about the company or LLP closing&lt;/h1&gt;</value>
     <values>
         <field>Guidance_Text_3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-A company or LLP must inform all interested parties that it&apos;s going to close within 7 days after you submit the request.&lt;/p&gt;</value>
+The Director(s)/Member(s) must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
@@ -150,7 +150,7 @@ It costs £8 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">quest to close a company or LLP (paid by debit or credit car, PayPal account or Companies House account).
+        <value xsi:type="xsd:string">quest to close a company or LLP (paid by debit or credit card, PayPal account or Companies House account).
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
 You&apos;ll need:

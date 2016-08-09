@@ -238,5 +238,10 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             if (!validatePageState()) return Page.TransactionException;
             return previousStep();
         }
-        // End Action methods.    
+        // End Action methods.   
+    public PageReference redirectDS02() {
+        PageReference pg = new PageReference('/StartFramework?t=DS02');
+        pg.setRedirect(true);
+        return pg;
+    }
 }

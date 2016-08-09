@@ -109,7 +109,7 @@
                     <apex:outputPanel rendered="{!accountSuccess}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    Account informations validated.
+                                    Account Information validated.
                                 </h1>
                         <p>
                             {!accountSuccessMsg}
@@ -153,7 +153,7 @@
                     <apex:outputPanel rendered="{!accountFailure}">
                         <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    Account informations incorrect.
+                                    Account Information incorrect.
                                 </h1>
                         <br/>
                         <p>

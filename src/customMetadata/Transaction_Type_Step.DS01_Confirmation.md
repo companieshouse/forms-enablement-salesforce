@@ -40,7 +40,7 @@ You can track the status of your filing by viewing the company’s filing histor
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">It&apos;s an offence not to tell all required parties</value>
+        <value xsi:type="xsd:string">It&apos;s a criminal offence not to tell all required parties</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>

@@ -44,6 +44,8 @@
                             <span class="form-hint">Email Address </span>
                             <span class="error-message">{!director.validationErrors}</span>
                             <apex:inputText styleClass="form-control" value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                            <br/>
+                            <br/>
                             <label class="form-label" for="emailconfirmation">
                             </label>
                             <span class="form-hint">Confirm email address</span>

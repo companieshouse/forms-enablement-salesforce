@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">The payment has been successful and your Payment reference number is: PAYMENTREF.</value>
+        <value xsi:type="xsd:string">The payment has been successful and your payment reference number is: PAYMENTREF.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>

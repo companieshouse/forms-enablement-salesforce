@@ -119,6 +119,37 @@ public with sharing class AccountsAuthCallbackController {
             // 6. Drop a cookie (user_auth) - value equal to the encrypted value of the User Auth record Id.
             // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
             String userProfileName = userProfileApiResponse.email;
+            Map<String, String> PrivateBeta_Accesslist = new Map<String, String>();
+            PrivateBeta_Accesslist.put('clarejady@hulljady.co.uk', 'Clare Jady');
+            PrivateBeta_Accesslist.put('sophie@taxexpert.co.uk', 'Sophie Dickinson');
+            PrivateBeta_Accesslist.put('catherine@mcmillanaccountants.com', 'Cathy Wolff');
+            PrivateBeta_Accesslist.put('barneyq@cueandco.eu', 'Bernard Cue');
+            PrivateBeta_Accesslist.put('esoussi@jordanstrustcompany.com', 'Evia Soussi');
+            PrivateBeta_Accesslist.put('brenda.bardwell@morrisowen.com', 'Brenda Bardwell');
+            PrivateBeta_Accesslist.put('fiona.sweeting@osborneclarke.com', 'Fiona Sweeting');
+            PrivateBeta_Accesslist.put('karen.vickery@osborneclarke.com', 'Karen Vickery');
+            PrivateBeta_Accesslist.put('ton.shaw@radius.com', 'Tom Shaw');
+            PrivateBeta_Accesslist.put('ann.williams@carillionplc.com', 'Ann Williams');
+            PrivateBeta_Accesslist.put('pevans@liffordhall.co.uk', 'Paul Evans');
+            PrivateBeta_Accesslist.put('marks@luckmans.com', 'Mark Spafford');
+            PrivateBeta_Accesslist.put('claireselman@ormerodrutter.co.uk', 'Claire Selman');
+            PrivateBeta_Accesslist.put('wendy.wilkes@squirepb.com', 'Wendy Wilkes');
+            PrivateBeta_Accesslist.put('lynette.bridgens@squirepb.com', 'Lynette Bridgens');
+            PrivateBeta_Accesslist.put('sandram@amterson.com', 'Sandra Murphy');
+            PrivateBeta_Accesslist.put('stewart.halton@argentsaccountants.co.uk', 'Stewart Halton');
+            PrivateBeta_Accesslist.put('chris.stubbins@mapartners.co.uk', 'Chris Stubbins');
+            PrivateBeta_Accesslist.put('fiona.bradford@mills-reeve.com', 'Fiona Bradford');
+            PrivateBeta_Accesslist.put('rachel.collins@mills-reeve.com', 'Rachel Collins');
+            PrivateBeta_Accesslist.put('julie.marquiss@externalservices.com', 'Julie Marquiss');
+            PrivateBeta_Accesslist.put('sylvain.picory@methodsdigital.co.uk', 'Sylvain Picory');
+            PrivateBeta_Accesslist.put('lbitoy@gmail.com', 'Leo Bitoy');
+            Boolean AccessGranted = PrivateBeta_Accesslist.containsKey(userProfileName);
+            If (AccessGranted == false) {
+                return CallPageRedirect();
+            }
+
+            
+
             System.debug(LoggingLevel.ERROR,'Cookies Saving:' + userProfileName);
             u.getCurrentUser(userProfileName); ///=> useless code as there is no usage of the return... setting the cookies...
             // throw new AccountsAuthCallbackException('presenter info' + userProfileName);
@@ -227,6 +258,12 @@ public with sharing class AccountsAuthCallbackController {
         // 9. Redirect to the first step for the transaction type as held on the company auth record (using encrypted 'c' querystring parameter).
 
         return null;
+    }
+
+    Public PageReference CallPageRedirect() {
+        PageReference unauthorised = new PageReference('/unauthorized');
+        unauthorised.setRedirect(true);
+        return unauthorised;
     }
 
     private void parseQueryString() {

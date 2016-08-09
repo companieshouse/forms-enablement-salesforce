@@ -28,7 +28,7 @@ Ver. Author        Date        Detail
                 <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
             
                 <p>
-                <apex:commandButton styleClass="button button-start" action="{!startAction}" value="Start" />
+                <apex:commandButton styleClass="button button-start" action="{!startAction}" value="Start now" />
                 </p>
              
                 <apex:outputText escape="false" value="{!pageTextAfterButton}"></apex:outputText>

@@ -162,7 +162,7 @@ public class PaymentController extends TransactionStepControllerBase {
         previousClicked = false;
         accountSuccess = false;
         accountFailure = false;
-        accountSuccessMsg = 'Your account payment has been validated, it will be proceed when you submit the '+ submissionMgr.submission.Form_Name__c + '.';
+        accountSuccessMsg = 'Your account payment has been validated, it will be processed when you submit the '+ submissionMgr.submission.Form_Name__c + '.';
         accountFailureMsg = 'Your account payment has not been validated, please use the previous button to correct the account number or authentication number or Start again.';
         paymentReference = '';
         accountAuthCode = '';
@@ -205,9 +205,9 @@ public class PaymentController extends TransactionStepControllerBase {
             ApexPages.currentPage().setRedirect(true);
             return ApexPages.currentPage();
         }
-        if (previousClicked) {
-            return previousAction();
-        }
+        //if (previousClicked) {
+        //    return previousAction();
+        //}
         //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
         return null;
     }
@@ -219,6 +219,13 @@ public class PaymentController extends TransactionStepControllerBase {
     }
     @TestVisible
     private void persistStep() {
+        if (previousClicked) {
+            submissionMgr.submission.Status__c = 'Signed';
+            submissionMgr.submission.hasPaid__c = false;
+            submissionMgr.submission.isPaymentAccount__c = false;
+            submissionMgr.submission.isPaymentPaypal__c = false;
+            submissionMgr.submission.isPaymentCard__c = false;
+        }
         if (hasPaymentSuccess || hasPaid) {
             submissionMgr.submission.Status__c = 'Paid';
             submissionMgr.submission.hasPaid__c = true;
@@ -251,13 +258,13 @@ public class PaymentController extends TransactionStepControllerBase {
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
-        if (!hasPaid() && valuePaymentUI == null ) {
+        if (!hasPaid() && valuePaymentUI == null && accountSuccess == false) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
             errorVal = 'error';
             return null;
         }
-        if (!hasPaid()  && valuePaymentUI == 2) {
+        if (!hasPaid() && valuePaymentUI == 2 && accountSuccess == false) {
             if (accountNumber.length() == 0) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number or select another method of payment';
@@ -334,6 +341,11 @@ public class PaymentController extends TransactionStepControllerBase {
     }
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
+
+        previousClicked = true;
+
+        persistStep();
+        
         return previousStep();
     }
     // End Action methods.
