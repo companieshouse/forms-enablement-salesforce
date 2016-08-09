@@ -109,7 +109,7 @@
                     <apex:outputPanel rendered="{!accountSuccess}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    Account Information validated.
+                                    Payment status
                                 </h1>
                         <p>
                             {!accountSuccessMsg}
@@ -119,10 +119,10 @@
                     <apex:outputPanel rendered="{!!accountSuccess}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    Successfully paid.
+                                    Payment status
                                 </h1>
                         <p>
-                            The payment has been succesful.
+                            Your payment has been successful
                         </p>
                     </div></apex:outputPanel>
                 </apex:outputPanel>
@@ -130,7 +130,7 @@
                     <apex:outputPanel rendered="{!!accountSuccess}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    The payment has been already processed.
+                                    Payment status
                                 </h1>
                         <p>
                             You have already paid for this transaction.
@@ -141,7 +141,7 @@
                 <apex:outputPanel rendered="{!hasPaymentRejected}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    The payment has been rejected.
+                                    Payment status
                                 </h1>
                         <p>
                             Do you want to try again?
@@ -153,7 +153,7 @@
                     <apex:outputPanel rendered="{!accountFailure}">
                         <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    Account Information incorrect.
+                                    Payment status
                                 </h1>
                         <br/>
                         <p>
@@ -169,7 +169,7 @@
                     <apex:outputPanel rendered="{!!accountFailure}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    Payment issuer has encoutered an issue.
+                                    Payment status
                                 </h1>
                         <br/>
                         <p>
@@ -182,7 +182,7 @@
                 <apex:outputPanel rendered="{!hasPaymentPending}">
                     <div role="group" tabindex="-1">
                         <h1 class="heading-xlarge">
-                                    The payment is pending.
+                                    Payment status
                                 </h1>
                         <p>
                             You might have to do further action to validate the payment.
@@ -190,7 +190,7 @@
                     </div>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="Continue to submit" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
                 </div>
                 </apex:outputPanel>
             </apex:form>

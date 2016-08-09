@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Check your details</value>
+        <value xsi:type="xsd:string">Do you still want to close COMPANYNAME?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

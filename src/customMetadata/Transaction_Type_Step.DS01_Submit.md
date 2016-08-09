@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Application is not yet submitted</value>
+        <value xsi:type="xsd:string">Submit your application</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

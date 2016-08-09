@@ -64,6 +64,8 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         pageBody = pageBody.replace('COMPANYNAME', compName);
         pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        pageBody2 += transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+        pageBody2 = pageBody2.replace('COMPANYNAME', compName);
         pageBodySuccess = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
         pageBodyFailure = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
         pageBodyFailureContact = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
@@ -76,6 +78,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         pageTitle3 = pageTitle3.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
 
         pageBody = pageBody.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBody2 = pageBody2.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 
         pageBodySuccess = pageBodySuccess.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBodyFailure = pageBodyFailure.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));

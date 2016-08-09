@@ -19,15 +19,15 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;We have emailed the following director to request their approval to close COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The application is being processed. The page will automatically refresh. Please wait.&lt;br/&gt;&lt;br/&gt;The following director names will appear on the application to close  COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;They will need to approve the request within 2 months. Once they approve the request, we will email you with a link to check and submit your request.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;For companies with multiple director an email will be sent to each of the director requesting their approval. You will rec</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">eive an email once all the director listed have approved the application. From this email you will be able to check and complete the application to close COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director approval requested&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Application Status&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

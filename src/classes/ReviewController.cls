@@ -345,6 +345,7 @@ public class ReviewController extends TransactionStepControllerBase {
         standardPanelView = transactionMgr.currentstep.StandardView__c;
         custompanelView = transactionMgr.currentstep.CustomView__c;
         companyName = submissionMgr.submission.CompanyName__c;
+        headerText1 = headerText1.replace('COMPANYNAME', companyName);
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         presenterEmail = submissionMgr.submission.Presenter__r.PersonEmail;
         presenterName = submissionMgr.submission.PresenterName__c;
