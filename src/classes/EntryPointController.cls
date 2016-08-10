@@ -82,7 +82,7 @@ public with sharing class EntryPointController {
 		pg.setRedirect(true);
 		return pg;
 	}
-	public void cleanTransactions() {
+	public PageReference cleanTransactions() {
 		try {
 			delete[select Name from Account];
 			delete[select Name from Contact];
@@ -96,8 +96,8 @@ public with sharing class EntryPointController {
 			hasPageErrors = true;
 			//return null;
 		}
-		//PageReference pg = new PageReference('/entrypoint');
-		//pg.setRedirect(true);
-		//return pg;
+		PageReference pg = new PageReference('/entrypoint');
+		pg.setRedirect(true);
+		return pg;
 	}
 }

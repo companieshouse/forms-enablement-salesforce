@@ -2,7 +2,7 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
-                <apex:outputPanel rendered="{!hasPageErrors}">
+                <!-- <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                             An error has occurred.
@@ -11,7 +11,7 @@
                             <span class="error-message"> {!currentErrors}</span>
                         </p>
                     </div>
-                </apex:outputPanel>
+                </apex:outputPanel> -->
                 <h1 class="heading-xlarge">
                     Additional documents
                 </h1>
@@ -38,7 +38,7 @@
                             <tbody id='attachmentBody'>
                                 <tr>
                                     <td>Solvency statement</td>
-                                    <td>{!solvencyStatus}</td>
+                                    <td>{!docStatus2}</td>
                                     <td>
                                         <a href='' onclick='addDoc("b")'>Add document</a>
                                         <apex:inputFile onchange="updateSolvency(this.value)" styleclass="dontshowButton" accept="pdf" fileName="SolvencyStatement" id="SolvencyStatement" value="{!solvencyBody}" />
@@ -46,7 +46,7 @@
                                 </tr>
                                 <tr>
                                     <td>Resolution</td>
-                                    <td>{!resolutionStatus}</td>
+                                    <td>{!docStatus1}</td>
                                     <td>
                                         <a href='' onclick='addDoc("a")'>Add document</a>
                                         <apex:inputFile onchange="updateResolution(this.value)" styleclass="dontshowButton" accept="pdf" fileName="Resolution" id="Resolution" value="{!resBody}" />

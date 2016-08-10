@@ -63,7 +63,7 @@
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>

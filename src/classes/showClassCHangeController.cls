@@ -91,6 +91,25 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 	public Id shareID {get; set;}
 
 	public String previousButtonText {get; set;}
+
+	public Datetime sharechangeDate {
+		get;
+		set;
+	}
+	public Integer varDay {
+		get;
+		set;
+	}
+	public Integer varYear {
+		get;
+		set;
+	}
+	public Integer varMonth {
+		get;
+		set;
+	}
+	public String errorVal1 {get; set;}
+	public String errormessage1 {get; set;}
 	public showClassCHangeController() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -138,6 +157,42 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 	}
 
 	public PageReference nextAction() {
+		if (varDay == null || varDay == 0 || varDay > 31) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct day';
+			return null;
+		}
+		if (varMonth == null || varMonth == 0 || varMonth > 12) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct Month';
+			return null;
+		}
+		if (varYear == null || varyear == 0 ) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct Year';
+			return null;
+		}
+		Datetime sharechangeDate = Datetime.newInstance(varYear, varMonth, varDay);
+		sharechangeDate.format('dd MMMMM yyyy');
+		if (sharechangeDate > Date.Today()) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Date must not be in the future';
+			return null;
+		}
+		Date savedDate = sharechangeDate.date();
+		List<shares__c> sharestoSave = new List<Shares__c>();
+		for (Shares__c sharestoAddDatesto : submissionMgr.submission.Shares__r) {
+			if (sharestoAddDatesto.SHARETYPE__c == submissionMgr.submission.Form_Name__c) {
+				sharestoAddDatesto.Date__c = savedDate;
+				sharestoSave.add(sharestoAddDatesto);
+			}
+		}
+		update sharestoSave;
+		// persist and save if validaiton passes
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
 		return nextStep();

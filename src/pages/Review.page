@@ -1,7 +1,7 @@
 <apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -383,40 +383,22 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel-variationNotice" rendered="{!variationNotice}">
-                        <div class="form-group">
-                            <h1 class="heading-xlarge">
-                                {!headerText1}
-                            </h1>
-                            <table class="check-your-answers">
-                                <thead>
-                                    <tr>
-                                        <th colspan="4">{!labelText}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="table-names">{!dateQuestionText}</td>
-                                        <td class="table-names">{!variationText}</td>
-                                    </tr>
-                                    <br/>
-                                    <apex:repeat value="{!variations}" var="sp" id="variations-particulars">
-                                        <tr>
-                                            <td>
-                                                <apex:outputText value="{!sp.Date__c}" id="variations-date" />
-                                            </td>
-                                            <td>
-                                                <apex:outputText value="{!sp.varationField__c}" id="variations-field" />
-                                            </td>
-                                        </tr>
-                                    </apex:repeat>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br/>
+                        <h1 class="heading-xlarge">Review your variation of rights</h1>
+                        <p class="lede text">Please confirm that the information you have provided for {!CompanyName} share capital is correct.</p>
+                        <h2 class="heading-large">Variation of rights</h2>
+                        <apex:repeat value="{!variations}" var="sp" id="variations-particulars">
+                            <p>Date of variation of rights:
+                                <span class="heading-small">{!sp.Date__c}</span>
+                            </p>
+                            <div class="form-group ">
+                                <label class="visually-hidden" for="">Details of variation of rights attached to shares</label>
+                                 <apex:inputTextArea readonly='true' richText="false" rows="8" cols="40" value="{!sp.varationField__c}" id="variationInfoId" />
+                            </div>
+                        </apex:repeat>
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel-attachments" rendered="{!custompanelView}">
                         <apex:outputPanel id="show-attachments" rendered="{!showAttachments}">
-                           <!--  <div class="form-group">
+                            <!--  <div class="form-group">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
@@ -453,7 +435,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                   <apex:repeat value="{!reviewAttachments}" var="sp" id="shareRepeat-attachments">
+                                        <apex:repeat value="{!reviewAttachments}" var="sp" id="shareRepeat-attachments">
                                             <tr>
                                                 <td>
                                                     <apex:outputText value="{!sp.Name}" id="attachments-name" />
@@ -462,7 +444,7 @@
                                                     <apex:outputText value="{!sp.Description}" id="attachments-description" />
                                                 </td>
                                                 <td>
-                                                <apex:commandLink action="{!changeAttachments}" status="status" value="Change"/>
+                                                    <apex:commandLink action="{!changeAttachments}" status="status" value="Change" />
                                                 </td>
                                             </tr>
                                         </apex:repeat>
@@ -695,6 +677,10 @@
                                 {!headerText1}</h1>
                             <p class="lede">{!displayText1}</p>
                             <h2 class="heading-large">{!headerText2}</h2>
+                            <apex:repeat value="{!sh08Family}" rows='1' var="datevar" id="SH08-date">
+                         <p>Date of assignment: <span class="heading-small">{!datevar.Date__c}</span></p>
+                         </apex:repeat>
+
                             <div class="form-group">
                                 <table class="check-your-answers">
                                     <thead>

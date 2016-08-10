@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">I confirm that the information above is correct</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -83,7 +83,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">4.0</value>
+        <value xsi:type="xsd:double">3.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

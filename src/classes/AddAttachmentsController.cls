@@ -15,22 +15,6 @@ Ver. Author        Date        Detail
 note: attachment size limited to 5MB
 */
 public class AddAttachmentsController extends TransactionStepControllerBase {
-    public Boolean hasPageErrors {
-        get;
-        set;
-    }
-    public Boolean showTable {
-        get;
-        set;
-    }
-    public List < Attachment > attachments {
-        get;
-        set;
-    }
-    public List < Attachment > newAttachments {
-        get;
-        set;
-    }
     public String companyName {
         get;
         set;
@@ -60,10 +44,6 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         set;
     }
     public String attachmentName {
-        get;
-        set;
-    }
-    public String currentErrors {
         get;
         set;
     }
@@ -119,11 +99,11 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public String solvencyStatus {
+    public String docStatus2 {
         get;
         set;
     }
-    public String resolutionStatus {
+    public String docStatus1 {
         get;
         set;
     }
@@ -131,23 +111,12 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Blob attBody {
-        get;
-        set;
-    }
+
     public Blob resBody {
         get;
         set;
     }
     public Blob solvencyBody {
-        get;
-        set;
-    }
-    public String attName {
-        get;
-        set;
-    }
-    public String attDescription {
         get;
         set;
     }
@@ -173,17 +142,13 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
         attachmentId = submissionMgr.submission.Id;
-        if (submissionMgr.submission.Attachments.size() > 0) {
-            attachments = submissionMgr.submission.Attachments;
-        }
         checkAttachmentStatus();
         return;
     }
     public PageReference goForward() {
-        //COMMENTED FOR FIELD NOT EXISTING IN OBJECT
-        //if (submissionMgr.submission.finishedAttachments__c == true && submissionMgr.submission.finishedAddingShares__c == true) {
-        //    return nextStep();
-        //}
+        if (submissionMgr.submission.finishedAttachments__c == true && submissionMgr.submission.finishedAddingShares__c == true) {
+            return nextStep();
+        }
         return null;
     }
     public void DeleteAttachments() {
@@ -203,26 +168,45 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
         Integer attSize = submissionMgr.submission.Attachments.size();
         if (attSize > 0) {
             for (Attachment checkedAttachments : submissionMgr.submission.Attachments) {
-                if (attSize == 1 ) {
-                    if (checkedAttachments.Name == 'Resolution') {
-                        resolutionStatus = 'Uploaded';
-                        solvencyStatus = 'Not yet uploaded';
+                if (submissionMgr.submission.Form_Name__c == 'SH06') {
+                    if (attSize == 1 ) {
+                        if (checkedAttachments.Name == 'Resolution') {
+                            docStatus1 = 'Uploaded';
+                            docStatus2 = 'Not yet uploaded';
+                        }
+                        if (checkedAttachments.Name == 'Solvency') {
+                            docStatus2 = 'Uploaded';
+                            docStatus1 = 'Not yet uploaded';
+                        }
+                    } else if (attSize == 2 ) {
+                        if (checkedAttachments.Name == 'Resolution') {
+                            docStatus1 = 'Uploaded';
+                        } else if (checkedAttachments.Name == 'Solvency') {
+                            docStatus2 = 'Uploaded';
+                        }
                     }
-                    if (checkedAttachments.Name == 'Solvency') {
-                        solvencyStatus = 'Uploaded';
-                        resolutionStatus = 'Not yet uploaded';
-                    }
-                } else if (attSize == 2 ) {
-                    if (checkedAttachments.Name == 'Resolution') {
-                        resolutionStatus = 'Uploaded';
-                    } else if (checkedAttachments.Name == 'Solvency') {
-                        solvencyStatus = 'Uploaded';
+                } else if (submissionMgr.submission.Form_Name__c == 'CC04') {
+                    if (attSize == 1 ) {
+                        if (checkedAttachments.Name == 'Resolution agreeing change') {
+                            docStatus1 = 'Uploaded';
+                            docStatus2 = 'Not yet uploaded';
+                        }
+                        if (checkedAttachments.Name == 'Revised Articles') {
+                            docStatus2 = 'Uploaded';
+                            docStatus1 = 'Not yet uploaded';
+                        }
+                    } else if (attSize == 2 ) {
+                        if (checkedAttachments.Name == 'Resolution agreeing change') {
+                            docStatus1 = 'Uploaded';
+                        } else if (checkedAttachments.Name == 'Revised Articles') {
+                            docStatus2 = 'Uploaded';
+                        }
                     }
                 }
             }
         } else {
-            solvencyStatus = 'Not yet uploaded';
-            resolutionStatus = 'Not yet uploaded';
+            docStatus2 = 'Not yet uploaded';
+            docStatus1 = 'Not yet uploaded';
         }
     }
     public void checkDocs(String docsType) {
@@ -276,8 +260,7 @@ public class AddAttachmentsController extends TransactionStepControllerBase {
     }
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
-        //COMMENTED FOR FIELD NOT EXIST in OBJECT
-        //submissionMgr.submission.finishedAttachments__c = true;
+        submissionMgr.submission.finishedAttachments__c = true;
         persistStep();
         return nextStep();
     }

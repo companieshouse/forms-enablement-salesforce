@@ -1,4 +1,4 @@
-<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="selectShareTypeController" action="{!checkstatus}" docType="html-5.0">
+<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="selectShareTypeController" action="{!goForward}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -45,9 +45,9 @@
                                 <label class="block-label" for="radio-4">
                                     <input id="ordinaryc" onclick="grabShareType('Ordinary C');" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
                                 </label>
-                                <label class="block-label" for="radio-5">
+                               <!--  <label class="block-label" for="radio-5">
                                     <input id="preferred" onclick="grabShareType('Preferred');" type="radio" name="radio-group" value="Preferred" /> Preferred
-                                </label>
+                                </label> -->
                                 <label class="block-label" for="radio-6" data-target="other-name">
                                     <input id="other" type="radio" name="radio-group" value="Other" /> Other
                                 </label>

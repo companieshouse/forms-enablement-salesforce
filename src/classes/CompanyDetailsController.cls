@@ -52,6 +52,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
 
     public CompanyDetailsController() {
         super();
+
         if (isPageInitialised) initialiseStep();
 
     }
@@ -63,6 +64,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
         headerText1 = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         companyType = new Map<String, String>();
+
         stepValidator = isPageAlreadyValidStep;
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
@@ -93,12 +95,11 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
         companyType.put('european-public-limited-liability-company-se', 'European public limited liability Company (SE)');
         companyType.put('uk-establishment', 'UK establishment Company');
 
-
         CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
         companyAddress1 = compProf.registered_office_address.address_line_1;
         companyAddress2 = compProf.registered_office_address.address_line_2;
         companyregion = compProf.registered_office_address.region;
-        companypostcode = compProf.registered_office_address.postal_code;
+        companypostcode = compProf.registered_office_address.postal_code ;
         companyCountry = compProf.registered_office_address.country;
         companyLocality = compProf.registered_office_address.locality;
         companyStatus = compProf.company_status.capitalize();

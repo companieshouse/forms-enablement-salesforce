@@ -1,10 +1,55 @@
-<apex:page title="Notice" showHeader="false" sidebar="false" standardStylesheets="false" controller="variationRightsController" docType="html-5.0">
+<apex:page title="Variation of Rights" showHeader="false" sidebar="false" standardStylesheets="false" controller="variationRightsController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-                <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <apex:form>
+                <apex:outputPanel id='masterPanel'>
+                    <apex:outputText value='{!headerText1}' escape='false' />
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!errormessage1}</a>
+                                </li>
+                                <li>
+                                    <a>{!errormessage2}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <fieldset class="form-group {!errorVal1}">
+                        <h2 class="heading-large">Date of variation of rights</h2>
+                        <legend class="visuallyhidden">Date of variation of rights</legend>
+                        <div class="form-date">
+                            <p class="form-hint">For example, 31 01 2016</p>
+                             <span class="error-message" id='shareclass-errors'>
+                                        {!errormessage1}</span>
+                            <div class="form-group form-group-day">
+                                <label for="day">Day</label>
+                                <apex:inputText Styleclass="form-control" id="day" value='{!varDay}'  />
+                            </div>
+                            <div class="form-group form-group-month">
+                                <label for="month">Month</label>
+                                <apex:inputText value='{!varMonth}' Styleclass="form-control" id="month"  />
+                            </div>
+                            <div class="form-group form-group-year">
+                                <label for="year">Year</label>
+
+                                <apex:inputText value='{!varYear}' Styleclass="form-control" id="year" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group {!errorVal2}">
+                        <h2 class="heading-large">Details of variation of rights attached to shares</h2>
+                         <span class="error-message" id='shareclass-errors'>
+                                        {!errormessage2}</span>
+                        <label class="visually-hidden" for="">Details of variation of rights attached to shares</label>
+                         <apex:inputTextArea richText="false" rows="8" cols="40" value="{!variationInfo}" id="variationInfoId" />
+                    </div>
+                </apex:outputPanel>
+                <!--
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -72,7 +117,8 @@
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                -->
+                <apex:commandButton styleClass="button" action="{!addShare}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
             </apex:form>
         </apex:define>

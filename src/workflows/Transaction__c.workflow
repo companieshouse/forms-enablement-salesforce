@@ -41,7 +41,7 @@
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <alerts>
@@ -52,7 +52,7 @@
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHExpired_Transaction</template>
     </alerts>
     <alerts>
@@ -85,8 +85,19 @@
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CH_Signing_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Submission_Email_for_DS02</fullName>
+        <description>Submission Email for DS02</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CHDS02_Submission</template>
     </alerts>
     <alerts>
         <fullName>Transaction_inactive_deleted</fullName>
@@ -183,6 +194,54 @@
             <value>Rejected</value>
         </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Rejected&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>DS01 SubmissionDownloadLink</fullName>
+        <actions>
+            <name>DocumentDownloadLink</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>DS02 SubmissionDownloadLink</fullName>
+        <actions>
+            <name>Submission_Email_for_DS02</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS02</value>
+        </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -327,25 +386,6 @@ Email should contain a URL to start a new journey</description>
         </criteriaItems>
         <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the review page</description>
         <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>SubmissionDownloadLink</fullName>
-        <actions>
-            <name>DocumentDownloadLink</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
-        <criteriaItems>
-            <field>Transaction__c.DownloadLink__c</field>
-            <operation>contains</operation>
-            <value>http</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.Status__c</field>
-            <operation>equals</operation>
-            <value>Submitted</value>
-        </criteriaItems>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>applicationDeleted</fullName>

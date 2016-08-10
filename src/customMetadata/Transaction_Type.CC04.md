@@ -98,36 +98,34 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;If you are filing for a private limited company, you will also require the following documents:&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Required documents&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt;
-&lt;li&gt;Solvency Statement&lt;/li&gt;
-&lt;li&gt;Special resolution authorising the capital reduction&lt;/li&gt;
-&lt;li&gt;Director&apos;s Statement
-&lt;/li&gt;
-&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;You must also file the following documents:&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;ul class=&quot;list list-bullet&quot;&gt; 
+&lt;li&gt;a copy of the resolution agreeing the change (within 15 days of the resolution being passed)&lt;/li&gt; 
+&lt;li&gt;a copy of the revised articles (within 15 days of the change in your company’s objects being acc</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">epted by Companies House)&lt;/li&gt; 
+&lt;/ul&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;These documents must be uploaded as attachments in order to complete the submission.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&apos;lede&apos;&gt;It normally takes a few minutes to complete this process.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
@@ -147,12 +145,18 @@ A company registration number is a unique number issued by Companies House whe</
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can use this service to:&lt;/p&gt;
-CC04</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+You can use this service to notify a change in your company’s objects.&lt;/p
+&lt;p class=&apos;lede&apos;&gt; You will need:
+&lt;ul class=&quot;list list-bullet&quot;&gt;
+&lt;li&gt;the company number&lt;/li&gt;
+&lt;li&gt;the company authentication code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">CC04</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Changing your company’s objects&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Product_Code__c</field>
@@ -176,11 +180,11 @@ CC04</value>
     </values>
     <values>
         <field>customGuidanceView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>hasGuidancePage__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isAccountPayment__c</field>

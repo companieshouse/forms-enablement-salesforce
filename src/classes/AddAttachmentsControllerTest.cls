@@ -18,40 +18,111 @@ Ver. Author        Date        Detail
 @IsTest
 public class AddAttachmentsControllerTest {
 
-    //public static final Integer NUMOFATTACHMENTSALLOWED = 5;
 
-    //@IsTest
-    //private static void testAddingAttachments() {
+    @isTest static void test_method_one() {
+        // go forward
+        CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
+
+        Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
+
+        Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
+        Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+
+        Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+
+        // needs mock web callout information here for initialize step test
+        insert testPresenter;
+
+        insert testCompany;
+
+        Transaction__c transac = testData.tx;
+
+        transac.Company__c = testCompany.Id;
+        transac.Valid_Step_Ids__c = testStep1.Id;
+        transac.CompanyNumber__c = '05448736';
+        transac.finishedAttachments__c = true;
+        transac.finishedAddingShares__c = true;
+
+        insert transac;
+
+        PageReference attachment3TestPage = Page.Attachments;
+        attachment3TestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        Test.setCurrentPage(attachment3TestPage);
+
+        AddAttachmentsController test3controller = new AddAttachmentsController();
+        test3controller.checkAttachmentStatus();
+
+        test3controller.goForward();
+        test3controller.nextAction();
+        test3controller.previousAction();
+    }
+    @isTest static void test_method_two() {
+
+        CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
+
+        Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
+
+        Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
+        Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+
+        Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+
+        // needs mock web callout information here for initialize step test
+        insert testPresenter;
+
+        insert testCompany;
+
+        Transaction__c transac = testData.tx;
+
+        transac.Company__c = testCompany.Id;
+        transac.Valid_Step_Ids__c = testStep1.Id;
+        transac.CompanyNumber__c = '05448736';
+        transac.finishedAttachments__c = false;
+
+        insert transac;
+        Blob testpdfBlob;
+        testpdfBlob = Blob.valueOf('This is a test');
+        //Attachment testAttachment = new Attachment();
+        //testAttachment.ParentId = transac.Id;
+        //testAttachment.Description = 'testdescription';
+        //testAttachment.Name = 'Resolution';
+        //testAttachment.Body = testpdfBlob;
+
+        //try {insert testAttachment;}
+        //catch (DmlException e) {System.debug('dml exception here ' + e);} catch (Exception e) {System.debug('regular exception e' + e);}
+
+        Blob test2pdfBlob;
+        test2pdfBlob = Blob.valueOf('This is a test');
+        //Attachment testAttachment2 = new Attachment();
+        //testAttachment.ParentId = transac.Id;
+        //testAttachment.Description = 'testdescription';
+        //testAttachment.Name = 'Solvency';
+        //testAttachment.Body = test2pdfBlob;
+
+        //try {insert testAttachment2;}
+        //catch (DmlException e) {System.debug('dml exception here ' + e);} catch (Exception e) {System.debug('regular exception e' + e);}
 
 
-    //    Transaction__C trans = new Transaction__c(Transaction_Type__c = 'Unit Test Transaction');
-    //    insert trans;
-    //    Test.startTest();
-    //    AddAttachmentsController addingattachmentcontroller = new AddAttachmentsController();
-    //    addingattachmentcontroller.attachmentId = trans.id;
+        PageReference attachment2TestPage = Page.Attachments;
+        attachment2TestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        Test.setCurrentPage(attachment2TestPage);
 
-    //    //System.assertEquals(0, addingattachmentcontroller.attachments.size());
 
-    //    //System.assertEquals(1, addingattachmentcontroller.newAttachments.size());
 
-    //    //Test.startTest();
-    //    //addingattachmentcontroller.addMore();
-    //    //Test.stopTest();
+        AddAttachmentsController test2controller = new AddAttachmentsController();
+        test2controller.solvencyBody = testpdfBlob;
+        test2controller.resBody = test2pdfBlob;
+        test2controller.goForward();
 
-    //    //System.assertEquals(1 + NUMOFATTACHMENTSALLOWED, addingattachmentcontroller.newAttachments.size());
+        test2controller.uploadResolution();
+        test2controller.uploadSolvency();
+        test2controller.checkDocs('Solvency');
+        test2controller.checkDocs('Resolution');
+        test2controller.checkAttachmentStatus();
+        test2controller.DeleteAttachments();
+        test2controller.nextAction();
 
-    //    List < Attachment > newAtts = addingattachmentcontroller.newAttachments;
-    //    newAtts[0].Name = 'Unit Test 1';
-    //    newAtts[0].Description = 'Unit Test 1';
-    //    newAtts[0].Body = Blob.valueOf('Unit Test 1');
+        test2controller.previousAction();
+    }
 
-    //    newAtts[2].Name = 'Unit Test 2';
-    //    newAtts[2].Description = 'Unit Test 2';
-    //    newAtts[2].Body = Blob.valueOf('Unit Test 2');
-
-    //    addingattachmentcontroller.save();
-    //            Test.stopTest();
-
-    //    System.assertEquals(2, addingattachmentcontroller.attachments.size());
-    //}
 }

@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: Confirmation
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-02-04  Initial development.
 */
@@ -93,10 +93,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         get;
         set;
     }
-     public Boolean customView {
+    public Boolean customView {
         get;
         set;
     }
+    public Boolean isDS01 {get; set;}
+    public Boolean isDS02 {get; set;}
 
     public String pageTitle {get; set;}
     public String pageTitle2 {get; set;}
@@ -107,43 +109,48 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     public String warningText {get; set;}
     // Constructors.
     public ConfirmationFrameworkController() {
-            super();
-            if (isPageInitialised) initialiseStep();
-        }
-        // End Constructors.
-        // Instance methods.
+        super();
+        if (isPageInitialised) initialiseStep();
+    }
+    // End Constructors.
+    // Instance methods.
     private void initialiseStep() {
         try {
             standardView = transactionMgr.currentStep.StandardView__c;
             customView = transactionMgr.currentStep.CustomView__c;
-            if(standardView)
-            {
+            if (standardView) {
                 if (submissionMgr.submission.SubmissionId__c == null) {
-                    // we need to submit the transaction to chips..... or change the status 
+                    // we need to submit the transaction to chips..... or change the status
                     // we need to change the submissionID__c to be our internal ID: SF ConfirmationID
                     // the SubmissionID__c will generated from CHIPS and passed back to us eventually
-                    
+
                     submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
                 }
                 submissionId = submissionMgr.submission.SubmissionId__c;
                 companyName = submissionMgr.submission.CompanyName__c;
                 companyNameText = transactionMgr.currentStep.CompanyNameText__c;
-                pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' :transactionMgr.currentStep.Header_Text_1__c;
-                pageTitle2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' :transactionMgr.currentStep.Header_Text_2__c;
-                pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' :transactionMgr.currentStep.Display_Text_1__c;
-                pageBody1 = transactionMgr.currentStep.Display_Text_2__c == null ? '' :transactionMgr.currentStep.Display_Text_2__c;
-                pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' :transactionMgr.currentStep.Display_Text_3__c;
-                pageBody2 += transactionMgr.currentStep.Display_Text_4__c == null ? '' :transactionMgr.currentStep.Display_Text_4__c;
-                warningText = transactionMgr.currentStep.Display_Text_6__c == null ? '' :transactionMgr.currentStep.Display_Text_6__c;
-                
-                if (pageBody1.contains('COMPNAME'))
-                {
+                pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
+                pageTitle2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c;
+                pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+                pageBody1 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+                pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+                pageBody2 += transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
+                warningText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
+                if (submissionMgr.submission.Transaction_Type__c == 'DS01') {
+                    isDS01 = true;
+                    isDS02 = false;
+                } else  if (submissionMgr.submission.Transaction_Type__c == 'DS02') {
+                    isDS02 = true;
+                    isDS01 = false;
+
+                }
+                if (pageBody1.contains('COMPNAME')) {
                     pageBody1 = pageBody1.replace('COMPNAME', companyName);
                 }
 
                 pageTitle2 = pageTitle2.replace('REFNUMB',  submissionMgr.submission.SubmissionId__c);
-                
+
                 if (submissionMgr.submission.attachments != null) {
                     if (submissionMgr.submission.attachments.size() > 0) {
                         showDoc = true;
@@ -167,14 +174,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                     attachmentId = null;
                 }
                 todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' + system.today().year();
-            }
-            else if(customView)
-            {
+            } else if (customView) {
                 if (submissionMgr.submission.SubmissionId__c == null) {
-                    // we need to submit the transaction to chips..... or change the status 
+                    // we need to submit the transaction to chips..... or change the status
                     // we need to change the submissionID__c to be our internal ID: SF ConfirmationID
                     // the SubmissionID__c will generated from CHIPS and passed back to us eventually
-                    
+
                     submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
                 }
@@ -193,11 +198,10 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 standardView = transactionMgr.currentStep.StandardView__c;
                 customView = transactionMgr.currentStep.CustomView__c;
 
-                if (confirmationContent3.contains('COMPANYNAME'))
-                {
+                if (confirmationContent3.contains('COMPANYNAME')) {
                     confirmationContent3 = confirmationContent3.replace('COMPANYNAME', companyName);
                 }
-                
+
                 if (submissionMgr.submission.attachments != null) {
                     if (submissionMgr.submission.attachments.size() > 0) {
                         showDoc = true;
@@ -227,21 +231,22 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         }
         return;
     }
-    public void saveTransaction() {
-        persistStep();
-    }
-    private void persistStep() {
-            submissionMgr.persist();
-        }
-        // End Instance methods.  
-    public PageReference previousAction() {
-            if (!validatePageState()) return Page.TransactionException;
-            return previousStep();
-        }
-        // End Action methods.   
     public PageReference redirectDS02() {
         PageReference pg = new PageReference('/StartFramework?t=DS02');
         pg.setRedirect(true);
         return pg;
     }
+
+    public void saveTransaction() {
+        persistStep();
+    }
+    private void persistStep() {
+        submissionMgr.persist();
+    }
+    // End Instance methods.
+    public PageReference previousAction() {
+        if (!validatePageState()) return Page.TransactionException;
+        return previousStep();
+    }
+    // End Action methods.
 }

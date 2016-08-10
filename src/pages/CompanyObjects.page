@@ -1,0 +1,94 @@
+<!-- 
+Name: ObjectsCompany.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+CompanyObjects - CC04
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author         Date        Detail
+1.0  Leo Bitoy  2016-08-05  Initial development.
+-->
+<apex:page title="Change Company Objects" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyObjectsController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form>
+                <h1 class="heading-xlarge">Company's objects</h1>
+                <div class="form-group">
+                    <fieldset>
+                        <h2 class="heading-medium">What changes are you making to the company objects?</h2>
+                        <label class="block-label" for="addobjects">
+                            <input id="addobjects" name="addobjects" type="checkbox" value="addobjects" /> I'm adding to the objects
+                        </label>
+                        <label class="block-label" for="removeobjects">
+                            <input id="removeobjects" name="removeobjects" type="checkbox" value="removeobjects" /> I'm removing some of the objects
+                        </label>
+                        <label class="block-label" for="alteringobjects">
+                            <input id="alteringobjects" name="alteringobjects" type="checkbox" value="alteringobjects" /> I'm altering some of the objects
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <h2 class="heading-medium">Confirmation</h2>
+                    <p>You must agree to this statement to proceed.</p>
+                    <fieldset>
+                        <legend class="visuallyhidden"></legend>
+                        <label class="block-label text" for="confirmation">
+                            <input id="confirmation" name="confirmation" type="checkbox" value="confirmation" /> I confirm that the information above is correct
+                        </label>
+                    </fieldset>
+                </div>
+                <div class='form-group'> <!-- onclick='getValues()' -->
+                    <apex:commandButton  status="status" styleClass="button" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
+                </div>
+                <script> 
+                function getValues() {
+                    var values = document.getElementsByTagName("input");
+
+                    for (var i = 0; i < values.length; i++) {
+                        if (values[i].id == 'confirmation') {
+                            console.log('confirmation found');
+                            if (values[i].checked = true) {
+                                 console.log('confirmation found and checke = ' + value[i].checked);
+
+                                if (values[i].id == "addobjects") {
+                                    if (values[i].checked = true) {
+                                     console.log('addobjects is checked');
+
+                                        saveAddValue(true);
+                                    }
+                                }
+                                if (values[i].id == "removeobjects") {
+                                    if (values[i].checked = true) {
+                                 console.log('removeobjects is checked');
+
+                                        saveRemoveValue(true);
+                                    }
+                                }
+                                if (values[i].id == "alteringobjects") {
+                                    if (values[i].checked = true) {
+                                 console.log('altering is checked');
+
+                                        saveAlterValue(true);
+                                    }
+                                }
+                                if (values[i].id == "aggregateidentifier") {
+                                    if (values[i].checked = true) {
+                                        saveConfirmValue(true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
