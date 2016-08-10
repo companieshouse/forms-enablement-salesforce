@@ -45,6 +45,7 @@
     </types>
     <types>
         <members>unfiled$public/CHDS01_Submission</members>
+        <members>unfiled$public/CHDS02_Submission</members>
         <members>unfiled$public/CHExpired_Transaction</members>
         <members>unfiled$public/CHExpiryReminder</members>
         <members>unfiled$public/CHReviewStatus</members>

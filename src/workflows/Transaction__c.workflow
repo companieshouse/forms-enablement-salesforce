@@ -388,6 +388,25 @@ Email should contain a URL to start a new journey</description>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
+        <fullName>SubmissionDownloadLink</fullName>
+        <actions>
+            <name>DocumentDownloadLink</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>applicationDeleted</fullName>
         <actions>
             <name>Transaction_inactive_deleted</name>

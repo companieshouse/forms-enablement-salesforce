@@ -1,7 +1,7 @@
 <apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -392,7 +392,7 @@
                             </p>
                             <div class="form-group ">
                                 <label class="visually-hidden" for="">Details of variation of rights attached to shares</label>
-                                 <apex:inputTextArea readonly='true' richText="false" rows="8" cols="40" value="{!sp.varationField__c}" id="variationInfoId" />
+                                 <apex:inputTextArea readonly="true" richText="false" rows="8" cols="40" value="{!sp.varationField__c}" id="variationInfoId" />
                             </div>
                         </apex:repeat>
                     </apex:outputPanel>
@@ -677,7 +677,7 @@
                                 {!headerText1}</h1>
                             <p class="lede">{!displayText1}</p>
                             <h2 class="heading-large">{!headerText2}</h2>
-                            <apex:repeat value="{!sh08Family}" rows='1' var="datevar" id="SH08-date">
+                            <apex:repeat value="{!sh08Family}" rows="1" var="datevar" id="SH08-date">
                          <p>Date of assignment: <span class="heading-small">{!datevar.Date__c}</span></p>
                          </apex:repeat>
 
