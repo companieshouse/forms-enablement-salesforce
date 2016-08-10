@@ -30,11 +30,15 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 		get;
 		set;
 	}
+	public String companyName {get; set;}
 	public withdrawController() {
 		super();
 		if (isPageInitialised) initialiseStep();
 	}
-	private void initialiseStep() {}
+	private void initialiseStep() {
+		companyName = submissionMgr.submission.CompanyName__c;
+
+	}
 	public void saveTransaction() {
 		persistStep();
 	}
