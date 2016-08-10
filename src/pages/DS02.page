@@ -133,8 +133,7 @@
             <header>
                 <div class="primary_header">
                     <p>
-                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        <strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
+                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
                     </p>
                 </div>
                 <div id="test" class="PDFBody">
@@ -165,7 +164,7 @@
                 <br />
                 <p style="text-align:center; font-weight: 300; font-size: 20px;">Notice of withdrawal of application</p>
                 <br />
-                <p>The directors hereby withdraw the appliction in which it was requested that this {!IF(Transaction__c.isLLP__c, 'LLP', 'company')} be struck off the Register</p>
+                <p>The directors hereby withdraw the application in which it was requested that this {!IF(Transaction__c.isLLP__c, 'LLP', 'company')} be struck off the Register</p>
                 <hr/>
             </div>
             <div>

@@ -35,11 +35,7 @@
                 <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" rendered="{!NOT(isLastPage)}" />
                 <br/>
                 <br/>
-                <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!$Label.UI_Text_Not_Your_Company}" id="thePreviousButton" />
-                <script>
-
-                
-                </script>
+                <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
             </apex:form>
         </apex:define>
     </apex:composition>
