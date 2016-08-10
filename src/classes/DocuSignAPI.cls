@@ -1166,6 +1166,9 @@ public class DocuSignAPI {
             DocuSignAPI.RequestRecipientTokenResponse_element response_x;
             Map<String, DocuSignAPI.RequestRecipientTokenResponse_element> response_map_x = new Map<String, DocuSignAPI.RequestRecipientTokenResponse_element>();
             response_map_x.put('response_x', response_x);
+            this.timeout_x = 120000;
+            System.debug('REQUESTSENDERTOKEN: ' + request_x );
+            System.debug('THISWEBSERVICE: ' + this );
             WebServiceCallout.invoke(
               this,
               request_x,
@@ -1179,6 +1182,7 @@ public class DocuSignAPI {
               'DocuSignAPI.RequestRecipientTokenResponse_element'}
             );
             response_x = response_map_x.get('response_x');
+            System.debug('RESPONSESENDERTOKEN: ' + response_x );
             return response_x.RequestRecipientTokenResult;
         }
         public DocuSignAPI.EnvelopeStatus CreateAndSendEnvelope(DocuSignAPI.Envelope Envelope) {
@@ -1187,6 +1191,9 @@ public class DocuSignAPI {
             DocuSignAPI.CreateAndSendEnvelopeResponse_element response_x;
             Map<String, DocuSignAPI.CreateAndSendEnvelopeResponse_element> response_map_x = new Map<String, DocuSignAPI.CreateAndSendEnvelopeResponse_element>();
             response_map_x.put('response_x', response_x);
+            this.timeout_x = 120000;
+            System.debug('REQUESTSENDERTOKEN: ' + request_x );
+            System.debug('THISWEBSERVICE: ' + this );
             WebServiceCallout.invoke(
               this,
               request_x,
@@ -1200,6 +1207,7 @@ public class DocuSignAPI {
               'DocuSignAPI.CreateAndSendEnvelopeResponse_element'}
             );
             response_x = response_map_x.get('response_x');
+            System.debug('RESPONSESENDERTOKEN: ' + response_x );
             return response_x.CreateAndSendEnvelopeResult;
         }
         public DocuSignAPI.EnvelopeStatus CreateEnvelope(DocuSignAPI.Envelope Envelope) {

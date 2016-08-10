@@ -48,7 +48,7 @@
     <values>
         <field>Header_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Confirm company details&lt;/h1&gt;</value>
+Confirm details&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
