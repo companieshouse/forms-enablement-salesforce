@@ -20,7 +20,7 @@
                             Cancelling your application
                         </h1>
                         <h3 class="heading-medium">Confirm you understand</h3>
-                        <p>I confirm that a director wants to cancel the appliation to close {!companyName}.</p>
+                        <p>I confirm that a director wants to cancel the application to close {!companyName}.</p>
                         <div class="form-group {errorVal}">
                             <fieldset>
                                 <legend class="visuallyhidden">Confirm you understand</legend>
