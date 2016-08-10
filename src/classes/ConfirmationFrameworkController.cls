@@ -231,6 +231,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         }
         return;
     }
+    public PageReference redirectDS02() {
+        PageReference pg = new PageReference('/StartFramework?t=DS02');
+        pg.setRedirect(true);
+        return pg;
+    }
+
     public void saveTransaction() {
         persistStep();
     }
