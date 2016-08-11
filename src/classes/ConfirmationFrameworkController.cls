@@ -134,6 +134,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 pageTitle2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c;
                 pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
                 pageBody1 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+                pageBody1 += transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
                 pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
                 pageBody2 += transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
                 warningText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
@@ -145,9 +146,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                     isDS01 = false;
 
                 }
-                if (pageBody1.contains('COMPNAME')) {
-                    pageBody1 = pageBody1.replace('COMPNAME', companyName);
-                }
+                
 
                 pageTitle2 = pageTitle2.replace('REFNUMB',  submissionMgr.submission.SubmissionId__c);
 

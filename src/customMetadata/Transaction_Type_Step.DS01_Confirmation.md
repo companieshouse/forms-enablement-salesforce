@@ -19,12 +19,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">We will send you an email to confirm that your submission has been received and it will contain details of your request including your reference number. You should keep this email for your records.</value>
+        <value xsi:type="xsd:string">You’ll get an email from Companies House to let you know if you’ve filled in the form correctly. If you have, your request for the company to be struck off will be published as a notice in your local &lt;a href=&quot;https://www.thegazette.co.uk/&quot; &gt;Gazette.&lt;/a&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">COMPNAME will be removed from the Register after &lt;b&gt;2 months&lt;/b&gt;.&lt;br/&gt;&lt;br/&gt;
-You can track the status of your filing by viewing the company’s filing history on: &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;Companies House Service&lt;/a&gt;.</value>
+        <value xsi:type="xsd:string">If nobody objects, the company will be struck off the register once the 2 months mentioned in the notice has passed.</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -36,7 +35,7 @@ You can track the status of your filing by viewing the company’s filing histor
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;br/&gt;&lt;br/&gt;A second notice will be published in the Gazette - this will mean the company won’t legally exist anymore (it will have been ‘dissolved’)</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>

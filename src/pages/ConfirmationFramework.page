@@ -72,7 +72,8 @@ Ver. Author        Date        Detail
                     <p>
                     <apex:outputtext value="{!pageBody}" escape="false" />
                     </p>
-                    <div class="form-group">
+                    
+                    <p><apex:outputText escape="false" value="{!pageBody1}"/></p>
                         <p class="heading-medium">Documents</p>
                         <section class="attachment embedded" id="attachment_1365490">
                             <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
@@ -85,9 +86,6 @@ Ver. Author        Date        Detail
                                 </p>
                             </div>
                         </section>
-                    </div>
-                    <p><apex:outputText escape="false" value="{!pageBody1}"/></p>
-                    
                     <h2 class="heading-medium">Your next steps</h2>
                     <p>
 
