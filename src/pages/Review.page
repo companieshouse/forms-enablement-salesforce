@@ -759,6 +759,9 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" /> 
+                    <br/>
+                    <br/>
+                    <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous}" />
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

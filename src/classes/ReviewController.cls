@@ -352,7 +352,14 @@ public class ReviewController extends TransactionStepControllerBase {
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
         continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
         previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
-        companyDirectors = submissionMgr.submission.Officers__r;
+        companyDirectors = new List<Officer__c>();
+        for(Officer__c off :submissionMgr.submission.Officers__r)
+        {
+            if(off.isSignatory__c)
+            {
+                companyDirectors.add(off);
+            }
+        }
         shareCurrencyMap = new map < String, Shares__c > ();
         viewmap = new Map < Integer, List < Shares__c >> ();
         matchedShares = new List < Shares__c > ();
@@ -608,6 +615,29 @@ public class ReviewController extends TransactionStepControllerBase {
         persistStep();
 
         return nextStep();
+    }
+
+    public PageReference resetTransaction(){
+        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+
+            if(submissionMgr.submission.Id != null)
+            {   
+                //update the transaction first
+                submissionMgr.submission.Status__c = 'deleteContact';
+                //Save the transaction type
+                String transactionType = submissionMgr.submission.Transaction_Type__c;
+                Id presenterID = submissionMgr.submission.Presenter__c;
+                String presenterEmail = submissionMgr.submission.ContactEmail__c;
+                Account companyId = submissionMgr.submission.Company__r;
+                update submissionMgr.submission;
+                delete submissionMgr.submission;
+                TransactionManager tr = new TransactionManager(transactionType);
+                Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, tr.td);
+                return tr == null ? null : tr.firstStep(submissionId);
+
+            }
+
+            return null;
     }
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;

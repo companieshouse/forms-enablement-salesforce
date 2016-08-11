@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">The account informations has been validated, and your account reference number is: PAYMENTREF.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>

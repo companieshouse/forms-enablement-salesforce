@@ -23,8 +23,6 @@ public with sharing class SubmissionController extends TransactionStepController
 
     public String size {get; private set;}
 
-    public String todayThreeMonths {get; set;}
-
     public Id attachmentId {get; private set;}
 
     public String submissionId {get; private set;}
@@ -34,9 +32,9 @@ public with sharing class SubmissionController extends TransactionStepController
     public String displayHeader {get; set;}
     public String displayText1 {get; set;}
     public String displayText2 {get; set;}
-    public String displayText3 {get; set;}
     public String subDate {get; set;}
     public String subTime {get; set;}
+
 
     // Constructors.
     public SubmissionController() {
@@ -61,18 +59,16 @@ public with sharing class SubmissionController extends TransactionStepController
             submissionId = submissionMgr.submission.SubmissionId__c;
             companyName = submissionMgr.submission.CompanyName__c;
             displayHeader = transactionMgr.currentStep.Header_Text_1__c;
-            displayText1 = transactionMgr.currentStep.Display_Text_1__c;
-            displayText1 = displayText1.replace('PAYMENTREF', submissionMgr.submission.paymentReference__c);
-            displayText2 = transactionMgr.currentStep.Display_Text_2__c;
-            displayText3 = transactionMgr.currentStep.Display_Text_3__c;
-
-            if (displayText3.contains('COMPANYNAME')) {
-                displayText3 = displayText3.replace('COMPANYNAME', companyName);
+            if(submissionMgr.submission.isPaymentAccount__c)
+            {
+                displayText1 = transactionMgr.currentStep.Display_Text_3__c;
+                displayText1 = displayText1.replace('PAYMENTREF', submissionMgr.submission.paymentReference__c);
             }
-
-
-            todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' +  system.today().year();
-
+            else{
+                displayText1 = transactionMgr.currentStep.Display_Text_1__c;
+                displayText1 = displayText1.replace('PAYMENTREF', submissionMgr.submission.paymentReference__c);
+            }
+            displayText2 = transactionMgr.currentStep.Display_Text_2__c;
 
         } catch (Exception e) { return; }
 
@@ -97,6 +93,15 @@ public with sharing class SubmissionController extends TransactionStepController
         system.debug('Before save tx: ' + submissionMgr.submission);
 
         persistStep();
+
+        if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
+        {
+            PageReference pg = new PageReference('/IntegrationError');
+
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
         // if(!validatePageState() || submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
         //   return Page.TransactionException;
 

@@ -103,24 +103,59 @@ public with sharing class CompanyController {
 
             return false;
         }
-        if (companyNumber.length() == 7) {
-            companyNumber = '0' + companyNumber;
-        }
+        //if (companyNumber.length() == 7) {
+        //    companyNumber = '0' + companyNumber;
+        //}
 
         if (companyNumber.length() > 8) {
             currentErrorMessage = 'Please enter only 8 alphanumeric characters';
-
-            return false;
-        } else if (companyNumber.length() < 8) {
-            currentErrorMessage = 'Please enter the 8 alphanumeric characters';
-            return false;
         }
 
-        if (!companyNumber.right(6).isNumeric()) {
-            currentErrorMessage = 'The last 6 characters must be numeric';
+        String prefix = '';
 
-            return false;
+        //Extract the prefix
+        if(companyNumber.length() > 2)
+            if(companyNumber.substring(0,2).isAlpha())
+            {
+                prefix = companyNumber.substring(0,2);
+            }
+        
+        Integer size = (String.isBlank(prefix) ? companyNumber.length() : companyNumber.substring(2).length());
+        String postfix = (String.isBlank(prefix) ? companyNumber : companyNumber.substringAfter(prefix));
+
+        while(size < (String.isBlank(prefix) ? 8 : 6 ))
+        {
+            postfix = '0' + postfix;
+            size++;
         }
+
+        prefix = prefix.toUpperCase();
+        companyNumber = prefix + postfix;
+
+        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+        if (compProf.company_name == null) {
+            currentErrorMessage = 'Company number does not exist';
+            hasPageErrors = true;
+            currentError = 'error';
+
+            //CSBEGINMOD: Carl 10/08/2016 : we were returning null instead of Boolean
+            return false;
+            //CSENDMOD: Carl 10/08/2016 : End mod
+        }
+
+        //    return false;
+        //} else if (companyNumber.length() < 8) {
+        //    currentErrorMessage = 'Please enter the 8 alphanumeric characters';
+        //    return false;
+        //}
+
+        //if (!companyNumber.right(6).isNumeric()) {
+        //    currentErrorMessage = 'The last 6 characters must be numeric';
+
+        //    return false;
+        //}
+
+        //if()
 
         // todo perform a search on the company API to see if the company is valid and if so return false
         // and add an error to display.
@@ -143,13 +178,7 @@ public with sharing class CompanyController {
             return null;
         }
 
-        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
-        if (compProf.company_name == null) {
-            currentErrorMessage = 'Company number does not exist';
-            hasPageErrors = true;
-            currentError = 'error';
-            return null;
-        }
+        
 
         trackuser = new TrackUserClass();
         // todo - the code below forces reauthentication.

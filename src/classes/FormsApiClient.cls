@@ -157,7 +157,7 @@ public class FormsApiClient {
         }
 
         // Packagemetada part
-        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage('packageID', txNumber) + '\n';
+        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage(txList[0].SubmissionId__c, txNumber) + '\n';
 
         // Finish with one last boundary
         requestBody += '\n' + '--' + BOUNDARY + '--' + '\n';
@@ -175,7 +175,7 @@ public class FormsApiClient {
     }
 
     public string getJsonPackage(String packageId, Integer count) {
-        return '{ "id": "' + packageId + '","count": ' + count + ' }';
+        return '{ "packageIdentifier": "' + packageId + '","count": ' + count + ' }';
     }
 
 
@@ -223,6 +223,25 @@ public class FormsApiClient {
             jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
             jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
             jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+        }
+        if(tx.Form_Name__c == 'DS02')
+        {//\n
+            jsonPartBody = jsonPartBody.remove('"payment" : {');
+            jsonPartBody = jsonPartBody.remove('"referenceNumber" : null,');
+            jsonPartBody = jsonPartBody.remove('"paymentMethod" : null,');
+            jsonPartBody = jsonPartBody.remove('"accountNumber" : null\n');
+            jsonPartBody = jsonPartBody.remove('              },');
+            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
+            jsonPartBody = jsonPartBody.remove('"shares" : null,');
+            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
+            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
+            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+            jsonPartBody = jsonPartBody.remove('"officers" : {');
+            jsonPartBody = jsonPartBody.remove('"officer" : [ ]\n');
+            jsonPartBody = jsonPartBody.remove('      },');
         }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');

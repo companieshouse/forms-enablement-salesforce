@@ -20,9 +20,7 @@ public with sharing class UpdateCompanyDirectorsController extends TransactionSt
     public String title {get; set;}
     public String body {get; set;}
     public String link {get; set;}
-    public Boolean stepValidator {get; set;}
-    public Boolean sigNeeded {get; set;}
-    public Boolean signingFinished {get; set;}
+    
     public Boolean isLLPf {get; set;}
 
     // Constructors.
@@ -35,10 +33,6 @@ public with sharing class UpdateCompanyDirectorsController extends TransactionSt
 
     // Instance methods.
     private void initialiseStep() {
-        stepValidator = isPageAlreadyValidStep;
-        sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
-        signingFinished = submissionMgr.submission.isSigningFinished__c;
-
         title = 'Update company OFFICERTERM';
         body = 'You must update details of company OFFICERTERM before you can proceed with your request to close the company.<br/><br/>Once you\'ve updated these details, you\'ll need to return to this service to complete your request.';
         link = 'Update company OFFICERTERM now';

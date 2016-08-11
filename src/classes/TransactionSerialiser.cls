@@ -798,7 +798,7 @@ public class TransactionSerialiser {
 
 			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
-			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c);
+			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c,getFormatedDate(system.today()));
 			List<Contact> lOff = [SELECT Name, LastName, Title, Middlenames__c, FirstName, DateSigned__c FROM Contact where Transaction__c = :transact.Id];
 			List<officer> lOffSerialized = new List<officer>();
 			for (Contact off : lOff) {

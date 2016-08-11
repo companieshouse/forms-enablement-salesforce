@@ -34,7 +34,7 @@ Ver. Author         Date        Detail
                 <strong class="heading-medium">{!submissionId}</strong>  
                 </p>-->
              </div>
-             <p class="lede">{!displayText1}</p>
+              <p class="lede">{!displayText1}</p>
              <p class="lede">{!displayText2}</p>
             
             <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />

@@ -181,6 +181,9 @@ public class PaymentController extends TransactionStepControllerBase {
         isAccountSelected = false;
         // isSameDaySelected = false;
     }
+
+    
+
     public PageReference checkPaymentResult() {
         initialiseAction();
         //If there is no payment associated we need to protect the page to be displayed

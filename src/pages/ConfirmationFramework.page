@@ -94,7 +94,7 @@ Ver. Author        Date        Detail
                         <apex:outputText escape="false" value="{!pageBody2}"/>
                         Read the full list of 
                         <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration" target="_blank">who to tell.
-                        </a>.
+                        </a>
                     </p>
                     <div class="notice">
                         <i class="icon icon-important">

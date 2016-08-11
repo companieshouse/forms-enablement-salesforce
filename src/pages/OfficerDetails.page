@@ -51,6 +51,8 @@
                             <span class="form-hint">Confirm email address</span>
                             <span class="error-message">{!director.confirmationErrors}</span>
                             <apex:inputText styleClass="form-control" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
+                            <br/>
+                            <br/>
                         </apex:repeat>
                     </div>
                     <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />

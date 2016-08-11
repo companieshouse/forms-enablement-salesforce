@@ -110,42 +110,23 @@ public with sharing class DocStatusController
         set;
     }
 
-    // address information
-    public String companyAddress1
-    {
-        get;
-        set;
-    }
-    public String companyAddress2
-    {
-        get;
-        set;
-    }
-    public String companyregion
-    {
-        get;
-        set;
-    }
-    public String companypostcode
-    {
-        get;
-        set;
-    }
-    public String companyCountry
-    {
-        get;
-        set;
-    }
-    public String companyLocality
-    {
-        get;
-        set;
-    }
-    public String companyIncorporationDate
-    {
-        get;
-        set;
-    }
+    // dynamic set data
+    public String companyTypeText {get; set;}
+    public String companyStatus {get; set;}
+    public String companyDateOfCreation {get; set;}
+
+
+    // company address information
+    public String companyAddress {get; set;}
+    public String companyAddress1 {get; set;}
+    public String companyAddress2 {get; set;}
+    public String companyregion {get; set;}
+    public String companypostcode {get; set;}
+    public String companyCountry {get; set;}
+    public String companyLocality {get; set;}
+    public Boolean showprevious {get; set;}
+
+    public Map<String, String> companyType {get; set;}
     public String informationstuff
     {
         get;
@@ -211,14 +192,54 @@ public with sharing class DocStatusController
             companyName = tx.CompanyName__c;
             companyNumber = tx.CompanyNumber__c;
             // address information
-            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
-            companyAddress1 = compProf.registered_office_address.address_line_1;
-            companyAddress2 = compProf.registered_office_address.address_line_2;
-            companyregion = compProf.registered_office_address.region;
-            companypostcode = compProf.registered_office_address.postal_code;
-            companyCountry = compProf.registered_office_address.country;
-            companyLocality = compProf.registered_office_address.locality;
-            companyIncorporationDate = compProf.date_of_creation;
+            companyType = new Map<String, String>();
+
+        
+        companyType.put('private-unlimited', 'Private unlimited Company');
+        companyType.put('ltd', 'Private limited Company');
+        companyType.put('plc', 'Public limited Company');
+        companyType.put('old-public-company', 'Old public Company');
+        companyType.put('private-limited-guarant-nsc-limited-exemption', 'Private Limited Company by guarantee without share capital, use of \'Limited\'exemption');
+        companyType.put('limited-partnership', 'Limited partnership');
+        companyType.put('private-limited-guarant-nsc', 'Private limited by guarantee without share capital');
+        companyType.put('converted-or-closed', 'Converted / closed');
+        companyType.put('private-unlimited-nsc', 'Private unlimited Company without share capital');
+        companyType.put('private-limited-shares-section-30-exemption', 'Private Limited Company, use of \'Limited\'exemption');
+        companyType.put('assurance-company', 'Assurance Company');
+        companyType.put('oversea-company', 'Overseas Company');
+        companyType.put('eeig', 'European economic interest grouping (EEIG)');
+        companyType.put('icvc-securities', 'Investment Company with variable capital');
+        companyType.put('icvc-warrant', 'Investment Company with variable capital');
+        companyType.put('icvc-umbrella', 'Investment Company with variable capital');
+        companyType.put('industrial-and-provident-society', 'Industrial and provident society');
+        companyType.put('northern-ireland', 'Northern Ireland Company');
+        companyType.put('northern-ireland-other', 'Credit union (Northern Ireland)');
+        companyType.put('llp', 'Limited liability partnership');
+        companyType.put('royal-charter', 'Royal charter Company');
+        companyType.put('investment-company-with-variable-capital', 'Investment Company with variable capital');
+        companyType.put('unregistered-company', 'Unregistered Company');
+        companyType.put('other', 'Other Company type');
+        companyType.put('european-public-limited-liability-company-se', 'European public limited liability Company (SE)');
+        companyType.put('uk-establishment', 'UK establishment Company');
+
+        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+        companyAddress1 = compProf.registered_office_address.address_line_1;
+        companyAddress2 = compProf.registered_office_address.address_line_2;
+        companyregion = compProf.registered_office_address.region;
+        companypostcode = compProf.registered_office_address.postal_code ;
+        companyCountry = compProf.registered_office_address.country;
+        companyLocality = compProf.registered_office_address.locality;
+        companyStatus = compProf.company_status.capitalize();
+        String[] split = compProf.date_of_creation.split('-');
+        Datetime tempDate = Datetime.newInstance(Integer.valueOf(split[0]), Integer.valueOf(split[1]), Integer.valueOf(split[2]));
+        companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
+
+        companyName = compProf.company_name;
+        companyTypeText = companyType.get(compProf.type);
+        showprevious = true;
+
+        companyAddress = (companyAddress1 ==  null ? '' : companyAddress1 + '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2 + '<br/>')  + (companyLocality ==  null ? '' : companyLocality + '<br/>')  + (companyregion ==  null ? '' : companyregion + '<br/>') + (companypostcode ==  null ? '' : companypostcode + '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
+
             system.debug('officers list for dsfs recipient status ====' + listofOfficers);
             // companyIncorporationDate = // may need CH api to query this information 
             // Note: (if we are calling this multiple times then we should do an upsert on the initial call to CH and persist
@@ -288,7 +309,7 @@ public with sharing class DocStatusController
         }
         else{
         hasPageErrors = true;
-        statusErrors = 'Sorry we cannot seem to find your document at the moment. Please try again later';
+        statusErrors = 'Please refresh as the application is processing data.';
         }
         return null;
 

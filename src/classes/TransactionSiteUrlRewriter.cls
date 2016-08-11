@@ -66,6 +66,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String SHOWSHARECHANGE = '/showClassChanges';
     public String OBJECTSCOMPANY = '/ObjectsCompany';
     public String WITHDRAWDISSOLUTION = '/withdrawdissolution';
+    public String INTEGRATIONERROR = '/intError';
 
     ///// VF Strings
     public String VF_PAGE_START         = '/StartFramework';
@@ -119,6 +120,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_SHOWCHANGE = '/ShowClassChanges';
     public String VF_PAGE_OBJECTSCOMPANY = '/ObjectsCompany';
     public String VF_PAGE_WITHDRAWDISSOLUTION = '/WithdrawDissolution';
+    public String VF_PAGE_INTEGRATIONERROR = '/IntegrationError';
 
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
@@ -211,6 +213,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         { pr = new PageReference(OBJECTSCOMPANY); }
         else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION))
         { pr = new PageReference(WITHDRAWDISSOLUTION); }
+        else if (url.startsWith(INTEGRATIONERROR))
+        { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
 
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -308,6 +312,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
                 friendlyPageReference = new PageReference(SHOWSHARECHANGE);
             } else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) {
                 friendlyPageReference = new PageReference(WITHDRAWDISSOLUTION);
+            }else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {
+                friendlyPageReference = new PageReference(INTEGRATIONERROR);
             }
 
 

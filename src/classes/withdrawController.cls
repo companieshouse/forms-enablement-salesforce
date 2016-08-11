@@ -77,6 +77,7 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 			currentErrorMessage = 'You must confirm to continue';
 			return null;
 		}
+		submissionMgr.submission.SubmissionId__c = 'FE' + submissionMgr.submission.Id;
 
 		FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
 		submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
