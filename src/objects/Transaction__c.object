@@ -805,6 +805,16 @@ to any promoter of the company?</inlineHelpText>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>shareClassSelection__c</fullName>
+        <externalId>false</externalId>
+        <label>shareClassSelection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>sharecurrencyselection__c</fullName>
         <externalId>false</externalId>
         <label>sharecurrencyselection</label>

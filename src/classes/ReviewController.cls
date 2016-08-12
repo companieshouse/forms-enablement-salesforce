@@ -734,8 +734,6 @@ public class ReviewController extends TransactionStepControllerBase {
         if (sh08Family.size() > 0) {
             showSh08 = true;
             sh08HelperText = 'Class(es) of shares';
-            throw new Form_CustomException('SH08 shares' + sh08Family);
-
         }
         if (cONSOLIDATION.size() > 0) {
             buildConsolidationCapitalMap();
@@ -928,7 +926,7 @@ public class ReviewController extends TransactionStepControllerBase {
     }
     public PageReference changeAttachments() {
 
-        throw new Form_CustomException('ATTID is ' + ' ' + attID + ' ' + 'ATTNAME is ' + ' ' + attName);
+        //throw new Form_CustomException('ATTID is ' + ' ' + attID + ' ' + 'ATTNAME is ' + ' ' + attName);
         // delete/change share methods for SH02
         // returns user to Scapital journey to create a new sharecapital for the 3 types of SH02 (Conversion, subdivision, consolidation, redemption)
         if (shareID != null) {

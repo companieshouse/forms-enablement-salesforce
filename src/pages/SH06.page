@@ -156,9 +156,9 @@
             <div>
                 <!-- Company Details -->
                 <apex:panelGrid columns="2" width="70%">
-                    <apex:outputLabel>{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Name:</apex:outputLabel>
+                    <apex:outputLabel >{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Name:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-                    <apex:outputLabel>{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Number:</apex:outputLabel>
+                    <apex:outputLabel >{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Number:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
                 </apex:panelGrid>
             </div>

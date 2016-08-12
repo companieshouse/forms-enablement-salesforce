@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>CC04 -CompanyDetails</label>
+    <label>SH02 CapitalStep1</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +11,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Continue</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -19,9 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-        Review the information below and confirm that this is the company you want to file for.
-      &lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -49,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Confirm your company details&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Statement of capital&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Tell us what the share capital will be following the reduction.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -81,7 +79,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">1.0</value>
+        <value xsi:type="xsd:double">5.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -89,14 +87,14 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">CC04</value>
+        <value xsi:type="xsd:string">SH02</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">CompanyDetails</value>
+        <value xsi:type="xsd:string">SCapital1</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Not the right company?</value>
+        <value xsi:type="xsd:string">Previous</value>
     </values>
 </CustomMetadata>

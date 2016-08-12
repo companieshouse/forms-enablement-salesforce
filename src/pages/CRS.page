@@ -1,7 +1,7 @@
-<apex:page title="CRS" showHeader="false" sidebar="false" standardStylesheets="false" controller="CRSController" action='{!goForward}' docType="html-5.0">
+<apex:page title="CRS" showHeader="false" sidebar="false" standardStylesheets="false" controller="CRSController" action="{!goForward}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -18,7 +18,7 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputPanel id='mainPage'>
+                    <apex:outputPanel id="mainPage">
                         <h1 class="heading-xlarge">Changes to your class of shares</h1>
                         <h3 class="heading-medium">Which class of shares are you making changes to?</h3>
                         <div class="form-group {!errorVal1}">
@@ -72,10 +72,10 @@
                         </p>
                         <div class='form-group'>
                             <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Continue" />
-                            <apex:actionFunction status='status' action="{!setSelectedClass}" name="grabShareType" reRender="emptyPanel">
+                            <apex:actionFunction status="status" action="{!setSelectedClass}" name="grabShareType" reRender="emptyPanel">
                                 <apex:param name="shareclasstype" value="" id="z" assignTo="{!selectedShareClass}" />
                             </apex:actionFunction>
-                            <apex:actionFunction status='status' action="{!setSelectedShareChange}" name="grabChangeType" reRender="emptyPanel">
+                            <apex:actionFunction status="status" action="{!setSelectedShareChange}" name="grabChangeType" reRender="emptyPanel">
                                 <apex:param name="sharechangetype" value="" id="x" assignTo="{!selectedShareChange}" />
                             </apex:actionFunction>
                         </div>

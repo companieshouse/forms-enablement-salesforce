@@ -97,6 +97,6 @@
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Not the right company?</value>
     </values>
 </CustomMetadata>

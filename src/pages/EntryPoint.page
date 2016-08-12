@@ -1,7 +1,7 @@
 <apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterpanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -44,7 +44,7 @@
                         <br/>
                         <br/>
                     </apex:outputPanel>
-                    <apex:outputPanel id='transactions' rendered="{!showTransactionClearer}">
+                    <apex:outputPanel id="transactions" rendered="{!showTransactionClearer}">
                         <apex:commandLink status="status" title="Clicking on this will remove Transactions, Accounts and Contacts" rerender="transactions,masterpanel" action="{!cleanTransactions}" value="Clear Transactions" id="clearTransactions" />
                         <br/> number of transactions: &nbsp;
                         <apex:outputText value="{!transactionssize}" />

@@ -19,9 +19,9 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel rendered="{!customView}">
-                    <apex:outputPanel id='SHVIEW' rendered="{!showSHVIEW}">
+                    <apex:outputPanel id="SHVIEW" rendered="{!showSHVIEW}">
                         <div class="govuk-box-highlight">
                             <h1 class="bold-large">Submission complete</h1>
                             <p>
@@ -37,7 +37,7 @@ Ver. Author        Date        Detail
                                 <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
                                     <p>Download a copy of your {!formName}:
                                         <ul>
-                                            <apex:repeat value='{!downloadDocs}' var="conAttachments">
+                                            <apex:repeat value="{!downloadDocs}" var="conAttachments">
                                                 <li>
                                                     <a href="/servlet/servlet.FileDownload?file={!conAttachments.Id}" rel="external">{!conAttachments.Name}, size:{!conAttachments.BodyLength} Bytes</a>
                                                 </li>
@@ -54,7 +54,7 @@ Ver. Author        Date        Detail
                         </div>
                         <p>When your {!formName} has been processed, we will send you another email to inform you whether your documents have been accepted or rejected. If any document has been rejected, we will explain the reasons why.</p>
                     </apex:outputPanel>
-                    <apex:outputPanel rendered='false'>
+                    <apex:outputPanel rendered="false">
                         <div class="govuk-box-highlight">
                             <h1 class="bold-large">You have submitted your statement</h1>
                             <p>

@@ -1,7 +1,7 @@
 <apex:page title="NonPrescribed" showHeader="false" sidebar="false" standardStylesheets="false" controller="nonPrescribed" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <h1 class="heading-xlarge">Which file do you want to submit?</h1>
                 <div class="form-group">
                     <fieldset>
@@ -19,9 +19,6 @@
                         </label>
                     </fieldset>
                 </div>
-                <apex:actionFunction action="{!pickSubmissionType}" status='status' reRender="masterPanel" >
-                	<apex:param assignTo="formValue" id="formValue" name="xyz" value="" />
-                </apex:actionFunction>
                 <div class='form-group'>
                     <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" />
                     <br/>

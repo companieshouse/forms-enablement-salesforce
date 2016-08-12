@@ -52,11 +52,19 @@
     </values>
     <values>
         <field>Company_Page_HiddenT1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
+          &lt;details&gt;&lt;summary&gt;&lt;span class=&quot;summary&quot;&gt;How do I know what the company number is?&lt;/span&gt;&lt;/summary&gt;
+            &lt;div class=&quot;panel panel-border-narrow&quot;&gt;
+              &lt;p&gt;
+                You can find the company numbe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">r on the incorporation certificate or you can &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot;&gt;search for it on the public register&lt;/a&gt;.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/details&gt;
+        &lt;/div&gt;</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
@@ -64,7 +72,7 @@
     </values>
     <values>
         <field>Company_Page_Title__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>

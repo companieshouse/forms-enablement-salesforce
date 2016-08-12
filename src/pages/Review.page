@@ -1,7 +1,7 @@
 <apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!startReviewProcesses}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form>
+            <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="masterHeader" rendered="{!showMasterHeader}">
                         <h1 class="heading-xlarge">Review your application</h1>
