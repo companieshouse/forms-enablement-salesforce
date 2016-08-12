@@ -1,9 +1,9 @@
-<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" action="{!findData}" controller="EntryPointController">
+<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="EntryPointController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel id="masterpanel">
-                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                                 An error has occurred.
@@ -36,7 +36,7 @@
                                 <option value="SH19">SH19</option>
                                 <option value="CC04">CC04</option>
                                 <option value="RES15">RES15</option>
-                                <option value="General_untructured">UNSTRUCTURED</option>
+                                <option value="Nonprescribed">Nonprescribed</option>
                             </select>
                             <br/>
                         </div>
@@ -44,23 +44,12 @@
                         <br/>
                         <br/>
                     </apex:outputPanel>
-                    <apex:outputPanel rendered="{!showTransactionClearer}">
-                        <apex:commandLink status="status" title="Clicking on this will remove Transactions, Accounts and Contacts" rerender="masterpanel" action="{!cleanTransactions}" value="Clear Transactions" id="clearTransactions" />
+                    <apex:outputPanel id='transactions' rendered="{!showTransactionClearer}">
+                        <apex:commandLink status="status" title="Clicking on this will remove Transactions, Accounts and Contacts" rerender="transactions,masterpanel" action="{!cleanTransactions}" value="Clear Transactions" id="clearTransactions" />
                         <br/> number of transactions: &nbsp;
                         <apex:outputText value="{!transactionssize}" />
                     </apex:outputPanel>
                     <br/>
-                    <!-- <apex:outputPanel rendered="{!showContactClearer}">
-                        <apex:commandLink status="status" title="Clicking on this will remove Contacts and Accounts" rerender="masterpanel" action="{!cleanContacts}" value="Clear Contacts" id="clearContacts" />
-                        <br/> number of contacts: &nbsp;
-                        <apex:outputText value="{!contactssize}" />
-                    </apex:outputPanel>
-                    <br/>
-                    <apex:outputPanel rendered="{!showAccountClearer}">
-                        <apex:commandLink status="status" title="Clicking on this will remove Contacts and Accounts" rerender="masterpanel" action="{!cleanAccounts}" value="Clear Accounts" id="clearAccounts" />
-                        <br/> number of accounts: &nbsp;
-                        <apex:outputText value="{!accountssize}" />
-                    </apex:outputPanel> -->
                     <script>
                     var environment = window.location.hostname;
                     console.log(environment);

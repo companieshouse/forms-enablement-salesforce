@@ -1,4 +1,4 @@
-<apex:page title="Cancelled Shares Summary" showHeader="false" sidebar="false" standardStylesheets="false" action="{!goForward}" controller="cancelShares" docType="html-5.0">
+<apex:page title="Review your changes" showHeader="false" sidebar="false" standardStylesheets="false" action="{!goForward}" controller="crsReviewController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -44,7 +44,7 @@
                             </table>
                         </div>
                         <div class="form-group">
-                            <apex:commandLink action="{!previousAction}" value="Cancel more shares" id="thePreviousButton" />
+                            <apex:commandLink action="{!changeShare}" value="Cancel more shares" id="thePreviousButton" />
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="datePanel">

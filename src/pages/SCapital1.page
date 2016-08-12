@@ -32,16 +32,16 @@
                                     <span class="error-message" id='shareclass-errors'>
                                         {!currentErrorMessage}</span>
                                 </apex:outputPanel>
-                                <label class="block-label" for="radio-1">
+                                <label class="block-label" for="ordinary">
                                     <input id="ordinary" onclick="grabShareType('Ordinary');" type="radio" name="radio-group" value="Ordinary" /> Ordinary
                                 </label>
-                                <label class="block-label" for="radio-2">
+                                <label class="block-label" for="ordinarya">
                                     <input id="ordinarya" onclick="grabShareType('Ordinary A');" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
                                 </label>
-                                <label class="block-label" for="radio-3">
+                                <label class="block-label" for="ordinaryb">
                                     <input id="ordinaryb" onclick="grabShareType('Ordinary B');" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
                                 </label>
-                                <label class="block-label" for="radio-4">
+                                <label class="block-label" for="ordinaryc">
                                     <input id="ordinaryc" onclick="grabShareType('Ordinary C');" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
                                 </label>
                                 <!--
@@ -49,7 +49,7 @@
                                     <input id="preferred" onclick="grabShareType('Preferred');" type="radio" name="radio-group" value="Preferred" /> Preferred
                                 </label>
                                 -->
-                                <label class="block-label" for="radio-6" data-target="other-name">
+                                <label class="block-label" for="other" data-target="other-name">
                                     <input id="other" type="radio" name="radio-group" value="Other" /> Other
                                 </label>
                             </fieldset>

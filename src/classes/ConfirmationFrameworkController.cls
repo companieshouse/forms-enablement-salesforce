@@ -107,6 +107,9 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     public String pageBody1 {get; set;}
     public String pageBody2 {get; set;}
     public String warningText {get; set;}
+    public Boolean showSHVIEW {get; set;}
+    public String formName {get; set;}
+    public List<Attachment> downloadDocs {get; set;}
     // Constructors.
     public ConfirmationFrameworkController() {
         super();
@@ -127,6 +130,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                     submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
                 }
+                formName = submissionMgr.submission.Form_Name__c;
                 submissionId = submissionMgr.submission.SubmissionId__c;
                 companyName = submissionMgr.submission.CompanyName__c;
                 companyNameText = transactionMgr.currentStep.CompanyNameText__c;
@@ -143,8 +147,8 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 } else  if (submissionMgr.submission.Transaction_Type__c == 'DS02') {
                     isDS02 = true;
                     isDS01 = false;
-
                 }
+
                 if (pageBody1.contains('COMPNAME')) {
                     pageBody1 = pageBody1.replace('COMPNAME', companyName);
                 }
@@ -175,6 +179,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 }
                 todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' + system.today().year();
             } else if (customView) {
+                showDoc = true;
+
+                if (submissionMgr.submission.Transaction_Type__c.contains('SH') || submissionMgr.submission.Transaction_Type__c.contains('CC')) {
+                    showSHVIEW = true;
+                }
+                downloadDocs = submissionMgr.submission.attachments;
                 if (submissionMgr.submission.SubmissionId__c == null) {
                     // we need to submit the transaction to chips..... or change the status
                     // we need to change the submissionID__c to be our internal ID: SF ConfirmationID
@@ -182,6 +192,11 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
 
                     submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
+                }
+                if (submissionMgr.submission.Form_Name__c == 'SH05_6_7') {
+                    formName = 'SH06';
+                } else {
+                    formName = submissionMgr.submission.Form_Name__c;
                 }
                 submissionId = submissionMgr.submission.SubmissionId__c;
                 companyName = submissionMgr.submission.CompanyName__c;
@@ -202,27 +217,8 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                     confirmationContent3 = confirmationContent3.replace('COMPANYNAME', companyName);
                 }
 
-                if (submissionMgr.submission.attachments != null) {
-                    if (submissionMgr.submission.attachments.size() > 0) {
-                        showDoc = true;
-                        attachmentId = submissionMgr.submission.attachments[0].Id;
-                        title = submissionMgr.submission.attachments[0].Name;
-                        Integer sizeInt = submissionMgr.submission.attachments[0].BodyLength;
-                        String tempSize = String.valueOf(sizeInt);
-                        size = tempSize.left(3);
-                        //MB
-                        if (tempSize.length() >= 9) {
-                            size += 'M';
-                        }
-                        //KB
-                        else if (tempSize.length() >= 6 && tempSize.length() < 9) {
-                            size += 'K';
-                        }
-                    }
-                } else {
-                    title = 'NA';
-                    size = 'NA';
-                    attachmentId = null;
+                if (submissionMgr.submission.attachments != null && submissionMgr.submission.attachments.size() > 0) {
+
                 }
                 todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' + system.today().year();
             }
@@ -237,16 +233,36 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         return pg;
     }
 
+    public String attSizer(Attachment fileAttachment) {
+        if (fileAttachment.BodyLength > 0) {
+            Integer sizeInt = fileAttachment.BodyLength;
+            String tempSize = String.valueOf(sizeInt);
+            size = tempSize.left(3);
+            //MB
+            if (tempSize.length() >= 9) {
+                size += 'M';
+                return size;
+            }
+            //KB
+            else if (tempSize.length() >= 6 && tempSize.length() < 9) {
+                size += 'K';
+                return size;
+            }
+            return size;
+        } else {
+
+            size = 'NA';
+            return size;
+        }
+    }
     public void saveTransaction() {
         persistStep();
     }
     private void persistStep() {
         submissionMgr.persist();
     }
-    // End Instance methods.
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
         return previousStep();
     }
-    // End Action methods.
 }

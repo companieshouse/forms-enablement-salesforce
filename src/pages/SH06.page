@@ -136,7 +136,11 @@
         <div style="container">
             <header>
                 <div class="primary_header">
-                    <p><img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong class="headerText">{!Transaction__c.Form_Name__c}</strong><strong class="HeaderText2">(ef)</strong></p>
+                    <p>
+                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <strong class="headerText">SH06</strong>
+                        <strong class="HeaderText2">(ef)</strong>
+                    </p>
                 </div>
                 <div id="test" class="PDFBody">
                     <div id="rectangle">
@@ -152,9 +156,9 @@
             <div>
                 <!-- Company Details -->
                 <apex:panelGrid columns="2" width="70%">
-                    <apex:outputLabel >Company Name:</apex:outputLabel>
+                    <apex:outputLabel>{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Name:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-                    <apex:outputLabel >Company Number:</apex:outputLabel>
+                    <apex:outputLabel>{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Number:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
                 </apex:panelGrid>
             </div>
@@ -168,62 +172,6 @@
                 <p>SHARE CAPITAL IMPORTANT NOTICE CONTENT HERE</p>
                 <br />
                 <hr/>
-                <p style="text-align:center; font-weight: 300; font-size: 20px;">Share capital</p>
-                <apex:panelGrid columns="3" styleClass="panelGrid" border="1">
-                    <tr>
-                        <td>Currency</td>
-                        <td>Class of shares</td>
-                        <td>Number of shares</td>
-                        <td>Aggregate nominal value</td>
-                        <td>Total aggregate amount unpaid</td>
-                    </tr>
-                    <apex:repeat value="{!Transaction__c.Shares__r}" var="shares">
-                        <tr>
-                            <td>{!shares.Currency__c}</td>
-                            <td>{!shares.Class_of_Shares__c}</td>
-                            <td>{!shares.Number_of_Shares__c}</td>
-                            <td>{!shares.Aggregate_nominal_value__c}</td>
-                            <td>{!shares.Total_aggregate_amount_unpaid__c}</td>
-                        </tr>
-                    </apex:repeat>
-                </apex:panelGrid>
-                <br />
-                <hr/>
-                <p style="text-align:center; font-weight: 300; font-size: 20px;">Prescribed particulars of rights attached to shares</p>
-                <apex:panelGrid columns="3" styleClass="panelGrid" border="1">
-                    <apex:repeat value="{!Transaction__c.Shares__r}" var="shares">
-                        <tr>
-                            <td>Class of Share</td>
-                            <td>{!shares.Class_of_Shares__c}</td>
-                        </tr>
-                        <tr>
-                            <td>Prescribed Particulars</td>
-                            <td>{!shares.Prescribed_Particulars__c}</td>
-                        </tr>
-                    </apex:repeat>
-                </apex:panelGrid>
-                <br />
-                <hr/>
-                <h4>Authorising Company Director:</h4>
-                <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
-                    <apex:panelGrid columns="3" styleClass="panelGrid" >
-                        <td class="col1" align="left">
-                            <div>{!off.name}</div>
-                        </td>
-                        <td class="col2">
-                        </td>
-                        <td class="col3">
-                            <!--  Signature -->
-                            <div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
-                            <div style='float:center;'>___________________________________</div>
-                            <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">{!$Label.PDF_Power_Of_Attorney_On_Behalf_Of}</div>
-                            <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">{!$Label.PDF_On_Behalf_Of_The_Corporate_Director}</div>
-                            <!--  Signature date -->
-                            <div style='float:left;'>Signature Date:</div>
-                            <div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>
-                        </td>
-                    </apex:panelGrid>
-                </apex:repeat>
             </div>
         </div>
     </body>

@@ -86,7 +86,8 @@
                                     <apex:outputPanel id="otherAggID" rendered="{!otherAgg}">
                                         <div class="panel panel-border-narrow" id="not-paid">
                                             <label class="form-label" for="not-paid-shares">What's the total aggregate amount unpaid?</label>
-                                            <input onchange="grabAggUnpaidNon0Value(this.value)" class="form-control" id="not-paid-shares" type="text" />
+                                            <apex:inputText value="{!aggUnpaid}" styleClass="form-control" id="not-paid-shares" />
+                                            <!-- <input onchange="grabAggUnpaidNon0Value(this.value)" class="form-control" id="not-paid-shares" type="text" /> -->
                                         </div>
                                     </apex:outputPanel>
                                 </apex:outputPanel>
@@ -113,7 +114,7 @@
                         </div> -->
                     </apex:outputPanel>
                     <div class="form-group">
-                        <apex:commandButton action="{!addnewShares}" id="SCapital1button" reRender="masterpanel,currency" styleClass="button" value="{!continueButtonText}" />
+                        <apex:commandButton action="{!addnewShares}" id="SCapital1button" reRender="masterpanel,currency" styleClass="button" value="Continue" />
                         <br/>
                         <br/>
                         <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;

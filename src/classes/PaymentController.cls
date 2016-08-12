@@ -226,9 +226,9 @@ public class PaymentController extends TransactionStepControllerBase {
         if (isCardSelected) {
             submissionMgr.submission.isPaymentCard__c = true;
         }
-        if (isSameDaySelected) {
-            submissionMgr.submission.isSameDayProcessing__c = true;
-        }
+        //if (isSameDaySelected) {
+        //    submissionMgr.submission.isSameDayProcessing__c = true;
+        //}
         if (submissionMgr.submission.Amount__c == null) submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
         submissionMgr.submission.paymentReference__c = paymentReference;
         submissionMgr.submission.paymentDate__c = String.valueOf(system.today());

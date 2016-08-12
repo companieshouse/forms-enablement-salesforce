@@ -32,7 +32,7 @@
                     </tbody>
                 </table>
                 <br/>
-                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
                 <br/>
                 <br/>
                 <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />

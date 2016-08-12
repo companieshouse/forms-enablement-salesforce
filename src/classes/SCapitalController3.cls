@@ -233,12 +233,15 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 				return addmoreShares();
 			}
 		}
-		submissionMgr.submission.finishedAttachments__c = false;
-		submissionMgr.persist();
-		PageReference pg = new PageReference('/Attachments');
-		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		pg.setRedirect(true);
-		return pg;
+		if (submissionMgr.submission.Form_Name__c == 'SH19') {
+			submissionMgr.submission.finishedAttachments__c = false;
+			submissionMgr.persist();
+			PageReference pg = new PageReference('/Attachments');
+			pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+			pg.setRedirect(true);
+			return pg;
+		}
+		return nextStep();
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;

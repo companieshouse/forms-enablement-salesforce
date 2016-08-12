@@ -178,7 +178,7 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 			return null;
 		}
 		if (aggUnpaid  == null) {
-			hasPageErrors = false;
+			hasPageErrors = true;
 			paidError = 'error';
 			aggnomError = '';
 			numberError = '';

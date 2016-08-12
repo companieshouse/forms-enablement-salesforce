@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: ChangeCRS
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-07-7  Initial development.
 */
@@ -40,27 +40,11 @@ public with sharing class ChangeCRSController extends TransactionStepControllerB
         get;
         set;
     }
-    public List < Shares__c > currentShares {
-        get;
-        set;
-    }
-    public Boolean showTable {
-        get;
-        set;
-    }
-    public Boolean sharesAvailable {
-        get;
-        set;
-    }
     public Boolean hasPageErrors {
         get;
         set;
     }
     public String currentErrorMessage {
-        get;
-        set;
-    }
-    public Map < Id, Shares__c > shareUpdaterMap {
         get;
         set;
     }
@@ -108,10 +92,6 @@ public with sharing class ChangeCRSController extends TransactionStepControllerB
         get;
         set;
     }
-    public List < Shares__c > allShares {
-        get;
-        set;
-    }
     public String selectedNotice {
         get;
         set;
@@ -136,186 +116,251 @@ public with sharing class ChangeCRSController extends TransactionStepControllerB
         get;
         set;
     }
-    public Boolean showValueField {
-        get;
-        set;
-    }
-    public Boolean showNewStructure {
-        get;
-        set;
-    }
-    public String selectionTitle {
-        get;
-        set;
-    }
-    public String helpText {
-        get;
-        set;
-    }
-    public String tableHelperText {
-        get;
-        set;
-    }
+    public List<Shares__c> sharesToAdd {get; set;}
+    public String error1 {get; set;}
+    public String error2 {get; set;}
+    public String error3 {get; set;}
+    public String error4 {get; set;}
+
+    public Boolean ifReconversion {get; set;}
+    public Boolean ifSubdivision {get; set;}
+    public Boolean ifConsolidation {get; set;}
+    public Boolean ifRedemption {get; set;}
+
     public ChangeCRSController() {
         super();
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
-        displayText = transactionMgr.currentStep.Display_Text_1__c;
-        displayText2 = transactionMgr.currentStep.Display_Text_2__c;
-        displayText3 = transactionMgr.currentStep.Display_Text_3__c;
-        displayText4 = transactionMgr.currentStep.Display_Text_4__c;
-        displayText5 = transactionMgr.currentStep.Display_Text_5__c;
-        displayText6 = transactionMgr.currentStep.Display_Text_6__c;
-        headerText2 = transactionMgr.currentStep.Header_Text_2__c;
-        headerText3 = transactionMgr.currentStep.Header_Text_3__c;
-        companyName = submissionMgr.submission.CompanyName__c;
-        companyNumber = submissionMgr.submission.CompanyNumber__c;
-        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
-        previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
-        selectedNotice = submissionMgr.submission.shareChangeSelection__c;
-        currentShares = new List < Shares__c > ();
-        selectShareTypeTable();
-        allShares = submissionMgr.submission.Shares__r;
+        displayText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        displayText3 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+        displayText4 = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
+        displayText5 = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
+        displayText6 = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
+        headerText2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c;
+        headerText3 = transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c;
+        companyName = submissionMgr.submission.CompanyName__c == null ? '' : submissionMgr.submission.CompanyName__c;
+        companyNumber = submissionMgr.submission.CompanyNumber__c == null ? '' : submissionMgr.submission.CompanyNumber__c;
+        continueButtonText = transactionMgr.currentStep.ContinueButtonText__c == null ? '' : transactionMgr.currentStep.ContinueButtonText__c;
+        previousButtonText = transactionMgr.currentStep.PreviousButtonText__c == null ? '' : transactionMgr.currentStep.PreviousButtonText__c;
+        selectedNotice = submissionMgr.submission.shareChangeSelection__c == null ? '' : submissionMgr.submission.shareChangeSelection__c;
+        classofshares = submissionMgr.submission.shareClassSelection__c == null ? '' : submissionMgr.submission.shareClassSelection__c;
+        sharesToAdd = new List<Shares__c>();
+        buildViewState();
     }
-    public void selectShareTypeTable() {
-        if (submissionMgr.submission.Shares__r.size() > 0) {
-            for (Shares__c previousShares: submissionMgr.submission.Shares__r) {
-                if (previousShares.SHARETYPE__c == selectedNotice) {
-                    currentShares.add(previousShares);
-                }
-            }
-            if (currentShares.size() == 0) {
-                showTable = false;
-            } else if (currentshares.size() > 0) {
-                showTable = true;
-            }
-        } else if (submissionMgr.submission.Shares__r.size() == 0) {
-            showTable = false;
+    public PageReference goForward() {
+        if (submissionMgr.submission.finishedpart1__c == true) {
+            return nextStep();
         }
-        // now build the fields
-        if (selectedNotice == 'CONSOLIDATION') {
-            headerText1 = 'Notice of consolidation of shares';
-            showNewStructure = true;
-            selectionTitle = 'Consolidation';
-            helpText = 'Please show the amendments to each class of share.';
-            tableHelperText = '';
+        return null;
+    }
+    public void buildViewState () {
+        if (selectedNotice == 'RECONVERSION') {
+            ifReconversion = true;
         } else if (selectedNotice == 'SUBDIVISION') {
-            headerText1 = 'Notice of Sub-division of shares';
-            showNewStructure = true;
-            helpText = 'Please show the amendments to each class of share.';
-            tableHelperText = '';
+            ifSubdivision = true;
+        } else if (selectedNotice == 'CONSOLIDATION') {
+            ifConsolidation = true;
         } else if (selectedNotice == 'REDEMPTION') {
-            headerText1 = 'Notice of Redemption of shares';
-            showNewStructure = false;
-            helpText = 'Please show the class number and nominal value of shares that have been redeemed. Only redeemable shares can be redeemed.';
-            tableHelperText = '';
-        } else if (selectedNotice == 'RECONVERSION') {
-            headerText1 = 'Re-conversion of stock into shares';
-            showValueField = true;
-            showNewStructure = false;
-            helpText = 'Please show the class number and nominal value of shares following re-conversion from stock.';
-            tableHelperText = 'New share structure';
+            ifRedemption = true;
         }
-    }
-    public void setSelectedShare() {
-        //throw new Form_CustomException(' here is your  selected class of  shares' + classofshares);
     }
     private void persistStep() {
         // persist stuff here
         submissionMgr.persist();
     }
-    public PageReference addAnotherNotice() {
-        if (!validatePageState()) return Page.TransactionException;
-        return previousStep();
-    }
-    public void addReconversion() {
+
+    public PageReference addReconversion() {
+
+        if ( valOfStock == null || valOfStock == 0 ) {
+            error1 = 'error';
+            error2 = '';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the value of the stock which has been re-converted';
+            return null;
+        }
+        if (oldIssuedShares == null || oldIssuedShares == 0 ) {
+            error1 = '';
+            error2 = 'error';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the number of' + ' ' + classofshares + ' ' + 'shares that have been re-converted';
+            return null;
+        }
+        if (oldNomVal == null || oldNomVal == 0 ) {
+            error1 = '';
+            error2 = '';
+            error3 = 'error';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the value of the stock which has been re-converted';
+            return null;
+        }
         try {
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
-            //if (classofshares == null || classofshares.length() == 0) {
-            //    hasPageErrors = true;
-            //    currentErrorMessage = 'Must add a class of shares';
-            //    return null;
-            //}
             sharesToAdd.add(new Shares__c(SHARETYPE__c = 'RECONVERSION', Name = classofshares, Transaction__c = submissionMgr.submission.Id, oldNumSharesIssued__c = oldIssuedShares, valOfStock__c = valOfStock, Class_of_Shares__c = classofshares, OldNominalValue__c = oldNomVal, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
+        return  nextAction();
     }
-    public void addRedemption() {
+    public PageReference addRedemption() {
+
+        if ( oldIssuedShares == null || oldIssuedShares == 0 ) {
+            error1 = 'error';
+            error2 = '';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the number of' + ' ' + classofshares + ' ' + 'shares that have been redeemed';
+            return null;
+        }
+        if (oldNomVal == null || oldNomVal == 0 ) {
+            error1 = '';
+            error2 = 'error';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the nominal value of each share';
+            return null;
+        }
         try {
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
-            //if (classofshares == null || classofshares.length() == 0) {
-            //    hasPageErrors = true;
-            //    currentErrorMessage = 'Must add a class of shares';
-            //    return null;
-            //}
             sharesToAdd.add(new Shares__c(SHARETYPE__c = 'REDEMPTION', Name = classofshares, Transaction__c = submissionMgr.submission.Id, oldNumSharesIssued__c = oldIssuedShares, OldNominalValue__c = oldNomVal, Class_of_Shares__c = classofshares, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
+        return  nextAction();
+
     }
-    public void addConsolidation() {
+    public PageReference addConsolidation() {
+        if ( oldIssuedShares != null && oldIssuedShares != 0 && oldNomVal != null && oldNomVal != 0  && newIssuedShares != null && newIssuedShares != 0 && newNomVal != null && newNomVal != 0 ) {
+            error1 = '';
+            error2 = '';
+            error3 = '';
+            error4 = '';
+            currentErrorMessage = '';
+            hasPageErrors = false;
+        }
+        if ( oldIssuedShares == null || oldIssuedShares == 0 ) {
+            error1 = 'error';
+            error2 = '';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add how many' + ' ' + classofshares + ' ' + 'shares that were previously issued';
+            return null;
+        }
+        if (oldNomVal == null || oldNomVal == 0 ) {
+            error1 = '';
+            error2 = 'error';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the nominal value of each previously issued' + ' ' + classofshares + ' ' + 'share';
+            return null;
+        }
+        if (newIssuedShares == null || newIssuedShares == 0 ) {
+            error1 = '';
+            error2 = '';
+            error3 = 'error';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add how many' + ' ' + classofshares + ' ' + 'share(s) that are currently in issue';
+            return null;
+        }
+        if (newNomVal == null || newNomVal == 0 ) {
+            error1 = '';
+            error2 = '';
+            error3 = '';
+            error4 = 'error';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the nominal value of each currently issued' + ' ' + classofshares + ' ' + 'share';
+            return null;
+        }
+
         try {
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
-            //if (classofshares == null || classofshares.length() == 0) {
-            //    hasPageErrors = true;
-            //    currentErrorMessage = 'Must add a class of shares';
-            //    return null;
-            //}
             sharesToAdd.add(new Shares__c(SHARETYPE__c = 'CONSOLIDATION', newNumSharesIssued__c = newIssuedShares, OldNominalValue__c = oldNomVal, NewNominalValu__c = newNomVal, Name = classofshares, Transaction__c = submissionMgr.submission.Id, oldNumSharesIssued__c = oldIssuedShares, Class_of_Shares__c = classofshares, ActiveData__c = true));
             insert sharesToAdd;
-        } catch (DmlException e) {} catch (Exception e) {}
+        } catch (DmlException e) {
+        } catch (Exception e) {}
+        return  nextAction();
     }
-    public void addSubdivision() {
+    public PageReference addSubdivision() {
+
+        if ( oldIssuedShares == null || oldIssuedShares == 0 ) {
+            error1 = 'error';
+            error2 = '';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add how many' + ' ' + classofshares + ' ' + 'share(s) were previously issued';
+            return null;
+        }
+        if (oldNomVal == null || oldNomVal == 0 ) {
+            error1 = '';
+            error2 = 'error';
+            error3 = '';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the nominal value of each previously issued' + ' ' + classofshares + ' ' + 'share';
+            return null;
+        }
+        if (newIssuedShares == null || newIssuedShares == 0 ) {
+            error1 = '';
+            error2 = '';
+            error3 = 'error';
+            error4 = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add how many' + ' ' + classofshares + ' ' + 'share(s) that are currently in issue';
+            return null;
+        }
+        if (newNomVal == null || newNomVal == 0 ) {
+            error1 = '';
+            error2 = '';
+            error3 = '';
+            error4 = 'error';
+            hasPageErrors = true;
+            currentErrorMessage = 'You must add the nominal value of each currently issued' + ' ' + classofshares + ' ' + 'share';
+            return null;
+        }
         try {
             List < Shares__c > sharesToAdd = new List < Shares__c > ();
-            //if (classofshares == null || classofshares.length() == 0) {
-            //    hasPageErrors = true;
-            //    currentErrorMessage = 'Must add a class of shares';
-            //    return null;
-            //}
             sharesToAdd.add(new Shares__c(SHARETYPE__c = 'SUBDIVISION', newNumSharesIssued__c = newIssuedShares, OldNominalValue__c = oldNomVal, NewNominalValu__c = newNomVal, Name = classofshares, Transaction__c = submissionMgr.submission.Id, oldNumSharesIssued__c = oldIssuedShares, Class_of_Shares__c = classofshares, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {} catch (Exception e) {}
+        return  nextAction();
+
     }
     public PageReference addShare() {
         if (selectedNotice == 'CONSOLIDATION') {
-            addConsolidation();
+            return addConsolidation();
         } else if (selectedNotice == 'SUBDIVISION') {
-            addSubdivision();
+            return addSubdivision();
         } else if (selectedNotice == 'REDEMPTION') {
-            addRedemption();
+            return addRedemption();
         } else if (selectedNotice == 'RECONVERSION') {
-            addReconversion();
+            return addReconversion();
         }
-        PageReference pg = new PageReference('/ChangeCRS');
-        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-        pg.setRedirect(true);
-        //throw new Form_CustomException('PG' + pg);
-        return pg;
+        return null;
     }
-    public PageReference changePage() {
-        PageReference pg = new PageReference('/ChangeCRS');
-        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-        pg.setRedirect(true);
-        //throw new Form_CustomException('PG' + pg);
-        return pg;
-    }
-    public PageReference addStatementofCapital() {
-        // validate before pushing to qa
-        //if (currentShares.isEmpty()) {
-        //    hasPageErrors = true;
-        //    currentErrorMessage = 'Cannot add a statement of capital without the notice';
-        //    return null;
-        //}
-        return nextAction();
-    }
+
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
-        return nextStep();
+        PageReference pg = new PageReference('/YourReviewChanges');
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        pg.setRedirect(true);
+        return pg;
     }
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
-        return previousStep();
+        PageReference pg = new PageReference('/CRS');
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+        pg.setRedirect(true);
+        return pg;
     }
 }

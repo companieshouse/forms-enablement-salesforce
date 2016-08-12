@@ -191,6 +191,9 @@ public class FormsApiClient {
             jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
             jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
         }
+        if (tx.Form_Name__c == 'DS02') {
+
+        }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');
         jsonPartBody = jsonPartBody.remove('"officers" : null,');

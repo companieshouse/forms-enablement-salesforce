@@ -27,13 +27,13 @@
                                 <span class="error-message" id='confirmation-errors'>
                                             {!currentErrorMessage}</span>
                                 <apex:outputLabel styleClass="block-label text" value="I understand" for="thecheckbox">
-                                    <apex:inputCheckbox id="thecheckbox" required="true" value="{!confirmationVal}"/>
+                                    <apex:inputCheckbox html-autofocus="true" id="thecheckbox" required="true" value="{!confirmationVal}"/>
                                 </apex:outputLabel>
                             </fieldset>
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" reRender="masterPanel" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" reRender="masterPanel" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
             </apex:form>
         </apex:define>
     </apex:composition>

@@ -19,45 +19,80 @@ Ver. Author        Date        Detail
 <apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form>
                 <apex:outputPanel rendered="{!customView}">
-                    <div class="govuk-box-highlight">
-                        <h1 class="bold-large">You have submitted your statement</h1>
+                    <apex:outputPanel id='SHVIEW' rendered="{!showSHVIEW}">
+                        <div class="govuk-box-highlight">
+                            <h1 class="bold-large">Submission complete</h1>
+                            <p>
+                                Your reference number is
+                                <br/>
+                                <strong class="heading-medium">{!submissionId}</strong>
+                            </p>
+                        </div>
+                        <h2 class="heading-medium">What happens now?</h2>
+                        <p>We will send you an email to confirm that your submission has been received and it will include the relevant reference numbers.</p>
+                        <div class="form-group">
+                            <section class="attachment embedded" id="attachment_1365490">
+                                <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
+                                    <p>Download a copy of your {!formName}:
+                                        <ul>
+                                            <apex:repeat value='{!downloadDocs}' var="conAttachments">
+                                                <li>
+                                                    <a href="/servlet/servlet.FileDownload?file={!conAttachments.Id}" rel="external">{!conAttachments.Name}, size:{!conAttachments.BodyLength} Bytes</a>
+                                                </li>
+                                            </apex:repeat>
+                                        </ul>
+                                    </p>
+                                </div>
+                          
+                                <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                                    <p>No Documents founds.
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                        <p>When your {!formName} has been processed, we will send you another email to inform you whether your documents have been accepted or rejected. If any document has been rejected, we will explain the reasons why.</p>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered='false'>
+                        <div class="govuk-box-highlight">
+                            <h1 class="bold-large">You have submitted your statement</h1>
+                            <p>
+                                Your reference number is
+                                <strong class="heading-medium">{!submissionId}</strong>
+                            </p>
+                        </div>
+                        <h2 class="heading-medium">{!confirmationHeading1}</h2>
+                        <apex:outputtext value="{!companyNameText}" escape="false" />
                         <p>
-                            Your reference number is
-                            <strong class="heading-medium">{!submissionId}</strong>
+                            <apex:outputText escape="false" value="{!confirmationContent1}" />
                         </p>
-                    </div>
-                    <h2 class="heading-medium">{!confirmationHeading1}</h2>
-                    <apex:outputtext value="{!companyNameText}" escape="false" />
-                    <p>
-                        <apex:outputText escape="false" value="{!confirmationContent1}" />
-                    </p>
-                    <p>
-                        <apex:outputText escape="false" value="{!confirmationContent2}" />
-                    </p>
-                    <p>{!confirmationContent3}</p>
-                    <h2 class="heading-medium">What happens next?</h2>
-                    <p>
-                        <apex:outputText escape="false" value="{!confirmationNextStepContent}" />
-                    </p>
-                    <div class="notice">
-                        <i class="icon icon-important">
-                            <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
-                        </i>
-                        <strong class="bold-small">
-                            <apex:outputText escape="false" value="{!confirmationWarningContent1}" />
-                        </strong>
-                    </div>
-                    <h2 class="heading-medium">{!confirmationHeading2}</h2>
-                    <p>
-                        <apex:outputText escape="false" value="{!confiratmionWarningContent2}" />
-                    </p>
-                    <h2 class="heading-medium">How did we do?</h2>
-                    <p>
-                        Your feedback will help us make this service better for all our users. It only takes 30 seconds to
-                        <a href="#" target="_blank">tell us what you thought of this service</a>.
-                    </p>
+                        <p>
+                            <apex:outputText escape="false" value="{!confirmationContent2}" />
+                        </p>
+                        <p>{!confirmationContent3}</p>
+                        <h2 class="heading-medium">What happens next?</h2>
+                        <p>
+                            <apex:outputText escape="false" value="{!confirmationNextStepContent}" />
+                        </p>
+                        <div class="notice">
+                            <i class="icon icon-important">
+                                <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
+                            </i>
+                            <strong class="bold-small">
+                                <apex:outputText escape="false" value="{!confirmationWarningContent1}" />
+                            </strong>
+                        </div>
+                        <h2 class="heading-medium">{!confirmationHeading2}</h2>
+                        <p>
+                            <apex:outputText escape="false" value="{!confiratmionWarningContent2}" />
+                        </p>
+                        <h2 class="heading-medium">How did we do?</h2>
+                        <p>
+                            Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                            <a href="#" target="_blank">tell us what you thought of this service</a>.
+                        </p>
+                    </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!standardView}">
                     <apex:outputPanel rendered="{!isDS01}">
@@ -106,40 +141,40 @@ Ver. Author        Date        Detail
                         <p>If you need to cancel your request so that {!companyName} stays on the register, you can submit a
                             <apex:commandLink action="{!redirectDS02}" target="_blank"> withdrawal to strike off.</apex:commandLink>
                         </p>
-                        </apex:outputPanel>
-                            <apex:outputPanel rendered="{!isDS02}">
-                                <div class="govuk-box-highlight">
-                                    <h1 class="bold-large">Submission complete</h1>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!isDS02}">
+                        <div class="govuk-box-highlight">
+                            <h1 class="bold-large">Submission complete</h1>
+                            <p>
+                                Your submission has been received. Your reference number is
+                                <br/>
+                                <strong class="heading-medium">{!submissionId}</strong>
+                            </p>
+                        </div>
+                        <h2 class="heading-medium">What happens now?</h2>
+                        <p>We'll send you an email confirming your request to withdraw the application to close {!companyName}.</p>
+                        <div class="form-group">
+                            <section class="attachment embedded" id="attachment_1365490">
+                                <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
                                     <p>
-                                        Your submission has been received. Your reference number is
-                                        <br/>
-                                        <strong class="heading-medium">{!submissionId}</strong>
+                                        <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">Download a copy of your submitted request {!title}
+                                        </a> (PDF, {!size}B)
                                     </p>
                                 </div>
-                                <h2 class="heading-medium">What happens now?</h2>
-                                <p>We'll send you an email confirming your request to withdraw the application to close {!companyName}.</p>
-                                <div class="form-group">
-                                    <section class="attachment embedded" id="attachment_1365490">
-                                        <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
-                                            <p>
-                                                <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">Download a copy of your submitted request {!title}
-                                                </a> (PDF, {!size}B)
-                                            </p>
-                                        </div>
-                                        <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
-                                            <p>No Documents founds.
-                                            </p>
-                                        </div>
-                                    </section>
+                                <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                                    <p>No Documents founds.
+                                    </p>
                                 </div>
-                                <p>When your application has been processed, we will send you a further email to tell you whether it has been accepted or rejected. If it has been rejected, we will explain the reasons why.</p>
-                                <p>You can track the status of your application by
-                                    <a href="www.gov.uk/get-information-about-a-company">viewing the company’s filing history</a>.</p>
-                                <h3 class="heading-medium">How did we do?</h3>
-                                <p>Your feedback will help us make this service better for all our users. It only takes 30 seconds to
-                                    <a href="v">tell us what you thought of this service</a>.</p>
-                            </apex:outputPanel>
+                            </section>
+                        </div>
+                        <p>When your application has been processed, we will send you a further email to tell you whether it has been accepted or rejected. If it has been rejected, we will explain the reasons why.</p>
+                        <p>You can track the status of your application by
+                            <a href="www.gov.uk/get-information-about-a-company">viewing the company’s filing history</a>.</p>
+                        <h3 class="heading-medium">How did we do?</h3>
+                        <p>Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                            <a href="v">tell us what you thought of this service</a>.</p>
                     </apex:outputPanel>
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>

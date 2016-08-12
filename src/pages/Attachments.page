@@ -2,16 +2,19 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
-                <!-- <apex:outputPanel rendered="{!hasPageErrors}">
+            <apex:outputPanel id="masterPanel">
+                <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                            An error has occurred.
-                        </h1>
-                        <p>
-                            <span class="error-message"> {!currentErrors}</span>
-                        </p>
-                    </div>
-                </apex:outputPanel> -->
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                </apex:outputPanel>
                 <h1 class="heading-xlarge">
                     Additional documents
                 </h1>
@@ -25,8 +28,34 @@
                     .dontshowButton {
                         display: none;
                     }
+                    
+                    a.showHands {
+                        cursor: pointer;
+                        cursor: hand;
+                    }
+                    
+                    a:hover {
+                        color: ;
+                    }
+                    
+                    a:hover {
+                        color: #2e8aca;
+                    }
+                    
+                    a:active {
+                        color: #2e8aca;
+                    }
+                    
+                    a:link {
+                        color: #005ea5;
+                    }
+                    
+                    a:visited {
+                        color: #2e8aca;
+                    }
                     </style>
-                    <div class="form-group">
+                    <div class="form-group {!errorVal}">
+                        <span class='error-message'>{!currentErrorMessage}</span>
                         <table>
                             <thead>
                                 <tr>
@@ -37,71 +66,70 @@
                             </thead>
                             <tbody id='attachmentBody'>
                                 <tr>
-                                    <td>Solvency statement</td>
-                                    <td>{!docStatus2}</td>
+                                    <td>{!docName}</td>
+                                    <td>{!docStatus1}</td>
                                     <td>
-                                        <a href='' onclick='addDoc("b")'>Add document</a>
-                                        <apex:inputFile onchange="updateSolvency(this.value)" styleclass="dontshowButton" accept="pdf" fileName="SolvencyStatement" id="SolvencyStatement" value="{!solvencyBody}" />
+                                        <a class='showHands' href='#' onclick='addDoc("a")'>Add document</a>
+
+                                        <apex:inputFile onchange="update1(this.value)" styleclass="dontshowButton" accept="application/pdf"  id="file1input" value="{!file1}" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Resolution</td>
-                                    <td>{!docStatus1}</td>
+                                    <td>{!docName2}</td>
+                                    <td>{!docStatus2}</td>
                                     <td>
-                                        <a href='' onclick='addDoc("a")'>Add document</a>
-                                        <apex:inputFile onchange="updateResolution(this.value)" styleclass="dontshowButton" accept="pdf" fileName="Resolution" id="Resolution" value="{!resBody}" />
+                                        <a class='showHands' href='#' onclick='addDoc("b")'>Add document</a>
+
+                                        <apex:inputFile onchange="update2(this.value)" styleclass="dontshowButton" accept="application/pdf"  id="file2input" value="{!file2}" />
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <apex:actionFunction action="{!uploadSolvency}" name="addSolvency">
-                            <apex:param name="solvencyvalue" value="abcm" id="solvbodyfile" assignTo="{!solvencyBody}" />
+                        <apex:actionFunction action="{!upload1}" status="status"  name="add1">
+                            <apex:param name="file1value" value="abcm" id="file1action" assignTo="{!file1}" />
                         </apex:actionFunction>
-                         <apex:actionFunction action="{!uploadResolution}" name="addResolution">
-                            <apex:param name="solvencyvalue" value="xyzd" id="resbodyfile" assignTo="{!resBody}" />
+                        <apex:actionFunction action="{!upload2}" status="status"  name="add2">
+                            <apex:param name="file2value" value="xyzd" id="file2action" assignTo="{!file2}" />
                         </apex:actionFunction>
                     </div>
                     <script>
                     function addDoc(x) {
                         console.log(x);
                         if (x == "a") {
-                            console.log('adding resolution');
-                            var a = document.getElementById('{!$Component.Resolution}');
-                            console.log('a ==' + JSON.stringify(a));
+                            var a = document.getElementById('{!$Component.file1input}');
                             a.click();
 
                         } else if (x == "b") {
-                            console.log('adding solvency');
-                            var b = document.getElementById('{!$Component.SolvencyStatement}');
-                            console.log('b ==' + JSON.stringify(b));
+                            var b = document.getElementById('{!$Component.file2input}');
                             b.click();
                         }
                     }
 
-                    function updateSolvency(x) {
-                        console.log('function called 1'+ x);
-                        
-                            addSolvency(x);
-                    
+                    function update1(x) {
+                        console.log('function called 1' + x);
+                        add1(x);
                     }
 
-                    function updateResolution(y) {
-                        console.log('function called 2'+ y);
-
-                   
-                            addResolution(y);
-                
+                    function update2(y) {
+                        console.log('function called 2' + y);
+                        add2(y);
                     }
                     </script>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <p>You must also file a directors’ statement of compliance within 15 days of the date of the resolution. You must file this document on paper.</p>
+                    <apex:outputPanel id="SH19Panel" rendered="{!formType == 'SH19'}">
+                        <p>You must also file a directors’ statement of compliance within 15 days of the date of the resolution. You must file this document on paper.</p>
+                    </apex:outputPanel>
                     <p>If you wish to use the same-day service, we will need all these documents.</p>
                 </div>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Submit documents" rendered="{!NOT(isLastPage)}" />
+                <apex:actionregion >
+
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                </apex:actionregion>
                 <br />
                 <br/>&nbsp;
-                <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
+                <!-- <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp; -->
+                </apex:outputPanel>
             </apex:form>
         </apex:define>
     </apex:composition>
