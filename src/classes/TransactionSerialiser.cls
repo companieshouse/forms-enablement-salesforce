@@ -605,7 +605,7 @@ public class TransactionSerialiser {
 			payment pay = new payment();
 
 			if (transact.isPaymentRequired__c)
-			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));}
 
 			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
@@ -666,7 +666,7 @@ public class TransactionSerialiser {
 			payment pay = new payment();
 
 			if (transact.isPaymentRequired__c)
-			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));}
 
 			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
@@ -709,7 +709,7 @@ public class TransactionSerialiser {
 			payment pay = new payment();
 
 			if (transact.isPaymentRequired__c)
-			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));}
 
 			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
@@ -744,7 +744,7 @@ public class TransactionSerialiser {
 			payment pay = new payment();
 
 			if (transact.isPaymentRequired__c)
-			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));}
 
 			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 			// change contsrutct
@@ -794,7 +794,7 @@ public class TransactionSerialiser {
 			payment pay = new payment();
 
 			if (transact.isPaymentRequired__c)
-			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));}
 
 			presenterDetails pDetails = new presenterDetails(transact.ContactEmail__c, transact.ContactEmail__c);
 
@@ -851,21 +851,21 @@ public class TransactionSerialiser {
 			if (transact.containsPackage__c == true) {
 				//  BUILD RES15
 				packagesmeta.add(new metadata('RES15', 2, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c));
-				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : '')));
+				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : '')));
 
 				packagesfil.add(new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), packagespayment[0], pDetails, transact.SubmissionId__c));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[0], packagescorp[0]));
 				//  BUILD CAPSS
 				packagesmeta.add(new metadata('CAPSS', 3, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c));
-				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : '')));
+				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : '')));
 
 				packagesfil.add(new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), packagespayment[1], pDetails, transact.SubmissionId__c));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
 				packagesform.add(new formdata(packagesfil[1], packagescorp[1]));
 				//  BUILD SH20
 				packagesmeta.add(new metadata('SH20', 4, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c));
-				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : '')));
+				packagespayment.add(new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : '')));
 
 				packagesfil.add(new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), packagespayment[2], pDetails, transact.SubmissionId__c));
 				packagescorp.add(new corporateBody(transact.CompanyNumber__c, transact.CompanyName__c));
@@ -886,7 +886,7 @@ public class TransactionSerialiser {
 				}
 			}
 			metadata met = new metadata(transact.Form_Name__c, 1,  Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
-			payment pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));
+			payment pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));
 
 			filingDetails fil = new filingDetails(transact.Barcode__c, getFormatedDate(date.today()), pay, pDetails, transact.SubmissionId__c);
 			List < Shares__c > lShares = [SELECT FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c, ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__c where Transaction__c = : transact.Id];
@@ -1008,7 +1008,7 @@ public class TransactionSerialiser {
 			metadata met = new metadata(transact.Form_Name__c, 1,  Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
 			payment pay = new payment();
 			if (transact.isPaymentRequired__c)
-			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? String.valueOf(transact.AccountNumber__c) : ''));}
+			{pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));}
 
 
 

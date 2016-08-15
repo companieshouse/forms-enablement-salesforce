@@ -229,8 +229,7 @@ public class FormsApiClient {
             jsonPartBody = jsonPartBody.remove('"payment" : {');
             jsonPartBody = jsonPartBody.remove('"referenceNumber" : null,');
             jsonPartBody = jsonPartBody.remove('"paymentMethod" : null,');
-            jsonPartBody = jsonPartBody.remove('"accountNumber" : null\n');
-            jsonPartBody = jsonPartBody.remove('              },');
+            jsonPartBody = jsonPartBody.remove('"accountNumber" : null\n      },');
             jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
             jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
             jsonPartBody = jsonPartBody.remove('"shares" : null,');
@@ -240,8 +239,7 @@ public class FormsApiClient {
             jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
             jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
             jsonPartBody = jsonPartBody.remove('"officers" : {');
-            jsonPartBody = jsonPartBody.remove('"officer" : [ ]\n');
-            jsonPartBody = jsonPartBody.remove('      },');
+            jsonPartBody = jsonPartBody.remove('"officer" : [ ]\n      },');
         }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');

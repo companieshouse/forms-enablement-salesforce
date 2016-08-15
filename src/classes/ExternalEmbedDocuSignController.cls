@@ -161,7 +161,7 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         String day   = d.day()   > 9 ? string.valueOf(d.day())   : '0' + string.valueOf(d.day());
         String month = d.month() > 9 ? string.valueOf(d.month()) : '0' + string.valueOf(d.month());
 
-        return day + month + d.year();
+        return day +'-' + month + '-' + d.year();
     }
 
     // Look for a custom setting record with the URL, username and password for the DocuSign server.

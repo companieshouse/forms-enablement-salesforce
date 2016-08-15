@@ -238,9 +238,9 @@ public class PaymentController extends TransactionStepControllerBase {
         }
         if (isAccountSelected) {
             submissionMgr.submission.isPaymentAccount__c = true;
-            submissionMgr.submission.AccountNumber__c = Integer.valueOf(accountNumber);
+            submissionMgr.submission.AccountNumber__c = accountNumber;
             paymentReference = accountNumber;
-            //submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
+            submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
         }
         if (isPaypalSelected) {
             submissionMgr.submission.isPaymentPaypal__c = true;
@@ -307,27 +307,14 @@ public class PaymentController extends TransactionStepControllerBase {
 
         if(isAccountSelected)
         {
-            //Make the API Call
-            FormsApiClient client = new FormsApiClient();
-            HTTPResponse response = client.requestPresenterAPI(accountNumber, accountAuthCode); 
+            
             persistStep();
-            if(response.getStatusCode() == 200)
-            {
-                PageReference pg = new PageReference('/Payment');
+            PageReference pg = new PageReference('/Payment');
 
-                pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                pg.getParameters().put('account', 'Success');
-                pg.setRedirect(true);
-                return pg;
-            }
-            else{
-                PageReference pg = new PageReference('/Payment');
-
-                pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                pg.getParameters().put('account', 'Failure');
-                pg.setRedirect(true);
-                return pg;
-            }
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+            
 
                
         }
@@ -345,9 +332,22 @@ public class PaymentController extends TransactionStepControllerBase {
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
 
+        Boolean isAccount = submissionMgr.submission.isPaymentAccount__c;
+        
         previousClicked = true;
 
         persistStep();
+
+        if(isAccount)
+        {
+            PageReference pg = new PageReference('/Payment');
+
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+
+
         
         return previousStep();
     }
@@ -432,31 +432,37 @@ public class PaymentController extends TransactionStepControllerBase {
         merchantReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_REFERENCE);
         merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);
         authResult = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_RESULT);
-        String accountPayment = ApexPages.currentPage().getParameters().get('account');
-        if(!String.isEmpty(accountPayment))
+
+        if(submissionMgr.submission.isPaymentAccount__c)
         {
-            if(accountPayment == 'Success')
+            //Make the API Call
+            FormsApiClient client = new FormsApiClient();
+            HTTPResponse response = client.requestPresenterAPI(submissionMgr.submission.AccountNumber__c, submissionMgr.submission.AccountAuthorisationCode__c); 
+            if(response != null)
             {
-                hasPaid = true;
-                hasPaymentSuccess = true;
-                accountSuccess = true;
-                accountFailure = false;
-                hasPaymentRejected = false;
-                hasPaymentPending = false;
-                previousClicked = false;
-                hasPaymentError = false;
-                return;
-            }
-            else if(accountPayment == 'Failure'){
-                hasPaid = false;
-                hasPaymentSuccess = false;
-                accountSuccess = false;
-                accountFailure = true;
-                hasPaymentRejected = false;
-                hasPaymentPending = false;
-                previousClicked = false;
-                hasPaymentError = true;
-                return;
+                if(response.getStatusCode() == 200)
+                {
+                    hasPaid = true;
+                    hasPaymentSuccess = true;
+                    accountSuccess = true;
+                    accountFailure = false;
+                    hasPaymentRejected = false;
+                    hasPaymentPending = false;
+                    previousClicked = false;
+                    hasPaymentError = false;
+                    return;
+                }
+                else{
+                    hasPaid = false;
+                    hasPaymentSuccess = false;
+                    accountSuccess = false;
+                    accountFailure = true;
+                    hasPaymentRejected = false;
+                    hasPaymentPending = false;
+                    previousClicked = false;
+                    hasPaymentError = true;
+                    return;
+                }
             }
         }
         if (merchantReference != null && merchantReference.length() > 0) {

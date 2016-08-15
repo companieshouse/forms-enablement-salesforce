@@ -133,8 +133,7 @@
             <header>
                 <div class="primary_header">
                     <p>
-                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                        <strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
+                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
                     </p>
                 </div>
                 <div id="test" class="PDFBody">

@@ -36,7 +36,7 @@
                                     <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
                                         <div class='form-group'>
                                             <label class="block-label" for="radio-indent-3">
-                                                <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"> Paypal
+                                                <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect1" value="Paypal" onchange="updatePayment(3);"> Paypal
                                                 </input>
                                             </label>
                                         </div>
@@ -44,7 +44,7 @@
                                     <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
                                         <div class='form-group'>
                                             <label class="block-label" for="radio-indent-1">
-                                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or debit card
+                                                <input class="card" id="radio-indent-1" type="radio" name="paymentSelect2" value="Card" onchange="updatePayment(1);"> Credit or debit card
                                                 </input>
                                             </label>
                                         </div>
@@ -52,7 +52,7 @@
                                     <apex:outputPanel id="accountPanel" rendered="{!isAccountPayment}">
                                         <div class='form-group'>
                                             <label class="block-label" for="radio-indent-2">
-                                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"> Payment on account
+                                                <input class="account" id="radio-indent-2" type="radio" name="paymentSelect3" value="Account" onchange="updatePayment(2);"> Payment on account
                                                 </input>
                                             </label>
                                         </div>
@@ -63,7 +63,7 @@
                                         <div aria-hidden="false" class="panel panel-border-narrow">
                                             <div class="form-group {!accounterrorVal}">
                                                 <span class='error-message'>{!accountcurrentErrorMessage}</span>
-                                                <label class="form-label" for="accountnumberinput">Account number:</label>
+                                                <label class="form-label" for="accountnumberinput">Presenter ID:</label>
                                                 <apex:inputText styleclass="form-control" value="{!accountNumber}" id="accountnumberinput" />
                                                 <br/>
                                                 <br/>
@@ -71,7 +71,7 @@
                                                 <apex:inputText styleclass="form-control" value="{!presenterId}" id="presenterID" />
                                                 <br/>
                                                 <br/> -->
-                                                <label class="form-label" for="accouthAuthCode">Authentication code:</label>
+                                                <label class="form-label" for="accouthAuthCode">Presenter Authentication code:</label>
                                                 <apex:inputText styleclass="form-control" value="{!accountAuthCode}" id="accouthAuthCode" />
                                             </div>
                                         </div>
@@ -190,7 +190,7 @@
                     </div>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="Continue to submit" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="Save and continue" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
                 </div>
                 </apex:outputPanel>
             </apex:form>

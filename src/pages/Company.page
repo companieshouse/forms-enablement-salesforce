@@ -47,7 +47,7 @@ Ver. Author        Date        Detail
                             </span>
                         </apex:outputPanel>
                     </label>
-                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
+                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" html-autofocus="true"/>
                     <br/>
                 </div>
 
