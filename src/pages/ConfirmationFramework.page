@@ -102,8 +102,8 @@ Ver. Author        Date        Detail
                            {!warningText}
                         </strong>
                     </div>
-                    <h2 class="heading-medium">How to cancel this request</h2>
-                    <p>If you need to cancel your request so that {!companyName} stays on the register, you can submit a <apex:commandLink action="{!redirectDS02}" target="_blank"> withdrawal to strike off.</apex:commandLink></p>
+                    <h2 class="heading-medium">Withdrawing the application to close the company</h2>
+                    <p>If you need to withdraw the application to close {!companyName}, you can submit a <apex:commandLink action="{!redirectDS02}" target="_blank"> withdrawal to strike off.</apex:commandLink></p>
                     </apex:outputPanel>
                     <apex:outputPanel rendered="{!isDS02}">
                         <div class="govuk-box-highlight">
