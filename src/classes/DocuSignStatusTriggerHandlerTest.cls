@@ -15,6 +15,7 @@ public class DocuSignStatusTriggerHandlerTest {
 
 	static Transaction__c createTransaction(){
 		Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
+        tx.Valid_Step_Ids__c = 'm0058000000D8jPAAS|m0058000000D8jSAAS|m0058000000D8jTAAS';
 		insert tx;
 		
 		return tx;
