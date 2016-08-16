@@ -213,15 +213,15 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		return pg;
 	}
 	public PageReference choosePath() {
-		if (!shareStatus) {
+		if ( shareStatus == null || !shareStatus ) {
 			persistStep();
 			return addmoreShares();
 		} else if (shareStatus) {
 			return nextAction();
-		} else if (String.valueOf(shareStatus) == 'undefined') {
-			currentErrorMessage = '<span class="error-message">You must make a selection</span>';
-			hasPageErrors = true;
-			return null;
+			//} else if (String.valueOf(shareStatus) == 'undefined') {
+			//	currentErrorMessage = '<span class="error-message">You must make a selection</span>';
+			//	hasPageErrors = true;
+			//	return null;
 		}
 		return null;
 	}

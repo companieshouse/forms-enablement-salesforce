@@ -62,15 +62,15 @@ public class whichDirector extends TransactionStepControllerBase {
         super();
         if (isPageInitialised) initialiseStep();
     }
-    private String convertName(String name) {
-        String firstName;
-        String lastName;
-        firstName = name.substringAfter(',') + ' ';
-        lastName = name.substringBefore(',');
-        lastName = lastName.toLowerCase();
-        lastName = lastName.capitalize();
-        return firstName + lastName;
-    }
+    //private String convertName(String name) {
+    //    String firstName;
+    //    String lastName;
+    //    firstName = name.substringAfter(',') + ' ';
+    //    lastName = name.substringBefore(',');
+    //    lastName = lastName.toLowerCase();
+    //    lastName = lastName.capitalize();
+    //    return firstName + lastName;
+    //}
     public void initialiseStep() {
         stepValidator = isPageAlreadyValidStep;
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
