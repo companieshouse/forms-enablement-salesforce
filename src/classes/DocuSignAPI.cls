@@ -581,6 +581,7 @@ public class DocuSignAPI {
         public Boolean EnforceSignerVisibility;
         public Boolean EnableWetSign;
         public Boolean AllowMarkup;
+        public String BrandId;
         public DocuSignAPI.EventNotification EventNotification;
         private String[] TransactionID_type_info = new String[]{'TransactionID','http://www.docusign.net/API/3.0',null,'0','1','false'};
         private String[] Asynchronous_type_info = new String[]{'Asynchronous','http://www.docusign.net/API/3.0',null,'0','1','false'};

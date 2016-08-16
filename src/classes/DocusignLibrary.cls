@@ -106,7 +106,7 @@ public class DocusignLibrary {
         return custF;
 	}	
 
-	public static DocuSignAPI.Envelope getEnvelope(String accountId, String subject, String emailBlurb)
+	public static DocuSignAPI.Envelope getEnvelope(String accountId, String subject, String emailBlurb, String brandId)
 	{
         DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
 
@@ -114,6 +114,7 @@ public class DocusignLibrary {
         envelope.EmailBlurb = emailBlurb;
         envelope.AccountId = accountId;
         envelope.EnvelopeIdStamping = false;
+        envelope.BrandId =  brandId;  //'3212b688-d206-4f05-b8bb-67609ac42349';
 
         return envelope;
 	}
