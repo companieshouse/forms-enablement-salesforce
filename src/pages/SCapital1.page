@@ -13,82 +13,87 @@
                             </p>
                             <ul class="error-summary-list">
                                 <li>
-                                    <a href="#">{!currentErrorMessage}</a>
+                                    <a>{!currentErrorMessage}</a>
                                 </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <div class="form-group">
-                        <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!headerText2}"></apex:outputText>
-                        <h3 class="heading-medium">What is the class of share?</h3>
-                        <div class="form-group {!errorsClass}">
-                            <fieldset>
-                                <legend class="visuallyhidden">What is the class of share?</legend>
-                                <apex:outputPanel rendered="{!shareClassErrors}">
-                                    <span class="error-message" id='shareclass-errors'>
-                                        {!currentErrorMessage}</span>
+                    <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
+                    <apex:outputText escape="false" value="{!headerText2}"></apex:outputText>
+                    <h3 class="heading-medium">What is the class of share?</h3>
+                    <div class="form-group {!errorsClass}">
+                        <fieldset>
+                            <legend class="visuallyhidden">What is the class of share?</legend>
+                            <apex:outputPanel rendered="{!shareClassErrors}">
+                                <span class="error-message" id='shareclass-errors'>
+                                    {!currentErrorMessage}</span>
+                            </apex:outputPanel>
+                            <label id='ordinarylabel' class="block-label" for="ordinary">
+                                <input id="ordinary" onclick="grabShareType('Ordinary');" type="radio" name="radio-group" value="Ordinary" /> Ordinary
+                            </label>
+                            <label id='ordinarylabela' class="block-label" for="ordinarya">
+                                <input id="ordinarya" onclick="grabShareType('Ordinary A');" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
+                            </label>
+                            <label id='ordinarylabelb' class="block-label" for="ordinaryb">
+                                <input id="ordinaryb" onclick="grabShareType('Ordinary B');" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
+                            </label>
+                            <label id='ordinarylabelc' class="block-label" for="ordinaryc">
+                                <input id="ordinaryc" onclick="grabShareType('Ordinary C');" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
+                            </label>
+                            <label id='ordinarylabel-other' class="block-label" for="other" data-target="other-name">
+                                <input onclick='openShare()' id="other" type="radio" name="radio-group" value="Other" /> Other
+                            </label>
+                            <apex:outputPanel id="shareFormPanel">
+                                <apex:outputPanel id="sharePanel" rendered="{!showShare}">
+                                    <div class="panel panel-border-narrow " id="other-name">
+                                        <label class="form-label" for="otherData"></label>
+                                        <input name='otherData' onchange="grabShareType(this.value)" class="form-control" id="otherData" type="text" />
+                                    </div>
                                 </apex:outputPanel>
-                                <label class="block-label" for="ordinary">
-                                    <input id="ordinary" onclick="grabShareType('Ordinary');" type="radio" name="ordinary" value="Ordinary" /> Ordinary
-                                </label>
-                                <label class="block-label" for="ordinarya">
-                                    <input id="ordinarya" onclick="grabShareType('Ordinary A');" type="radio" name="ordinarya" value="Ordinary A" /> Ordinary A
-                                </label>
-                                <label class="block-label" for="ordinaryb">
-                                    <input id="ordinaryb" onclick="grabShareType('Ordinary B');" type="radio" name="ordinaryb" value="Ordinary B" /> Ordinary B
-                                </label>
-                                <label class="block-label" for="ordinaryc">
-                                    <input id="ordinaryc" onclick="grabShareType('Ordinary C');" type="radio" name="ordinaryc" value="Ordinary C" /> Ordinary C
-                                </label>
-                                <!--
-                                <label class="block-label" for="radio-5">
-                                    <input id="preferred" onclick="grabShareType('Preferred');" type="radio" name="radio-group" value="Preferred" /> Preferred
-                                </label>
-                                -->
-                                <label class="block-label" for="other" data-target="other-name">
-                                    <input id="other" type="radio" name="other" value="Other" /> Other
-                                </label>
-                            </fieldset>
-                            <div class="panel panel-border-narrow js-hidden" id="other-name">
-                                <label class="form-label" for="otherData"></label>
-                                <input name='otherData' onchange="grabShareType(this.value)" class="form-control" id="otherData" type="text" />
-                            </div>
-                        </div>
-                        <h1 class="heading-medium">What are the rights attached to these shares?</h1>
-                        <div class="form-group {!errorsClass}">
-                            <fieldset>
-                                <legend class="visuallyhidden"></legend>
-                                <apex:outputPanel rendered="{!rightsErrors}">
-                                    <span class="error-message" id='rights-errors'>
-                                        {!currentErrorMessage}</span>
-                                </apex:outputPanel>
-                                <label class="block-label" for="rights-1">
-                                    <input onclick="grabPrescribedParticular('Share has full rights including voting, dividend and distributions')" id="rights-1" type="radio" name="rights-1" value="Share has full rights including voting, dividend and distributions" /> Share has full rights including voting, dividend and distributions
-                                </label>
-                                <label class="block-label" for="rights-2" data-target="other-rights">
-                                    <input id="rights-2" type="radio" name="rights-2" value="" /> I want to define my own rights
-                                </label>
-                                
-                            </fieldset>
-                            <div class="panel panel-border-narrow js-hidden" id="other-rights">
-                                <label class="form-label" for="other-rights-1"></label>
-                                <textarea onchange="grabPrescribedParticular(this.value)" rows="10" cols="70" name='other-rights-1' id="preparticularsrights"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <apex:commandButton action="{!nextAction}" id="SCapital1button" reRender="masterpanel" styleClass="button" value="{!continueButtonText}" />
-                            <br/>
-                            <br/>
-                            <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
-                        </div>
-                        <apex:actionFunction action="{!grabShareType}" name="saveValue" reRender="emptyPanel">
-                            <apex:param name="shareclasstype" value="" id="z" assignTo="{!shareClassType}" />
-                        </apex:actionFunction>
-                        <apex:actionFunction action="{!grabPrescribedParticular}" name="grabPrescribedParticular" reRender="emptyPanel">
-                            <apex:param name="grabPrescribedParticular" value="" id="x" assignTo="{!prescribedParticular}" />
-                        </apex:actionFunction>
+                            </apex:outputPanel>
+                        </fieldset>
                     </div>
+                    <h1 class="heading-medium">What are the rights attached to these shares?</h1>
+                    <div class="form-group {!errorsClass2}">
+                        <fieldset>
+                            <legend class="visuallyhidden"></legend>
+                            <apex:outputPanel rendered="{!rightsErrors}">
+                                <span class="error-message" id='rights-errors'>
+                                    {!currentErrorMessage}</span>
+                            </apex:outputPanel>
+                            <label class="block-label" for="rights-1">
+                                <input onclick="grabPrescribedParticular('Share has full rights including voting, dividend and distributions')" id="rights-1" type="radio" name="radio-group-2" value="Share has full rights including voting, dividend and distributions" /> Share has full rights including voting, dividend and distributions
+                            </label>
+                            <label class="block-label" for="rights-2" data-target="other-rights">
+                                <input id="rights-2" onclick='openParticular()' type="radio" name="radio-group-2" value="" /> I want to define my own rights
+                            </label>
+                            <apex:outputPanel id="particularFormpanel">
+                                <apex:outputPanel id="particularPanel" rendered="{!showparticular}">
+                                    <div class="panel panel-border-narrow" id="other-rights">
+                                        <label class="form-label" for="other-rights-1"></label>
+                                        <textarea onchange="grabPrescribedParticular(this.value)" rows="10" cols="70" name='other-rights-1' id="preparticularsrights"></textarea>
+                                    </div>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <apex:commandButton action="{!nextAction}" id="SCapital1button" reRender="masterpanel" styleClass="button" value="{!continueButtonText}" />
+                        <br/>
+                        <br/>
+                    </div>
+                    <apex:actionFunction action="{!grabShareType}" name="grabShareType" reRender="emptyPanel">
+                        <apex:param name="shareclasstype" value="" id="z" assignTo="{!shareClassType}" />
+                    </apex:actionFunction>
+                     <apex:actionFunction action="{!openShare}" name="openShare" reRender="shareFormPanel">
+                        <apex:param name="showsharevalue" value="" id="showsharevalue" assignTo="{!showShare}" />
+                    </apex:actionFunction>
+                    <apex:actionFunction action="{!openParticular}" name="openParticular" reRender="particularFormpanel, particularPanel">
+                        <apex:param name="showparticularvalue" value="" id="showparticularvalue" assignTo="{!showparticular}" />
+                    </apex:actionFunction>
+                    <apex:actionFunction action="{!grabPrescribedParticular}" name="grabPrescribedParticular" reRender="emptyPanel">
+                        <apex:param name="grabPrescribedParticular" value="" id="x" assignTo="{!prescribedParticular}" />
+                    </apex:actionFunction>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

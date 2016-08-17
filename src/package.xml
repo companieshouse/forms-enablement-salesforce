@@ -6,10 +6,12 @@
         <members>AddAttachmentsController</members>
         <members>AddAttachmentsControllerTest</members>
         <members>AppConstants</members>
-        <members>ApplicationDateController</members>
         <members>BehalfDecisionController</members>
+        <members>BehalfDecisionControllerTest</members>
         <members>BehalfInputDetailsController</members>
+        <members>BehalfInputDetailsControllerTest</members>
         <members>BehalfWhichSignatoryController</members>
+        <members>BehalfWhichSignatoryControllerTest</members>
         <members>CH_ChargeController</members>
         <members>CH_ChargeController_Test</members>
         <members>CH_SearchByNumberClass_Test</members>
@@ -43,16 +45,21 @@
         <members>CompanyQueryAction</members>
         <members>CompanyQueryActionTest</members>
         <members>ConfirmationFrameworkController</members>
+        <members>ConfirmationFrameworkControllerTest</members>
         <members>CustomViews</members>
         <members>DigitalSignatureController</members>
         <members>DirectorDetails</members>
+        <members>DirectorDetailsTest</members>
         <members>DirectorsListController</members>
+        <members>DirectorsListControllerTest</members>
         <members>DocStatusController</members>
+        <members>DocStatusControllerTest</members>
         <members>DocuSignAPI</members>
         <members>DocuSignAPITest</members>
         <members>DocuSignStatusTriggerHandler</members>
         <members>DocuSignStatusTriggerHandlerTest</members>
         <members>DocumentController</members>
+        <members>DocumentControllerTest</members>
         <members>DocusignLibrary</members>
         <members>EditSharesByTypeController</members>
         <members>EntryPointController</members>
@@ -66,7 +73,6 @@
         <members>FormsApiClient</members>
         <members>FormsApiClientTest</members>
         <members>FormsApiMock</members>
-        <members>FreeFormController</members>
         <members>GuidanceController</members>
         <members>GuidanceControllerTest</members>
         <members>IStepNavigable</members>
@@ -84,6 +90,9 @@
         <members>SCapitalController1</members>
         <members>SCapitalController2</members>
         <members>SCapitalController3</members>
+        <members>SCapitalControllerTest1</members>
+        <members>SCapitalControllerTest2</members>
+        <members>SCapitalControllerTest3</members>
         <members>SecurityManager</members>
         <members>SigningController</members>
         <members>SigningControllerTest</members>
@@ -95,16 +104,21 @@
         <members>SubmissionManager</members>
         <members>SubmissionManagerTest</members>
         <members>TrackUserClass</members>
+        <members>TrackUserClassTest</members>
         <members>TransactionCleanup</members>
         <members>TransactionCleanupTest</members>
         <members>TransactionManager</members>
+        <members>TransactionManagerTest</members>
         <members>TransactionSerialiser</members>
         <members>TransactionSerialiserTest</members>
         <members>TransactionSiteUrlRewriter</members>
         <members>TransactionStepControllerBase</members>
+        <members>TransactionStepControllerBaseTest</members>
         <members>UpdateCompanyDirectorsController</members>
+        <members>UpdateCompanyDirectorsControllerTest</members>
         <members>cancelShares</members>
         <members>chooseDirector</members>
+        <members>chooseDirectorTest</members>
         <members>crsReviewController</members>
         <members>nonPrescribed</members>
         <members>nonPrescribed1</members>
@@ -113,6 +127,7 @@
         <members>superSort</members>
         <members>variationRightsController</members>
         <members>whichDirector</members>
+        <members>whichDirectorTest</members>
         <members>withdrawController</members>
         <name>ApexClass</name>
     </types>
@@ -122,7 +137,6 @@
     </types>
     <types>
         <members>AccountsAuthCallback</members>
-        <members>ApplicationDate</members>
         <members>Attachments</members>
         <members>BehalfDecision</members>
         <members>BehalfInputDetails</members>
@@ -153,7 +167,6 @@
         <members>Exception</members>
         <members>ExternalEmbedDocuSign</members>
         <members>FormApplication</members>
-        <members>FreeForm</members>
         <members>Guidance</members>
         <members>Nonprescribed1</members>
         <members>Nonprescribed2</members>
