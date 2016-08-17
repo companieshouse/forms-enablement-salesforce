@@ -96,6 +96,12 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		get;
 		set;
 	}
+	public String errorsClass2 {
+		get;
+		set;
+	}
+	public Boolean showparticular {get; set;}
+	public Boolean showShare {get; set;}
 	public SCapitalController1() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -108,6 +114,7 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 	}
 	public void grabPrescribedParticular() {
 		if (prescribedParticular != null) {
+			showparticular = true;
 			System.debug('sharetype == ' + ' ' + prescribedParticular);
 			//throw new Form_CustomException('prescribed particular is ' +prescribedParticular);
 		}
@@ -133,13 +140,18 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 		}
 		return null;
 	}
+	public void openShare() {
+		showShare = true;
+	}
+	public void openParticular() {
+		showparticular = true;
+	}
 	public PageReference AddtocurrentShare() {
 		submissionMgr.persist();
 		return nextStep();
 	}
 	private void persistStep() {
 		if (prescribedParticular != null && shareClassType != null) {
-			//throw new Form_CustomException('share class type and prescribed particular' + ' ' + shareClassType +' new stuff here ' + ' ' + prescribedParticular);
 			submissionMgr.submission.selectShareType__c = shareClassType;
 			submissionMgr.submission.prescribedParticular__c = prescribedParticular;
 		}
@@ -158,14 +170,14 @@ public with sharing class SCapitalController1 extends TransactionStepControllerB
 			errorsClass = '';
 		}
 		if (prescribedParticular == null) {
-			errorsClass = 'error';
+			errorsClass2 = 'error';
 			rightsErrors = true;
 			hasPageErrors = true;
 			currentErrorMessage = 'You are missing the rights attached to these shares';
 			return null;
 		} else if (prescribedParticular != null) {
 			rightsErrors = false;
-			errorsClass = '';
+			errorsClass2 = '';
 		}
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();

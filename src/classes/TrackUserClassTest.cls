@@ -49,12 +49,13 @@ private class TrackUserClassTest {
 		test1controller.setStringGuidanceAgreeBox('SampleText');
 		test1controller.GuidanceAgreeBox();
 		test1controller.getUserDocument();
-		test1controller.getSearchedCompany(transac.CompanyNumber__c);
-		// mock
-		cookie searched_company = new Cookie('searched_company', SecurityManager.encryptText(transac.CompanyNumber__c), null, -1, true);
-		ApexPages.currentPage().setCookies(new Cookie[] { searched_company });
 
-		test1controller.returnCurrentCompanyObject();
+		//test1controller.getSearchedCompany(transac.CompanyNumber__c);
+		//// mock
+		//cookie searched_company = new Cookie('searched_company', SecurityManager.encryptText(transac.CompanyNumber__c), null, -1, true);
+		//ApexPages.currentPage().setCookies(new Cookie[] { searched_company });
+
+		//test1controller.returnCurrentCompanyObject();
 		test1controller.getCurrentUser(transac.ContactEmail__c);
 		test1controller.returnCurrentUser();
 	}
