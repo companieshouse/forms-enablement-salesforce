@@ -110,16 +110,13 @@ public class AddAttachmentsControllerTest {
 
 
         AddAttachmentsController test2controller = new AddAttachmentsController();
-        test2controller.solvencyBody = testpdfBlob;
-        test2controller.resBody = test2pdfBlob;
+        test2controller.file1 = testpdfBlob;
+        test2controller.file2 = test2pdfBlob;
         test2controller.goForward();
 
-        test2controller.uploadResolution();
-        test2controller.uploadSolvency();
-        test2controller.checkDocs('Solvency');
-        test2controller.checkDocs('Resolution');
+        test2controller.upload1();
+        test2controller.upload2();
         test2controller.checkAttachmentStatus();
-        //test2controller.attachmenttoDeleteId =
         test2controller.DeleteAttachments();
         test2controller.nextAction();
 
