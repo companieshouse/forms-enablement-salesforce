@@ -20,24 +20,24 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="changeClassName">
                         <h1 class="heading-xlarge">
-                            {!headerText1}
-                        </h1>
+                            Changing the name of a class of shares
+                            </h1>
                         <div class="form-group {!olderrorsClass}">
                             <span id='errorHint' class='error-message'>{!oldcurrentErrorMessage}</span>
-                            <label class="form-label-bold" for="classofShare-item">Existing name of the class of shares
+                            <label class="form-label" for="classofShare-item">Existing name of the class of shares
                             </label>
                             <apex:inputText styleClass="form-control" id="shareclsasoldname" value="{!classofshares}" />
                         </div>
                         <div class="form-group {!newerrorsClass}">
                             <span id='errorHint' class='error-message'>{!newcurrentErrorMessage}</span>
-                            <label class="form-label-bold" for="classofShare-item">New name of class of shares or other designation
+                            <label class="form-label" for="classofShare-item">New name of class of shares or other designation
                                 <span class="form-hint" name="classofShareHint" id="shareclassNewName"></span>
                             </label>
                             <apex:inputText styleClass="form-control" id="classofsharesNew" value="{!classofsharesNew}" />
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!addShare}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="button" action="{!addShare}" value="Continue"  />
                 <br/> &nbsp;
                 <!-- <apex:commandLink action="{!addtoPreviousShare}" value="Add Shares to another currency" id="addtoPreviousShare" /> &nbsp;-->
             </apex:form>

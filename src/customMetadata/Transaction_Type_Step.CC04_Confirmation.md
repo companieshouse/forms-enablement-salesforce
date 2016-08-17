@@ -15,7 +15,7 @@
     </values>
     <values>
         <field>CustomView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Display_Text_1__c</field>
@@ -81,11 +81,11 @@ You&apos;ll need to quote this if you contact us about your request.</value>
     </values>
     <values>
         <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">6.0</value>
+        <value xsi:type="xsd:double">5.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

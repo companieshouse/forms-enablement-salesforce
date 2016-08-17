@@ -28,6 +28,10 @@ public with sharing class StartFrameworkController {
         get;
         set;
     }
+    public String pageTextAfterButton2 {
+        get;
+        set;
+    }
     public String transactionType {
         get;
         set;
@@ -67,6 +71,8 @@ public with sharing class StartFrameworkController {
             //pageText = transactionMgr.td.Landing_Page_Text10__c == null ? '' : transactionMgr.td.Landing_Page_Text10__c;
             //pageText = transactionMgr.td.Landing_Page_Text11__c == null ? '' : transactionMgr.td.Landing_Page_Text11__c;
             pageTextAfterButton = transactionMgr.td.Below_Button_Text__c == null ? '' : transactionMgr.td.Below_Button_Text__c;
+            pageTextAfterButton2 = transactionMgr.td.Below_Button_Text2__c == null ? '' : transactionMgr.td.Below_Button_Text2__c;
+
             hasGuidancePage = transactionMgr.td.hasGuidancePage__c;
             isPageInitialised = true;
         } catch (Exception e) {

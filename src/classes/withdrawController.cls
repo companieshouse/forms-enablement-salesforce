@@ -30,11 +30,15 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 		get;
 		set;
 	}
+	public String companyName {get; set;}
 	public withdrawController() {
 		super();
 		if (isPageInitialised) initialiseStep();
 	}
-	private void initialiseStep() {}
+	private void initialiseStep() {
+		companyName = submissionMgr.submission.CompanyName__c  == null ? '' : submissionMgr.submission.CompanyName__c;
+
+	}
 	public void saveTransaction() {
 		persistStep();
 	}
@@ -59,7 +63,7 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 		if (Test.IsRunningTest()) pdfBlob = Blob.valueOf('This is a test');
 		else pdfBlob = pageRef.getContent();
 		pdfAttachment.ParentId = submissionMgr.submission.Id;
-		pdfAttachment.Name = submissionMgr.submission.Form_Name__c;
+		pdfAttachment.Name = submissionMgr.submission.Form_Name__c + '.pdf';
 		pdfAttachment.Description = submissionMgr.submission.Form_Name__c;
 		pdfAttachment.Body = pdfBlob;
 		try {

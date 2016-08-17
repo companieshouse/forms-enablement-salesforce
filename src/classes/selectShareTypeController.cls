@@ -92,7 +92,15 @@ public with sharing class selectShareTypeController extends TransactionStepContr
         get;
         set;
     }
-    public String errorsClass {
+    public String errorsnum {
+        get;
+        set;
+    }
+    public String errorsnom {
+        get;
+        set;
+    }
+    public String errorstype {
         get;
         set;
     }
@@ -139,25 +147,43 @@ public with sharing class selectShareTypeController extends TransactionStepContr
     }
 
     public PageReference addnewShares() {
+        if (shareClassType == null) {
+            errorstype = 'error';
+            errorsnom = '';
+            errorsnum = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You are missing the Share Class Type';
+            return null;
+        }
+        if (shareClassType.length() < 1) {
+            errorstype = 'error';
+            errorsnom = '';
+            errorsnum = '';
+            hasPageErrors = true;
+            currentErrorMessage = 'You are missing the Share Class Type';
+            return null;
+        }
         if (numberofshares == 0 || numberofshares == null) {
+            errorstype = '';
+            errorsnom = '';
+            errorsnum = 'error';
             hasPageErrors = true;
             currentErrorMessage = 'Must add the number of shares';
             return null;
         }
         if (nominalvalue == 0 || nominalvalue == null) {
+            errorstype = '';
+            errorsnom = 'error';
+            errorsnum = '';
             hasPageErrors = true;
             currentErrorMessage = 'Aggregate nominal value must be greater than 0';
             return null;
         }
-        if (shareClassType.length() < 1) {
-            hasPageErrors = true;
-            currentErrorMessage = 'You are missing the Share Class Type';
-            return null;
-        }
+
 
         List < Shares__c > sharesToAdd = new List < Shares__c > ();
         try {
-            sharesToAdd.add(new Shares__c( Aggregate_nominal_value__c = nominalvalue, Number_of_Shares__c = numberofshares, SHARETYPE__c = 'SH06', Name = shareClassType, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = shareClassType, ActiveData__c = true));
+            sharesToAdd.add(new Shares__c( Aggregate_nominal_value__c = nominalvalue, Number_of_Shares__c = numberofshares, SHARETYPE__c = 'CANCELLEDSHARES', Name = shareClassType, Transaction__c = submissionMgr.submission.Id, Class_of_Shares__c = shareClassType, ActiveData__c = true));
             insert sharesToAdd;
         } catch (DmlException e) {System.debug('DML error =' + ' ' + e.getMessage());} catch (Exception e) {System.debug('Exception =' + ' ' + e.getMessage());}
 
@@ -165,6 +191,7 @@ public with sharing class selectShareTypeController extends TransactionStepContr
         pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         pg.setRedirect(true);
         return pg;
+
     }
 
     public PageReference nextAction() {

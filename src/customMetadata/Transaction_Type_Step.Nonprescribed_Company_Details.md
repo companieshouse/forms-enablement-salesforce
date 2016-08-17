@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>SH10 -Authorise</label>
+    <label>Nonprescribed - Company Details</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Review the information below and confirm that this is the correct company.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,8 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Authorise and submit</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Confirm company details&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -55,10 +56,6 @@
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
-        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>
@@ -83,7 +80,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">4.0</value>
+        <value xsi:type="xsd:double">1.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -91,14 +88,14 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">SH10</value>
+        <value xsi:type="xsd:string">Nonprescribed</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">SigningPage</value>
+        <value xsi:type="xsd:string">CompanyDetails</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Previous</value>
+        <value xsi:type="xsd:string">Not the right company?</value>
     </values>
 </CustomMetadata>

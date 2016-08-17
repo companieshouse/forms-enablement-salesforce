@@ -150,7 +150,10 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 		} catch (Exception e) {
 			System.debug('DML Error with ' + e.getMessage());
 		}
-		return previousAction();
+		PageReference pg = new PageReference('/ChangeShareClassName');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 	private void persistStep() {
 		submissionMgr.persist();
@@ -175,6 +178,12 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 			errormessage1 = 'Please enter the correct Year';
 			return null;
 		}
+		if (varYear < 1700 ) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct Year (later than 1700)';
+			return null;
+		}
 		Datetime sharechangeDate = Datetime.newInstance(varYear, varMonth, varDay);
 		sharechangeDate.format('dd MMMMM yyyy');
 		if (sharechangeDate > Date.Today()) {
@@ -195,10 +204,16 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 		// persist and save if validaiton passes
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
-		return nextStep();
+		PageReference pg = new PageReference('/Review');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;
-		return previousStep();
+		PageReference pg = new PageReference('/ChangeShareClassName');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 }

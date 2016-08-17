@@ -1,94 +1,85 @@
-<apex:page title="CRS" controller="CRSController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page title="CRS" showHeader="false" sidebar="false" standardStylesheets="false" controller="CRSController" action="{!goForward}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                
                 <apex:outputPanel id="masterpanel">
-                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
                             <ul class="error-summary-list">
                                 <li>
-                                    <span class="error-message">{!currentErrorMessage}</span>
+                                    <a>{!currentErrorMessage1}</a>
+                                </li>
+                                <li>
+                                    <a>{!currentErrorMessage2}</a>
                                 </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <div class="form-group">
-                        <h1 class="heading-xlarge">
-                            {!headerText1}
-                        </h1>
-                        <p class="lede">{!displayText}
-                        </p>
-                        <fieldset>
-                            <span id="radio-errors"></span>
-                            <apex:outputText escape="false" value="{!currentErrorMessage}" />
-                            <label class="block-label" for="radio-inline-1">
-                                <input id="radio-inline-1" type="radio" name="sharetype" value="CONSOLIDATION" /> Consolidation
-                            </label>
-                            <label class="block-label" for="radio-inline-2">
-                                <input id="radio-inline-2" type="radio" name="sharetype" value="SUBDIVISION" /> Sub-division
-                            </label>
-                            <label class="block-label" for="radio-inline-3">
-                                <input id="radio-inline-3" type="radio" name="sharetype" value="REDEMPTION" /> Redemption
-                            </label>
-                            <label class="block-label" for="radio-inline-4">
-                                <input id="radio-inline-3" type="radio" name="sharetype" value="RECONVERSION" /> Re-conversion
-                            </label>
-                            <apex:outputPanel id="emptypanel" />
-                        </fieldset>
-                    </div>
-                    <div class="form-group">
-                        <details>
-                            <summary>
-                                <span class="summary">Help with type of change</span>
-                            </summary>
-                            <div class="panel panel-border-narrow">
-                                <p>
-                                    <b>Nominal value:</b> this is the face value of each share. This is also the minimum amount that must be paid for shares.
-                                </p>
-                                <p>
-                                    <b>Consolidation:</b> this is when shares of a certain nominal value are converted into a smaller number of shares, each with a larger value.
-                                </p>
-                                <p>
-                                    <b>Sub-division:</b> this is when shares of a certain nominal value are divided into a larger number of shares, each with a smaller value.
-                                </p>
-                                <p>
-                                    <b>Redemption:</b> this is when shares issued with an agreement that the company will buy them back at the option of the company or the shareholder after a certain period of time are bought back. Only redeemable shares can be redeemed and they must be fully paid up.
-                                </p>
-                                <p>
-                                    <b>Re-conversion:</b> this is when a company re-converts any of its stock back into shares. The value of the stock must equal the aggregate nominal value - the number of shares issued multiplied by nominal value of each share value - of the new share structure.
-                                </p>
+                    <apex:outputPanel id="mainPage">
+                        <h1 class="heading-xlarge">Changes to your class of shares</h1>
+                        <h3 class="heading-medium">Which class of shares are you making changes to?</h3>
+                        <div class="form-group {!errorVal1}">
+                            <fieldset>
+                                <legend class="visually-hidden">What class of share are you making changes to?</legend>
+                                <span class="error-message" id='rights-errors'>
+                                    {!currentErrorMessage1}</span>
+                                <label class="block-label" for="radio-1">
+                                    <input id="radio-1" onclick="grabShareType(this.value);" type="radio" name="radio-group" value="Ordinary" /> Ordinary
+                                </label>
+                                <label class="block-label" for="radio-2">
+                                    <input id="radio-2" onclick="grabShareType(this.value);" type="radio" name="radio-group" value="Ordinary A" /> Ordinary A
+                                </label>
+                                <label class="block-label" for="radio-3">
+                                    <input id="radio-3" onclick="grabShareType(this.value);" type="radio" name="radio-group" value="Ordinary B" /> Ordinary B
+                                </label>
+                                <label class="block-label" for="radio-4">
+                                    <input id="radio-4" onclick="grabShareType(this.value);" type="radio" name="radio-group" value="Ordinary C" /> Ordinary C
+                                </label>
+                                <label class="block-label" for="radio-6" data-target="other-name">
+                                    <input id="radio-6" type="radio" name="radio-group" value="" /> Other
+                                </label>
+                            </fieldset>
+                            <div class="panel panel-border-narrow js-hidden" id="other-name">
+                                <label class="form-label" for="otherData"></label>
+                                <input onchange="grabShareType(this.value)" class="form-control" id="otherData" type="text" />
                             </div>
-                        </details>
-                    </div>
-                    <apex:commandButton reRender="none" styleClass="button" onclick="updateShareType();" value="Select notice type" />
-                    <apex:actionFunction action="{!setSelectedShareType}" name="setSelectedShareType" reRender="none">
-                        <apex:param name="sharetypeParam" value="" id="y" assignTo="{!selectedShareChange}" />
-                    </apex:actionFunction>
-                    <!--<apex:actionFunction action="{!setErrors}" name="setErrors" reRender="masterpanel">
-                        <apex:param name="errorParam" value="" id="z" assignTo="{!hasPageErrors}" />
-                    </apex:actionFunction> -->
-                    <script>
-                    function updateShareType(selection) {
-
-                        var statuses = document.getElementsByName('sharetype');
-                        for (var i = 0, length = statuses.length; i < length; i++) {
-
-                            console.log(statuses[i].value);
-
-                            if (statuses[i].checked) {
-                                console.log(statuses[i].value);
-
-
-                                setSelectedShareType(statuses[i].value);
-                            }
-                        }
-                    };
-                    </script>
-                    <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
+                        </div>
+                        <h3 class="heading-medium">What changes are you making to the chosen class of shares?</h3>
+                        <div class="form-group {!errorVal2}">
+                            <fieldset>
+                                <legend class="visually-hidden">What changes have you made to the chosen class of shares?</legend>
+                                <span class="error-message" id='rights-errors'>
+                                    {!currentErrorMessage2}</span>
+                                <label class="block-label" for="consolidation">
+                                    <input onclick="grabChangeType('CONSOLIDATION');" id="consolidation" type="radio" name="changesGroup" value="consolidation" /> Consolidation
+                                </label>
+                                <label class="block-label" for="sub-division">
+                                    <input onclick="grabChangeType('SUBDIVISION');" id="sub-division" type="radio" name="changesGroup" value="sub-division" /> Sub-division
+                                </label>
+                                <label class="block-label" for="redemption">
+                                    <input onclick="grabChangeType('REDEMPTION');" id="redemption" type="radio" name="changesGroup" value="redemption" /> Redemption
+                                </label>
+                                <label class="block-label" for="re-conversion">
+                                    <input onclick="grabChangeType('RECONVERSION');" id="re-conversion" type="radio" name="changesGroup" value="re-conversion" /> Re-conversion
+                                </label>
+                            </fieldset>
+                        </div>
+                        <p>Read the guidance on what
+                            <a href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/400527/Checklist_guidance_for_SH02.pdf">changes you can make.</a>
+                        </p>
+                        <div class='form-group'>
+                            <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Continue" />
+                            <apex:actionFunction status="status" action="{!setSelectedClass}" name="grabShareType" reRender="emptyPanel">
+                                <apex:param name="shareclasstype" value="" id="z" assignTo="{!selectedShareClass}" />
+                            </apex:actionFunction>
+                            <apex:actionFunction status="status" action="{!setSelectedShareChange}" name="grabChangeType" reRender="emptyPanel">
+                                <apex:param name="sharechangetype" value="" id="x" assignTo="{!selectedShareChange}" />
+                            </apex:actionFunction>
+                        </div>
+                    </apex:outputPanel>
                 </apex:outputPanel>
             </apex:form>
         </apex:define>

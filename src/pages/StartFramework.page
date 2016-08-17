@@ -32,6 +32,7 @@ Ver. Author        Date        Detail
                 </p>
              
                 <apex:outputText escape="false" value="{!pageTextAfterButton}"></apex:outputText>
+                <apex:outputText escape="false" value="{!pageTextAfterButton2}"></apex:outputText>
                 
             </apex:form>
         </apex:define>

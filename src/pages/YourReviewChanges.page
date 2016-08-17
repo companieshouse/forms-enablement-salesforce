@@ -1,0 +1,106 @@
+<apex:page title="Review your changes" showHeader="false" sidebar="false" standardStylesheets="false" action="{!goForward}" controller="crsReviewController" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!errormessage1}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!showTable}" id="BuildTable">
+                        <div class="form-group">
+                            <h2 class="heading-large">Review your changes</h2>
+                            <apex:repeat value="{!viewkeys}" var="key">
+                                <h2 class="heading-large">{!viewkeys[key]}</h2>
+                                <div class='form-group'>
+                                    <table class="check-your-answers">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Class of Shares</th>
+                                                <th scope="col" class="numeric">Previous number of shares</th>
+                                                <th scope="col" class="numeric">Previous nominal value</th>
+                                                <th scope="col" class="numeric">New number of shares</th>
+                                                <th scope="col" class="numeric">New nominal value</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <apex:repeat value="{!viewmap[key]}" var="sp">
+                                                <tr>
+                                                    <td class="col">
+                                                        <apex:outputText value="{!sp.Name}" id="Class" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.oldNumSharesIssued__c}" id="oldissue" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.OldNominalValue__c}" id="oldval" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.newNumSharesIssued__c}" id="newissue" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <apex:outputText value="{!sp.NewNominalValu__c}" id="newval" />
+                                                    </td>
+                                                    <td class="numeric">
+                                                        <a href='#' onclick='changeValue("{!sp.Id}")'>Change</a>
+                                                    </td>
+                                                </tr>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        <script>
+                        function changeValue() {
+                            // call update method and set finished adding shares to false
+                            deleteShare();
+                        }
+                        </script>
+                        <apex:actionFunction action="{!deleteShare}" name="changeValue" reRender="emptyPanel">
+                            <apex:param name="changeValue" value="" id="zzz" assignTo="{!shareID}" />
+                        </apex:actionFunction>
+                        <p>
+                            <apex:commandLink action="{!changeMoreShares}" status="status" value="Change more shares" />
+                        </p>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="datePanel">
+                        <fieldset class="form-group {!errorVal1}">
+                            <h2 class="heading-large">Date of assignment</h2>
+                            <legend class="visuallyhidden">Date of assignment</legend>
+                            <div class="form-date">
+                                <p class="form-hint">For example, 31 01 2016</p>
+                                <span class="error-message" id='shareclass-errors'>
+                                    {!errormessage1}</span>
+                                <div class="form-group form-group-day">
+                                    <label for="day">Day</label>
+                                    <apex:inputText Styleclass="form-control" id="day" value="{!varDay}" />
+                                </div>
+                                <div class="form-group form-group-month">
+                                    <label for="month">Month</label>
+                                    <apex:inputText value="{!varMonth}" Styleclass="form-control" id="month" />
+                                </div>
+                                <div class="form-group form-group-year">
+                                    <label for="year">Year</label>
+                                    <apex:inputText value="{!varYear}" Styleclass="form-control" id="year" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <div class="form-group">
+                    <apex:commandButton styleClass="button button-spacer" action="{!nextAction}" value="Continue to Statement of Capital" rendered="{!NOT(isLastPage)}" />
+                </div>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

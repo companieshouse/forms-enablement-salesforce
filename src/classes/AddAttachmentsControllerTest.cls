@@ -119,6 +119,7 @@ public class AddAttachmentsControllerTest {
         test2controller.checkDocs('Solvency');
         test2controller.checkDocs('Resolution');
         test2controller.checkAttachmentStatus();
+        //test2controller.attachmenttoDeleteId =
         test2controller.DeleteAttachments();
         test2controller.nextAction();
 

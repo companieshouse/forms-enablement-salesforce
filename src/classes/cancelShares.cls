@@ -93,7 +93,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
-    public Datetime shareCancelDate {
+    public Date shareCancelDate {
         get;
         set;
     }
@@ -141,7 +141,7 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
     }
     public void checkSharestoCancel() {
         for (Shares__c previouslycancelledshares : submissionMgr.submission.Shares__r) {
-            if (previouslycancelledshares.SHARETYPE__c == 'SH06') {
+            if (previouslycancelledshares.SHARETYPE__c == 'CANCELLEDSHARES') {
                 currentShares.add(previouslycancelledshares);
             }
         }
@@ -166,29 +166,41 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             errormessage1 = 'Please enter the correct Month';
             return null;
         }
+        if (varYear == null || String.valueOf(varyear).length() < 4 ) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Year is too short';
+            return null;
+        }
+        if (varYear < 1700 ) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct Year after 1700';
+            return null;
+        }
         if (varYear == null || varyear == 0 ) {
             hasPageErrors = true;
             errorVal1 = 'error';
             errormessage1 = 'Please enter the correct Year';
             return null;
         }
-        Datetime shareCancelDate = Datetime.newInstance(varYear, varMonth, varDay);
-        shareCancelDate.format('dd MMMMM yyyy');
+        shareCancelDate = Date.newInstance(varYear, varMonth, varDay);
+        //Date savedDate = shareCancelDate.date();
+
+        //shareCancelDate.format('dd MMMMM yyyy');
         if (shareCancelDate > Date.Today()) {
             hasPageErrors = true;
             errorVal1 = 'error';
             errormessage1 = 'Date must not be in the future';
             return null;
         }
-        Date savedDate = shareCancelDate.date();
         List<shares__c> sharestoSave = new List<Shares__c>();
         for (Shares__c sharestoAddDatesto : submissionMgr.submission.Shares__r) {
-            if (sharestoAddDatesto.SHARETYPE__c == 'SH06') {
-                sharestoAddDatesto.Date__c = savedDate;
+            if (sharestoAddDatesto.SHARETYPE__c == 'CANCELLEDSHARES') {
+                sharestoAddDatesto.Date__c = shareCancelDate;
                 sharestoSave.add(sharestoAddDatesto);
             }
         }
-
         update sharestoSave;
         // persist and save if validaiton passes
         if (!validatePageState()) return Page.TransactionException;

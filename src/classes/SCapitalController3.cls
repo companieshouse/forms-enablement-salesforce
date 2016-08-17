@@ -213,15 +213,15 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 		return pg;
 	}
 	public PageReference choosePath() {
-		if (!shareStatus) {
+		if ( shareStatus == null || !shareStatus ) {
 			persistStep();
 			return addmoreShares();
 		} else if (shareStatus) {
 			return nextAction();
-		} else if (String.valueOf(shareStatus) == 'undefined') {
-			currentErrorMessage = '<span class="error-message">You must make a selection</span>';
-			hasPageErrors = true;
-			return null;
+			//} else if (String.valueOf(shareStatus) == 'undefined') {
+			//	currentErrorMessage = '<span class="error-message">You must make a selection</span>';
+			//	hasPageErrors = true;
+			//	return null;
 		}
 		return null;
 	}
@@ -233,13 +233,15 @@ public with sharing class SCapitalController3 extends TransactionStepControllerB
 				return addmoreShares();
 			}
 		}
-		
-		submissionMgr.submission.finishedAttachments__c = false;
-		submissionMgr.persist();
-		PageReference pg = new PageReference('/Attachments');
-		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		pg.setRedirect(true);
-		return pg;
+		if (submissionMgr.submission.Form_Name__c == 'SH19') {
+			submissionMgr.submission.finishedAttachments__c = false;
+			submissionMgr.persist();
+			PageReference pg = new PageReference('/Attachments');
+			pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+			pg.setRedirect(true);
+			return pg;
+		}
+		return nextStep();
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;

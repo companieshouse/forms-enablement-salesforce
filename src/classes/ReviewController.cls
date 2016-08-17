@@ -119,6 +119,70 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public Map < String, Shares__c > shareClassMapSH02 {
+        get;
+        set;
+    }
+    public List < Shares__c > matchedSharesSH02 {
+        get;
+        set;
+    }
+    public Map < Integer, List < Shares__c >> viewmapSH02 {
+        get;
+        set;
+    }
+    public Map < Integer, String > viewkeysSH02 {
+        get;
+        set;
+    }
+    public Map < String, Shares__c > shareClassMapREd {
+        get;
+        set;
+    }
+    public List < Shares__c > matchedSharesREd {
+        get;
+        set;
+    }
+    public Map < Integer, List < Shares__c >> viewmapREd {
+        get;
+        set;
+    }
+    public Map < Integer, String > viewkeysREd {
+        get;
+        set;
+    }
+    public Map < String, Shares__c > shareClassMapCon {
+        get;
+        set;
+    }
+    public List < Shares__c > matchedSharesCon {
+        get;
+        set;
+    }
+    public Map < Integer, List < Shares__c >> viewmapCon {
+        get;
+        set;
+    }
+    public Map < Integer, String > viewkeysCon {
+        get;
+        set;
+    }
+    public Map < String, Shares__c > shareClassMapSUB {
+        get;
+        set;
+    }
+    public List < Shares__c > matchedSharesSUB {
+        get;
+        set;
+    }
+    public Map < Integer, List < Shares__c >> viewmapSUB {
+        get;
+        set;
+    }
+    public Map < Integer, String > viewkeysSUB {
+        get;
+        set;
+    }
     public Map < String, Shares__c > shareCurrencyMap {
         get;
         set;
@@ -263,6 +327,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public List < Shares__c > cC04 {
+        get;
+        set;
+    }
     public String sh08HelperText {
         get;
         set;
@@ -295,6 +363,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public String cc04HelperText {
+        get;
+        set;
+    }
     public Boolean showPromoters {
         get;
         set;
@@ -323,6 +395,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
+    public Boolean showCC04 {
+        get;
+        set;
+    }
     public Id shareID {
         get;
         set;
@@ -331,7 +407,36 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
-    public List<Shares__c> dummyShares {get; set;}
+    public Boolean showTable {
+        get;
+        set;
+    }
+    public Boolean showtotalunpaid {
+        get;
+        set;
+    }
+    public List < Shares__c > viewSHares {
+        get;
+        set;
+    }
+    public Boolean showMasterHeader {
+        get;
+        set;
+    }
+    public String confirmationTextPanel {
+        get;
+        set;
+    }
+    public Boolean showSH02 {
+        get;
+        set;
+    }
+    public Boolean showSH06 {
+        get;
+        set;
+    }
+    public Id attID {get; set;}
+    public String attName {get; set;}
     public ReviewController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -365,6 +470,22 @@ public class ReviewController extends TransactionStepControllerBase {
         matchedShares = new List < Shares__c > ();
         viewkeys = new Map < Integer, String > ();
         shareClassMap = new map < String, Shares__c > ();
+        shareClassMapSH02 = new map < String, Shares__c > ();
+        matchedSharesSH02 = new List < Shares__c > ();
+        viewmapSH02 = new Map < Integer, List < Shares__c >> ();
+        viewkeysSH02 = new Map < Integer, String > ();
+        shareClassMapSUB = new map < String, Shares__c > ();
+        matchedSharesSUB = new List < Shares__c > ();
+        viewmapSUB = new Map < Integer, List < Shares__c >> ();
+        viewkeysSUB = new Map < Integer, String > ();
+        shareClassMapCon = new map < String, Shares__c > ();
+        matchedSharesCon = new List < Shares__c > ();
+        viewmapCon = new Map < Integer, List < Shares__c >> ();
+        viewkeysCon = new Map < Integer, String > ();
+        shareClassMapREd = new map < String, Shares__c > ();
+        matchedSharesREd = new List < Shares__c > ();
+        viewmapREd = new Map < Integer, List < Shares__c >> ();
+        viewkeysREd = new Map < Integer, String > ();
         viewmap2 = new Map < Integer, List < Shares__c >> ();
         matchedShares2 = new List < Shares__c > ();
         viewkeys2 = new Map < Integer, String > ();
@@ -389,14 +510,144 @@ public class ReviewController extends TransactionStepControllerBase {
         sUBDIVISION = new List < Shares__c > ();
         sh08Family = new List < Shares__c > ();
         promoters = new List < Shares__c > ();
+        cC04 = new List < Shares__c > ();
         showCurrency = true;
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = true;
         }
-        dummyShares = submissionMgr.submission.Shares__r;
+        viewSHares = submissionMgr.submission.Shares__r;
         buildVal();
         shareRouter();
         return;
+    }
+    public void startReviewProcesses() {
+        if (submissionMgr.submission.Form_Name__c != 'DS01') {
+            buildPDF();
+        }
+    }
+    public void buildPDF() {
+
+        Attachment pdfAttachment = new Attachment();
+        Blob pdfBlob;
+        String pageName;
+        if (submissionMgr.submission.Form_Name__c == 'SH05_6_7') {pageName = 'SH06';}
+        else {pageName = submissionMgr.submission.Form_Name__c; }
+        if (submissionMgr.submission.Attachments.size() > 0) {
+            try {
+                Delete[Select id, name from Attachment where ParentId = :submissionMgr.submission.id and Name = :pageName + '.pdf'];
+            } catch (DmlException e) {
+                System.debug('DML Error in deleting' + pageName + 'Error Details are' + ' ' + e.getMessage());
+            } catch (Exception e) {
+                System.debug('General Error in deleting' + pageName + 'Error Details are' + ' ' + e.getMessage());
+            }
+        }
+        PageReference pageRef = new PageReference('/apex/' + pageName);
+        pageRef.getParameters().put('id', submissionMgr.submission.Id);
+        if (Test.IsRunningTest()) pdfBlob = Blob.valueOf('This is a test');
+        else pdfBlob = pageRef.getContent();
+        pdfAttachment.ParentId = submissionMgr.submission.Id;
+        pdfAttachment.Name = pageName + '.pdf';
+        pdfAttachment.Description = pageName;
+        pdfAttachment.Body = pdfBlob;
+        try {
+            insert pdfAttachment;
+        } catch (DmlException e) {
+            System.debug('DML Error in inserting' + pageName + 'Error Details are' + ' ' + e.getMessage());
+        } catch (Exception e) {
+            System.debug('General Error in inserting' + pageName + 'Error Details are' + ' ' + e.getMessage());
+        }
+    }
+    public void buildsubdivisionCapitalMap() {
+        if (sUBDIVISION.size() > 0) {
+            for (Shares__c shareclasslimiter : sUBDIVISION) {
+                shareClassMapSUB.put(shareclasslimiter.SHARETYPE__c, shareclasslimiter);
+            }
+            List < String > listKeys2 = new List < String > (shareClassMapSUB.keyset());
+            for (Integer i = 0; i < listKeys2.size(); i++) {
+                matchedSharesSUB = new List < Shares__c > ();
+                for (Shares__c buildShares : sUBDIVISION) {
+                    if (buildShares.SHARETYPE__c == listKeys2.get(i)) {
+                        matchedSharesSUB.add(buildShares);
+                        viewmapSUB.put(i, matchedSharesSUB);
+                        viewkeysSUB.put(i, buildShares.SHARETYPE__c);
+                    }
+                }
+            }
+            if (matchedSharesSUB.size() > 0) {
+                showTable = true;
+            }
+        } else {
+            System.debug('you have no statement of capital to iterate over');
+        }
+    }
+    public void buildConversionCapitalMap() {
+        if (rECONVERSION.size() > 0) {
+            for (Shares__c shareclasslimiter : rECONVERSION) {
+                shareClassMapCon.put(shareclasslimiter.SHARETYPE__c, shareclasslimiter);
+            }
+            List < String > listKeys2 = new List < String > (shareClassMapCon.keyset());
+            for (Integer i = 0; i < listKeys2.size(); i++) {
+                matchedSharesCon = new List < Shares__c > ();
+                for (Shares__c buildShares : rECONVERSION) {
+                    if (buildShares.SHARETYPE__c == listKeys2.get(i)) {
+                        matchedSharesCon.add(buildShares);
+                        viewmapCon.put(i, matchedSharesCon);
+                        viewkeysCon.put(i, buildShares.SHARETYPE__c);
+                    }
+                }
+            }
+            if (matchedSharesCon.size() > 0) {
+                showTable = true;
+            }
+        } else {
+            System.debug('you have no statement of capital to iterate over');
+        }
+    }
+    public void buildRedemptionCapitalMap() {
+        if (rEDEMPTION.size() > 0) {
+            for (Shares__c shareclasslimiter : rEDEMPTION) {
+                shareClassMapREd.put(shareclasslimiter.SHARETYPE__c, shareclasslimiter);
+            }
+            List < String > listKeys2 = new List < String > (shareClassMapREd.keyset());
+            for (Integer i = 0; i < listKeys2.size(); i++) {
+                matchedSharesREd = new List < Shares__c > ();
+                for (Shares__c buildShares : rEDEMPTION) {
+                    if (buildShares.SHARETYPE__c == listKeys2.get(i)) {
+                        matchedSharesREd.add(buildShares);
+                        viewmapREd.put(i, matchedSharesREd);
+                        viewkeysREd.put(i, buildShares.SHARETYPE__c);
+                    }
+                }
+            }
+            if (matchedSharesREd.size() > 0) {
+                showTable = true;
+            }
+        } else {
+            System.debug('you have no statement of capital to iterate over');
+        }
+    }
+    public void buildConsolidationCapitalMap() {
+        if (cONSOLIDATION.size() > 0) {
+            for (Shares__c shareclasslimiter : cONSOLIDATION) {
+                shareClassMapSH02.put(shareclasslimiter.SHARETYPE__c, shareclasslimiter);
+            }
+            List < String > listKeys2 = new List < String > (shareClassMapSH02.keyset());
+            for (Integer i = 0; i < listKeys2.size(); i++) {
+                matchedSharesSH02 = new List < Shares__c > ();
+                for (Shares__c buildShares : cONSOLIDATION) {
+                    if (buildShares.SHARETYPE__c == listKeys2.get(i)) {
+                        matchedSharesSH02.add(buildShares);
+                        viewmapSH02.put(i, matchedSharesSH02);
+                        viewkeysSH02.put(i, buildShares.SHARETYPE__c);
+                    }
+                }
+            }
+            if (matchedSharesSH02.size() > 0) {
+                showTable = true;
+            }
+        } else {
+            System.debug('you have no statement of capital to iterate over');
+        }
     }
     public void buildAttachments() {}
     public void confirmReviewPage() {}
@@ -429,6 +680,8 @@ public class ReviewController extends TransactionStepControllerBase {
         for (Shares__c totalShares : submissionMgr.submission.Shares__r) {
             if (totalShares.SHARETYPE__c == 'STATEMENTOFCAPITAL') {
                 sharesforBuilding.add(totalShares);
+            } else if (totalShares.SHARETYPE__c == 'COMPANYOBJECTS') {
+                cC04.add(totalShares);
             } else if (totalShares.SHARETYPE__c == 'CANCELLEDSHARES') {
                 sharesforCancelling.add(totalShares);
             } else if (totalShares.SHARETYPE__c == 'PARTICULARS') {
@@ -445,13 +698,10 @@ public class ReviewController extends TransactionStepControllerBase {
                 sUBDIVISION.add(totalShares);
             } else if (totalShares.SHARETYPE__c == 'SH08') {
                 sh08Family.add(totalShares);
-                //this should never happen as we have shares with no type
             } else if (totalShares.SHARETYPE__c == 'PROMOTER') {
                 promoters.add(totalShares);
-                //this should never happen as we have shares with no type
             } else if (totalShares.SHARETYPE__c == 'TRANSFERRED') {
                 sharesforCancelling.add(totalShares);
-                //this should never happen as we have shares with no type
             }
         }
         if (sharesforBuilding.size() > 0) {
@@ -460,7 +710,6 @@ public class ReviewController extends TransactionStepControllerBase {
             showStatementofCapital = true;
         }
         if (preParticulars.size() > 0) {
-
             //showParticulars = true;
             //showCurrency = false;
         }
@@ -484,6 +733,8 @@ public class ReviewController extends TransactionStepControllerBase {
             reviewTitle = 'Treasury shares sold or transferred';
         }
         if (sUBDIVISION.size() > 0) {
+            buildsubdivisionCapitalMap();
+            showSH02 = true;
             showSubdivision = true;
             subdivisiontableHelperText = 'Sub-division';
             shownewstructure = true;
@@ -493,29 +744,68 @@ public class ReviewController extends TransactionStepControllerBase {
             sh08HelperText = 'Class(es) of shares';
         }
         if (cONSOLIDATION.size() > 0) {
+            buildConsolidationCapitalMap();
+            showSH02 = true;
             showConsolidation = true;
             consolidationtableHelperText = 'Consolidation';
             shownewstructure = true;
         }
         if (rECONVERSION.size() > 0) {
+            buildConversionCapitalMap();
+            showSH02 = true;
             showreConversion = true;
             reconversiontableHelperText = 'Reconversion';
             showValueField = true;
         }
         if (rEDEMPTION.size() > 0) {
+            showSH02 = true;
+            buildRedemptionCapitalMap();
             showRedemption = true;
             redemptiontableHelperText = 'Redemption';
+        }
+        if (cC04.size() > 0) {
+            showCC04 = true;
+            cc04HelperText = 'Company\'s objects';
         }
         if (variations.size() > 0) {
             buildLABELS();
         }
+        if (submissionMgr.submission.Form_Name__c == 'SH19') {
+            showtotalunpaid = true;
+            confirmationTextPanel = 'I confirm that the information above is correct and this is the latest statement of capital';
+        }
+        if (submissionMgr.submission.Form_Name__c == 'SH08') {
+            showMasterHeader = false;
+            confirmationTextPanel = 'I confirm that the information above is correct';
+        }
+        if (submissionMgr.submission.Form_Name__c == 'SH05_6_7') {
+            //showMasterHeader = false;
+            confirmationTextPanel = 'I confirm that the information above is correct and this is the latest statement of capital';
+        }
+        if (submissionMgr.submission.Form_Name__c == 'SH10') {
+            //showMasterHeader = false;
+            confirmationTextPanel = 'I confirm that the information above is correct';
+        }
+        if (submissionMgr.submission.Form_Name__c == 'CC04') {
+            //showMasterHeader = false;
+            confirmationTextPanel = 'I confirm that the information above is correct';
+        }
+        if (submissionMgr.submission.Form_Name__c == 'SH02') {
+            //showMasterHeader = false;
+            confirmationTextPanel = 'I confirm that the information above is correct';
+        }
         //lastly build attachments
         if (submissionMgr.submission.Attachments.size() > 0) {
-            if (submissionMgr.submission.Attachments[0].Name != submissionMgr.submission.Form_Name__c) {
-                reviewAttachments = submissionMgr.submission.Attachments;
+            reviewAttachments = new List < Attachment > ();
+            for (Attachment reviewpageattachments : submissionMgr.submission.Attachments) {
+                if (reviewpageattachments.Name != submissionMgr.submission.Form_Name__c + '.pdf') {
+                    reviewAttachments.add(reviewpageattachments);
+                }
+            }
+            if (reviewAttachments.size() > 0) {
                 showAttachments = true;
             }
-        } else if (submissionMgr.submission.Attachments.size() == 0 || submissionMgr.submission.Attachments[0].Name == submissionMgr.submission.Form_Name__c) {
+        } else if (submissionMgr.submission.Attachments.size() == 0) {
             showAttachments = false;
         }
         // change company name
@@ -523,7 +813,6 @@ public class ReviewController extends TransactionStepControllerBase {
             displayText1 = displayText1.replace('COMPANYNAME', companyName);
         }
     }
-
     public void totalAmountUnpaid() {
         if (sharesforBuilding.size() > 0) {
             for (Shares__c sharecurrencylimiter : sharesforBuilding) {
@@ -544,7 +833,6 @@ public class ReviewController extends TransactionStepControllerBase {
             System.debug('you have no statement of capital to iterate over');
         }
     }
-
     public void buildInverseCapitalMap() {
         if (sharesforBuilding.size() > 0) {
             for (Shares__c shareclasslimiter : sharesforBuilding) {
@@ -566,15 +854,15 @@ public class ReviewController extends TransactionStepControllerBase {
         }
     }
     private void persistStep() {
-        submissionMgr.submission.finishedAddingShares__c = false;
 
         submissionMgr.persist();
+
     }
     public PageReference deleteShare() {
-
+        // delete/change share methods for Statement of capital
+        // returns user to Scapital journey to create a new sharecapital
         if (shareID != null) {
-            persistStep();
-
+            //persistStep();
             try {
                 List < Shares__c > deletedrecord = [SELECT Id, Name, Currency__c From Shares__c where ID = : shareID];
                 //throw new Form_CustomException('record you are deleting is' + deletedrecord);
@@ -584,8 +872,54 @@ public class ReviewController extends TransactionStepControllerBase {
             } catch (Exception e) {
                 System.debug('DML Error with ' + e.getMessage());
             }
-
             PageReference pg = new PageReference('/SCapital1');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+        return null;
+    }
+
+    public PageReference removeSH08() {
+        // delete/change share methods for Statement of capital
+        // returns user to Scapital journey to create a new sharecapital
+        if (shareID != null) {
+            attachmentpersistStep();
+            // persistStep();
+
+            try {
+                List < Shares__c > deletedrecord = [SELECT Id, Name From Shares__c where ID = :shareID];
+                //throw new Form_CustomException('record you are deleting is' + deletedrecord);
+                delete deletedrecord[0];
+            } catch (DmlException e) {
+                System.debug('DML Error with ' + e.getMessage());
+            } catch (Exception e) {
+                System.debug('DML Error with ' + e.getMessage());
+            }
+            PageReference pg = new PageReference('/ChangeShareClassName');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+        return null;
+    }
+    public PageReference deleteSH02Share() {
+        // delete/change share methods for SH02
+        // returns user to Scapital journey to create a new sharecapital for the 3 types of SH02 (Conversion, subdivision, consolidation, redemption)
+        if (shareID != null) {
+            submissionMgr.submission.finishedpart1__c = false;
+            submissionMgr.submission.finishedAddingShares__c = false;
+            persistStep();
+            try {
+                List < Shares__c > deletedrecord = [SELECT Id, Name, Currency__c From Shares__c where ID = : shareID];
+                //throw new Form_CustomException('record you are deleting is' + deletedrecord);
+                delete deletedrecord[0];
+            } catch (DmlException e) {
+                System.debug('DML Error with ' + e.getMessage());
+            } catch (Exception e) {
+                System.debug('DML Error with ' + e.getMessage());
+            }
+            PageReference pg = new PageReference('/CRS');
             pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
             pg.setRedirect(true);
             return pg;
@@ -595,14 +929,36 @@ public class ReviewController extends TransactionStepControllerBase {
     private void attachmentpersistStep() {
         submissionMgr.submission.finishedAddingShares__c = false;
         submissionMgr.submission.finishedAttachments__c = true;
-
+        submissionMgr.submission.finishedpart1__c = false;
         submissionMgr.persist();
     }
     public PageReference changeAttachments() {
-        if (!validatePageState()) return Page.TransactionException;
-        attachmentpersistStep();
 
-        return previousStep();
+        //throw new Form_CustomException('ATTID is ' + ' ' + attID + ' ' + 'ATTNAME is ' + ' ' + attName);
+        // delete/change share methods for SH02
+        // returns user to Scapital journey to create a new sharecapital for the 3 types of SH02 (Conversion, subdivision, consolidation, redemption)
+        if (shareID != null) {
+            submissionMgr.submission.finishedpart1__c = false;
+            submissionMgr.submission.finishedAddingShares__c = false;
+            submissionMgr.submission.finishedAttachments__c = false;
+            persistStep();
+            String realfilename;
+            realfilename = attName + '.pdf';
+            try {
+                List < Attachment > deletedrecord = [SELECT Id, Name From Attachment where ID = : attID and Name = :realfilename];
+                //throw new Form_CustomException('record you are deleting is' + deletedrecord);
+                delete deletedrecord[0];
+            } catch (DmlException e) {
+                System.debug('DML Error with ' + e.getMessage());
+            } catch (Exception e) {
+                System.debug('DML Error with ' + e.getMessage());
+            }
+            PageReference pg = new PageReference('/attachments');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+        return null;
     }
     public PageReference nextAction() {
         if (!confirmationVal) {
@@ -613,8 +969,15 @@ public class ReviewController extends TransactionStepControllerBase {
         }
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
-
-        return nextStep();
+        if (submissionMgr.submission.Form_Name__c == 'DS01' || submissionMgr.submission.Form_Name__c == 'DS02') {
+            return nextStep();
+        } else if (submissionMgr.submission.Form_Name__c != 'DS01' || submissionMgr.submission.Form_Name__c != 'DS02') {
+            PageReference pg = new PageReference('/ConfirmationFramework');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+        return null;
     }
 
     public PageReference resetTransaction(){

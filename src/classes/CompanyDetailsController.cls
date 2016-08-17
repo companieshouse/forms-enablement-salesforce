@@ -48,6 +48,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
 
+    public String previousButtonText {get; set;}
     public Boolean signingFinished {get; set;}
 
     public CompanyDetailsController() {
@@ -62,6 +63,8 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
         displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
         headerText1 = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
+        previousButtonText = transactionMgr.currentStep.previousButtonText__c == null ? '' : transactionMgr.currentStep.previousButtonText__c;
+
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         companyType = new Map<String, String>();
 

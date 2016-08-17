@@ -176,6 +176,14 @@ public with sharing class variationRightsController extends TransactionStepContr
             errormessage1 = 'Please enter the correct Year';
             return null;
         }
+        if (varYear < 1700 ) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errorVal2 = '';
+            errormessage2 = '';
+            errormessage1 = 'Please enter the correct Year (later than 1700)';
+            return null;
+        }
         Datetime variationDate = Datetime.newInstance(varYear, varMonth, varDay);
         variationDate.format('dd MMMMM yyyy');
         if (variationDate > Date.Today()) {

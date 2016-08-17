@@ -101,6 +101,6 @@
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Previous</value>
+        <value xsi:type="xsd:string">Not the right company?</value>
     </values>
 </CustomMetadata>

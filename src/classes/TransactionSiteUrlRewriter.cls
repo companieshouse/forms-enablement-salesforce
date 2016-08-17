@@ -45,7 +45,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String CURRENCYSELECTION = '/currencySelection';
     public String PREPARTICULARRIGHTS = '/preparticularrights';
     public String ADDSHAREBASE = '/addsharesbase';
-    public String TABULARDATA = '/tabulardata';
     public String ATTACHMENTS = '/attachments';
     public String SIGNINGPAGE = '/signingpage';
     public String CANCELLEDSHARES = '/cancelledshares';
@@ -59,7 +58,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String EDITYSHARESBYTYPE = '/editsharesbytype';
     public String CRS = '/crs';
     public String CHANGECRS = '/changecrs';
-    public String FREEFORM = '/freeform';
+    public String YOURREVIEWCHANGES = '/yourreviewchanges';
+    public String NONPRESCRIBED1 = '/Nonprescribed1';
+    public String NONPRESCRIBED2 = '/Nonprescribed2';
+
     public String SCAP1 = '/SCapital1';
     public String SCAP2 = '/SCapital2';
     public String SCAP3 = '/SCapital3';
@@ -99,7 +101,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_CURRENCYSELECTION = '/CurrencySelection';
     public String VF_PAGE_PREPARTICULARRIGHTS = '/PreParticularRights';
     public String VF_PAGE_ADDSHARESBASE = '/AddSharesBase';
-    public String VF_PAGE_TABULARDATA = '/TabularData';
     public String VF_PAGE_ATTACHMENTS = '/Attachments';
     public String VF_PAGE_SIGNINGPAGE = '/SigningPage';
     public String VF_PAGE_CANCELLEDSHARES = '/CancelledShares';
@@ -113,6 +114,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_EDITYSHARESBYTYPE = '/EditySharesByType';
     public String VF_PAGE_CRS = '/CRS';
     public String VF_PAGE_CHANGECRS = '/ChangeCRS';
+    public String VF_PAGE_YOURREVIEWCHANGES = '/YourReviewChanges';
     public String VF_PAGE_FREEFORM = '/FreeForm';
     public String VF_PAGE_SCAP1 = '/SCapital1';
     public String VF_PAGE_SCAP2 = '/SCapital2';
@@ -120,6 +122,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_SHOWCHANGE = '/ShowClassChanges';
     public String VF_PAGE_OBJECTSCOMPANY = '/ObjectsCompany';
     public String VF_PAGE_WITHDRAWDISSOLUTION = '/WithdrawDissolution';
+    public String VF_PAGE_NONPRESCRIBED1 = '/Nonprescribed1';
+    public String VF_PAGE_NONPRESCRIBED2 = '/Nonprescribed2';
     public String VF_PAGE_INTEGRATIONERROR = '/IntegrationError';
 
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
@@ -153,69 +157,39 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.startsWith(BEHALFDECISION))         { pr = new PageReference(VF_PAGE_BEHALFDECISION); }
         else if (url.startsWith(SELECTIONBEHALF))            { pr = new PageReference(VF_PAGE_SELECTIONBEHALF); }
         else if (url.startsWith(INPUTBEHALF))            { pr = new PageReference(VF_PAGE_INPUTBEHALF); }
-        else if (url.startsWith(CHOOSEDIRECTOR)) {
-            pr = new PageReference(VF_PAGE_CHOOSEDIRECTOR);
-        } else if (url.startsWith(WHICHDIRECTOR)) {
-            pr = new PageReference(VF_PAGE_WHICHDIRECTOR);
-        } else if (url.startsWith(OFFICERDETAILS)) {
-            pr = new PageReference(VF_PAGE_OFFICERDETAILS);
-        } else if (url.startsWith(SHAREBUILDER)) {
-            pr = new PageReference(VF_PAGE_SHAREBUILDER);
-        } else if (url.startsWith(CURRENCYSELECTION)) {
-            pr = new PageReference(VF_PAGE_CURRENCYSELECTION);
-        } else if (url.startsWith(PREPARTICULARRIGHTS)) {
-            pr = new PageReference(VF_PAGE_PREPARTICULARRIGHTS);
-        } else if (url.startsWith(ADDSHAREBASE)) {
-            pr = new PageReference(VF_PAGE_ADDSHARESBASE);
-        } else if (url.startsWith(TABULARDATA)) {
-            pr = new PageReference(VF_PAGE_TABULARDATA);
-        } else if (url.startsWith(SIGNINGPAGE)) {
-            pr = new PageReference(VF_PAGE_SIGNINGPAGE);
-        } else if (url.startsWith(ATTACHMENTS)) {
-            pr = new PageReference(VF_PAGE_ATTACHMENTS);
-        } else if (url.startsWith(CANCELLEDSHARES)) {
-            pr = new PageReference(VF_PAGE_CANCELLEDSHARES);
-        } else if (url.startsWith(SELECTSHARETYPE)) {
-            pr = new PageReference(VF_PAGE_SELECTSHARETYPE);
-        } else if (url.startsWith(CHANGESHARENAME)) {
-            pr = new PageReference(VF_PAGE_CHANGESHARENAME);
-        } else if (url.startsWith(VARIATION)) {
-            pr = new PageReference(VF_PAGE_VARIATION);
-        } else if (url.startsWith(APPLICATIONDATE)) {
-            pr = new PageReference(VF_PAGE_APPLICATIONDATE);
-        } else if (url.startsWith(FORMAPPLICATION)) {
-            pr = new PageReference(VF_PAGE_FORMAPPLICATION);
-        } else if (url.startsWith(PROMOTERS)) {
-            pr = new PageReference(VF_PAGE_PROMOTERS);
-        } else if (url.startsWith(RESOLUTIONCHANGE)) {
-            pr = new PageReference(VF_PAGE_RESOLUTIONCHANGE);
-        } else if (url.startsWith(EDITYSHARESBYTYPE)) {
-            pr = new PageReference(VF_PAGE_EDITYSHARESBYTYPE);
-        } else if (url.startsWith(CRS)) {
-            pr = new PageReference(VF_PAGE_CRS);
-        } else if (url.startsWith(CHANGECRS)) {
-            pr = new PageReference(VF_PAGE_CHANGECRS);
-        } else if (url.startsWith(FREEFORM)) {
-            pr = new PageReference(VF_PAGE_FREEFORM);
-        } else if (url.startsWith(SCAP1)) {
-            pr = new PageReference(VF_PAGE_SCAP1);
-        } else if (url.startsWith(SCAP2)) {
-            pr = new PageReference(VF_PAGE_SCAP2);
-        } else if (url.startsWith(SCAP3)) {
-            pr = new PageReference(VF_PAGE_SCAP3);
-        } else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))
-        { pr = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
-        else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))
-        { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
-        else if (url.startsWith(VF_PAGE_SHOWCHANGE))
-        { pr = new PageReference(SHOWSHARECHANGE); }
-        else if (url.startsWith(VF_PAGE_OBJECTSCOMPANY))
-        { pr = new PageReference(OBJECTSCOMPANY); }
-        else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION))
-        { pr = new PageReference(WITHDRAWDISSOLUTION); }
-        else if (url.startsWith(INTEGRATIONERROR))
+        else if (url.startsWith(CHOOSEDIRECTOR)) { pr = new PageReference(VF_PAGE_CHOOSEDIRECTOR);}
+        else if (url.startsWith(WHICHDIRECTOR)) { pr = new PageReference(VF_PAGE_WHICHDIRECTOR);}
+        else if (url.startsWith(OFFICERDETAILS)) { pr = new PageReference(VF_PAGE_OFFICERDETAILS);}
+        else if (url.startsWith(SHAREBUILDER)) { pr = new PageReference(VF_PAGE_SHAREBUILDER);}
+        else if (url.startsWith(CURRENCYSELECTION)) { pr = new PageReference(VF_PAGE_CURRENCYSELECTION);}
+        else if (url.startsWith(PREPARTICULARRIGHTS)) { pr = new PageReference(VF_PAGE_PREPARTICULARRIGHTS);}
+        else if (url.startsWith(ADDSHAREBASE)) { pr = new PageReference(VF_PAGE_ADDSHARESBASE);}
+        else if (url.startsWith(SIGNINGPAGE)) { pr = new PageReference(VF_PAGE_SIGNINGPAGE);}
+        else if (url.startsWith(ATTACHMENTS)) { pr = new PageReference(VF_PAGE_ATTACHMENTS);}
+        else if (url.startsWith(CANCELLEDSHARES)) { pr = new PageReference(VF_PAGE_CANCELLEDSHARES);}
+        else if (url.startsWith(SELECTSHARETYPE)) { pr = new PageReference(VF_PAGE_SELECTSHARETYPE);}
+        else if (url.startsWith(CHANGESHARENAME)) { pr = new PageReference(VF_PAGE_CHANGESHARENAME);}
+        else if (url.startsWith(VARIATION)) { pr = new PageReference(VF_PAGE_VARIATION);}
+        else if (url.startsWith(APPLICATIONDATE)) { pr = new PageReference(VF_PAGE_APPLICATIONDATE);}
+        else if (url.startsWith(FORMAPPLICATION)) { pr = new PageReference(VF_PAGE_FORMAPPLICATION);}
+        else if (url.startsWith(PROMOTERS)) { pr = new PageReference(VF_PAGE_PROMOTERS);}
+        else if (url.startsWith(RESOLUTIONCHANGE)) { pr = new PageReference(VF_PAGE_RESOLUTIONCHANGE);}
+        else if (url.startsWith(EDITYSHARESBYTYPE)) { pr = new PageReference(VF_PAGE_EDITYSHARESBYTYPE);}
+        else if (url.startsWith(CRS)) { pr = new PageReference(VF_PAGE_CRS);}
+        else if (url.startsWith(CHANGECRS)) { pr = new PageReference(VF_PAGE_CHANGECRS);}
+        else if (url.startsWith(VF_PAGE_YOURREVIEWCHANGES)) { pr = new PageReference(YOURREVIEWCHANGES); }
+        else if (url.startsWith(SCAP1)) { pr = new PageReference(VF_PAGE_SCAP1);}
+        else if (url.startsWith(SCAP2)) { pr = new PageReference(VF_PAGE_SCAP2);}
+        else if (url.startsWith(SCAP3)) { pr = new PageReference(VF_PAGE_SCAP3);}
+        else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE)) { pr = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
+        else if (url.startsWith(VF_PAGE_EXTDOCUSIGN)) { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
+        else if (url.startsWith(VF_PAGE_SHOWCHANGE)) { pr = new PageReference(SHOWSHARECHANGE); }
+        else if (url.startsWith(VF_PAGE_OBJECTSCOMPANY)) { pr = new PageReference(OBJECTSCOMPANY); }
+        else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) { pr = new PageReference(WITHDRAWDISSOLUTION); }
+        else if (url.startsWith(VF_PAGE_NONPRESCRIBED1)) { pr = new PageReference(NONPRESCRIBED1); }
+        else if (url.startsWith(VF_PAGE_NONPRESCRIBED2)) { pr = new PageReference(NONPRESCRIBED2); }
+		else if (url.startsWith(INTEGRATIONERROR))
         { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
-
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
     }
@@ -256,66 +230,38 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             else if (url.startsWith(VF_PAGE_BEHALFDECISION))     { friendlyPageReference = new PageReference(BEHALFDECISION); }
             else if (url.startsWith(VF_PAGE_SELECTIONBEHALF))        { friendlyPageReference = new PageReference(SELECTIONBEHALF); }
             else if (url.startsWith(VF_PAGE_INPUTBEHALF))        { friendlyPageReference = new PageReference(INPUTBEHALF); }
-            else if (url.startsWith(VF_PAGE_CHOOSEDIRECTOR)) {
-                friendlyPageReference = new PageReference(CHOOSEDIRECTOR);
-            } else if (url.startsWith(VF_PAGE_WHICHDIRECTOR)) {
-                friendlyPageReference = new PageReference(WHICHDIRECTOR);
-            } else if (url.startsWith(VF_PAGE_OFFICERDETAILS)) {
-                friendlyPageReference = new PageReference(OFFICERDETAILS);
-            } else if (url.startsWith(VF_PAGE_SHAREBUILDER)) {
-                friendlyPageReference = new PageReference(SHAREBUILDER);
-            } else if (url.startsWith(VF_PAGE_CURRENCYSELECTION)) {
-                friendlyPageReference = new PageReference(CURRENCYSELECTION);
-            } else if (url.startsWith(VF_PAGE_PREPARTICULARRIGHTS)) {
-                friendlyPageReference = new PageReference(PREPARTICULARRIGHTS);
-            } else if (url.startsWith(VF_PAGE_ADDSHARESBASE)) {
-                friendlyPageReference = new PageReference(ADDSHAREBASE);
-            } else if (url.startsWith(VF_PAGE_TABULARDATA)) {
-                friendlyPageReference = new PageReference(TABULARDATA);
-            } else if (url.startsWith(VF_PAGE_SIGNINGPAGE)) {
-                friendlyPageReference = new PageReference(SIGNINGPAGE);
-            } else if (url.startsWith(VF_PAGE_ATTACHMENTS)) {
-                friendlyPageReference = new PageReference(ATTACHMENTS);
-            } else if (url.startsWith(VF_PAGE_CANCELLEDSHARES)) {
-                friendlyPageReference = new PageReference(CANCELLEDSHARES);
-            } else if (url.startsWith(VF_PAGE_SELECTSHARETYPE)) {
-                friendlyPageReference = new PageReference(SELECTSHARETYPE);
-            } else if (url.startsWith(VF_PAGE_CHANGESHARENAME)) {
-                friendlyPageReference = new PageReference(CHANGESHARENAME);
-            } else if (url.startsWith(VF_PAGE_VARIATION)) {
-                friendlyPageReference = new PageReference(VARIATION);
-            } else if (url.startsWith(VF_PAGE_APPLICATIONDATE)) {
-                friendlyPageReference = new PageReference(APPLICATIONDATE);
-            } else if (url.startsWith(VF_PAGE_FORMAPPLICATION)) {
-                friendlyPageReference = new PageReference(FORMAPPLICATION);
-            } else if (url.startsWith(VF_PAGE_PROMOTERS)) {
-                friendlyPageReference = new PageReference(PROMOTERS);
-            } else if (url.startsWith(VF_PAGE_RESOLUTIONCHANGE)) {
-                friendlyPageReference = new PageReference(RESOLUTIONCHANGE);
-            } else if (url.startsWith(VF_PAGE_EDITYSHARESBYTYPE)) {
-                friendlyPageReference = new PageReference(EDITYSHARESBYTYPE);
-            } else if (url.startsWith(VF_PAGE_CHANGECRS)) {
-                friendlyPageReference = new PageReference(CHANGECRS);
-            } else if (url.startsWith(VF_PAGE_CRS)) {
-                friendlyPageReference = new PageReference(CRS);
-            } else if (url.startsWith(VF_PAGE_FREEFORM)) {
-                friendlyPageReference = new PageReference(FREEFORM);
-            } else if (url.startsWith(VF_PAGE_SCAP1)) {
-                friendlyPageReference = new PageReference(SCAP1);
-            } else if (url.startsWith(VF_PAGE_SCAP2)) {
-                friendlyPageReference = new PageReference(SCAP2);
-            } else if (url.startsWith(VF_PAGE_SCAP3)) {
-                friendlyPageReference = new PageReference(SCAP3);
-            } else if (url.startsWith(VF_PAGE_OBJECTSCOMPANY)) {
-                friendlyPageReference = new PageReference(OBJECTSCOMPANY);
-            } else if (url.startsWith(VF_PAGE_SHOWCHANGE)) {
-                friendlyPageReference = new PageReference(SHOWSHARECHANGE);
-            } else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) {
-                friendlyPageReference = new PageReference(WITHDRAWDISSOLUTION);
-            }else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {
+            else if (url.startsWith(VF_PAGE_CHOOSEDIRECTOR)) { friendlyPageReference = new PageReference(CHOOSEDIRECTOR); }
+            else if (url.startsWith(VF_PAGE_WHICHDIRECTOR)) { friendlyPageReference = new PageReference(WHICHDIRECTOR); }
+            else if (url.startsWith(VF_PAGE_OFFICERDETAILS)) {friendlyPageReference = new PageReference(OFFICERDETAILS);}
+            else if (url.startsWith(VF_PAGE_SHAREBUILDER)) {friendlyPageReference = new PageReference(SHAREBUILDER);}
+            else if (url.startsWith(VF_PAGE_CURRENCYSELECTION)) {friendlyPageReference = new PageReference(CURRENCYSELECTION);}
+            else if (url.startsWith(VF_PAGE_PREPARTICULARRIGHTS)) {friendlyPageReference = new PageReference(PREPARTICULARRIGHTS);}
+            else if (url.startsWith(VF_PAGE_ADDSHARESBASE)) {friendlyPageReference = new PageReference(ADDSHAREBASE);}
+            else if (url.startsWith(VF_PAGE_SIGNINGPAGE)) {friendlyPageReference = new PageReference(SIGNINGPAGE);}
+            else if (url.startsWith(VF_PAGE_ATTACHMENTS)) {friendlyPageReference = new PageReference(ATTACHMENTS);}
+            else if (url.startsWith(VF_PAGE_CANCELLEDSHARES)) {friendlyPageReference = new PageReference(CANCELLEDSHARES);}
+            else if (url.startsWith(VF_PAGE_SELECTSHARETYPE)) {friendlyPageReference = new PageReference(SELECTSHARETYPE);}
+            else if (url.startsWith(VF_PAGE_CHANGESHARENAME)) {friendlyPageReference = new PageReference(CHANGESHARENAME);}
+            else if (url.startsWith(VF_PAGE_VARIATION)) {friendlyPageReference = new PageReference(VARIATION);}
+            else if (url.startsWith(VF_PAGE_APPLICATIONDATE)) {friendlyPageReference = new PageReference(APPLICATIONDATE);}
+            else if (url.startsWith(VF_PAGE_FORMAPPLICATION)) {friendlyPageReference = new PageReference(FORMAPPLICATION);}
+            else if (url.startsWith(VF_PAGE_PROMOTERS)) {friendlyPageReference = new PageReference(PROMOTERS);}
+            else if (url.startsWith(VF_PAGE_RESOLUTIONCHANGE)) {friendlyPageReference = new PageReference(RESOLUTIONCHANGE);}
+            else if (url.startsWith(VF_PAGE_EDITYSHARESBYTYPE)) {friendlyPageReference = new PageReference(EDITYSHARESBYTYPE);}
+            else if (url.startsWith(VF_PAGE_CHANGECRS)) {friendlyPageReference = new PageReference(CHANGECRS);}
+            else if (url.startsWith(VF_PAGE_CRS)) {friendlyPageReference = new PageReference(CRS);}
+            else if (url.startsWith(VF_PAGE_YOURREVIEWCHANGES)) {friendlyPageReference = new PageReference(YOURREVIEWCHANGES);}
+            else if (url.startsWith(VF_PAGE_SCAP1)) {friendlyPageReference = new PageReference(SCAP1);}
+            else if (url.startsWith(VF_PAGE_SCAP2)) {friendlyPageReference = new PageReference(SCAP2);}
+            else if (url.startsWith(VF_PAGE_SCAP3)) {friendlyPageReference = new PageReference(SCAP3);}
+            else if (url.startsWith(VF_PAGE_OBJECTSCOMPANY)) {friendlyPageReference = new PageReference(OBJECTSCOMPANY);}
+            else if (url.startsWith(VF_PAGE_SHOWCHANGE)) {friendlyPageReference = new PageReference(SHOWSHARECHANGE);}
+            else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) {friendlyPageReference = new PageReference(WITHDRAWDISSOLUTION);}
+            else if (url.startsWith(VF_PAGE_NONPRESCRIBED1)) {friendlyPageReference = new PageReference(NONPRESCRIBED1);}
+            else if (url.startsWith(VF_PAGE_NONPRESCRIBED2)) {friendlyPageReference = new PageReference(NONPRESCRIBED2);}
+			else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {
                 friendlyPageReference = new PageReference(INTEGRATIONERROR);
             }
-
 
 
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());

@@ -17,7 +17,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="changeClassName">
                         <h1 class="heading-xlarge">
-                            {!headerText1}
+                            Changing classes of shares
                         </h1>
                         <apex:outputPanel rendered="{!showTable}" id="BuildTable">
                             <div class="form-group">
@@ -46,7 +46,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                             <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="changemoreshares" />
+                             <apex:commandLink action="{!previousAction}" value="Change more classes of shares" id="changemoreshares" />
                             <apex:actionFunction action="{!deleteShare}" name="deleteShare" reRender="masterpanel">
                                 <apex:param name="shareID" value="" id="MNO" assignTo="{!shareID}" />
                             </apex:actionFunction>
@@ -77,9 +77,9 @@
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <div class="form-group">
-                    &nbsp;</div>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
-                <br/> &nbsp;
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" />
+               </div>
+                
             </apex:form>
         </apex:define>
     </apex:composition>
