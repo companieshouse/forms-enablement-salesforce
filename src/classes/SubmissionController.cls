@@ -31,7 +31,6 @@ public with sharing class SubmissionController extends TransactionStepController
     public Boolean showDoc {get; private set;}
     public String displayHeader {get; set;}
     public String displayText1 {get; set;}
-    public String displayText2 {get; set;}
     public String subDate {get; set;}
     public String subTime {get; set;}
 
@@ -59,16 +58,8 @@ public with sharing class SubmissionController extends TransactionStepController
             submissionId = submissionMgr.submission.SubmissionId__c;
             companyName = submissionMgr.submission.CompanyName__c;
             displayHeader = transactionMgr.currentStep.Header_Text_1__c;
-            if(submissionMgr.submission.isPaymentAccount__c)
-            {
-                displayText1 = transactionMgr.currentStep.Display_Text_3__c;
-                displayText1 = displayText1.replace('PAYMENTREF', submissionMgr.submission.paymentReference__c);
-            }
-            else{
-                displayText1 = transactionMgr.currentStep.Display_Text_1__c;
-                displayText1 = displayText1.replace('PAYMENTREF', submissionMgr.submission.paymentReference__c);
-            }
-            displayText2 = transactionMgr.currentStep.Display_Text_2__c;
+            
+            displayText1 = transactionMgr.currentStep.Display_Text_1__c;
 
         } catch (Exception e) { return; }
 

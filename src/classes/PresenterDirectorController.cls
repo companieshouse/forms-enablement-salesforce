@@ -80,10 +80,16 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List < officerContainer > ();
         pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
-        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        if(submissionMgr.submission.Officers__r.size() == 1)
+        {
+            pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        }
+        else{
+            pageBody = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        }
         pageBody = pageBody.replace('COMPANYNAME', companyName);
         pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
-        pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
 
         pageTitle = pageTitle.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
         pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));

@@ -158,7 +158,6 @@ Global with sharing class CompaniesHouseCalloutsRequest {
             success = false;
         else
             success = true;
-
         return res.getBody(); 
     
     }

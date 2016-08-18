@@ -63,7 +63,15 @@ public with sharing class DirectorsListController extends TransactionStepControl
         isLPCompany = false;
         officerTerm = '';
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
-        pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        if(submissionMgr.submission.Officers__r.size() == 1)
+        {
+            pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
+        }
+        else{
+            pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+
+        }
 
         pageText = pageText.replace('COMPANYNAME', companyName);
         if (isPageAlreadyValidStep) {

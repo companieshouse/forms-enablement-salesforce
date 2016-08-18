@@ -45,7 +45,14 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         showNoError = false;
 
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
-        headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
+        if(submissionMgr.submission.Officers__r.size() == 1)
+        {
+            headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
+        }
+        else{
+            headerBox1 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c );
+        }
+        
 
 
         headerBox1 = headerBox1.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));

@@ -30,7 +30,6 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
     public String pageTitle4 {get; set;}
     public String pageBody {get; set;}
     public String pageBody2 {get; set;}
-    public String pageBodySuccess {get; set;}
     public String pageBodyFailure {get; set;}
     public String pageBodyFailureContact {get; set;}
     public Boolean pollServer {get; set;}
@@ -66,23 +65,16 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         pageBody2 += transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
         pageBody2 = pageBody2.replace('COMPANYNAME', compName);
-        pageBodySuccess = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
         pageBodyFailure = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
         pageBodyFailureContact = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
 
+        pageTitle3 = pageTitle3.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
 
-        pageTitle = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+        pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBody2 = pageBody2.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 
-        pageTitle2 = pageTitle2.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
-
-        pageTitle3 = pageTitle3.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
-
-        pageBody = pageBody.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageBody2 = pageBody2.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-
-        pageBodySuccess = pageBodySuccess.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageBodyFailure = pageBodyFailure.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageBodyFailureContact = pageBodyFailureContact.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBodyFailure = pageBodyFailure.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBodyFailureContact = pageBodyFailureContact.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         for (Contact off : submissionMgr.submission.Contacts__r) {
             if (off.isSignatory__c) {
                 i++;

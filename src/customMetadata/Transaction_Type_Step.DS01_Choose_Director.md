@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A majority of directors need to approve your request to close the company/LLP before you can proceed.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A majority of directors need to approve your request to close the company before you can proceed.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which directors will approve your request to close the company/LLP?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which directors will approve your request to close the company?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

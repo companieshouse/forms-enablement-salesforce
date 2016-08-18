@@ -23,15 +23,15 @@
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;For companies with multiple director an email will be sent to each of the director requesting their approval. You will rec</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;For companies with multiple directors an email will be sent to each of the directors requesting their approval. You will rec</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">eive an email once all the director listed have approved the application. From this email you will be able to check and complete the application to close COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">eive an email once all the directors listed have approved the application. From this email you will be able to check and complete the application to close COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The emails of one or more director(s) has been rejected. Please check the spelling or contact the director if his address email has any issues. Please start a new application to close.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The emails of one or more director has been rejected. Please check the spelling or contact the director if his address email has any issues. Please start a new application to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;One or more director(s)  has declined to sign. Please start a new application to close.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;One or more director  has declined to sign. Please start a new application to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -55,7 +55,7 @@
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director has declined to signed&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;director has declined to signed&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_4__c</field>

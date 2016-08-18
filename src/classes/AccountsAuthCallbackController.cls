@@ -146,6 +146,7 @@ public with sharing class AccountsAuthCallbackController {
             PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
             PrivateBeta_Accesslist.put('@methodsdigital.co.uk','Methds');
             PrivateBeta_Accesslist.put('@methods.co.uk','Methods');
+            PrivateBeta_Accesslist.put('01testdocu@gmail.com','STEST');
             Boolean AccessGranted = PrivateBeta_Accesslist.containsKey(userProfileName);
             Boolean chUser = PrivateBeta_Accesslist.containsKey('@'+userProfileName.subStringAfter('@'));
             If (AccessGranted == false && chUser == false) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - Behalf Which</label>
+    <label>LLDS01 - Confirmation</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,27 +19,27 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Select all who apply&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">You’ll get an email from Companies House to let you know if you’ve filled in the form correctly. If you have, your request for the LLP to be struck off will be published as a notice in your local &lt;a href=&quot;https://www.thegazette.co.uk/&quot; &gt;Gazette.&lt;/a&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">If nobody objects, the LLP will be struck off the register once the 2 months mentioned in the notice has passed.</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">The directors must inform all interested parties of the request to close within 7 days of it being submitted.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;Interested parties include:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;br/&gt;&lt;br/&gt;A second notice will be published in the Gazette - this will mean the LLP won’t legally exist anymore (it will have been ‘dissolved’)</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">It is a criminal offence not to tell all interested parties</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -47,11 +47,13 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which director needs someone to approve the request on their behalf?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">Your submission has been received.</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which director need someone to approve the request on their behalf?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;heading-medium&quot;&gt;
+REFNUMB &lt;/strong&gt;&lt;br/&gt;
+You&apos;ll need to quote this if you contact us about your request.</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -75,15 +77,15 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">7.0</value>
+        <value xsi:type="xsd:double">14.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -91,11 +93,11 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS01</value>
+        <value xsi:type="xsd:string">LLDS01</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">BehalfWhichSignatory</value>
+        <value xsi:type="xsd:string">ConfirmationFramework</value>
     </values>
     <values>
         <field>previousButtonText__c</field>

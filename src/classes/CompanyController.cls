@@ -133,6 +133,62 @@ public with sharing class CompanyController {
         companyNumber = prefix + postfix;
 
         CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+        Map<String, String> companyType = new Map<String, String>();
+        companyType.put('private-unlimited', 'Company'); //Company
+        companyType.put('ltd', 'Company'); //Company
+        companyType.put('plc', 'Company'); //Company
+        companyType.put('old-public-company', 'Company');//Company
+        companyType.put('private-limited-guarant-nsc-limited-exemption', 'Company');//Company
+        companyType.put('limited-partnership', 'LLP');//member
+        companyType.put('private-limited-guarant-nsc', 'Company');//Company
+        companyType.put('converted-or-closed', 'Company');//Company
+        companyType.put('private-unlimited-nsc', 'Company');//Company
+        companyType.put('private-limited-shares-section-30-exemption', 'Company');//Company
+        companyType.put('assurance-company', 'Company');//Company
+        companyType.put('oversea-company', 'Company');//Company
+        //companyType.put('eeig', 'European Economic Interest Grouping (EEIG)');//Ignore 
+        companyType.put('icvc-securities', 'Company');//Company
+        companyType.put('icvc-warrant', 'Company');//Company
+        companyType.put('icvc-umbrella', 'Company');//Company
+        companyType.put('industrial-and-provident-society', 'Company');//Company
+        companyType.put('northern-ireland', 'Company');//Company
+        companyType.put('northern-ireland-other', 'Company');//Company
+        companyType.put('llp', 'LLP');//member
+        companyType.put('royal-charter', 'Company');//Company
+        companyType.put('investment-company-with-variable-capital', 'Company');//Company
+        companyType.put('unregistered-company', 'Company');//Company
+        companyType.put('other', 'Company');//Company
+        companyType.put('european-public-limited-liability-company-se', 'LLP');//member
+        companyType.put('uk-establishment', 'Company');//Company
+
+        String companyTypeText = companyType.get(compProf.type);
+
+        if(transactionType.contains('DS01') || transactionType.contains('DS02'))
+        {
+            if(transactionType.contains('LL'))
+            {
+                if(!companyTypeText.equals('LLP'))
+                {
+                    currentErrorMessage = 'The company searched is not a LLP, please select use the correct form associated to your company type.';
+                    hasPageErrors = true;
+                    currentError = 'error';
+
+                    return false;
+                }
+            }
+            else
+            {
+                if(companyTypeText.equals('LLP'))
+                {
+                    currentErrorMessage = 'The company searched is a LLP, please select use the correct form associated to your company type.';
+                    hasPageErrors = true;
+                    currentError = 'error';
+
+                    return false;
+                }
+            }
+        }
+
         if (compProf.company_name == null) {
             currentErrorMessage = 'Company number does not exist';
             hasPageErrors = true;

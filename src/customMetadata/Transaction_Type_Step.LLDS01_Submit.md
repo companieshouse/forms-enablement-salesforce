@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - Behalf Which</label>
+    <label>LLDS01 - Submit</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Select all who apply&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">The application can now be submitted.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,11 +47,11 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which director needs someone to approve the request on their behalf?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">Submit your application</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which director need someone to approve the request on their behalf?&lt;/h1&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -75,7 +75,7 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>StandardView__c</field>
@@ -83,7 +83,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">7.0</value>
+        <value xsi:type="xsd:double">13.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -91,11 +91,11 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS01</value>
+        <value xsi:type="xsd:string">LLDS01</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">BehalfWhichSignatory</value>
+        <value xsi:type="xsd:string">Submission</value>
     </values>
     <values>
         <field>previousButtonText__c</field>

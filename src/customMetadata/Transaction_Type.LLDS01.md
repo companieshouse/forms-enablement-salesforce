@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - Dissolution</label>
+    <label>LLDS01 - Dissolution</label>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
@@ -24,10 +24,10 @@
     <values>
         <field>Below_Button_Text__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
-Other ways to close a company
+Other ways to close a LLP
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
-You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;
+You can also &lt;a href=&quot;https://www.gov.uk/government/publications/limited-liability-partnership-strike-off-dissolution-and-restoration&quot;&gt;close a LLP by post.&lt;/a&gt;
 &lt;/p&gt;</value>
     </values>
     <values>
@@ -80,7 +80,7 @@ A company number is a unique number issued by Companies House whe</value>
     <values>
         <field>Company_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Tell us which company you want to close
+Tell us which LLP you want to close
 &lt;/h1&gt;</value>
     </values>
     <values>
@@ -101,12 +101,12 @@ Tell us which company you want to close
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">The directors understand that they are responsible for ensuring all interested parties are notified.</value>
+        <value xsi:type="xsd:string">The members understand that they are responsible for ensuring all interested parties are notified.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Who to tell about the company&lt;/h1&gt;</value>
+Who to tell about the LLP&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
@@ -115,7 +115,7 @@ Who to tell about the company&lt;/h1&gt;</value>
     <values>
         <field>Guidance_Text_3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-The Director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;</value>
+The members must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
@@ -126,7 +126,7 @@ Interested parties include:
     <values>
         <field>Guidance_Text_5__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;who to tell.&lt;/a&gt;&lt;/p&gt;</value>
+Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/limited-liability-partnership-strike-off-dissolution-and-restoration&quot;&gt;who to tell.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
@@ -143,14 +143,14 @@ You must:
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">ll all director(s) of the company about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company&lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">ll all members of the LLP about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a LLP&lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
 It costs £8 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">quest to close a company (paid by debit or credit card, PayPal account or Companies House account).
+        <value xsi:type="xsd:string">quest to close a LLP (paid by debit or credit card, PayPal account or Companies House account).
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
 You&apos;ll need:
@@ -158,27 +158,27 @@ You&apos;ll need:
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">e company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director&lt;/li&gt;&lt;li&gt;a credit or debit card, PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">e company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each members&lt;/li&gt;&lt;li&gt;a credit or debit card, PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-Your request will need to be approved by the sole director if there&apos;s only 1, by both if there are 2, or by the majority if there are more than 2.
+Your request will need to be approved by both members if there are 2, or by the majority if there are more than 2.
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
 You can use this service to:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;request to strike off a limited company&lt;/li&gt;
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;request to strike off a LLP&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Closing a limited company
+Closing a limited limited liability partnership (LLP)
 &lt;/h1&gt;</value>
     </values>
     <values>
@@ -199,7 +199,7 @@ Closing a limited company
     </values>
     <values>
         <field>companySearchPageText__c</field>
-        <value xsi:type="xsd:string">Tell us which company you would like to close</value>
+        <value xsi:type="xsd:string">Tell us which LLP you would like to close</value>
     </values>
     <values>
         <field>customGuidanceView__c</field>

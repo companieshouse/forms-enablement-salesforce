@@ -162,7 +162,7 @@ public class PaymentController extends TransactionStepControllerBase {
         previousClicked = false;
         accountSuccess = false;
         accountFailure = false;
-        accountSuccessMsg = 'Your account payment has been validated, it will be processed when you submit the '+ submissionMgr.submission.Form_Name__c + '.';
+        accountSuccessMsg = 'Your account payment has been validated, it will be processed when you submit the '+ submissionMgr.submission.Form_Name__c + '. Your reference number is: ' + submissionMgr.submission.paymentReference__c;
         accountFailureMsg = 'Your account payment has not been validated, please use the previous button to correct the presenter id or presenter authentication code or Start again.';
         paymentReference = '';
         accountAuthCode = '';

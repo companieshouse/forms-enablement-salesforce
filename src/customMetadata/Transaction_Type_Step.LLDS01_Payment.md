@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS01 - DirectorsInputPresenter</label>
+    <label>LLDS01 - Payment</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -20,7 +20,10 @@
     <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-The directors listed on the public register for COMPANYNAME are:
+You need to pay £FEE before you can submit your request to close the LLP.
+&lt;/p&gt;
+&lt;p class=&quot;heading-medium&quot;&gt;
+How do you want to make the payment?
 &lt;/p&gt;</value>
     </values>
     <values>
@@ -41,8 +44,7 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-To help the directors recognise your request, you&apos;ll need to provide your details. We&apos;ll also use the email address you used to sign in to contact you, if necessary.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -50,9 +52,7 @@ To help the directors recognise your request, you&apos;ll need to provide your d
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Are you a director?
-&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Pay to close your LLP&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -68,7 +68,7 @@ Are you a director?
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -80,7 +80,7 @@ Are you a director?
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>StandardView__c</field>
@@ -88,7 +88,7 @@ Are you a director?
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">12.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -96,11 +96,11 @@ Are you a director?
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS01</value>
+        <value xsi:type="xsd:string">LLDS01</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">DirectorsInputList</value>
+        <value xsi:type="xsd:string">Payment</value>
     </values>
     <values>
         <field>previousButtonText__c</field>

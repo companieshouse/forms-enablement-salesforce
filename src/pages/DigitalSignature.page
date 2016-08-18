@@ -55,7 +55,6 @@ Ver. Author        Date        Detail
                 </apex:outputPanel>
                 <apex:outputPanel id="failureContact" rendered="{!successSigning}">
                     <apex:outputText escape="false" value="{!pageTitle2}" />
-                    <apex:outputText escape="false" value="{!pageBodySuccess}" />
                     <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     <br/>
                     <br/>

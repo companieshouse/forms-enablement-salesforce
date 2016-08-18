@@ -42,15 +42,20 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         showNoError = false;
 
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
-        headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
 
-        textBox1 = textBox1.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+        //Header
+        if(submissionMgr.submission.Officers__r.size() == 1)
+        {
+            headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
+        }
+        else{
+            headerBox1 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c );
+        }
+
+        //Added s at the officer term to match the content genericity of the sentence.
+        textBox1 = textBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize() + 's'));
         headerBox1 = headerBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 
-        if(submissionMgr.submission.OfficerCount__c == 1)
-        {
-            headerBox1 = headerBox1.replace('Do', 'Does');
-        }
         return;
     }
 

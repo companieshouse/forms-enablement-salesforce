@@ -36,9 +36,6 @@ public with sharing class CH_SearchControllerByOfficerListClass {
             results = 'No records found';  
         
         }else{
-        
-            results = 'Record(s) found';
-            
             itemsToDisplay = jsonData.items;
             itemsToDisplayTopLevel = jsonData;
             itemsToDisplayAddress  = jsonData.items;
