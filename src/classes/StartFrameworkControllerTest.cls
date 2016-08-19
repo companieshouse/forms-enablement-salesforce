@@ -1,14 +1,11 @@
 @IsTest public with sharing class StartFrameworkControllerTest {
-	@IsTest(SeeAllData = true) public static void StartFrameworkControllerTest() {
-		test_method_two();
-		//noGuidancePage();
-	}
 
-	@isTest static void noGuidancePage() {
+	@isTest static void noGUidance() {
 		PageReference noGuidanceTestPage = Page.StartFramework;
-		noGuidanceTestPage.getParameters().put('t', 'CC04');
+		noGuidanceTestPage.getParameters().put('t', '');
 		Test.setCurrentPage(noGuidanceTestPage);
 		StartFrameworkController noguidancecontroller = new StartFrameworkController();
+		noguidancecontroller.hasGuidancePage = false;
 		noguidancecontroller.startAction();
 	}
 

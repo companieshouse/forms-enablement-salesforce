@@ -49,7 +49,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         return;
     }
 
-    private void persistStep() {
+    @TestVisible private void persistStep() {
         if (behalfValidation != null)
             submissionMgr.submission.isBehalfSignatoryEnable__c = behalfValidation;
         submissionMgr.persist();
@@ -88,27 +88,66 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
 
         return null;
     }
-    public PageReference redirectUser() {
-        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
-        if (isPageAlreadyValidStep)
-            if (submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) {
-                if (submissionMgr.submission.Id != null) {
-                    //update the transaction first
-                    submissionMgr.submission.Status__c = 'deleteContact';
-                    //Save the transaction type
-                    String transactionType = submissionMgr.submission.Transaction_Type__c;
-                    Id presenterID = submissionMgr.submission.Presenter__c;
-                    String presenterEmail = submissionMgr.submission.ContactEmail__c;
-                    Account companyId = submissionMgr.submission.Company__r;
-                    update submissionMgr.submission;
-                    delete submissionMgr.submission;
-                    Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
-                    PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
+    //@RemoteAction
+    //@TestVisible public static Boolean refreshBoolean(String paramfunction) {
+    //    String paramInput = paramfunction;
 
-                    pg.setRedirect(true);
-                    return pg;
-                }
-            }
-        return null;
-    }
+    //    String paramValue = SecurityManager.decryptText(EncodingUtil.urlDecode(paramInput, 'UTF-8'));
+
+    //    // Submission state.
+    //    String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+    //    String stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
+
+    //    List<Transaction__c> transac = [Select Id, Historical_Valid_Step_Ids__c From Transaction__c Where Id = :submissionId Limit 1];
+    //    if ( transac.size() == 0)
+    //        return false;
+    //    //We need to detect if the page has been loaded more than 1 time
+    //    String historicalValidStepId = transac[0].Historical_Valid_Step_Ids__c;
+    //    String stepIdTXT = stepId;
+    //    Boolean isPageAlreadyValidStep = false;
+    //    if (historicalValidStepId != null)
+    //        if (historicalValidStepId.contains(stepIdTXT)) {
+    //            //We need to check if the value associated is 0 if not 0 then it is true
+    //            List<String> histStep = historicalValidStepId.split(AppConstants.DELIM_HISTORICAL_STEP);
+    //            for (Integer i = 0; i <= histStep.size() - 1; i++) {
+    //                if (histStep[i] == stepIdTXT) {
+    //                    if (Integer.valueOf(histStep[i + 1]) == 0) {
+    //                        isPageAlreadyValidStep = false;
+    //                        break;
+    //                    } else {
+    //                        isPageAlreadyValidStep = true;
+    //                        break;
+    //                    }
+    //                }
+    //            }
+    //        } else
+    //            isPageAlreadyValidStep = false;
+
+    //    System.debug('TESTD' + isPageAlreadyValidStep);
+    //    return isPageAlreadyValidStep;
+    //}
+
+    //public PageReference redirectUser() {
+    //    //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+    //    if (isPageAlreadyValidStep)
+    //        if (submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) {
+    //            if (submissionMgr.submission.Id != null) {
+    //                //update the transaction first
+    //                submissionMgr.submission.Status__c = 'deleteContact';
+    //                //Save the transaction type
+    //                String transactionType = submissionMgr.submission.Transaction_Type__c;
+    //                Id presenterID = submissionMgr.submission.Presenter__c;
+    //                String presenterEmail = submissionMgr.submission.ContactEmail__c;
+    //                Account companyId = submissionMgr.submission.Company__r;
+    //                update submissionMgr.submission;
+    //                delete submissionMgr.submission;
+    //                Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, transactionMgr.td);
+    //                PageReference pg = transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
+
+    //                pg.setRedirect(true);
+    //                return pg;
+    //            }
+    //        }
+    //    return null;
+    //}
 }

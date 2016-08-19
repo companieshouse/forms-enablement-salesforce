@@ -1,6 +1,5 @@
 @isTest
-private class BehalfWhichSignatoryControllerTest {
-
+private class variationRightsControllerTest {
 
 	@isTest static void test_method_one() {
 
@@ -18,7 +17,7 @@ private class BehalfWhichSignatoryControllerTest {
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
-		transac.Transaction_Type__c = 'DS01';
+		transac.Transaction_Type__c = 'SH10';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -32,6 +31,15 @@ private class BehalfWhichSignatoryControllerTest {
 		transac.isBehalfSignatoryEnable__c = true;
 		transac.OfficerCount__c = 1;
 		insert transac;
+
+		Attachment testAttachment = new Attachment();
+		Blob testpdfBlob;
+		testpdfBlob = Blob.valueOf('This is a test');
+		testAttachment.parentId = transac.id;
+		testAttachment.description = 'testDescription';
+		testAttachment.Name = 'TestBlob';
+		testAttachment.body = testpdfBlob;
+		insert testAttachment;
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;
@@ -48,25 +56,24 @@ private class BehalfWhichSignatoryControllerTest {
 		testoff.isSignatory__c = true;
 		insert testoff;
 
-		PageReference behalfwhichsignatoryPage = Page.BehalfWhichSignatory;
-		behalfwhichsignatoryPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(behalfwhichsignatoryPage);
-		BehalfWhichSignatoryController test1controller = new BehalfWhichSignatoryController();
-		test1controller.listOfDirectors.add(new BehalfWhichSignatoryController.officerContainer(testoff));
-		test1controller.updateDirectorList();
-		test1controller.selectedId = testoff.id;
-		test1controller.nextAction();
+		PageReference variationRightsPage = Page.VariationOfRights;
+		variationRightsPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(variationRightsPage);
+		variationRightsController test1controller = new variationRightsController();
+
 		test1controller.previousAction();
-		test1controller.behalfValidation = true;
-		test1controller.nextAction();
-		test1controller.persistStep();
-
-		//test1controller.initPage();
-
-		test1controller.updateSelectedPresenter();
-
-		test1controller.selectedId = null;
-		test1controller.nextAction();
+		test1controller.addShare();
+		test1controller.varDay = 12;
+		test1controller.addShare();
+		test1controller.varMonth = 11;
+		test1controller.addShare();
+		test1controller.varYear = 1500;
+		test1controller.addShare();
+		test1controller.varYear = 2050;
+		test1controller.addShare();
+		test1controller.varYear = 1981;
+		test1controller.addShare();
+		test1controller.variationInfo = 'variation information test info';
+		test1controller.addShare();
 	}
-
 }

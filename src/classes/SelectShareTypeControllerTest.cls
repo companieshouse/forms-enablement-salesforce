@@ -1,7 +1,5 @@
 @isTest
-private class BehalfWhichSignatoryControllerTest {
-
-
+private class SelectShareTypeControllerTest {
 	@isTest static void test_method_one() {
 
 		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
@@ -14,11 +12,14 @@ private class BehalfWhichSignatoryControllerTest {
 		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
 
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
+		Shares__c testShare1 = new Shares__c();
+
 		insert testPresenter;
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
-		transac.Transaction_Type__c = 'DS01';
+		transac.Transaction_Type__c = 'SH08';
+		transac.Form_Name__c = 'SH08';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -32,6 +33,20 @@ private class BehalfWhichSignatoryControllerTest {
 		transac.isBehalfSignatoryEnable__c = true;
 		transac.OfficerCount__c = 1;
 		insert transac;
+
+		testShare1.Transaction__c = transac.id;
+		testShare1.SHARETYPE__c = 'SH08';
+		testshare1.ActiveData__c = true;
+		insert testshare1;
+
+		Attachment testAttachment = new Attachment();
+		Blob testpdfBlob;
+		testpdfBlob = Blob.valueOf('This is a test');
+		testAttachment.parentId = transac.id;
+		testAttachment.description = 'testDescription';
+		testAttachment.Name = 'SH08';
+		testAttachment.body = testpdfBlob;
+		insert testAttachment;
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;
@@ -48,25 +63,30 @@ private class BehalfWhichSignatoryControllerTest {
 		testoff.isSignatory__c = true;
 		insert testoff;
 
-		PageReference behalfwhichsignatoryPage = Page.BehalfWhichSignatory;
-		behalfwhichsignatoryPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(behalfwhichsignatoryPage);
-		BehalfWhichSignatoryController test1controller = new BehalfWhichSignatoryController();
-		test1controller.listOfDirectors.add(new BehalfWhichSignatoryController.officerContainer(testoff));
-		test1controller.updateDirectorList();
-		test1controller.selectedId = testoff.id;
+		PageReference selectShareTypeTestPage = Page.selectShareType;
+		selectShareTypeTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(selectShareTypeTestPage);
+		SelectShareTypeController test1controller = new SelectShareTypeController();
+		test1controller.AddtocurrentShare();
+		test1controller.goForward();
+		test1controller.addnewShares();
+		test1controller.shareClassType = null;
+		test1controller.addnewShares();
+		test1controller.shareClassType = '';
+		test1controller.addnewShares();
+		test1controller.shareClassType = 'test share type';
+		test1controller.grabShareType();
+		test1controller.addnewShares();
+		test1controller.numberofshares = null;
+		test1controller.addnewShares();
+		test1controller.numberofshares = 100;
+		test1controller.addnewShares();
+		test1controller.nominalvalue = null;
+		test1controller.addnewShares();
+		test1controller.nominalvalue = 100;
+		test1controller.addnewShares();
 		test1controller.nextAction();
 		test1controller.previousAction();
-		test1controller.behalfValidation = true;
-		test1controller.nextAction();
-		test1controller.persistStep();
-
-		//test1controller.initPage();
-
-		test1controller.updateSelectedPresenter();
-
-		test1controller.selectedId = null;
-		test1controller.nextAction();
 	}
 
 }

@@ -1,5 +1,5 @@
 @isTest
-private class DirectorsListControllerTest {
+private class PresenterDirectorControllerTest {
 
 	@isTest static void test_method_one() {
 		//officers loaded
@@ -49,22 +49,23 @@ private class DirectorsListControllerTest {
 		insert testOff2;
 
 
-		PageReference directorsList = Page.DirectorsList;
-		directorsList.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(directorsList);
+		PageReference presenterDirectorTest = Page.PresenterDirector;
+		presenterDirectorTest.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(presenterDirectorTest);
 
-		DirectorsListController controller = new DirectorsListController();
-		controller.updateDirectorList();
+		PresenterDirectorController controller = new PresenterDirectorController();
+		controller.populateDirectorList();
 		controller.redirectUser();
 		controller.nextAction();
+		controller.directorPresenter = false;
+
 		controller.previousAction();
+		controller.updatePresenter();
 
-		controller.validationDirector = true;
 		controller.nextAction();
-
-		controller.validationDirector = false;
+		controller.directorPresenter = true;
 		controller.nextAction();
-		//controller.populateDirectorList();
+		controller.updatePresenter();
 
 	}
 

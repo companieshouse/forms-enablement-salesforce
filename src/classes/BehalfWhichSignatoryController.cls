@@ -52,7 +52,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         return;
     }
 
-    private void persistStep() {
+    @testvisible private void persistStep() {
         if (listOfDirectors == null)
             return;
 

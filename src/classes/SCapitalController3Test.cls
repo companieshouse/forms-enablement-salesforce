@@ -1,6 +1,6 @@
 @IsTest
-public with sharing class SCapitalControllerTest3 {
-	public SCapitalControllerTest3() {
+public with sharing class SCapitalController3Test {
+	public SCapitalController3Test() {
 		test_method_one();
 		test_method_two();
 	}
