@@ -137,6 +137,14 @@
 		<members>SCapitalController1Test</members>
 		<members>nonPrescribedTest</members>
 		<members>nonPrescribed1Test</members>
+		<members>FormApplicationControllerTest</members>
+		<members>EditSharesByTypeTest</members>
+		<members>crsReviewControllerTest</members>
+		<members>CRSControllerTest</members>
+		<members>ChangeShareClassNameTest</members>
+		<members>ChangeCRSControllerTest</members>
+		<members>cancelSharesTest</members>
+		<members>AppConstantsTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
