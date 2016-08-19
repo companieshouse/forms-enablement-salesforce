@@ -76,11 +76,11 @@ public class chooseDirector extends TransactionStepControllerBase {
         pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         String pageBodyTemp = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         errorMsg1 = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
-
+        buildDirectorsList();
         pageBodyTemp = pageBodyTemp.replace('X', String.valueOf(majoritytosign));
         errorMsg1 = errorMsg1.replace('X', String.valueOf(majoritytosign));
 
-        if(submissionMgr.submission.OfficerCount__c == 1){
+        if(builtDirectors.size() == 1){
             pageBodyTemp = pageBodyTemp.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
             errorMsg1 = errorMsg1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
         }
@@ -92,7 +92,6 @@ public class chooseDirector extends TransactionStepControllerBase {
         pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBody += pageBodyTemp;
-        buildDirectorsList();
         return;
     }
 
@@ -110,11 +109,7 @@ public class chooseDirector extends TransactionStepControllerBase {
         for (Officer__c chosenOfficer : companyDirectors) {
             if (chosenOfficer.isPresenter__c == False) {
                 builtDirectors.add(chosenOfficer);
-            } else if (chosenOfficer.IsPresenter__c == true) {
-                if (chosenOfficer.isSignatory__c == true) {
-                    majoritytosign = majoritytosign - 1;
-                }
-            }
+            } 
         }
     }
 

@@ -19,15 +19,15 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The application is being processed. The page will automatically refresh. Please wait.&lt;br/&gt;&lt;br/&gt;The following director names will appear on the application to close  COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Your signature is being saved. &lt;br/&gt; Please wait for a few moments until this has completed.&lt;br/&gt; &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;For companies with multiple directors an email will be sent to each of the directors requesting their approval. You will rec</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The director(s) will be sent an email requesting their approval to close COMPANYNAME&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">eive an email once all the directors listed have approved the application. From this email you will be able to check and complete the application to close COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;You will receive an email once the directors listed below have approved the application and this will allow you to check and complete the submisison.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -35,7 +35,7 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Your signature has been saved. &lt;br/&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Application Status&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Signature Status&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

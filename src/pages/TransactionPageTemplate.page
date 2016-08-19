@@ -20,7 +20,7 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 2.0  SylvainP      2016-04-20  Extension to GDS/Gov style
 -->
-<apex:page standardStyleSheets="false">
+<apex:page standardStyleSheets="false" >
 
 <!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--><html lang="en"><!--<![endif]--> 
@@ -50,6 +50,7 @@ Ver. Author        Date        Detail
                 <apex:insert name="content"/>
             </div>
             <div class="column-third">
+                <apex:insert name="content2"/>
             </div>
         </div>
     </main>

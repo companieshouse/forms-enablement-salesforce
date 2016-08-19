@@ -64,18 +64,22 @@ public class DirectorDetails extends TransactionStepControllerBase {
         companyName = submissionMgr.submission.CompanyName__c;
         companyDirectors = submissionMgr.submission.Officers__r;
         builtDirectors = new List < Officer__c > ();
-        if(submissionMgr.submission.OfficerCount__c > 1)
+        buildDirectorsList();
+        if(builtDirectors.size() == 1)
         {
-            pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
-            pageBody = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-        }
-        else{
             pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
             pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         }
+        else{
+            pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
+            pageBody = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        }
         
-        pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        buildDirectorsList();
+        if(builtDirectors.size() == 1)
+        {
+            pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s','')));
+        }
+
         return;
     }
     public PageReference checkDirectorStatus() {

@@ -189,7 +189,7 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
     }
     
     // Look for a custom setting record with the credentials for the server.
-    private static Account_Api_Settings__c getSettings() {
+    public static Account_Api_Settings__c getSettings() {
         // Return the first active one found.
         for (Account_Api_Settings__c s : Account_Api_Settings__c.getAll().values()) {
             if (s.Is_Active__c) { 

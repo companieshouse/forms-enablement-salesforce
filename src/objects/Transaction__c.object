@@ -742,6 +742,14 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isSignout__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isSignout</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>officerTerminology__c</fullName>
         <externalId>false</externalId>
         <label>Officer Terminology</label>

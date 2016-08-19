@@ -20,12 +20,14 @@
     <values>
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-The directors listed on the public register for COMPANYNAME are:
+The directors listed on the public register for COMPANYNAME is:
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+The directors listed on the public register for COMPANYNAME are:
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>

@@ -189,8 +189,18 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 }
             }
             nbOfOfficers = listOfDirectors.size();
+            if(nbOfOfficers == 1)
+            {
+                pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
+            }
+            else{
+                pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+
+            }
             pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
             pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
+            pageText = pageText.replace('COMPANYNAME', companyName);
         } else {
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
             //Make the call to the list of directors
@@ -261,8 +271,20 @@ public with sharing class DirectorsListController extends TransactionStepControl
             submissionMgr.submission.isLP__c = isLPCompany;
             submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
 
+            if(nbOfOfficers == 1)
+            {
+                pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
+            }
+            else{
+                pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+
+            }
+
             pageText = pageText.replace('directors', officerTerm);
+
             pageTitle = pageTitle.replace('directors', officerTerm);
+            pageText = pageText.replace('COMPANYNAME', companyName);
 
             update submissionMgr.submission;
 

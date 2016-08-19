@@ -53,7 +53,7 @@ Confirm the email address of person approving
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving on behalf of DIRECTORNAME&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Who is approving for &lt;br/&gt;DIRECTORNAME?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

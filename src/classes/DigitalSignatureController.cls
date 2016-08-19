@@ -56,11 +56,35 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         Integer i = 0;
         listOfDirectors = new List<wrapperDirector>();
 
+        for (Contact off : submissionMgr.submission.Contacts__r) {
+            if (off.isSignatory__c) {
+                i++;
+                listOfDirectors.add(new wrapperDirector(off.Name, off.Email));
+            }
+            if (off.IsPresenter__c) {
+                presenterSigning = true;
+            }
+        }
+        
+        if (listOfDirectors.size() > 1) {
+            multipleDirectors = true;
+        }
+        
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
         pageTitle2 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
         pageTitle3 = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
         pageTitle4 = (transactionMgr.currentStep.Header_Text_4__c == null ? '' : transactionMgr.currentStep.Header_Text_4__c);
-        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        
+        if (presenterSigning == true) {
+            if (listOfDirectors.size() > 1) {
+                pageBody = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
+            } else {
+                pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+            }
+        } else {
+            pageBody = '';
+        }
+        
         pageBody = pageBody.replace('COMPANYNAME', compName);
         pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         pageBody2 += transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
@@ -75,15 +99,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
 
         pageBodyFailure = pageBodyFailure.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBodyFailureContact = pageBodyFailureContact.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        for (Contact off : submissionMgr.submission.Contacts__r) {
-            if (off.isSignatory__c) {
-                i++;
-                listOfDirectors.add(new wrapperDirector(off.Name, off.Email));
-            }
-            if (off.IsPresenter__c) {
-                presenterSigning = true;
-            }
-        }
+        
 
         emailPresenter = submissionMgr.submission.Presenter__r.PersonEmail;
     }

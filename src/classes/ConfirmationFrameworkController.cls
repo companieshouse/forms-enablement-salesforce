@@ -254,8 +254,22 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             return size;
         }
     }
-    public void saveTransaction() {
+    public PageReference saveTransaction() {
+        
+        if(submissionMgr.submission.isSignout__c)
+        {
+            
+            PageReference pg = new PageReference('https://www.gov.uk/government/organisations/companies-house');
+
+            pg.setRedirect(true);
+
+            return pg;
+        }
+        
+
         persistStep();
+
+        return null;
     }
     private void persistStep() {
         submissionMgr.persist();
@@ -263,5 +277,23 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
         return previousStep();
+    }
+
+    public PageReference signoutMethod(){
+
+        Account_API_Settings__c urlSettings = AccountsAPIHelper.getSettings();
+        //Build the signout page
+        PageReference pg = new PageReference('https://' + urlSettings.Host__c + '/signout');
+
+        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+
+        pg.setRedirect(true);
+
+        //Update the record
+        submissionMgr.submission.isSignout__c = true;
+
+        update submissionMgr.submission;
+
+        return pg;
     }
 }

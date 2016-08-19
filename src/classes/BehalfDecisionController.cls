@@ -47,13 +47,15 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         if(submissionMgr.submission.Officers__r.size() == 1)
         {
             headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
+            //Added s at the officer term to match the content genericity of the sentence.
+            textBox1 = textBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize() + 's'));
         }
         else{
             headerBox1 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c );
+            textBox1 = textBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize() ));
         }
 
-        //Added s at the officer term to match the content genericity of the sentence.
-        textBox1 = textBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize() + 's'));
+        
         headerBox1 = headerBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 
         return;
