@@ -145,6 +145,8 @@
 		<members>ChangeCRSControllerTest</members>
 		<members>cancelSharesTest</members>
 		<members>AppConstantsTest</members>
+		<members>TransactionSiteUrlRewriterTest</members>
+		<members>SubmissionControllerTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>

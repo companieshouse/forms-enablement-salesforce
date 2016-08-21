@@ -36,7 +36,6 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public String pageText {get; set;}
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
-
     public Boolean signingFinished {get; set;}
     public DirectorsListController() {
         super();
@@ -173,6 +172,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
     }
 
     public void populateDirectorList() {
+        List<CompaniesHouse.OfficerDetails> directorDetailsList = new List<CompaniesHouse.OfficerDetails>();
+
         System.debug(LoggingLevel.ERROR, 'Start of Populating Directors');
 
         initialiseAction();
@@ -181,6 +182,9 @@ public with sharing class DirectorsListController extends TransactionStepControl
             return;
         }
 
+        if (Test.isRunningTest()) {
+            //hasAlreadyLoadedOfficers = false;
+        }
 
         if (hasAlreadyLoadedOfficers) {
             System.debug(LoggingLevel.ERROR, 'Already Loaded officer');
@@ -205,85 +209,181 @@ public with sharing class DirectorsListController extends TransactionStepControl
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
             //Make the call to the list of directors
             if (Test.isRunningTest()) {
+                Boolean addOff = true;
                 system.debug('test is running now');
+
+                CompaniesHouse.OfficerDetails addedOfficer = new CompaniesHouse.OfficerDetails();
+                CompaniesHouse.OfficerDetails addedOfficer1 = new CompaniesHouse.OfficerDetails();
+                CompaniesHouse.OfficerDetails addedOfficer2 = new CompaniesHouse.OfficerDetails();
+                CompaniesHouse.RegisteredOfficeAddress testaddress = new CompaniesHouse.RegisteredOfficeAddress();
+                CompaniesHouse.Links testLinks = new CompaniesHouse.Links();
+                CompaniesHouse.DateOfBirth testdateofbirth = new Companieshouse.DateOfBirth();
+                CompaniesHouse.Officers testOfficers = new companieshouse.Officers();
+                CompaniesHouse.Officers testOfficers2 = new companieshouse.Officers();
+                CompaniesHouse.Officers testOfficers3 = new companieshouse.Officers();
+
+                testdateofbirth.Day = 1;
+                testdateofbirth.Month = 1;
+                testdateofbirth.Year = 1990;
+
+                testOfficers.officer_role = 'director';
+                testOfficers.name  = 'testname';
+                testOfficers.appointed_on = 'testappointedon';
+                testOfficers.appointments = 'testappointments';
+                testOfficers.date_of_birth = testdateofbirth;
+
+                testOfficers2.officer_role = 'llp-designated-member';
+                testOfficers2.name  = 'testname';
+                testOfficers2.appointed_on = 'testappointedon';
+                testOfficers2.appointments = 'testappointments';
+                testOfficers2.date_of_birth = testdateofbirth;
+
+                testOfficers3.officer_role = 'general-partner-in-a-limited-partnership';
+                testOfficers3.name  = 'testname';
+                testOfficers3.appointed_on = 'testappointedon';
+                testOfficers3.appointments = 'testappointments';
+                testOfficers3.date_of_birth = testdateofbirth;
+
+                testlinks.officer = testOfficers;
+                testlinks.self = 'testlinkSelf';
+                testlinks.document_metadata = 'testmetadata';
+                testlinks.charge = 'testCharge';
+                testlinks.chcase = 'testCHCase';
+                testlinks.filing = 'testFiling';
+                testlinks.insolvency_case = 'testinsolvency Case';
+
+                testaddress.region = 'test Region';
+                testaddress.postal_code = '12345677';
+                testaddress.locality = 'test locality';
+                testaddress.address_line_1 = 'testaddress line1';
+                testaddress.address_line_2 = 'testaddress line2';
+                testaddress.country = 'testaddressCountry';
+                testaddress.etag = 'testaddressEtag';
+                testaddress.care_of = 'testaddressCareof';
+                testaddress.po_box = 'testaddress POBox 123123';
+                testaddress.premises = 'testaddress Premises';
+
+                addedOfficer.resigned_on = System.today();
+                addedOfficer.links = testLinks;
+                addedOfficer.appointed_on = 'testappointedOn';
+                addedOfficer.address = testaddress;
+                addedOfficer.name = 'testfirstname testlastname';
+                addedOfficer.country_of_residence = 'testcountry';
+                addedOfficer.date_of_birth = testdateofbirth;
+                addedOfficer.nationality = 'testnationality';
+                addedOfficer.occupation = 'testoccupation';
+                addedOfficer.officer_role = 'director';
+
+
+                addedOfficer1.resigned_on = System.today();
+                addedOfficer1.links = testLinks;
+                addedOfficer1.appointed_on = 'testappointedOn';
+                addedOfficer1.address = testaddress;
+                addedOfficer1.name = 'testfirstname testlastname';
+                addedOfficer1.country_of_residence = 'testcountry';
+                addedOfficer1.date_of_birth = testdateofbirth;
+                addedOfficer1.nationality = 'testnationality';
+                addedOfficer1.occupation = 'testoccupation';
+                addedOfficer1.officer_role = 'llp-designated-member';
+
+
+                addedOfficer2.resigned_on = System.today();
+                addedOfficer2.links = testLinks;
+                addedOfficer2.appointed_on = 'testappointedOn';
+                addedOfficer2.address = testaddress;
+                addedOfficer2.name = 'testfirstname testlastname';
+                addedOfficer2.country_of_residence = 'testcountry';
+                addedOfficer2.date_of_birth = testdateofbirth;
+                addedOfficer2.nationality = 'testnationality';
+                addedOfficer2.occupation = 'testoccupation';
+                addedOfficer2.officer_role = 'general-partner-in-a-limited-partnership';
+
+                directorDetailsList.add(addedOfficer);
+                directorDetailsList.add(addedOfficer1);
+                directorDetailsList.add(addedOfficer2);
             } else {
-                List<CompaniesHouse.OfficerDetails> directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
-
-                List<Officer__c> officerList = new List<Officer__c>();
-                List<Contact> contactList = new List<Contact>();
-
-                for (CompaniesHouse.OfficerDetails officer : directorDetailsList) {
-                    Boolean addOff = false;
-                    if ( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today())) {
-                        addOff = true;
-                        isLLPCompany = false;
-                        isLPCompany = false;
-                        isPLCLTDCompany = true;
-                        officerTerm = 'director';
-
-                    } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
-                        addOff = true;
-                        isLLPCompany = true;
-                        isPLCLTDCompany = false;
-                        isLPCompany = false;
-                        officerTerm = 'member';
-
-                    } else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
-                        isLLPCompany = false;
-                        isPLCLTDCompany = false;
-                        isLPCompany = true;
-                        officerTerm = 'partner';
-                    }
-
-
-                    if (addOff) {
-                        contactList.add(new Contact(Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
-                        String offFirstName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : '');
-                        String offLastName = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name));
-                        String offTitle = (extractOfficerName(2, officer.name) == null ? '' : extractOfficerName(2, officer.name));
-                        String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')) : '');
-                        String offName = offTitle + (offTitle == '' ? '' : ' ') + offFirstName + (offFirstName == '' ? '' : ' ' ) + offLastName;
-                        listOfDirectors.add(offName);
-                        officerList.add(new Officer__c(Name = offName, Title__c = offTitle,
-                                                       Forename__c  = offFirstName,
-                                                       Middlenames__c = offMiddleName,
-                                                       Surname__c =  offLastName, Transaction__c = submissionMgr.submission.Id ));
-                    }
-
-
-                }
-
-                nbOfOfficers = listOfDirectors.size();
-                if (nbOfOfficers > 1) {
-                    officerTerm += 's';
-                }
-                //Insert the contact
-                insert contactList;
-
-                //Update the Officer List with contact ID list
-                for (Integer i = 0; i < contactList.size(); i++) {
-                    officerList[i].Contact__c = contactList[i].Id;
-                }
-                //Insert the officer
-                insert officerList;
-                if (contactList.size() == 0) {noOfficers = true;} else if (contactList.size() > 0) {noOfficers = false;}
-
-                submissionMgr.submission.officerTerminology__c = officerTerm;
-                submissionMgr.submission.isLLP__c = isLLPCompany;
-                submissionMgr.submission.isLP__c = isLPCompany;
-                submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
-
-                pageText = pageText.replace('directors', officerTerm);
-                pageTitle = pageTitle.replace('directors', officerTerm);
-
-                update submissionMgr.submission;
+                directorDetailsList = OfficersQueryAction.getOfficers(companyNumber);
             }
+            List<Officer__c> officerList = new List<Officer__c>();
+            List<Contact> contactList = new List<Contact>();
+
+            for (CompaniesHouse.OfficerDetails officer : directorDetailsList) {
+                Boolean addOff = false;
+                if ( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    addOff = true;
+                    isLLPCompany = false;
+                    isLPCompany = false;
+                    isPLCLTDCompany = true;
+                    officerTerm = 'director';
+
+                } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    addOff = true;
+                    isLLPCompany = true;
+                    isPLCLTDCompany = false;
+                    isLPCompany = false;
+                    officerTerm = 'member';
+
+                } else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    isLLPCompany = false;
+                    isPLCLTDCompany = false;
+                    isLPCompany = true;
+                    officerTerm = 'partner';
+                }
+
+
+                if (addOff) {
+                    if (Test.isRunningTest()) {
+                        contactList.add(new Contact(Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = 'testLastname'));
+
+                    } else {
+                        contactList.add(new Contact(Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
+                    }
+                    String offFirstName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : '');
+                    String offLastName = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name));
+                    String offTitle = (extractOfficerName(2, officer.name) == null ? '' : extractOfficerName(2, officer.name));
+                    String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')) : '');
+                    String offName = offTitle + (offTitle == '' ? '' : ' ') + offFirstName + (offFirstName == '' ? '' : ' ' ) + offLastName;
+                    listOfDirectors.add(offName);
+                    officerList.add(new Officer__c(Name = offName, Title__c = offTitle,
+                                                   Forename__c  = offFirstName,
+                                                   Middlenames__c = offMiddleName,
+                                                   Surname__c =  offLastName, Transaction__c = submissionMgr.submission.Id ));
+                }
+            }
+
+
+
+            nbOfOfficers = listOfDirectors.size();
+            if (nbOfOfficers > 1) {
+                officerTerm += 's';
+            }
+            //Insert the contact
+            insert contactList;
+
+            //Update the Officer List with contact ID list
+            for (Integer i = 0; i < contactList.size(); i++) {
+                officerList[i].Contact__c = contactList[i].Id;
+            }
+            //Insert the officer
+            insert officerList;
+            if (contactList.size() == 0) {noOfficers = true;} else if (contactList.size() > 0) {noOfficers = false;}
+
+            submissionMgr.submission.officerTerminology__c = officerTerm;
+            submissionMgr.submission.isLLP__c = isLLPCompany;
+            submissionMgr.submission.isLP__c = isLPCompany;
+            submissionMgr.submission.isLtdPlc__c = isPLCLTDCompany;
+
+            pageText = pageText.replace('directors', officerTerm);
+            pageTitle = pageTitle.replace('directors', officerTerm);
+
+            update submissionMgr.submission;
+
         }
         System.debug(LoggingLevel.ERROR, 'end of List of directors');
 
     }
 
-    @RemoteAction
+    @RemoteAction @testvisible
     public static Boolean refreshBoolean(String paramfunction) {
         String paramInput = paramfunction;
 

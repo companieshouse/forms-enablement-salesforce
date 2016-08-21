@@ -1,6 +1,5 @@
 @isTest
-private class whichDirectorTest {
-
+private class SubmissionControllerTest {
 
 	@isTest static void test_method_one() {
 
@@ -12,13 +11,16 @@ private class whichDirectorTest {
 		Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
 
 		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
-
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
+
+		Contact testContact2 = CompaniesHouseTestData.getInstance().contact2;
 		insert testPresenter;
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
-		transac.Transaction_Type__c = 'TestForm';
+		transac.OfficerCount__c = 2;
+		transac.Status__c = 'Submission pending';
+		transac.Transaction_Type__c = 'DS01';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -29,7 +31,8 @@ private class whichDirectorTest {
 		transac.SoleDirectorPresenter__c = true;
 		transac.isPresenterMultipleDirectors__c = true;
 		insert transac;
-
+		testContact2.Transaction__c = transac.id;
+		insert testContact2;
 		testContact.Transaction__c = transac.id;
 		insert testContact;
 		Officer__c testoff = new Officer__c();
@@ -40,32 +43,34 @@ private class whichDirectorTest {
 		testoff.IsPresenter__c = true;
 		testoff.Transaction__c = transac.Id;
 		testoff.Contact__c = testContact.id;
+		testoff.isSignatory__c = true;
+
 		insert testoff;
 
-		PageReference whichDirector1testpage = Page.whichDirector;
-		whichDirector1testpage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(whichDirector1testpage);
-		whichDirector test1controller = new whichDirector();
+		Officer__c testoff2 = new Officer__c();
+		testoff2.Surname__c = 'testsurname2';
+		testoff2.Forename__c = 'testforename2';
+		testoff2.Middlenames__c = 'testmiddlename2';
+		testoff2.Email__c = 'testEmail2@testemail2.com';
+		testoff2.IsPresenter__c = false;
+		testoff2.Transaction__c = transac.Id;
+		testoff2.Contact__c = testContact2.id;
+		testoff2.isSignatory__c = true;
 
-		test1controller.checkDirectorStatus();
-		test1controller.selectPresenter();
-		test1controller.nextAction();
-		test1controller.selectedid = testoff.id;
-		test1controller.selectPresenter();
+		insert testoff2;
+
+
+		PageReference submissionFrameworkPage = Page.Submission;
+		submissionFrameworkPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(submissionFrameworkPage);
+		SubmissionController test1controller = new SubmissionController();
+
 		test1controller.nextAction();
 		test1controller.previousAction();
-		test1controller.isPageAlreadyValidStep = true;
-		system.debug('your transaction manager' + test1controller.transactionMgr);
-		test1controller.isPageAlreadyValidStep = true;
-
-		//test1controller.transactionMgr = new TransactionManager('DS01');
-		test1controller.redirectUser();
-		//test1controller.checkDirectorStatus();
-
 	}
 
 	@isTest static void test_method_two() {
-		//multiple test
+
 		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
 
 		Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
@@ -74,26 +79,29 @@ private class whichDirectorTest {
 		Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
 
 		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
-
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
+
+		Contact testContact2 = CompaniesHouseTestData.getInstance().contact2;
 		insert testPresenter;
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
-		transac.Transaction_Type__c = 'TestForm';
+		transac.OfficerCount__c = 2;
+		transac.Status__c = 'Error';
+		transac.Transaction_Type__c = 'DS01';
 		transac.Company__c = testCompany.Id;
+		transac.isPaymentAccount__c = true;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
 		transac.finishedAttachments__c = true;
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
-		transac.isPresenterMultipleDirectors__c = true;
-		transac.Presenter__c = testPresenter.Id;
-		transac.company__r = testcompany;
 		transac.SoleDirectorPresenter__c = true;
+		transac.isPresenterMultipleDirectors__c = true;
 		insert transac;
-
+		testContact2.Transaction__c = transac.id;
+		insert testContact2;
 		testContact.Transaction__c = transac.id;
 		insert testContact;
 		Officer__c testoff = new Officer__c();
@@ -104,28 +112,30 @@ private class whichDirectorTest {
 		testoff.IsPresenter__c = true;
 		testoff.Transaction__c = transac.Id;
 		testoff.Contact__c = testContact.id;
+		testoff.isSignatory__c = true;
+
 		insert testoff;
 
-		PageReference whichDirector1testpage = Page.whichDirector;
-		whichDirector1testpage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(whichDirector1testpage);
-		whichDirector test1controller = new whichDirector();
-		test1controller.checkDirectorStatus();
-		test1controller.currentError = '';
-		test1controller.selectPresenter();
-		test1controller.nextAction();
-		test1controller.selectedid = testoff.id;
-		test1controller.selectPresenter();
+		Officer__c testoff2 = new Officer__c();
+		testoff2.Surname__c = 'testsurname2';
+		testoff2.Forename__c = 'testforename2';
+		testoff2.Middlenames__c = 'testmiddlename2';
+		testoff2.Email__c = 'testEmail2@testemail2.com';
+		testoff2.IsPresenter__c = false;
+		testoff2.Transaction__c = transac.Id;
+		testoff2.Contact__c = testContact2.id;
+		testoff2.isSignatory__c = true;
+
+		insert testoff2;
+
+
+		PageReference submissionFrameworkPage = Page.Submission;
+		submissionFrameworkPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(submissionFrameworkPage);
+		SubmissionController test1controller = new SubmissionController();
+
 		test1controller.nextAction();
 		test1controller.previousAction();
-		test1controller.isPageAlreadyValidStep = false;
-		system.debug('your transaction manager' + test1controller.transactionMgr.td);
-
-		//test1controller.transactionMgr = new TransactionManager('DS01');
-		test1controller.redirectUser();
-		//test1controller.checkDirectorStatus();
-
-
 	}
 
 }

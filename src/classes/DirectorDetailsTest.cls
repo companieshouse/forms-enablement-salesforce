@@ -34,6 +34,7 @@ public with sharing class DirectorDetailsTest {
 		insert testContact2;
 		testContact.Transaction__c = transac.id;
 		insert testContact;
+
 		Officer__c testoff = new Officer__c();
 		testoff.Surname__c = 'testsurname';
 		testoff.Forename__c = 'testforename';
@@ -68,7 +69,13 @@ public with sharing class DirectorDetailsTest {
 		test1controller.nextAction();
 		test1controller.previousAction();
 		test1controller.redirectUser();
+		test1controller.emailValidation('testemailemail.com', 'testusernameString');
+		test1controller.emailValidation('testemail@emailcom', 'testusernameString');
+		test1controller.emailValidation('testemail@email.com', 'testusernameString');
 
+		test1controller.emailComparison('testemail@email.com', 'testErroremail@email.com', 'testpersonusername');
+		test1controller.emailComparison('testemail@email.com', 'testemail@email.com', 'testpersonusername');
+		test1controller.saveWrappedDirectorsSelection();
 	}
 
 }

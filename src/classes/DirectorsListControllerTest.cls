@@ -1,4 +1,4 @@
-@isTest
+@isTest(seealldata = true)
 private class DirectorsListControllerTest {
 
 	@isTest static void test_method_one() {
@@ -24,8 +24,6 @@ private class DirectorsListControllerTest {
 
 		insert testCompany;
 
-
-
 		Transaction__c transac = testData.tx;
 		transac.Form_Name__c = 'DS01';
 		transac.Transaction_Type__c = 'DS01';
@@ -35,6 +33,7 @@ private class DirectorsListControllerTest {
 		transac.officerTerminology__c = 'test';
 		transac.isDigitalSignatureNeeded__c = true;
 		insert transac;
+
 		con1.Account = testCompany;
 		con2.Account = testCompany;
 
@@ -42,17 +41,19 @@ private class DirectorsListControllerTest {
 		insert con2;
 
 		testOff2.Transaction__c = transac.id;
+		testOff2.Name = 'test 2Name';
 		testOff2.Contact__c = con1.Id;
 
+		testoff1.Name = 'test 1Name';
 		testoff1.transaction__c = transac.id;
 		testOff1.Contact__c = con2.Id;
 		insert testOff1;
 		insert testOff2;
 
 
-		PageReference directorsList = Page.DirectorsList;
-		directorsList.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(directorsList);
+		PageReference directorsListPage = Page.DirectorsList;
+		directorsListPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(directorsListPage);
 
 		DirectorsListController controller = new DirectorsListController();
 		controller.extractOfficerName(0, 'name, name');
@@ -81,12 +82,11 @@ private class DirectorsListControllerTest {
 
 
 		controller.nextAction();
-		controller.companyNumber = null;
-		controller.populateDirectorList();
-
 		controller.companyNumber = '05448736';
 		controller.populateDirectorList();
-
+		controller.companyNumber = 'null';
+		controller.hasAlreadyLoadedOfficers = false;
+		controller.populateDirectorList();
 	}
 
 }
