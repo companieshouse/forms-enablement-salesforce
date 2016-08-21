@@ -27,7 +27,8 @@ private class DirectorsListControllerTest {
 
 
 		Transaction__c transac = testData.tx;
-		transac.Form_Name__c = 'TestForm';
+		transac.Form_Name__c = 'DS01';
+		transac.Transaction_Type__c = 'DS01';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -54,17 +55,37 @@ private class DirectorsListControllerTest {
 		Test.setCurrentPage(directorsList);
 
 		DirectorsListController controller = new DirectorsListController();
+		controller.extractOfficerName(0, 'name, name');
+		controller.extractOfficerName(1, 'name, name');
+		controller.extractOfficerName(2, 'name, name');
+		controller.extractOfficerName(0, 'name');
+		controller.hasAlreadyLoadedOfficers = false;
+		controller.initialiseStep();
+		controller.validationDirector = false;
 		controller.updateDirectorList();
 		controller.redirectUser();
 		controller.nextAction();
 		controller.previousAction();
 
-		controller.validationDirector = true;
+		controller.validationDirector = null;
 		controller.nextAction();
 
-		controller.validationDirector = false;
+		controller.validationDirector = true;
 		controller.nextAction();
-		//controller.populateDirectorList();
+		controller.validationDirector = null;
+		controller.validateStep();
+		controller.validationDirector = false;
+		controller.validateStep();
+		controller.validationDirector = true;
+		controller.validateStep();
+
+
+		controller.nextAction();
+		controller.companyNumber = null;
+		controller.populateDirectorList();
+
+		controller.companyNumber = '05448736';
+		controller.populateDirectorList();
 
 	}
 

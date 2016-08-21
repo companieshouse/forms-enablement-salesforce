@@ -8,16 +8,45 @@ private class CompanyControllerTest {
 		Test.setCurrentPage(companyTestPage);
 
 		CompanyController controller = new CompanyController();
-
+		controller.companyNumber = '';
+		controller.nextAction();
 		controller.companyNumber = '123456789';
+		controller.nextAction();
+		controller.companyNumber = '12345';
+		controller.nextAction();
+		controller.companyNumber = '12345jkl';
+		controller.nextAction();
+		controller.companyNumber = '1234567';
 		controller.nextAction();
 		controller.previousAction();
 
 		controller.companyNumber = '12345678';
 		controller.nextAction();
-		controller.previousAction();
 
 	}
 
 
+	@isTest static void test_method_two() {
+		PageReference companyTestPage = Page.Company;
+		companyTestPage.getParameters().put('t', 'SH02');
+
+		Test.setCurrentPage(companyTestPage);
+
+		CompanyController controller = new CompanyController();
+		controller.companyNumber = '';
+		controller.nextAction();
+		controller.companyNumber = '123456789';
+		controller.nextAction();
+		controller.companyNumber = '12345';
+		controller.nextAction();
+		controller.companyNumber = '12345jkl';
+		controller.nextAction();
+		controller.companyNumber = '1234567';
+		controller.nextAction();
+		controller.previousAction();
+		controller.initialiseAction();
+		controller.companyNumber = '12345678';
+		controller.nextAction();
+
+	}
 }

@@ -1,5 +1,5 @@
 @isTest
-public with sharing class DirectorDetailsTest {
+private class TransactionSiteUrlRewriterTest {
 
 	@isTest static void test_method_one() {
 
@@ -59,16 +59,20 @@ public with sharing class DirectorDetailsTest {
 		insert testoff2;
 
 
-		PageReference officerDetailsTestPage = Page.OfficerDetails;
-		officerDetailsTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		Test.setCurrentPage(officerDetailsTestPage);
-		DirectorDetails test1controller = new DirectorDetails();
 
-		test1controller.checkDirectorStatus();
-		test1controller.nextAction();
-		test1controller.previousAction();
-		test1controller.redirectUser();
+		TransactionSiteUrlRewriter test1controller = new TransactionSiteUrlRewriter();
+
+		List<ApexPage> listOfPages = [SELECT ApiVersion, ControllerKey, ControllerType, CreatedById, CreatedDate, Description, MasterLabel, LastModifiedById, LastModifiedDate, Markup, Name, NamespacePrefix, Id, SystemModstamp FROM ApexPage];
+
+		List<PageReference> listofRefs = new List<PageReference>();
+
+		for (Integer i = 0; i < listOfPages.size(); i++) {
+
+			PageReference testPageRef = new PageReference(listOfPages[i].Name);
+			test1controller.mapRequestUrl(testPageRef);
+			listofRefs.add(testPageRef);
+			test1controller.generateUrlFor(listofRefs);
+		}
 
 	}
-
 }
