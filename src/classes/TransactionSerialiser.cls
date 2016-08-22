@@ -737,7 +737,7 @@ public class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
-		if (transact.Form_Name__c == 'DS01') {
+		if (transact.Form_Name__c.contains('DS01')) {
 
 			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
 
@@ -767,7 +767,7 @@ public class TransactionSerialiser {
 			formdata form = new formdata(fil, corp);
 			//Get the attachment into the attachment object
 			//
-			List < Attachment > attRec = [Select Id, Body from Attachment where parentId = : transact.Id];
+			List < Attachment > attRec = [Select Id, Body from Attachment where parentId = : transact.Id Order by CreatedDate DESC ];
 			if (attRec == null) {
 				return JSON.serialize('Transaction must have a form attached.');
 			}
@@ -787,7 +787,7 @@ public class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
-		if (transact.Form_Name__c == 'DS02') {
+		if (transact.Form_Name__c.contains('DS02')) {
 
 			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
 
