@@ -125,7 +125,7 @@
             <div style="container">
                 <header>
                     <div class="primary_header">
-                        <p><img src="{!$Resource.Logo}"/>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">DS01</strong><strong class="HeaderText2">(ef)</strong></p>
+                        <p><img src="{!$Resource.Logo}"/> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS01</strong><strong class="HeaderText2">(ef)</strong></p>
                     </div>
                     <div id="test" class="PDFBody" >
                         <div id="rectangle" >

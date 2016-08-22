@@ -521,7 +521,7 @@ public class ReviewController extends TransactionStepControllerBase {
         return;
     }
     public void startReviewProcesses() {
-        if (submissionMgr.submission.Form_Name__c != 'DS01') {
+        if (!submissionMgr.submission.Form_Name__c.contains('DS01')) {
             buildPDF();
         }
     }
@@ -652,7 +652,7 @@ public class ReviewController extends TransactionStepControllerBase {
     public void buildAttachments() {}
     public void confirmReviewPage() {}
     public void buildVal() {
-        if (submissionMgr.submission.Form_Name__c == 'DS01') {
+        if (submissionMgr.submission.Form_Name__c.contains('DS01')) {
             confirmationVal = true;
         } else {
             confirmationVal = false;
@@ -969,9 +969,9 @@ public class ReviewController extends TransactionStepControllerBase {
         }
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
-        if (submissionMgr.submission.Form_Name__c == 'DS01' || submissionMgr.submission.Form_Name__c == 'DS02') {
+        if (submissionMgr.submission.Form_Name__c.contains('DS01') || submissionMgr.submission.Form_Name__c.contains('DS02')) {
             return nextStep();
-        } else if (submissionMgr.submission.Form_Name__c != 'DS01' || submissionMgr.submission.Form_Name__c != 'DS02') {
+        } else if (!submissionMgr.submission.Form_Name__c.contains('DS01') || !submissionMgr.submission.Form_Name__c.contains('DS02')) {
             PageReference pg = new PageReference('/ConfirmationFramework');
             pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
             pg.setRedirect(true);

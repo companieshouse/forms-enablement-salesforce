@@ -214,7 +214,7 @@ public class FormsApiClient {
 
         //call TransactionSerialiser to get JSON
         String jsonPartBody = TransactionSerialiser.transactionToJSON(tx);
-        if (tx.Form_Name__c == 'DS01') {
+        if (tx.Form_Name__c.contains('DS01')) {
             jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
             jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
             jsonPartBody = jsonPartBody.remove('"shares" : null,');
@@ -224,7 +224,7 @@ public class FormsApiClient {
             jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
             jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
         }
-        if(tx.Form_Name__c == 'DS02')
+        if(tx.Form_Name__c.contains('DS02'))
         {//\n
             jsonPartBody = jsonPartBody.remove('"payment" : {');
             jsonPartBody = jsonPartBody.remove('"referenceNumber" : null,');

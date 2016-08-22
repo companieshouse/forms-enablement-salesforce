@@ -142,10 +142,10 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
                 pageBody2 += transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
                 warningText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
-                if (submissionMgr.submission.Transaction_Type__c == 'DS01') {
+                if (submissionMgr.submission.Transaction_Type__c.contains('DS01')) {
                     isDS01 = true;
                     isDS02 = false;
-                } else  if (submissionMgr.submission.Transaction_Type__c == 'DS02') {
+                } else  if (submissionMgr.submission.Transaction_Type__c.contains('DS02')) {
                     isDS02 = true;
                     isDS01 = false;
 
