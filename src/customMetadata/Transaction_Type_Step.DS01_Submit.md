@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">The payment has been successful and your Payment reference number is: PAYMENTREF.</value>
+        <value xsi:type="xsd:string">The payment has been successful and your payment reference number is: PAYMENTREF.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">The account informations has been validated, and your account reference number is: PAYMENTREF.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Application is not yet submitted</value>
+        <value xsi:type="xsd:string">Submit your application</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -55,6 +55,10 @@
     </values>
     <values>
         <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

@@ -70,12 +70,9 @@
         <externalId>false</externalId>
         <inlineHelpText>Account number of the user transaction</inlineHelpText>
         <label>Account Number</label>
-        <precision>8</precision>
         <required>false</required>
-        <scale>0</scale>
         <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Amount__c</fullName>
@@ -703,6 +700,14 @@ to any promoter of the company?</inlineHelpText>
         <externalId>false</externalId>
         <inlineHelpText>DO NOT TOUCH THIS FIELD, BACK END ONLY</inlineHelpText>
         <label>is Presenter Multiple Director?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isReviewTrigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isReviewTrigger</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

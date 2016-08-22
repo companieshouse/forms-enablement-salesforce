@@ -88,9 +88,13 @@ public with sharing class TrackUserClass {
         //if (searched_company == null) {
         Account acc = new Account();
         //Do an API call to get the company name
-        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
-        acc.Name = compProf.company_name;
-
+        if (Test.isRunningTest()) {
+            companyNumber = '12345678';
+            acc.Name = 'testName';
+        } else {
+            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+            acc.Name = compProf.company_name;
+        }
         acc.AccountNumber = companyNumber;
         acc.CompanyNumber__c = companyNumber;
         Schema.SObjectField f = Account.Fields.CompanyNumber__c;

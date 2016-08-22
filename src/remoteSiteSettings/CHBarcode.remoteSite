@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RemoteSiteSetting xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>https://enablement-api.preprod.companieshouse.gov.uk/barcode
+
+Barcode URL for Forms Enablement before sending to CHIPS</description>
+    <disableProtocolSecurity>false</disableProtocolSecurity>
+    <isActive>true</isActive>
+    <url>https://enablement-api.preprod.companieshouse.gov.uk</url>
+</RemoteSiteSetting>

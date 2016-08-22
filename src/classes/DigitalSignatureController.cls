@@ -5,9 +5,7 @@ Copyright © 2016  Methods Digital
 ======================================================
 Purpose:
 -------
-
 Controller class for the Visualforce Page: DigitalSignature
-
 ======================================================
 ======================================================
 History
@@ -29,13 +27,16 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
     public String pageTitle {get; set;}
     public String pageTitle2 {get; set;}
     public String pageTitle3 {get; set;}
+    public String pageTitle4 {get; set;}
     public String pageBody {get; set;}
     public String pageBody2 {get; set;}
     public String pageBodySuccess {get; set;}
     public String pageBodyFailure {get; set;}
+    public String pageBodyFailureContact {get; set;}
     public Boolean pollServer {get; set;}
-    public Integer waittime = 0;
-    public String statustoshow {get; set;}
+    public Integer waittime {get; set;}
+    public Boolean failureEmail {get; set;}
+
     public DigitalSignatureController() {
         super();
 
@@ -44,8 +45,11 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
 
     public void initialiseStep() {
         pendingPage = false;
+        waittime = 0;
         successSigning = false;
         failureSigning = false;
+        failureEmail = false;
+        pollServer =true;
         skipPage = false;
         presenterSigning = false;
         multipleDirectors = false;
@@ -56,18 +60,29 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
         pageTitle2 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
         pageTitle3 = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
+        pageTitle4 = (transactionMgr.currentStep.Header_Text_4__c == null ? '' : transactionMgr.currentStep.Header_Text_4__c);
         pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         pageBody = pageBody.replace('COMPANYNAME', compName);
         pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+        pageBody2 += transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+        pageBody2 = pageBody2.replace('COMPANYNAME', compName);
         pageBodySuccess = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
         pageBodyFailure = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
+        pageBodyFailureContact = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
 
-        pageTitle = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageTitle = pageTitle.replace('director(s)', 'Director(s)');
+
+        pageTitle = pageTitle.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+
+        pageTitle2 = pageTitle2.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+
+        pageTitle3 = pageTitle3.replace('Director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+
         pageBody = pageBody.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBody2 = pageBody2.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
 
         pageBodySuccess = pageBodySuccess.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         pageBodyFailure = pageBodyFailure.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        pageBodyFailureContact = pageBodyFailureContact.replace('director(s)', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         for (Contact off : submissionMgr.submission.Contacts__r) {
             if (off.isSignatory__c) {
                 i++;
@@ -79,6 +94,29 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
         }
 
         emailPresenter = submissionMgr.submission.Presenter__r.PersonEmail;
+    }
+
+    public PageReference resetTransaction(){
+        //The framework has been decomissioned to now redirect to the company details page once you click the link start again
+
+            if(submissionMgr.submission.Id != null)
+            {   
+                //update the transaction first
+                submissionMgr.submission.Status__c = 'deleteContact';
+                //Save the transaction type
+                String transactionType = submissionMgr.submission.Transaction_Type__c;
+                Id presenterID = submissionMgr.submission.Presenter__c;
+                String presenterEmail = submissionMgr.submission.ContactEmail__c;
+                Account companyId = submissionMgr.submission.Company__r;
+                update submissionMgr.submission;
+                delete submissionMgr.submission;
+                TransactionManager tr = new TransactionManager(transactionType);
+                Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyId, tr.td);
+                return tr == null ? null : tr.firstStep(submissionId);
+
+            }
+
+            return null;
     }
 
     public PageReference initSignature() {
@@ -104,14 +142,32 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             return nextAction();
         }
 
+        if(submissionMgr.submission.Status__c == 'Contact email Error')
+        {
+            //Get the contact in the list and display the list of error
+            listOfDirectors.clear();
+
+            for (Contact off : submissionMgr.submission.Contacts__r) {
+                if(off.RecipientStatus__c == 'AutoResponded')
+                {
+                    listOfDirectors.add(new wrapperDirector(off.Name, off.Email));
+                }
+            }
+
+            pollServer = false;
+            failureEmail = true;
+            return null;
+        }
 
 
         if (submissionMgr.submission.isSigningStarted__c || !presenterSigning) {
             //Determine if it has been declined or not
             if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED) {
+                pollServer = false;
                 successSigning = true;
                 return null;
             } else if (submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                pollServer = false;
                 failureSigning = true;
                 return null;
             }
@@ -125,43 +181,156 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             }
             pendingPage = true;
 
-            List<Transaction__c> recs = [select Id, Name, Status__c from Transaction__c where ID = :submissionMgr.submission.Id];
-            if (submissionMgr.submission.officers__r.size() == 1) {
-
-                if (recs[0].Status__c == 'Signed') {
-                    pollServer = false;
-                    PageReference pg = new PageReference('/DigitalSignature');
-                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                    pg.setRedirect(false);
-                    return pg;
-                }
-            }
-            pollServer = true;
-            waittime++;
-            statustoshow = recs[0].Status__c;
-            if (waittime == 8) {
-                if (submissionMgr.submission.officers__r.size() == 1) {
-                    //sole presenter signing and docusign not responding after ten seconds
-                    if (submissionMgr.submission.officers__r[0].IsPresenter__c == true) {
-                        pollServer = false;
-
-                        return restartPresenterSigning();
-                    }
-                } else if (submissionMgr.submission.officers__r.size() > 1) {
-                    // presenter signed and docusign still outstanding with other signatories
-                    // presenter will receive a status email to track the progress
-                    // stop polling server
-
-                    pollServer = false;
-                    return null;
-                }
-            }
             return null;
         }
 
 
 
         return nextAction();
+
+    }
+
+
+    public PageReference pollMethods(){
+
+        List<Contact> lCont = [Select Id,DateSigned__c,RecipientStatus__c,Email, isPresenter__c  From Contact Where Transaction__c = :submissionMgr.submission.Id];
+
+        Boolean hasSigned = false;
+        Boolean hasWrongEmail = false;
+
+        for(Contact off :lCont)
+        {
+            if(off.isPresenter__c)
+            {
+                if(off.DateSigned__c != null){
+                    hasSigned = true;
+                }
+            }
+            if(off.RecipientStatus__c == 'AutoResponded')
+            {
+                hasWrongEmail = true;
+            }
+        }
+
+        if(hasWrongEmail)
+        {
+            submissionMgr.submission.Status__c = 'Contact email Error';
+            update submissionMgr.submission;
+
+            PageReference pg = new PageReference('/DigitalSignature');
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+
+        if(presenterSigning)
+            if(hasSigned)
+            {
+                if(lCont.size() == 1)
+                {
+                    submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SIGNED;
+                    update submissionMgr.submission;
+
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+
+                }
+                else{
+                    if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                        PageReference pg = new PageReference('/DigitalSignature');
+                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+                    else if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED)
+                    {
+                        PageReference pg = new PageReference('/DigitalSignature');
+                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+
+                    pendingPage = true;
+                    pollServer = false;
+
+                }
+            }
+            else
+            {
+                if(lCont.size() == 1)
+                {
+                    if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                        PageReference pg = new PageReference('/DigitalSignature');
+                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+
+                    waittime++;
+                    pollServer = true;
+                }
+                else{
+                    waittime++;
+                    pollServer = true;
+                }
+            }
+
+        if(waittime == 8)
+        {
+            if(presenterSigning)
+                if(lCont.size() == 1)
+                {
+                    if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                        PageReference pg = new PageReference('/DigitalSignature');
+                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+                    else if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED)
+                    {
+                        PageReference pg = new PageReference('/DigitalSignature');
+                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+
+                    pollServer = false;
+                    return this.restartPresenterSigning();
+                }
+                else{
+                    if(submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
+                        PageReference pg = new PageReference('/DigitalSignature');
+                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+                    pollServer = false;
+                    return this.restartPresenterSigning();
+
+                }
+            if(!presenterSigning)
+            {
+                if(hasWrongEmail)
+                {
+                    submissionMgr.submission.Status__c = 'Contact email Error';
+                    update submissionMgr.submission;
+
+                    PageReference pg = new PageReference('/DigitalSignature');
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
+                }
+                pollServer = false;
+                return null;
+            }
+        }
+        else{
+            if(!presenterSigning)
+                waittime++;
+        }
+        return null;
 
     }
 

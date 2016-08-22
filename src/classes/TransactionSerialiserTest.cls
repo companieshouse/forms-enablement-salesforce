@@ -9,7 +9,7 @@ private class TransactionSerialiserTest {
 		Transaction__c transac = testData.tx;
 		transac.isPaymentRequired__c = true;
 		transac.isPaymentAccount__c = true;
-		transac.AccountNumber__c = 94948;
+		transac.AccountNumber__c = '94948';
 		transac.ContactEmail__c = 'sylvain.picory@methodsdigital.co.uk';
 		insert transac;
 

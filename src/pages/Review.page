@@ -53,7 +53,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Approving {!officerTerm}</td>
+                                    <td>Approving by</td>
                                     <td>
                                         <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
                                             <apex:outputText value="{!Director.Name}" id="theValue" />
@@ -865,7 +865,7 @@
                         <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
                         <br/>
                         <br/>
-                        <!-- <apex:commandLink rendered="{!showprevious}" action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> -->
+                    <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous}" />
                     </div>
                 </apex:outputPanel>
             </apex:form>

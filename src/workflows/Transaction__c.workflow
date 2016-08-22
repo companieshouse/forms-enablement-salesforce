@@ -330,6 +330,11 @@ Email should contain a URL to start a new journey</description>
             <operation>equals</operation>
             <value>False</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.isReviewTrigger__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
         <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -381,6 +386,25 @@ Email should contain a URL to start a new journey</description>
         </criteriaItems>
         <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the review page</description>
         <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>SubmissionDownloadLink</fullName>
+        <actions>
+            <name>DocumentDownloadLink</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>applicationDeleted</fullName>

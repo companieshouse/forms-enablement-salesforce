@@ -38,38 +38,68 @@
                         
                     <div class="form-group {!errorVal}">
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
+                            <label for="email" class="heading-medium closer">{!director.off.Name}
+                            <span class="error-message">{!director.validationErrors}
                             <label class="form-label" for="email">
-                                {!director.off.Name}
-                            </label>
-                            <span class="form-hint">Email Address </span>
-                            <span class="error-message">{!director.validationErrors}</span>
+                                Email Address<br/>
                             <apex:inputText styleClass="form-control" value="{!director.email}" id="email" html-name="email"></apex:inputText>
-                            <label class="form-label" for="emailconfirmation">
                             </label>
-                            <span class="form-hint">Confirm email address</span>
-                            <span class="error-message">{!director.confirmationErrors}</span>
+                            </span>
+                            </label>
+                            <span class="error-message">{!director.validationErrors}
+                            <label class="form-label" for="confirmationemail">
+                                Confirm Email Address<br/>
                             <apex:inputText styleClass="form-control" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
+                            </label>
+                            </span>
+                            <br/>
+                            <br/>
                         </apex:repeat>
                     </div>
                     <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="redirecter">
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log({!stepValidator});
-                    if ({!stepValidator}) {
-                        if ({!sigNeeded} && !{!signingFinished}) {
-                            console.log('wrong state starting redirection');
-                            redirecter();
-                        } else {
-                            console.log('correct state no redirection');
-                        }
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        DirectorDetails.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
                     }
-                }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
                 </script>
             </apex:form>
         </apex:define>

@@ -6,6 +6,8 @@
 		<members>AddAttachmentsController</members>
 		<members>AddAttachmentsControllerTest</members>
 		<members>AppConstants</members>
+		<members>AppConstantsTest</members>
+		<members>ApplicationDateController</members>
 		<members>BehalfDecisionController</members>
 		<members>BehalfDecisionControllerTest</members>
 		<members>BehalfInputDetailsController</members>
@@ -27,9 +29,12 @@
 		<members>CH_SearchControllerClass</members>
 		<members>CH_SearchControllerClass_Test</members>
 		<members>CRSController</members>
+		<members>CRSControllerTest</members>
 		<members>ChApiMock</members>
 		<members>ChangeCRSController</members>
+		<members>ChangeCRSControllerTest</members>
 		<members>ChangeShareClassName</members>
+		<members>ChangeShareClassNameTest</members>
 		<members>CompaniesHouse</members>
 		<members>CompaniesHouseCalloutsRequest</members>
 		<members>CompaniesHouseCalloutsResponse</members>
@@ -61,11 +66,13 @@
 		<members>DocumentControllerTest</members>
 		<members>DocusignLibrary</members>
 		<members>EditSharesByTypeController</members>
+		<members>EditSharesByTypeTest</members>
 		<members>EntryPointController</members>
 		<members>ExternalEmbedDocuSignController</members>
 		<members>FormAPISubmissionManager</members>
 		<members>FormAPISubmissionManagerTest</members>
 		<members>FormApplicationController</members>
+		<members>FormApplicationControllerTest</members>
 		<members>Form_CustomException</members>
 		<members>FormsAPIService</members>
 		<members>FormsAPIServiceTest</members>
@@ -75,6 +82,7 @@
 		<members>GuidanceController</members>
 		<members>GuidanceControllerTest</members>
 		<members>IStepNavigable</members>
+		<members>IntegrationErrorController</members>
 		<members>MockHttpResponseGenerator</members>
 		<members>MockWebServiceResponseGenerator</members>
 		<members>OfficersQueryAction</members>
@@ -82,14 +90,21 @@
 		<members>PaymentController</members>
 		<members>PaymentControllerTest</members>
 		<members>PresenterDirectorController</members>
+		<members>PresenterDirectorControllerTest</members>
 		<members>RecipientStatusDocusignTriggerHandler</members>
 		<members>ResolutionChangeController</members>
+		<members>ResolutionChangeControllerTest</members>
 		<members>ReviewController</members>
 		<members>ReviewControllerTest</members>
 		<members>SCapitalController1</members>
+		<members>SCapitalController1Test</members>
 		<members>SCapitalController2</members>
+		<members>SCapitalController2Test</members>
 		<members>SCapitalController3</members>
+		<members>SCapitalController3Test</members>
 		<members>SecurityManager</members>
+		<members>SecurityManagerTest</members>
+		<members>SelectShareTypeControllerTest</members>
 		<members>SigningController</members>
 		<members>SigningControllerTest</members>
 		<members>SmartPayUrl</members>
@@ -97,9 +112,11 @@
 		<members>StartFrameworkController</members>
 		<members>StartFrameworkControllerTest</members>
 		<members>SubmissionController</members>
+		<members>SubmissionControllerTest</members>
 		<members>SubmissionManager</members>
 		<members>SubmissionManagerTest</members>
 		<members>TrackUserClass</members>
+		<members>TrackUserClassTest</members>
 		<members>TransactionCleanup</members>
 		<members>TransactionCleanupTest</members>
 		<members>TransactionManager</members>
@@ -107,46 +124,32 @@
 		<members>TransactionSerialiser</members>
 		<members>TransactionSerialiserTest</members>
 		<members>TransactionSiteUrlRewriter</members>
+		<members>TransactionSiteUrlRewriterTest</members>
 		<members>TransactionStepControllerBase</members>
 		<members>TransactionStepControllerBaseTest</members>
+		<members>TransactionTriggerHandler</members>
 		<members>UpdateCompanyDirectorsController</members>
 		<members>UpdateCompanyDirectorsControllerTest</members>
 		<members>cancelShares</members>
+		<members>cancelSharesTest</members>
 		<members>chooseDirector</members>
 		<members>chooseDirectorTest</members>
 		<members>crsReviewController</members>
+		<members>crsReviewControllerTest</members>
 		<members>nonPrescribed</members>
 		<members>nonPrescribed1</members>
+		<members>nonPrescribed1Test</members>
+		<members>nonPrescribedTest</members>
 		<members>selectShareTypeController</members>
 		<members>showClassCHangeController</members>
-		<members>superSort</members>
+		<members>showClassCHangeControllerTest</members>
 		<members>variationRightsController</members>
+		<members>variationRightsControllerTest</members>
 		<members>whichDirector</members>
 		<members>whichDirectorTest</members>
 		<members>withdrawController</members>
-		<members>TrackUserClassTest</members>
-		<members>PresenterDirectorControllerTest</members>
 		<members>withdrawControllerTest</members>
-		<members>variationRightsControllerTest</members>
-		<members>showClassCHangeControllerTest</members>
-		<members>SelectShareTypeControllerTest</members>
-		<members>SecurityManagerTest</members>
-		<members>ResolutionChangeControllerTest</members>
-		<members>SCapitalController2Test</members>
-		<members>SCapitalController3Test</members>
-		<members>SCapitalController1Test</members>
-		<members>nonPrescribedTest</members>
-		<members>nonPrescribed1Test</members>
-		<members>FormApplicationControllerTest</members>
-		<members>EditSharesByTypeTest</members>
-		<members>crsReviewControllerTest</members>
-		<members>CRSControllerTest</members>
-		<members>ChangeShareClassNameTest</members>
-		<members>ChangeCRSControllerTest</members>
-		<members>cancelSharesTest</members>
-		<members>AppConstantsTest</members>
-		<members>TransactionSiteUrlRewriterTest</members>
-		<members>SubmissionControllerTest</members>
+		<members>IntegrationErrorControllerTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -186,6 +189,7 @@
 		<members>ExternalEmbedDocuSign</members>
 		<members>FormApplication</members>
 		<members>Guidance</members>
+		<members>IntegrationError</members>
 		<members>Nonprescribed1</members>
 		<members>Nonprescribed2</members>
 		<members>ObjectsCompany</members>

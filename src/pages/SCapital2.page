@@ -117,7 +117,7 @@
                         <apex:commandButton action="{!addnewShares}" id="SCapital1button" reRender="masterpanel,currency" styleClass="button" value="Continue" />
                         <br/>
                         <br/>
-                        <!-- <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp; -->
+                        <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
                         <apex:actionFunction action="{!grabCurrencyType}" name="grabCurrencyType" reRender="emptyPanel">
                             <apex:param name="grabCurrencyType" value="" id="a" assignTo="{!currencyType}" />
                         </apex:actionFunction>

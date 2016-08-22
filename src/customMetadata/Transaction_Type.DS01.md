@@ -59,19 +59,19 @@ You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-
         <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
 &lt;details&gt;
 &lt;summary&gt;
-&lt;span class=&quot;summary&quot;&gt;Help with company registration number&lt;/span&gt;
+&lt;span class=&quot;summary&quot;&gt;Help with company number&lt;/span&gt;
 &lt;/summary&gt;
 &lt;div class=&quot;panel panel-border-narrow&quot;&gt;
 &lt;p&gt;
-A company registration number is a unique number issued by Companies House whe</value>
+A company number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+        <value xsi:type="xsd:string">n a limited company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck Service&lt;/a&gt; Service.
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/details&gt;
@@ -101,22 +101,21 @@ Tell us which company you want to close
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">The directors / members understand that they are responsible for ensuring all interested parties are notified.</value>
+        <value xsi:type="xsd:string">The directors / LLP members understand that they are responsible for ensuring all interested parties are notified.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Directors&apos; / members&apos; responsibilities&lt;/h1&gt;</value>
+Who to tell about the company or LLP closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
-Who to tell about your company or limited liability partnership closing&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-A company or limited liability partnership must inform all interested parties that it&apos;s going to close within 7 days after you submit the request.&lt;/p&gt;</value>
+The Director(s)/Member(s) must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
@@ -131,39 +130,41 @@ Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
+        <value xsi:type="xsd:string">&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;It is a criminal offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
 Before you start
-&lt;/p&gt;</value>
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+You must:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;te</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You must:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell all director(s) of the company or all member(s) of the limited liability partnership about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or limited liability</value>
+        <value xsi:type="xsd:string">ll all director(s) of the company or all member(s) of the LLP about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company or LLP&lt;/li&gt;&lt;/ul&gt;
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+It costs £8 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">partnership&lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">quest to close a company or LLP (paid by debit or credit card, PayPal account or Companies House account).
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
-It costs £8 to submit a request to close a company or limited liability partnership (paid by debit or credit card or PayPal account).
-&lt;/p&gt;</value>
+You&apos;ll need:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;th</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You&apos;ll need:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director or member&lt;/li&gt;&lt;li&gt;a credit or debit card or PayPal account&lt;/li&gt;&lt;/ul&gt;
+        <value xsi:type="xsd:string">e company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director or member&lt;/li&gt;&lt;li&gt;a credit or debit card, PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You request will need to be approved by the sole director if there&apos;s only 1, by both if there are 2, or by the majority if there are more than 2. It will appear on the public register.
+Your request will need to be approved by the sole director if there&apos;s only 1, by both if there are 2, or by the majority if there are more than 2.
 &lt;/p&gt;</value>
     </values>
     <values>
@@ -171,7 +172,7 @@ You request will need to be approved by the sole director if there&apos;s only 1
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
 You can use this service to:
 &lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;request to strike off a limited company&lt;/li&gt;
-&lt;li&gt;request to strike off a limited liability partnership (LLP)&lt;/li&gt;
+&lt;li&gt;request to strike off a LLP&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;</value>
     </values>

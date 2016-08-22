@@ -19,6 +19,7 @@ public class FormsApiClient {
 
     private String SUBMISSION_ENDPOINT = '/submission';
     private String BARCODE_ENDPOINT = '/barcode';
+    private String PRESENTERAPI = '/presenterauth';
 
 
 
@@ -44,6 +45,38 @@ public class FormsApiClient {
         // Get request body
         String requestBody = getBarcodeBody();
         request.setBody(requestBody);
+
+        // Debug request
+        System.debug(LoggingLevel.INFO, 'Request header: ' + request);
+        System.debug(LoggingLevel.INFO, 'Request body: ' + request.getBody());
+
+
+        // Send the request
+        Http http = new Http();
+        HTTPResponse response = http.send(request);
+
+        // Debug response
+        System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
+        System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
+
+        return response;
+
+    }
+
+    public HttpResponse requestPresenterAPI(String presenterId, String authCode){
+        //  Don't forget to add a Remote Site record for the server as well as the custom setting
+        //  record.
+        Forms_API_Service__c connection = getConnection();
+        // Create Http request
+        HttpRequest request = new HttpRequest();
+
+        request.setEndpoint(connection.URL__c + PRESENTERAPI + '?id='+presenterId + '&auth=' +authCode);
+        request.setMethod('GET');
+        request.setHeader('Content-Type', 'application/json');
+        request.setHeader('Accept', '*/*');
+        request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+
+        
 
         // Debug request
         System.debug(LoggingLevel.INFO, 'Request header: ' + request);
@@ -124,7 +157,7 @@ public class FormsApiClient {
         }
 
         // Packagemetada part
-        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage('packageID', txNumber) + '\n';
+        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage(txList[0].SubmissionId__c, txNumber) + '\n';
 
         // Finish with one last boundary
         requestBody += '\n' + '--' + BOUNDARY + '--' + '\n';
@@ -142,7 +175,7 @@ public class FormsApiClient {
     }
 
     public string getJsonPackage(String packageId, Integer count) {
-        return '{ "id": "' + packageId + '","count": ' + count + ' }';
+        return '{ "packageIdentifier": "' + packageId + '","count": ' + count + ' }';
     }
 
 
@@ -191,8 +224,22 @@ public class FormsApiClient {
             jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
             jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
         }
-        if (tx.Form_Name__c == 'DS02') {
-
+        if(tx.Form_Name__c == 'DS02')
+        {//\n
+            jsonPartBody = jsonPartBody.remove('"payment" : {');
+            jsonPartBody = jsonPartBody.remove('"referenceNumber" : null,');
+            jsonPartBody = jsonPartBody.remove('"paymentMethod" : null,');
+            jsonPartBody = jsonPartBody.remove('"accountNumber" : null\n      },');
+            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
+            jsonPartBody = jsonPartBody.remove('"shares" : null,');
+            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
+            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
+            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+            jsonPartBody = jsonPartBody.remove('"officers" : {');
+            jsonPartBody = jsonPartBody.remove('"officer" : [ ]\n      },');
         }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');

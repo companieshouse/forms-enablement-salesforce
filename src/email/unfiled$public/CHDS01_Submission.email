@@ -166,7 +166,7 @@
     </tr>
     <tr>
         <th class='basic' >Status</th>
-        <th class='basic' >{!Transaction__c.Status__c}</th>
+        <th class='basic' >{!Transaction__c.CompanyStatus__c}</th>
     </tr>
     <tr>
         <th class='basic' >Incorporation date</th>
@@ -222,7 +222,7 @@
                     <h2 class="third-level-heading">Withdrawal of striking off request by a company</h2>
                 </p>
                 <p class="paragraphs-regular">
-                If the company ceases to be eligible for striking off at any time after the request is submitted, and before the request is fully processed, as specified in section 1009 of the Companies Act 2006, you'll need to read the guidance on how to proceed using the following <a href='https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4#withdrawal-of-the-strike-off-application'> link.</a>
+                If the company ceases to be eligible for striking off at any time after the request is submitted, and before the request is fully processed, as specified in section 1009 of the Companies Act 2006, you'll need to read the guidance on how to proceed using the following <a href='https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration'> link.</a>
                 </p>
             </td>
         </tr>

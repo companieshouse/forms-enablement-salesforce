@@ -238,7 +238,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Not Your Company</shortDescription>
-        <value>Not your company?</value>
+        <value>Not the company you want to close?</value>
     </labels>
     <labels>
         <fullName>UI_Text_Payment</fullName>

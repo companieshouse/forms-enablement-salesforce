@@ -35,6 +35,7 @@ private class BehalfWhichSignatoryControllerTest {
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;
+
 		Officer__c testoff = new Officer__c();
 		testoff.name = 'testfirstname';
 		testoff.Surname__c = 'testsurname';
@@ -52,7 +53,7 @@ private class BehalfWhichSignatoryControllerTest {
 		behalfwhichsignatoryPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(behalfwhichsignatoryPage);
 		BehalfWhichSignatoryController test1controller = new BehalfWhichSignatoryController();
-		test1controller.listOfDirectors.add(new BehalfWhichSignatoryController.officerContainer(testoff));
+		test1controller.initPage();
 		test1controller.updateDirectorList();
 		test1controller.selectedId = testoff.id;
 		test1controller.nextAction();
@@ -61,12 +62,13 @@ private class BehalfWhichSignatoryControllerTest {
 		test1controller.nextAction();
 		test1controller.persistStep();
 
-		//test1controller.initPage();
-
 		test1controller.updateSelectedPresenter();
 
 		test1controller.selectedId = null;
 		test1controller.nextAction();
+
+		test1controller.redirectUser();
+
 	}
 
 }

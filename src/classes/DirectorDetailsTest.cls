@@ -40,6 +40,7 @@ public with sharing class DirectorDetailsTest {
 		testoff.Forename__c = 'testforename';
 		testoff.Middlenames__c = 'testmiddlename';
 		testoff.Email__c = 'testEmail@testemail.com';
+		testoff.Name = 'testname1';
 		testoff.IsPresenter__c = true;
 		testoff.Transaction__c = transac.Id;
 		testoff.Contact__c = testContact.id;
@@ -50,6 +51,7 @@ public with sharing class DirectorDetailsTest {
 		Officer__c testoff2 = new Officer__c();
 		testoff2.Surname__c = 'testsurname2';
 		testoff2.Forename__c = 'testforename2';
+		testoff2.Name = 'testname';
 		testoff2.Middlenames__c = 'testmiddlename2';
 		testoff2.Email__c = 'testEmail2@testemail2.com';
 		testoff2.IsPresenter__c = false;
@@ -68,7 +70,6 @@ public with sharing class DirectorDetailsTest {
 		test1controller.checkDirectorStatus();
 		test1controller.nextAction();
 		test1controller.previousAction();
-		test1controller.redirectUser();
 		test1controller.emailValidation('testemailemail.com', 'testusernameString');
 		test1controller.emailValidation('testemail@emailcom', 'testusernameString');
 		test1controller.emailValidation('testemail@email.com', 'testusernameString');
@@ -76,6 +77,9 @@ public with sharing class DirectorDetailsTest {
 		test1controller.emailComparison('testemail@email.com', 'testErroremail@email.com', 'testpersonusername');
 		test1controller.emailComparison('testemail@email.com', 'testemail@email.com', 'testpersonusername');
 		test1controller.saveWrappedDirectorsSelection();
+		test1controller.isPageAlreadyValidStep = true;
+		test1controller.redirectUser();
+
 	}
 
 }

@@ -21,15 +21,13 @@
         <field>Display_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
 Name of person approving
-&lt;/p&gt;
-&lt;p class=&quot;form-hint&quot;&gt;For example, John Smith&lt;/p&gt;</value>
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
-Email of person approving
-&lt;/p&gt;
-&lt;p class=&quot;form-hint&quot;&gt;For example, john.smith@example.co.uk&lt;/p&gt;</value>
+Email address of person approving
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -37,7 +35,9 @@ Email of person approving
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
+Confirm the email address of person approving
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -61,6 +61,10 @@ Email of person approving
     </values>
     <values>
         <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

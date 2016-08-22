@@ -1,54 +1,36 @@
 @IsTest
 public class UpdateCompanyDirectorsControllerTest {
+	
 
+	@IsTest
+	public static void testController(){
+		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
 
-        @isTest static void test_method_one() {
+        Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
 
-                CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
+        Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
+        Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
 
-                Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
+        Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
 
-                Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
-                Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+        insert testPresenter;
 
-                Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+        insert testCompany;
 
-                Contact testContact = CompaniesHouseTestData.getInstance().contact1;
-                insert testPresenter;
+        Transaction__c transac = testData.tx;
 
-                insert testCompany;
-                Transaction__c transac = testData.tx;
-                transac.Company__c = testCompany.Id;
-                transac.Valid_Step_Ids__c = testStep1.Id;
-                transac.CompanyNumber__c = '05448736';
-                transac.finishedAttachments__c = true;
-                transac.finishedAddingShares__c = true;
-                transac.isDigitalSignatureNeeded__c = true;
-                transac.isSigningFinished__c = false;
-                transac.officerTerminology__c = 'testterminology';
-                insert transac;
+        transac.Company__c = testCompany.Id;
+        transac.Valid_Step_Ids__c = testStep1.Id;
+        transac.officerTerminology__c = 'Test';
 
-                testContact.Transaction__c = transac.id;
-                insert testContact;
-                Officer__c testoff = new Officer__c();
-                testoff.Surname__c = 'testsurname';
-                testoff.Forename__c = 'testforename';
-                testoff.Middlenames__c = 'testmiddlename';
-                testoff.Email__c = 'testEmail@testemail.com';
-                testoff.IsPresenter__c = true;
-                testoff.Transaction__c = transac.Id;
-                testoff.Contact__c = testContact.id;
-                insert testoff;
+        insert transac;
 
-                PageReference directorupdatePage = Page.UpdateCompanyDirectors;
-                directorupdatePage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                Test.setCurrentPage(directorupdatePage);
+        
 
-                UpdateCompanyDirectorsController test1controller = new UpdateCompanyDirectorsController();
-                test1controller.isPageAlreadyValidStep = true;
-                test1controller.redirectUser();
-                test1controller.isPageAlreadyValidStep = false;
-                test1controller.redirectUser();
+        PageReference pg = Page.UpdateCompanyDirectors;
+        pg.getParameters().put('c', SecurityManager.encryptText(transac.Id+AppConstants.ID_DELIM_CHAR+testStep1.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+        Test.setCurrentPage(pg);
 
-        }
+        UpdateCompanyDirectorsController pay = new UpdateCompanyDirectorsController();
+	}
 }

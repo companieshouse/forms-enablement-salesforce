@@ -19,23 +19,23 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;We have emailed the following director to request their approval to close COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The application is being processed. The page will automatically refresh. Please wait.&lt;br/&gt;&lt;br/&gt;The following director names will appear on the application to close  COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;They will need to approve the request within 2 months. Once they approve the request, we will email you with a link to check and submit your request.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;For companies with multiple director an email will be sent to each of the director requesting their approval. You will rec</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">eive an email once all the director listed have approved the application. From this email you will be able to check and complete the application to close COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The emails of one or more director(s) has been rejected. Please check the spelling or contact the director if his address email has any issues. Please start a new application to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;All director(s) successfully signed the application.&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -47,15 +47,19 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director approval(s) requested&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Application Status&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director(s) has signed successfully&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Application has been signed successfully&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director(s) has declined to signed&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Director has declined to signed&lt;/h1&gt;</value>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Emails delivery failed&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Is_Active__c</field>

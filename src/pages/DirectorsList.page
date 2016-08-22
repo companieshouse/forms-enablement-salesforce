@@ -68,20 +68,44 @@
                             <a href="https://www.gov.uk/government/publications/appoint-a-director-ap01"> Appoint company director(s) </a>for information on appointing directors </p>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:actionFunction action="{!redirectUser}" name="redirecter">
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>
                 <script>
-                setTimeout(function checkSteps() {
-                    console.log({!stepValidator});
-                    if ({!stepValidator}) {
-                        if ({!sigNeeded} && !{!signingFinished}) {
-                            console.log('wrong state starting redirection');
-                            redirecter();
-                        } else {
-                            console.log('correct state no redirection');
-                        }
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        DirectorsListController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
                     }
-                }, 3000);
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                  checkSteps();
                 </script>
             </apex:form>
         </apex:define>

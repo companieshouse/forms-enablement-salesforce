@@ -68,6 +68,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String SHOWSHARECHANGE = '/showClassChanges';
     public String OBJECTSCOMPANY = '/ObjectsCompany';
     public String WITHDRAWDISSOLUTION = '/withdrawdissolution';
+    public String INTEGRATIONERROR = '/intError';
 
     ///// VF Strings
     public String VF_PAGE_START         = '/StartFramework';
@@ -123,6 +124,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_WITHDRAWDISSOLUTION = '/WithdrawDissolution';
     public String VF_PAGE_NONPRESCRIBED1 = '/Nonprescribed1';
     public String VF_PAGE_NONPRESCRIBED2 = '/Nonprescribed2';
+    public String VF_PAGE_INTEGRATIONERROR = '/IntegrationError';
+
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
         System.debug(LoggingLevel.ERROR, 'in mapRequestUrl:' + friendlyUrl);
@@ -185,6 +188,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) { pr = new PageReference(WITHDRAWDISSOLUTION); }
         else if (url.startsWith(VF_PAGE_NONPRESCRIBED1)) { pr = new PageReference(NONPRESCRIBED1); }
         else if (url.startsWith(VF_PAGE_NONPRESCRIBED2)) { pr = new PageReference(NONPRESCRIBED2); }
+		else if (url.startsWith(INTEGRATIONERROR))
+        { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
     }
@@ -254,6 +259,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) {friendlyPageReference = new PageReference(WITHDRAWDISSOLUTION);}
             else if (url.startsWith(VF_PAGE_NONPRESCRIBED1)) {friendlyPageReference = new PageReference(NONPRESCRIBED1);}
             else if (url.startsWith(VF_PAGE_NONPRESCRIBED2)) {friendlyPageReference = new PageReference(NONPRESCRIBED2);}
+			else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {
+                friendlyPageReference = new PageReference(INTEGRATIONERROR);
+            }
 
 
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
