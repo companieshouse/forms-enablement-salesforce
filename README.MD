@@ -37,7 +37,6 @@ git clone git@github.com:companieshouse/forms-enablement-salesforce.git
 cd forms-enablement-salesforce
 ```
 
-
 ### Running the application
 
 To run the application you have to first create a salesforce developer account or a Salesforce Sandbox Account. Then install the DocuSign API and then deploy this repository to your sandbox. This is a publically facing application so to run this application publically you will need to enable [Force.com Sites](https://developer.salesforce.com/page/Sites).
