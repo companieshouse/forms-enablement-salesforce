@@ -868,6 +868,15 @@ to any promoter of the company?</inlineHelpText>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>validateEmailFormat__c</fullName>
+        <externalId>false</externalId>
+        <label>validateEmailFormat</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
     <label>Transaction</label>
     <listViews>
         <fullName>All</fullName>

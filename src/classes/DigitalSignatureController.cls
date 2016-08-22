@@ -66,7 +66,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             }
         }
         
-        if (listOfDirectors.size() > 1) {
+        if ((listOfDirectors.size() >= 1 && !presenterSigning) || listOfDirectors.size() > 1) {
             multipleDirectors = true;
         }
         

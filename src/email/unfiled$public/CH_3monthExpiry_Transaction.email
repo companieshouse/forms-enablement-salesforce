@@ -36,7 +36,7 @@
             </tr>
             <tr>
               <td width="100%" style="font-family: Helvetica, Arial, sans-serif;">
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The Request  to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Today()+30}.</p>
+                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The request  to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Today()+30}.</p>
                 
                 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The status of the directors signing is located at the following link: <a href="{!Transaction__c.SignerStatus__c}">Status</a></p>
 

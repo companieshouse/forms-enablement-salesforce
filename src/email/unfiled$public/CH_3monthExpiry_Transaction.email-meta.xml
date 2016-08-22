@@ -12,7 +12,7 @@ Request  to close {!Transaction__c.CompanyName__c}
 
 {!Transaction__c.PresenterName__c},
 
-The Request  to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Today()+30} .
+The request  to close {!Transaction__c.CompanyName__c} has not been completed and will be deleted on {!Today()+30} .
 
 The status of the directors signing is located at the following link: {!Transaction__c.SignerStatus__c}
 

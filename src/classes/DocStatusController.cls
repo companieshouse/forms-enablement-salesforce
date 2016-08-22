@@ -309,7 +309,7 @@ public with sharing class DocStatusController
         }
         else{
         hasPageErrors = true;
-        statusErrors = 'Please refresh as the application is processing data.';
+        statusErrors = 'Your request is currently being processed, refresh your screen in a few minutes and try again';
         }
         return null;
 

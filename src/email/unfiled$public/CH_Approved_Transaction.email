@@ -71,7 +71,7 @@
                     {!IF(Transaction__c.CompanyCountry__c == null,'', '<tr><th class="nonbasic"></th><th class="nonbasic">'+Transaction__c.CompanyCountry__c+'</th></tr>')} 
                 </table>
                 <br/>
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The process to close the company has now started. The company will be removed from the Register after 2 months.</p>
+                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The process to close the company has now started. The company will be removed from the register after 2 months.</p>
 
                 <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens  next</h2>
 

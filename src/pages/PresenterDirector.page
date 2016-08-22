@@ -34,6 +34,12 @@
                             <ul class="error-summary-list">
                                 <li>
                                     <a>{!currentPageError}</a>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a>"/>
+                                    {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a>"/>
+                                    {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
                                 </li>
                             </ul>
                         </div>
@@ -66,11 +72,13 @@
                             <div class="form-group">
                                 <div aria-hidden="false" class="panel panel-border-narrow">
                                     <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
-                                    <div class="form-group ">
+                                    <div class="form-group {!errorValBottom}">
+                                        <span class="error-message" id="error-message-full-name">{!currentPageErrorTop}</span>
                                         <label class="form-label" for="directors-name">Your full name (optional)</label>
                                         <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group {!errorValBottom2}">
+                                        <span class="error-message" id="error-message-full-name">{!currentPageErrorBot}</span>
                                         <label class="form-label" for="directors-confirm-phone">Phone number (optional)</label>
                                         <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
                                     </div>

@@ -24,7 +24,24 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         get;
         set;
     }
+    public String currentPageErrorTop {
+        get;
+        set;
+    }
+    public String currentPageErrorBot {
+        get;
+        set;
+    }
     public String errorVal {
+        get;
+        set;
+    }
+    public String errorValBottom {
+        get;
+        set;
+    }
+
+    public String errorValBottom2 {
         get;
         set;
     }
@@ -76,6 +93,10 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         //directorPresenter = true;
         phoneNumber = '';
         presenterName = '';
+        errorValBottom2 = '';
+        errorValBottom = '';
+        currentPageErrorTop = '';
+        currentPageErrorBot = '';
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List < officerContainer > ();
@@ -122,6 +143,47 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             return null;
         }
 
+        if(!directorPresenter)
+        {
+            Boolean hasError = false;
+            if(presenterName != null)
+                if(presenterName.length() > 255)
+                {
+                    hasError = true;
+                    hasPageErrors = true;
+                    errorValBottom = 'error';
+                    currentPageErrorTop = 'The name is too long.';
+                }
+                else{
+                    errorValBottom = '';
+                    currentPageErrorTop = '';
+                }
+            else{
+                errorValBottom = '';
+                currentPageErrorTop = '';
+            }
+
+            if(phoneNumber != null)
+                if(phoneNumber.length() > 255)
+                {
+                    hasError = true;
+                    hasPageErrors = true;
+                    errorValBottom2 = 'error';
+                    currentPageErrorBot = 'The phone is too long.';
+                }else{
+                    errorValBottom2 = '';
+                    currentPageErrorBot = '';
+                }
+            else{
+                errorValBottom2 = '';
+                currentPageErrorBot = '';
+            }
+
+            if(hasError){
+                return null;
+            }
+        }
+
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
         return nextStep();
@@ -146,6 +208,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             showMorePresenterInfo = false;
             hasPageErrors = false;
             errorVal = '';
+            errorValBottom = '';
+            errorValBottom2 = '';
         } else if (!directorPresenter) {
             showMorePresenterInfo = true;
         }

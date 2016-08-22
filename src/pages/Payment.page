@@ -191,6 +191,9 @@
                 </apex:outputPanel>
                 <div class="form-group">
                     <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="Save and continue" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
+                    <br/>
+                    <br/>
+                    <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous}" />
                 </div>
                 </apex:outputPanel>
             </apex:form>

@@ -194,23 +194,19 @@ public class DirectorDetails extends TransactionStepControllerBase {
             showErrors = true;
             return false;
         }
-        // check for @
-        if (email.contains('@')) {
-            // check for "."
-            if (!email.contains('.')) {
-                //throw new Form_CustomException(' email error for' + ' ' + username + ' '+  'not containing dot ' + email);
-                emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
-                hasPageErrors = true;
-                showErrors = true;
-                return false;
-            }
-        } else {
-            // throw new Form_CustomException(' email not valid needs @ ' + email);
-            emailErrors = 'Email Address for' + ' ' + username + ' ' + ' must be valid and contain an @';
+
+        try{
+            submissionMgr.submission.validateEmailFormat__c = emailAddress;
+            update submissionMgr.submission;
+        }
+        catch(DMLException e)
+        {
+            emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must be valid.';
             hasPageErrors = true;
             showErrors = true;
             return false;
         }
+
         return true;
     }
     public Boolean emailComparison(String email1, String email2, String username) {

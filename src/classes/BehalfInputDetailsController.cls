@@ -110,29 +110,24 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             behalfSelectionerrorVal = '';
             return null;
         }
-        if (emailDirector.contains('@')) {
-            // check for "."
-            if (!emailDirector.contains('.')) {
-                hasPageErrors = true;
-                currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
-                emailErrorVal = 'error';
-                emailError = true;
-                nameError = false;
-                behalfError = false;
-                nameErrorVal = '';
-                behalfSelectionerrorVal = '';
-                return null;
-            }
-        } else {
+       
+        try{
+            submissionMgr.submission.validateEmailFormat__c = emailDirector;
+            update submissionMgr.submission;
+        }
+        catch(DMLException e)
+        {
             hasPageErrors = true;
-            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' must be valid and contain an @';
+            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
             emailErrorVal = 'error';
             emailError = true;
+            emailConfirmError = false;
             nameError = false;
             behalfError = false;
             nameErrorVal = '';
             behalfSelectionerrorVal = '';
             return null;
+
         }
 
         if (emailConfirmDirector == null) {
@@ -147,23 +142,15 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             behalfSelectionerrorVal = '';
             return null;
         }
-        if (emailConfirmDirector.contains('@')) {
-            // check for "."
-            if (!emailConfirmDirector.contains('.')) {
-                hasPageErrors = true;
-                currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + 'must be valid and contain a proper address (e.g. .com .net .edu .co.uk )';
-                emailErrorVal = 'error';
-                emailError = false;
-                emailConfirmError = true;
-                nameError = false;
-                behalfError = false;
-                nameErrorVal = '';
-                behalfSelectionerrorVal = '';
-                return null;
-            }
-        } else {
+        
+        try{
+            submissionMgr.submission.validateEmailFormat__c = emailConfirmDirector;
+            update submissionMgr.submission;
+        }
+        catch(DMLException e)
+        {
             hasPageErrors = true;
-            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' must be valid and contain an @';
+            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
             emailErrorVal = 'error';
             emailError = false;
             emailConfirmError = true;
@@ -172,6 +159,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             nameErrorVal = '';
             behalfSelectionerrorVal = '';
             return null;
+
         }
 
         if(emailDirector != emailConfirmDirector)
