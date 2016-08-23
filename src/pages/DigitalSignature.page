@@ -32,8 +32,8 @@ Ver. Author        Date        Detail
                     {!waitTime} {!pollServer}
                     </apex:outputPanel> -->
                     <apex:actionPoller enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5"  />
-                    <apex:outputText escape="false" value="{!pageTitle}" />
-                    <apex:outputText escape="false" value="{!pageBody}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle)}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageBody)}" />
                     <table class="table-spacing">
                         <thead>
                             <tr>
@@ -51,19 +51,19 @@ Ver. Author        Date        Detail
                         </tbody>
                     </table>
                     <br/>
-                    <apex:outputText escape="false" value="{!pageBody2}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageBody2)}" />
                 </apex:outputPanel>
                 <apex:outputPanel id="failureContact" rendered="{!successSigning}">
-                    <apex:outputText escape="false" value="{!pageTitle2}" />
-                    <apex:outputText escape="false" value="{!pageBodySuccess}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle2)}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageBodySuccess)}" />
                     <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     <br/>
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
                 <apex:outputPanel id="succesSign" rendered="{!failureEmail}">
-                    <apex:outputText escape="false" value="{!pageTitle4}" />
-                    <apex:outputText escape="false" value="{!pageBodyFailureContact}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle4)}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageBodyFailureContact)}" />
                     <table class="table-spacing">
                         <thead>
                             <tr>
@@ -85,8 +85,8 @@ Ver. Author        Date        Detail
                     <apex:commandButton action="{!resetTransaction}" styleClass="button" value="{!$Label.UI_Text_Previous}" />
                 </apex:outputPanel>
                 <apex:outputPanel id="failureSign" rendered="{!failureSigning}">
-                    <apex:outputText escape="false" value="{!pageTitle3}" />
-                    <apex:outputText escape="false" value="{!pageBodyFailure}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle3)}" />
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageBodyFailure)}" />
                     <br/>
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton2" />

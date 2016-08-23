@@ -13,7 +13,7 @@
                             <p>
                                 <h1 class="heading-medium">{!displayText}</h1>
                                 <span id="radio-errors"></span>
-                                <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                                <apex:outputText escape="false" value="{!HTMLENCODE(currentErrorMessage)}" />
                                 <label class="block-label" for="radio-inline-1">
                                     <input id="radio-inline-1" onclick="clearErrors()" type="radio" name="signingStatus" value="true" /> Yes
                                 </label>

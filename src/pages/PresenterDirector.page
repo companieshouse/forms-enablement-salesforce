@@ -38,8 +38,8 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>    
-                    <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle)}"></apex:outputText>    
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageBody)}"></apex:outputText>
                     <div class="form-group {!errorVal}">
                       <span class="error-message" id="error-message-full-name">{!currentPageError}</span>
                         <ul class="list list-bullet">
@@ -47,7 +47,7 @@
                                 <li>{!director.officerTXT}</li>
                             </apex:repeat>
                         </ul>
-                        <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(pageBody2)}"></apex:outputText>
                         <fieldset class="inline">
                             <div id="presenterSelection" class="form-group">
                                 <label class="block-label" for="radio-indent-1">
@@ -65,7 +65,7 @@
                         <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
                             <div class="form-group">
                                 <div aria-hidden="false" class="panel panel-border-narrow">
-                                    <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
+                                    <apex:outputText escape="false"  value="{!HTMLENCODE(pageHiddenText)}"></apex:outputText>
                                     <div class="form-group ">
                                         <label class="form-label" for="directors-name">Your full name (optional)</label>
                                         <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />

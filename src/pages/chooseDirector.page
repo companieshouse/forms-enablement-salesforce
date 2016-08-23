@@ -27,16 +27,16 @@
                             <ul class="error-summary-list">
                                 <li>
                                     <a>
-                                        <apex:outputText escape="false" value="{!errorMsg1}"></apex:outputText>
+                                        <apex:outputText escape="false" value="{!HTMLENCODE(errorMsg1)}"></apex:outputText>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>  
+                    <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle)}"></apex:outputText>  
                     <div class="form-group {!errorVal}">
-                            <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
-                            <apex:outputText rendered="{!hasPageErrors}" escape="false" value="{!errorMsg1}"></apex:outputText>
+                            <apex:outputText escape="false" value="{!HTMLENCODE(pageBody)}"></apex:outputText>
+                            <apex:outputText rendered="{!hasPageErrors}" escape="false" value="{!HTMLENCODE(errorMsg1)}"></apex:outputText>
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
                             <label class="block-label">
                                 <apex:inputCheckbox value="{!director.selected}">{!director.off.Name}</apex:inputCheckbox>

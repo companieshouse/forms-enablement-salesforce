@@ -32,7 +32,7 @@ Ver. Author             Date        Detail
                                     </li>
                                 </ul>
                             </div>
-                            <apex:outputText escape="false" value="{!displayText0}" />
+                            <apex:outputText escape="false" value="{!HTMLENCODE(displayText0)}" />
                             <fieldset>
                                 <div class='form-group' id='checkboxArea'>
                                     <span id='errorHint' style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
@@ -73,12 +73,12 @@ Ver. Author             Date        Detail
                         <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
                     </apex:outputPanel>
                     <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
-                        <apex:outputText escape="false" value="{!guidanceTitle}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!guidanceText1}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!guidanceText2}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!guidanceText3}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!guidanceText4}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!guidanceText5}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(guidanceTitle)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(guidanceText1)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(guidanceText2)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(guidanceText3)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(guidanceText4)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(guidanceText5)}"></apex:outputText>
                         <div class="form-group">
                             <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
                             <br />

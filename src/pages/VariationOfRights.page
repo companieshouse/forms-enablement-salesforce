@@ -3,7 +3,7 @@
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterPanel">
-                    <apex:outputText value="{!headerText1}" escape="false" />
+                    <apex:outputText value="{!HTMLENCODE(headerText1)}" escape="false" />
                     <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">

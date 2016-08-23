@@ -10,7 +10,7 @@
                             </h1>
                             <ul class="error-summary-list">
                                 <li>
-                                    <apex:outputText escape="false" value="{!currentErrorMessage}" />
+                                    <a>{!currentErrorMessage}" </a>
                                 </li>
                             </ul>
                         </div>

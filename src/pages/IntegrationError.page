@@ -22,7 +22,7 @@ Ver. Author        Date        Detail
                    {!title} 
                 </h1>
                 <p class="lede">
-                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                    <apex:outputText escape="false" value="{!HTMLENCODE(body)}"></apex:outputText>
                 </p>
 
                 <apex:commandLink action="{!startAgain}" value="Try again" id="thePreviousButton" />

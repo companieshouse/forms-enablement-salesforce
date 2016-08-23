@@ -13,14 +13,14 @@
                             </p>
                             <ul class="error-summary-list">
                                 <li>
-                                    <a href="#">{!currentErrorMessage}</a>
+                                    <a>{!currentErrorMessage}</a>
                                 </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
                     <div class="form-group">
-                        <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!headerText2}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(headerText1)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(headerText2)}"></apex:outputText>
                         <h3 class="heading-medium">What is the class of share?</h3>
                         <div class="form-group {!errorsClass}">
                             <fieldset>

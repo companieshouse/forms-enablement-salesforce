@@ -2,8 +2,8 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
-                <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
+                <apex:outputText escape="false" value="{!HTMLENCODE(headerText1)}"></apex:outputText>
+                <apex:outputText escape="false" value="{!HTMLENCODE(displayText1)}"></apex:outputText>
                 <p class="heading-large">{!companyName}</p>
                 <table class="check-your-answers" >
                     <tbody>
@@ -26,7 +26,7 @@
                         <tr>
                             <td>Registered Address</td>
                             <td>
-                                <apex:outputText escape="false" value="{!companyAddress}" />
+                                <apex:outputText escape="false" value="{!HTMLENCODE(companyAddress)}" />
                             </td>
                         </tr>
                     </tbody>

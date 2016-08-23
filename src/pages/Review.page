@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>Registered address</td>
                                     <td>
-                                        <apex:outputText escape="false" value="{!companyAddress}" />
+                                        <apex:outputText escape="false" value="{!HTMLENCODE(companyAddress)}" />
                                     </td>
                                 </tr>
                                 <tr>
