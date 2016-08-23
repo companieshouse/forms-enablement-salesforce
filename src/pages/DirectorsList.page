@@ -25,8 +25,8 @@
             <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="OfficersPanel" rendered="{!NOT(noOfficers)}">
-                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(pageText)}"></apex:outputText>
                         <div class="form-group {!errorVal}">
                             <ul class="list list-bullet">
                                 <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">

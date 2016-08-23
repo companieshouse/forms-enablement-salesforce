@@ -21,11 +21,11 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" value="{!headerBox1}" escape="false"></apex:outputText>
+                    <apex:outputText rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" value="{!HTMLENCODE(headerBox1)}" escape="false"></apex:outputText>
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
                         <apex:outputPanel id="body">
-                            <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}" />
+                            <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!HTMLENCODE(textBox1FastTrackFee)}" />
                             <apex:outputText escape="false" rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}" />
                             <span style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
                         </apex:outputPanel>

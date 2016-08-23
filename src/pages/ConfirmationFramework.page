@@ -63,29 +63,29 @@ Ver. Author        Date        Detail
                             </p>
                         </div>
                         <h2 class="heading-medium">{!confirmationHeading1}</h2>
-                        <apex:outputtext value="{!companyNameText}" escape="false" />
+                        <apex:outputtext value="{!HTMLENCODE(companyNameText)}" escape="false" />
                         <p>
-                            <apex:outputText escape="false" value="{!confirmationContent1}" />
+                            <apex:outputText escape="false" value="{!HTMLENCODE(confirmationContent1)}" />
                         </p>
                         <p>
-                            <apex:outputText escape="false" value="{!confirmationContent2}" />
+                            <apex:outputText escape="false" value="{!HTMLENCODE(confirmationContent2)}" />
                         </p>
                         <p>{!confirmationContent3}</p>
                         <h2 class="heading-medium">What happens next?</h2>
                         <p>
-                            <apex:outputText escape="false" value="{!confirmationNextStepContent}" />
+                            <apex:outputText escape="false" value="{!HTMLENCODE(confirmationNextStepContent)}" />
                         </p>
                         <div class="notice">
                             <i class="icon icon-important">
                                 <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
                             </i>
                             <strong class="bold-small">
-                                <apex:outputText escape="false" value="{!confirmationWarningContent1}" />
+                                <apex:outputText escape="false" value="{!HTMLENCODE(confirmationWarningContent1)}" />
                             </strong>
                         </div>
                         <h2 class="heading-medium">{!confirmationHeading2}</h2>
                         <p>
-                            <apex:outputText escape="false" value="{!confiratmionWarningContent2}" />
+                            <apex:outputText escape="false" value="{!HTMLENCODE(confiratmionWarningContent2)}" />
                         </p>
                         <h2 class="heading-medium">How did we do?</h2>
                         <p>
@@ -99,16 +99,16 @@ Ver. Author        Date        Detail
                     <div class="govuk-box-highlight">
                         <h1 class="bold-large">{!pageTitle}</h1>
                         <p>
-                            <apex:outputText escape="false" value="{!pageTitle2}"/>
+                            <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle2)}"/>
                         </p>
                     </div>
                     <h2 class="heading-medium">What happens next</h2>
                     
                     <p>
-                    <apex:outputtext value="{!pageBody}" escape="false" />
+                    <apex:outputtext value="{!HTMLENCODE(pageBody)}" escape="false" />
                     </p>
                     
-                    <p><apex:outputText escape="false" value="{!pageBody1}"/></p>
+                    <p><apex:outputText escape="false" value="{!HTMLENCODE(pageBody1)}"/></p>
                         <p class="heading-medium">Documents</p>
                         <section class="attachment embedded" id="attachment_1365490">
                             <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
@@ -124,7 +124,7 @@ Ver. Author        Date        Detail
                     <h2 class="heading-medium">Your next steps</h2>
                     <p>
 
-                        <apex:outputText escape="false" value="{!pageBody2}"/>
+                        <apex:outputText escape="false" value="{!HTMLENCODE(pageBody2)}"/>
                         Read the full list of 
                         <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration" target="_blank">who to tell.
                         </a>

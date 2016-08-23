@@ -13,3 +13,6 @@ mm.log
 *.orig
 .project
 .settings/
+src/classes/UnitTestCoverage.cls-meta.xml
+src/classes/UnitTestCoverageTest.cls
+src/classes/UnitTestCoverageTest.cls-meta.xml

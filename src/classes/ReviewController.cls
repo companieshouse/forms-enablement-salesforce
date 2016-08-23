@@ -227,10 +227,10 @@ public class ReviewController extends TransactionStepControllerBase {
         get;
         set;
     }
-    //public Boolean showParticulars {
-    //    get;
-    //    set;
-    //}
+    public Boolean showParticulars {
+        get;
+        set;
+    }
     public Boolean showCancelledShares {
         get;
         set;
