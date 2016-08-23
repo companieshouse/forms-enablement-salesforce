@@ -131,7 +131,8 @@ public with sharing class CompanyController {
 
         prefix = prefix.toUpperCase();
         companyNumber = prefix + postfix;
-
+	
+		//TODOMERGE: ISOLATE THE API CALL
         CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
         Map<String, String> companyType = new Map<String, String>();
         companyType.put('private-unlimited', 'Company'); //Company
@@ -243,27 +244,31 @@ public with sharing class CompanyController {
 
 
         //Merged From Leo 03 May 2016
-        trackuser.getSearchedCompany(companyNumber);
-        return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+        } else {
+			trackuser.getSearchedCompany(companyNumber);
+        	return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+		}
         //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );
         //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);
     }
 
-    private String getNonce() {
-        
-        final Integer NONCE_LENGTH = 16;
-        
-        final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
-        
-        String nonce = '';
-        
-        while (nonce.length() < NONCE_LENGTH) {
-           Integer i = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
-           nonce += chars.substring(i, i + 1);
-        }
-        
-        return nonce; 
-    }
+    //private String getNonce() {
+
+    //    final Integer NONCE_LENGTH = 16;
+
+    //    final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+
+    //    String nonce = '';
+
+    //    while (nonce.length() < NONCE_LENGTH) {
+    //        Integer i = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
+    //        nonce += chars.substring(i, i + 1);
+    //    }
+
+    //    return nonce;
+    //}
 
     public PageReference previousAction() {
         trackuser = new TrackUserClass();

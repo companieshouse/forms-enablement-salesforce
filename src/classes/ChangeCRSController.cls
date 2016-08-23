@@ -16,19 +16,7 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-07-7  Initial development.
 */
 public with sharing class ChangeCRSController extends TransactionStepControllerBase {
-    public Decimal numberofshares {
-        get;
-        set;
-    }
-    public Decimal aggregateunpaidAmount {
-        get;
-        set;
-    }
     public String classofshares {
-        get;
-        set;
-    }
-    public Decimal aggregateNominalValue {
         get;
         set;
     }
@@ -69,10 +57,6 @@ public with sharing class ChangeCRSController extends TransactionStepControllerB
         set;
     }
     public String displayText6 {
-        get;
-        set;
-    }
-    public String headerText1 {
         get;
         set;
     }

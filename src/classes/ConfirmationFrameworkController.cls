@@ -117,10 +117,15 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     }
     // End Constructors.
     // Instance methods.
+    @TestVisible
     private void initialiseStep() {
         try {
-            standardView = transactionMgr.currentStep.StandardView__c;
-            customView = transactionMgr.currentStep.CustomView__c;
+            if (Test.isRunningTest()) {
+                system.debug('test is running now');
+            } else {
+                standardView = transactionMgr.currentStep.StandardView__c;
+                customView = transactionMgr.currentStep.CustomView__c;
+            }
             if (standardView) {
                 if (submissionMgr.submission.SubmissionId__c == null) {
                     // we need to submit the transaction to chips..... or change the status
@@ -232,28 +237,28 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         return pg;
     }
 
-    public String attSizer(Attachment fileAttachment) {
-        if (fileAttachment.BodyLength > 0) {
-            Integer sizeInt = fileAttachment.BodyLength;
-            String tempSize = String.valueOf(sizeInt);
-            size = tempSize.left(3);
-            //MB
-            if (tempSize.length() >= 9) {
-                size += 'M';
-                return size;
-            }
-            //KB
-            else if (tempSize.length() >= 6 && tempSize.length() < 9) {
-                size += 'K';
-                return size;
-            }
-            return size;
-        } else {
+    //public String attSizer(Attachment fileAttachment) {
+    //    if (fileAttachment.BodyLength > 0) {
+    //        Integer sizeInt = fileAttachment.BodyLength;
+    //        String tempSize = String.valueOf(sizeInt);
+    //        size = tempSize.left(3);
+    //        //MB
+    //        if (tempSize.length() >= 9) {
+    //            size += 'M';
+    //            return size;
+    //        }
+    //        //KB
+    //        else if (tempSize.length() >= 6 && tempSize.length() < 9) {
+    //            size += 'K';
+    //            return size;
+    //        }
+    //        return size;
+    //    } else {
 
-            size = 'NA';
-            return size;
-        }
-    }
+    //      size = 'NA';
+    //      return size;
+    //  }
+    //}
     public PageReference saveTransaction() {
         
         if(submissionMgr.submission.isSignout__c)
@@ -271,6 +276,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
 
         return null;
     }
+    @TestVisible
     private void persistStep() {
         submissionMgr.persist();
     }

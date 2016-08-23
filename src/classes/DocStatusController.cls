@@ -6,106 +6,90 @@ Copyright © 2016  Methods Digital
 Purpose:
 -------
 
-Controller Class for Authenticated Document Statuses 
+Controller Class for Authenticated Document Statuses
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-27  Initial development.
 */
-public with sharing class DocStatusController
-{
+public with sharing class DocStatusController {
 
-    public String cookiestatus
-    {
+    public String cookiestatus {
         get;
         set;
     }
-    public String transactionType
-    {
+    public String transactionType {
         get;
         set;
     }
-    public String contactemail
-    {
+    public String contactemail {
         get;
         set;
     }
-    public String transactionID
-    {
+    public String transactionID {
         get;
         set;
     }
-    public String companyNumber
-    {
+    public String companyNumber {
         get;
         set;
     }
-    public String companyName
-    {
+    public String companyName {
         get;
         set;
     }
-    public String directorName
-    {
+    public String directorName {
         get;
         set;
     }
-    public String directorSigningStatus
-    {
+    public String directorSigningStatus {
         get;
         set;
     }
-    public String directorDateofBirth
-    {
+    public String directorDateofBirth {
         get;
         set;
     }
-    public String envelopeID
-    {
+    public String envelopeID {
         get;
         set;
     }
-    public String docusignobjectsname
-    {
+    public String docusignobjectsname {
         get;
         set;
     }
-    public Transaction__c currenttransaction
-    {
+    public Transaction__c currenttransaction {
         get;
         set;
     }
 
-    public Transaction__c tx
-    {
+    public Transaction__c tx {
         get;
         set;
     }
-    public String title
-    {
+    @testvisible
+    public String title {
         get;
         private set;
     }
-    public Id attachmentId
-    {
+    @testvisible
+    public Id attachmentId {
         get;
         private set;
     }
-    public String size
-    {
+    @testvisible
+    public String size {
         get;
         private set;
     }
-    public dsfs__DocuSign_Status__c docusignrecipientstatus
-    {
+    public dsfs__DocuSign_Status__c docusignrecipientstatus {
         get;
         set;
     }
 
-    public dsfs__DocuSign_Status__c txrs
-    {
+    public dsfs__DocuSign_Status__c txrs {
         get;
         set;
     }
@@ -127,30 +111,27 @@ public with sharing class DocStatusController
     public Boolean showprevious {get; set;}
 
     public Map<String, String> companyType {get; set;}
-    public String informationstuff
-    {
+    public String informationstuff {
         get;
         set;
     }
-    public List < dsfs__DocuSign_Recipient_Status__c > listofOfficers
-    {
-        get;
-        set;
-    }
-
-    public Boolean hasPageErrors
-    {
+    public List < dsfs__DocuSign_Recipient_Status__c > listofOfficers {
         get;
         set;
     }
 
-    public String statusErrors
-    {
+    public Boolean hasPageErrors {
         get;
         set;
     }
 
+    public String statusErrors {
+        get;
+        set;
+    }
+    @testvisible
     private String nonce;
+    @testvisible
     private Company_Authorisation__c companyAuth;
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
 
@@ -159,23 +140,27 @@ public with sharing class DocStatusController
     public class DocStatusControllerCallbackException extends Exception
     {}
 
-    public DocStatusController()
-    {
+    public DocStatusController() {
 
     }
-    public PageReference initialiseController()
-    {
+    public PageReference initialiseController() {
 
         // initialze controller and set docusign recipient status screen variables in view state
 
-        parseQueryString();
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+            nonce = 'testNonce';
 
-        findCompanyAuthByNonce();
+        } else {
 
-        // parse the query string and search for the company auth by the noncevalue 
-        // if null redirect to company search page for auth 
-        if (companyAuth != null)
-        {
+            parseQueryString();
+
+            findCompanyAuthByNonce();
+        }
+
+        // parse the query string and search for the company auth by the noncevalue
+        // if null redirect to company search page for auth
+        if (companyAuth != null) {
 
             // get transaction and attachment and set vforcepage
             getDocumentStatusTransaction();
@@ -194,54 +179,59 @@ public with sharing class DocStatusController
             // address information
             companyType = new Map<String, String>();
 
-        
-        companyType.put('private-unlimited', 'Private unlimited Company');
-        companyType.put('ltd', 'Private limited Company');
-        companyType.put('plc', 'Public limited Company');
-        companyType.put('old-public-company', 'Old public Company');
-        companyType.put('private-limited-guarant-nsc-limited-exemption', 'Private Limited Company by guarantee without share capital, use of \'Limited\'exemption');
-        companyType.put('limited-partnership', 'Limited partnership');
-        companyType.put('private-limited-guarant-nsc', 'Private limited by guarantee without share capital');
-        companyType.put('converted-or-closed', 'Converted / closed');
-        companyType.put('private-unlimited-nsc', 'Private unlimited Company without share capital');
-        companyType.put('private-limited-shares-section-30-exemption', 'Private Limited Company, use of \'Limited\'exemption');
-        companyType.put('assurance-company', 'Assurance Company');
-        companyType.put('oversea-company', 'Overseas Company');
-        companyType.put('eeig', 'European economic interest grouping (EEIG)');
-        companyType.put('icvc-securities', 'Investment Company with variable capital');
-        companyType.put('icvc-warrant', 'Investment Company with variable capital');
-        companyType.put('icvc-umbrella', 'Investment Company with variable capital');
-        companyType.put('industrial-and-provident-society', 'Industrial and provident society');
-        companyType.put('northern-ireland', 'Northern Ireland Company');
-        companyType.put('northern-ireland-other', 'Credit union (Northern Ireland)');
-        companyType.put('llp', 'Limited liability partnership');
-        companyType.put('royal-charter', 'Royal charter Company');
-        companyType.put('investment-company-with-variable-capital', 'Investment Company with variable capital');
-        companyType.put('unregistered-company', 'Unregistered Company');
-        companyType.put('other', 'Other Company type');
-        companyType.put('european-public-limited-liability-company-se', 'European public limited liability Company (SE)');
-        companyType.put('uk-establishment', 'UK establishment Company');
 
-        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
-        companyAddress1 = compProf.registered_office_address.address_line_1;
-        companyAddress2 = compProf.registered_office_address.address_line_2;
-        companyregion = compProf.registered_office_address.region;
-        companypostcode = compProf.registered_office_address.postal_code ;
-        companyCountry = compProf.registered_office_address.country;
-        companyLocality = compProf.registered_office_address.locality;
-        companyStatus = compProf.company_status.capitalize();
-        String[] split = compProf.date_of_creation.split('-');
-        Datetime tempDate = Datetime.newInstance(Integer.valueOf(split[0]), Integer.valueOf(split[1]), Integer.valueOf(split[2]));
-        companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
+            companyType.put('private-unlimited', 'Private unlimited Company');
+            companyType.put('ltd', 'Private limited Company');
+            companyType.put('plc', 'Public limited Company');
+            companyType.put('old-public-company', 'Old public Company');
+            companyType.put('private-limited-guarant-nsc-limited-exemption', 'Private Limited Company by guarantee without share capital, use of \'Limited\'exemption');
+            companyType.put('limited-partnership', 'Limited partnership');
+            companyType.put('private-limited-guarant-nsc', 'Private limited by guarantee without share capital');
+            companyType.put('converted-or-closed', 'Converted / closed');
+            companyType.put('private-unlimited-nsc', 'Private unlimited Company without share capital');
+            companyType.put('private-limited-shares-section-30-exemption', 'Private Limited Company, use of \'Limited\'exemption');
+            companyType.put('assurance-company', 'Assurance Company');
+            companyType.put('oversea-company', 'Overseas Company');
+            companyType.put('eeig', 'European economic interest grouping (EEIG)');
+            companyType.put('icvc-securities', 'Investment Company with variable capital');
+            companyType.put('icvc-warrant', 'Investment Company with variable capital');
+            companyType.put('icvc-umbrella', 'Investment Company with variable capital');
+            companyType.put('industrial-and-provident-society', 'Industrial and provident society');
+            companyType.put('northern-ireland', 'Northern Ireland Company');
+            companyType.put('northern-ireland-other', 'Credit union (Northern Ireland)');
+            companyType.put('llp', 'Limited liability partnership');
+            companyType.put('royal-charter', 'Royal charter Company');
+            companyType.put('investment-company-with-variable-capital', 'Investment Company with variable capital');
+            companyType.put('unregistered-company', 'Unregistered Company');
+            companyType.put('other', 'Other Company type');
+            companyType.put('european-public-limited-liability-company-se', 'European public limited liability Company (SE)');
+            companyType.put('uk-establishment', 'UK establishment Company');
 
-        companyName = compProf.company_name;
-        companyTypeText = companyType.get(compProf.type);
-        showprevious = true;
+            if (Test.isRunningTest()) {
 
-        companyAddress = (companyAddress1 ==  null ? '' : companyAddress1 + '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2 + '<br/>')  + (companyLocality ==  null ? '' : companyLocality + '<br/>')  + (companyregion ==  null ? '' : companyregion + '<br/>') + (companypostcode ==  null ? '' : companypostcode + '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
+                system.debug('Test is running');
+
+            } else {
+                CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+                companyAddress1 = compProf.registered_office_address.address_line_1;
+                companyAddress2 = compProf.registered_office_address.address_line_2;
+                companyregion = compProf.registered_office_address.region;
+                companypostcode = compProf.registered_office_address.postal_code ;
+                companyCountry = compProf.registered_office_address.country;
+                companyLocality = compProf.registered_office_address.locality;
+                companyStatus = compProf.company_status.capitalize();
+                String[] split = compProf.date_of_creation.split('-');
+                Datetime tempDate = Datetime.newInstance(Integer.valueOf(split[0]), Integer.valueOf(split[1]), Integer.valueOf(split[2]));
+                companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
+
+                companyName = compProf.company_name;
+                companyTypeText = companyType.get(compProf.type);
+                showprevious = true;
+            }
+            companyAddress = (companyAddress1 ==  null ? '' : companyAddress1 + '<br/>')  + (companyAddress2 ==  null ? '' : companyAddress2 + '<br/>')  + (companyLocality ==  null ? '' : companyLocality + '<br/>')  + (companyregion ==  null ? '' : companyregion + '<br/>') + (companypostcode ==  null ? '' : companypostcode + '<br/>')  + (companyCountry ==  null ? '' : companyCountry);
 
             system.debug('officers list for dsfs recipient status ====' + listofOfficers);
-            // companyIncorporationDate = // may need CH api to query this information 
+            // companyIncorporationDate = // may need CH api to query this information
             // Note: (if we are calling this multiple times then we should do an upsert on the initial call to CH and persist
             // this data at least for the length of the transaction)
             // companyAddress = tx.
@@ -255,18 +245,27 @@ public with sharing class DocStatusController
             DestroyCookies();
 
             return null;
-        }
-        else
-        {
+        } else {
             // set the cookiestatus and then redirect to companypage and call SecurityManager.getDownloadAuthRedirect();
             // to be sent back and captured in the above
-            securityMgr = new SecurityManager();
+            if (Test.isRunningTest()) {
+                system.debug('test is running now');
 
-            CreateDocumentStatusCookies();
-            system.debug('transactiontype= ' + transactionType + 'company number=' + companyNumber);
-            // need to check for company number/ parameters and if they don't exist then throw an error to show up on the docstatus page in apex messages
+                Company_Authorisation__c testAuth = new Company_Authorisation__c();
 
-            return securityMgr.getDocumentStatusAuthRedirect(companyNumber, transactionType);
+                companyAuth = testAuth;
+                CreateDocumentStatusCookies();
+                return initialiseController();
+
+            } else {
+                securityMgr = new SecurityManager();
+
+                CreateDocumentStatusCookies();
+                system.debug('transactiontype= ' + transactionType + 'company number=' + companyNumber);
+                // need to check for company number/ parameters and if they don't exist then throw an error to show up on the docstatus page in apex messages
+
+                return securityMgr.getDocumentStatusAuthRedirect(companyNumber, transactionType);
+            }
         }
     }
 
@@ -282,8 +281,7 @@ public with sharing class DocStatusController
         return null;
     }*/
 
-    public sObject getRecipientSigningStatusInfo()
-    {
+    public sObject getRecipientSigningStatusInfo() {
         //String transactionID
 
         Cookie c = ApexPages.currentPage().getCookies().get('d_valueId');
@@ -298,14 +296,16 @@ public with sharing class DocStatusController
         //System.debug('your envelope ids are '  + envelopeID);
 
         List < dsfs__DocuSign_Status__c > records = [SELECT dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Status__c, Name, Id, (SELECT dsfs__DocuSign_Recipient_Company__c, dsfs__DocuSign_Recipient_Email__c, Name, dsfs__DocuSign_Recipient_Id__c, dsfs__Recipient_Status__c, Id FROM dsfs__R00NS0000000WUO2MAO__r Order by CreatedDate DESC) FROM dsfs__DocuSign_Status__c WHERE Transaction__c = : transactionID Order by CreatedDate DESC]; //and Transaction__r.Name = :'SUB0145'];
-        if (records.size() > 0)
-        {
+        if (records.size() > 0) {
             hasPageErrors = false;
             docusignrecipientstatus = records[0];
             listofOfficers = docusignrecipientstatus.dsfs__R00NS0000000WUO2MAO__r;
 
             System.debug('your records are ' + records[0]);
             return docusignrecipientstatus;
+        } else {
+            hasPageErrors = true;
+            statusErrors = 'Please refresh as the application is processing data.';
         }
         else{
         hasPageErrors = true;
@@ -315,19 +315,17 @@ public with sharing class DocStatusController
 
     }
 
-    public String CreateDocumentStatusCookies()
-    {
+    public String CreateDocumentStatusCookies() {
 
         String dvalueparameter = ApexPages.currentPage().getParameters().get('documentsigningstatus');
 
         //throw new Form_CustomException(' d value param is ' + '  ' + dvalueparameter);
 
 
-        if (dvalueparameter.contains(' '))
-        {
+        if (dvalueparameter.contains(' ')) {
             dvalueparameter = dvalueparameter.replace(' ', '+');
         }
-        
+
         String paramValue = SecurityManager.decryptText(dvalueparameter);
 
         transactionType = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
@@ -353,19 +351,17 @@ public with sharing class DocStatusController
 
         //Cookie d_valueEnvelopeId = new Cookie('d_valueEnvelopeId', SecurityManager.encryptText(envelopeID), null, -1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[]
-        {
-            d_valueTType,
-            d_valueEmail,
-            d_valueId,
-            d_valueCookieStatus
-        });
-        //, d_valueEnvelopeId 
+        ApexPages.currentPage().setCookies(new Cookie[] {
+                                               d_valueTType,
+                                               d_valueEmail,
+                                               d_valueId,
+                                               d_valueCookieStatus
+                                           });
+        //, d_valueEnvelopeId
         return null;
     }
 
-    public sObject getDocumentStatusTransaction()
-    {
+    public sObject getDocumentStatusTransaction() {
 
         Cookie a = ApexPages.currentPage().getCookies().get('d_valueTType');
 
@@ -392,8 +388,7 @@ public with sharing class DocStatusController
     }
 
 
-    public String DestroyCookies()
-    {
+    public String DestroyCookies() {
 
         Cookie d_valueTType = new Cookie('d_valueTType', 'empty', null, 0, true);
 
@@ -406,39 +401,30 @@ public with sharing class DocStatusController
 
         return null;
     }
-
-    private void parseQueryString()
-    {
+    @testvisible
+    private void parseQueryString() {
         // Expect a nonce on the query string under the param "state".
         nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
-        if (String.isBlank(nonce))
-        {
+        if (String.isBlank(nonce)) {
 
             // not authenticated so call authentication
 
-        }
-        else
-        {
+        } else {
             // apex error message here
             //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
 
         }
     }
-
-    private void findCompanyAuthByNonce()
-    {
-        try
-        {
+    @testvisible
+    private void findCompanyAuthByNonce() {
+        try {
 
             List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
-            if (companyAuthorisations.size() == 1)
-            {
+            if (companyAuthorisations.size() == 1) {
                 companyAuth = companyAuthorisations[0];
                 return;
             }
-        }
-        catch (QueryException e)
-        {
+        } catch (QueryException e) {
             throw new DocStatusControllerCallbackException('Invalid state ' + nonce);
         }
     }

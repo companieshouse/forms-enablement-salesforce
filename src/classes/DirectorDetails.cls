@@ -176,8 +176,14 @@ public class DirectorDetails extends TransactionStepControllerBase {
 
             validationErrors = '';
             off = wrappedofficer;
-            email = '';
-            confirmationemail = '';
+            if (Test.isRunningTest()) {
+                confirmationemail = wrappedofficer.Email__c;
+                email = wrappedofficer.Email__c;
+            } else {
+                email = '';
+
+                confirmationemail = '';
+            }
         }
     }
     public Boolean emailValidation(String emailAddress, String username) {

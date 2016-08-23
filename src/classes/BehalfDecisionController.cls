@@ -61,7 +61,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         return;
     }
 
-    private void persistStep() {
+    @TestVisible private void persistStep() {
         if (behalfValidation != null)
             submissionMgr.submission.isBehalfSignatoryEnable__c = behalfValidation;
         submissionMgr.persist();

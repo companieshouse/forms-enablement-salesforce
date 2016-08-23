@@ -17,10 +17,7 @@ Ver. Author        Date        Detail
 1.1  Leo Bitoye&    2016-22-07  Removal of SH05 and SH07 capability.
 */
 public with sharing class cancelShares extends TransactionStepControllerBase {
-    public Date cancellationDate {
-        get;
-        set;
-    }
+
     public String companyName {
         get;
         set;
@@ -38,10 +35,6 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         set;
     }
     public Boolean hasPageErrors {
-        get;
-        set;
-    }
-    public String currentErrorMessage {
         get;
         set;
     }
@@ -82,10 +75,6 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         set;
     }
     public String continueButtonText {
-        get;
-        set;
-    }
-    public List < Shares__c > allShares {
         get;
         set;
     }
@@ -176,12 +165,6 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
             hasPageErrors = true;
             errorVal1 = 'error';
             errormessage1 = 'Please enter the correct Year after 1700';
-            return null;
-        }
-        if (varYear == null || varyear == 0 ) {
-            hasPageErrors = true;
-            errorVal1 = 'error';
-            errormessage1 = 'Please enter the correct Year';
             return null;
         }
         shareCancelDate = Date.newInstance(varYear, varMonth, varDay);

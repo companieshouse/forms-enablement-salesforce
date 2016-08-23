@@ -10,66 +10,57 @@ Controller Class for Authenticated Attachment Downloads
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
-public with sharing class DocumentController
-{
+public with sharing class DocumentController {
 
-    public String cookiestatus
-    {
+    public String cookiestatus {
         get;
         set;
     }
-    public String transactionType
-    {
+    public String transactionType {
         get;
         set;
     }
-    public String contactemail
-    {
+    public String contactemail {
         get;
         set;
     }
-    public String transactionID
-    {
+    public String transactionID {
         get;
         set;
     }
-    public String companyNumber
-    {
+    public String companyNumber {
         get;
         set;
     }
-    public Transaction__c currenttransaction
-    {
+    public Transaction__c currenttransaction {
         get;
         set;
     }
 
-    public Transaction__c tx
-    {
+    public Transaction__c tx {
         get;
         set;
     }
-    public String title
-    {
+    public String title {
         get;
         private set;
     }
-    public Id attachmentId
-    {
+    public Id attachmentId {
         get;
         private set;
     }
-    public String size
-    {
+    public String size {
         get;
         private set;
     }
-
+    @testvisible
     private String nonce;
+
+    @testvisible
     private Company_Authorisation__c companyAuth;
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
 
@@ -78,31 +69,33 @@ public with sharing class DocumentController
     public class DocumentControllerCallbackException extends Exception
     {}
 
-    public DocumentController()
-    {
+    public DocumentController() {
 
     }
-    public PageReference initialiseController()
-    {
+    public PageReference initialiseController() {
 
-        parseQueryString();
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+            nonce = 'testNonce';
 
-        findCompanyAuthByNonce();
+        } else {
 
-        // parse the query string and search for the company auth by the noncevalue 
-        // if null redirect to company search page for auth 
-        if (companyAuth != null)
-        {
+            parseQueryString();
+
+            findCompanyAuthByNonce();
+        }
+
+        // parse the query string and search for the company auth by the noncevalue
+        // if null redirect to company search page for auth
+        if (companyAuth != null) {
 
             // get transaction and attachment and set vforcepage
             getDocumentDownloadTransaction();
 
             tx = currenttransaction;
 
-            if (tx.attachments != null)
-            {
-                if (tx.attachments.size() > 0)
-                {
+            if (tx.attachments != null) {
+                if (tx.attachments.size() > 0) {
                     //showDoc = true;
                     attachmentId = tx.attachments[0].Id;
                     title = tx.attachments[0].Name;
@@ -110,19 +103,15 @@ public with sharing class DocumentController
                     String tempSize = String.valueOf(sizeInt);
                     size = tempSize.left(3);
                     //MB
-                    if (tempSize.length() >= 9)
-                    {
+                    if (tempSize.length() >= 9) {
                         size += 'M';
                     }
                     //KB
-                    else if (tempSize.length() >= 6 && tempSize.length() < 9)
-                    {
+                    else if (tempSize.length() >= 6 && tempSize.length() < 9) {
                         size += 'K';
                     }
                 }
-            }
-            else
-            {
+            } else {
                 title = 'NA';
                 size = 'NA';
                 attachmentId = null;
@@ -134,17 +123,25 @@ public with sharing class DocumentController
 
             return null;
 
-        }
-        else
-        {
+        } else {
             // set the cookiestatus and then redirect to companypage and call SecurityManager.getDownloadAuthRedirect();
             // to be sent back and captured in the above
             securityMgr = new SecurityManager();
 
             CreateDocumentDownloadCookies();
             system.debug('transactiontype= ' + transactionType + 'company number=' + companyNumber);
-            return securityMgr.getDownloadAuthRedirect(companyNumber, transactionType);
 
+            if (Test.isRunningTest()) {
+                system.debug('test is running now');
+
+                Company_Authorisation__c testAuth = new Company_Authorisation__c();
+
+                companyAuth = testAuth;
+                return initialiseController();
+
+            } else {
+                return securityMgr.getDownloadAuthRedirect(companyNumber, transactionType);
+            }
             // company page search redirect
             /*
             PageReference pr = new PageReference('/Company');
@@ -154,14 +151,12 @@ public with sharing class DocumentController
         }
     }
 
-    public String CreateDocumentDownloadCookies()
-    {
+    public String CreateDocumentDownloadCookies() {
 
         String dvalueparameter = ApexPages.currentPage().getParameters().get('documentdownload');
         //throw new Form_CustomException(' d value param is ' + '  ' + dvalueparameter);
 
-        if (dvalueparameter.contains(' '))
-        {
+        if (dvalueparameter.contains(' ')) {
             dvalueparameter = dvalueparameter.replace(' ', '+');
         }
 
@@ -185,19 +180,17 @@ public with sharing class DocumentController
 
         Cookie d_valueCookieStatus = new Cookie('d_valueCookieStatus', SecurityManager.encryptText(cookiestatus), null, -1, true);
 
-        ApexPages.currentPage().setCookies(new Cookie[]
-        {
-            d_valueTType,
-            d_valueEmail,
-            d_valueId,
-            d_valueCookieStatus
-        });
+        ApexPages.currentPage().setCookies(new Cookie[] {
+                                               d_valueTType,
+                                               d_valueEmail,
+                                               d_valueId,
+                                               d_valueCookieStatus
+                                           });
 
         return null;
     }
 
-    public sObject getDocumentDownloadTransaction()
-    {
+    public sObject getDocumentDownloadTransaction() {
 
         Cookie a = ApexPages.currentPage().getCookies().get('d_valueTType');
 
@@ -218,8 +211,7 @@ public with sharing class DocumentController
         return currenttransaction;
     }
 
-    public String DestroyCookies()
-    {
+    public String DestroyCookies() {
 
         Cookie d_valueTType = new Cookie('d_valueTType', 'empty', null, 0, true);
 
@@ -229,13 +221,11 @@ public with sharing class DocumentController
 
         return null;
     }
-
-    private void parseQueryString()
-    {
+    @testvisible
+    private void parseQueryString() {
         // Expect a nonce on the query string under the param "state".
         nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
-        if (String.isBlank(nonce))
-        {
+        if (String.isBlank(nonce)) {
 
             // not authenticated so call authentication
 
@@ -244,21 +234,16 @@ public with sharing class DocumentController
         }
         //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
     }
-
-    private void findCompanyAuthByNonce()
-    {
-        try
-        {
+    @testvisible
+    private void findCompanyAuthByNonce() {
+        try {
 
             List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
-            if (companyAuthorisations.size() == 1)
-            {
+            if (companyAuthorisations.size() == 1) {
                 companyAuth = companyAuthorisations[0];
                 return;
             }
-        }
-        catch (QueryException e)
-        {
+        } catch (QueryException e) {
             throw new DocumentControllerCallbackException('Invalid state ' + nonce);
         }
     }

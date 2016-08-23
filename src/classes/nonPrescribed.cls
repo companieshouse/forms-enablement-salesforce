@@ -64,14 +64,14 @@ public with sharing class nonPrescribed extends TransactionStepControllerBase {
 		get;
 		set;
 	}
-	public Boolean hasPageErrors {
-		get;
-		set;
-	}
-	public String currentErrorMessage {
-		get;
-		set;
-	}
+	//public Boolean hasPageErrors {
+	//	get;
+	//	set;
+	//}
+	//public String currentErrorMessage {
+	//	get;
+	//	set;
+	//}
 
 	public nonPrescribed() {
 		super();

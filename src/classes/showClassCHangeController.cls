@@ -16,14 +16,6 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
 public with sharing class showClassCHangeController extends TransactionStepControllerBase {
-	public String classofshares {
-		get;
-		set;
-	}
-	public String classofsharesNew {
-		get;
-		set;
-	}
 	public String companyName {
 		get;
 		set;
@@ -33,10 +25,6 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 		set;
 	}
 	public Boolean hasPageErrors {
-		get;
-		set;
-	}
-	public String currentErrorMessage {
 		get;
 		set;
 	}
@@ -91,11 +79,6 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 	public Id shareID {get; set;}
 
 	public String previousButtonText {get; set;}
-
-	public Datetime sharechangeDate {
-		get;
-		set;
-	}
 	public Integer varDay {
 		get;
 		set;

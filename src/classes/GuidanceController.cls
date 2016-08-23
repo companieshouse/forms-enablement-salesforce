@@ -102,17 +102,17 @@ public with sharing class GuidanceController {
     }
 
     public PageReference setAgreeValue() {
-        if (!agreeBoxChoice) {
+        if (agreeBoxChoice == null || String.valueOf(agreeBoxChoice) == 'undefined') {
+            currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
+            hasPageErrors = true;
+            return null;
+        } else if (!agreeBoxChoice) {
             currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
             hasPageErrors = true;
             return null;
         } else if (agreeBoxChoice) {
             currentErrorMessage = '';
             hasPageErrors = false;
-        } else if (String.valueOf(agreeBoxChoice) == 'undefined') {
-            currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
-            hasPageErrors = true;
-            return null;
         }
         return nextAction();
     }

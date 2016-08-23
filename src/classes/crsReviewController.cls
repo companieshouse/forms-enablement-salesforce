@@ -16,10 +16,6 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-08-08  Initial development.
 */
 public with sharing class crsReviewController extends TransactionStepControllerBase {
-	public Date changeDate {
-		get;
-		set;
-	}
 	public String companyName {
 		get;
 		set;
@@ -37,10 +33,6 @@ public with sharing class crsReviewController extends TransactionStepControllerB
 		set;
 	}
 	public Boolean hasPageErrors {
-		get;
-		set;
-	}
-	public String currentErrorMessage {
 		get;
 		set;
 	}
@@ -81,10 +73,6 @@ public with sharing class crsReviewController extends TransactionStepControllerB
 		set;
 	}
 	public String continueButtonText {
-		get;
-		set;
-	}
-	public List < Shares__c > allShares {
 		get;
 		set;
 	}
@@ -225,12 +213,6 @@ public with sharing class crsReviewController extends TransactionStepControllerB
 			hasPageErrors = true;
 			errorVal1 = 'error';
 			errormessage1 = 'Please enter the correct Year after 1700';
-			return null;
-		}
-		if (varYear == null || varyear == 0 ) {
-			hasPageErrors = true;
-			errorVal1 = 'error';
-			errormessage1 = 'Please enter the correct Year';
 			return null;
 		}
 		shareChangeDate = Date.newInstance(varYear, varMonth, varDay);

@@ -18,6 +18,7 @@ private class whichDirectorTest {
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
+		transac.Transaction_Type__c = 'TestForm';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -25,6 +26,8 @@ private class whichDirectorTest {
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
+		transac.SoleDirectorPresenter__c = true;
+		transac.isPresenterMultipleDirectors__c = true;
 		insert transac;
 
 		testContact.Transaction__c = transac.id;
@@ -43,6 +46,7 @@ private class whichDirectorTest {
 		whichDirector1testpage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(whichDirector1testpage);
 		whichDirector test1controller = new whichDirector();
+
 		test1controller.checkDirectorStatus();
 		test1controller.selectPresenter();
 		test1controller.nextAction();
@@ -51,8 +55,12 @@ private class whichDirectorTest {
 		test1controller.nextAction();
 		test1controller.previousAction();
 		test1controller.isPageAlreadyValidStep = true;
+		system.debug('your transaction manager' + test1controller.transactionMgr);
+		test1controller.isPageAlreadyValidStep = true;
+
+		//test1controller.transactionMgr = new TransactionManager('DS01');
 		test1controller.redirectUser();
-		test1controller.checkDirectorStatus();
+		//test1controller.checkDirectorStatus();
 
 	}
 
@@ -72,6 +80,7 @@ private class whichDirectorTest {
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
+		transac.Transaction_Type__c = 'TestForm';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -80,6 +89,9 @@ private class whichDirectorTest {
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
 		transac.isPresenterMultipleDirectors__c = true;
+		transac.Presenter__c = testPresenter.Id;
+		transac.company__r = testcompany;
+		transac.SoleDirectorPresenter__c = true;
 		insert transac;
 
 		testContact.Transaction__c = transac.id;
@@ -107,8 +119,12 @@ private class whichDirectorTest {
 		test1controller.nextAction();
 		test1controller.previousAction();
 		test1controller.isPageAlreadyValidStep = false;
+		system.debug('your transaction manager' + test1controller.transactionMgr.td);
+
+		//test1controller.transactionMgr = new TransactionManager('DS01');
 		test1controller.redirectUser();
-		test1controller.checkDirectorStatus();
+		//test1controller.checkDirectorStatus();
+
 
 	}
 

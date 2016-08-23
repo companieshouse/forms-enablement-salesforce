@@ -13,7 +13,8 @@ private class TrackUserClassTest {
 		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
 
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
-		insert testPresenter;
+
+
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
@@ -27,6 +28,9 @@ private class TrackUserClassTest {
 		transac.officerTerminology__c = 'testterminology';
 		insert transac;
 
+		testPresenter.PersonEmail = transac.ContactEmail__c;
+		insert testPresenter;
+
 		testContact.Transaction__c = transac.id;
 		insert testContact;
 		Officer__c testoff = new Officer__c();
@@ -39,6 +43,15 @@ private class TrackUserClassTest {
 		testoff.Contact__c = testContact.id;
 		insert testoff;
 
+		Company_Authorisation__c testAuth = new Company_Authorisation__c();
+		testAuth.Company_Access_Token__c = 'test';
+		testAuth.Company_Number__c = '12345678';
+		testAuth.userEmail__c = 'test@test.com';
+		testAuth.User_Id__c = 'testuserId';
+		testAuth.Nonce__c = 'testNonce2';
+		testAuth.Transaction_Type__c = 'DS01';
+		insert testAuth;
+
 		PageReference cookieTester = Page.StartFramework;
 		cookieTester.getParameters().put('t', 'DS01');
 		Test.setCurrentPage(cookieTester);
@@ -50,13 +63,21 @@ private class TrackUserClassTest {
 		test1controller.GuidanceAgreeBox();
 		test1controller.getUserDocument();
 		test1controller.getSearchedCompany(transac.CompanyNumber__c);
-		// mock
-		cookie searched_company = new Cookie('searched_company', SecurityManager.encryptText(transac.CompanyNumber__c), null, -1, true);
-		ApexPages.currentPage().setCookies(new Cookie[] { searched_company });
-
+		//// mock
+		//cookie searched_company = new Cookie('searched_company', SecurityManager.encryptText(transac.CompanyNumber__c), null, -1, true);
+		//ApexPages.currentPage().setCookies(new Cookie[] { searched_company });
+		test1controller.setStringGuidanceAgreeBox('true');
+		test1controller.setBooleanGuidanceAgreeBox(true);
+		test1controller.GuidanceAgreeBox();
+		test1controller.saveUserDocumentInfo();
+		test1controller.getUserDocument();
 		test1controller.returnCurrentCompanyObject();
 		test1controller.getCurrentUser(transac.ContactEmail__c);
+		test1controller.getSearchedCompany('12345678');
+		test1controller.returnCurrentCompanyObject();
 		test1controller.returnCurrentUser();
+		TrackUserClass.isValidUser('testEmail@testemail.com');
+		TrackUserClass.isValidCompanySearched('12345678');
 	}
 
 }
