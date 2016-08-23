@@ -246,6 +246,7 @@ public with sharing class CompanyController {
         //Merged From Leo 03 May 2016
         if (Test.isRunningTest()) {
             system.debug('test is running now');
+            return null;
         } else {
 			trackuser.getSearchedCompany(companyNumber);
         	return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);

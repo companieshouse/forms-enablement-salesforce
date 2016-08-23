@@ -303,10 +303,7 @@ public with sharing class DocStatusController {
 
             System.debug('your records are ' + records[0]);
             return docusignrecipientstatus;
-        } else {
-            hasPageErrors = true;
-            statusErrors = 'Please refresh as the application is processing data.';
-        }
+        } 
         else{
         hasPageErrors = true;
         statusErrors = 'Your request is currently being processed, refresh your screen in a few minutes and try again';
