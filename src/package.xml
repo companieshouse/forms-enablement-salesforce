@@ -48,16 +48,20 @@
         <members>unfiled$public/CHDS02_Submission</members>
         <members>unfiled$public/CHExpired_Transaction</members>
         <members>unfiled$public/CHExpiryReminder</members>
-        <members>unfiled$public/CHReviewStatus</members>
+        <members>unfiled$public/CHLLDS01_Submission</members>
         <members>unfiled$public/CH_3monthExpiry_Transaction</members>
         <members>unfiled$public/CH_Application_Deleted</members>
         <members>unfiled$public/CH_Approved_Transaction</members>
+        <members>unfiled$public/CH_DS01_Review_Status</members>
+        <members>unfiled$public/CH_DS01_Signing_Status</members>
         <members>unfiled$public/CH_DS02_Approved_Transaction</members>
         <members>unfiled$public/CH_DS02_Rejected_Transaction</members>
         <members>unfiled$public/CH_Director_Decline</members>
         <members>unfiled$public/CH_Director_Decline_for_Director</members>
+        <members>unfiled$public/CH_LLDS01Signing_Status</members>
+        <members>unfiled$public/CH_LLDS01_Review_Status</members>
         <members>unfiled$public/CH_Rejected_Transaction</members>
-        <members>unfiled$public/CH_Signing_Status</members>
+        <members>unfiled$public/Carls_template</members>
         <name>EmailTemplate</name>
     </types>
     <types>

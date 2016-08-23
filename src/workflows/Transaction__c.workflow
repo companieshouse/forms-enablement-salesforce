@@ -34,8 +34,8 @@
         <template>unfiled$public/CH_Rejected_Transaction</template>
     </alerts>
     <alerts>
-        <fullName>DocumentDownloadLink</fullName>
-        <description>DocumentDownloadLink</description>
+        <fullName>DS01_Submission_email_alert</fullName>
+        <description>DS01 Submission email alert</description>
         <protected>false</protected>
         <recipients>
             <field>ContactEmail__c</field>
@@ -56,15 +56,59 @@
         <template>unfiled$public/CHExpired_Transaction</template>
     </alerts>
     <alerts>
-        <fullName>Notify_presenter_that_documents_are_signed_and_awaiting_review_redirect_to_the_r</fullName>
-        <description>Notify presenter that documents are signed and awaiting review - redirect to the review page</description>
+        <fullName>Send_Email_LLDS01</fullName>
+        <description>Send Email LLDS01</description>
         <protected>false</protected>
         <recipients>
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
-        <template>unfiled$public/CHReviewStatus</template>
+        <template>unfiled$public/CHLLDS01_Submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Review_Email_DS01</fullName>
+        <description>Send Review Email DS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS01_Review_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Review_Email_LLDS01</fullName>
+        <description>Send Review Email LLDS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_LLDS01_Review_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Signing_Status_email</fullName>
+        <description>Send Signing Status email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_LLDS01Signing_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Signing_Status_email_DS01</fullName>
+        <description>Send Signing Status email DS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS01_Signing_Status</template>
     </alerts>
     <alerts>
         <fullName>Send_Submission_Confirmation</fullName>
@@ -78,15 +122,15 @@
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <alerts>
-        <fullName>SigningStatusScreen</fullName>
-        <description>SigningStatusScreen</description>
+        <fullName>Send_Submission_Confirmation_LLDS01</fullName>
+        <description>Send Submission Confirmation (LLDS01)</description>
         <protected>false</protected>
         <recipients>
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
-        <template>unfiled$public/CH_Signing_Status</template>
+        <template>unfiled$public/CHLLDS01_Submission</template>
     </alerts>
     <alerts>
         <fullName>Submission_Email_for_DS02</fullName>
@@ -197,54 +241,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>DS01 SubmissionDownloadLink</fullName>
-        <actions>
-            <name>DocumentDownloadLink</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
-        <criteriaItems>
-            <field>Transaction__c.DownloadLink__c</field>
-            <operation>contains</operation>
-            <value>http</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.Status__c</field>
-            <operation>equals</operation>
-            <value>Submitted</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.Form_Name__c</field>
-            <operation>equals</operation>
-            <value>DS01</value>
-        </criteriaItems>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>DS02 SubmissionDownloadLink</fullName>
-        <actions>
-            <name>Submission_Email_for_DS02</name>
-            <type>Alert</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Transaction__c.DownloadLink__c</field>
-            <operation>contains</operation>
-            <value>http</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.Status__c</field>
-            <operation>equals</operation>
-            <value>Submitted</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.Form_Name__c</field>
-            <operation>equals</operation>
-            <value>DS02</value>
-        </criteriaItems>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
         <fullName>Decline notification</fullName>
         <actions>
             <name>ContactPresenteronDecline</name>
@@ -254,7 +250,7 @@
             <name>TransactionPathBuilder</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Transaction__c.Status__c</field>
             <operation>equals</operation>
@@ -305,9 +301,77 @@ Email should contain a URL to start a new journey</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>ReviewTransaction</fullName>
+        <fullName>Send CH Signing Status email DS01</fullName>
         <actions>
-            <name>Notify_presenter_that_documents_are_signed_and_awaiting_review_redirect_to_the_r</name>
+            <name>Send_Signing_Status_email_DS01</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>sentsignertrue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.MultipleDirectors__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.sentsignerstatus__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to signing status page</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send CH Signing Status email LLDS01</fullName>
+        <actions>
+            <name>Send_Signing_Status_email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>sentsignertrue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.MultipleDirectors__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.sentsignerstatus__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the status page</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send CH review email DS01</fullName>
+        <actions>
+            <name>Send_Review_Email_DS01</name>
             <type>Alert</type>
         </actions>
         <actions>
@@ -335,42 +399,57 @@ Email should contain a URL to start a new journey</description>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
         <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>SigningStatusTransaction</fullName>
+        <fullName>Send CH review email LLDS01</fullName>
         <actions>
-            <name>SigningStatusScreen</name>
+            <name>Send_Review_Email_LLDS01</name>
             <type>Alert</type>
         </actions>
         <actions>
-            <name>sentsignertrue</name>
+            <name>sentreviewurlupdate</name>
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
         <criteriaItems>
-            <field>Transaction__c.SignerStatus__c</field>
+            <field>Transaction__c.ReviewRedirect__c</field>
             <operation>contains</operation>
             <value>http</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Transaction__c.MultipleDirectors__c</field>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.SentreviewURL__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.isReviewTrigger__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Transaction__c.sentsignerstatus__c</field>
-            <operation>notEqual</operation>
-            <value>True</value>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
         </criteriaItems>
-        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the review page</description>
-        <triggerType>onAllChanges</triggerType>
+        <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>SubmissionDownloadLink</fullName>
+        <fullName>Submission Email DS01</fullName>
         <actions>
-            <name>DocumentDownloadLink</name>
+            <name>DS01_Submission_email_alert</name>
             <type>Alert</type>
         </actions>
         <active>true</active>
@@ -383,6 +462,59 @@ Email should contain a URL to start a new journey</description>
             <field>Transaction__c.Status__c</field>
             <operation>equals</operation>
             <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Submission Email DS02</fullName>
+        <actions>
+            <name>Submission_Email_for_DS02</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS02</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Submission Email LLDS01</fullName>
+        <actions>
+            <name>Send_Email_LLDS01</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
         </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>

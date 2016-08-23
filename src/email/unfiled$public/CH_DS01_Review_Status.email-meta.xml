@@ -3,7 +3,7 @@
     <available>true</available>
     <description>Notify presenter that transaction is currently in the review status</description>
     <encodingKey>ISO-8859-1</encodingKey>
-    <name>CH Review Status</name>
+    <name>CH DS01 Review Status</name>
     <style>none</style>
     <subject>Signing complete for {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c})    Ref: FE{!Transaction__c.Id}</subject>
     <textOnly>Companies House signing complete

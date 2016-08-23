@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>LLDS01 submission receipt</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>CH LLDS01 Submission</name>
+    <style>none</style>
+    <subject>Request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) has been submitted. Ref: FE{!Transaction__c.Id})</subject>
+    <textOnly>Companies House
+
+Request  to close {!Transaction__c.CompanyName__c}
+
+{!Transaction__c.PresenterName__c}
+
+Your application to close {!Transaction__c.CompanyName__c} has been successfully submitted.
+
+Your Reference number is
+{!Transaction__c.SubmissionId__c}
+
+You&apos;ll need to quote this if you contact us about your request.
+
+What happens  next
+
+It&apos;s the responsibility of the director(s) to ensure that copies of the request have been sent to all interested parties within 7 days of submitting the completed request.  Interested parties can include:
+
+members, usually shareholders
+creditors
+employees
+
+
+Please check the guidance notes for more information on the process: https://www.gov.uk/government/organisations/companies-house
+
+Failure to notify interested parties is an offence. You&apos;re advised to obtain and retain some proof of delivery or posting of copies to interested parties.
+
+Read the full list of who to tell using the following link:
+
+
+Download a copy of your application here:{!Transaction__c.DownloadLink__c}
+
+Withdrawal of request by a company
+
+If the company ceases to be eligible for striking off at any time after the request is submitted, and before the request is fully processed, as specified in section 1009 of the Companies Act 2006, you&apos;ll need to read the guidance on how to proceed using the following  link: https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4#withdrawal-of-the-strike-off-application.
+
+
+This is an automated email, please do not reply. Forward any enquiries to the following:
+Email: enquiries@companieshouse.gov.uk
+Service Desk: +44 (0)303 1234 500</textOnly>
+    <type>custom</type>
+</EmailTemplate>
