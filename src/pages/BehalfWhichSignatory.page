@@ -34,9 +34,9 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!HTMLENCODE(headerBox1)}"></apex:outputText>
+                    <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                     <div class="form-group {!errorVal}">
-                        <apex:outputText escape="false" value="{!HTMLENCODE(textBox1)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
                         <apex:outputPanel id="divDirector">
                             <fieldset>
                                 <span class='error-message' id='error-span'>{!currentErrorMessage}</span>

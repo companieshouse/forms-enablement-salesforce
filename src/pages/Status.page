@@ -10,7 +10,7 @@
                         <b>{!companyNumber}</b> - Incorporated on {!companyDateOfCreation}
                     </p>
                     <p class="lede">
-                        <apex:outputText escape="false" value="{!HTMLENCODE(companyAddress)}"/>
+                        <apex:outputText escape="false" value="{!companyAddress}"/>
                         <!-- information here {!informationstuff} -->
                     </p>
                 </div>

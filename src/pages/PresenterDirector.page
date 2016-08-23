@@ -34,12 +34,12 @@
                             <ul class="error-summary-list">
                                 <li>
                                     <a>{!currentPageError}</a>
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a>"/>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="!<a>)"/>
                                     {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a>"/>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="!</a><br/>)"/>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="!<a>)"/>
                                     {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="!</a>)"/>
                                 </li>
                             </ul>
                         </div>

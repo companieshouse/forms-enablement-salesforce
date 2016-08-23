@@ -5,28 +5,24 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>CH Director Decline</name>
     <style>none</style>
-    <subject>Request  to close {!Transaction__c.CompanyName__c}</subject>
-    <textOnly>Companies House
+    <subject>Director has declined to sign for  {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) Ref: FE{!Transaction__c.Id}</subject>
+    <textOnly>Companies House Director Declines
 
 Request  to close {!Transaction__c.CompanyName__c}
 
-{!Transaction__c.PresenterName__c},
+A director has declined to sign the application to close  {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c}  and the application has been cancelled  as a result. Your reference number for any future enquiries is FE{!Transaction__c.Id}.
 
-A director has declined to sign the application to close:
+The process to close the company has now stopped and the company will be not removed from the register.
 
-Company name: {!Transaction__c.CompanyName__c}
-Company Number:{!Transaction__c.CompanyNumber__c}
+What happens next
 
-The application has been cancelled as a result.
+If you still wish to close the company, you&apos;ll need to submit a new application.
 
-If you still wish to close the company, you&apos;ll need to begin the process again using the following  link:{!Transaction__c.TransactionPath__c}.
+Submit a new application to close.
 
+Contact Centre tel +44 (0)303 1234 500
+or email enquiries@companieshouse.gov.uk.
 
-
-
-
-This is an automated email, please do not reply. Forward any enquiries to the following:
-Email: enquiries@companieshouse.gov.uk
-Service Desk: +44 (0)303 1234 500</textOnly>
+This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</textOnly>
     <type>custom</type>
 </EmailTemplate>

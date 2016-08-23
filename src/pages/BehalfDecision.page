@@ -38,9 +38,9 @@
                     <apex:outputPanel id="choicePanel">
                         <div class="form-group">
                             
-                                <apex:outputText escape="false" value="{!HTMLENCODE(headerBox1)}"></apex:outputText>
+                                <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                            
-                            <apex:outputText escape="false" value="{!HTMLENCODE(textBox1)}"></apex:outputText>
+                            <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
                             <fieldset class="inline">
                                 <div class="form-group {!errorVal}">
                                     <legend class='visuallyhidden'>{!textBox1}</legend>

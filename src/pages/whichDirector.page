@@ -32,8 +32,8 @@
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="directorsList">
-                        <apex:outputText escape="false" value="{!HTMLENCODE(pageTitle)}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!HTMLENCODE(pageBody)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
                         <div class="form-group {!errorVal}">
                             <apex:outputPanel rendered="{!hasPageErrors}">
                                 <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}

@@ -41,7 +41,7 @@ Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyN
 </br> </br>You will need to review, complete and submit the request to close. Your reference number for any future enquiries is FE{!Transaction__c.Id}. </p>
 
 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">
-<a href="{!Transaction__c.SignerStatus__c}">Review, complete and submit the request to close</a>.</p>
+<a href="{!Transaction__c.ReviewerRedirect__c}">Review, complete and submit the request to close</a>.</p>
 
                 <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2>
 

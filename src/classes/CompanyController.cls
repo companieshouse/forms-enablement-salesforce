@@ -82,7 +82,6 @@ public with sharing class CompanyController {
             companySearchHeader = transactionMgr.td.companySearchPageText__c;
             isPageInitialised = true;
             pageTitle = transactionMgr.td.Company_Page_Title__c == null ? '' : transactionMgr.td.Company_Page_Title__c;
-
             pageBody = transactionMgr.td.Company_Page_Body_1__c == null ? '' : transactionMgr.td.Company_Page_Body_1__c;
             pageBody += transactionMgr.td.Company_Page_Body_2__c == null ? '' : transactionMgr.td.Company_Page_Body_2__c;
 
@@ -114,7 +113,7 @@ public with sharing class CompanyController {
         String prefix = '';
 
         //Extract the prefix
-        if(companyNumber.length() > 2)
+        if(companyNumber.length() >= 2)
             if(companyNumber.substring(0,2).isAlpha())
             {
                 prefix = companyNumber.substring(0,2);
@@ -131,9 +130,36 @@ public with sharing class CompanyController {
 
         prefix = prefix.toUpperCase();
         companyNumber = prefix + postfix;
-	
-		//TODOMERGE: ISOLATE THE API CALL
-        CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+	    CompaniesHouse.CompanyProfile compProf = new CompaniesHouse.CompanyProfile();
+
+        try{
+            if(Test.isRunningTest())
+            {
+                compProf.type = 'ltd';
+                compProf.company_name = 'ltd SP';
+            }
+            else{
+                compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+            }
+        }catch(Exception e)
+        {
+            currentErrorMessage = 'Company number does not exist or incorrect.';
+            hasPageErrors = true;
+            currentError = 'error';
+            return false;
+        }
+         
+
+        if (compProf.company_name == null) {
+            currentErrorMessage = 'Company number does not exist or incorrect.';
+            hasPageErrors = true;
+            currentError = 'error';
+
+            //CSBEGINMOD: Carl 10/08/2016 : we were returning null instead of Boolean
+            return false;
+            //CSENDMOD: Carl 10/08/2016 : End mod
+        }
+
         Map<String, String> companyType = new Map<String, String>();
         companyType.put('private-unlimited', 'Company'); //Company
         companyType.put('ltd', 'Company'); //Company
@@ -162,7 +188,9 @@ public with sharing class CompanyController {
         companyType.put('european-public-limited-liability-company-se', 'LLP');//member
         companyType.put('uk-establishment', 'Company');//Company
 
+
         String companyTypeText = companyType.get(compProf.type);
+
 
         if(transactionType.contains('DS01') || transactionType.contains('DS02'))
         {
@@ -190,15 +218,7 @@ public with sharing class CompanyController {
             }
         }
 
-        if (compProf.company_name == null) {
-            currentErrorMessage = 'Company number does not exist';
-            hasPageErrors = true;
-            currentError = 'error';
-
-            //CSBEGINMOD: Carl 10/08/2016 : we were returning null instead of Boolean
-            return false;
-            //CSENDMOD: Carl 10/08/2016 : End mod
-        }
+        
 
         //    return false;
         //} else if (companyNumber.length() < 8) {

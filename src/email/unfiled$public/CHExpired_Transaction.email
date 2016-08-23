@@ -2,7 +2,7 @@
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    <title>Companies House submission confirmation</title>
+    <title>Companies House Final Warning Expiry</title>
   </head>
 
   <body style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;margin: 0;color:#0b0c0c">
@@ -35,54 +35,24 @@
               <td width="100%" style="font-family: Helvetica, Arial, sans-serif;"><h1 class="email" style="font-weight: 700; font-size: 48px; line-height: 1.041666667; margin: 30px 0;">Request  to close {!Transaction__c.CompanyName__c}</h1></td>
             </tr>
             <tr>
+
               <td width="100%" style="font-family: Helvetica, Arial, sans-serif;">
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The application to close the following company was not completed and has been cancelled as a result.</p>
+               <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c} <b> has not been completed </b>and will be deleted on {!Today()+1}. Your reference number for any future enquiries is FE{!Transaction__c.Id}. </p>
+   
+                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">  <a href="{!Transaction__c.SignerStatus__c}"> View the directors signing status </a></p>
 
-                <table>
-                    <thead >
-                        <tr>
-                            <th colspan='2'>{!Transaction__c.CompanyName__c}</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <th class='basic' >Company number</th>
-                        <th class='basic' >{!Transaction__c.CompanyNumber__c}</th>
-                    </tr>
-                    <tr>
-                        <th class='basic' >Status</th>
-                        <th class='basic' >{!Transaction__c.CompanyStatus__c}</th>
-                    </tr>
-                    <tr>
-                        <th class='basic' >Incorporation date</th>
-                        <th class='basic' >{!Transaction__c.CompanyIncorporationDate__c}</th>
-                    </tr>
-                    <tr>
-                        <th class='basic'>Company type</th>
-                        <th class='basic'>{!Transaction__c.CompanyType__c}</th>
-                    </tr>
-                    <tr>
-                        <th class='nonbasic'>Registered Address</th>
-                        <th class='nonbasic'>{!Transaction__c.CompanyAddress1__c}</th>
-                    </tr>
-                    {!IF(Transaction__c.CompanyAddress2__c == null,'', '<tr><th class="nonbasic"></th><th class="nonbasic">'+Transaction__c.CompanyAddress2__c+'</th></tr>')} 
-                    {!IF(Transaction__c.CompanyAddress2__c == null,'', '<tr><th class="nonbasic"></th><th class="nonbasic">'+Transaction__c.CompanyLocality__c+'</th></tr>')} 
-                    {!IF(Transaction__c.CompanyRegion__c == null,'', '<tr><th class="nonbasic"></th><th class="nonbasic">'+Transaction__c.CompanyRegion__c+'</th></tr>')} 
-                    {!IF(Transaction__c.CompanyPostCode__c == null,'', '<tr><th class="nonbasic"></th><th class="nonbasic">'+Transaction__c.CompanyPostCode__c+'</th></tr>')} 
-                    {!IF(Transaction__c.CompanyCountry__c == null,'', '<tr><th class="nonbasic"></th><th class="nonbasic">'+Transaction__c.CompanyCountry__c+'</th></tr>')} 
-                </table>
-                <br/>
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">If you still wish to close the company, please begin the process again using the following link: <a href="{!Transaction__c.ApplicationBaseURL__c}">Start</a></p>
+                <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next:</h2>
 
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">Your reference number is FE{!Transaction__c.Id}. You'll need to quote this if you contact us about your request.</p>
-                
+                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">To avoid the request being deleted, it's important that you ask those who have not approved to approve this request before midnight  tomorrow ( {!Today()+1}).</p>
+          
                 <p style="font-size: 16px; color: #6f777b; line-height: 1.125; margin: 0 0 30px 0;">Contact Centre tel +44 (0)303 1234 500<br>or email <a href="mailto:enquiries@companieshouse.gov.uk">enquiries@companieshouse.gov.uk</a>.</p>
 
                 <p style="font-size: 16px; color: #6f777b; line-height: 1.125; margin: 0 0 30px 0;">This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</p>
+              </td>
+                
               </td>
             </tr>
           </tbody></table>
         </td>
       </tr>
     </tbody></table>
-  
-</body></html>

@@ -24,17 +24,17 @@ Ver. Author        Date        Detail
                 </h1>
                 <apex:outputPanel rendered="{!!isLLPf}">
                 <p class="lede">
-                    <apex:outputText escape="false" value="{!HTMLENCODE(body)}"></apex:outputText>
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
                     <a href="https://www.gov.uk/government/collections/change-director-details-on-your-limited-company">
-                        <apex:outputText escape="false" value="{!HTMLENCODE(link)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!link}"></apex:outputText>
                     </a>
                 </p>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!isLLPf}">
                     <p class="lede">
-                    <apex:outputText escape="false" value="{!HTMLENCODE(body)}"></apex:outputText>
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
                     <a href="https://www.gov.uk/government/collections/change-member-details-on-your-limited-liability-partnership-llp">
-                        <apex:outputText escape="false" value="{!HTMLENCODE(link)}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!link}"></apex:outputText>
                     </a>
                 </p>
                 </apex:outputPanel>
