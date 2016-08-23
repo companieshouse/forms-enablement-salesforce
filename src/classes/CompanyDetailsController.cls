@@ -154,6 +154,8 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
 
         pg.getParameters().put('t', submissionMgr.submission.Form_Name__c);
         pg.setRedirect(true);
+        if(submissionMgr.submission.Contacts__r != null && !submissionMgr.submission.Contacts__r.isEmpty())
+            delete submissionMgr.submission.Contacts__r;
         delete submissionMgr.submission;
         return pg;
         //return previousStep();

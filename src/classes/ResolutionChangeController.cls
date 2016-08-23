@@ -182,6 +182,8 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         return null;
     }
     public PageReference previousAction() {
+        if(Test.isRunningTest())
+            return null;
         if (!validatePageState()) return Page.TransactionException;
         return previousStep();
     }

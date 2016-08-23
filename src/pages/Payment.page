@@ -144,6 +144,7 @@
                                     Payment status
                                 </h1>
                         <p>
+                            The payment has been rejected.
                             Do you want to try again?
                             <a onclick="updateLink();" href="#">Try again?</a>
                         </p>
@@ -173,6 +174,7 @@
                                 </h1>
                         <br/>
                         <p>
+                            An error occurred during the payment process.
                             Do you want to try again (It might not work)?
                             <a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
                         </p>
@@ -185,6 +187,7 @@
                                     Payment status
                                 </h1>
                         <p>
+                            The payment is pending.
                             You might have to do further action to validate the payment.
                         </p>
                     </div>

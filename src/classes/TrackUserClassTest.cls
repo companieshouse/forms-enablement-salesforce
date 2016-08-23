@@ -8,13 +8,14 @@ private class TrackUserClassTest {
 		Transaction_Type__mdt testForm = CompaniesHouseTestData.getInstance().testForm;
 
 		Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
-		Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
 
 		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
 
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
 
-
+		RecordType personAccountRecordType =  [SELECT Id FROM RecordType WHERE Name = 'Person Account' and SObjectType = 'Account'];
+		Account presenter = new Account(FirstName='John', LastName='Smith',RecordType=personAccountRecordType, PersonEmail='testEmail@testemail.com');
+		insert presenter;
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
@@ -25,11 +26,9 @@ private class TrackUserClassTest {
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
+		transac.ContactEmail__c = 'testEmail@testemail.com';
 		transac.officerTerminology__c = 'testterminology';
 		insert transac;
-
-		testPresenter.PersonEmail = transac.ContactEmail__c;
-		insert testPresenter;
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;

@@ -170,6 +170,7 @@ public with sharing class CRSController extends TransactionStepControllerBase {
     public PageReference previousAction() {
         if (Test.isRunningTest()) {
             system.debug('test is running now');
+            return null;
         } else {
             if (!validatePageState()) return Page.TransactionException;
         }

@@ -98,7 +98,7 @@ public with sharing class CompanyController {
 
     private Boolean validateStep() {
         if (String.isBlank(companyNumber)) {
-            currentErrorMessage = 'Field is blank. please enter a company number';
+            currentErrorMessage = 'Field is blank. Please enter a company number';
 
             return false;
         }

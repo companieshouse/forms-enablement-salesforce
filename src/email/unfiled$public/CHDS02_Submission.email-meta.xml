@@ -6,43 +6,23 @@
     <name>CH DS02 Submission</name>
     <style>none</style>
     <subject>Request to Cancel your application to close a company for  {!Transaction__c. CompanyName__c} was successful</subject>
-    <textOnly>Companies House
+    <textOnly>Companies House submission confirmation
 
-Request to withdraw request to dissolve {!Transaction__c.CompanyName__c}
+Cancel your application to close  {!Transaction__c.CompanyName__c}
 
-{!Transaction__c.PresenterName__c}
+Your request to cancel the application to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c}  has been successfully submitted. Your reference number for any future enquiries is FE{!Transaction__c.Id}.
 
-Your request to withdraw your request to dissolve {!Transaction__c.CompanyName__c} has been successfully submitted.
+The process to cancel the application to close the company has now started. You will receive a further email notifying you if the cancellation has been accepted or rejected.
 
-{!Transaction__c.CompanyName__c}
-Company number {!Transaction__c.CompanyNumber__c}
-Status {!Transaction__c.CompanyStatus__c}
-Incorporation date {!Transaction__c.CompanyIncorporationDate__c}
-Company type {!Transaction__c.CompanyType__c}
-Address {!Transaction__c.CompanyAddress1__c}
-{!IF(Transaction__c.CompanyAddress2__c == null,&apos;&apos;, &apos;
-&apos;+Transaction__c.CompanyAddress2__c+&apos;
-&apos;)} {!IF(Transaction__c.CompanyAddress2__c == null,&apos;&apos;, &apos;
-&apos;+Transaction__c.CompanyLocality__c+&apos;
-&apos;)}  {!IF(Transaction__c.CompanyRegion__c == null,&apos;&apos;, &apos;
-&apos;+Transaction__c.CompanyRegion__c+&apos;
-&apos;)}  {!IF(Transaction__c.CompanyPostCode__c == null,&apos;&apos;, &apos;
-&apos;+Transaction__c.CompanyPostCode__c+&apos;
-&apos;)}  {!IF(Transaction__c.CompanyCountry__c == null,&apos;&apos;, &apos;
-&apos;+Transaction__c.CompanyCountry__c+&apos;
-&apos;)}
+What happens next
 
+If the cancellation is accepted, the company will not be removed from the register. If the cancellation is rejected, the company will be removed from the register after two months of the closure notice being published in the relevant Gazette.
 
-Your Reference number is
-{!Transaction__c.SubmissionId__c}
+Click to download a copy of your request
 
-You&apos;ll need to quote this if you contact us about your request.
+Contact Centre tel +44 (0)303 1234 500
+or email enquiries@companieshouse.gov.uk.
 
-
-Download a copy of your application here:{!Transaction__c.DownloadLink__c}
-
-This is an automated email, please do not reply. Forward any enquiries to the following:
-Email: enquiries@companieshouse.gov.uk
-Service Desk: +44 (0)303 1234 500</textOnly>
+This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</textOnly>
     <type>custom</type>
 </EmailTemplate>

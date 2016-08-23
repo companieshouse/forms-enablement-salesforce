@@ -47,13 +47,13 @@
                                     <td>{!companyNumber}</td>
                                 </tr>
                                 <tr>
-                                    <td>Registered address</td>
+                                    <td>Registered Office Address</td>
                                     <td>
                                         <apex:outputText escape="false" value="{!companyAddress}" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Approving by</td>
+                                    <td>Approved by</td>
                                     <td>
                                         <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
                                             <apex:outputText value="{!Director.Name}" id="theValue" />
