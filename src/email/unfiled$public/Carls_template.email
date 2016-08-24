@@ -2,7 +2,7 @@
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    <title>Companies House submission confirmation</title>
+    <title>Companies House Docusign Approval Request</title>
   </head>
 
   <body style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;margin: 0;color:#0b0c0c">
@@ -37,20 +37,20 @@
             <tr>
               <td width="100%" style="font-family: Helvetica, Arial, sans-serif;">
                 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">
-Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) has been accepted.
- Your reference number for any future enquiries is FE{!Transaction__c.Id}. </p>
-
-<p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The process to close the company has now started. The company will be removed from the register after two months of the closure notice being published in the relevant Gazette. </p>
-
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"><a href="{!Transaction__c.DownloadLink__c}"class="button">Click to download a copy of your application</a></p>
+                A request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c} <b>needs your approval</b> before it can be submitted to Companies House for processing. 
+        
+                </br> </br>
+                The request will be deleted if it's not approved and completed by {!Today()+90}. Your reference number for any future enquiries is FE{!Transaction__c.Id}. </p>
 
                 <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2>
 
-<p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">It is the responsibility of directors to ensure that <a href="{!Transaction__c.DownloadLink__c}"class="button">copies of the request</a> have been sent to all interested parties. This can include members (usually shareholders), creditors and employees, who must be notified within 7 days of submitting the completed request. The full list of who to tell can be found in the <a href='https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration'>online guide.</a> </p>
-                
-                <p style="font-size: 16px; color: #6f777b; line-height: 1.125; margin: 0 0 30px 0;">Contact Centre tel +44 (0)303 1234 500<br>or email <a href="mailto:enquiries@companieshouse.gov.uk">enquiries@companieshouse.gov.uk</a>.</p>
+                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">
+                Once the request has been approved by all individuals required, we will email you with instructions for you to review, complete and submit the request.</a> </p>
 
-                <p style="font-size: 16px; color: #6f777b; line-height: 1.125; margin: 0 0 30px 0;">This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</p>
+                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">
+                It is the responsibility of directors to ensure that copies of the request have been sent to all interested parties. This can include members (usually shareholders), creditors and employees, who must be notified within 7 days of submitting the completed request. The full list of who to tell can be found in the <a href='https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration'>online guide.</a> </p>
+                
+
               </td>
             </tr>
           </tbody></table>

@@ -142,8 +142,8 @@ public class FormsApiClient {
 
 
     // SendForm is a multipart/form-data
-    // Put parts together separete with boundary. And finish with one last boundary.
-    // Note -- is part of seperator
+    // Put parts together separate with boundary. And finish with one last boundary.
+    // Note -- is part of separator
     public string getBody(List<Transaction__c> txList) {
         Integer txNumber = 0;
         String requestBody = '';
@@ -157,7 +157,8 @@ public class FormsApiClient {
         }
 
         // Packagemetada part
-        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage(txList[0].SubmissionId__c, txNumber) + '\n';
+        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage(txList[0].SubmissionId__c, txNumber, txList[0].AccountNumber__c, 
+            txList[0].AccountAuthorisationCode__c) + '\n';
 
         // Finish with one last boundary
         requestBody += '\n' + '--' + BOUNDARY + '--' + '\n';
@@ -174,8 +175,12 @@ public class FormsApiClient {
         return jsonPartHeader;
     }
 
-    public string getJsonPackage(String packageId, Integer count) {
-        return '{ "packageIdentifier": "' + packageId + '","count": ' + count + ' }';
+    public string getJsonPackage(String packageId, Integer count, String presenterId, String presenterAuth) {
+        String jsonPackage = '{ "packageIdentifier": "' + packageId + '","count": ' + count;
+        if (presenterId != null) jsonPackage = jsonPackage + ',"presenterId": "' + presenterId + '"';
+        if (presenterAuth != null) jsonPackage = jsonPackage + ',"presenterAuth": "' + presenterAuth + '"';
+        jsonPackage = jsonPackage + ' }';
+         return jsonPackage;
     }
 
 

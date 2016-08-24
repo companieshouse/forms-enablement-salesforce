@@ -31,11 +31,11 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;This company currently has no directors appointed. Go to &lt;a href=&quot;https://www.gov.uk/government/publications/appoint-a-director-ap01&quot;&gt; appoint company director &lt;/a&gt;for more informations.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The number of directors exceeds the maximum that this private beta permits. Please contact Companies House for advice.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -56,11 +56,13 @@ Is this directors list correct?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Appoint company directors&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_4__c</field>

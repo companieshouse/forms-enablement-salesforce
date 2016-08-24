@@ -372,7 +372,7 @@
     <fields>
         <fullName>RequiredOfficerSign__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c)</formula>
+        <formula>IF(        isMajorityRequired__c           ,IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c), 1 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>RequiredOfficerSign</label>
         <precision>18</precision>

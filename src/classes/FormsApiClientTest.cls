@@ -71,5 +71,36 @@ public class FormsApiClientTest {
         HTTPResponse response = client.requestBarcode();
         
         Test.stopTest();
-    }   
+    }
+
+    @isTest(seeAllData=false)
+    public static void getJsonPackageNoPresenterTest() {
+
+        String expectedJson = '{ "packageIdentifier": "12345","count": 1 }';
+
+        Test.startTest();
+        
+        FormsApiClient client = new FormsApiClient();
+        String jsonPackage = client.getJsonPackage('12345', 1, null, null);
+        
+        System.assertEquals(expectedJson, jsonPackage);
+
+        Test.stopTest();
+    } 
+
+    @isTest(seeAllData=false)
+    public static void getJsonPackageWithPresenterTest() {
+
+        String expectedJson = '{ "packageIdentifier": "12345","count": 1,"presenterId": "01234567891","presenterAuth": "01234567891x" }';
+
+        Test.startTest();
+        
+        FormsApiClient client = new FormsApiClient();
+        String jsonPackage = client.getJsonPackage('12345', 1, '01234567891', '01234567891x');
+        
+        System.assertEquals(expectedJson, jsonPackage);
+
+        Test.stopTest();
+    }  
+
 }

@@ -83,7 +83,7 @@ Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Family__c</field>
-        <value xsi:type="xsd:string">Dissolution</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>FeeFastTrack__c</field>
@@ -199,7 +199,7 @@ Cancel your application to close a company
     </values>
     <values>
         <field>isMajorityForm__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>isPaymentRequired__c</field>

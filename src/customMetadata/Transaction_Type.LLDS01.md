@@ -178,7 +178,7 @@ You can use this service to:
     <values>
         <field>Landing_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Closing a limited limited liability partnership (LLP)
+Closing a limited liability partnership (LLP)
 &lt;/h1&gt;</value>
     </values>
     <values>

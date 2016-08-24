@@ -99,15 +99,21 @@ public with sharing class CompanyController {
     private Boolean validateStep() {
         if (String.isBlank(companyNumber)) {
             currentErrorMessage = 'Field is blank. Please enter a company number';
-
+            hasPageErrors = true;
+            currentError = 'error';
             return false;
         }
         //if (companyNumber.length() == 7) {
         //    companyNumber = '0' + companyNumber;
         //}
 
+        companyNumber = companyNumber.deleteWhitespace();
+
         if (companyNumber.length() > 8) {
             currentErrorMessage = 'Please enter only 8 alphanumeric characters';
+            hasPageErrors = true;
+            currentError = 'error';
+            return false;
         }
 
         String prefix = '';

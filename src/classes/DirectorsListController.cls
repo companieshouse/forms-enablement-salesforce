@@ -37,10 +37,12 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
+    public Boolean toMuchOfficer {get; set;}
     public DirectorsListController() {
         super();
         System.debug(LoggingLevel.ERROR, 'After Super Call:' + isPageInitialised);
         hasAlreadyLoadedOfficers = false;
+        toMuchOfficer= false;
         if (isPageInitialised) initialiseStep();
 
     }
@@ -221,7 +223,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
             }
         } else {
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
-            //Make the call to the list of directors
+            //Make the call to the list of directors-
             List<CompaniesHouse.OfficerDetails> directorDetailsList = new List<CompaniesHouse.OfficerDetails>();
             if (Test.isRunningTest()) {
                 Boolean addOff = true;
@@ -370,7 +372,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             }
 
-            nbOfOfficers = listOfDirectors.size();
+            nbOfOfficers = (OfficersQueryAction.active_count == null ? officerList.size() : OfficersQueryAction.active_count);
+
             if(nbOfOfficers > 1)
             {
                 officerTerm += 's';
@@ -384,7 +387,17 @@ public with sharing class DirectorsListController extends TransactionStepControl
             }
             //Insert the officer
             insert officerList;
-            if (contactList.size() == 0) {noOfficers = true;} else if (contactList.size() > 0) {noOfficers = false;}
+            if (contactList.size() == 0) {
+                noOfficers = true;
+                pageText = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+                pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
+
+                pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
+                pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
+            } 
+            else if (contactList.size() > 0) {
+                noOfficers = false;
+            }
 
             submissionMgr.submission.officerTerminology__c = officerTerm;
             submissionMgr.submission.isLLP__c = isLLPCompany;
@@ -406,7 +419,18 @@ public with sharing class DirectorsListController extends TransactionStepControl
             pageTitle = pageTitle.replace('directors', officerTerm);
             pageText = pageText.replace('COMPANYNAME', companyName);
 
+            submissionMgr.submission.OfficerCount__c = nbOfOfficers;
             update submissionMgr.submission;
+
+            if(officerList.size() != OfficersQueryAction.active_count)
+            {
+                toMuchOfficer = true;
+                pageText = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
+                pageTitle = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
+
+                pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
+                pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
+            }
 
         }
         System.debug(LoggingLevel.ERROR, 'end of List of directors');

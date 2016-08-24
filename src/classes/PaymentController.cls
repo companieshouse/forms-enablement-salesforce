@@ -444,6 +444,7 @@ public class PaymentController extends TransactionStepControllerBase {
                 {
                     hasPaid = true;
                     hasPaymentSuccess = true;
+                    paymentReference = submissionMgr.submission.AccountNumber__c;
                     accountSuccess = true;
                     accountFailure = false;
                     hasPaymentRejected = false;

@@ -79,6 +79,9 @@ public class DirectorDetails extends TransactionStepControllerBase {
         {
             pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s','')));
         }
+        else{
+            pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        }
 
         return;
     }

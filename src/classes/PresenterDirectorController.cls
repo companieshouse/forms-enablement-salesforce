@@ -152,7 +152,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                     hasError = true;
                     hasPageErrors = true;
                     errorValBottom = 'error';
-                    currentPageErrorTop = 'The name is too long.(maximum number of characters allowed is 255)';
+                    currentPageErrorTop = 'The name is too long (maximum number of characters allowed is 255).';
                 }
                 else{
                     errorValBottom = '';
@@ -169,7 +169,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                     hasError = true;
                     hasPageErrors = true;
                     errorValBottom2 = 'error';
-                    currentPageErrorBot = 'The phone number is too long.(maximum number of characters allowed is 255)';
+                    currentPageErrorBot = 'The phone number is too long (maximum number of characters allowed is 255).';
                 }else{
                     errorValBottom2 = '';
                     currentPageErrorBot = '';

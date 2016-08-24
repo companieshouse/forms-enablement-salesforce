@@ -3,6 +3,7 @@ public with sharing class CH_SearchControllerByOfficerListClass {
     public String resultDisplay {get;set;}  
     public String CH_searchTextNumber{get;set;}
     public String results{get;set;}
+    public Integer active_count {get; set;}
     
     public List<CompaniesHouse.OfficerDetails> itemsToDisplay {get;set;}
     public CompaniesHouse.OfficerList itemsToDisplayTopLevel {get;set;}
@@ -36,6 +37,7 @@ public with sharing class CH_SearchControllerByOfficerListClass {
             results = 'No records found';  
         
         }else{
+            this.active_count = jsonData.active_count;
             itemsToDisplay = jsonData.items;
             itemsToDisplayTopLevel = jsonData;
             itemsToDisplayAddress  = jsonData.items;

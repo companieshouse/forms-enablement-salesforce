@@ -124,7 +124,7 @@ public class chooseDirector extends TransactionStepControllerBase {
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
 
-        if (submissionMgr.submission.isMajorityRequired__c) {
+        //if (submissionMgr.submission.isMajorityRequired__c) {
             if (isSignatureNumberOK()) {
                 hasPageErrors = false;
                 errorVal = '';
@@ -134,7 +134,7 @@ public class chooseDirector extends TransactionStepControllerBase {
                 errorVal = 'error';
                 return null;
             }
-        }
+       // }
         persistStep();
 
         return nextStep();

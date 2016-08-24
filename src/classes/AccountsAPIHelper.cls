@@ -19,7 +19,7 @@ which the user must reauthenticate.
 History
 ------- 
 Ver. Author        Date        Detail
-1.0  Mark Cane&    2016-04-09  Initial conversion of Eliot Stock code.
+1.0  Mark Cane&    2016-04-09  Initial conversion of Eliot Stock code .
 */
 public with sharing class AccountsAPIHelper {
 	
@@ -29,6 +29,7 @@ public with sharing class AccountsAPIHelper {
         get;
         set;
     }
+    
 
     public class AccountsApiException extends Exception {}	
 
