@@ -155,7 +155,7 @@ public virtual class TransactionStepControllerBase {
 
 
         //The framework has been decomissioned to now redirect to the company details page once you click the link start again
-        if(submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c)
+        if((submissionMgr.submission.isDigitalSignatureNeeded__c && !submissionMgr.submission.isSigningFinished__c) || (!submissionMgr.submission.Form_Name__c.contains('DS01'))) 
         {
             if(submissionMgr.submission.Id != null)
             {   

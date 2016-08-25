@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -95,7 +95,7 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">The directors understand that if they proceed the request to  close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
+        <value xsi:type="xsd:string">The directors understand that if they proceed the request to close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
@@ -105,8 +105,7 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-        In certain circumstances defined in section 1009 of the 2006 Companies Act, it is possible to cancel a request to to close before the closure process has completed. See the online guidance for more information&lt;/br&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;In certain circumstances defined in section 1009 of the 2006 Companies Act, it is possible to cancel a request to close before the closure process has completed. See the online guidance for more information&lt;/br&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>

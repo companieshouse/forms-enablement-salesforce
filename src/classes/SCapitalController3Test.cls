@@ -52,7 +52,7 @@ public with sharing class SCapitalController3Test {
 		scap3controller.shareStatus = false;
 
 		scap3controller.nextAction();
-		scap3controller.AddtocurrentShare();
+		//scap3controller.AddtocurrentShare();
 		scap3controller.checkstatus();
 		scap3controller.restartJourney();
 
