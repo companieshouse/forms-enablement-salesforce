@@ -133,7 +133,7 @@
             <header>
                 <div class="primary_header">
                     <p>
-                        <img src="{!$Resource.Logo}" />&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong>
+                        <img src="{!$Resource.Logo}" />  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong>
                     </p>
                 </div>
                 <div id="test" class="PDFBody">
@@ -164,17 +164,19 @@
                 <br />
                 <p style="text-align:center; font-weight: 300; font-size: 20px;">Notice of withdrawal of application</p>
                 <br />
-                <p>The members hereby withdraw the application in which it was requested that this LLP be struck off the Register</p>
+                <p>CONTENT</p>
                 <hr/>
             </div>
             <div>
                 <!-- Signature -->
-                <apex:panelGrid columns="2" width="70%">
+                
+                <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+                        <apex:panelGrid columns="2" width="70%"  rendered="{!off.isSignatory__c}">
                     <apex:outputLabel >Signature</apex:outputLabel>
-                    <label class="block-label text" for="I-understand">
-                        <input id="I-understand" name="approve-application" type="checkbox" checked='true' value="I-understand" /> {!Transaction__c.ContactEmail__c}
-                    </label>
+                    
+                        <div>{!off.Title__c} &nbsp; {!off.Forename__c} &nbsp; {!off.Surname__c}</div>
                 </apex:panelGrid>
+                    </apex:repeat>
             </div>
             <hr/>
         </div>

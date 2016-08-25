@@ -133,13 +133,13 @@
             <header>
                 <div class="primary_header">
                     <p>
-                        <img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
+                        <img src="{!$Resource.Logo}" />  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
                     </p>
                 </div>
                 <div id="test" class="PDFBody">
                     <div id="rectangle">
                         <div id="rectangle2">
-                            <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Withdrawal of striking off application by {!IF(Transaction__c.isLLP__c, 'LLP', 'company')}</p>
+                            <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Withdrawal of striking off application by company</p>
                         </div>
                     </div>
                 </div>
@@ -152,9 +152,9 @@
             <div>
                 <!-- Company Details -->
                 <apex:panelGrid columns="2" width="70%">
-                    <apex:outputLabel >{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Name:</apex:outputLabel>
+                    <apex:outputLabel >Company Name:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-                    <apex:outputLabel >{!IF(Transaction__c.isLLP__c, 'LLP', 'Company')} Number:</apex:outputLabel>
+                    <apex:outputLabel >Company Number:</apex:outputLabel>
                     <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
                 </apex:panelGrid>
                                 <hr/>
@@ -164,17 +164,19 @@
                 <br />
                 <p style="text-align:center; font-weight: 300; font-size: 20px;">Notice of withdrawal of application</p>
                 <br />
-                <p>The directors hereby withdraw the application in which it was requested that this {!IF(Transaction__c.isLLP__c, 'LLP', 'company')} be struck off the Register</p>
+                <p>CONTENT</p>
                 <hr/>
             </div>
             <div>
                 <!-- Signature -->
-                <apex:panelGrid columns="2" width="70%">
+                
+                <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+                        <apex:panelGrid columns="2" width="70%"  rendered="{!off.isSignatory__c}">
                     <apex:outputLabel >Signature</apex:outputLabel>
-                    <label class="block-label text" for="I-understand">
-                        <input id="I-understand" name="approve-application" type="checkbox" checked='true' value="I-understand" /> {!Transaction__c.ContactEmail__c}
-                    </label>
+                    
+                        <div>{!off.Title__c} &nbsp; {!off.Forename__c} &nbsp; {!off.Surname__c}</div>
                 </apex:panelGrid>
+                    </apex:repeat>
             </div>
             <hr/>
         </div>

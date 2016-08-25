@@ -12,6 +12,17 @@
         <template>unfiled$public/CH_Director_Decline</template>
     </alerts>
     <alerts>
+        <fullName>Contact_DS02_or_LLDS02_for_approved_transaction</fullName>
+        <description>Contact DS02 or LLDS02 for approved transaction</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS02_Approved_Transaction</template>
+    </alerts>
+    <alerts>
         <fullName>Contact_Presenter_On_CH_Approval</fullName>
         <description>Contact Presenter On CH Approval</description>
         <protected>false</protected>
@@ -65,6 +76,17 @@
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHLLDS01_Submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Rejected_email_to_presenter_DS02_and_LLDS02</fullName>
+        <description>Send Rejected email to presenter DS02 and LLDS02</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS02_Rejected_Transaction</template>
     </alerts>
     <alerts>
         <fullName>Send_Review_Email_DS01</fullName>
@@ -211,7 +233,7 @@
         <protected>false</protected>
     </fieldUpdates>
     <rules>
-        <fullName>CH Approval notification</fullName>
+        <fullName>CH Approval notification DS01 and LLDS01</fullName>
         <actions>
             <name>Contact_Presenter_On_CH_Approval</name>
             <type>Alert</type>
@@ -222,11 +244,36 @@
             <operation>equals</operation>
             <value>Approved</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS01</value>
+        </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>CH Rejection notification</fullName>
+        <fullName>CH Approval notification DS02 and LLDS02</fullName>
+        <actions>
+            <name>Contact_DS02_or_LLDS02_for_approved_transaction</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS02</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Rejection notification DS01 and LLDS01</fullName>
         <actions>
             <name>Contact_Presenter_On_CH_Rejection</name>
             <type>Alert</type>
@@ -236,6 +283,31 @@
             <field>Transaction__c.Status__c</field>
             <operation>equals</operation>
             <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Rejected&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Rejection notification DS02 and LLDS02</fullName>
+        <actions>
+            <name>Send_Rejected_email_to_presenter_DS02_and_LLDS02</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS02</value>
         </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Rejected&apos;.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -471,7 +543,7 @@ Email should contain a URL to start a new journey</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Submission Email DS02</fullName>
+        <fullName>Submission Email DS02 And LLDS02</fullName>
         <actions>
             <name>Submission_Email_for_DS02</name>
             <type>Alert</type>
@@ -489,7 +561,7 @@ Email should contain a URL to start a new journey</description>
         </criteriaItems>
         <criteriaItems>
             <field>Transaction__c.Form_Name__c</field>
-            <operation>equals</operation>
+            <operation>contains</operation>
             <value>DS02</value>
         </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

@@ -266,11 +266,11 @@ public class chooseDirector extends TransactionStepControllerBase {
         // Submission state.
         String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
         Id stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
-        List<Transaction__c> transac = [Select Id,Transaction_Type__c,Presenter__c,ContactEmail__c,Company__r.Id,Company__r.Name,Company__r.CompanyNumber__c, Status__c,Historical_Valid_Step_Ids__c,isDigitalSignatureNeeded__c,isSigningFinished__c From Transaction__c Where Id = :submissionId Limit 1];
+        List<Transaction__c> transac = [Select Id,Transaction_Type__c,Presenter__c,ContactEmail__c,Company__r.Id,Form_Name__c,Company__r.Name,Company__r.CompanyNumber__c, Status__c,Historical_Valid_Step_Ids__c,isDigitalSignatureNeeded__c,isSigningFinished__c From Transaction__c Where Id = :submissionId Limit 1];
         if(transac.size() == 0)
             return null;
 
-        if (transac[0].isDigitalSignatureNeeded__c && !transac[0].isSigningFinished__c) {
+        if ((transac[0].isDigitalSignatureNeeded__c && !transac[0].isSigningFinished__c) || (!transac[0].Form_Name__c.contains('DS01'))) {
             if (transac[0].Id != null) {
                 //update the transaction first
                 transac[0].Status__c = 'deleteContact';

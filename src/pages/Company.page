@@ -30,6 +30,8 @@ Ver. Author        Date        Detail
                         </h1>
                         <ul class="error-summary-list">
                             <li>
+                                <!--For test to show to Carl
+                                <a href="#text-input">{!currentErrorMessage}</a>-->
                                 <a>{!currentErrorMessage}</a>
                             </li>
                         </ul>
@@ -47,7 +49,7 @@ Ver. Author        Date        Detail
                             </span>
                         </apex:outputPanel>
                     </label>
-                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" html-autofocus="true"/>
+                    <apex:inputText maxlength="8" size="8" styleClass="form-control" value="{!companyNumber}" id="text-input" html-autofocus="true"/>
                     <br/>
                 </div>
 

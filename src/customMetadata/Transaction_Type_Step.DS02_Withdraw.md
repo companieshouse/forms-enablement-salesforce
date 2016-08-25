@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;Confirm you understand&lt;/p&gt;&lt;p&gt;I confirm that a director wants to cancel the application to close COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">I understand</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving your submission&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

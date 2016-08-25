@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Content1</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Title</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

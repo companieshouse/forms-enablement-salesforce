@@ -95,15 +95,15 @@ Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Warning!!</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">ContentT1</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">ContentT2</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
@@ -167,7 +167,7 @@ Cancel your application to close a company
     </values>
     <values>
         <field>StandardGuidanceView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>above_button_text__c</field>
@@ -183,7 +183,7 @@ Cancel your application to close a company
     </values>
     <values>
         <field>hasGuidancePage__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>isAccountPayment__c</field>

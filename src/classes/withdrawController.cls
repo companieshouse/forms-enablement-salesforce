@@ -31,21 +31,24 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 		set;
 	}
 	public String companyName {get; set;}
+	public String pageText {get; set;}
+	public String pageTitle {get; set;}
+	public String textCheckbox {get; set;}
 	public withdrawController() {
 		super();
 		if (isPageInitialised) initialiseStep();
 	}
 	private void initialiseStep() {
 		companyName = submissionMgr.submission.CompanyName__c  == null ? '' : submissionMgr.submission.CompanyName__c;
+		pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+		pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+		textCheckbox = (transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c);
+		pageText = pageText.replace('COMPANYNAME', companyName);
 
 	}
-	public void saveTransaction() {
-		persistStep();
-	}
+	
 	public void confirmWithdraw() {}
-	private void persistStep() {
-		submissionMgr.persist();
-	}
+	
 	public void buildDocument() {
 		if (submissionMgr.submission.Attachments.size() > 0) {
 			try {
@@ -73,7 +76,16 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 		} catch (Exception e) {
 			System.debug('General Error in inserting' + submissionMgr.submission.Form_Name__c + 'Error Details are' + ' ' + e.getMessage());
 		}
+		submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION;
+		persistStep();
 	}
+
+	private void persistStep() {
+		submissionMgr.submission.submissionTime__c = String.valueOf(system.now().time());
+        submissionMgr.submission.submissionDate__c = String.valueOf(system.today().format());
+		submissionMgr.persist();
+	}
+
 	public PageReference nextAction() {
 		if (confirmationVal == null || confirmationVal == false) {
 			errorVal = 'error';
@@ -88,20 +100,28 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 			system.debug('During testing Salesforce doesn\'t support webservice Callouts');
 
 		} else {
-			FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
-			submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+			if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_PENDING_SUBMISSION) {
+				FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+				submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+			}
 		}
-		system.debug('Before save tx: ' + submissionMgr.submission);
-		if (Test.isRunningTest()) {
-			system.debug('test is running now');
-
-		} else {if (!validatePageState()) return Page.TransactionException;}
 
 		persistStep();
-		PageReference pg = new PageReference('/ConfirmationFramework');
-		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-		pg.setRedirect(true);
-		return pg;
+
+		
+		if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR) {
+            PageReference pg = new PageReference('/IntegrationError');
+
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+
+		if(Test.isRunningTest())
+		{
+			return null;
+		}
+		return nextStep();
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;
