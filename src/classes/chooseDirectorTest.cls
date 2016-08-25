@@ -106,6 +106,17 @@ private class chooseDirectorTest {
 		Test.setCurrentPage(chooseDirectorPage);
 		chooseDirector test1controller = new chooseDirector();
 
+		String c = EncodingUtil.urlEncode(SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), 'UTF-8');
+		chooseDirector.refreshBoolean(c);
+
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+
+		update transac;
+
+		chooseDirector.refreshBoolean(c);
+
+		test1controller.redirectUser();
+
 		test1controller.checkDirectorStatus();
 		test1controller.nextAction();
 		test1controller.previousAction();

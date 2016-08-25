@@ -1,4 +1,4 @@
-@isTest(SeeAllData=true)
+@isTest(SeeAllData=false)
 public with sharing class CH_SearchControllerClass_Test {
     
     public static testMethod void testmethod_CH_Search(){

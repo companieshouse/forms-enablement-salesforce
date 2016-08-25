@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>When Companies House approves one transaction</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>CH Approved Transaction LLDS01</name>
+    <style>none</style>
+    <subject>Request to close accepted for {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) Ref: FE{!Transaction__c.Id}</subject>
+    <textOnly>Companies House approved transaction
+
+Request  to close {!Transaction__c.CompanyName__c}
+
+Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) has been accepted. Your reference number for any future enquiries is FE{!Transaction__c.Id}.
+
+The process to close the company has now started. The company will be removed from the register after two months of the closure notice being published in the relevant Gazette.
+
+Click to download a copy of your application
+
+What happens next
+
+It is the responsibility of directors to ensure that copies of the request have been sent to all interested parties. This can include members (usually shareholders), creditors and employees, who must be notified within 7 days of submitting the completed request. The full list of who to tell can be found in the online guide.
+
+Contact Centre tel +44 (0)303 1234 500
+or email enquiries@companieshouse.gov.uk.
+
+This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</textOnly>
+    <type>custom</type>
+</EmailTemplate>

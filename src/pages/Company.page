@@ -19,10 +19,10 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
+<apex:page id="CompPage" title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="apex-form">
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -30,9 +30,7 @@ Ver. Author        Date        Detail
                         </h1>
                         <ul class="error-summary-list">
                             <li>
-                                <!--For test to show to Carl
-                                <a href="#text-input">{!currentErrorMessage}</a>-->
-                                <a>{!currentErrorMessage}</a>
+                                <a href="#CompPage:TempPage:apex-form:text-input">{!currentErrorMessage}</a>
                             </li>
                         </ul>
                     </div>
@@ -41,7 +39,7 @@ Ver. Author        Date        Detail
                 
                 <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
 
-                 <div class="form-group {!currentError}">
+                <div class="form-group {!currentError}">
                     <label class="form-label" for="text-input">What's the company number?
                         <span class="form-hint">This is an 8-digit number issued by Companies House when the company was set up.</span>
                         <apex:outputPanel rendered="{!hasPageErrors}">

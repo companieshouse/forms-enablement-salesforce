@@ -67,6 +67,17 @@
         <template>unfiled$public/CHExpired_Transaction</template>
     </alerts>
     <alerts>
+        <fullName>Send_Approved_email_to_LLDS01</fullName>
+        <description>Send Approved email to LLDS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_Approved_Transaction_LLDS01</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Email_LLDS01</fullName>
         <description>Send Email LLDS01</description>
         <protected>false</protected>
@@ -233,7 +244,7 @@
         <protected>false</protected>
     </fieldUpdates>
     <rules>
-        <fullName>CH Approval notification DS01 and LLDS01</fullName>
+        <fullName>CH Approval notification DS01</fullName>
         <actions>
             <name>Contact_Presenter_On_CH_Approval</name>
             <type>Alert</type>
@@ -246,7 +257,7 @@
         </criteriaItems>
         <criteriaItems>
             <field>Transaction__c.Form_Name__c</field>
-            <operation>contains</operation>
+            <operation>equals</operation>
             <value>DS01</value>
         </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
@@ -268,6 +279,26 @@
             <field>Transaction__c.Form_Name__c</field>
             <operation>contains</operation>
             <value>DS02</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Approval notification LLDS01</fullName>
+        <actions>
+            <name>Send_Approved_email_to_LLDS01</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
         </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

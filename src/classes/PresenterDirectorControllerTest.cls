@@ -33,6 +33,8 @@ private class PresenterDirectorControllerTest {
 		transac.CompanyNumber__c = '05448736';
 		transac.officerTerminology__c = 'test';
 		transac.isDigitalSignatureNeeded__c = true;
+		transac.PresenterName__c = 'Short Presenter Name';
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
 		insert transac;
 		con1.Account = testCompany;
 		con2.Account = testCompany;
@@ -55,6 +57,14 @@ private class PresenterDirectorControllerTest {
 
 		PresenterDirectorController controller = new PresenterDirectorController();
 		controller.populateDirectorList();
+
+		String c = EncodingUtil.urlEncode(SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), 'UTF-8');
+		PresenterDirectorController.refreshBoolean(c);
+
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+
+		update transac;
+
 		controller.redirectUser();
 		controller.nextAction();
 		controller.directorPresenter = false;
@@ -63,9 +73,12 @@ private class PresenterDirectorControllerTest {
 		controller.updatePresenter();
 
 		controller.nextAction();
+
 		controller.directorPresenter = true;
 		controller.nextAction();
 		controller.updatePresenter();
+
+		controller.redirectUser();
 
 	}
 

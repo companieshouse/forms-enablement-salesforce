@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">I understand</value>
+        <value xsi:type="xsd:string">The directors understand that if they proceed the request to close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>

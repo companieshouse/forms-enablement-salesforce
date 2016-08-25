@@ -1,4 +1,4 @@
-@isTest(seealldata = true)
+@isTest(seealldata = false)
 private class DirectorsListControllerTest {
 
 	@isTest static void test_method_one() {
@@ -30,7 +30,9 @@ private class DirectorsListControllerTest {
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
 		transac.officerTerminology__c = 'test';
+
 		transac.isDigitalSignatureNeeded__c = true;
 		insert transac;
 
@@ -56,12 +58,25 @@ private class DirectorsListControllerTest {
 		Test.setCurrentPage(directorsListPage);
 
 		DirectorsListController controller = new DirectorsListController();
+
+		controller.populateDirectorList();
+
+		String c = EncodingUtil.urlEncode(SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), 'UTF-8');
+		DirectorsListController.refreshBoolean(c);
+
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+
+		update transac;
+
+		controller = new DirectorsListController();
+
+		controller.populateDirectorList();
+
 		controller.extractOfficerName(0, 'name, name');
 		controller.extractOfficerName(1, 'name, name');
 		controller.extractOfficerName(2, 'name, name');
 		controller.extractOfficerName(0, 'name');
 		controller.hasAlreadyLoadedOfficers = false;
-		controller.initialiseStep();
 		controller.validationDirector = false;
 		controller.updateDirectorList();
 		controller.redirectUser();
@@ -87,6 +102,8 @@ private class DirectorsListControllerTest {
 		controller.companyNumber = 'null';
 		controller.hasAlreadyLoadedOfficers = false;
 		controller.populateDirectorList();
-	}
 
+		controller.redirectUser();
+
+	}
 }

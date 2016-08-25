@@ -19,11 +19,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Content1</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The process to cancel the application to close has now started.&lt;/p&gt;&lt;p&gt;You will receive an email notifying you if the cancellation request has been accepted or rejected.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;If the cancellation request is accepted, the company will not be closed and will remain on the register.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -35,7 +35,7 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;If the cancellation request is rejected, the company will be closed and  removed from the register after two months of the closure notice being published in the relevant Gazette.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -47,11 +47,12 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Title</value>
+        <value xsi:type="xsd:string">Your cancellation request has been received.</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;heading-medium&quot;&gt;
+REFNUMB &lt;/strong&gt;&lt;br/&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

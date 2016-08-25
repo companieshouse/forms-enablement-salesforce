@@ -52,6 +52,7 @@
         <members>unfiled$public/CH_3monthExpiry_Transaction</members>
         <members>unfiled$public/CH_Application_Deleted</members>
         <members>unfiled$public/CH_Approved_Transaction</members>
+        <members>unfiled$public/CH_Approved_Transaction_LLDS01</members>
         <members>unfiled$public/CH_DS01_Review_Status</members>
         <members>unfiled$public/CH_DS01_Signing_Status</members>
         <members>unfiled$public/CH_DS02_Approved_Transaction</members>

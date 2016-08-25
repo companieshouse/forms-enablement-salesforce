@@ -205,9 +205,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
             nbOfOfficers = listOfDirectors.size();
             if(Test.isRunningTest())
             {
-
-            }else
-            {
+                //submissionMgr.submission.officerTerminology__c = 'test';
+            }
                 if(nbOfOfficers == 1)
                 {
                     pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
@@ -220,7 +219,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
                 pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
                 pageText = pageText.replace('COMPANYNAME', companyName);
-            }
+            
         } else {
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
             //Make the call to the list of directors-
@@ -392,8 +391,8 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 pageText = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
                 pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
 
-                pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
-                pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
+                pageText = pageText.replace('directors', officerTerm);
+                pageTitle = pageTitle.replace('directors', officerTerm);
             } 
             else if (contactList.size() > 0) {
                 noOfficers = false;
@@ -446,10 +445,12 @@ public with sharing class DirectorsListController extends TransactionStepControl
         // Submission state.
         String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
         String stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
-        
+
         List<Transaction__c> transac = [Select Id, Historical_Valid_Step_Ids__c From Transaction__c Where Id = :submissionId Limit 1];
         if( transac.size() == 0)
+        {
             return false;
+        }
         //We need to detect if the page has been loaded more than 1 time
         String historicalValidStepId = transac[0].Historical_Valid_Step_Ids__c;
         String stepIdTXT = stepId;

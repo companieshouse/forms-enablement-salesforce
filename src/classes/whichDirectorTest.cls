@@ -92,6 +92,7 @@ private class whichDirectorTest {
 		transac.Presenter__c = testPresenter.Id;
 		transac.company__r = testcompany;
 		transac.SoleDirectorPresenter__c = true;
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 1 + AppConstants.DELIM_HISTORICAL_STEP;
 		insert transac;
 
 		testContact.Transaction__c = transac.id;
@@ -110,6 +111,17 @@ private class whichDirectorTest {
 		whichDirector1testpage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(whichDirector1testpage);
 		whichDirector test1controller = new whichDirector();
+
+		String c = EncodingUtil.urlEncode(SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), 'UTF-8');
+		whichDirector.refreshBoolean(c);
+
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
+
+		update transac;
+
+		whichDirector.refreshBoolean(c);
+
+
 		test1controller.checkDirectorStatus();
 		test1controller.currentError = '';
 		test1controller.selectPresenter();

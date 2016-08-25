@@ -65,7 +65,6 @@ private class withdrawControllerTest {
 		test1controller.confirmationVal = false;
 		test1controller.nextAction();
 		test1controller.previousAction();
-		test1controller.saveTransaction();
 		test1controller.confirmWithdraw();
 		test1controller.confirmationVal = true;
 		test1controller.nextAction();

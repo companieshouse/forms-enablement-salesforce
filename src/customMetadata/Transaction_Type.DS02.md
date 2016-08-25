@@ -54,19 +54,19 @@
         <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
 &lt;details&gt;
 &lt;summary&gt;
-&lt;span class=&quot;summary&quot;&gt;Help with company registration number&lt;/span&gt;
+&lt;span class=&quot;summary&quot;&gt;Help with company number&lt;/span&gt;
 &lt;/summary&gt;
 &lt;div class=&quot;panel panel-border-narrow&quot;&gt;
 &lt;p&gt;
-A company registration number is a unique number issued by Companies House whe</value>
+A company number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">n a limited company or Limited Liability Partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+        <value xsi:type="xsd:string">n a limited company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt;WebCheck Service&lt;/a&gt; Service.
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/details&gt;
@@ -75,7 +75,7 @@ A company registration number is a unique number issued by Companies House whe</
     <values>
         <field>Company_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Tell us which company you want to file for&lt;/h1&gt;</value>
+Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -95,15 +95,18 @@ Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">Warning!!</value>
+        <value xsi:type="xsd:string">The directors understand that if they proceed the request to  close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">ContentT1</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+ How to withdraw your application to close a company
+&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">ContentT2</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+        In certain circumstances defined in section 1009 of the 2006 Companies Act, it is possible to cancel a request to to close before the closure process has completed. See the online guidance for more information&lt;/br&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
@@ -115,7 +118,8 @@ Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+ &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;Read the online guide.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
@@ -148,7 +152,7 @@ Tell us which company you want to file for&lt;/h1&gt;</value>
     <values>
         <field>Landing_Page_Text__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-        This service is used to withdraw a company&apos;s application to close.
+        This service is used to withdraw a company&apos;s application to close.&lt;/p&gt;
       &lt;/p&gt;</value>
     </values>
     <values>

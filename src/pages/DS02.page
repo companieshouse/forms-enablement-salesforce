@@ -160,6 +160,7 @@
                                 <hr/>
 
             </div>
+            <!--SECTION 1-->
             <div class="warningText">
                 <br />
                 <p style="text-align:center; font-weight: 300; font-size: 20px;">Notice of withdrawal of application</p>
@@ -167,6 +168,16 @@
                 <p>CONTENT</p>
                 <hr/>
             </div>
+            <!--END OF SECTION 1-->
+             <!--SECTION 2-->
+            <div class="warningText">
+                <br />
+                <p style="text-align:center; font-weight: 300; font-size: 20px;">Title 2</p>
+                <br />
+                <p>CONTENT2</p>
+                <hr/>
+            </div>
+            <!--END OF SECTION 2-->
             <div>
                 <!-- Signature -->
                 
