@@ -238,6 +238,7 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         System.debug(LoggingLevel.INFO, 'Get access token POST to ' + endpoint + ', request body: ' + body);
         
         request.setBody(body);
+        request.setTimeout(120000);
  
         Http http = new Http();
         

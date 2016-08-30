@@ -176,9 +176,9 @@
                                 <!--  Signature -->
                                 <div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
                                 <div style='float:center;'>___________________________________</div>
-                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney sign on behalf of the director</div>
+                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney signed on behalf of the director</div>
                                 
-                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate director</div>
+                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Signed on behalf of the corporate director</div>
                                 <!--  Signature date -->
                                 <div style='float:left;'>Signature Date:</div>
                                 <div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>

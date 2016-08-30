@@ -15,6 +15,7 @@
                     </p>
                 </div>
                 <h2 class="heading-large">Requested Approvals</h2>
+                <p> Emails are <i>Sent</i> from Companies House requesting an approval signature, <i>Delivered</i> to the directors and then once signed and approved shown as <i>Completed</i>. </p>
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div  role="group" aria-labelledby="error-summary-heading-1" tabindex="-1">
                         <p>

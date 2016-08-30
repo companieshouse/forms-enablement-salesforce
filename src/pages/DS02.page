@@ -136,62 +136,71 @@
                         <img src="{!$Resource.Logo}" />  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">DS02</strong><strong class="HeaderText2">(ef)</strong>
                     </p>
                 </div>
-                <div id="test" class="PDFBody">
-                    <div id="rectangle">
-                        <div id="rectangle2">
-                            <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Withdrawal of striking off application by company</p>
+                    <div id="test" class="PDFBody" >
+                        <div id="rectangle" >
+                            <div id="rectangle2" >
+                                <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Withdrawal of striking off application by company</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <div>
-                <!-- Company Details -->
-                <apex:panelGrid columns="2" width="70%">
-                    <apex:outputLabel >Company Name:</apex:outputLabel>
-                    <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-                    <apex:outputLabel >Company Number:</apex:outputLabel>
-                    <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
-                </apex:panelGrid>
-                                <hr/>
+                </header>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div>
+                    <!-- Company Deatails -->
+                    <apex:panelGrid columns="2" width="70%">
+                        <apex:outputLabel >Company Name:</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyName__c}" />
+                        <apex:outputLabel >Company Number:</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
+                    </apex:panelGrid>
+                    <br/>
+                        <apex:outputLabel >Received for filing in Electronic Format on the :</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
+                        <!-- TODO I need a date variable or todays date to go in here -->
 
-            </div>
-            <!--SECTION 1-->
-            <div class="warningText">
-                <br />
-                <p style="text-align:center; font-weight: 300; font-size: 20px;">Notice of withdrawal of application</p>
-                <br />
-                <p>CONTENT</p>
-                <hr/>
-            </div>
-            <!--END OF SECTION 1-->
-             <!--SECTION 2-->
-            <div class="warningText">
-                <br />
-                <p style="text-align:center; font-weight: 300; font-size: 20px;">Title 2</p>
-                <br />
-                <p>CONTENT2</p>
-                <hr/>
-            </div>
-            <!--END OF SECTION 2-->
-            <div>
-                <!-- Signature -->
-                
-                <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
-                        <apex:panelGrid columns="2" width="70%"  rendered="{!off.isSignatory__c}">
-                    <apex:outputLabel >Signature</apex:outputLabel>
-                    
-                        <div>{!off.Title__c} &nbsp; {!off.Forename__c} &nbsp; {!off.Surname__c}</div>
-                </apex:panelGrid>
+                </div>
+                <br/>
+                <br/>
+                <!-- warning message -->
+                <div class="warningText">
+                    <br />
+                         <hr/>
+                    <p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director(s)</p>
+                    <br />
+                    <p>The directors hereby withdraw the application in which it was requested that 
+                        this company be struck off the Register.</p>
+                    <br />
+                    <h4>Authorising company Director:</h4>
+                    <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+                        <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
+                            <td class="col1" align="left">
+                                <div>{!off.Title__c} &nbsp; {!off.Forename__c} &nbsp; {!off.Surname__c}</div>
+                            </td>
+                            <td class="col2" >
+                            </td>
+                            <td class="col3">
+                                <!--  Signature -->
+                                <div style='float:center; margin-left: 10px'> Digitally Signed</div>
+                                <div style='float:center;'>___________________________________</div>
+                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney sign on behalf of the director</div>
+                                
+                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate director</div>
+                                <!--  Signature date -->
+                                <div style='float:left;'>Signature Date: </div>
+                                <div style='float:left;'> {!Transaction__c.CompanyNumber__c}</div>
+                                <!-- I need a date variable or todays date to go in here -->
+                                <!--<div style='float:left; color: white;'> {!off.RecipientId__c}</div>-->
+                            </td>
+                        </apex:panelGrid>
                     </apex:repeat>
+                    <hr/>
+                </div>    
             </div>
-            <hr/>
-        </div>
-    </body>
+        </body>
 
     </html>
 </apex:page>

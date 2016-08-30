@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;Confirm you understand&lt;/p&gt;&lt;p&gt;I confirm that a director wants to cancel the application to close COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;Approve and submit the cancel request&lt;/p&gt;&lt;p&gt; You must agree to the conditions below before you can submit the cancellation of the request to close  COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">The directors understand that if they proceed the request to close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
+        <value xsi:type="xsd:string">I am a director of this company, or a person  authorised to act on behalf of the director. I understand that by proceeding I will cancel  the the request to close the company, and that this request will be recorded on the permanent company record.</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -47,7 +47,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving your submission&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving and Submitting your your request&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
