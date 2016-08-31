@@ -251,7 +251,7 @@ public with sharing class CompanyController {
     public PageReference initialiseAction() {
         if (!isUserAuthenticated) return Page.StartFramework;
         if (!isPageInitialised) return Page.TransactionException;
-        return null;
+        return SecurityManager.checkSessionValidityCookie();
     }
 
     public PageReference nextAction() {

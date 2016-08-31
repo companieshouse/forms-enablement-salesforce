@@ -305,6 +305,13 @@
         <value>Search</value>
     </labels>
     <labels>
+        <fullName>UI_Text_SignOut_Page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI_Text_SignOut_Page</shortDescription>
+        <value>Sign Out</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Start</fullName>
         <categories>Ui Text</categories>
         <language>en_US</language>

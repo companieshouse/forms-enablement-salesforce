@@ -34,7 +34,10 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
 
     public PageReference initSiging() {
+        PageReference res = initialiseAction();
 
+        if(res != null)
+            return res;
 
         externalURL = docusignSignature(submissionMgr, transactionMgr);
 

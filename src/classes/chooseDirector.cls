@@ -96,11 +96,26 @@ public class chooseDirector extends TransactionStepControllerBase {
     }
 
     public PageReference checkDirectorStatus() {
+        PageReference res = initialiseAction();
 
-        if (submissionMgr.submission.Officers__r.size() == 1) {
-            if (submissionMgr.submission.Officers__r[0].isSignatory__c)
-                return nextAction();
+        if(res != null)
+            return res;
+
+        Boolean skip = false;
+        if(submissionMgr.submission.RequiredOfficerSign__c == 1)
+        {
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                if(off.isSignatory__c)
+                {
+                    skip = true;
+                }
+            }
         }
+        
+        if(skip)
+            return nextAction();
+        
         return null;
     }
 

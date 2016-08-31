@@ -78,9 +78,16 @@ global with sharing class FormsAPIService {
 
                 tx.Status__c = AppConstants.REQUEST_STATUS_REJECTED;
                 
+                String rejectedReasonsField = '';
                 for(Reason r : rejectReasons){
-                    tx.ErrorDescription__c += (r.textEnglish.length() > 10000 ? r.textEnglish.substring(0, 9999) : r.textEnglish);
+                    rejectedReasonsField += (r.textEnglish.length() > 9995 ? r.textEnglish.substring(0, 9994) : r.textEnglish) +' \n\r';
                 }
+                if(rejectedReasonsField.length() > 9999)
+                {
+                    rejectedReasonsField = rejectedReasonsField.substring(0, 9999);
+                }
+
+                tx.ErrorDescription__c = rejectedReasonsField;
 
             //Unknown status
             } else {

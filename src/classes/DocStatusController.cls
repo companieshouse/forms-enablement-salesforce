@@ -16,6 +16,8 @@ Ver. Author        Date        Detail
 */
 public with sharing class DocStatusController {
 
+    private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
+
     public String cookiestatus {
         get;
         set;
@@ -110,6 +112,8 @@ public with sharing class DocStatusController {
     public String companyLocality {get; set;}
     public Boolean showprevious {get; set;}
 
+    public String authCode {get; set;}
+
     public Map<String, String> companyType {get; set;}
     public String informationstuff {
         get;
@@ -157,6 +161,17 @@ public with sharing class DocStatusController {
 
             findCompanyAuthByNonce();
         }
+
+        securityMgr = new SecurityManager();
+
+        //AUTH CHS NOT DYNAMIC SO WE DISABLE THIS 
+        //if(authCode == null)
+        //{
+        //    String hostname = ApexPages.currentPage().getHeaders().get('Host');
+        //    String redirectUrl = 'https://' + hostname + ApexPages.currentPage().getUrl();
+        //    System.debug(redirectUrl);
+        //    return securityMgr.getUserAuthRedirect(redirectUrl);
+        //}
 
         // parse the query string and search for the company auth by the noncevalue
         // if null redirect to company search page for auth
@@ -258,7 +273,7 @@ public with sharing class DocStatusController {
                 return initialiseController();
 
             } else {
-                securityMgr = new SecurityManager();
+                
 
                 CreateDocumentStatusCookies();
                 system.debug('transactiontype= ' + transactionType + 'company number=' + companyNumber);
@@ -411,6 +426,8 @@ public with sharing class DocStatusController {
             //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
 
         }
+        authCode = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_CODE);
+        
     }
     @testvisible
     private void findCompanyAuthByNonce() {

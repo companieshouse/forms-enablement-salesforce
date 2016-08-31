@@ -39,8 +39,6 @@
                 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c}  has been successfully submitted. 
 Your reference number for any future enquiries is FE{!Transaction__c.Id}. </p>
 
-                <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The process to close the company has now started. The company will be removed from the register  after two months of the closure notice being published in the relevant Gazette. </p>
-
                 <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2>
 
                 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">It is the responsibility of directors to ensure that <a href="{!Transaction__c.DownloadLink__c}"class="button">copies of the request</a> have been sent to all interested parties. This can include members (usually shareholders), creditors and employees, who must be notified within 7 days of submitting the completed request. The full list of who to tell can be found in the <a href='https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration'>online guide.</a> </p>

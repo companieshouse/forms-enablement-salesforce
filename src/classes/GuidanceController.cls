@@ -101,6 +101,10 @@ public with sharing class GuidanceController {
         return;
     }
 
+    public PageReference checkSession(){
+        return SecurityManager.checkSessionValidityCookie();
+    }
+
     public PageReference setAgreeValue() {
         if (agreeBoxChoice == null || String.valueOf(agreeBoxChoice) == 'undefined') {
             currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
@@ -128,7 +132,7 @@ public with sharing class GuidanceController {
         userTracker.saveUserDocumentInfo();
         //userTracker.getUserDocument();
         // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
-        return securityMgr.getUserAuthRedirect();
+        return securityMgr.getUserAuthRedirect(null);
     }
     public PageReference previousAction() {
         userTracker = new TrackUserClass();

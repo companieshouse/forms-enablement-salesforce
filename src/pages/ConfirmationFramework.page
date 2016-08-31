@@ -172,13 +172,12 @@ Ver. Author        Date        Detail
         </apex:define>
     
     <apex:define name="content2">
-    <!-- <div style="text-align: right;" id="global-nav">
+        <div style="text-align: right;" id="global-nav">
             <br/>
-                            <apex:form>
-                <apex:commandLink style="text-align:right;" rendered="true" action="{!signoutMethod}" value="Signout" id="signoutLink" />
-                </apex:form>
-                      
-        </div> -->
+            <apex:form >
+                <apex:commandLink style="text-align:right;" rendered="true" action="{!signoutAction}" value="Signout" id="signoutLink" />
+            </apex:form>           
+        </div>
     </apex:define>
     </apex:composition>
 </apex:page>

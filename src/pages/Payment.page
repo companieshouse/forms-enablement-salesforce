@@ -145,7 +145,7 @@
                                 </h1>
                         <p>
                             The payment has been rejected.
-                            Do you want to <a onclick="updateLink();" href="#">Try again</a>?
+                            Do you want to <a onclick="updateLink();" href="#">return to payment page</a>?
                         </p>
                     </div>
                 </apex:outputPanel>

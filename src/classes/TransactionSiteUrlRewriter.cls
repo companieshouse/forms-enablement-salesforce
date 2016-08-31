@@ -69,6 +69,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String OBJECTSCOMPANY = '/ObjectsCompany';
     public String WITHDRAWDISSOLUTION = '/withdrawdissolution';
     public String INTEGRATIONERROR = '/intError';
+    public String SIGNOUT = '/signout';
+    public String SESSIONEXPIRED = '/expired';
 
     ///// VF Strings
     public String VF_PAGE_START         = '/StartFramework';
@@ -125,6 +127,8 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_NONPRESCRIBED1 = '/Nonprescribed1';
     public String VF_PAGE_NONPRESCRIBED2 = '/Nonprescribed2';
     public String VF_PAGE_INTEGRATIONERROR = '/IntegrationError';
+    public String VF_PAGE_SIGNOUT = '/SignOut';
+    public String VF_PAGE_SESSIONEXPIRED = '/SessionExpired';
 
     global PageReference mapRequestUrl(PageReference friendlyUrl) {
         // this method translates a requested frendly url to a physical page.
@@ -188,8 +192,10 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) { pr = new PageReference(WITHDRAWDISSOLUTION); }
         else if (url.startsWith(VF_PAGE_NONPRESCRIBED1)) { pr = new PageReference(NONPRESCRIBED1); }
         else if (url.startsWith(VF_PAGE_NONPRESCRIBED2)) { pr = new PageReference(NONPRESCRIBED2); }
-		else if (url.startsWith(INTEGRATIONERROR))
-        { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
+		else if (url.startsWith(INTEGRATIONERROR)) { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
+        else if (url.startsWith(SIGNOUT)) { pr = new PageReference(VF_PAGE_SIGNOUT); }
+        else if (url.startsWith(SESSIONEXPIRED)) { pr = new PageReference(VF_PAGE_SESSIONEXPIRED); }
+
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
     }
@@ -259,9 +265,9 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             else if (url.startsWith(VF_PAGE_WITHDRAWDISSOLUTION)) {friendlyPageReference = new PageReference(WITHDRAWDISSOLUTION);}
             else if (url.startsWith(VF_PAGE_NONPRESCRIBED1)) {friendlyPageReference = new PageReference(NONPRESCRIBED1);}
             else if (url.startsWith(VF_PAGE_NONPRESCRIBED2)) {friendlyPageReference = new PageReference(NONPRESCRIBED2);}
-			else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {
-                friendlyPageReference = new PageReference(INTEGRATIONERROR);
-            }
+			else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {friendlyPageReference = new PageReference(INTEGRATIONERROR);}
+            else if (url.startsWith(VF_PAGE_SIGNOUT)) {friendlyPageReference = new PageReference(SIGNOUT);}
+            else if (url.startsWith(VF_PAGE_SESSIONEXPIRED)) {friendlyPageReference = new PageReference(SESSIONEXPIRED);}
 
 
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());

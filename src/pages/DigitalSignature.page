@@ -52,8 +52,8 @@ Ver. Author        Date        Detail
                                 </apex:repeat>
                             </tbody>
                         </table>
-                        <!-- <br/>
-                        You may now <a href="https://beta.companieshouse.gov.uk/signout">SIGN-OUT</a> -->
+                        <br/>
+                        <apex:commandLink action="{!signoutAction}" value="{!$Label.UI_Text_SignOut_Page}" id="theSignOutButton" />
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:outputPanel id="failureContact" rendered="{!successSigning}">

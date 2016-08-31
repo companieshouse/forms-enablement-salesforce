@@ -92,7 +92,10 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
     }
 
     public PageReference initPage() {
-        initialiseAction();
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
 
         if (submissionMgr.submission.SoleDirectorPresenter__c) {
             return nextStep();

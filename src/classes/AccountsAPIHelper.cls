@@ -55,7 +55,7 @@ public with sharing class AccountsAPIHelper {
                return docstatusredirectUrl;
     }   
 
-	public String getUserAuthUrl(String nonce){
+	public String getUserAuthUrl(String nonce, String redirectURL){
 
 		Account_Api_Settings__c settings = getSettings();
 		
@@ -78,10 +78,18 @@ public with sharing class AccountsAPIHelper {
         //lb changed the sequence....really shouldn't matter
         authUrl+='&state='+nonce;
 
+        //Force the param always
+        authUrl+='&reauthenticate=force';
         // Redirect URL.
-        String redirectUrl = EncodingUtil.urlEncode(getRedirectUrl(), 'UTF-8');        
 
-		 authUrl += '&redirect_uri='+redirectUrl;
+        String redirectUrlParam = EncodingUtil.urlEncode(getRedirectUrl(), 'UTF-8');        
+
+        if(!String.isBlank(redirectUrl))
+        {
+            redirectUrlParam = redirectUrl;
+        }
+
+		 authUrl += '&redirect_uri='+redirectUrlParam;
 
          return authUrl;
     }

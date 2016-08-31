@@ -89,7 +89,10 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     }
 
     public PageReference initPage() {
-        initialiseAction();
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
 
         if (submissionMgr.submission.SoleDirectorPresenter__c || !submissionMgr.submission.isBehalfSignatoryEnable__c) {
             persistStep();

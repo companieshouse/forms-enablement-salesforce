@@ -229,7 +229,10 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     }
 
     public PageReference initPage() {
-        initialiseAction();
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
 
         if (submissionMgr.submission.SoleDirectorPresenter__c) {
             return nextStep();

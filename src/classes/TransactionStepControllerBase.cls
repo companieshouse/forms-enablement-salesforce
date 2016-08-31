@@ -127,9 +127,8 @@ public virtual class TransactionStepControllerBase {
     }
 
     public PageReference initialiseAction() {
-        if (!isPageAuthenticated) return Page.TransactionException; // todo - default behaviour is to redirect back to start page. Further consideration required.
-        if (!isPageInitialised) return Page.TransactionException;
-        return null;
+        return authenticatedSession();
+        //return null;
     }
 
     protected virtual Boolean loadStepSubmissionState() {
@@ -139,6 +138,10 @@ public virtual class TransactionStepControllerBase {
             return false;
         }
         return true;
+    }
+
+    protected PageReference authenticatedSession(){
+        return SecurityManager.checkSessionValidityCookie();
     }
 
     protected Boolean validatePageState() {

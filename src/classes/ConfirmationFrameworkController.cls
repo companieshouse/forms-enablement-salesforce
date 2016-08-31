@@ -260,7 +260,11 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     //  }
     //}
     public PageReference saveTransaction() {
-        
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
+            
         if(submissionMgr.submission.isSignout__c)
         {
             
@@ -285,21 +289,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         return previousStep();
     }
 
-    public PageReference signoutMethod(){
+    public PageReference signoutAction(){
 
-        Account_API_Settings__c urlSettings = AccountsAPIHelper.getSettings();
         //Build the signout page
-        PageReference pg = new PageReference('https://' + urlSettings.Host__c + '/signout');
-
-        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-
+        PageReference pg = new PageReference('/SignOut');
         pg.setRedirect(true);
-
-        //Update the record
-        submissionMgr.submission.isSignout__c = true;
-
-        update submissionMgr.submission;
-
         return pg;
     }
+
 }

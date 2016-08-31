@@ -192,8 +192,11 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         if (!validatePageState()) return Page.TransactionException;
         return previousStep();
     }
-    public void populateDirectorList() {
-        initialiseAction();
+    public PageReference populateDirectorList() {
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
         //Get the list officer already created
         if (submissionMgr.submission.Officers__r != null) {
             if (submissionMgr.submission.Officers__r.size() > 0) {
@@ -202,6 +205,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                 }
             }
         }
+        return null;
     }
     public PageReference updatePresenter() {
         if (directorPresenter) {

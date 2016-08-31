@@ -8,7 +8,7 @@
                 <table class="check-your-answers" >
                     <tbody>
                         <tr>
-                            <td>Company Number</td>
+                            <td>Company number</td>
                             <td>{!companyNumber}</td>
                         </tr>
                         <tr>
@@ -20,11 +20,11 @@
                             <td>{!companyDateOfCreation}</td>
                         </tr>
                         <tr>
-                            <td>Company Type</td>
+                            <td>Company type</td>
                             <td>{!companyTypeText}</td>
                         </tr>
                         <tr>
-                            <td>Registered Address</td>
+                            <td>Registered office address</td>
                             <td>
                                 <apex:outputText escape="false" value="{!companyAddress}" />
                             </td>

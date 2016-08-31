@@ -104,12 +104,24 @@ public class whichDirector extends TransactionStepControllerBase {
         update officerUpdater;
     }
     public PageReference checkDirectorStatus() {
-        Boolean isSolePresenterDetected = submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c;
-        Boolean isPresenterDetected = SubmissionMgr.submission.isPresenterMultipleDirectors__c == null ? false : submissionMgr.submission.isPresenterMultipleDirectors__c;
-        if (isPresenterDetected || isSolePresenterDetected) {
-            return null;
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
+
+        if(submissionMgr.submission.isDigitalSignatureNeeded__c )
+        {
+            //For DS01 :(
+            Boolean isSolePresenterDetected = submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c;
+            Boolean isPresenterDetected = SubmissionMgr.submission.isPresenterMultipleDirectors__c == null ? false : submissionMgr.submission.isPresenterMultipleDirectors__c;
+            if (isPresenterDetected || isSolePresenterDetected) {
+                return null;
+            }
+            return nextStep();
         }
-        return nextStep();
+
+        return null;
+        
     }
     private void persistStep() {
         submissionMgr.persist();

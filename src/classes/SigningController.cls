@@ -105,7 +105,11 @@ public with sharing class SigningController extends TransactionStepControllerBas
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
     }
-    public void buildDocument() {
+    public PageReference buildDocument() {
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
 
         Attachment pdfAttachment = new Attachment();
         Blob pdfBlob;
@@ -127,6 +131,8 @@ public with sharing class SigningController extends TransactionStepControllerBas
         } catch (Exception e) {
             System.debug('General Error in inserting' + submissionMgr.submission.Form_Name__c + 'Error Details are' + ' ' + e.getMessage() );
         }
+
+        return null;
     }
 
     private void persistStep() {

@@ -128,7 +128,10 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
     }
 
     public PageReference initSignature() {
-        initialiseAction();
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
 
         if (!ApexPages.currentPage().getParameters().containsKey('c') ||
                 String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -409,5 +412,13 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             this.email = email;
         }
     }
+
+    public PageReference signoutAction(){
+
+        //Build the signout page
+        PageReference pg = new PageReference('/SignOut');
+        pg.setRedirect(true);
+        return pg;
+    }    
     // End Action methods.
 }

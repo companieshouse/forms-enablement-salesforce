@@ -30,13 +30,13 @@ public with sharing class CH_SearchControllerByOfficerListClass {
         resultDisplay = req.getRequestOfficersList(CH_searchTextNumber);
         jsonData = res.getResponseOfficerList(resultDisplay);
         system.debug('JsonData before IF : ' + jsonData);
-        system.debug('JsonData Total Results before IF : ' + jsonData.total_results);
         
         if(jsonData.total_results == null) {
         
             results = 'No records found';  
         
         }else{
+            system.debug('JsonData Total Results before IF : ' + jsonData.total_results);
             this.active_count = jsonData.active_count;
             itemsToDisplay = jsonData.items;
             itemsToDisplayTopLevel = jsonData;

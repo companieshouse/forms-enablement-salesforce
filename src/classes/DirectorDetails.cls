@@ -86,6 +86,11 @@ public class DirectorDetails extends TransactionStepControllerBase {
         return;
     }
     public PageReference checkDirectorStatus() {
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
+            
         if (submissionMgr.submission.Officers__r.size() >= 1) {
             Integer baseline = 0;
             Integer myinteger = 0;

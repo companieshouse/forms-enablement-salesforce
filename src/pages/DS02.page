@@ -158,10 +158,9 @@
                         <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
                     </apex:panelGrid>
                     <br/>
-                        <apex:outputLabel >Received for filing in Electronic Format on the :</apex:outputLabel>
-                        <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
-                        <!-- TODO I need a date variable or todays date to go in here -->
-
+                        <apex:outputLabel >Received for filing in Electronic Format on the : &nbsp; </apex:outputLabel>
+                        <apex:outputText value="{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}" />
+                        <!-- TODO  {!DAY(TODAY())} {!MONTH(TODAY())} {!YEAR(TODAY())} -->
                 </div>
                 <br/>
                 <br/>
@@ -190,10 +189,9 @@
                                 
                                 <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate director</div>
                                 <!--  Signature date -->
-                                <div style='float:left;'>Signature Date: </div>
-                                <div style='float:left;'> {!Transaction__c.CompanyNumber__c}</div>
+                                <div style='float:left;'>Signature Date: &nbsp; </div>
+                                <div style='float:left;'> {!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</div>
                                 <!-- I need a date variable or todays date to go in here -->
-                                <!--<div style='float:left; color: white;'> {!off.RecipientId__c}</div>-->
                             </td>
                         </apex:panelGrid>
                     </apex:repeat>

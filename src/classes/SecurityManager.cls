@@ -23,7 +23,8 @@ public with sharing class SecurityManager {
   @testvisible
   private String nonce;
   final static String DEFAULT_PRIVATE_KEY_TEXT = '12345678901234567890123456789012';
-
+  final static String DEFAULT_SF_CHS_COOKIE_NAME = 'SFCHS';
+ 
   // Constructors.
   public SecurityManager() {}
 
@@ -34,12 +35,12 @@ public with sharing class SecurityManager {
     return false;
   }
 
-  public PageReference getUserAuthRedirect() {
+  public PageReference getUserAuthRedirect(String redirectURL) {
     AccountsAPIHelper h = new AccountsAPIHelper();
 
     nonce = getNonce();
 
-    return new PageReference(h.getUserAuthUrl(nonce));
+    return new PageReference(h.getUserAuthUrl(nonce, redirectURL));
   }
 
   public PageReference getCompanyAuthRedirect(String companyNumber, String transactionType) {
@@ -119,6 +120,47 @@ public with sharing class SecurityManager {
     String encodedCipherText = EncodingUtil.base64Encode(cipherText);
     System.debug(LoggingLevel.ERROR, encodedCipherText);
     return encodedCipherText;
+  }
+
+  //This methods will control the session validity from SF for each page displayed based on a cookie
+  //
+  public static PageReference checkSessionValidityCookie(){
+    //Check for the cookie existence
+    //
+    Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey(DEFAULT_SF_CHS_COOKIE_NAME);
+
+    if(containsCookie)
+    {
+      //Refresh the cookie
+      createSessionValidityCookie();
+
+      return null;
+    }
+    else
+    {
+      PageReference pg = new PageReference('/SessionExpired');
+      pg.setRedirect(true);
+      return pg;
+    }
+
+  }
+
+  //This methods will create a cookie for the session validity
+  public static void createSessionValidityCookie()
+  {
+    //Create the cookie
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+    ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
+
+  }
+
+  public static void removeSessionValidityCookie()
+  {
+    //Create the cookie
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText('false' + String.valueOf(DateTime.now().getTime())), '', 0, true);
+
+    ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
   }
   // End Static methods.
 }

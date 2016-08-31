@@ -51,6 +51,7 @@ public with sharing class StartFrameworkController {
         securityMgr = new SecurityManager();
         //  userTracker = new TrackUserClass();
         // userTracker.getUserDocument();
+        SecurityManager.createSessionValidityCookie();
         try {
             if (!ApexPages.currentPage().getParameters().containsKey('t') || String.isBlank(ApexPages.currentPage().getParameters().get('t')) || !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
             transactionType = ApexPages.currentPage().getParameters().get('t');
@@ -84,7 +85,7 @@ public with sharing class StartFrameworkController {
     // Instance methods.
     public PageReference initialiseAction() {
         if (!isPageInitialised) return Page.TransactionException;
-        return null;
+        return SecurityManager.checkSessionValidityCookie();
     }
     public PageReference startAction() {
         //Static step we need to check the boolean if there is a guidance page in the form
@@ -102,7 +103,7 @@ public with sharing class StartFrameworkController {
             userTracker.saveUserDocumentInfo();
             //userTracker.getUserDocument();
             // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
-            return securityMgr.getUserAuthRedirect();
+            return securityMgr.getUserAuthRedirect(null);
         }
     }
     // End Instance methods.

@@ -15,7 +15,7 @@ History
 Ver. Author             Date        Detail
 1.0  Sylvain Picory     2016-05-28  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="GuidanceController">
+<apex:page title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="GuidanceController" action="{!checkSession}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="form">

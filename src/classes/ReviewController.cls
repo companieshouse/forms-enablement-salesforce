@@ -490,10 +490,17 @@ public class ReviewController extends TransactionStepControllerBase {
         shareRouter();
         return;
     }
-    public void startReviewProcesses() {
+    public PageReference startReviewProcesses() {
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
+
         if (!submissionMgr.submission.Form_Name__c.contains('DS01')) {
             buildPDF();
         }
+
+        return null;
     }
     public void buildPDF() {
 

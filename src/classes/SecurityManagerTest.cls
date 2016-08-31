@@ -7,7 +7,7 @@ private class SecurityManagerTest {
 
 		secManagerControllerTester.validateAuthenticatedState('test String', 'testString');
 
-		secManagerControllerTester.getUserAuthRedirect();
+		secManagerControllerTester.getUserAuthRedirect(null);
 		secManagerControllerTester.getNonce();
 		SecurityManager.decryptText(SecurityManager.encryptText('text encrypted'));
 		SecurityManager.encryptText('texttoencrypt');
