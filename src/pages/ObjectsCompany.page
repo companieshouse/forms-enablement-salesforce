@@ -15,7 +15,7 @@ History
 Ver. Author         Date        Detail
 1.0  Leo Bitoy  2016-08-05  Initial development.
 -->
-<apex:page title="Change Company Objects" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyObjectsController">
+<apex:page cache="false" title="Change Company Objects" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyObjectsController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

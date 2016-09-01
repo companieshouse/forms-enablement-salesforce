@@ -184,6 +184,7 @@ public with sharing class AccountsAuthCallbackController {
             String hostname = ApexPages.currentPage().getHeaders().get('Host');
             String startjourneyURL = 'https://' + hostname + '/company?t=' + transactionType;
             PageReference startjourney = new PageReference(startjourneyURL);
+            SecurityManager.createSessionValidityCookie();
             System.debug('redirect is = ' + startjourney);
             // redirect to the framework once userprofile is given
             // note this presenter information is minimal (e.g. locale, email address, etc.)
@@ -232,6 +233,7 @@ public with sharing class AccountsAuthCallbackController {
 
             if (submissionMgr.submission.Valid_Step_Ids__c != null)
             {
+                SecurityManager.createSessionValidityCookie();
 
                 String split = submissionMgr.submission.Valid_Step_Ids__c;
 

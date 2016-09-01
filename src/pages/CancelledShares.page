@@ -1,4 +1,4 @@
-<apex:page title="Cancelled Shares Summary" showHeader="false" sidebar="false" standardStylesheets="false" action="{!goForward}" controller="cancelShares" docType="html-5.0">
+<apex:page cache="false" title="Cancelled Shares Summary" showHeader="false" sidebar="false" standardStylesheets="false" action="{!goForward}" controller="cancelShares" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

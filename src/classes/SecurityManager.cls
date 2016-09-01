@@ -75,6 +75,17 @@ public with sharing class SecurityManager {
 
     return new PageReference(h.getDocumentStatusURL(companyNumber, transactionType, nonce));
   }
+
+  public PageReference getReviewStatusAuthRedirect(String companyNumber, String transactionType) {
+    AccountsAPIHelper h = new AccountsAPIHelper();
+
+    // String tempcompanyinformation =  TrackUserClass.getSearchedCompany(companyNumber);
+    // always create/update a cookie when new company search is called
+
+    nonce = getNonce();
+
+    return new PageReference(h.getReviewStatusURL(companyNumber, transactionType, nonce));
+  }
   @testvisible
   private String getNonce() {
 
@@ -127,6 +138,7 @@ public with sharing class SecurityManager {
   public static PageReference checkSessionValidityCookie(){
     //Check for the cookie existence
     //
+    system.debug('COOKIE:' + ApexPages.currentPage().getCookies());
     Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey(DEFAULT_SF_CHS_COOKIE_NAME);
 
     if(containsCookie)
@@ -149,7 +161,7 @@ public with sharing class SecurityManager {
   public static void createSessionValidityCookie()
   {
     //Create the cookie
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 480, true);
 
     ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
 

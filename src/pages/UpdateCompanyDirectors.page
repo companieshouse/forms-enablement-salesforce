@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain P    2016-06-16   Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Update_Company_Directors}" showHeader="false" sidebar="false" standardStylesheets="false" controller="UpdateCompanyDirectorsController" action="{!initialiseAction}">
+<apex:page cache="false" title="{!$Label.UI_Text_Update_Company_Directors}" showHeader="false" sidebar="false" standardStylesheets="false" controller="UpdateCompanyDirectorsController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

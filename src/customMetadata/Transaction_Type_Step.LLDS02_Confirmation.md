@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS02 - Withdraw</label>
+    <label>LLDS02 - Confirmation</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,11 +19,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;Approve and submit the cancel request&lt;/p&gt;&lt;p&gt; You must agree to the conditions below before you can submit the cancellation of the request to close  COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The process to cancel the application to close has now started.&lt;/p&gt;&lt;p class=&quot;lede&quot;&gt;You will receive an email notifying you if the cancellation request has been accepted or rejected.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;If the cancellation request is accepted, the LLP will not be closed and will remain on the register.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -35,11 +35,11 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;If the cancellation request is rejected, the LLP will be closed and  removed from the register after two months of the closure notice being published in the relevant Gazette.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">I am a director of this company, or a person authorised to act on behalf of the director. I understand that by proceeding I will cancel the request to close the company, and that this request will be recorded on the permanent company record.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -47,11 +47,12 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving and Submitting your request&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">Your cancellation request has been received.</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;heading-medium&quot;&gt;
+REFNUMB &lt;/strong&gt;&lt;br/&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
@@ -75,15 +76,15 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>StandardView__c</field>
-        <value xsi:type="xsd:boolean">false</value>
+        <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">4.0</value>
+        <value xsi:type="xsd:double">5.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -91,11 +92,11 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS02</value>
+        <value xsi:type="xsd:string">LLDS02</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>
-        <value xsi:type="xsd:string">WithdrawDissolution</value>
+        <value xsi:type="xsd:string">ConfirmationFramework</value>
     </values>
     <values>
         <field>previousButtonText__c</field>

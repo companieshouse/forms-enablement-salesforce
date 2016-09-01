@@ -41,7 +41,7 @@ Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyN
 </br> </br>The request will be deleted if it's not approved and completed by {!Today()+90}. Your reference number for any future enquiries is FE{!Transaction__c.Id}. </p>
 
 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">
-<a href="{!Transaction__c.SignerStatus__c}">View the status of the request for directors to sign</a>.</p>
+<a href="{!Transaction__c.SignerStatus__c}">View the status of the request for members to sign</a>.</p>
 
                 <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2>
 

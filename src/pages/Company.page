@@ -19,7 +19,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page id="CompPage" title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
+<apex:page cache="false" id="CompPage" title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="apex-form">
@@ -40,13 +40,13 @@ Ver. Author        Date        Detail
                 <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
 
                 <div class="form-group {!currentError}">
-                    <label class="form-label" for="text-input">What's the company number?
+                    <apex:outputLabel styleClass="form-label" for="text-input">What's the company number?
                         <span class="form-hint">This is an 8-digit number issued by Companies House when the company was set up.</span>
                         <apex:outputPanel rendered="{!hasPageErrors}">
                             <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
                             </span>
                         </apex:outputPanel>
-                    </label>
+                    </apex:outputLabel>
                     <apex:inputText maxlength="8" size="8" styleClass="form-control" value="{!companyNumber}" id="text-input" html-autofocus="true"/>
                     <br/>
                 </div>

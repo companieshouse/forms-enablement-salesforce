@@ -16,7 +16,7 @@ History
 Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-05-27  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Confirmation_Page}" 
+<apex:page cache="false" title="{!$Label.UI_Text_Confirmation_Page}" 
     showHeader="false" 
     sidebar="false" 
     standardStylesheets="false"

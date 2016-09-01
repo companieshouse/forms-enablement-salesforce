@@ -1,4 +1,4 @@
-<apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" action="{!goForward}" applyHtmlTag="false" docType="html-5.0">
+<apex:page cache="false" title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" action="{!goForward}" applyHtmlTag="false" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">

@@ -1,4 +1,4 @@
-<apex:page title="CRS" showHeader="false" sidebar="false" standardStylesheets="false" controller="CRSController" action="{!goForward}" docType="html-5.0">
+<apex:page cache="false" title="CRS" showHeader="false" sidebar="false" standardStylesheets="false" controller="CRSController" action="{!goForward}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

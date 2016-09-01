@@ -1,4 +1,4 @@
-<apex:page title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!startReviewProcesses}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!startReviewProcesses}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -70,7 +70,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h2 class="heading-medium">{!displayText2}</h2>
+                        <apex:outputPanel id="standardPanel-h2" rendered="{!displayText2}">
+                            <h2 class="heading-medium">{!displayText2}</h2>
+                        </apex:outputPanel>
                         <p class="text">
                             {!displayText3}
                         </p>

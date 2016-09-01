@@ -145,7 +145,7 @@ public with sharing class DocStatusController {
     {}
 
     public DocStatusController() {
-
+        SecurityManager.createSessionValidityCookie();
     }
     public PageReference initialiseController() {
 
@@ -164,14 +164,37 @@ public with sharing class DocStatusController {
 
         securityMgr = new SecurityManager();
 
-        //AUTH CHS NOT DYNAMIC SO WE DISABLE THIS 
-        //if(authCode == null)
-        //{
-        //    String hostname = ApexPages.currentPage().getHeaders().get('Host');
-        //    String redirectUrl = 'https://' + hostname + ApexPages.currentPage().getUrl();
-        //    System.debug(redirectUrl);
-        //    return securityMgr.getUserAuthRedirect(redirectUrl);
-        //}
+        if(authCode == null)
+        {
+            //We need to get the parameter and inject it as a cookies
+            String cParam = ApexPages.currentPage().getParameters().get('documentsigningstatus');
+
+            Cookie cParamCookie = new Cookie('documentsigningstatus', cParam, '', 480, true);
+
+            ApexPages.currentPage().setCookies(new Cookie[]{cParamCookie});
+
+            String hostname = ApexPages.currentPage().getHeaders().get('Host');
+            String redirectUrl = 'https://' + hostname + ApexPages.currentPage().getUrl().substringBefore('?');
+            System.debug(redirectUrl);
+            return securityMgr.getUserAuthRedirect(redirectUrl);
+        }
+
+        if(authCode != null)
+        {
+            //Put back the c parameter from the cookies
+            Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey('documentsigningstatus');
+
+            if(containsCookie)
+            {
+                //Get the cookie
+                Cookie cParamCookie = ApexPages.currentPage().getCookies().get('documentsigningstatus');   
+                String cParam = cParamCookie.getValue();
+
+                ApexPages.currentPage().getParameters().put('documentsigningstatus', cParam);
+            }
+            SecurityManager.createSessionValidityCookie();
+
+        }
 
         // parse the query string and search for the company auth by the noncevalue
         // if null redirect to company search page for auth

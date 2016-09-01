@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>DS02 - Withdraw</label>
+    <label>LLDS02 - Withdraw</label>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -39,7 +39,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">I am a director of this company, or a person authorised to act on behalf of the director. I understand that by proceeding I will cancel the request to close the company, and that this request will be recorded on the permanent company record.</value>
+        <value xsi:type="xsd:string">I am a member of this LLP, or a person authorised to act on behalf of the member. I understand that by proceeding I will cancel the request to close the LLP, and that this request will be recorded on the permanent company record.</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -75,7 +75,7 @@
     </values>
     <values>
         <field>SObject_Type__c</field>
-        <value xsi:type="xsd:string">Transaction__c</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>StandardView__c</field>
@@ -91,7 +91,7 @@
     </values>
     <values>
         <field>Transaction_Type__c</field>
-        <value xsi:type="xsd:string">DS02</value>
+        <value xsi:type="xsd:string">LLDS02</value>
     </values>
     <values>
         <field>Visualforce_Page_Name__c</field>

@@ -14,7 +14,7 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page title="Please input the details of the selected persons" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="Please input the details of the selected persons" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -40,17 +40,17 @@
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
                             <label for="email" class="heading-medium closer">{!director.off.Name}
                             <span class="error-message">{!director.validationErrors}
-                            <label class="form-label" for="email">
+                            <apex:outputLabel styleClass="form-label" for="email">
                                 Email Address<br/>
                             <apex:inputText styleClass="form-control" value="{!director.email}" id="email" html-name="email"></apex:inputText>
-                            </label>
+                            </apex:outputLabel>
                             </span>
                             </label>
                             <span class="error-message">{!director.validationErrors}
-                            <label class="form-label" for="confirmationemail">
+                            <apex:outputLabel styleClass="form-label" for="confirmationemail">
                                 Confirm Email Address<br/>
                             <apex:inputText styleClass="form-control" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
-                            </label>
+                            </apex:outputLabel>
                             </span>
                             <br/>
                             <br/>

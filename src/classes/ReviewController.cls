@@ -15,6 +15,20 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
 public class ReviewController extends TransactionStepControllerBase {
+    private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
+    private static final String QUERY_STRING_PARAM_NONCE = 'state';
+    public String authCode {get; set;}
+    
+    @testvisible
+    private Company_Authorisation__c companyAuth;
+
+    public String transactionType {
+        get;
+        set;
+    }
+    @testvisible
+    private String nonce;
+
     public Boolean hasPageErrors {
         get;
         set;
@@ -415,6 +429,10 @@ public class ReviewController extends TransactionStepControllerBase {
     }
 
     public void initialiseStep() {
+        if (submissionMgr.submission.Form_Name__c.contains('DS01')) {
+            SecurityManager.createSessionValidityCookie();
+        }
+
         displayText1 = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
@@ -490,7 +508,150 @@ public class ReviewController extends TransactionStepControllerBase {
         shareRouter();
         return;
     }
+
+    @testvisible
+    private void parseQueryString() {
+        // Expect a nonce on the query string under the param "state".
+        nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
+        if (String.isBlank(nonce)) {
+
+            // not authenticated so call authentication
+
+
+
+        }
+        authCode = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_CODE);
+
+    }
+
+    @testvisible
+    private void findCompanyAuthByNonce() {
+
+            List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
+            if (companyAuthorisations.size() == 1) {
+                companyAuth = companyAuthorisations[0];
+                return;
+            }
+        
+    }
+
     public PageReference startReviewProcesses() {
+        //Abuse of C param for User Auth 
+        String cParamGeneral = '';
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+            nonce = 'testNonce';
+
+        } else {
+
+            parseQueryString();
+
+            findCompanyAuthByNonce();
+        }
+        if(!ApexPages.currentPage().getCookies().containsKey('auth'))
+        {
+            if(submissionMgr != null)
+            {
+                if(submissionMgr.submission.SentreviewURL__c)
+                {
+                    securityMgr = new SecurityManager();
+
+                    if(authCode == null)
+                    {
+                        //We need to get the parameter and inject it as a cookies
+                        String cParam = ApexPages.currentPage().getParameters().get('c');
+                        
+                        Cookie cParamCookie = new Cookie('c', cParam, '', 480, true);
+
+                        ApexPages.currentPage().setCookies(new Cookie[]{cParamCookie});
+
+                        String hostname = ApexPages.currentPage().getHeaders().get('Host');
+                        String redirectUrl = 'https://' + hostname + ApexPages.currentPage().getUrl().substringBefore('?');
+                        System.debug(redirectUrl);
+                        return securityMgr.getUserAuthRedirect(redirectUrl);
+                    }
+
+                    
+                }
+            }
+
+
+
+            if(authCode != null)
+            {
+                //Put back the c parameter from the cookies
+                Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey('c');
+
+                
+
+                if(containsCookie)
+                {
+                    //Get the cookie
+                    Cookie cParamCookie = ApexPages.currentPage().getCookies().get('c');   
+                    String cParam = cParamCookie.getValue();
+                    
+                    ApexPages.currentPage().getParameters().put('c', cParam);
+                    cParamGeneral = cParam;
+                }
+                SecurityManager.createSessionValidityCookie();
+
+            }
+
+            if(!String.isEmpty(cParamGeneral))
+            {
+                securityMgr = new SecurityManager();
+                // parse the query string and search for the company auth by the noncevalue
+                // if null redirect to company search page for auth
+                if (companyAuth == null) {
+
+
+                    String cParam = cParamGeneral;
+
+                    String paramValue = SecurityManager.decryptText(cParam);                    
+
+                    // Submission state.
+                    String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
+                    List<Transaction__c> transac = [Select Id,Transaction_Type__c,Presenter__c,ContactEmail__c,Company__r.Id,Company__r.Name,Form_Name__c,Company__r.CompanyNumber__c, Status__c,Historical_Valid_Step_Ids__c,isDigitalSignatureNeeded__c,isSigningFinished__c From Transaction__c Where Id = :submissionId Limit 1];
+                    if(transac.size() == 0)
+                        return null;
+
+                    Cookie cParamCookie = new Cookie('c', cParam, '', 480, true);
+
+                    ApexPages.currentPage().setCookies(new Cookie[]{cParamCookie});
+
+                    // need to check for company number/ parameters and if they don't exist then throw an error to show up on the docstatus page in apex messages
+                    return securityMgr.getReviewStatusAuthRedirect(transac[0].Company__r.CompanyNumber__c, transac[0].Transaction_Type__c);
+                    
+                }
+                if(companyAuth != null)
+                {
+                    //Put back the c parameter from the cookies
+                    Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey('c');
+
+                    if(containsCookie)
+                    {
+                        //Get the cookie
+                        Cookie cParamCookie = ApexPages.currentPage().getCookies().get('c');   
+                        String cParam = cParamCookie.getValue();
+
+                        ApexPages.currentPage().getParameters().put('c', cParam);
+
+                        Cookie authOKCookie = new Cookie('auth', 'AuthOK', '', 7, true);
+
+
+                        PageReference pg = new PageReference('/Review');
+                        pg.getParameters().put('c', cParam);
+                        pg.setCookies(new Cookie[]{authOKCookie});
+                        pg.setRedirect(true);
+
+                        return pg;
+
+                    }
+                    SecurityManager.createSessionValidityCookie();
+                }
+            }
+        }
+
         PageReference res = initialiseAction();
 
         if(res != null)

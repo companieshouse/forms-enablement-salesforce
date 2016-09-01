@@ -16,7 +16,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
+<apex:page cache="false" title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="ConfirmationFrameworkController" action="{!saveTransaction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

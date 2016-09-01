@@ -18,7 +18,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Start}" showHeader="false" sidebar="false" standardStylesheets="false" controller="StartFrameworkController" action="{!initialiseAction}">
+<apex:page title="{!$Label.UI_Text_Start}" cache="false" showHeader="false" sidebar="false" standardStylesheets="false" controller="StartFrameworkController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

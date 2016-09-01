@@ -1,4 +1,4 @@
-<apex:page title="{!$Label.UI_Text_Company_Details}" controller="CompanyDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="{!$Label.UI_Text_Company_Details}" controller="CompanyDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

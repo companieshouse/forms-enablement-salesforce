@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain P    2016-06-16   Initial development.
 -->
-<apex:page title="Error during the submit process, submit again?" showHeader="false" sidebar="false" standardStylesheets="false" controller="IntegrationErrorController" action="{!initialiseAction}">
+<apex:page cache="false" title="Error during the submit process, submit again?" showHeader="false" sidebar="false" standardStylesheets="false" controller="IntegrationErrorController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

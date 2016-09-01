@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-04  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_DocuSign}" controller="DigitalSignatureController" docType="html-5.0" showHeader="false" action="{!initSignature}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="{!$Label.UI_Text_DocuSign}" controller="DigitalSignatureController" docType="html-5.0" showHeader="false" action="{!initSignature}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <script>
     if (window.frameElement) {
         parent.location.href = window.location;

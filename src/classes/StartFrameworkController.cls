@@ -51,7 +51,6 @@ public with sharing class StartFrameworkController {
         securityMgr = new SecurityManager();
         //  userTracker = new TrackUserClass();
         // userTracker.getUserDocument();
-        SecurityManager.createSessionValidityCookie();
         try {
             if (!ApexPages.currentPage().getParameters().containsKey('t') || String.isBlank(ApexPages.currentPage().getParameters().get('t')) || !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
             transactionType = ApexPages.currentPage().getParameters().get('t');
@@ -85,7 +84,7 @@ public with sharing class StartFrameworkController {
     // Instance methods.
     public PageReference initialiseAction() {
         if (!isPageInitialised) return Page.TransactionException;
-        return SecurityManager.checkSessionValidityCookie();
+        return null;
     }
     public PageReference startAction() {
         //Static step we need to check the boolean if there is a guidance page in the form

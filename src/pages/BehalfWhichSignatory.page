@@ -16,7 +16,7 @@
    Ver. Author        Date        Detail
    1.0  SylvainP      2016-06-17  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

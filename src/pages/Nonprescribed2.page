@@ -1,4 +1,4 @@
-<apex:page title="NonPrescribed1" showHeader="false" sidebar="false" standardStylesheets="false" controller="nonPrescribed1" docType="html-5.0">
+<apex:page cache="false" title="NonPrescribed1" showHeader="false" sidebar="false" standardStylesheets="false" controller="nonPrescribed1" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

@@ -1,4 +1,4 @@
-<apex:page title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController2" action="{!checkstatus}" docType="html-5.0">
+<apex:page cache="false" title="Statement of Capital" showHeader="false" sidebar="false" standardStylesheets="false" controller="SCapitalController2" action="{!checkstatus}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

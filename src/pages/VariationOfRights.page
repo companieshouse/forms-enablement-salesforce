@@ -1,4 +1,4 @@
-<apex:page title="Variation of Rights" showHeader="false" sidebar="false" standardStylesheets="false" controller="variationRightsController" docType="html-5.0">
+<apex:page cache="false" title="Variation of Rights" showHeader="false" sidebar="false" standardStylesheets="false" controller="variationRightsController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

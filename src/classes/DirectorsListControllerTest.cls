@@ -56,7 +56,9 @@ private class DirectorsListControllerTest {
 		PageReference directorsListPage = Page.DirectorsList;
 		directorsListPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(directorsListPage);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
+    	directorsListPage.setCookies(new Cookie[]{sessionValidity});
 		DirectorsListController controller = new DirectorsListController();
 
 		controller.populateDirectorList();

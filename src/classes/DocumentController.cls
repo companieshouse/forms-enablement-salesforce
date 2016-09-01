@@ -15,7 +15,9 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
 public with sharing class DocumentController {
+    private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
 
+    public String authCode {get; set;}
     public String cookiestatus {
         get;
         set;
@@ -70,7 +72,7 @@ public with sharing class DocumentController {
     {}
 
     public DocumentController() {
-
+        SecurityManager.createSessionValidityCookie();
     }
     public PageReference initialiseController() {
 
@@ -83,6 +85,40 @@ public with sharing class DocumentController {
             parseQueryString();
 
             findCompanyAuthByNonce();
+        }
+
+         securityMgr = new SecurityManager();
+
+        if(authCode == null)
+        {
+            //We need to get the parameter and inject it as a cookies
+            String cParam = ApexPages.currentPage().getParameters().get('documentdownload');
+
+            Cookie cParamCookie = new Cookie('documentdownload', cParam, '', 480, true);
+
+            ApexPages.currentPage().setCookies(new Cookie[]{cParamCookie});
+
+            String hostname = ApexPages.currentPage().getHeaders().get('Host');
+            String redirectUrl = 'https://' + hostname + ApexPages.currentPage().getUrl().substringBefore('?');
+            System.debug(redirectUrl);
+            return securityMgr.getUserAuthRedirect(redirectUrl);
+        }
+
+        if(authCode != null)
+        {
+            //Put back the c parameter from the cookies
+            Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey('documentdownload');
+
+            if(containsCookie)
+            {
+                //Get the cookie
+                Cookie cParamCookie = ApexPages.currentPage().getCookies().get('documentdownload');   
+                String cParam = cParamCookie.getValue();
+
+                ApexPages.currentPage().getParameters().put('documentdownload', cParam);
+            }
+            SecurityManager.createSessionValidityCookie();
+
         }
 
         // parse the query string and search for the company auth by the noncevalue
@@ -232,6 +268,8 @@ public with sharing class DocumentController {
 
 
         }
+        authCode = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_CODE);
+
         //throw new DocumentControllerCallbackException('A ' + QUERY_STRING_PARAM_NONCE + ' parameter is required.'); }
     }
     @testvisible

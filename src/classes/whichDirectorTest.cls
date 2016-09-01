@@ -45,6 +45,9 @@ private class whichDirectorTest {
 		PageReference whichDirector1testpage = Page.whichDirector;
 		whichDirector1testpage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(whichDirector1testpage);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+    	whichDirector1testpage.setCookies(new Cookie[]{sessionValidity});
 		whichDirector test1controller = new whichDirector();
 
 		test1controller.checkDirectorStatus();

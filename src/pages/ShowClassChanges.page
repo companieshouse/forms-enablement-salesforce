@@ -1,4 +1,4 @@
-<apex:page title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="showClassCHangeController" docType="html-5.0">
+<apex:page cache="false" title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="showClassCHangeController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

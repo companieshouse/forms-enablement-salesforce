@@ -101,10 +101,6 @@ public with sharing class GuidanceController {
         return;
     }
 
-    public PageReference checkSession(){
-        return SecurityManager.checkSessionValidityCookie();
-    }
-
     public PageReference setAgreeValue() {
         if (agreeBoxChoice == null || String.valueOf(agreeBoxChoice) == 'undefined') {
             currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';

@@ -30,6 +30,9 @@ public class UpdateCompanyDirectorsControllerTest {
         PageReference pg = Page.UpdateCompanyDirectors;
         pg.getParameters().put('c', SecurityManager.encryptText(transac.Id+AppConstants.ID_DELIM_CHAR+testStep1.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(pg);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+        pg.setCookies(new Cookie[]{sessionValidity});
 
         UpdateCompanyDirectorsController pay = new UpdateCompanyDirectorsController();
 	}

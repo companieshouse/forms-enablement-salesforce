@@ -55,6 +55,10 @@ private class PresenterDirectorControllerTest {
 		presenterDirectorTest.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(presenterDirectorTest);
 
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+    	presenterDirectorTest.setCookies(new Cookie[]{sessionValidity});
+
 		PresenterDirectorController controller = new PresenterDirectorController();
 		controller.populateDirectorList();
 

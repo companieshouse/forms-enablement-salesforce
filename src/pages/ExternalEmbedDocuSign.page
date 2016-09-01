@@ -1,4 +1,4 @@
-<apex:page title="Please sign the form" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
+<apex:page cache="false" title="Please sign the form" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

@@ -52,6 +52,9 @@ private class BehalfInputDetailsControllerTest {
 		PageReference behalfInputPage = Page.BehalfInputDetails;
 		behalfInputPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(behalfInputPage);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+    	behalfInputPage.setCookies(new Cookie[]{sessionValidity});
 		BehalfInputDetailsController test1controller = new BehalfInputDetailsController();
 		test1controller.currentOfficer = testoff;
 		test1controller.initPage();

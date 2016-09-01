@@ -1,4 +1,4 @@
-<apex:page standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
+<apex:page cache="false" standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
     <!-- note standard controller will change -->
     <!--  Page to render SH02 pdf -->
     <html>

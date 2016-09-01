@@ -1,4 +1,4 @@
-<apex:page title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="ResolutionChangeController">
+<apex:page cache="false" title="Forms Enablement" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" controller="ResolutionChangeController">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

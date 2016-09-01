@@ -1,4 +1,4 @@
-<apex:page standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
+<apex:page cache="false" standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
     <!--  Page to render DS02 pdf -->
     <!--  Author: Leo Bitoy -->
     <html>

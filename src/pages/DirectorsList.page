@@ -19,7 +19,7 @@
    Ver. Author        Date        Detail
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >

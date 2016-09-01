@@ -47,6 +47,9 @@ private class chooseDirectorTest {
 		PageReference chooseDirectorPage = Page.chooseDirector;
 		chooseDirectorPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(chooseDirectorPage);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+    	chooseDirectorPage.setCookies(new Cookie[]{sessionValidity});
 		chooseDirector test1controller = new chooseDirector();
 
 		test1controller.checkDirectorStatus();
