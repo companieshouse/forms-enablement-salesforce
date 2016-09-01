@@ -40,6 +40,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String INPUTBEHALF = '/randomI';
     public String CHOOSEDIRECTOR = '/choosedirector';
     public String WHICHDIRECTOR = '/whichdirector';
+    public String DOCUMENT = '/documents';
     public String OFFICERDETAILS = '/officerdetails';
     public String SHAREBUILDER = '/shareBuilder';
     public String CURRENCYSELECTION = '/currencySelection';
@@ -86,6 +87,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_PDFGENERATION = '/PDFGeneration';
     public String VF_PAGE_PAYMENT       = '/Payment';
     public String VF_PAGE_REVIEW        = '/Review';
+    public String VF_PAGE_DOCUMENT = '/Documents';
     public String VF_PAGE_PRESENTER     = '/PresenterDirector';
     public String VF_PAGE_OFFICERSEMAIL = '/DirectorsInputList';
     public String VF_PAGE_GUIDANCE      = '/Guidance';
@@ -195,6 +197,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 		else if (url.startsWith(INTEGRATIONERROR)) { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
         else if (url.startsWith(SIGNOUT)) { pr = new PageReference(VF_PAGE_SIGNOUT); }
         else if (url.startsWith(SESSIONEXPIRED)) { pr = new PageReference(VF_PAGE_SESSIONEXPIRED); }
+        else if (url.startsWith(DOCUMENT)) { pr = new PageReference(VF_PAGE_DOCUMENT); }
 
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;
@@ -268,7 +271,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
 			else if (url.startsWith(VF_PAGE_INTEGRATIONERROR)) {friendlyPageReference = new PageReference(INTEGRATIONERROR);}
             else if (url.startsWith(VF_PAGE_SIGNOUT)) {friendlyPageReference = new PageReference(SIGNOUT);}
             else if (url.startsWith(VF_PAGE_SESSIONEXPIRED)) {friendlyPageReference = new PageReference(SESSIONEXPIRED);}
-
+            else if (url.startsWith(VF_PAGE_DOCUMENT)) {friendlyPageReference = new PageReference(DOCUMENT);}
 
             if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
             friendlyUrls.add(friendlyPageReference);

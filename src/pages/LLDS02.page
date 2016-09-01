@@ -1,5 +1,5 @@
 <apex:page cache="false" standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
-    <!--  Page to render DS02 pdf -->
+    <!--  Page to render LLDS02 pdf -->
     <!--  Author: Leo Bitoy -->
     <html>
 
@@ -78,7 +78,7 @@
             width: 350px;
             padding-left: 4px;
             padding-top: 4px;
-            height: 80px;
+            height: 104px;
             background: black;
         }
         
@@ -89,7 +89,7 @@
         
         #rectangle2 {
             width: 346px;
-            height: 76px;
+            height: 100px;
             padding-right: 0px;
             padding-left: px;
             background: white;
@@ -133,7 +133,7 @@
             <header>
                 <div class="primary_header">
                     <p>
-                        <img src="{!$Resource.Logo}" />  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong>
+                        <img src="{!$Resource.Logo}" />  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong>
                     </p>
                 </div>
                     <div id="test" class="PDFBody" >
@@ -151,29 +151,30 @@
                 <br/>
                 <br/>
                 <div>
-                    <!-- Company Deatails -->
+                    <!-- Company Details -->
                     <apex:panelGrid columns="2" width="70%">
-                        <apex:outputLabel >Company Name:</apex:outputLabel>
+                        <apex:outputLabel >LLP Name:</apex:outputLabel>
                         <apex:outputText value="{!Transaction__c.CompanyName__c}" />
-                        <apex:outputLabel >Company Number:</apex:outputLabel>
+                        <apex:outputLabel >LLP Number:</apex:outputLabel>
                         <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
                     </apex:panelGrid>
+                    <br/>
+                        <apex:outputLabel >Received for filing in Electronic Format on the : &nbsp; </apex:outputLabel>
+                        <apex:outputText value="{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}" />
+                        <!-- TODO  {!DAY(TODAY())} {!MONTH(TODAY())} {!YEAR(TODAY())} -->
                 </div>
                 <br/>
                 <br/>
-                <br/>
-                <br/>
-                <hr/>
                 <!-- warning message -->
                 <div class="warningText">
                     <br />
                          <hr/>
-                    <p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director(s)</p>
+                    <p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of members</p>
                     <br />
                     <p>The members hereby withdraw the application in which it was requested that 
                         this LLP be struck off the Register.</p>
                     <br />
-                    <h4>Authorising company Member(s):</h4>
+                    <h4>Authorising LLP Member:</h4>
                     <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
                         <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
                             <td class="col1" align="left">
@@ -183,14 +184,15 @@
                             </td>
                             <td class="col3">
                                 <!--  Signature -->
-                                <div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
+                                <div style='float:center; margin-left: 10px'> Digitally Signed</div>
                                 <div style='float:center;'>___________________________________</div>
                                 <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney sign on behalf of the member</div>
                                 
                                 <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate member</div>
                                 <!--  Signature date -->
-                                <div style='float:left;'>Signature Date:</div>
-                                <div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>
+                                <div style='float:left;'>Signature Date: &nbsp; </div>
+                                <div style='float:left;'> {!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</div>
+                                <!-- I need a date variable or todays date to go in here -->
                             </td>
                         </apex:panelGrid>
                     </apex:repeat>
