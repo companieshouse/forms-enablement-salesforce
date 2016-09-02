@@ -31,7 +31,7 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;There are no current directors for this LLP according to our records. You must register the appointments before requesting to close the LLP.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;There are no current members for this LLP according to our records. You must register the appointments before requesting to close the LLP.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>

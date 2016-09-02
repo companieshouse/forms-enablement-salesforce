@@ -388,7 +388,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
             insert officerList;
             if (contactList.size() == 0) {
                 noOfficers = true;
-                pageText = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c.replace('directors', officerTerm);
+                pageText = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
                 pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
                 return null;
             } 
