@@ -281,6 +281,14 @@
         <value>Previous</value>
     </labels>
     <labels>
+        <fullName>UI_Text_Previous_Payment</fullName>
+        <categories>UI Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI Text Previous Payment</shortDescription>
+        <value>Discard signature(s) and start again</value>
+    </labels>
+    <labels>
         <fullName>UI_Text_Review</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>

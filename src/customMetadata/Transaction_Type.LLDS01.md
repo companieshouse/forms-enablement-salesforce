@@ -67,7 +67,7 @@ A company number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">n a limited company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+        <value xsi:type="xsd:string">n a limited liability partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
@@ -121,7 +121,7 @@ The members must give a copy of the application to all interested parties within
         <field>Guidance_Text_4__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
 Interested parties include:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
@@ -146,7 +146,7 @@ You must:
         <value xsi:type="xsd:string">ll all members of the LLP about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a LLP&lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
-It costs £8 to submit a re</value>
+It costs £8.00 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>

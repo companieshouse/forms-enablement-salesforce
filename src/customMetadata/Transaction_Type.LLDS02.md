@@ -23,7 +23,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/withdraw-striking-off-application-limited-liability-partnership-ll-ds02&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -62,7 +62,7 @@ A company number is a unique number issued by Companies House whe</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">n a limited company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+        <value xsi:type="xsd:string">n a limited liability partnership (LLP) company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
@@ -75,7 +75,7 @@ A company number is a unique number issued by Companies House whe</value>
     <values>
         <field>Company_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Tell us which company you want to cancel closing&lt;/h1&gt;</value>
+Tell us which LLP you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -95,12 +95,12 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">The directors understand that if they proceed the request to close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
+        <value xsi:type="xsd:string">The members understand that if they proceed the request to close may be stopped, but that the request to close and the request to cancel will remain on the company record.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
- How to withdraw your application to close a company
+ How to withdraw your application to close an LLP
 &lt;/h1&gt;</value>
     </values>
     <values>
@@ -118,7 +118,7 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     <values>
         <field>Guidance_Text_5__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
- &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;Read the online guide.&lt;/a&gt;&lt;/p&gt;</value>
+ &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/limited-liability-partnership-strike-off-dissolution-and-restoration&quot;&gt;Read the online guide.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
@@ -128,8 +128,8 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
         <field>Landing_Page_Text2__c</field>
         <value xsi:type="xsd:string">&lt;p&gt;You will need:&lt;/p&gt;
       &lt;ul class=&quot;list list-bullet&quot;&gt;
-        &lt;li&gt;the company number&lt;/li&gt;
-        &lt;li&gt;the company authentication code&lt;/li&gt;
+        &lt;li&gt;the LLP number&lt;/li&gt;
+        &lt;li&gt;the LLP authentication code&lt;/li&gt;
       &lt;/ul&gt;</value>
     </values>
     <values>
@@ -151,13 +151,13 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     <values>
         <field>Landing_Page_Text__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-        This service is used to withdraw a company&apos;s application to close.&lt;/p&gt;
+        This service is used to withdraw an LLP&apos;s application to close.&lt;/p&gt;
       &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Cancel your application to close a company
+Cancel your application to close a Limited Liability Partnership (LLP)
 &lt;/h1&gt;</value>
     </values>
     <values>

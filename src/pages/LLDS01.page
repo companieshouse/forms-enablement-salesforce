@@ -125,7 +125,9 @@
             <div style="container">
                 <header>
                     <div class="primary_header">
-                        <p><img src="{!$Resource.Logo}"/> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS01</strong><strong class="HeaderText2">(ef)</strong></p>
+                        <p><img src="{!$Resource.Logo}"/> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS01</strong>
+                        <strong class="HeaderText2">(ef)</strong>
+                        </p>
                     </div>
                     <div id="test" class="PDFBody" >
                         <div id="rectangle" >
@@ -176,9 +178,9 @@
                                 <!--  Signature -->
                                 <div style='float:center; color: white; margin-left: 10px'>/s{!off.RecipientId__c}/</div>
                                 <div style='float:center;'>___________________________________</div>
-                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney sign on behalf of the member</div>
+                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney signed on behalf of the member</div>
                                 
-                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate member</div>
+                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Signed on behalf of the corporate member</div>
                                 <!--  Signature date -->
                                 <div style='float:left;'>Signature Date:</div>
                                 <div style='float:left; color: white;'>/sd{!off.RecipientId__c}/</div>

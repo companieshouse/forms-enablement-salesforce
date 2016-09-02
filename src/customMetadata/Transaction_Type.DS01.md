@@ -146,7 +146,7 @@ You must:
         <value xsi:type="xsd:string">ll all director(s) of the company about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company&lt;/li&gt;&lt;/ul&gt;
 &lt;/p&gt;
 &lt;p class=&quot;lede&quot;&gt;
-It costs £8 to submit a re</value>
+It costs £8.00 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>

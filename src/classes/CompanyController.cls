@@ -172,31 +172,39 @@ public with sharing class CompanyController {
         companyType.put('plc', 'Company'); //Company
         companyType.put('old-public-company', 'Company');//Company
         companyType.put('private-limited-guarant-nsc-limited-exemption', 'Company');//Company
-        companyType.put('limited-partnership', 'LLP');//member
+        companyType.put('limited-partnership', 'ERROR');//member
         companyType.put('private-limited-guarant-nsc', 'Company');//Company
-        companyType.put('converted-or-closed', 'Company');//Company
+        companyType.put('converted-or-closed', 'ERROR');//Company
         companyType.put('private-unlimited-nsc', 'Company');//Company
         companyType.put('private-limited-shares-section-30-exemption', 'Company');//Company
-        companyType.put('assurance-company', 'Company');//Company
-        companyType.put('oversea-company', 'Company');//Company
-        //companyType.put('eeig', 'European Economic Interest Grouping (EEIG)');//Ignore 
-        companyType.put('icvc-securities', 'Company');//Company
-        companyType.put('icvc-warrant', 'Company');//Company
-        companyType.put('icvc-umbrella', 'Company');//Company
-        companyType.put('industrial-and-provident-society', 'Company');//Company
+        companyType.put('assurance-company', 'ERROR');//Company
+        companyType.put('oversea-company', 'ERROR');//Company
+        companyType.put('eeig', 'ERROR');//Ignore 
+        companyType.put('icvc-securities', 'ERROR');//Company
+        companyType.put('icvc-warrant', 'ERROR');//Company
+        companyType.put('icvc-umbrella', 'ERROR');//Company
+        companyType.put('industrial-and-provident-society', 'ERROR');//Company
         companyType.put('northern-ireland', 'Company');//Company
         companyType.put('northern-ireland-other', 'Company');//Company
         companyType.put('llp', 'LLP');//member
-        companyType.put('royal-charter', 'Company');//Company
-        companyType.put('investment-company-with-variable-capital', 'Company');//Company
-        companyType.put('unregistered-company', 'Company');//Company
-        companyType.put('other', 'Company');//Company
-        companyType.put('european-public-limited-liability-company-se', 'LLP');//member
-        companyType.put('uk-establishment', 'Company');//Company
+        companyType.put('royal-charter', 'ERROR');//Company
+        companyType.put('investment-company-with-variable-capital', 'ERROR');//Company
+        companyType.put('unregistered-company', 'ERROR');//Company
+        companyType.put('other', 'ERROR');//Company
+        companyType.put('european-public-limited-liability-company-se', 'ERROR');//member
+        companyType.put('uk-establishment', 'ERROR');//Company
+        companyType.put('registered-society-non-jurisdictional', 'ERROR');//Company
 
 
         String companyTypeText = companyType.get(compProf.type);
 
+        if(companyTypeText == 'ERROR')
+        {
+            currentErrorMessage = 'This company type is not accepted by the system.';
+            hasPageErrors = true;
+            currentError = 'error';
+            return false;
+        }
 
         if(transactionType.contains('DS01') || transactionType.contains('DS02'))
         {
@@ -204,7 +212,7 @@ public with sharing class CompanyController {
             {
                 if(!companyTypeText.equals('LLP'))
                 {
-                    currentErrorMessage = 'The company searched is not a LLP, please select use the correct form associated to your company type.';
+                    currentErrorMessage = 'This company is not a limited liability partnership.';
                     hasPageErrors = true;
                     currentError = 'error';
 
@@ -215,7 +223,7 @@ public with sharing class CompanyController {
             {
                 if(companyTypeText.equals('LLP'))
                 {
-                    currentErrorMessage = 'The company searched is a LLP, please select use the correct form associated to your company type.';
+                    currentErrorMessage = 'This company is not a limited company.';
                     hasPageErrors = true;
                     currentError = 'error';
 

@@ -206,22 +206,19 @@ public with sharing class DirectorsListController extends TransactionStepControl
                 }
             }
             nbOfOfficers = listOfDirectors.size();
-            if(Test.isRunningTest())
+
+            if(nbOfOfficers == 1)
             {
-                //submissionMgr.submission.officerTerminology__c = 'test';
+                pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
             }
-                if(nbOfOfficers == 1)
-                {
-                    pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+            else{
+                pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
 
-                }
-                else{
-                    pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-
-                }
-                pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
-                pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
-                pageText = pageText.replace('COMPANYNAME', companyName);
+            }
+            pageText = pageText.replace('directors', submissionMgr.submission.officerTerminology__c);
+            pageTitle = pageTitle.replace('directors', submissionMgr.submission.officerTerminology__c);
+            pageText = pageText.replace('COMPANYNAME', companyName);
             
         } else {
             System.debug(LoggingLevel.ERROR, 'Get the director list from API');
@@ -391,7 +388,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
             insert officerList;
             if (contactList.size() == 0) {
                 noOfficers = true;
-                pageText = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+                pageText = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c.replace('directors', officerTerm);
                 pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
                 return null;
             } 

@@ -63,14 +63,15 @@
             font-family: "Sans-Serif";
             font-weight: 700;
             font-style: bold;
-            font-size: 60px
+            font-size: 60px;
+            margin-left: 60px;
         }
         
         .HeaderText2 {
             font-family: "Sans-Serif";
             font-weight: 700;
             font-style: bold;
-            font-size: 18px
+            font-size: 18px;
         }
         
         #rectangle {
@@ -132,9 +133,7 @@
         <div style="container">
             <header>
                 <div class="primary_header">
-                    <p>
-                        <img src="{!$Resource.Logo}" />  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong>
-                    </p>
+                    <p><img src="{!$Resource.Logo}"/><strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong></p>
                 </div>
                     <div id="test" class="PDFBody" >
                         <div id="rectangle" >
@@ -186,9 +185,9 @@
                                 <!--  Signature -->
                                 <div style='float:center; margin-left: 10px'> Digitally Signed</div>
                                 <div style='float:center;'>___________________________________</div>
-                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney sign on behalf of the member</div>
+                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney signed on behalf of the member</div>
                                 
-                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate member</div>
+                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Signed on behalf of the corporate member</div>
                                 <!--  Signature date -->
                                 <div style='float:left;'>Signature Date: &nbsp; </div>
                                 <div style='float:left;'> {!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</div>

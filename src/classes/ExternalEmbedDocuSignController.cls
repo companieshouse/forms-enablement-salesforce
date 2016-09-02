@@ -121,7 +121,7 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
 
                 String offName = (off.Title != null ? off.Title : '' ) + ' ' + (off.FirstName != null ? off.FirstName.capitalize() : '')  + ' ' +  off.LastName.toLowerCase().capitalize();
-                String recName = (off.isCorporateDirector__c == true ? off.AuthorizedSigner__c : (off.isPowerOfAttorney__c == true ? off.AuthorizedSigner__c : offName));
+                String recName = (off.isCorporateDirector__c == true ? off.AuthorizedSigner__c + ' pp ' + offName  : (off.isPowerOfAttorney__c == true ? off.AuthorizedSigner__c + ' pp ' + offName : offName));
 
                 //Update off with the sent name to Docusign
                 offRec.DocusignName__c = recName;

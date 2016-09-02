@@ -31,7 +31,7 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;This LLP currently has no directors appointed. Go to &lt;a href=&quot;https://www.gov.uk/government/publications/appoint-a-member-of-a-limited-liability-partnership-ll-ap01&quot;&gt; appoint LLP member &lt;/a&gt;for more information.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;There are no current directors for this LLP according to our records. You must register the appointments before requesting to close the LLP.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
