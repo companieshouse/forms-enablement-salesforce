@@ -223,7 +223,6 @@ public with sharing class ReviewControllerTest {
         test1controller.startReviewProcesses();
         test1controller.confirmReviewPage();
         test1controller.buildAttachments();
-        test1controller.resetTransaction();
 
     }
 

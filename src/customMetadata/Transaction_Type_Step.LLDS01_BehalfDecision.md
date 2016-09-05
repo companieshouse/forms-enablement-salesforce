@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Does any directors needs someone to sign on their behalf?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Does any directors need someone to sign on their behalf?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

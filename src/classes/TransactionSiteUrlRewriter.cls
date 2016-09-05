@@ -84,7 +84,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String VF_PAGE_ERROR         = '/transactionexception';
     public String VF_PAGE_DIGITALSIGNATURE      = '/DigitalSignature';
     public String VF_PAGE_EXTDOCUSIGN      = '/ExternalEmbedDocuSign';
-    public String VF_PAGE_PDFGENERATION = '/PDFGeneration';
     public String VF_PAGE_PAYMENT       = '/Payment';
     public String VF_PAGE_REVIEW        = '/Review';
     public String VF_PAGE_DOCUMENT = '/Documents';
@@ -150,7 +149,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.startsWith(ERROR))                  { pr = new PageReference(VF_PAGE_ERROR); }
         else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))       { pr = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
         else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))       { pr = new PageReference(VF_PAGE_EXTDOCUSIGN); }
-        else if (url.startsWith(VF_PAGE_PDFGENERATION))  { pr = new PageReference(VF_PAGE_PDFGENERATION); }
         else if (url.startsWith(PAYMENT))                { pr = new PageReference(VF_PAGE_PAYMENT); }
         else if (url.startsWith(REVIEW))                 { pr = new PageReference(VF_PAGE_REVIEW); }
         else if (url.startsWith(PRESENTER))              { pr = new PageReference(VF_PAGE_PRESENTER); }
@@ -227,7 +225,6 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             else if (url.startsWith(VF_PAGE_ERROR))          { friendlyPageReference = new PageReference(ERROR); }
             else if (url.startsWith(VF_PAGE_DIGITALSIGNATURE))  { friendlyPageReference = new PageReference(VF_PAGE_DIGITALSIGNATURE); }
             else if (url.startsWith(VF_PAGE_EXTDOCUSIGN))       { friendlyPageReference = new PageReference(VF_PAGE_EXTDOCUSIGN); }
-            else if (url.startsWith(VF_PAGE_PDFGENERATION))  { friendlyPageReference = new PageReference(VF_PAGE_PDFGENERATION); }
             else if (url.startsWith(VF_PAGE_PAYMENT))        { friendlyPageReference = new PageReference(PAYMENT); }
             else if (url.startsWith(VF_PAGE_REVIEW))         { friendlyPageReference = new PageReference(REVIEW); }
             else if (url.startsWith(VF_PAGE_PRESENTER))      { friendlyPageReference = new PageReference(PRESENTER); }
