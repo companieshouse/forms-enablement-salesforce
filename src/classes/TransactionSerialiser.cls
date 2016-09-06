@@ -737,7 +737,7 @@ public class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
-		if (transact.Form_Name__c.contains('DS01')) {
+		*/if (transact.Form_Name__c.contains('DS01')) {
 
 			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
 
@@ -786,7 +786,7 @@ public class TransactionSerialiser {
 			gen.writeObject(lAtt);
 			gen.writeEndObject();
 			return gen.getAsString();
-		}*/
+		}
 		if (transact.Form_Name__c.contains('DS02')) {
 
 			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
