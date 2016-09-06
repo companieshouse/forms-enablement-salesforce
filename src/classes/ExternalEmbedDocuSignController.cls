@@ -163,7 +163,11 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
         //Here page URL contains Apex/Payment
         baseURL = baseURL + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())) ;
-        String result = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+        
+        String result = '';
+
+        if(!Test.isRunningTest())
+            result = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
 
         //Update the sending name of each off
         update offToUpdate;

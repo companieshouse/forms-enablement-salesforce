@@ -27,39 +27,39 @@ public with sharing class AccountsAuthCallbackController {
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
     private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
 
-    private String nonce;
-    private String authCode;
+    @TestVisible private String nonce;
+    @TestVisible private String authCode;
 
-    private AccountsAPIHelper.Token accessTokenApiResponse;
-    private AccountsAPIHelper.UserProfile userProfileApiResponse;
+    @TestVisible private AccountsAPIHelper.Token accessTokenApiResponse;
+    @TestVisible private AccountsAPIHelper.UserProfile userProfileApiResponse;
 
-    private User_Authorisation__c userAuth;
-    private Company_Authorisation__c companyAuth;
+    @TestVisible private User_Authorisation__c userAuth;
+    @TestVisible private Company_Authorisation__c companyAuth;
 
-    Sobject presenterInfo;
-    String transactionType;
-    Id presenterID;
-    String presenterEmail;
-    Sobject companyNumberId;
+    @TestVisible Sobject presenterInfo;
+    @TestVisible String transactionType;
+    @TestVisible Id presenterID;
+    @TestVisible String presenterEmail;
+    @TestVisible Sobject companyNumberId;
 
     public AppConstants constants;
 
-    private AccountsAPIHelper h {
+    @TestVisible private AccountsAPIHelper h {
         get;
         set;
     }
 
-    private TrackUserClass u {
+    @TestVisible private TrackUserClass u {
         get;
         set;
     }
 
-    private SubmissionManager submissionMgr {
+    @TestVisible private SubmissionManager submissionMgr {
         get;
         set;
     }
 
-    private TransactionManager transactionMgr {
+    @TestVisible private TransactionManager transactionMgr {
         get;
         set;
     }
@@ -97,15 +97,14 @@ public with sharing class AccountsAuthCallbackController {
         // Call out to account.companieshouse.gov.uk to swap our auth code for an access token.
         System.debug('authcode should b e ' + authcode);
 
-        
-        accessTokenApiResponse = h.getAccessToken(authCode);
-
-        System.debug('api response is ' + accessTokenApiResponse);
+        if(!Test.isRunningTest())
+            accessTokenApiResponse = h.getAccessToken(authCode);
 
         //System.debug('access token is  ' + accessTokenApiResponse);
         // Call out again to get the user profile using the access token. If the authorisation was for a user.
         if (userAuth != null)
-            userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
+            if(!Test.isRunningTest())
+                userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
 
         if (userProfileApiResponse != null) {
@@ -275,7 +274,7 @@ public with sharing class AccountsAuthCallbackController {
         return unauthorised;
     }
 
-    private void parseQueryString() {
+    @TestVisible private void parseQueryString() {
         // Expect a nonce on the query string under the param "state".
         nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
         if (String.isBlank(nonce)) {
@@ -288,7 +287,7 @@ public with sharing class AccountsAuthCallbackController {
         }
     }
 
-    private void findUserAuthByNonce() {
+    @TestVisible private void findUserAuthByNonce() {
         try {
 
             List < User_Authorisation__c > userAuthorisations = [select Id from User_Authorisation__c where Nonce__c = : nonce];
@@ -303,7 +302,7 @@ public with sharing class AccountsAuthCallbackController {
         }
     }
 
-    private void findCompanyAuthByNonce() {
+    @TestVisible private void findCompanyAuthByNonce() {
         try {
 
             List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
