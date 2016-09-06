@@ -65,31 +65,31 @@ public class TransactionSerialiser {
 
 		}
 	}
-	public class shareAssignments {
-		public List < shareAssignment > shareAssignments {
-			get;
-			set;
-		}
-		public shareAssignments() {}
-		public shareAssignments(List < shareAssignment > assignedShares) {
-			this.shareAssignments = assignedShares;
-		}
-	}
-	public class shareAssignment {
-		public String existingClass {
-			get;
-			set;
-		}
-		public String nameOrOtherDesignation {
-			get;
-			set;
-		}
-		public shareAssignment() {}
-		public shareAssignment(String existingClass, String nameOrOtherDesignation) {
-			this.existingClass = existingClass;
-			this.nameOrOtherDesignation = nameOrOtherDesignation;
-		}
-	}
+	//public class shareAssignments {
+	//	public List < shareAssignment > shareAssignments {
+	//		get;
+	//		set;
+	//	}
+	//	public shareAssignments() {}
+	//	public shareAssignments(List < shareAssignment > assignedShares) {
+	//		this.shareAssignments = assignedShares;
+	//	}
+	//}
+	//public class shareAssignment {
+	//	public String existingClass {
+	//		get;
+	//		set;
+	//	}
+	//	public String nameOrOtherDesignation {
+	//		get;
+	//		set;
+	//	}
+	//	public shareAssignment() {}
+	//	public shareAssignment(String existingClass, String nameOrOtherDesignation) {
+	//		this.existingClass = existingClass;
+	//		this.nameOrOtherDesignation = nameOrOtherDesignation;
+	//	}
+	//}
 
 	public class presenterDetails {
 		public String presenterEmailIn {get; set;}
@@ -122,13 +122,13 @@ public class TransactionSerialiser {
 			this.presenterDocumentReference = presenterDocumentReference;
 			this.signDate = signDate;
 		}
-		public filingDetails(String barcode, String receiptDate, payment payment, presenterDetails presenterDetails, String presenterDocumentReference) {
-			this.barcode = barcode;
-			this.receiptDate = receiptDate;
-			this.payment = payment;
-			this.presenterDetails = presenterDetails;
-			this.presenterDocumentReference = presenterDocumentReference;
-		}
+		//public filingDetails(String barcode, String receiptDate, payment payment, presenterDetails presenterDetails, String presenterDocumentReference) {
+		//	this.barcode = barcode;
+		//	this.receiptDate = receiptDate;
+		//	this.payment = payment;
+		//	this.presenterDetails = presenterDetails;
+		//	this.presenterDocumentReference = presenterDocumentReference;
+		//}
 	}
 	public class officer {
 		public personName personName {
@@ -146,177 +146,177 @@ public class TransactionSerialiser {
 		}
 	}
 	// statement of capital starts here
-	public class statementOfCapital {
-		public shareValues shareValues {
-			get;
-			set;
-		}
-		public shareClasses shareClasses {
-			get;
-			set;
-		}
-		public Boolean latestSOCInd {
-			get;
-			set;
-		}
-		public grandTotals grandTotals {
-			get;
-			set;
-		} // todo change back socIND to list List < latestSOCInd > List < latestSOCInd >
-		public statementOfCapital() {}
-		//public statementOfCapital(List < shareValues > valueofShares, List < shareClasses > classesofShares, String socIND, List < grandTotals > totals) {
-		public statementOfCapital(shareValues valueofShares, shareClasses classesofShares, Boolean socIND, grandTotals totals) {
-			this.shareValues = valueofShares;
-			this.shareClasses = classesofShares;
-			this.latestSOCInd = socIND;
-			this.grandTotals = totals;
-		}
-	}
-	public class shareValues {
-		public List < shareValue > shareValue {
-			get;
-			set;
-		}
-		public shareValues(List < shareValue > shareValue) {
-			this.shareValue = shareValue;
-		}
-	}
-	public class shareClasses {
-		public List < shareClass > shareClass {
-			get;
-			set;
-		}
-		public shareClasses(List < shareClass > shareClass) {
-			this.shareClass = shareClass;
-		}
-	}
-	public class shareValue {
-		public String currencyCode {
-			get;
-			set;
-		}
-		public Decimal value {
-			get;
-			set;
-		}
-		public Decimal totalAmountUnpaid {
-			get;
-			set;
-		}
-		public Decimal totalNumberOfShares {
-			get;
-			set;
-		}
-		public shareValue(String currencyCode, Decimal value, Decimal totalAmountUnpaid, Decimal totalNumberOfShares) {
-			this.currencyCode = currencyCode;
-			this.value = value;
-			this.totalAmountUnpaid = totalAmountUnpaid;
-			this.totalNumberOfShares = totalNumberOfShares;
-		}
-	}
-	public class shareClass {
-		public String currencyCode {
-			get;
-			set;
-		}
-		public String suppliedClass {
-			get;
-			set;
-		}
-		public String description {
-			get;
-			set;
-		}
-		public Decimal sNumber {
-			get;
-			set;
-		}
-		// NUmber is a reserved word...
-		public Decimal value {
-			get;
-			set;
-		}
-		public shareClass(String currencyCode, String suppliedClass, String description, Decimal value, Decimal sNumber) {
-			this.currencyCode = currencyCode;
-			this.suppliedClass = suppliedClass;
-			this.description = description;
-			this.value = value;
-			this.sNumber = sNumber;
-		}
-	}
-	public class grandTotals {
-		//public List < shareValueGrandTotals > shareValueGrandTotals {
-		//	get;
-		//	set;
-		//}
-		public Decimal shareNumberGrandTotal {
-			get;
-			set;
-		} //Decimal snumbergtotal,
-		//public List < shareNumberGrandTotal > shareNumberGrandTotal {
-		//	get;
-		//	set;
-		//}
-		public shareValueGrandTotals shareValueGrandTotals {
-			get;
-			set;
-		}
-		//public Decimal snumbergtotal {get; set;}
-		public grandTotals() {}
-		public grandTotals(Decimal snumbergtotal, shareValueGrandTotals svaluegtotal) {
-			this.shareNumberGrandTotal = snumbergtotal;
-			this.shareValueGrandTotals = svaluegtotal;
-		}
-	}
-	public class shareValueGrandTotals {
-		public List < shareValueGrandTotal > shareValueGrandTotal {
-			get;
-			set;
-		}
-		public shareValueGrandTotals() {}
-		public shareValueGrandTotals(List < shareValueGrandTotal > svaluegtotal) {
-			this.shareValueGrandTotal = svaluegtotal;
-		}
-	}
-	public class shareValueGrandTotal {
-		public String currencyCode {
-			get;
-			set;
-		}
-		public Decimal totalAmountUnpaid {
-			get;
-			set;
-		}
-		public Decimal value {
-			get;
-			set;
-		}
-		public shareValueGrandTotal() {}
-		public shareValueGrandTotal(String money, Decimal unpaidAmount, Decimal val) {
-			this.currencyCode = money;
-			this.totalAmountUnpaid = unpaidAmount;
-			this.value = val;
-		}
-	}
-	public class shareNumberGrandTotal {
-		public Decimal shareNumberGrandTotal {
-			get;
-			set;
-		}
-		public shareNumberGrandTotal() {}
-		public shareNumberGrandTotal(Decimal sNGT) {
-			this.shareNumberGrandTotal = sNGT;
-		}
-	}
-	public class latestSOCInd {
-		public String latestSOCInd {
-			get;
-			set;
-		}
-		public latestSOCInd(String latestSOCInd) {
-			this.latestSOCInd = latestSOCInd;
-		}
-	}
+	//public class statementOfCapital {
+	//	public shareValues shareValues {
+	//		get;
+	//		set;
+	//	}
+	//	public shareClasses shareClasses {
+	//		get;
+	//		set;
+	//	}
+	//	public Boolean latestSOCInd {
+	//		get;
+	//		set;
+	//	}
+	//	public grandTotals grandTotals {
+	//		get;
+	//		set;
+	//	} // todo change back socIND to list List < latestSOCInd > List < latestSOCInd >
+	//	public statementOfCapital() {}
+	//	//public statementOfCapital(List < shareValues > valueofShares, List < shareClasses > classesofShares, String socIND, List < grandTotals > totals) {
+	//	public statementOfCapital(shareValues valueofShares, shareClasses classesofShares, Boolean socIND, grandTotals totals) {
+	//		this.shareValues = valueofShares;
+	//		this.shareClasses = classesofShares;
+	//		this.latestSOCInd = socIND;
+	//		this.grandTotals = totals;
+	//	}
+	//}
+	//public class shareValues {
+	//	public List < shareValue > shareValue {
+	//		get;
+	//		set;
+	//	}
+	//	public shareValues(List < shareValue > shareValue) {
+	//		this.shareValue = shareValue;
+	//	}
+	//}
+	//public class shareClasses {
+	//	public List < shareClass > shareClass {
+	//		get;
+	//		set;
+	//	}
+	//	public shareClasses(List < shareClass > shareClass) {
+	//		this.shareClass = shareClass;
+	//	}
+	//}
+	//public class shareValue {
+	//	public String currencyCode {
+	//		get;
+	//		set;
+	//	}
+	//	public Decimal value {
+	//		get;
+	//		set;
+	//	}
+	//	public Decimal totalAmountUnpaid {
+	//		get;
+	//		set;
+	//	}
+	//	public Decimal totalNumberOfShares {
+	//		get;
+	//		set;
+	//	}
+	//	public shareValue(String currencyCode, Decimal value, Decimal totalAmountUnpaid, Decimal totalNumberOfShares) {
+	//		this.currencyCode = currencyCode;
+	//		this.value = value;
+	//		this.totalAmountUnpaid = totalAmountUnpaid;
+	//		this.totalNumberOfShares = totalNumberOfShares;
+	//	}
+	//}
+	//public class shareClass {
+	//	public String currencyCode {
+	//		get;
+	//		set;
+	//	}
+	//	public String suppliedClass {
+	//		get;
+	//		set;
+	//	}
+	//	public String description {
+	//		get;
+	//		set;
+	//	}
+	//	public Decimal sNumber {
+	//		get;
+	//		set;
+	//	}
+	//	// NUmber is a reserved word...
+	//	public Decimal value {
+	//		get;
+	//		set;
+	//	}
+	//	public shareClass(String currencyCode, String suppliedClass, String description, Decimal value, Decimal sNumber) {
+	//		this.currencyCode = currencyCode;
+	//		this.suppliedClass = suppliedClass;
+	//		this.description = description;
+	//		this.value = value;
+	//		this.sNumber = sNumber;
+	//	}
+	//}
+	//public class grandTotals {
+	//	//public List < shareValueGrandTotals > shareValueGrandTotals {
+	//	//	get;
+	//	//	set;
+	//	//}
+	//	public Decimal shareNumberGrandTotal {
+	//		get;
+	//		set;
+	//	} //Decimal snumbergtotal,
+	//	//public List < shareNumberGrandTotal > shareNumberGrandTotal {
+	//	//	get;
+	//	//	set;
+	//	//}
+	//	public shareValueGrandTotals shareValueGrandTotals {
+	//		get;
+	//		set;
+	//	}
+	//	//public Decimal snumbergtotal {get; set;}
+	//	public grandTotals() {}
+	//	public grandTotals(Decimal snumbergtotal, shareValueGrandTotals svaluegtotal) {
+	//		this.shareNumberGrandTotal = snumbergtotal;
+	//		this.shareValueGrandTotals = svaluegtotal;
+	//	}
+	//}
+	//public class shareValueGrandTotals {
+	//	public List < shareValueGrandTotal > shareValueGrandTotal {
+	//		get;
+	//		set;
+	//	}
+	//	public shareValueGrandTotals() {}
+	//	public shareValueGrandTotals(List < shareValueGrandTotal > svaluegtotal) {
+	//		this.shareValueGrandTotal = svaluegtotal;
+	//	}
+	//}
+	//public class shareValueGrandTotal {
+	//	public String currencyCode {
+	//		get;
+	//		set;
+	//	}
+	//	public Decimal totalAmountUnpaid {
+	//		get;
+	//		set;
+	//	}
+	//	public Decimal value {
+	//		get;
+	//		set;
+	//	}
+	//	public shareValueGrandTotal() {}
+	//	public shareValueGrandTotal(String money, Decimal unpaidAmount, Decimal val) {
+	//		this.currencyCode = money;
+	//		this.totalAmountUnpaid = unpaidAmount;
+	//		this.value = val;
+	//	}
+	//}
+	//public class shareNumberGrandTotal {
+	//	public Decimal shareNumberGrandTotal {
+	//		get;
+	//		set;
+	//	}
+	//	public shareNumberGrandTotal() {}
+	//	public shareNumberGrandTotal(Decimal sNGT) {
+	//		this.shareNumberGrandTotal = sNGT;
+	//	}
+	//}
+	//public class latestSOCInd {
+	//	public String latestSOCInd {
+	//		get;
+	//		set;
+	//	}
+	//	public latestSOCInd(String latestSOCInd) {
+	//		this.latestSOCInd = latestSOCInd;
+	//	}
+	//}
 	// Statement of capital ends here
 	public class officerCollection {
 		public List < officer > officer {
@@ -366,17 +366,17 @@ public class TransactionSerialiser {
 			get;
 			set;
 		}
-		public statementOfCapital statementOfCapital {
-			get;
-			set;
-		}
-		public reconvertedClasses reconvertedClasses {get; set;}
-		public redeemedClasses redeemedClasses {get; set;}
-		public subdividedClasses subdividedClasses {get; set;}
-		public consolidatedClasses consolidatedClasses {get; set;}
-		public shares shares {get; set;}
-		public detailsOfVariationOfRights detailsOfVariationOfRights {get; set;}
-		public shareAssignments shareAssignments {get; set;}
+		//public statementOfCapital statementOfCapital {
+		//	get;
+		//	set;
+		//}
+		//public reconvertedClasses reconvertedClasses {get; set;}
+		//public redeemedClasses redeemedClasses {get; set;}
+		//public subdividedClasses subdividedClasses {get; set;}
+		//public consolidatedClasses consolidatedClasses {get; set;}
+		//public shares shares {get; set;}
+		//public detailsOfVariationOfRights detailsOfVariationOfRights {get; set;}
+		//public shareAssignments shareAssignments {get; set;}
 		public corporateBody() {}
 
 		public corporateBody(String incorporationNumber, String corporateBodyName) {
@@ -389,32 +389,32 @@ public class TransactionSerialiser {
 			this.officers = officers;
 		}
 		// SH19
-		public corporateBody(String incorporationNumber, String corporateBodyName, statementOfCapital capitalStatement) {
-			this.incorporationNumber = incorporationNumber;
-			this.corporateBodyName = corporateBodyName;
-			this.statementOfCapital = capitalStatement;
-		}
-		public corporateBody(String incorporationNumber, String corporateBodyName, shareAssignments shareAssignments) {
-			this.incorporationNumber = incorporationNumber;
-			this.corporateBodyName = corporateBodyName;
-			this.shareAssignments = shareAssignments;
-		}
-		public corporateBody(String incorporationNumber, String corporateBodyName, detailsOfVariationOfRights variationValue) {
-			this.incorporationNumber = incorporationNumber;
-			this.corporateBodyName = corporateBodyName;
-			this.detailsOfVariationOfRights = variationValue;
-		}
-		public corporateBody(String incorporationNumber, String corporateBodyName, statementOfCapital capitalStatement, shares shares, consolidatedClasses consolidatedClasses, subdividedClasses subdividedClasses, redeemedClasses redeemedClasses, reconvertedClasses reconvertedClasses) {
-			this.incorporationNumber = incorporationNumber;
-			this.corporateBodyName = corporateBodyName;
-			this.statementOfCapital = capitalStatement;
-			this.reconvertedClasses = reconvertedClasses;
-			this.redeemedClasses = redeemedClasses;
-			this.subdividedClasses = subdividedClasses;
-			this.consolidatedClasses = consolidatedClasses;
-			this.shares = shares;
+		//public corporateBody(String incorporationNumber, String corporateBodyName, statementOfCapital capitalStatement) {
+		//	this.incorporationNumber = incorporationNumber;
+		//	this.corporateBodyName = corporateBodyName;
+		//	this.statementOfCapital = capitalStatement;
+		//}
+		//public corporateBody(String incorporationNumber, String corporateBodyName, shareAssignments shareAssignments) {
+		//	this.incorporationNumber = incorporationNumber;
+		//	this.corporateBodyName = corporateBodyName;
+		//	this.shareAssignments = shareAssignments;
+		//}
+		//public corporateBody(String incorporationNumber, String corporateBodyName, detailsOfVariationOfRights variationValue) {
+		//	this.incorporationNumber = incorporationNumber;
+		//	this.corporateBodyName = corporateBodyName;
+		//	this.detailsOfVariationOfRights = variationValue;
+		//}
+		//public corporateBody(String incorporationNumber, String corporateBodyName, statementOfCapital capitalStatement, shares shares, consolidatedClasses consolidatedClasses, subdividedClasses subdividedClasses, redeemedClasses redeemedClasses, reconvertedClasses reconvertedClasses) {
+		//	this.incorporationNumber = incorporationNumber;
+		//	this.corporateBodyName = corporateBodyName;
+		//	this.statementOfCapital = capitalStatement;
+		//	this.reconvertedClasses = reconvertedClasses;
+		//	this.redeemedClasses = redeemedClasses;
+		//	this.subdividedClasses = subdividedClasses;
+		//	this.consolidatedClasses = consolidatedClasses;
+		//	this.shares = shares;
 
-		}
+		//}
 	}
 	public class formdata {
 		public filingDetails filingDetails {
@@ -456,137 +456,137 @@ public class TransactionSerialiser {
 			//this.description = description;
 		}
 	}
-	public class detailsOfVariationOfRights {
-		public String detailsOfVariationOfRights {get; set;}
-		public detailsOfVariationOfRights () {}
-		public detailsOfVariationOfRights(String detailsOfVariationOfRights) {
+	//public class detailsOfVariationOfRights {
+	//	public String detailsOfVariationOfRights {get; set;}
+	//	public detailsOfVariationOfRights () {}
+	//	public detailsOfVariationOfRights(String detailsOfVariationOfRights) {
 
-			this.detailsOfVariationOfRights = detailsOfVariationOfRights;
-		}
-	}
-	public class shares {
-		public Boolean consolidation {get; set;
-		                             }
-		public Boolean subDivision {get; set;
-		                           }
-		public Boolean redemptionSelected {get; set;
-		                                  }
-		public Boolean reconversion {get; set;
-		                            }
-		public shares() {}
-		public shares(Boolean consolidation, Boolean subDivision, Boolean redemptionSelected, Boolean reconversion ) {
-			this.consolidation = consolidation;
-			this.subDivision = subDivision;
-			this.redemptionSelected = redemptionSelected;
-			this.reconversion = reconversion;
-		}
+	//		this.detailsOfVariationOfRights = detailsOfVariationOfRights;
+	//	}
+	//}
+	//public class shares {
+	//	public Boolean consolidation {get; set;
+	//	                             }
+	//	public Boolean subDivision {get; set;
+	//	                           }
+	//	public Boolean redemptionSelected {get; set;
+	//	                                  }
+	//	public Boolean reconversion {get; set;
+	//	                            }
+	//	public shares() {}
+	//	public shares(Boolean consolidation, Boolean subDivision, Boolean redemptionSelected, Boolean reconversion ) {
+	//		this.consolidation = consolidation;
+	//		this.subDivision = subDivision;
+	//		this.redemptionSelected = redemptionSelected;
+	//		this.reconversion = reconversion;
+	//	}
 
-	}
-	public class consolidatedClasses {
-		public List<consolidatedClass> consolidatedClass {get; set;}
-		public consolidatedClasses() {}
-		public consolidatedClasses(List <consolidatedClass> consolidatedClass) {
-			this.consolidatedClass = consolidatedClass;
-		}
+	//}
+	//public class consolidatedClasses {
+	//	public List<consolidatedClass> consolidatedClass {get; set;}
+	//	public consolidatedClasses() {}
+	//	public consolidatedClasses(List <consolidatedClass> consolidatedClass) {
+	//		this.consolidatedClass = consolidatedClass;
+	//	}
 
-	}
-	public class subdividedClasses {
-		public List<subdividedClass> subdividedClass {get; set;}
-		public subdividedClasses() {}
-		public subdividedClasses(List<subdividedClass> subdividedClass) {
-			this.subdividedClass = subdividedClass;
-		}
-	}
-	public class redeemedClasses {
-		public List<redeemedClass> redeemedClass {get; set;}
-		public redeemedClasses() {}
-		public redeemedClasses(List<redeemedClass> redeemedClass) {
-			this.redeemedClass = redeemedClass;
-		}
+	//}
+	//public class subdividedClasses {
+	//	public List<subdividedClass> subdividedClass {get; set;}
+	//	public subdividedClasses() {}
+	//	public subdividedClasses(List<subdividedClass> subdividedClass) {
+	//		this.subdividedClass = subdividedClass;
+	//	}
+	//}
+	//public class redeemedClasses {
+	//	public List<redeemedClass> redeemedClass {get; set;}
+	//	public redeemedClasses() {}
+	//	public redeemedClasses(List<redeemedClass> redeemedClass) {
+	//		this.redeemedClass = redeemedClass;
+	//	}
 
-	}
-	public class reconvertedClasses {
-		public List<reconvertedClass> reconvertedClass {get; set;}
-		public reconvertedClasses() {}
-		public reconvertedClasses(List<reconvertedClass> reconvertedClass) {
-			this.reconvertedClass = reconvertedClass;
-		}
-	}
-
-
-
-
-	public class consolidatedClass {
-		public String classValue {get; set;}
-		public previousStructure previousStructure {get; set;}
-		public newStructure newStructure {get; set;}
-		public consolidatedClass() {}
-		public consolidatedClass(String classValue, previousStructure previousStructure, newStructure newStructure ) {
-			this.classValue = classValue;
-			this.previousStructure = previousStructure;
-			this.newStructure = newStructure;
-		}
-
-	}
-	public class previousStructure {
-		public Decimal snumber {get; set;}
-		public Decimal value {get; set;}
-		public previousStructure() {}
-		public previousStructure(Decimal snumber, Decimal value) {
-			this.snumber = snumber;
-			this.value = value;
-		}
-
-	}
+	//}
+	//public class reconvertedClasses {
+	//	public List<reconvertedClass> reconvertedClass {get; set;}
+	//	public reconvertedClasses() {}
+	//	public reconvertedClasses(List<reconvertedClass> reconvertedClass) {
+	//		this.reconvertedClass = reconvertedClass;
+	//	}
+	//}
 
 
 
-	public class newStructure {
-		public Decimal snumber {get; set;}
-		public Decimal value {get; set;}
-		public  newStructure () {}
 
-		public  newStructure (Decimal snumber, Decimal value) {
-			this.snumber = snumber;
-			this.value = value;
-		}
-	}
-	public class subdividedClass {
-		public String classValue {get; set;}
-		public previousStructure previousStructure {get; set;}
-		public newStructure newStructure {get; set;}
-		public subdividedClass() {}
-		public subdividedClass(String classValue, previousStructure previousStructure, newStructure newStructure ) {
-			this.classValue = classValue;
-			this.previousStructure = previousStructure;
-			this.newStructure = newStructure;
-		}
-	}
-	public class redeemedClass {
-		public String classValue {get; set;}
+	//public class consolidatedClass {
+	//	public String classValue {get; set;}
+	//	public previousStructure previousStructure {get; set;}
+	//	public newStructure newStructure {get; set;}
+	//	public consolidatedClass() {}
+	//	public consolidatedClass(String classValue, previousStructure previousStructure, newStructure newStructure ) {
+	//		this.classValue = classValue;
+	//		this.previousStructure = previousStructure;
+	//		this.newStructure = newStructure;
+	//	}
 
-		public Decimal snumber {get; set;}
-		public Decimal value {get; set;}
-		public redeemedClass() {}
-		public redeemedClass(Decimal snumber, Decimal value) {
-			this.snumber = snumber;
-			this.value = value;
-		}
+	//}
+	//public class previousStructure {
+	//	public Decimal snumber {get; set;}
+	//	public Decimal value {get; set;}
+	//	public previousStructure() {}
+	//	public previousStructure(Decimal snumber, Decimal value) {
+	//		this.snumber = snumber;
+	//		this.value = value;
+	//	}
 
-	}
+	//}
 
-	public class reconvertedClass {
-		public String classValue {get; set;}
-		public Decimal stockValue {get; set;}
-		public Decimal snumber {get; set;}
-		public Decimal value {get; set;}
-		public reconvertedClass() {}
-		public reconvertedClass(Decimal snumber, Decimal value) {
-			this.snumber = snumber;
-			this.value = value;
-		}
 
-	}
+
+	//public class newStructure {
+	//	public Decimal snumber {get; set;}
+	//	public Decimal value {get; set;}
+	//	public  newStructure () {}
+
+	//	public  newStructure (Decimal snumber, Decimal value) {
+	//		this.snumber = snumber;
+	//		this.value = value;
+	//	}
+	//}
+	//public class subdividedClass {
+	//	public String classValue {get; set;}
+	//	public previousStructure previousStructure {get; set;}
+	//	public newStructure newStructure {get; set;}
+	//	public subdividedClass() {}
+	//	public subdividedClass(String classValue, previousStructure previousStructure, newStructure newStructure ) {
+	//		this.classValue = classValue;
+	//		this.previousStructure = previousStructure;
+	//		this.newStructure = newStructure;
+	//	}
+	//}
+	//public class redeemedClass {
+	//	public String classValue {get; set;}
+
+	//	public Decimal snumber {get; set;}
+	//	public Decimal value {get; set;}
+	//	public redeemedClass() {}
+	//	public redeemedClass(Decimal snumber, Decimal value) {
+	//		this.snumber = snumber;
+	//		this.value = value;
+	//	}
+
+	//}
+
+	//public class reconvertedClass {
+	//	public String classValue {get; set;}
+	//	public Decimal stockValue {get; set;}
+	//	public Decimal snumber {get; set;}
+	//	public Decimal value {get; set;}
+	//	public reconvertedClass() {}
+	//	public reconvertedClass(Decimal snumber, Decimal value) {
+	//		this.snumber = snumber;
+	//		this.value = value;
+	//	}
+
+	//}
 
 	public static String transactionToJSON(Transaction__c transact) {
 		//We need to convert the transaction record to a JSON object
@@ -598,7 +598,7 @@ public class TransactionSerialiser {
 			return JSON.serialize('Argument cannot be null.');
 		}
 		//Build each object for the JSON
-		if (transact.Form_Name__c == 'SH20') {
+		/*if (transact.Form_Name__c == 'SH20') {
 
 			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
 
@@ -786,7 +786,7 @@ public class TransactionSerialiser {
 			gen.writeObject(lAtt);
 			gen.writeEndObject();
 			return gen.getAsString();
-		}
+		}*/
 		if (transact.Form_Name__c.contains('DS02')) {
 
 			metadata met = new metadata(transact.Form_Name__c, 1, Integer.valueOf(transact.Version_Form__c), transact.SubmissionId__c);
@@ -837,7 +837,7 @@ public class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
-		if (transact.Form_Name__c == 'SH19') {
+		/*if (transact.Form_Name__c == 'SH19') {
 			List < metadata > packagesmeta = new List < metadata > ();
 			List < payment > packagespayment = new List < payment > ();
 
@@ -966,9 +966,9 @@ public class TransactionSerialiser {
 			}
 			gen.writeEndObject();
 			return gen.getAsString();
-		}
+		}*/
 
-		if (transact.Form_Name__c == 'SH02') {
+		/*if (transact.Form_Name__c == 'SH02') {
 			// Booleans for sharetype changes
 			Boolean redeemedShares;
 			Boolean consolidatedShares;
@@ -1055,7 +1055,7 @@ public class TransactionSerialiser {
 			gen.writeObject(lAtt);
 			gen.writeEndObject();
 			return gen.getAsString();
-		}
+		}*/
 		String valtoReturn = 'NoFormtoSerializeFound';
 		return valtoReturn;
 	}

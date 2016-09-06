@@ -31,7 +31,7 @@ private class CompanyControllerTest {
 
 	@isTest static void test_method_two() {
 		PageReference companyTestPage = Page.Company;
-		companyTestPage.getParameters().put('t', 'SH02');
+		companyTestPage.getParameters().put('t', 'DS02');
 
 		Test.setCurrentPage(companyTestPage);
 		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);

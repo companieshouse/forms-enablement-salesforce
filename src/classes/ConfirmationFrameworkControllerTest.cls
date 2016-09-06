@@ -97,8 +97,8 @@ private class ConfirmationFrameworkControllerTest {
 		insert testCompany;
 		Transaction__c transac = testData.tx;
 		transac.OfficerCount__c = 2;
-		transac.Transaction_Type__c = 'SH05_6_7';
-		transac.Form_Name__c = 'SH05_6_7';
+		transac.Transaction_Type__c = 'LLDS02';
+		transac.Form_Name__c = 'LLDS02';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
