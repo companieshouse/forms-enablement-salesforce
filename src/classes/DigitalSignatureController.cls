@@ -187,7 +187,8 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
 
             //Send to docusign as no presenter don t load the external embed page
             if (!submissionMgr.submission.isSigningStarted__c) {
-                ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
+                if(!Test.isRunningTest())
+                    ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
                 persistStep();
             }
             pendingPage = true;

@@ -61,7 +61,7 @@ Ver. Author        Date        Detail
                     <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     <br/>
                     <br/>
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    <apex:commandLink action="{!resetTransaction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
                 <apex:outputPanel id="succesSign" rendered="{!failureEmail}">
                     <apex:outputText escape="false" value="{!pageTitle4}" />
