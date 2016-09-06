@@ -5,7 +5,7 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>CH DS02 Submission</name>
     <style>none</style>
-    <subject>Request to Cancel your application to close a company for  {!Transaction__c. CompanyName__c} was successful</subject>
+    <subject>Request to Cancel your application to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) has been submitted successfully</subject>
     <textOnly>Companies House submission confirmation
 
 Cancel your application to close  {!Transaction__c.CompanyName__c}
