@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A majority of directors need to approve your request to close the LLP before you can proceed.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A majority of members need to approve your request to close the LLP before you can proceed.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
