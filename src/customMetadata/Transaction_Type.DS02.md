@@ -34,6 +34,19 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>CompanySearchedBody1__c</field>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Review the information below and confirm that this is the correct company.&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>CompanySearchedHeader1__c</field>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt; 
+Confirm Searched Company&lt;/h1&gt;</value>
+    </values>
+    <values>
+        <field>CompanySearchedPreviousButton__c</field>
+        <value xsi:type="xsd:string">Not the right company?</value>
+    </values>
+    <values>
         <field>Company_Page_Body_1__c</field>
         <value xsi:nil="true"/>
     </values>

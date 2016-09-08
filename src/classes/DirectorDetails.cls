@@ -50,6 +50,7 @@ public class DirectorDetails extends TransactionStepControllerBase {
 
     public String pageTitle {get; set;}
     public String pageBody {get; set;}
+    public String emailMessage {get; set;}
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
@@ -69,12 +70,13 @@ public class DirectorDetails extends TransactionStepControllerBase {
         {
             pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
             pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
-        }
+         }
         else{
             pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
             pageBody = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         }
-        
+        emailMessage = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+
         if(builtDirectors.size() == 1)
         {
             pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s','')));

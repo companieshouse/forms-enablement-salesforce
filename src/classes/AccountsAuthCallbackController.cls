@@ -142,6 +142,7 @@ public with sharing class AccountsAuthCallbackController {
             PrivateBeta_Accesslist.put('julie.marquiss@externalservices.com', 'Julie Marquiss');
             PrivateBeta_Accesslist.put('sylvain.picory@methodsdigital.co.uk', 'Sylvain Picory');
             PrivateBeta_Accesslist.put('lbitoy@gmail.com', 'Leo Bitoy');
+            PrivateBeta_Accesslist.put('jake@fluffylogic.com', 'jake');
             PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
             PrivateBeta_Accesslist.put('@methodsdigital.co.uk','Methds');
             PrivateBeta_Accesslist.put('@methods.co.uk','Methods');
@@ -183,7 +184,7 @@ public with sharing class AccountsAuthCallbackController {
             String hostname = ApexPages.currentPage().getHeaders().get('Host');
             String startjourneyURL = 'https://' + hostname + '/company?t=' + transactionType;
             PageReference startjourney = new PageReference(startjourneyURL);
-            SecurityManager.createSessionValidityCookie();
+            SecurityManager.createSessionValidityCookie(userProfileApiResponse.email);
             System.debug('redirect is = ' + startjourney);
             // redirect to the framework once userprofile is given
             // note this presenter information is minimal (e.g. locale, email address, etc.)
@@ -232,7 +233,7 @@ public with sharing class AccountsAuthCallbackController {
 
             if (submissionMgr.submission.Valid_Step_Ids__c != null)
             {
-                SecurityManager.createSessionValidityCookie();
+                SecurityManager.createSessionValidityCookie(presenterEmail);
 
                 String split = submissionMgr.submission.Valid_Step_Ids__c;
 

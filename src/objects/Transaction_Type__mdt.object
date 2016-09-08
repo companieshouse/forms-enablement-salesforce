@@ -57,6 +57,29 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>CompanySearchedBody1__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Searched Body 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanySearchedHeader1__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Searched Header 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanySearchedPreviousButton__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Searched Previous Button</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Company_Page_Body_1__c</fullName>
         <externalId>false</externalId>
         <label>Company Page Body 1</label>

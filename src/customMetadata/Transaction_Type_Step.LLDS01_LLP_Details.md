@@ -100,6 +100,6 @@ Confirm details&lt;/h1&gt;</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Not the company you want to close</value>
+        <value xsi:type="xsd:string">Not the LLP you want to close</value>
     </values>
 </CustomMetadata>

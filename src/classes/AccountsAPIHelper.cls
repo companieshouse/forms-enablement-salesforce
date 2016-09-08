@@ -371,6 +371,7 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         public String email;
         public String id;
         public String locale;
+        public String scope;
     } 
     
     public class Token {

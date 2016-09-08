@@ -49,7 +49,6 @@ public with sharing class CompanyController {
     Boolean isPageInitialised = false;
     Boolean isUserAuthenticated = false;
     SecurityManager securityMgr;
-    SubmissionManager submissionMgr;
     TransactionManager transactionMgr;
     //String transactionType;
     TrackUserClass trackuser;
@@ -66,7 +65,6 @@ public with sharing class CompanyController {
     // Instance methods.
     private void initialise() {
         securityMgr = new SecurityManager();
-        submissionMgr = new SubmissionManager();
 
         try {
 
@@ -259,7 +257,12 @@ public with sharing class CompanyController {
     public PageReference initialiseAction() {
         if (!isUserAuthenticated) return Page.StartFramework;
         if (!isPageInitialised) return Page.TransactionException;
-        return SecurityManager.checkSessionValidityCookie();
+
+        //Get if the user is auth
+        Cookie userEmail = ApexPages.currentPage().getCookies().get('user_Email');
+
+        //return SecurityManager.checkSessionValidityCookie();
+        return SecurityManager.checkSessionValidityCookie(SecurityManager.decryptText(userEmail.getValue()));
     }
 
     public PageReference nextAction() {
@@ -283,7 +286,12 @@ public with sharing class CompanyController {
             return null;
         } else {
 			trackuser.getSearchedCompany(companyNumber);
-        	return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+        	//return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+            PageReference pg = new PageReference('/CompanySearched');
+            pg.setRedirect(true);
+            pg.getParameters().put('t', transactionType);
+
+            return pg;
 		}
         //Id submissionId = submissionMgr.initialise( transactionType, '0014E000003oEPN', '0014E000003oEPI',transactionMgr.td.Fee__c );
         //return transactionMgr==null ? null : transactionMgr.firstStep(submissionId);

@@ -35,6 +35,8 @@
                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
                         
                         <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+
+                        <apex:outputText escape="false" value="{!emailMessage}"></apex:outputText>
                         
                     <div class="form-group {!errorVal}">
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">

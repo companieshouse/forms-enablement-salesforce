@@ -5,7 +5,7 @@
             	<h1 class="heading-xlarge">
                         Provide your signature
                 </h1>
-                <p class="lede">As a {!officerTerm} of {!compName}, you need to provide your signature to strike the company off the register and dissolve it.</p>
+                <p class="lede">As a {!officerTerm} of {!compName}, you need to provide your signature to strike the company off the register and dissolve it. <br/>Notifications will be sent by email. Please remember to check your email and junk folders.</p>
                 <div id="doculoader"></div>
                 <script>
                 // window.open('{!externalURL}','_self'); 

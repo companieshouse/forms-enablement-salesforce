@@ -141,7 +141,11 @@ public virtual class TransactionStepControllerBase {
     }
 
     protected PageReference authenticatedSession(){
-        return SecurityManager.checkSessionValidityCookie();
+        //If Auth sec submissionMgr.submission.ContactEmail__c
+        if(submissionMgr != null)
+            if(submissionMgr.submission != null)
+                return SecurityManager.checkSessionValidityCookie(submissionMgr.submission.ContactEmail__c);
+        return null;
     }
 
     protected Boolean validatePageState() {

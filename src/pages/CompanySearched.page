@@ -1,0 +1,42 @@
+<apex:page cache="false" title="{!$Label.UI_Text_Company_Details}" controller="CompanySearchedController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
+                <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
+                <p class="heading-large">{!companyName}</p>
+                <table class="check-your-answers" >
+                    <tbody>
+                        <tr>
+                            <td>Company number</td>
+                            <td>{!companyNumber}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>{!companyStatus}</td>
+                        </tr>
+                        <tr>
+                            <td>Incorporation date</td>
+                            <td>{!companyDateOfCreation}</td>
+                        </tr>
+                        <tr>
+                            <td>Company type</td>
+                            <td>{!companyTypeText}</td>
+                        </tr>
+                        <tr>
+                            <td>Registered office address</td>
+                            <td>
+                                <apex:outputText escape="false" value="{!companyAddress}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
+                <br/>
+                <br/>
+                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

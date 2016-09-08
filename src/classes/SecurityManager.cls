@@ -135,7 +135,7 @@ public with sharing class SecurityManager {
 
   //This methods will control the session validity from SF for each page displayed based on a cookie
   //
-  public static PageReference checkSessionValidityCookie(){
+  public static PageReference checkSessionValidityCookie(String emailPresenter){
     //Check for the cookie existence
     //
     system.debug('COOKIE:' + ApexPages.currentPage().getCookies());
@@ -144,24 +144,54 @@ public with sharing class SecurityManager {
     if(containsCookie)
     {
       //Refresh the cookie
-      createSessionValidityCookie();
-
-      return null;
+      if(validateSession(emailPresenter))
+      {
+        createSessionValidityCookie(emailPresenter);
+        return null;
+      }
     }
-    else
-    {
-      PageReference pg = new PageReference('/SessionExpired');
-      pg.setRedirect(true);
-      return pg;
-    }
+    PageReference pg = new PageReference('/SessionExpired');
+    pg.setRedirect(true);
+    return pg;
+    
 
   }
 
+  //This methods will validate the cookie
+  public static Boolean validateSession(String emailPresenter)
+  {
+    //Get the cookie
+    Cookie sessionValidity = ApexPages.currentPage().getCookies().get(DEFAULT_SF_CHS_COOKIE_NAME);
+
+    //Decrypt the value
+    String result = SecurityManager.decryptText(sessionValidity.getValue());
+
+    //Split the result
+    String[] valueDecrypt = result.split(AppConstants.ID_DELIM_SPLIT_CHAR);
+
+    if(emailPresenter.equals(valueDecrypt[0]))
+    {
+      if(Datetime.now().getTime() > Long.valueOf(valueDecrypt[1]))
+      {
+        Long milliseconds = Datetime.now().getTime() - Long.valueOf(valueDecrypt[1]);
+        Long seconds = milliseconds / 1000;
+        Long minutes = seconds / 60;
+        if(minutes > 8)
+        {
+          return false;
+        }
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   //This methods will create a cookie for the session validity
-  public static void createSessionValidityCookie()
+  public static void createSessionValidityCookie(String emailPresenter)
   {
     //Create the cookie
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 480, true);
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 480, true);
 
     ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
 
@@ -170,7 +200,7 @@ public with sharing class SecurityManager {
   public static void removeSessionValidityCookie()
   {
     //Create the cookie
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText('false' + String.valueOf(DateTime.now().getTime())), '', 0, true);
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(String.valueOf(DateTime.now().getTime())), '', 0, true);
 
     ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
   }

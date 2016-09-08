@@ -35,6 +35,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>CompanySearchedBody1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedHeader1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedPreviousButton__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Company_Page_Body_1__c</field>
         <value xsi:nil="true"/>
     </values>

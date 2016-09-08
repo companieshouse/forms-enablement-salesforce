@@ -89,7 +89,7 @@ public with sharing class SubmissionManager {
                                                      and ContactEmail__c = :presenterEmail
                                                              and Company__c = :companyId.Id
                                                                      and Transaction_Type__c = :transactionType
-                                                                             and (Status__c != :AppConstants.REQUEST_STATUS_SUBMITTED OR Status__c != :AppConstants.REQUEST_STATUS_REJECTED OR Status__c != :AppConstants.REQUEST_STATUS_APPROVED)];
+                                                                             and (Status__c != :AppConstants.REQUEST_STATUS_SUBMITTED AND Status__c != :AppConstants.REQUEST_STATUS_REJECTED AND Status__c != :AppConstants.REQUEST_STATUS_APPROVED)];
         //  or Status__c=:AppConstants.REQUEST_STATUS_SIGNED)]; // should factor in status.
         if (recs.size() == 1) {
             submission = recs[0] ;
