@@ -177,7 +177,7 @@ public with sharing class AccountsAuthCallbackController {
             Schema.SObjectField f = Account.Fields.userIDChips__c;
             Database.UpsertResult cr = Database.upsert(newPersonAccount,f,false);
 
-
+            
             transactionType = u.getUserDocument();
 
             System.debug('transaction type is ' + transactionType);

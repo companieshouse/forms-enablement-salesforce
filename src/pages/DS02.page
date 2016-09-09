@@ -168,12 +168,12 @@
                 <div class="warningText">
                     <br />
                          <hr/>
-                    <p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director(s)</p>
+                    <p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director</p>
                     <br />
-                    <p>The directors hereby withdraw the application in which it was requested that 
+                    <p>The director hereby withdraws the application in which it was requested that 
                         this company be struck off the Register.</p>
                     <br />
-                    <h4>Authorising company Director:</h4>
+                    <h4>Authorising Company Director:</h4>
                     <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
                         <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
                             <td class="col1" align="left">

@@ -41,13 +41,11 @@
                 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"><br/><b>
                 {!Transaction__c.ErrorDescription__c}</b></p>
 
-<p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">The process to close the company<b> has not been stopped</b>. If a valid request to close has been accepted, then the company will be closed within two months of the notice to close being published in the relevant Gazette.</p>
-
                 <p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"><a href="{!Transaction__c.DownloadLink__c}"class="button">Click to download a copy of your application</a></p>
 
                 <h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2>
 
-<p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">If you still wish to close this company, then you will need to start the process again with a new cancellation request. </p>
+<p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">You will need to check the status of your application using the online companies house services and may need to submit a new request to cancel or request to close as necessary.<br/> If a valid request to close has been accepted, then the company will be closed within two months of the notice to close being published in the relevant Gazette.</p>
                 
                 <p style="font-size: 16px; color: #6f777b; line-height: 1.125; margin: 0 0 30px 0;">Contact Centre tel +44 (0)303 1234 500<br>or email <a href="mailto:enquiries@companieshouse.gov.uk">enquiries@companieshouse.gov.uk</a>.</p>
 

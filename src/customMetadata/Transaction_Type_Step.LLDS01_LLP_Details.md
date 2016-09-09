@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Review the information below and confirm that this is the correct LLP.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Confirm that this is the correct LLP to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
