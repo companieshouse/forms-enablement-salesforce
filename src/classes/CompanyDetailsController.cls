@@ -50,6 +50,10 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
     public String previousButtonText {get; set;}
     public Boolean signingFinished {get; set;}
 
+    public Boolean buttonDS01 {get; set;}
+    public String textButtonDS01 {get; set;}
+    public String textButtonOther {get; set;}
+
     public CompanyDetailsController() {
         super();
 
@@ -58,6 +62,16 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
     }
 
     public void initialiseStep() {
+
+        buttonDS01 = submissionMgr.submission.Form_Name__c.contains('DS01') ? true : false;
+
+        textButtonDS01 = 'Close the company';
+        if(submissionMgr.submission.Form_Name__c.contains('LL'))
+        {
+            textButtonDS01 = 'Close the LLP';
+        }
+        textButtonOther = 'Continue';
+
         displayText1 = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
         displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         displayText3 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;

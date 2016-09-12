@@ -140,6 +140,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         HttpRequest req = new HttpRequest();
         req.setEndpoint(hitURL);
         req.setMethod('GET');
+        req.setTimeout(120000);
         
         Blob headerValue = Blob.valueOf(this.authenticationToken + ':');
         String authorizationHeader = 'Basic ' + EncodingUtil.base64Encode(headerValue);

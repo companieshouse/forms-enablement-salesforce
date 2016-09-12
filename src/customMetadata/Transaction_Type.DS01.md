@@ -49,7 +49,7 @@ Confirm Searched Company&lt;/h1&gt;</value>
     </values>
     <values>
         <field>CompanySearchedPreviousButton__c</field>
-        <value xsi:type="xsd:string">Not the company you want to close</value>
+        <value xsi:type="xsd:string">Not the company you want to close?</value>
     </values>
     <values>
         <field>Company_Page_Body_1__c</field>
