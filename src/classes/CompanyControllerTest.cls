@@ -50,6 +50,11 @@ private class CompanyControllerTest {
 		controller.companyNumber = '1234567';
 		controller.nextAction();
 		controller.previousAction();
+		Cookie current_userEmail = new Cookie('user_Email', SecurityManager.encryptText('sylvain.picory@methodsdigita.co.uk'), null, -1, true);
+        // set time to 0 instead of -1 to remove cookie
+
+        ApexPages.currentPage().setCookies(new Cookie[] { current_userEmail });
+
 		controller.initialiseAction();
 		controller.companyNumber = '12345678';
 		controller.nextAction();

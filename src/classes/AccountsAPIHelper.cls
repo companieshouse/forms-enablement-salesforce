@@ -86,7 +86,8 @@ public with sharing class AccountsAPIHelper {
         authUrl+='&state='+nonce;
 
         //Force the param always
-        authUrl+='&reauthenticate=force';
+        //authUrl+='&reauthenticate=force';
+        
         // Redirect URL.
 
         String redirectUrlParam = EncodingUtil.urlEncode(getRedirectUrl(), 'UTF-8');        

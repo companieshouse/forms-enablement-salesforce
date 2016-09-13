@@ -19,7 +19,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Your signature is being saved. &lt;br/&gt; Please wait for a few moments until this has completed.&lt;br/&gt; &lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Your signature is being processed. &lt;br/&gt; Please wait for a few moments until this has completed.&lt;br/&gt; &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>

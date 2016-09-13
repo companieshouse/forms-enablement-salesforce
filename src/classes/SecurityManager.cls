@@ -169,6 +169,8 @@ public with sharing class SecurityManager {
     //Split the result
     String[] valueDecrypt = result.split(AppConstants.ID_DELIM_SPLIT_CHAR);
 
+    system.debug(valueDecrypt[0] + ' Validate against:' + emailPresenter);
+
     if(emailPresenter.equals(valueDecrypt[0]))
     {
       if(Datetime.now().getTime() > Long.valueOf(valueDecrypt[1]))

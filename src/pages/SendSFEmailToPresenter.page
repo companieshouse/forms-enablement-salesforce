@@ -1,0 +1,47 @@
+<apex:page controller="SendSFEmailToPresenterController" tabStyle="Transaction__c" showHeader="false" sidebar="false" showChat="false" wizard="false" action="{!initPreview}" >
+	<apex:form id="theSendEmailForm" >
+		 <apex:pageBlock rendered="{!errors}">
+			<apex:pageBlockSection columns="1"> 
+				<apex:pageMessages /> 
+			</apex:pageblockSection>
+		</apex:pageBlock>
+		<apex:pageBlock rendered="{!!errors && !resultTab}" title="Send email to the presenter">
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Send email" rendered="{!!errorsPreview}" status="status" action="{!sendEmail}" reRender="theSendEmailForm"/>
+				<apex:commandButton value="Close Window" status="status" onclick="window.close(); return true;" reRender="theSendEmailForm"/>
+			</apex:pageBlockButtons>
+			<apex:pageBlockSection title="Presenter Details">
+				<apex:outputField value="{!clickTransaction.PresenterName__c}" />
+				<apex:outputField value="{!presenter.PersonEmail}" />
+			</apex:pageBlockSection>
+			<apex:pageBlockSection title="Select an email template" collapsible="false" columns="1">
+				<apex:selectList onchange="refreshTemplate();" value="{!selectedTemplate}" multiselect="false" size="1">
+					<apex:selectOptions value="{!templateList}"/>
+				</apex:selectList>
+			</apex:pageBlockSection> 
+			<apex:pageBlockSection title="Preview of the template" collapsible="false" columns="1">
+				<apex:outputPanel id="templatePreview" rendered="{!!errorsPreview}">
+					<apex:outputText escape="false" value="{!htmlTemplate}"/>
+				</apex:outputPanel>
+				<apex:outputPanel rendered="{!errorsPreview}">
+						<apex:pageMessages /> 
+				</apex:outputPanel>
+			</apex:pageBlockSection> 
+		</apex:pageBlock>
+		<apex:pageBlock rendered="{!!errors && resultTab}" title="Result">
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Close Window" status="status" onclick="window.close(); return true;" reRender="theSendEmailForm"/>
+			</apex:pageBlockButtons>
+			<apex:pageBlockSection title="Email sent" collapsible="false" columns="1">
+				<apex:outputPanel rendered="{!success}">
+					<apex:image value="/img/msg_icons/confirm32.png"/> <apex:outputText value="Email send successfully to {!presenter.PersonEmail}"/>
+				</apex:outputPanel> 
+				<apex:outputPanel rendered="{!!success}">
+					<apex:image value="/img/msg_icons/error32.png"/> <apex:outputText value="There has been an error during the submition for delivery. "/>
+					<apex:outputText value="{!reasonErrors}"/>
+				</apex:outputPanel> 
+			</apex:pageBlockSection>
+		</apex:pageBlock>
+		<apex:actionFunction status="status" action="{!refreshTemplate}" name="refreshTemplate" reRender="theSendEmailForm"/> 
+	</apex:form>
+</apex:page>

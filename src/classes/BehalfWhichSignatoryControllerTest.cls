@@ -53,20 +53,19 @@ private class BehalfWhichSignatoryControllerTest {
 		behalfwhichsignatoryPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(behalfwhichsignatoryPage);
 		//Create the cookie
-    	Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
-
-    	behalfwhichsignatoryPage.setCookies(new Cookie[]{sessionValidity});
+    	SecurityManager.createSessionValidityCookie('test@test.com');
 		BehalfWhichSignatoryController test1controller = new BehalfWhichSignatoryController();
 		test1controller.initPage();
 		test1controller.updateDirectorList();
 		test1controller.selectedId = testoff.id;
+		test1controller.valueRadio = 'true';
+		test1controller.updateSelectedPresenter();
 		test1controller.nextAction();
 		test1controller.previousAction();
 		test1controller.behalfValidation = true;
 		test1controller.nextAction();
 		test1controller.persistStep();
 
-		test1controller.updateSelectedPresenter();
 
 		test1controller.selectedId = null;
 		test1controller.nextAction();

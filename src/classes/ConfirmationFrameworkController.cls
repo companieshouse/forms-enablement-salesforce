@@ -232,6 +232,12 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         return;
     }
     public PageReference redirectDS02() {
+        if(submissionMgr.submission.Form_Name__c.contains('LL'))
+        {
+            PageReference pg = new PageReference('/StartFramework?t=LLDS02');
+            pg.setRedirect(true);
+            return pg;
+        }
         PageReference pg = new PageReference('/StartFramework?t=DS02');
         pg.setRedirect(true);
         return pg;

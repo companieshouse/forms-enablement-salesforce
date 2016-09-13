@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt; Check email and junk folders for any notifications.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>

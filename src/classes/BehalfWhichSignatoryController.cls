@@ -31,6 +31,8 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
+    public String valueRadio {get; set;}
+
     public BehalfWhichSignatoryController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -43,6 +45,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
         showNoError = false;
+        valueRadio = '';
 
         return;
     }
@@ -122,10 +125,13 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     }
 
     public PageReference updateSelectedPresenter() {
-        if (selectedId != 'null') {
+        if (selectedId != null) {
             for (officerContainer off : listOfDirectors) {
                 if ( String.valueOf(off.officer.Id) == selectedId) {
-                    off.isSignatoryBehalf = true;
+                    if(valueRadio == 'true')
+                        off.isSignatoryBehalf = true;
+                    if(valueRadio == 'false')
+                        off.isSignatoryBehalf = false;
                 }
             }
         }

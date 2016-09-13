@@ -27,7 +27,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">The directors must inform all interested parties of the request to close within 7 days of it being submitted.</value>
+        <value xsi:type="xsd:string">The Director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
