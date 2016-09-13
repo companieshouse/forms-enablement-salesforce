@@ -157,10 +157,10 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         }
         System.debug('STATUS CODE REQUEST:' + res.getStatusCode() );
         
-        if (res.getStatusCode() != SUCCESS_CODE)
-            success = false;
-        else
+        if (res.getStatusCode() == SUCCESS_CODE || res.getStatusCode() == 404)
             success = true;
+        else
+            success = false;
         return res.getBody(); 
     
     }
