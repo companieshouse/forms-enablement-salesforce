@@ -64,7 +64,7 @@
                     <script type="text/javascript">
                     function changeValue(out) {
                         var radioClicked = document.getElementById(out.id);
-                        if (radioClicked.checked,'true') {
+                        if (radioClicked.checked == true) {
                             updateSelectedPresenter(radioClicked.name, 'true');
                         } else if (radioClicked.checked == false) {
                             updateSelectedPresenter(radioClicked.name,'false');

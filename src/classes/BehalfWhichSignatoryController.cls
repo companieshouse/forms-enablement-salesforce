@@ -41,7 +41,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
 
 
     public void initialiseStep() {
-        SecurityManager.createSessionValidityCookie('sylvain.picory@methodsdigital.co.uk');
+        //SecurityManager.createSessionValidityCookie('sylvain.picory@methodsdigital.co.uk');
         stepValidator = isPageAlreadyValidStep;
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
@@ -138,6 +138,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     }
 
     public PageReference updateSelectedPresenter() {
+        //throw new Form_CustomException('IDIDID' + selectedId + 'DWAWA' + valueRadio);
         if (selectedId != null) {
             for (officerContainer off : listOfDirectors) {
                 if ( String.valueOf(off.officer.Id) == selectedId) {
