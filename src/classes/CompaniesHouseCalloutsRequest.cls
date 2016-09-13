@@ -13,7 +13,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
     private string endpoint;
     private string authenticationToken;
     private string endpointCompanyNumber;
-    public boolean success;
+    public Boolean success {get; set;}
     private static final Integer SUCCESS_CODE = 200;
   
     //WSCalloutsRequest Constructor
@@ -155,6 +155,8 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         } catch (CalloutException e) {
                 return e.getMessage();
         }
+        System.debug('STATUS CODE REQUEST:' + res.getStatusCode() );
+        
         if (res.getStatusCode() != SUCCESS_CODE)
             success = false;
         else

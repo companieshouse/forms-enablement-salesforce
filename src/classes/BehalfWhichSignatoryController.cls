@@ -41,6 +41,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
 
 
     public void initialiseStep() {
+        SecurityManager.createSessionValidityCookie('sylvain.picory@methodsdigital.co.uk');
         stepValidator = isPageAlreadyValidStep;
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
@@ -53,7 +54,6 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     @testvisible private void persistStep() {
         if (listOfDirectors == null)
             return;
-
         for (Officer__c off : submissionMgr.submission.Officers__r) {
             for (officerContainer offCont : listOfDirectors) {
                 if (off.Id == offCont.officer.Id) {
@@ -68,9 +68,22 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     }
     // End Instance methods.
 
+    public Boolean validateOfficer()
+    {
+        Boolean hasOneSignedOnBehalf = false;
+
+        for(officerContainer off : listOfDirectors)
+        {
+            if(off.isSignatoryBehalf)
+                hasOneSignedOnBehalf = true;
+        }
+
+        return hasOneSignedOnBehalf;
+    }
+
     // Action methods.
     public PageReference nextAction() {
-        if (selectedId == 'null' || selectedId == null) {
+        if (!validateOfficer()) {
             hasPageErrors = true;
             currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
             errorVal = 'error';
@@ -129,9 +142,13 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             for (officerContainer off : listOfDirectors) {
                 if ( String.valueOf(off.officer.Id) == selectedId) {
                     if(valueRadio == 'true')
+                    {
                         off.isSignatoryBehalf = true;
+                    }
                     if(valueRadio == 'false')
+                    {
                         off.isSignatoryBehalf = false;
+                    }
                 }
             }
         }

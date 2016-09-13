@@ -144,6 +144,15 @@ public with sharing class CompanyController {
             }
             else{
                 compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+
+                System.debug('STATUS OF CompanyQueryAction:' + CompanyQueryAction.isSuccess );
+                if(!CompanyQueryAction.isSuccess)
+                {
+                    currentErrorMessage = 'Company data currently unavailable. Try again.';
+                    hasPageErrors = true;
+                    currentError = 'error';
+                    return false;
+                }
             }
         }catch(Exception e)
         {
