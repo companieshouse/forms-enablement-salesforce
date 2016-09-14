@@ -21,7 +21,7 @@ public with sharing class SendSFEmailToPresenterController {
 	public String htmlTemplate {get; set;}
 	public Account presenter {get; set;}
 	public Boolean errors {get; set;}
-	public Id transactionId {get; set;}
+	public String transactionId {get; set;}
 	public Transaction__c clickTransaction {get; set;}
 	public Boolean resultTab {get; set;}
 	public Boolean success {get; set;}

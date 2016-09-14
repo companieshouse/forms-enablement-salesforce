@@ -84,8 +84,10 @@ public class CompaniesHouseTestData {
 
         testStep3 = [Select Apex_Class_Name__c, Id, DeveloperName, Display_Text_1__c, Display_Text_2__c, Display_Text_3__c, Document_Template_Name__c, Header_Text_1__c, Is_Active__c, Label, MasterLabel, Language, NamespacePrefix, Persist_FieldSet_1_Name__c, QualifiedApiName, Query_FieldSet_1_Name__c, SObject_Type__c, Step_Number__c, Step_Type__c, Transaction_Type__c, Visualforce_Page_Name__c From Transaction_Type_Step__mdt Where DeveloperName = 'TestStep3'];
 
-        presenterAccount = new Account(Name = 'sylvain.picory@methodsdigitial.co.uk');
+        RecordType personAccountRecordType =  [SELECT Id FROM RecordType WHERE Name = 'Person Account' and SObjectType = 'Account'];
 
+        presenterAccount = new Account(LastName = 'sylvain.picory@methodsdigitial.co.uk',RecordType=personAccountRecordType, PersonEmail='sylvain.picory@methodsdigitial.co.uk');
+        
         companyAccount = new Account(Name = '05448736');
 
         contact1 = new Contact(LastName = 'Temp');
