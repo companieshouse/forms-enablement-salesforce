@@ -7,7 +7,7 @@
  * 
  * Author: eliot.stock@methods.co.uk
  */
-public class SmartPayUrl {
+public with sharing class SmartPayUrl {
     
     @TestVisible
     private static final String ENV_TEST = 'TEST';
@@ -187,7 +187,7 @@ public class SmartPayUrl {
 		
 	}
     
-    public class Builder {
+    public with sharing class Builder {
         
         private SmartPayUrl url;
         

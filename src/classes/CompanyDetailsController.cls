@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  S PIcory    2016-05-19  Initial development.
 */
-public class CompanyDetailsController extends TransactionStepControllerBase {
+public with sharing class CompanyDetailsController extends TransactionStepControllerBase {
 
 // Public properties.
 

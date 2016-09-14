@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  S PIcory    2016-09-08  Initial development.
 */
-public class CompanySearchedController {
+public with sharing class CompanySearchedController {
 
 // Public properties.
 

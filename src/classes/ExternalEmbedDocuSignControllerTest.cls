@@ -21,6 +21,7 @@ private class ExternalEmbedDocuSignControllerTest {
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
+		transac.Presenter__c = testPresenter.Id;
 		transac.finishedAttachments__c = true;
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
@@ -30,6 +31,9 @@ private class ExternalEmbedDocuSignControllerTest {
 		transac.isPresenterMultipleDirectors__c = true;
 		transac.OfficerCount__c = 1;
 		insert transac;
+
+		transac.Presenter__c = testPresenter.Id;
+		update transac;
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;
@@ -47,9 +51,8 @@ private class ExternalEmbedDocuSignControllerTest {
 		PageReference externalDocusign = Page.ExternalEmbedDocuSign;
 		externalDocusign.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(externalDocusign);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		SecurityManager.createSessionValidityCookie('test@test.com');
 
-    	externalDocusign.setCookies(new Cookie[]{sessionValidity});
 		ExternalEmbedDocuSignController test1controller = new ExternalEmbedDocuSignController();
 
 		test1controller.initSiging();
@@ -76,6 +79,7 @@ private class ExternalEmbedDocuSignControllerTest {
 		transac.Transaction_Type__c = 'TestForm';
 		transac.Form_Name__c = 'LLDS01';
 		transac.Company__c = testCompany.Id;
+		transac.Presenter__c = testPresenter.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
 		transac.finishedAttachments__c = true;
@@ -87,6 +91,9 @@ private class ExternalEmbedDocuSignControllerTest {
 		transac.isPresenterMultipleDirectors__c = true;
 		transac.OfficerCount__c = 1;
 		insert transac;
+
+		transac.Presenter__c = testPresenter.Id;
+		update transac;
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;
@@ -104,9 +111,8 @@ private class ExternalEmbedDocuSignControllerTest {
 		PageReference externalDocusign = Page.ExternalEmbedDocuSign;
 		externalDocusign.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(externalDocusign);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		SecurityManager.createSessionValidityCookie('test@test.com');
 
-    	externalDocusign.setCookies(new Cookie[]{sessionValidity});
 		ExternalEmbedDocuSignController test1controller = new ExternalEmbedDocuSignController();
 
 		test1controller.initSiging();
@@ -132,6 +138,7 @@ private class ExternalEmbedDocuSignControllerTest {
 		Transaction__c transac = testData.tx;
 		transac.Transaction_Type__c = 'LLDS01';
 		transac.Form_Name__c = 'LLDS01';
+		transac.Presenter__c = testPresenter.Id;
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
@@ -144,6 +151,9 @@ private class ExternalEmbedDocuSignControllerTest {
 		transac.isPresenterMultipleDirectors__c = true;
 		transac.OfficerCount__c = 1;
 		insert transac;
+
+		transac.Presenter__c = testPresenter.Id;
+		update transac;
 
 		testContact.Transaction__c = transac.id;
 		insert testContact;

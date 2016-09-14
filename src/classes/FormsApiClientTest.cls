@@ -14,7 +14,7 @@
  * Author: antonio.bravo@gollico.co.uk 
  **/
 @isTest
-public class FormsApiClientTest {
+public with sharing class FormsApiClientTest {
     //Create Data
     //Create Transaction
     static Transaction__c createTransaction() {

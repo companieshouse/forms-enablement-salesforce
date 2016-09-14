@@ -47,9 +47,8 @@ private class chooseDirectorTest {
 		PageReference chooseDirectorPage = Page.chooseDirector;
 		chooseDirectorPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(chooseDirectorPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+				SecurityManager.createSessionValidityCookie('test@test.com');
 
-    	chooseDirectorPage.setCookies(new Cookie[]{sessionValidity});
 		chooseDirector test1controller = new chooseDirector();
 
 		test1controller.checkDirectorStatus();
@@ -107,6 +106,8 @@ private class chooseDirectorTest {
 		PageReference chooseDirectorPage = Page.chooseDirector;
 		chooseDirectorPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(chooseDirectorPage);
+				SecurityManager.createSessionValidityCookie('test@test.com');
+
 		chooseDirector test1controller = new chooseDirector();
 
 		String c = EncodingUtil.urlEncode(SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), 'UTF-8');

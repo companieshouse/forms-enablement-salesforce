@@ -31,7 +31,7 @@ public with sharing class AccountsAPIHelper {
     }
     
 
-    public class AccountsApiException extends Exception {}	
+    public with sharing class AccountsApiException extends Exception {}	
 
     public String getRedirectUrl() {
         String hostname = ApexPages.currentPage().getHeaders().get('Host');
@@ -366,7 +366,7 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         return profile;
     }
     
-	public class UserProfile {
+	public with sharing class UserProfile {
         public String surname;
         public String forename;
         public String email;
@@ -375,7 +375,7 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         public String scope;
     } 
     
-    public class Token {
+    public with sharing class Token {
         public String access_token;
         // TODO: Consider using an Integer here if this comes across without quotes.
         public String expires_in;

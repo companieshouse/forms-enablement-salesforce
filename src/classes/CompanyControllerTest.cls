@@ -6,9 +6,8 @@ private class CompanyControllerTest {
 		companyTestPage.getParameters().put('t', 'DS01');
 
 		Test.setCurrentPage(companyTestPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+				SecurityManager.createSessionValidityCookie('test@test.com');
 
-    	companyTestPage.setCookies(new Cookie[]{sessionValidity});
 
 		CompanyController controller = new CompanyController();
 		controller.companyNumber = '';
@@ -34,9 +33,8 @@ private class CompanyControllerTest {
 		companyTestPage.getParameters().put('t', 'DS02');
 
 		Test.setCurrentPage(companyTestPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+				SecurityManager.createSessionValidityCookie('test@test.com');
 
-    	companyTestPage.setCookies(new Cookie[]{sessionValidity});
 
 		CompanyController controller = new CompanyController();
 		controller.companyNumber = '';

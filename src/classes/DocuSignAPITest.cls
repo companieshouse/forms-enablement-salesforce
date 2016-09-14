@@ -6,7 +6,7 @@
  * ab
  **/
 @isTest
-public class DocuSignAPITest{
+public with sharing class DocuSignAPITest{
 
 	@isTest(seeAllData=false)
 	static void DocuSignAPI_CodeCoverage (){

@@ -8,7 +8,7 @@
  * Author: eliot.stock@methodsdigitial.co.uk
  * Update: antonio.bravo@golligo.co.uk
  */
-public class CompaniesHouseTestData {
+public with sharing class CompaniesHouseTestData {
 
     private static CompaniesHouseTestData instance;
 
@@ -55,7 +55,7 @@ public class CompaniesHouseTestData {
                                 CompanyNumber__c = '0987654321',
                                 Form_Name__c = 'DS01',
                                 Version_Form__c = '1',
-                                ContactEmail__c = 'test@test.com');
+                                ContactEmail__c = 'test@test.com');//'test@test.com
 
         off = new Officer__c(Forename__c = 'Test',
                              Surname__c = 'Name',

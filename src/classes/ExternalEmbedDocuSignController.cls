@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-05  Initial development.
 */
-public class ExternalEmbedDocuSignController extends TransactionStepControllerBase {
+public with sharing class ExternalEmbedDocuSignController extends TransactionStepControllerBase {
 
     public String externalURL {get; set;}
     public String officerTerm {get; set;}

@@ -6,7 +6,7 @@
 		guidanceTestPage.getParameters().put('t', 'DS01');
 
 		Test.setCurrentPage(guidanceTestPage);
-
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		GuidanceController controller = new GuidanceController();
 		controller.customGuidanceView = false;
 		controller.standardGuidanceView = true;
@@ -26,6 +26,7 @@
 		PageReference guidance2TestPage = Page.Guidance;
 		guidance2TestPage.getParameters().put('t', 'TestForm');
 		Test.setCurrentPage(guidance2TestPage);
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		GuidanceController test2controller = new GuidanceController();
 		test2controller.customGuidanceView = true;
 		test2controller.standardGuidanceView = false;

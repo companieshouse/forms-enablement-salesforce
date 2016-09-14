@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-04  Initial development.
 */
-public class DocusignLibrary {
+public with sharing class DocusignLibrary {
 
     public static Integer customFieldPos {get; set;}
     public static Integer tabPos {get; set;}

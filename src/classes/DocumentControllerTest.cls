@@ -50,7 +50,7 @@ private class DocumentControllerTest {
 		PageReference documentsTestPage2 = Page.Documents;
 		documentsTestPage2.getParameters().put('state', 'testNonce2');
 		Test.setCurrentPage(documentsTestPage2);
-
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		DocumentController test2controller = new DocumentController();
 		Company_Authorisation__c testAuth = new Company_Authorisation__c();
 		testAuth.Company_Access_Token__c = 'test';
@@ -114,7 +114,7 @@ private class DocumentControllerTest {
 		PageReference documentsTestPage = Page.Documents;
 		documentsTestPage.getParameters().put('documentdownload', SecurityManager.encryptText('DS01' + AppConstants.ID_DELIM_CHAR + 'test@email.com' + AppConstants.ID_DELIM_CHAR + transac.id + AppConstants.ID_DELIM_CHAR + '05448736'));
 		Test.setCurrentPage(documentsTestPage);
-
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		DocumentController test2controller = new DocumentController();
 		Company_Authorisation__c testAuth = new Company_Authorisation__c();
 		testAuth.Company_Access_Token__c = 'test';

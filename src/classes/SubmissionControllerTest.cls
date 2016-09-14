@@ -63,7 +63,7 @@ private class SubmissionControllerTest {
 		PageReference submissionFrameworkPage = Page.Submission;
 		submissionFrameworkPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(submissionFrameworkPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         submissionFrameworkPage.setCookies(new Cookie[]{sessionValidity});
 		SubmissionController test1controller = new SubmissionController();
@@ -135,7 +135,7 @@ private class SubmissionControllerTest {
 		PageReference submissionFrameworkPage = Page.Submission;
 		submissionFrameworkPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(submissionFrameworkPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         submissionFrameworkPage.setCookies(new Cookie[]{sessionValidity});
 		SubmissionController test1controller = new SubmissionController();

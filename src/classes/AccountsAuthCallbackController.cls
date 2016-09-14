@@ -64,7 +64,7 @@ public with sharing class AccountsAuthCallbackController {
         set;
     }
 
-    public class AccountsAuthCallbackException extends Exception {}
+    public with sharing class AccountsAuthCallbackException extends Exception {}
 
     // Constructors.
     public AccountsAuthCallbackController() {

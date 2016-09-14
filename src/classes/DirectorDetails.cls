@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-06-16  Initial development.
 */
-public class DirectorDetails extends TransactionStepControllerBase {
+public with sharing class DirectorDetails extends TransactionStepControllerBase {
     public Boolean hasPageErrors {
         get;
         set;

@@ -90,7 +90,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -205,7 +205,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -317,7 +317,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -417,7 +417,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -517,7 +517,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com' +AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -616,7 +616,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -715,7 +715,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -814,7 +814,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -913,7 +913,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
@@ -1013,7 +1013,7 @@ public with sharing class ReviewControllerTest {
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();

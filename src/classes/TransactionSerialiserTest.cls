@@ -11,7 +11,7 @@ private class TransactionSerialiserTest {
 		transac.isPaymentAccount__c = true;
 		transac.Form_Name__c = 'DS01';
 		transac.AccountNumber__c = '94948';
-		transac.ContactEmail__c = 'sylvain.picory@methodsdigital.co.uk';
+		transac.ContactEmail__c = 'test@test.com';
 		insert transac;
 
 		transac.SubmissionId__c = 'FE' + transac.Id;
@@ -205,7 +205,7 @@ private class TransactionSerialiserTest {
 		transac.isPaymentRequired__c = true;
 		transac.isPaymentAccount__c = true;
 		transac.AccountNumber__c = '94948';
-		transac.ContactEmail__c = 'sylvain.picory@methodsdigital.co.uk';
+		transac.ContactEmail__c = 'test@test.com';
 		transac.Form_Name__c = 'DS02';
 		transac.Transaction_Type__c = 'DS02';
 		insert transac;

@@ -6,19 +6,19 @@ Ver. Author        Date        Detail
 1.5 Leo Bitoy 2016-07-07 (SH02, SH19, SH10, Sh08, Dynamic Elements)
 */
 
-public class TransactionSerialiser {
+public with sharing class TransactionSerialiser {
 	public final static String MIMETYPESTRING = 'application/pdf';
 	public final static String CATEGORYSTRING = 'FORM IMAGE PDF';
-	public class attachmentsWraper {
+	public with sharing class attachmentsWraper {
 		public attachments[] attachments;
 	}
-	public class metadataWraper {
+	public with sharing class metadataWraper {
 		public metadata metadata;
 	}
-	public class formdataWraper {
+	public with sharing class formdataWraper {
 		public formdata formdata;
 	}
-	public class metadata {
+	public with sharing class metadata {
 		public String type {
 			get;
 			set;
@@ -43,7 +43,7 @@ public class TransactionSerialiser {
 			this.submissionReference = submissionReference;
 		}
 	}
-	public class payment {
+	public with sharing class payment {
 		public String paymentMethod {
 			get;
 			set;
@@ -65,7 +65,7 @@ public class TransactionSerialiser {
 
 		}
 	}
-	//public class shareAssignments {
+	//public with sharing class shareAssignments {
 	//	public List < shareAssignment > shareAssignments {
 	//		get;
 	//		set;
@@ -75,7 +75,7 @@ public class TransactionSerialiser {
 	//		this.shareAssignments = assignedShares;
 	//	}
 	//}
-	//public class shareAssignment {
+	//public with sharing class shareAssignment {
 	//	public String existingClass {
 	//		get;
 	//		set;
@@ -91,7 +91,7 @@ public class TransactionSerialiser {
 	//	}
 	//}
 
-	public class presenterDetails {
+	public with sharing class presenterDetails {
 		public String presenterEmailIn {get; set;}
 		public String presenterEmailOut {get; set;}
 
@@ -102,7 +102,7 @@ public class TransactionSerialiser {
 			this.presenterEmailOut = presenterEmailOut;
 		}
 	}
-	public class filingDetails { // changes
+	public with sharing class filingDetails { // changes
 		public payment payment {get; set;}
 		public String barcode {get; set;}
 		public String receiptDate {get; set;}
@@ -130,7 +130,7 @@ public class TransactionSerialiser {
 		//	this.presenterDocumentReference = presenterDocumentReference;
 		//}
 	}
-	public class officer {
+	public with sharing class officer {
 		public personName personName {
 			get;
 			set;
@@ -146,7 +146,7 @@ public class TransactionSerialiser {
 		}
 	}
 	// statement of capital starts here
-	//public class statementOfCapital {
+	//public with sharing class statementOfCapital {
 	//	public shareValues shareValues {
 	//		get;
 	//		set;
@@ -172,7 +172,7 @@ public class TransactionSerialiser {
 	//		this.grandTotals = totals;
 	//	}
 	//}
-	//public class shareValues {
+	//public with sharing class shareValues {
 	//	public List < shareValue > shareValue {
 	//		get;
 	//		set;
@@ -181,7 +181,7 @@ public class TransactionSerialiser {
 	//		this.shareValue = shareValue;
 	//	}
 	//}
-	//public class shareClasses {
+	//public with sharing class shareClasses {
 	//	public List < shareClass > shareClass {
 	//		get;
 	//		set;
@@ -190,7 +190,7 @@ public class TransactionSerialiser {
 	//		this.shareClass = shareClass;
 	//	}
 	//}
-	//public class shareValue {
+	//public with sharing class shareValue {
 	//	public String currencyCode {
 	//		get;
 	//		set;
@@ -214,7 +214,7 @@ public class TransactionSerialiser {
 	//		this.totalNumberOfShares = totalNumberOfShares;
 	//	}
 	//}
-	//public class shareClass {
+	//public with sharing class shareClass {
 	//	public String currencyCode {
 	//		get;
 	//		set;
@@ -244,7 +244,7 @@ public class TransactionSerialiser {
 	//		this.sNumber = sNumber;
 	//	}
 	//}
-	//public class grandTotals {
+	//public with sharing class grandTotals {
 	//	//public List < shareValueGrandTotals > shareValueGrandTotals {
 	//	//	get;
 	//	//	set;
@@ -268,7 +268,7 @@ public class TransactionSerialiser {
 	//		this.shareValueGrandTotals = svaluegtotal;
 	//	}
 	//}
-	//public class shareValueGrandTotals {
+	//public with sharing class shareValueGrandTotals {
 	//	public List < shareValueGrandTotal > shareValueGrandTotal {
 	//		get;
 	//		set;
@@ -278,7 +278,7 @@ public class TransactionSerialiser {
 	//		this.shareValueGrandTotal = svaluegtotal;
 	//	}
 	//}
-	//public class shareValueGrandTotal {
+	//public with sharing class shareValueGrandTotal {
 	//	public String currencyCode {
 	//		get;
 	//		set;
@@ -298,7 +298,7 @@ public class TransactionSerialiser {
 	//		this.value = val;
 	//	}
 	//}
-	//public class shareNumberGrandTotal {
+	//public with sharing class shareNumberGrandTotal {
 	//	public Decimal shareNumberGrandTotal {
 	//		get;
 	//		set;
@@ -308,7 +308,7 @@ public class TransactionSerialiser {
 	//		this.shareNumberGrandTotal = sNGT;
 	//	}
 	//}
-	//public class latestSOCInd {
+	//public with sharing class latestSOCInd {
 	//	public String latestSOCInd {
 	//		get;
 	//		set;
@@ -318,7 +318,7 @@ public class TransactionSerialiser {
 	//	}
 	//}
 	// Statement of capital ends here
-	public class officerCollection {
+	public with sharing class officerCollection {
 		public List < officer > officer {
 			get;
 			set;
@@ -328,7 +328,7 @@ public class TransactionSerialiser {
 			this.officer = officer;
 		}
 	}
-	public class personName {
+	public with sharing class personName {
 		String titleOther {
 			get;
 			set;
@@ -353,7 +353,7 @@ public class TransactionSerialiser {
 			this.surname = surname;
 		}
 	}
-	public class corporateBody {
+	public with sharing class corporateBody {
 		public String incorporationNumber {
 			get;
 			set;
@@ -416,7 +416,7 @@ public class TransactionSerialiser {
 
 		//}
 	}
-	public class formdata {
+	public with sharing class formdata {
 		public filingDetails filingDetails {
 			get;
 			set;
@@ -431,7 +431,7 @@ public class TransactionSerialiser {
 			this.corporateBody = corporateBody;
 		}
 	}
-	public class attachments { // PDF
+	public with sharing class attachments { // PDF
 		public String mimetype {
 			get;
 			set;
@@ -456,7 +456,7 @@ public class TransactionSerialiser {
 			//this.description = description;
 		}
 	}
-	//public class detailsOfVariationOfRights {
+	//public with sharing class detailsOfVariationOfRights {
 	//	public String detailsOfVariationOfRights {get; set;}
 	//	public detailsOfVariationOfRights () {}
 	//	public detailsOfVariationOfRights(String detailsOfVariationOfRights) {
@@ -464,7 +464,7 @@ public class TransactionSerialiser {
 	//		this.detailsOfVariationOfRights = detailsOfVariationOfRights;
 	//	}
 	//}
-	//public class shares {
+	//public with sharing class shares {
 	//	public Boolean consolidation {get; set;
 	//	                             }
 	//	public Boolean subDivision {get; set;
@@ -482,7 +482,7 @@ public class TransactionSerialiser {
 	//	}
 
 	//}
-	//public class consolidatedClasses {
+	//public with sharing class consolidatedClasses {
 	//	public List<consolidatedClass> consolidatedClass {get; set;}
 	//	public consolidatedClasses() {}
 	//	public consolidatedClasses(List <consolidatedClass> consolidatedClass) {
@@ -490,14 +490,14 @@ public class TransactionSerialiser {
 	//	}
 
 	//}
-	//public class subdividedClasses {
+	//public with sharing class subdividedClasses {
 	//	public List<subdividedClass> subdividedClass {get; set;}
 	//	public subdividedClasses() {}
 	//	public subdividedClasses(List<subdividedClass> subdividedClass) {
 	//		this.subdividedClass = subdividedClass;
 	//	}
 	//}
-	//public class redeemedClasses {
+	//public with sharing class redeemedClasses {
 	//	public List<redeemedClass> redeemedClass {get; set;}
 	//	public redeemedClasses() {}
 	//	public redeemedClasses(List<redeemedClass> redeemedClass) {
@@ -505,7 +505,7 @@ public class TransactionSerialiser {
 	//	}
 
 	//}
-	//public class reconvertedClasses {
+	//public with sharing class reconvertedClasses {
 	//	public List<reconvertedClass> reconvertedClass {get; set;}
 	//	public reconvertedClasses() {}
 	//	public reconvertedClasses(List<reconvertedClass> reconvertedClass) {
@@ -516,7 +516,7 @@ public class TransactionSerialiser {
 
 
 
-	//public class consolidatedClass {
+	//public with sharing class consolidatedClass {
 	//	public String classValue {get; set;}
 	//	public previousStructure previousStructure {get; set;}
 	//	public newStructure newStructure {get; set;}
@@ -528,7 +528,7 @@ public class TransactionSerialiser {
 	//	}
 
 	//}
-	//public class previousStructure {
+	//public with sharing class previousStructure {
 	//	public Decimal snumber {get; set;}
 	//	public Decimal value {get; set;}
 	//	public previousStructure() {}
@@ -541,7 +541,7 @@ public class TransactionSerialiser {
 
 
 
-	//public class newStructure {
+	//public with sharing class newStructure {
 	//	public Decimal snumber {get; set;}
 	//	public Decimal value {get; set;}
 	//	public  newStructure () {}
@@ -551,7 +551,7 @@ public class TransactionSerialiser {
 	//		this.value = value;
 	//	}
 	//}
-	//public class subdividedClass {
+	//public with sharing class subdividedClass {
 	//	public String classValue {get; set;}
 	//	public previousStructure previousStructure {get; set;}
 	//	public newStructure newStructure {get; set;}
@@ -562,7 +562,7 @@ public class TransactionSerialiser {
 	//		this.newStructure = newStructure;
 	//	}
 	//}
-	//public class redeemedClass {
+	//public with sharing class redeemedClass {
 	//	public String classValue {get; set;}
 
 	//	public Decimal snumber {get; set;}
@@ -575,7 +575,7 @@ public class TransactionSerialiser {
 
 	//}
 
-	//public class reconvertedClass {
+	//public with sharing class reconvertedClass {
 	//	public String classValue {get; set;}
 	//	public Decimal stockValue {get; set;}
 	//	public Decimal snumber {get; set;}

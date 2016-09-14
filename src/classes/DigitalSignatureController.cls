@@ -13,7 +13,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-04  Initial development.
 */
-public class DigitalSignatureController extends TransactionStepControllerBase {
+public with sharing class DigitalSignatureController extends TransactionStepControllerBase {
 
     public Boolean pendingPage {get; set;}
     public String compName {get; set;}

@@ -1,5 +1,5 @@
 @IsTest
-public class UpdateCompanyDirectorsControllerTest {
+public with sharing class UpdateCompanyDirectorsControllerTest {
 	
 
 	@IsTest
@@ -30,7 +30,7 @@ public class UpdateCompanyDirectorsControllerTest {
         PageReference pg = Page.UpdateCompanyDirectors;
         pg.getParameters().put('c', SecurityManager.encryptText(transac.Id+AppConstants.ID_DELIM_CHAR+testStep1.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(pg);
-        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
         pg.setCookies(new Cookie[]{sessionValidity});
 

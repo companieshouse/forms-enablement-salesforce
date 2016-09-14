@@ -47,9 +47,8 @@ private class BehalfDecisionControllerTest {
 		PageReference behalfDecisionPage = Page.BehalfDecision;
 		behalfDecisionPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(behalfDecisionPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+				SecurityManager.createSessionValidityCookie('test@test.com');
 
-    	behalfDecisionPage.setCookies(new Cookie[]{sessionValidity});
 		BehalfDecisionController test1controller = new BehalfDecisionController();
 		test1controller.updateDirectorList();
 		test1controller.nextAction();

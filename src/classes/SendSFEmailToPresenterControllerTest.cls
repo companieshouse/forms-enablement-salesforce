@@ -49,7 +49,7 @@ private class SendSFEmailToPresenterControllerTest {
 		digitalSignature.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		digitalSignature.getParameters().put('id', String.valueOf(transac.Id));
 		Test.setCurrentPage(digitalSignature);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
     	digitalSignature.setCookies(new Cookie[]{sessionValidity});
 		SendSFEmailToPresenterController test1controller = new SendSFEmailToPresenterController();
@@ -93,7 +93,7 @@ private class SendSFEmailToPresenterControllerTest {
 
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
 		testContact.LastName = 'TEST';
-		testContact.Email = 'sylvain.picory@methodsdigital.co.uk';
+		testContact.Email = 'test@test.com';
 		testContact.Transaction__c = transac.Id;
 		insert testPresenter;
 
@@ -117,7 +117,7 @@ private class SendSFEmailToPresenterControllerTest {
 		digitalSignature.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		digitalSignature.getParameters().put('id', String.valueOf(transac.Id));
 		Test.setCurrentPage(digitalSignature);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
     	digitalSignature.setCookies(new Cookie[]{sessionValidity});
 		SendSFEmailToPresenterController test1controller = new SendSFEmailToPresenterController();
@@ -173,7 +173,7 @@ private class SendSFEmailToPresenterControllerTest {
 		PageReference digitalSignature = Page.SendSFEmailToPresenter;
 		digitalSignature.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(digitalSignature);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
     	digitalSignature.setCookies(new Cookie[]{sessionValidity});
 		SendSFEmailToPresenterController test1controller = new SendSFEmailToPresenterController();

@@ -76,7 +76,7 @@ public with sharing class DocumentController {
 
     SecurityManager securityMgr;
 
-    public class DocumentControllerCallbackException extends Exception
+    public with sharing class DocumentControllerCallbackException extends Exception
     {}
 
     public DocumentController() {

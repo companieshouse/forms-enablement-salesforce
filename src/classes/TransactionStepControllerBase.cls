@@ -21,7 +21,7 @@ Ver. Author        Date        Detail
 */
 public virtual class TransactionStepControllerBase {
 
-    // Public class members.
+    // public with sharing class members.
     public Boolean isPageAuthenticated = false;
     public Boolean isPageInitialised = false;
     public Boolean isPageAlreadyValidStep = false;
@@ -38,7 +38,6 @@ public virtual class TransactionStepControllerBase {
         
     // Constructors.
     public TransactionStepControllerBase() {
-
         initialise();
     }
     // End Constructors.

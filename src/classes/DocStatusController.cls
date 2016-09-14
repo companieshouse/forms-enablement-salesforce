@@ -150,7 +150,7 @@ public with sharing class DocStatusController {
 
     SecurityManager securityMgr;
 
-    public class DocStatusControllerCallbackException extends Exception
+    public with sharing class DocStatusControllerCallbackException extends Exception
     {}
 
     public DocStatusController() {

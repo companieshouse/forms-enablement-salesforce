@@ -3,7 +3,7 @@
  * 
  * Author: eliot.stock@methods.co.uk
  */
-public class FormsApiMock implements HttpCalloutMock {
+public with sharing class FormsApiMock implements HttpCalloutMock {
 
 	public HTTPResponse respond(HTTPRequest request) {
 		HttpResponse response = new HttpResponse();

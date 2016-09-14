@@ -65,7 +65,7 @@ public with sharing class DirectorDetailsTest {
 		PageReference officerDetailsTestPage = Page.OfficerDetails;
 		officerDetailsTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
 		Test.setCurrentPage(officerDetailsTestPage);
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 
     	officerDetailsTestPage.setCookies(new Cookie[]{sessionValidity});
 		DirectorDetails test1controller = new DirectorDetails();

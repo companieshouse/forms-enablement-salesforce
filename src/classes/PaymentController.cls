@@ -4,7 +4,7 @@
  * Version adapted to Framework
  * Author: eliot.stock@methods.co.uk
  */
-public class PaymentController extends TransactionStepControllerBase {
+public with sharing class PaymentController extends TransactionStepControllerBase {
     //Payment properties
     private static final String QUERY_STRING_PARAM_MERCHANT_REFERENCE = 'merchantReference';
     private static final String QUERY_STRING_PARAM_MERCHANT_SIG = 'merchantSig';

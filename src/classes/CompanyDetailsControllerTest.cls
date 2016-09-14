@@ -38,7 +38,7 @@ public with sharing class CompanyDetailsControllerTest {
 
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
 		testContact.LastName = 'TEST';
-		testContact.Email = 'sylvain.picory@methodsdigital.co.uk';
+		testContact.Email = 'test@test.com';
 		testContact.Transaction__c = transac.Id;
 		insert testPresenter;
 
@@ -63,7 +63,8 @@ public with sharing class CompanyDetailsControllerTest {
 		digitalSignature.getParameters().put('id', String.valueOf(transac.Id));
 		Test.setCurrentPage(digitalSignature);
 		Test.setMock(HttpCalloutMock.class, new ChApiMock());
-		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('true' + String.valueOf(DateTime.now().getTime())), '', 120, true);
+		SecurityManager.createSessionValidityCookie('test@test.com');
+		Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+ AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
 		Cookie compS = new Cookie('searched_company', SecurityManager.encryptText('TEST'), '', 120, true);
 
     	digitalSignature.setCookies(new Cookie[]{sessionValidity, compS});

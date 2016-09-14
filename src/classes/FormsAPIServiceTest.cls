@@ -27,7 +27,7 @@ Ver. Author         Date        Detail
 */
 
 @isTest
-public class FormsAPIServiceTest {
+public with sharing class FormsAPIServiceTest {
 
     //private static String CHIPS_APPROVED = AppConstants.CHIPS_APPROVED;
     //private static String CHIPS_REJECTED = AppConstants.CHIPS_REJECTED;

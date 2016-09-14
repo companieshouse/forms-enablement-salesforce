@@ -16,7 +16,7 @@ private class AccountsAuthCallbackControllerTest {
 		testP.getParameters().put(QUERY_STRING_PARAM_AUTH_CODE, 'dwawdwadw');
 
 		Test.setCurrentPage(testP);
-
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		AccountsAuthCallbackController at = new AccountsAuthCallbackController();
 
 		at.nonce = 'dwawdwa';

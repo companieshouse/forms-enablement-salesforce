@@ -11,7 +11,7 @@
  * Author: antonio.bravo@gollico.co.uk 
  **/
 @isTest
-public class FormAPISubmissionManagerTest {
+public with sharing class FormAPISubmissionManagerTest {
     //Create Data
     //Create Transaction
     static Transaction__c createTransaction() {

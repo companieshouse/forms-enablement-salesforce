@@ -10,7 +10,7 @@
  * lb - updated rejected status test
  **/
 @isTest
-public class DocuSignStatusTriggerHandlerTest {
+public with sharing class DocuSignStatusTriggerHandlerTest {
 
 
 	static Transaction__c createTransaction(){

@@ -2,7 +2,7 @@
  * Author: eliot.stock@methods.digital.co.uk.
  */
 @isTest
-public class SmartPayUrlTest {
+public with sharing class SmartPayUrlTest {
     
     @isTest
     public static void testGetSettings(){

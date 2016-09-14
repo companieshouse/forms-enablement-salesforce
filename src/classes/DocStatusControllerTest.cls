@@ -50,7 +50,7 @@ private class DocStatusControllerTest {
 		PageReference documentStatusPage2 = Page.Status;
 		documentStatusPage2.getParameters().put('state', 'testNonce2');
 		Test.setCurrentPage(documentStatusPage2);
-
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		DocStatusController test2controller = new DocStatusController();
 		Company_Authorisation__c testAuth = new Company_Authorisation__c();
 		testAuth.Company_Access_Token__c = 'test';
@@ -114,7 +114,7 @@ private class DocStatusControllerTest {
 		PageReference documentStatusPage = Page.Status;
 		documentStatusPage.getParameters().put('documentsigningstatus', SecurityManager.encryptText('DS01' + AppConstants.ID_DELIM_CHAR + 'test@email.com' + AppConstants.ID_DELIM_CHAR + transac.id + AppConstants.ID_DELIM_CHAR + '05448736'));
 		Test.setCurrentPage(documentStatusPage);
-
+		SecurityManager.createSessionValidityCookie('test@test.com');
 		DocStatusController test2controller = new DocStatusController();
 		Company_Authorisation__c testAuth = new Company_Authorisation__c();
 		testAuth.Company_Access_Token__c = 'test';
