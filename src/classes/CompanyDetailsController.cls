@@ -136,6 +136,7 @@ public class CompanyDetailsController extends TransactionStepControllerBase {
         return;
     }
 
+    @TestVisible
     private void persistStep() {
 
         submissionMgr.submission.CompanyName__c = companyName;

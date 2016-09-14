@@ -1,6 +1,6 @@
 @isTest
-public with sharing class CompanyDetailsControllerTest {
-
+private class CompanySearchedControllerTest {
+	
 	@isTest static void test_method_one() {
 		// Implement test code
 		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
@@ -25,7 +25,6 @@ public with sharing class CompanyDetailsControllerTest {
 		transac.CompanyNumber__c = '05448736';
 		transac.Presenter__c = testPresenter.Id;
 		transac.PresenterName__c = 'TEST';
-		transac.Form_Name__c = 'DS01';
 		transac.finishedAttachments__c = true;
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
@@ -58,8 +57,8 @@ public with sharing class CompanyDetailsControllerTest {
 		testoff.isSignatory__c = true;
 		insert testoff;
 
-		PageReference digitalSignature = Page.CompanyDetails;
-		digitalSignature.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		PageReference digitalSignature = Page.CompanySearched;
+		digitalSignature.getParameters().put('t', 'TestForm');
 		digitalSignature.getParameters().put('id', String.valueOf(transac.Id));
 		Test.setCurrentPage(digitalSignature);
 		Test.setMock(HttpCalloutMock.class, new ChApiMock());
@@ -67,11 +66,10 @@ public with sharing class CompanyDetailsControllerTest {
 		Cookie compS = new Cookie('searched_company', SecurityManager.encryptText('TEST'), '', 120, true);
 
     	digitalSignature.setCookies(new Cookie[]{sessionValidity, compS});
-		CompanyDetailsController test1controller = new CompanyDetailsController();
+		CompanySearchedController test1controller = new CompanySearchedController();
 		test1controller.initialiseAction();
-		test1controller.persistStep();
 		test1controller.nextAction();
 		test1controller.previousAction();
 	}
-
+	
 }

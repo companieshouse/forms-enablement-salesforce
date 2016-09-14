@@ -219,7 +219,7 @@ public with sharing class CompanyController {
             {
                 if(!companyTypeText.equals('LLP'))
                 {
-                    currentErrorMessage = 'This company is not a limited liability partnership.';
+                    currentErrorMessage = 'You cannot close this company type using this service.';
                     hasPageErrors = true;
                     currentError = 'error';
 
@@ -230,7 +230,7 @@ public with sharing class CompanyController {
             {
                 if(companyTypeText.equals('LLP'))
                 {
-                    currentErrorMessage = 'This company is not a limited company.';
+                    currentErrorMessage = 'You cannot close this company type using this service.';
                     hasPageErrors = true;
                     currentError = 'error';
 
