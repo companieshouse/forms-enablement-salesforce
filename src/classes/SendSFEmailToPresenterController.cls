@@ -123,7 +123,8 @@ public with sharing class SendSFEmailToPresenterController {
 				return null;
 			}
 			else{
-				ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,'Error: There has been an error while generating the preview. You are trying to send an email that has not yet been issued by the system.');
+				//ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,'Error: There has been an error while generating the preview. You are trying to send an email that has not yet been issued by the system.');
+	            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,'Error: There has been one or more error(s) while generating the preview. Before sending the email make sure that the errors do not impact the format (EG: TODAY()... OK, Field Missing NOK)'  + bodyRes.getErrors());
 	            ApexPages.addMessage(myMsg);
 	            errorsPreview = true;
 	            return null;

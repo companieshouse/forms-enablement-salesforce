@@ -7,7 +7,7 @@
 		</apex:pageBlock>
 		<apex:pageBlock rendered="{!!errors && !resultTab}" title="Send email to the presenter">
 			<apex:pageBlockButtons >
-				<apex:commandButton value="Send email" rendered="{!!errorsPreview}" status="status" action="{!sendEmail}" reRender="theSendEmailForm"/>
+				<apex:commandButton value="Send email" status="status" action="{!sendEmail}" reRender="theSendEmailForm"/>
 				<apex:commandButton value="Close Window" status="status" onclick="window.close(); return true;" reRender="theSendEmailForm"/>
 			</apex:pageBlockButtons>
 			<apex:pageBlockSection title="Presenter Details">
