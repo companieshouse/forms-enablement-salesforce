@@ -150,6 +150,31 @@ public with sharing class SmartPayUrl {
         return url;
     }
     
+    public Boolean checkSigningString(String authResult, String pspReference, String merchantReference,String skinCode, String merchantSig)
+    {
+        //'authResult' => 'AUTHORISED', 'pspReference' => '1211992213193029',
+        //'merchantReference' => 'Internet Order 12345', 'skinCode' => @skin_code1,
+        SmartPay_Settings__c settings = getSettings();
+
+        System.debug('Parameters : ' + authResult + ' , ' + pspReference + ' , ' + merchantReference + ' , ' + skinCode + ' , ' + merchantSig);
+
+        String signingString = pspReference == null ? 'authResult:merchantReference:skinCode:merchantReturnData:' : 'authResult:pspReference:merchantReference:skinCode:merchantReturnData:';
+        signingString += pspReference == null ? authResult + ':' + merchantReference + ':' + skinCode + ':'+ merchantReference:  authResult + ':' + pspReference + ':' + merchantReference + ':' + skinCode + ':'+ merchantReference;
+
+        String hmacKey = settings.HMAC_key__c;
+
+        Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString),EncodingUtil.convertFromHex(hmacKey));
+
+        String sigEncoded = EncodingUtil.base64Encode(sig);
+
+        System.debug('Encoded answer: ' + sigEncoded);
+
+        if(merchantSig == sigEncoded)
+            return true;
+
+        return false;
+    }
+
     /**
      * Generate the URL to which SmartPay will pass the user back after they've paid. Should be
      * on the same hostname as we are now. No need to URL encode it.

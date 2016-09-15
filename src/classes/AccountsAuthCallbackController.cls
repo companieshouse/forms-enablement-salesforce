@@ -127,7 +127,7 @@ public with sharing class AccountsAuthCallbackController {
             PrivateBeta_Accesslist.put('brenda.bardwell@morrisowen.com', 'Brenda Bardwell');
             PrivateBeta_Accesslist.put('fiona.sweeting@osborneclarke.com', 'Fiona Sweeting');
             PrivateBeta_Accesslist.put('karen.vickery@osborneclarke.com', 'Karen Vickery');
-            PrivateBeta_Accesslist.put('ton.shaw@radius.com', 'Tom Shaw');
+            PrivateBeta_Accesslist.put('tom.shaw@radius.com', 'Tom Shaw');
             PrivateBeta_Accesslist.put('ann.williams@carillionplc.com', 'Ann Williams');
             PrivateBeta_Accesslist.put('pevans@liffordhall.co.uk', 'Paul Evans');
             PrivateBeta_Accesslist.put('marks@luckmans.com', 'Mark Spafford');
@@ -141,22 +141,17 @@ public with sharing class AccountsAuthCallbackController {
             PrivateBeta_Accesslist.put('rachel.collins@mills-reeve.com', 'Rachel Collins');
             PrivateBeta_Accesslist.put('julie.marquiss@externalservices.com', 'Julie Marquiss');
             PrivateBeta_Accesslist.put('sylvain.picory@methodsdigital.co.uk', 'Sylvain Picory');
-            PrivateBeta_Accesslist.put('lbitoy@gmail.com', 'Leo Bitoy');
             PrivateBeta_Accesslist.put('jake@fluffylogic.com', 'jake');
             PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
-            PrivateBeta_Accesslist.put('@methodsdigital.co.uk','Methds');
-            PrivateBeta_Accesslist.put('@methods.co.uk','Methods');
-            PrivateBeta_Accesslist.put('01testdocu@gmail.com','STEST');
+            PrivateBeta_Accesslist.put('mistercalvin@gmail.com','calvin1');
+            PrivateBeta_Accesslist.put('calvin.chong@consultspark.co.uk','calvin2');
             PrivateBeta_Accesslist.put('ceri.counter@companyregistrations.co.uk','CHPRESENTERTESTER'); 
             Boolean AccessGranted = PrivateBeta_Accesslist.containsKey(userProfileName);
             Boolean chUser = PrivateBeta_Accesslist.containsKey('@'+userProfileName.subStringAfter('@'));
             If (AccessGranted == false && chUser == false) {
                 return CallPageRedirect();
             }
-
-
             
-
             System.debug(LoggingLevel.ERROR,'Cookies Saving:' + userProfileName);
             u.getCurrentUser(userProfileName); ///=> useless code as there is no usage of the return... setting the cookies...
             // throw new AccountsAuthCallbackException('presenter info' + userProfileName);

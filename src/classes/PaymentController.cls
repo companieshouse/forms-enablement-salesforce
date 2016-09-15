@@ -10,6 +10,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     private static final String QUERY_STRING_PARAM_MERCHANT_SIG = 'merchantSig';
     private static final String QUERY_STRING_PARAM_AUTH_RESULT = 'authResult';
     private static final String QUERY_STRING_PARAM_PSP_REFERENCE = 'pspReference';
+    private static final String QUERY_STRING_PARAM_SKIN_CODE = 'skinCode';
     // AUTHORISED: Authorisation was successfully completed.
     private static final String AUTH_RESULT_AUTHORISED = 'AUTHORISED';
     // REFUSED: Authorisation was unsuccessful, Declined by issuer.
@@ -435,7 +436,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         merchantReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_REFERENCE);
         merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);
         authResult = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_RESULT);
-
+        String pspRef = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PSP_REFERENCE);
+        String skinC = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_SKIN_CODE);
         if(submissionMgr.submission.isPaymentAccount__c)
         {
             //Make the API Call
@@ -471,6 +473,17 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         }
         if (merchantReference != null && merchantReference.length() > 0) {
             // Valid params for the result URL back to us after payment. Now check authResult.
+            SmartPayUrl smp = new SmartPayUrl();
+
+            if(!smp.checkSigningString(authResult, pspRef, merchantReference, skinC, merchantSig))
+            {
+                hasPaymentSuccess = false;
+                hasPaid = false;
+                hasPaymentRejected = false;
+                hasPaymentPending = false;
+                previousClicked = false;
+                hasPaymentError = false;
+            }
             if (authResult == AUTH_RESULT_AUTHORISED) {
                 //change the status of the payment page
                 paymentReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PSP_REFERENCE);
