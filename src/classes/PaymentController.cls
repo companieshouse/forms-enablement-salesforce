@@ -11,6 +11,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     private static final String QUERY_STRING_PARAM_AUTH_RESULT = 'authResult';
     private static final String QUERY_STRING_PARAM_PSP_REFERENCE = 'pspReference';
     private static final String QUERY_STRING_PARAM_SKIN_CODE = 'skinCode';
+    private static final String QUERY_STRING_PARAM_PAYMENT_METHOD = 'paymentMethod';
+    private static final String QUERY_STRING_PARAM_SHOPPER_LOCAL = 'shopperLocale';
     // AUTHORISED: Authorisation was successfully completed.
     private static final String AUTH_RESULT_AUTHORISED = 'AUTHORISED';
     // REFUSED: Authorisation was unsuccessful, Declined by issuer.
@@ -25,6 +27,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     // ERROR: An error occurred during the payment process.
     private static final String AUTH_RESULT_ERROR = 'ERROR';
     private String merchantReference;
+    public Boolean hasBeenRedirected {get; set;}
     private String merchantSig;
     private String authResult;
     // Public properties.
@@ -144,6 +147,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     public String accountFailureMsg {get; set;}
 
     public String accounterrorVal {get; set;}
+    public Boolean hasBeenHacked {get; set;}
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -156,8 +160,10 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     }
     public void initialiseStep() {
         hasPaid = false;
+        hasBeenRedirected = false;
         hasPaymentSuccess = false;
         hasPaymentRejected = false;
+        hasBeenHacked = false;
         hasPaymentError = false;
         hasPaymentPending = false;
         previousClicked = false;
@@ -186,6 +192,10 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     
 
     public PageReference checkPaymentResult() {
+        parseQueryString();
+        if(hasBeenRedirected)
+            SecurityManager.createSessionValidityCookie(submissionMgr.submission.ContactEmail__c);
+            
         PageReference res = initialiseAction();
 
         if(res != null)
@@ -201,7 +211,13 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             hasPaid = true;
             return null;
         }
-        parseQueryString();
+
+        if(hasBeenHacked)
+        {
+            PageReference pg = new PageReference('/InMaintenance');
+            pg.setRedirect(true);
+            return pg;
+        }
 
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -244,13 +260,19 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             submissionMgr.submission.isPaymentAccount__c = true;
             submissionMgr.submission.AccountNumber__c = accountNumber;
             paymentReference = accountNumber;
+            submissionMgr.submission.isPaymentPaypal__c = false;
+            submissionMgr.submission.isPaymentCard__c = false;
             submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
         }
         if (isPaypalSelected) {
             submissionMgr.submission.isPaymentPaypal__c = true;
+            submissionMgr.submission.isPaymentAccount__c = false;
+            submissionMgr.submission.isPaymentCard__c = false;
         }
         if (isCardSelected) {
             submissionMgr.submission.isPaymentCard__c = true;
+            submissionMgr.submission.isPaymentPaypal__c = false;
+            submissionMgr.submission.isPaymentAccount__c = false;
         }
         if (transactionMgr.td.isSameDayPayment__c == true)
             if(isSameDaySelected) {
@@ -433,11 +455,27 @@ public with sharing class PaymentController extends TransactionStepControllerBas
      * they ever needed to query a transation with Barclays.
      */
     public void parseQueryString() {
+        //QUERY_STRING_PARAM_PAYMENT_METHOD
         merchantReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_REFERENCE);
         merchantSig = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_MERCHANT_SIG);
         authResult = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_AUTH_RESULT);
-        String pspRef = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PSP_REFERENCE);
-        String skinC = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_SKIN_CODE);
+
+        String pspRef = '';
+        if(ApexPages.currentPage().getParameters().containsKey(QUERY_STRING_PARAM_PSP_REFERENCE))
+            pspRef = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PSP_REFERENCE);
+
+        String skinC = '';
+        if(ApexPages.currentPage().getParameters().containsKey(QUERY_STRING_PARAM_SKIN_CODE))
+            skinC = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_SKIN_CODE);
+
+        String paymentMeth = '';
+        if(ApexPages.currentPage().getParameters().containsKey(QUERY_STRING_PARAM_PAYMENT_METHOD))
+            paymentMeth = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PAYMENT_METHOD);
+
+        String shopperLoc = '';
+        if(ApexPages.currentPage().getParameters().containsKey(QUERY_STRING_PARAM_SHOPPER_LOCAL))
+            shopperLoc = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_SHOPPER_LOCAL);
+        
         if(submissionMgr.submission.isPaymentAccount__c)
         {
             //Make the API Call
@@ -456,6 +494,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                     hasPaymentPending = false;
                     previousClicked = false;
                     hasPaymentError = false;
+                    hasBeenRedirected = true;
                     return;
                 }
                 else{
@@ -467,6 +506,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                     hasPaymentPending = false;
                     previousClicked = false;
                     hasPaymentError = true;
+                    hasBeenRedirected = true;
                     return;
                 }
             }
@@ -475,7 +515,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             // Valid params for the result URL back to us after payment. Now check authResult.
             SmartPayUrl smp = new SmartPayUrl();
 
-            if(!smp.checkSigningString(authResult, pspRef, merchantReference, skinC, merchantSig))
+            if(smp.checkSigningString(authResult, pspRef, merchantReference, skinC,paymentMeth,shopperLoc, merchantSig) == false)
             {
                 hasPaymentSuccess = false;
                 hasPaid = false;
@@ -483,8 +523,10 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = false;
+                hasBeenHacked = true;
+                return;
             }
-            if (authResult == AUTH_RESULT_AUTHORISED) {
+            else if (authResult == AUTH_RESULT_AUTHORISED) {
                 //change the status of the payment page
                 paymentReference = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_PSP_REFERENCE);
                 hasPaid = false;
@@ -493,6 +535,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = false;
+                hasBeenRedirected = true;
                 persistStep();
             } else if (authResult == AUTH_RESULT_REFUSED) {
                 //Go To refused Payment page ?
@@ -502,6 +545,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = false;
+                hasBeenRedirected = true;
             } else if (authResult == AUTH_RESULT_PENDING) {
                 //Nothing to do?
                 hasPaymentSuccess = false;
@@ -510,6 +554,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPaymentPending = true;
                 previousClicked = false;
                 hasPaymentError = false;
+                hasBeenRedirected = true;
             } else if (authResult == AUTH_RESULT_CANCELLED) {
                 hasPaymentSuccess = false;
                 hasPaid = false;
@@ -517,6 +562,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPaymentPending = false;
                 previousClicked = true;
                 hasPaymentError = false;
+                hasBeenRedirected = true;
             } else if (authResult == AUTH_RESULT_ERROR) {
                 hasPaymentSuccess = false;
                 hasPaid = false;
@@ -524,6 +570,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPaymentPending = false;
                 previousClicked = false;
                 hasPaymentError = true;
+                hasBeenRedirected = true;
             }
         } else {
             hasPaymentSuccess = false;

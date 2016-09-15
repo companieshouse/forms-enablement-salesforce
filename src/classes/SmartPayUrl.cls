@@ -150,16 +150,34 @@ public with sharing class SmartPayUrl {
         return url;
     }
     
-    public Boolean checkSigningString(String authResult, String pspReference, String merchantReference,String skinCode, String merchantSig)
+    public Boolean checkSigningString(String authResultParam, String pspReferenceParam, String merchantReferenceParam, String skinCodeParam, String paymentMethodParam, String shopperLocalParam, String merchantSig)
     {
-        //'authResult' => 'AUTHORISED', 'pspReference' => '1211992213193029',
-        //'merchantReference' => 'Internet Order 12345', 'skinCode' => @skin_code1,
+        //String combination5 = 'authResult:merchantReference:merchantReturnData:shopperLocale:skinCode:CANCELLED:a0J4E000000wLTxUAM:a0J4E000000wLTxUAM:en_GB:rDzAns5W';
+        //authResult:merchantReference:merchantReturnData:paymentMethod:pspReference:shopperLocale:skinCode:AUTHORISED:SKINTEST-test:YourMerchantReturnData:visa:7914447419663319:en_GB:314lwMhy
+
         SmartPay_Settings__c settings = getSettings();
 
-        System.debug('Parameters : ' + authResult + ' , ' + pspReference + ' , ' + merchantReference + ' , ' + skinCode + ' , ' + merchantSig);
+        String signingStringStart = 'authResult:merchantReference:merchantReturnData:';
+        String signingStringEnd = 'skinCode:';
 
-        String signingString = pspReference == null ? 'authResult:merchantReference:skinCode:merchantReturnData:' : 'authResult:pspReference:merchantReference:skinCode:merchantReturnData:';
-        signingString += pspReference == null ? authResult + ':' + merchantReference + ':' + skinCode + ':'+ merchantReference:  authResult + ':' + pspReference + ':' + merchantReference + ':' + skinCode + ':'+ merchantReference;
+        String valuesStringStart = authResultParam + ':' + merchantReferenceParam + ':' + merchantReferenceParam + ':';
+        String valuesStringEnd =  skinCodeParam;
+        
+        if(paymentMethodParam != '')
+        {
+            signingStringStart += 'paymentMethod:';
+            valuesStringStart += paymentMethodParam +':';
+        }
+
+        if(shopperLocalParam != '')
+        {
+            signingStringStart += 'shopperLocale:';
+            valuesStringStart += shopperLocalParam +':';
+        }
+
+        String signingString = signingStringStart + signingStringEnd + valuesStringStart + valuesStringEnd;
+
+        System.debug('Signing String' + signingString);
 
         String hmacKey = settings.HMAC_key__c;
 
@@ -167,7 +185,7 @@ public with sharing class SmartPayUrl {
 
         String sigEncoded = EncodingUtil.base64Encode(sig);
 
-        System.debug('Encoded answer: ' + sigEncoded);
+        System.debug('Encoded answer: ' + sigEncoded + ' and result:' + merchantSig);
 
         if(merchantSig == sigEncoded)
             return true;
