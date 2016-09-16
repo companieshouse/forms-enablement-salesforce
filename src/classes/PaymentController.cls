@@ -200,17 +200,6 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
         if(res != null)
             return res;
-        //If there is no payment associated we need to protect the page to be displayed
-        if (!submissionMgr.submission.isPaymentRequired__c) {
-            hasPaid = true;
-            PageReference nextPage = nextStep();
-            nextPage.setRedirect(true);
-            return nextPage;
-        }
-        if (hasPaid()) {
-            hasPaid = true;
-            return null;
-        }
 
         if(hasBeenHacked)
         {
@@ -218,6 +207,20 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             pg.setRedirect(true);
             return pg;
         }
+
+        //If there is no payment associated we need to protect the page to be displayed
+        if (!submissionMgr.submission.isPaymentRequired__c) {
+            hasPaid = true;
+            PageReference nextPage = nextStep();
+            nextPage.setRedirect(true);
+            return nextPage;
+        }
+        if (hasPaid() && !hasPaymentSuccess) {
+            hasPaid = true;
+            return null;
+        }
+
+        
 
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -524,6 +527,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 previousClicked = false;
                 hasPaymentError = false;
                 hasBeenHacked = true;
+                hasBeenRedirected = true;
                 return;
             }
             else if (authResult == AUTH_RESULT_AUTHORISED) {

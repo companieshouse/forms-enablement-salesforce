@@ -158,10 +158,10 @@ public with sharing class SmartPayUrl {
         SmartPay_Settings__c settings = getSettings();
 
         String signingStringStart = 'authResult:merchantReference:merchantReturnData:';
-        String signingStringEnd = 'skinCode:';
+        String signingStringEnd = 'shopperLocale:skinCode:';
 
         String valuesStringStart = authResultParam + ':' + merchantReferenceParam + ':' + merchantReferenceParam + ':';
-        String valuesStringEnd =  skinCodeParam;
+        String valuesStringEnd =  shopperLocalParam +':' + skinCodeParam;
         
         if(paymentMethodParam != '')
         {
@@ -169,10 +169,10 @@ public with sharing class SmartPayUrl {
             valuesStringStart += paymentMethodParam +':';
         }
 
-        if(shopperLocalParam != '')
+        if(pspReferenceParam != '')
         {
-            signingStringStart += 'shopperLocale:';
-            valuesStringStart += shopperLocalParam +':';
+            signingStringStart += 'pspReference:';
+            valuesStringStart += pspReferenceParam +':';
         }
 
         String signingString = signingStringStart + signingStringEnd + valuesStringStart + valuesStringEnd;
