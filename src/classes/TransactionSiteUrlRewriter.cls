@@ -197,7 +197,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.equals(VF_PAGE_WITHDRAWDISSOLUTION)) { pr = new PageReference(WITHDRAWDISSOLUTION); }
         else if (url.equals(VF_PAGE_NONPRESCRIBED1)) { pr = new PageReference(NONPRESCRIBED1); }
         else if (url.equals(VF_PAGE_NONPRESCRIBED2)) { pr = new PageReference(NONPRESCRIBED2); }
-		else if (url.equals(INTEGRATIONERROR)) { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
+        else if (url.equals(INTEGRATIONERROR)) { pr = new PageReference(VF_PAGE_INTEGRATIONERROR); }
         else if (url.equals(SIGNOUT)) { pr = new PageReference(VF_PAGE_SIGNOUT); }
         else if (url.equals(SESSIONEXPIRED)) { pr = new PageReference(VF_PAGE_SESSIONEXPIRED); }
         else if (url.equals(DOCUMENT)) { pr = new PageReference(VF_PAGE_DOCUMENT); }
@@ -273,13 +273,18 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
             else if (url.equals(VF_PAGE_WITHDRAWDISSOLUTION)) {friendlyPageReference = new PageReference(WITHDRAWDISSOLUTION);}
             else if (url.equals(VF_PAGE_NONPRESCRIBED1)) {friendlyPageReference = new PageReference(NONPRESCRIBED1);}
             else if (url.equals(VF_PAGE_NONPRESCRIBED2)) {friendlyPageReference = new PageReference(NONPRESCRIBED2);}
-			else if (url.equals(VF_PAGE_INTEGRATIONERROR)) {friendlyPageReference = new PageReference(INTEGRATIONERROR);}
+            else if (url.equals(VF_PAGE_INTEGRATIONERROR)) {friendlyPageReference = new PageReference(INTEGRATIONERROR);}
             else if (url.equals(VF_PAGE_SIGNOUT)) {friendlyPageReference = new PageReference(SIGNOUT);}
             else if (url.equals(VF_PAGE_SESSIONEXPIRED)) {friendlyPageReference = new PageReference(SESSIONEXPIRED);}
             else if (url.equals(VF_PAGE_DOCUMENT)) {friendlyPageReference = new PageReference(DOCUMENT);}
 
-            if (friendlyPageReference != null) friendlyPageReference.getParameters().putAll(pr.getParameters());
-            friendlyUrls.add(friendlyPageReference);
+            if (friendlyPageReference != null) {
+                friendlyPageReference.getParameters().putAll(pr.getParameters());
+                friendlyUrls.add(friendlyPageReference);
+            } else {
+                friendlyUrls.add(pr);
+            }
+            
         }
         System.debug(LoggingLevel.ERROR, friendlyUrls);
         return friendlyUrls;

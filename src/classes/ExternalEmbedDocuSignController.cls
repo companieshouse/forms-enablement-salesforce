@@ -45,6 +45,9 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
     }
 
     public static String docusignSignature(SubmissionManager submissionMgrParam, TransactionManager transactionMgrParam) {
+        
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: entered docusignSignature');
+        
         SubmissionManager submissionMgr = submissionMgrParam;
         TransactionManager transactionMgr = transactionMgrParam;
         DocuSignSetting__c dsSetting = getDocuSignSettings();
@@ -63,16 +66,24 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
          }   
 
 
-
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: after emailBlurb');
+        
         PageReference pageRef = new PageReference('/apex/' + page);
         pageRef.getParameters().put('id', submissionMgr.submission.Id);
+        
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got pageref');
+        
         if (Test.IsRunningTest())
             pdfBlob = Blob.valueOf('This is a test');
         else
             pdfBlob = pageRef.getContent();
+            
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got pdfBlob');
 
         DocuSignAPI.Document doc = DocusignLibrary.getDocument(1, EncodingUtil.base64Encode(pdfBlob), submissionMgr.submission.Form_Name__c + '_' + submissionMgr.submission.CompanyName__c + '_' + getDate(0), 'pdf');
 
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got doc');
+        
         DocuSignAPI.CustomField custF1 = DocusignLibrary.getCustomField( 'DSFSSourceObjectId', submissionMgr.submission.Id + '~Transaction__c', 'Text');
         //DocuSignAPI.CustomField custF2 = DocusignLibrary.getCustomField( 'OfficerSigner1', submissionMgr.submission.Officers__r[0].Id + '~Officer__c', 'Text');
 
@@ -82,6 +93,9 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
 
         DocuSignAPI.Envelope env = DocusignLibrary.getEnvelope(dsSetting.AccountId__c, submissionMgr.submission.Form_Name__c + ' - application for closing ' + submissionMgr.submission.CompanyName__c,  emailBlurb, dsSetting.BrandId__c);
 
+
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got initial env');
+        
         //Init size of each collection of the envelope
         env = DocusignLibrary.initDocs(env, 1);
         env = DocusignLibrary.initCustomFields(env, 2);
@@ -153,21 +167,27 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
             }
         }
 
-
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got final env');
 
         //Build httpHeader
         String auth = DocusignLibrary.buildAuthString( dsSetting.Username__c, dsSetting.Password__c, dsSetting.IntegratorKey__c);
         Map<String, String> httpHeader = DocusignLibrary.buildHTTPHeaders(auth);
+        
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got header');
 
         String baseURL = Site.getBaseUrl() + '/DigitalSignature';
-
+        
         //Here page URL contains Apex/Payment
         baseURL = baseURL + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())) ;
+        
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got baseURL=' + baseURL);
         
         String result = '';
 
         if(!Test.isRunningTest())
             result = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+            
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: sent envelope');
 
         //Update the sending name of each off
         update offToUpdate;
