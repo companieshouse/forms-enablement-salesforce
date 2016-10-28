@@ -117,8 +117,11 @@ public with sharing class AccountsAuthCallbackController {
             // 5. Update the user authorisation record, possibly in a @Future, only after we're done calling out.
             // 6. Drop a cookie (user_auth) - value equal to the encrypted value of the User Auth record Id.
             // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
+            
             String userProfileName = userProfileApiResponse.email;
             Map<String, String> PrivateBeta_Accesslist = new Map<String, String>();
+            
+             /*remove whitelist           
             PrivateBeta_Accesslist.put('clarejady@hulljady.co.uk', 'Clare Jady');
             PrivateBeta_Accesslist.put('sophie@taxexpert.co.uk', 'Sophie Dickinson');
             PrivateBeta_Accesslist.put('catherine@mcmillanaccountants.com', 'Cathy Wolff');
@@ -145,11 +148,18 @@ public with sharing class AccountsAuthCallbackController {
             PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
             PrivateBeta_Accesslist.put('mistercalvin@gmail.com','calvin1');
             PrivateBeta_Accesslist.put('calvin.chong@consultspark.co.uk','calvin2');
+            PrivateBeta_Accesslist.put('ciara.maccooey@googlemail.com','ciara');
             PrivateBeta_Accesslist.put('ceri.counter@companyregistrations.co.uk','CHPRESENTERTESTER'); 
+            remove whitelist */
+            
+            PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
             Boolean AccessGranted = PrivateBeta_Accesslist.containsKey(userProfileName);
             Boolean chUser = PrivateBeta_Accesslist.containsKey('@'+userProfileName.subStringAfter('@'));
-            If (AccessGranted == false && chUser == false) {
-                return CallPageRedirect();
+            
+            if(Test.isRunningTest())   {                      
+                If (AccessGranted == false && chUser == false) {            
+                    return CallPageRedirect();   
+                }
             }
             
             System.debug(LoggingLevel.ERROR,'Cookies Saving:' + userProfileName);
