@@ -70,7 +70,7 @@ public with sharing class FormAPISubmissionManager {
                 } else {
                     tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
                     tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output) ;
-                    tx = addIntegrationLog('Barcode failed', tx);
+                    tx = addIntegrationLog('Barcode failed.<br/> Reason: ' + tx.ErrorDescription__c , tx);
                 }
 
            // }
@@ -101,7 +101,7 @@ public with sharing class FormAPISubmissionManager {
             } else {
                 tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
                 tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output);
-                tx = addIntegrationLog('SendForm Failed', tx);
+                tx = addIntegrationLog('SendForm Failed<br/> Reason: ' + tx.ErrorDescription__c , tx);
             }
                 
         //}
