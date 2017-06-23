@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-04  Initial development.
 */
-public class DocusignLibrary {
+public with sharing class DocusignLibrary {
 
     public static Integer customFieldPos {get; set;}
     public static Integer tabPos {get; set;}
@@ -106,13 +106,15 @@ public class DocusignLibrary {
         return custF;
 	}	
 
-	public static DocuSignAPI.Envelope getEnvelope(String accountId, String subject, String emailBlurb)
+	public static DocuSignAPI.Envelope getEnvelope(String accountId, String subject, String emailBlurb, String brandId)
 	{
         DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
 
         envelope.Subject = subject;
         envelope.EmailBlurb = emailBlurb;
         envelope.AccountId = accountId;
+        envelope.EnvelopeIdStamping = false;
+        envelope.BrandId =  brandId;  //'3212b688-d206-4f05-b8bb-67609ac42349';
 
         return envelope;
 	}

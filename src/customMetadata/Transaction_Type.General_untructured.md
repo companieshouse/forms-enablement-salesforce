@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>General - untructured</label>
+    <protected>true</protected>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
@@ -31,6 +32,50 @@
     </values>
     <values>
         <field>Below_Button_Title__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedBody1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedHeader1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedPreviousButton__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Title__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

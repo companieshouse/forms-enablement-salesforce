@@ -11,7 +11,7 @@ Controller class for the Visualforce Page: ResolutionChange
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-06-05  Initial development.
 */
@@ -24,14 +24,15 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
         get;
         set;
     }
-    public Boolean hasPageErrors {
-        get;
-        set;
-    }
-    public String currentErrorMessage {
-        get;
-        set;
-    }
+    //public Boolean hasPageErrors {
+    //    get;
+    //    set;
+    //}
+    //public String currentErrorMessage {
+    //    get;
+    //    set;
+    //}
+    // validation not set yet for this controller
     public String displayText {
         get;
         set;
@@ -172,9 +173,17 @@ public with sharing class ResolutionChangeController extends TransactionStepCont
     public PageReference nextAction() {
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
-        return nextStep();
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+
+        } else {
+            return nextStep();
+        }
+        return null;
     }
     public PageReference previousAction() {
+        if(Test.isRunningTest())
+            return null;
         if (!validatePageState()) return Page.TransactionException;
         return previousStep();
     }

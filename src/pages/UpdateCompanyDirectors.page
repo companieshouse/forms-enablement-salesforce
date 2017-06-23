@@ -15,29 +15,30 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain P    2016-06-16   Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Update_Company_Directors}" 
-    showHeader="false" 
-    sidebar="false" 
-    standardStylesheets="false"
-    controller="UpdateCompanyDirectorsController"
-    action="{!initialiseAction}">
-    
-   
-	<apex:composition template="TransactionPageTemplate">
-  
-		<apex:define name="content">
-			
-			<apex:form >
-				<h1 class="heading-xlarge">
-        			Update company directors
-      			</h1>			
-				
-				<p>The company directors must be correct before the company can be closed. Go to <a href="https://www.gov.uk/government/collections/update-director-or-company-secretary-details">Update your company details</a> for more information on how to update the company directors.</p>
-
-			</apex:form>
-				
-      	</apex:define>
-
-	</apex:composition>
-
+<apex:page cache="false" title="{!$Label.UI_Text_Update_Company_Directors}" showHeader="false" sidebar="false" standardStylesheets="false" controller="UpdateCompanyDirectorsController" action="{!initialiseAction}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="heading-xlarge">
+                   {!title} 
+                </h1>
+                <apex:outputPanel rendered="{!!isLLPf}">
+                <p class="lede">
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                    <a href="https://www.gov.uk/government/collections/change-director-details-on-your-limited-company">
+                        <apex:outputText escape="false" value="{!link}"></apex:outputText>
+                    </a>
+                </p>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!isLLPf}">
+                    <p class="lede">
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                    <a href="https://www.gov.uk/government/collections/change-member-details-on-your-limited-liability-partnership-llp">
+                        <apex:outputText escape="false" value="{!link}"></apex:outputText>
+                    </a>
+                </p>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>

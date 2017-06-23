@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>SH02</label>
+    <protected>true</protected>
     <values>
         <field>Below_Button_Text2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/consolidate-sub-divide-redeem-shares-or-re-convert-stock-into-shares-sh02&quot;&gt;change your share structure by post.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Text3__c</field>
@@ -23,7 +24,8 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">This service is also available in Welsh (Cymraeg).</value>
+        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium&quot;&gt;Before you start&lt;/h3&gt;
+&lt;p&gt;You should read the guidance on &lt;a href=&quot;https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/400527/Checklist_guidance_for_SH02.pdf&quot;&gt;changing your share capital.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -32,6 +34,58 @@
     <values>
         <field>Below_Button_Title__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedBody1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedHeader1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedPreviousButton__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT1__c</field>
+        <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
+          &lt;details&gt;&lt;summary&gt;&lt;span class=&quot;summary&quot;&gt;How do I know what the company number is?&lt;/span&gt;&lt;/summary&gt;
+            &lt;div class=&quot;panel panel-border-narrow&quot;&gt;
+              &lt;p&gt;
+                You can find the company numbe</value>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT2__c</field>
+        <value xsi:type="xsd:string">r on the incorporation certificate or you can &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot;&gt;search for it on the public register&lt;/a&gt;.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/details&gt;
+        &lt;/div&gt;</value>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Title__c</field>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Tell us which company you want to file for&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -79,12 +133,21 @@
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">You&apos;ll need: &lt;br/&gt;
-&lt;ul  class=&quot;list list-bullet&quot;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the compan authentication code&lt;/li&gt;&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">ice of redemption of shares&lt;/li&gt;
+        &lt;li&gt;give notice of re-conversion of stock into shares&lt;/li&gt;
+      &lt;/ul&gt;
+
+&lt;p&gt;You will need:&lt;/p&gt;
+&lt;ul class=&quot;list list-bullet&quot;&gt;
+        &lt;li&gt;the company number&lt;/li&gt;
+        &lt;li&gt;the company authentication</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">code&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;It normally takes 10 minutes to complete this process.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
@@ -100,12 +163,18 @@
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">You can use this service to: &lt;br/&gt;
-&lt;ul  class=&quot;list list-bullet&quot;&gt;&lt;li&gt;give notice of consolidation, subdivision, redemption of shares&lt;/li&gt;&lt;li&gt;give notice of re-conversion of stock into shares&lt;/li&gt;&lt;/ul&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You can use this service to:&lt;/p&gt;
+&lt;ul class=&quot;list list-bullet&quot;&gt;
+        &lt;li&gt;give notice of consilidation of shares&lt;/li&gt;
+        &lt;li&gt;give notice of sub-division of shares&lt;/li&gt;
+        &lt;li&gt;give notice of redemption of shares&lt;/li&gt;
+        &lt;li&gt;give not</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Notice of consolidation, subdivision, redemption of shares or re-conversion of stock into shares.</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        Change your share structure
+      &lt;/h1&gt;</value>
     </values>
     <values>
         <field>Product_Code__c</field>

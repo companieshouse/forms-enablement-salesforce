@@ -1,9 +1,12 @@
 <apex:component >
         <div class="phase-banner-beta">
             <p>
-                <strong class="phase-tag">BETA</strong>
+                <strong class="phase-tag" style="background-color:#005EA1!important;">BETA</strong>
+                <!-- TODO: The banner "Beta" should be re-styled when using cdn. -->
                 <!-- TODO: The word "feedback" should be a link to somewhere. -->
-                <span>This is a trial service — your <a target="_blank" href="https://www.surveymonkey.co.uk/r/closingacompany">feedback</a> will help us to improve it.</span>
+                <span>This is a trial service — your <a target="_blank" href="https://www.surveymonkey.co.uk/r/closingacompany">feedback</a> will help us to improve it.
+                <!-- <a href="https://account.preprod.companieshouse.gov.uk/signout" style="text-align: right">Signout</a> -->
+                </span>
             </p>
         </div>
 </apex:component>

@@ -1,0 +1,20 @@
+<apex:page cache="false" title="Test" showHeader="false" sidebar="false" standardStylesheets="false" controller="SignOutController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel >
+                    
+                        <div class="govuk-box-highlight">
+                            <h1 class="bold-large">Test</h1>
+                            <p>
+                                This is a test
+                                <br/>
+                            </p>
+                        </div>
+                        
+                    
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

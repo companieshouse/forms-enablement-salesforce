@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>When Companies House rejects a transaction</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>CH DS02 Rejected Transaction</name>
+    <style>none</style>
+    <subject>Application to close rejected for  {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) Ref: FE{!Transaction__c.Id}</subject>
+    <textOnly>Companies House rejection confirmation
+
+Request  to cancel the application to close {!Transaction__c.CompanyName__c}
+
+Your request to cancel the application to close  {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c}  has been  rejected  for the following reason(s). Your reference number for any future enquiries is FE{!Transaction__c.Id}.
+
+
+{!Transaction__c.ErrorDescription__c}
+
+The process to close the company has not been stopped. The company will be closed within two months of the notice to close being published in the relevant Gazette.
+
+Click to download a copy of your application
+
+What happens next
+
+If you still wish to close this company, then you will need to start the process again with a new application to cancel the application to close.
+
+Contact Centre tel +44 (0)303 1234 500
+or email enquiries@companieshouse.gov.uk.
+
+This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</textOnly>
+    <type>custom</type>
+</EmailTemplate>

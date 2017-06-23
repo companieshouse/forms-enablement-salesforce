@@ -19,71 +19,123 @@
    Ver. Author        Date        Detail
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
+<apex:page cache="false" title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:outputPanel id="testEmpty"/>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <div id="masterDiv" class="form-group">
-                    <h1 class="heading-xlarge">
-                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you a director?"></apex:outputText>
-                        <apex:outputText rendered="{!isLLPCompany}" value="Are you a member?"></apex:outputText>
-                    </h1>
-                    <p class="lede">
-                        <apex:outputText rendered="{!NOT(isLLPCompany)}" value=" {!companyName} has the following directors listed on the public register"></apex:outputText>
-                        <apex:outputText rendered="{!isLLPCompany}" value="{!companyName} has the following members listed on the public register"></apex:outputText>
-                    </p>
-                    <ul class="list list-bullet">
-                        <apex:repeat value="{!listOfDirectors}" var="director" id="directorslistID">
-                            <li>{!director.officerTXT}</li>
-                        </apex:repeat>
-                    </ul>
-                    <fieldset class="inline">
-                        <legend class="visuallyhidden">
-                            <apex:outputText rendered="{!NOT(isLLPCompany)}" value="Are you the sole director listed above?"></apex:outputText>
-                            <apex:outputText rendered="{!isLLPCompany}" value="Are you the sole member listed above?"></apex:outputText>
-                        </legend>
-                        <div id="presenterSelection" class="form-group">
-                            <label class="block-label" for="radio-indent-1">
-                                <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"> Yes
-                                </input>
-                            </label>
-                            <label class="block-label" for="radio-indent-2">
-                                <input class="presenterNO" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"> No
-                                </input>
-                            </label>
-                        </div>
-                    </fieldset>
+                <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="emptyPanel"></apex:outputPanel>
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentPageError}</a>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a>"/>
+                                    {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a>"/>
+                                    {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
+                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>    
+                    <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+                    <div class="form-group {!errorVal}">
+                      <span class="error-message" id="error-message-full-name">{!currentPageError}</span>
+                        <ul class="list list-bullet">
+                            <apex:repeat value="{!listOfDirectors}" var="director" id="directorslistID">
+                                <li>{!director.officerTXT}</li>
+                            </apex:repeat>
+                        </ul>
+                        <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
+                        <fieldset class="inline">
+                            <div id="presenterSelection" class="form-group">
+                                <label class="block-label" for="radio-indent-1">
+                                    <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"> Yes
+                                    </input>
+                                </label>
+                                <label class="block-label" for="radio-indent-2">
+                                    <input class="presenterNO" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"> No
+                                    </input>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
                     <apex:outputPanel id="SecondDiv">
-                        <apex:outputPanel rendered="{!!directorPresenter}" id="divPresenter">
-                            <div aria-hidden="false" class="panel panel-border-narrow">
-                                <p>
-                                    <apex:outputText rendered="{!NOT(isLLPCompany)}" value="
-                                To apply to close this company we will need to know your details to help the director(s) recognise your request. We'll also contact you through the email address used with this account."></apex:outputText>
-                                    <apex:outputText rendered="{!isLLPCompany}" value="
-                                    To apply to close this company we will need to know your details to help the member(s) recognise your request. We'll also contact you through the email address used with this account."></apex:outputText>
-                                </p>
-                                <div class="form-group">
-                                    <label class="form-label" for="directors-name">Your full name</label>
-                                    <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="directors-confirm-phone">Phone number</label>
-                                    <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                        <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
+                            <div class="form-group">
+                                <div aria-hidden="false" class="panel panel-border-narrow">
+                                    <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
+                                    <div class="form-group {!errorValBottom}">
+                                        <span class="error-message" id="error-message-full-name">{!currentPageErrorTop}</span>
+                                        <apex:outputLabel styleClass="form-label" for="directors-name">Your full name (optional)</apex:outputLabel>
+                                        <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
+                                    </div>
+                                    <div class="form-group {!errorValBottom2}">
+                                        <span class="error-message" id="error-message-full-name">{!currentPageErrorBot}</span>
+                                        <apex:outputLabel styleClass="form-label" for="directors-confirm-phone">Phone number (optional)</apex:outputLabel>
+                                        <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                                    </div>
                                 </div>
                             </div>
                         </apex:outputPanel>
                     </apex:outputPanel>
-                    <apex:actionFunction action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
+                    <apex:actionFunction status="status" action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
                         <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
                     </apex:actionFunction>
-                </div>
-                <br />
-                <br /> &nbsp;
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> &nbsp;
+                    <br />
+                    <br /> 
+                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    <br />
+                    <br />
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        PresenterDirectorController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
             </apex:form>
         </apex:define>
     </apex:composition>

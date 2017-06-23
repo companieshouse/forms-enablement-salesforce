@@ -1,34 +1,23 @@
 <!-- Authenticated Page for Document Approval Statuses -->
 <!--  Author: Leo Bitoy -->
-<apex:page title="{!$Label.UI_Text_Confirmation_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="{!initialiseController}">
+<apex:page cache="false" title="Consult the status of the requested approvals" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="{!initialiseController}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <style>
-                .govuk-box-review {
-                    text-align: center;
-                    padding: 2em 0 1em 0;
-                    margin: 1em 0 1em 0;
-                    color: #000;
-                    background: #D3D3D3;
-                }
-                </style>
-                <div class="govuk-box-review">
-                    <h1 class="bold-large gov-uk-box-review-fontcolor ">{!companyName}</h1>
-                    <p class="gov-uk-box-review-fontcolor ">
-                        <b>{!companyNumber}</b> - Incorporated on {!companyIncorporationDate}
+                <div class="govuk-box-highlight">
+                    <h1 class="bold-large">{!companyName}</h1>
+                    <p class="lede">
+                        <b>{!companyNumber}</b> - Incorporated on {!companyDateOfCreation}
                     </p>
-                    <p class="gov-uk-box-review-fontcolor">
-                        {!companyAddress1} - {!companyLocality} - {!companypostcode}
+                    <p class="lede">
+                        <apex:outputText escape="false" value="{!companyAddress}"/>
                         <!-- information here {!informationstuff} -->
                     </p>
                 </div>
                 <h2 class="heading-large">Requested Approvals</h2>
+                <p> Emails are <i>Sent</i> from Companies House requesting an approval signature, <i>Delivered</i> to the directors and then once signed and approved shown as <i>Completed</i>. </p>
                 <apex:outputPanel rendered="{!hasPageErrors}">
-                    <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                            An error has occurred.
-                        </h1>
+                    <div  role="group" aria-labelledby="error-summary-heading-1" tabindex="-1">
                         <p>
                             {!statusErrors}
                         </p>

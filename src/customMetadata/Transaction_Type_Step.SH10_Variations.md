@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>SH10 - Variations</label>
+    <protected>true</protected>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">This is the date on which the company&apos;s Board of Directors approved the variation. This must not be a future date.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">What are the details of the variation of rights attached to shares?</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Details of variation of rights&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -55,6 +56,10 @@
     </values>
     <values>
         <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

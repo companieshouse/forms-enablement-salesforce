@@ -1,4 +1,4 @@
-<apex:page title="Cancelled Shares Summary" showHeader="false" sidebar="false" standardStylesheets="false" controller="cancelShares" docType="html-5.0">
+<apex:page cache="false" title="Cancelled Shares Summary" showHeader="false" sidebar="false" standardStylesheets="false" action="{!goForward}" controller="cancelShares" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -10,7 +10,7 @@
                             </h1>
                             <ul class="error-summary-list">
                                 <li>
-                                    <span class="error-message">{!currentErrorMessage}</span>
+                                    <a>{!errormessage1}</a>
                                 </li>
                             </ul>
                         </div>
@@ -43,28 +43,33 @@
                                 </tbody>
                             </table>
                         </div>
-                        <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
+                        <div class="form-group">
+                            <apex:commandLink action="{!previousAction}" value="Cancel more shares" id="thePreviousButton" />
+                        </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="datePanel">
-                        <fieldset class="form-group">
-                            <h2 class="heading-large">{!headerText2}</h2>
-                            <legend class="visuallyhidden">{!headerText2}</legend>
-                            <div class="form-date">
-                                <p class="form-hint">For example, 31 1 2016</p>
-                                <div class="form-group form-group-day">
-                                    <label for="dob-day">Day</label>
-                                    <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" min="0" max="31"/>
-                                </div>
-                                <div class="form-group form-group-month">
-                                    <label for="dob-month">Month</label>
-                                    <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" min="0" max="12"/>
-                                </div>
-                                <div class="form-group form-group-year">
-                                    <label for="dob-year">Year</label>
-                                    <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" min="0" max="2014"/>
-                                </div>
+                     <fieldset class="form-group {!errorVal1}">
+                        <h2 class="heading-large">Date of assignment</h2>
+                        <legend class="visuallyhidden">Date of assignment</legend>
+                        <div class="form-date">
+                            <p class="form-hint">For example, 31 01 2016</p>
+                             <span class="error-message" id='shareclass-errors'>
+                                        {!errormessage1}</span>
+                            <div class="form-group form-group-day">
+                                <label for="day">Day</label>
+                                <apex:inputText Styleclass="form-control" id="day" value="{!varDay}"  />
                             </div>
-                        </fieldset>
+                            <div class="form-group form-group-month">
+                                <label for="month">Month</label>
+                                <apex:inputText value="{!varMonth}" Styleclass="form-control" id="month"  />
+                            </div>
+                            <div class="form-group form-group-year">
+                                <label for="year">Year</label>
+
+                                <apex:inputText value="{!varYear}" Styleclass="form-control" id="year" />
+                            </div>
+                        </div>
+                    </fieldset>
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <div class="form-group">

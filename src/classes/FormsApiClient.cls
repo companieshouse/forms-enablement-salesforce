@@ -11,7 +11,7 @@
  * Update 11/04/2016
  * Author: antonio.bravo@gollico.co.uk
  */
-public class FormsApiClient {
+public with sharing class FormsApiClient {
 
     // The multipart boundary can be any old string that's unlikely to exist in the parts
     // themselves. This is a random sequence of bytes.
@@ -19,18 +19,35 @@ public class FormsApiClient {
 
     private String SUBMISSION_ENDPOINT = '/submission';
     private String BARCODE_ENDPOINT = '/barcode';
+    private String PRESENTERAPI = '/presenterauth';
 
-
+    //Added for log purpose
+    public static Integer numberOfTimeCalled {get; set;} 
 
     /**
     * Request Barcode from FormsAPI
     */
-    public HttpResponse requestBarcode() {
+    public HttpResponse requestBarcode(Transaction__c tx) {
 
         //  Don't forget to add a Remote Site record for the server as well as the custom setting
         //  record.
         Forms_API_Service__c connection = getConnection();
 
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + tx.Id;
+        log += '<br/> Barcode: ' + tx.Barcode__c;
+        log += '<br/> Company Number: ' + tx.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
+        log += '<br/> Integration Requesting Barcode Initiated';
+        log += '<br/>-----------------------------------------------------------------------------------';
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
+
+
+        FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
 
         // Create Http request
         HttpRequest request = new HttpRequest();
@@ -43,7 +60,40 @@ public class FormsApiClient {
 
         // Get request body
         String requestBody = getBarcodeBody();
+        request.setTimeout(120000);
         request.setBody(requestBody);
+
+        // Debug request
+        System.debug(LoggingLevel.INFO, 'Request header: ' + request);
+        System.debug(LoggingLevel.INFO, 'Request body: ' + request.getBody());
+
+
+        // Send the request
+        Http http = new Http();
+        HTTPResponse response = http.send(request);
+
+        // Debug response
+        System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
+        System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
+
+        return response;
+
+    }
+
+    public HttpResponse requestPresenterAPI(String presenterId, String authCode){
+        //  Don't forget to add a Remote Site record for the server as well as the custom setting
+        //  record.
+        Forms_API_Service__c connection = getConnection();
+        // Create Http request
+        HttpRequest request = new HttpRequest();
+
+        request.setEndpoint(connection.URL__c + PRESENTERAPI + '?id='+presenterId + '&auth=' +authCode);
+        request.setMethod('GET');
+        request.setHeader('Content-Type', 'application/json');
+        request.setHeader('Accept', '*/*');
+        request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+        request.setTimeout(120000);
+        
 
         // Debug request
         System.debug(LoggingLevel.INFO, 'Request header: ' + request);
@@ -76,6 +126,20 @@ public class FormsApiClient {
         // record.
         Forms_API_Service__c connection = getConnection();
 
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + tx.Id;
+        log += '<br/> Barcode: ' + tx.Barcode__c;
+        log += '<br/> Company Number: ' + tx.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
+        log += '<br/> Integration Sending Form Initiated';
+        log += '<br/>-----------------------------------------------------------------------------------';
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
+
+        FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
 
         // Create Http request
         HttpRequest request = new HttpRequest();
@@ -85,6 +149,7 @@ public class FormsApiClient {
         request.setHeader('Content-Type', 'multipart/form-data; boundary=' + BOUNDARY);
         request.setHeader('Accept', '*/*');
         request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+        request.setTimeout(120000);
 
         // Get request body
         String requestBody = getBody(txList);
@@ -109,8 +174,8 @@ public class FormsApiClient {
 
 
     // SendForm is a multipart/form-data
-    // Put parts together separete with boundary. And finish with one last boundary.
-    // Note -- is part of seperator
+    // Put parts together separate with boundary. And finish with one last boundary.
+    // Note -- is part of separator
     public string getBody(List<Transaction__c> txList) {
         Integer txNumber = 0;
         String requestBody = '';
@@ -124,7 +189,8 @@ public class FormsApiClient {
         }
 
         // Packagemetada part
-        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage('packageID', txNumber) + '\n';
+        requestBody += getJsonPartHeader('packagemetadata') + getJsonPackage(txList[0].SubmissionId__c, txNumber, txList[0].AccountNumber__c, 
+            txList[0].AccountAuthorisationCode__c) + '\n';
 
         // Finish with one last boundary
         requestBody += '\n' + '--' + BOUNDARY + '--' + '\n';
@@ -141,8 +207,12 @@ public class FormsApiClient {
         return jsonPartHeader;
     }
 
-    public string getJsonPackage(String packageId, Integer count) {
-        return '{ "id": "' + packageId + '","count": ' + count + ' }';
+    public string getJsonPackage(String packageId, Integer count, String presenterId, String presenterAuth) {
+        String jsonPackage = '{ "packageIdentifier": "' + packageId + '","count": ' + count;
+        if (presenterId != null) jsonPackage = jsonPackage + ',"presenterId": "' + presenterId + '"';
+        if (presenterAuth != null) jsonPackage = jsonPackage + ',"presenterAuth": "' + presenterAuth + '"';
+        jsonPackage = jsonPackage + ' }';
+         return jsonPackage;
     }
 
 
@@ -181,10 +251,37 @@ public class FormsApiClient {
 
         //call TransactionSerialiser to get JSON
         String jsonPartBody = TransactionSerialiser.transactionToJSON(tx);
+        if (tx.Form_Name__c.contains('DS01')) {
+            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
+            jsonPartBody = jsonPartBody.remove('"shares" : null,');
+            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
+            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
+            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+        }
+        if(tx.Form_Name__c.contains('DS02'))
+        {//\n
+            jsonPartBody = jsonPartBody.remove('"payment" : {');
+            jsonPartBody = jsonPartBody.remove('"referenceNumber" : null,');
+            jsonPartBody = jsonPartBody.remove('"paymentMethod" : null,');
+            jsonPartBody = jsonPartBody.remove('"accountNumber" : null\n      },');
+            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
+            jsonPartBody = jsonPartBody.remove('"shares" : null,');
+            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
+            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
+            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
+            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+            jsonPartBody = jsonPartBody.remove('"officers" : {');
+            jsonPartBody = jsonPartBody.remove('"officer" : [ ]\n      },');
+        }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');
         jsonPartBody = jsonPartBody.remove('"officers" : null,');
-        //throw new Form_CustomException('here is your garbage string' + jsonPartBody);
+        system.debug(LoggingLevel.ERROR, 'Json ready to be sent:' + jsonPartBody);
         return jsonPartBody;
     }
 

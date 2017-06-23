@@ -1,158 +1,135 @@
-<apex:page title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" applyHtmlTag="false" docType="html-5.0">
+<apex:page cache="false" title="Supporting Documentation" showHeader="false" sidebar="false" standardStylesheets="false" controller="AddAttachmentsController" action="{!goForward}" applyHtmlTag="false" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form enctype="multipart/form-data">
+            <apex:outputPanel id="masterPanel">
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                        <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-                            An error has occurred.
-                        </h1>
-                        <p>
-                            <span class="error-message"> {!currentErrors}</span>
-                        </p>
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                </apex:outputPanel>
+                <h1 class="heading-xlarge">
+                    Additional documents
+                </h1>
+                <p class="lede">
+                    You need to file additional documents before the company’s capital can be reduced. If these documents have already been filed, there is no need to file them again.
+                </p>
+                <h1 class="heading-xlarge">
+                </h1>
+                <apex:outputPanel id="prototypeAttachments">
+                    <style>
+                    .dontshowButton {
+                        display: none;
+                    }
+                    
+                    a.showHands {
+                        cursor: pointer;
+                        cursor: hand;
+                    }
+                    
+                    a:hover {
+                        color: ;
+                    }
+                    
+                    a:hover {
+                        color: #2e8aca;
+                    }
+                    
+                    a:active {
+                        color: #2e8aca;
+                    }
+                    
+                    a:link {
+                        color: #005ea5;
+                    }
+                    
+                    a:visited {
+                        color: #2e8aca;
+                    }
+                    </style>
+                    <div class="form-group {!errorVal}">
+                        <span class='error-message'>{!currentErrorMessage}</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="doc-name">Document name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id='attachmentBody'>
+                                <tr>
+                                    <td>{!docName}</td>
+                                    <td>{!docStatus1}</td>
+                                    <td>
+                                        <a class='showHands' href='#' onclick='addDoc("a")'>Add document</a>
+
+                                        <apex:inputFile onchange="update1(this.value)" styleclass="dontshowButton" accept="application/pdf"  id="file1input" value="{!file1}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{!docName2}</td>
+                                    <td>{!docStatus2}</td>
+                                    <td>
+                                        <a class='showHands' href='#' onclick='addDoc("b")'>Add document</a>
+
+                                        <apex:inputFile onchange="update2(this.value)" styleclass="dontshowButton" accept="application/pdf"  id="file2input" value="{!file2}" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <apex:actionFunction action="{!upload1}" status="status"  name="add1">
+                            <apex:param name="file1value" value="abcm" id="file1action" assignTo="{!file1}" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!upload2}" status="status"  name="add2">
+                            <apex:param name="file2value" value="xyzd" id="file2action" assignTo="{!file2}" />
+                        </apex:actionFunction>
                     </div>
+                    <script>
+                    function addDoc(x) {
+                        console.log(x);
+                        if (x == "a") {
+                            var a = document.getElementById('{!$Component.file1input}');
+                            a.click();
+
+                        } else if (x == "b") {
+                            var b = document.getElementById('{!$Component.file2input}');
+                            b.click();
+                        }
+                    }
+
+                    function update1(x) {
+                        console.log('function called 1' + x);
+                        add1(x);
+                    }
+
+                    function update2(y) {
+                        console.log('function called 2' + y);
+                        add2(y);
+                    }
+                    </script>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <h1 class="heading-xlarge">
-                        {!headerText1}
-                    </h1>
-                    <p class="lede">
-                        <apex:outputText escape="false" value="{!displayText}" id="displayText" />
-                    </p>
-                    <h2 class="heading-large">
-                        <apex:outputText escape="false" value="{!displayText2}" id="displayText2" />
-                    </h2>
-                    <apex:outputText escape="false" value="{!displayText3}" id="displayText3" />
-                    <p class="lede">
-                        <apex:outputText escape="false" value="{!displayText4}" id="displayText4" />
-                    </p>
-                    <apex:outputText escape="false" value="{!displayText5}" id="displayText5" />
-                    <!--<apex:outputPanel id="newattachmentspanel">
-                        <apex:repeat value="{!newAttachments}" var="att">
-                            <label class="form-label" for="fileName">
-                                File Name
-                            </label>
-                            <apex:inputText value="{!att.name}" id="fileName" />
-                            <label class="form-label" for="description">
-                                Description
-                            </label>
-                            <apex:inputText value="{!att.description}" id="description" />
-                            <label class="form-label" for="file">
-                                File
-                            </label>
-                            <apex:inputFile value="{!att.body}" filename="{!att.name}" id="file" />
-                        </apex:repeat>
-                    </apex:outputPanel> -->
-                    <apex:outputPanel id="prototypeAttachments">
-                        <style>
-                        .SI-FILES-STYLIZED label.cabinet {
-                            width: 79px;
-                            height: 22px;
-                            background: url(btn-choose-file.gif) 0 0 no-repeat;
-                            display: block;
-                            overflow: hidden;
-                            cursor: pointer;
-                        }
-                        
-                        .SI-FILES-STYLIZED label.cabinet input.file {
-                            position: relative;
-                            height: 100%;
-                            width: auto;
-                            opacity: 0;
-                            -moz-opacity: 0;
-                            filter: progid: DXImageTransform.Microsoft.Alpha(opacity=0);
-                        }
-                        </style>
-                        <div class="form-group">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="doc-name">Document</th>
-                                        <th scope="col">File name</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <apex:repeat value="{!newAttachments}" var="att">
-                                        <tr>
-                                            <td>{!att.name}</td>
-                                            <td>
-                                                <label class="cabinet">
-                                                    <apex:inputFile accept="PDF, pdf" value="{!att.body}" filename="{!att.name}" id="file" styleclass="file" />
-                                                </label>
-                                                <!--                                                <label for="file">Add document</label>
-
-                                                <input type='File' value="{!att.body}" id="file" />-->
-                                            </td>
-                                        </tr>
-                                    </apex:repeat>
-                                </tbody>
-                            </table>
-                        </div>
+                    <apex:outputPanel id="SH19Panel" rendered="{!formType == 'SH19'}">
+                        <p>You must also file a directors’ statement of compliance within 15 days of the date of the resolution. You must file this document on paper.</p>
                     </apex:outputPanel>
-                    <p>
-                        <br/>
-                        <br/>
-                        <!-- <apex:commandLink value="Add More" action="{!addMore}" />&nbsp;&nbsp;&nbsp; 
-                        <apex:commandLink value="Remove" action="{!remove}" /> &nbsp;&nbsp;&nbsp; 
-                        <apex:commandLink value="Save" action="{!save}" />-->
-                    </p>
+                    <p>If you wish to use the same-day service, we will need all these documents.</p>
                 </div>
-                <apex:outputPanel id="BuildTable" rendered="false">
-                    <table class="check-your-answers" render='false'>
-                        <thead>
-                            <tr>
-                                <th colspan="4">{!headerText2}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Download</td>
-                                <td>Name</td>
-                                <td>Description</td>
-                            </tr>
-                            <br/>
-                            <apex:repeat value="{!attachments}" var="sp" id="theRepeat">
-                                <tr>
-                                    <td>
-                                        <apex:outputLink value="{!URLFOR($Action.Attachment.Download, sp.Id)}" target="_blank">Download</apex:outputLink>
-                                    </td>
-                                    <td>
-                                        <apex:outputText value="{!sp.Name}" id="Name" />
-                                    </td>
-                                    <td>
-                                        <apex:outputText value="{!sp.Description}" id="Description" />
-                                    </td>
-                                    <!--
-                                    <td>
-                                        <apex:commandLink value="Delete" onclick="deleter(this)"  />
-                                        <input id="" type="hidden" value="{!sp.Id}"/>
-                                    </td> -->
-                                </tr>
-                            </apex:repeat>
-                            <!--
-                            <apex:actionFunction name="deleteAttachment" action="{!DeleteAttachments}">
-                                <apex:param name="attachmentIdParam" value="" assignTo="{!attachmentId}" />
-                            </apex:actionFunction>
-                            <script>
-                                
-                                function deleter(somevalue){
+                <apex:actionregion >
 
-
-                                    alert(somevalue);
-                                    deleteAttachment(somevalue);
-
-                                }
-
-                            </script>
-                            -->
-                        </tbody>
-                    </table>
-                    <br/>
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                </apex:actionregion>
+                <br />
+                <br/>&nbsp;
+                <!-- <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp; -->
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
-                <br /> &nbsp;
-                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
             </apex:form>
         </apex:define>
     </apex:composition>

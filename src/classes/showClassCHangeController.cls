@@ -16,14 +16,6 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoye&    2016-13-06  Initial development.
 */
 public with sharing class showClassCHangeController extends TransactionStepControllerBase {
-	public String classofshares {
-		get;
-		set;
-	}
-	public String classofsharesNew {
-		get;
-		set;
-	}
 	public String companyName {
 		get;
 		set;
@@ -33,10 +25,6 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 		set;
 	}
 	public Boolean hasPageErrors {
-		get;
-		set;
-	}
-	public String currentErrorMessage {
 		get;
 		set;
 	}
@@ -91,6 +79,20 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 	public Id shareID {get; set;}
 
 	public String previousButtonText {get; set;}
+	public Integer varDay {
+		get;
+		set;
+	}
+	public Integer varYear {
+		get;
+		set;
+	}
+	public Integer varMonth {
+		get;
+		set;
+	}
+	public String errorVal1 {get; set;}
+	public String errormessage1 {get; set;}
 	public showClassCHangeController() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -131,19 +133,70 @@ public with sharing class showClassCHangeController extends TransactionStepContr
 		} catch (Exception e) {
 			System.debug('DML Error with ' + e.getMessage());
 		}
-		return previousAction();
+		PageReference pg = new PageReference('/ChangeShareClassName');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 	private void persistStep() {
 		submissionMgr.persist();
 	}
 
 	public PageReference nextAction() {
+		if (varDay == null || varDay == 0 || varDay > 31) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct day';
+			return null;
+		}
+		if (varMonth == null || varMonth == 0 || varMonth > 12) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct Month';
+			return null;
+		}
+		if (varYear == null || varyear == 0 ) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct Year';
+			return null;
+		}
+		if (varYear < 1700 ) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Please enter the correct Year (later than 1700)';
+			return null;
+		}
+		Datetime sharechangeDate = Datetime.newInstance(varYear, varMonth, varDay);
+		sharechangeDate.format('dd MMMMM yyyy');
+		if (sharechangeDate > Date.Today()) {
+			hasPageErrors = true;
+			errorVal1 = 'error';
+			errormessage1 = 'Date must not be in the future';
+			return null;
+		}
+		Date savedDate = sharechangeDate.date();
+		List<shares__c> sharestoSave = new List<Shares__c>();
+		for (Shares__c sharestoAddDatesto : submissionMgr.submission.Shares__r) {
+			if (sharestoAddDatesto.SHARETYPE__c == submissionMgr.submission.Form_Name__c) {
+				sharestoAddDatesto.Date__c = savedDate;
+				sharestoSave.add(sharestoAddDatesto);
+			}
+		}
+		update sharestoSave;
+		// persist and save if validaiton passes
 		if (!validatePageState()) return Page.TransactionException;
 		persistStep();
-		return nextStep();
+		PageReference pg = new PageReference('/Review');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 	public PageReference previousAction() {
 		if (!validatePageState()) return Page.TransactionException;
-		return previousStep();
+		PageReference pg = new PageReference('/ChangeShareClassName');
+		pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		pg.setRedirect(true);
+		return pg;
 	}
 }

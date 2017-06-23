@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email template to play with</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Carls template</name>
+    <style>none</style>
+    <subject>Docusign request to approve closure for {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c})  Ref: FE{!Transaction__c.Id}</subject>
+    <textOnly>Companies House Error Status
+
+Request  to close {!Transaction__c.Status}
+
+Check following errors {!Transaction__c.Status}({!Transaction__c.CompanyNumber__c}) 
+
+FE{!Transaction__c.Id}.</textOnly>
+    <type>custom</type>
+</EmailTemplate>

@@ -1,4 +1,4 @@
-<apex:page controller="CH_SearchControllerByInsolvencyClass" sidebar="false">
+<apex:page cache="false" controller="CH_SearchControllerByInsolvencyClass" sidebar="false">
     
     
     <apex:form >

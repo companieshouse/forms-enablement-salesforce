@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>SH19 CapitalStep1</label>
+    <protected>true</protected>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -47,14 +48,18 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Share capital</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Statement of capital&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">What is the share currency?</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Tell us what the share capital will be following the reduction.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

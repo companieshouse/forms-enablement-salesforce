@@ -22,6 +22,16 @@ public with sharing class TransactionTriggerHandler {
 
         for (Transaction__c transactionupdater: transactionsList) {
             // list of transactions to update at the end
+            if( transactionupdater.Status__c == 'deleteContact')
+            {
+                //Get the associated contacts as I know there will be only one contact then I can do a DML in a for loop
+                List<Transaction__c> tCont = [Select Id, (SELECT Id FROM Contacts__r) From Transaction__c where Id = :transactionupdater.Id];
+
+                if(tCont[0].Contacts__r != null)  
+                {
+                    delete tCont[0].Contacts__r;
+                }
+            }
             if (transactionupdater.Status__c == AppConstants.REQUEST_STATUS_PENDING_SIGNATURES) {
                 // loop through transactions from trigger and find the signed status
 
@@ -90,9 +100,9 @@ public with sharing class TransactionTriggerHandler {
     public static void afterUpdate(List <Transaction__c> transactionsList)
     {
 
-
+        System.debug('LISTDEBUG' + transactionsList);
         List < Transaction__c > transactionsToUpdate = new List < Transaction__c > ();
-        List < Transaction__c > transactionListRecords = [Select Id, ApplicationBaseURL__c,Valid_Step_Ids__c, Status__c, MultipleDirectors__c From Transaction__c Where Id IN: transactionsList AND Status__c = : AppConstants.REQUEST_STATUS_SIGNED AND (MultipleDirectors__c = true )];
+        List < Transaction__c > transactionListRecords = [Select Id, ApplicationBaseURL__c,Valid_Step_Ids__c, Status__c, MultipleDirectors__c From Transaction__c Where Id IN: transactionsList AND Status__c = : AppConstants.REQUEST_STATUS_SIGNED AND SentreviewURL__c = false And isReviewTrigger__c = false AND SoleDirectorPresenter__c = false];
         for (Transaction__c transactionupdater: transactionListRecords) {
             // list of transactions to update at the end
 
@@ -106,8 +116,31 @@ public with sharing class TransactionTriggerHandler {
             String docuSignStepID = stepsId[stepsId.size() - 1];
 
             TransactionManager reviewerManager = new TransactionManager((Id) docuSignStepID);
-
-            PageReference pr = reviewerManager.nextStep(subIDs);
+                
+            Transaction_Type_Step__mdt nextStep;
+            
+            for (Transaction_Type_Step__mdt step : reviewerManager.stepsById.values()){
+                if (step.Step_Number__c > Integer.valueOf(reviewerManager.currentStep.Step_Number__c)){
+                    
+                    
+                    if (step.Step_Type__c.equalsIgnoreCase(AppConstants.TRANSACTION_TYPE_VISUALFORCE_PAGE)){
+                        nextStep = step;
+                        break;
+                            
+                    } else if (step.Step_Type__c.equalsIgnoreCase(AppConstants.TRANSACTION_TYPE_APEX_CODE)){
+                        
+                        Id nextStepId = reviewerManager.getNextStepIdByApex(step.Apex_Class_Name__c,subIDs );
+                        nextStep = reviewerManager.stepsById.get(nextStepId);
+                        break;
+                                            
+                    }           
+                }
+            }
+                        
+            PageReference pr = new PageReference('/'+nextStep.Visualforce_Page_Name__c);
+            pr.getParameters().put('c', SecurityManager.encryptText(subIDs+AppConstants.ID_DELIM_CHAR+nextStep.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));              
+                    
+            //PageReference pr = reviewerManager.nextStep(subIDs);
 
             redirectReviewURL += pr.getUrl();
 
@@ -120,6 +153,8 @@ public with sharing class TransactionTriggerHandler {
             Transaction__c transactionshim = new Transaction__c();
             transactionshim.Id = transactionupdater.Id;
             transactionshim.isSigningFinished__c = true;
+            transactionshim.isReviewTrigger__c = true;
+            transactionshim.Valid_Step_Ids__c = transactionupdater.Valid_Step_Ids__c + AppConstants.ID_DELIM_CHAR + nextStep.Id;
             transactionshim.MultipleDirectors__c = transactionupdater.MultipleDirectors__c;
             transactionshim.ReviewRedirect__c = transactionupdater.ReviewRedirect__c;
             transactionsToUpdate.add(transactionshim);

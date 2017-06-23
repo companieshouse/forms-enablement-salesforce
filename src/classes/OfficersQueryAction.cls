@@ -11,7 +11,7 @@ public with sharing class OfficersQueryAction {
  * ab
  **/
 
-
+    public static Integer active_count {get; set;}
     //Method to get a list of officers from the API
     public static List<CompaniesHouse.OfficerDetails> getOfficers(String companyNumber) {
         List<CompaniesHouse.OfficerDetails> directorDetailsList;
@@ -22,6 +22,7 @@ public with sharing class OfficersQueryAction {
         req.get_CH_Search_functionByOfficerList();
 
         directorDetailsList = req.itemsToDisplay;
+        active_count = req.active_count;
 
         return directorDetailsList;
 

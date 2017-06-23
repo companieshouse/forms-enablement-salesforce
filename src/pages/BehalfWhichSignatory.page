@@ -16,61 +16,102 @@
    Ver. Author        Date        Detail
    1.0  SylvainP      2016-06-17  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-   <apex:composition template="TransactionPageTemplate">
-      <apex:define name="content">
-      <apex:form >
+<apex:page cache="false" title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                    <div class="form-group {!errorVal}">
+                        <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+                        <apex:outputPanel id="divDirector">
+                            <fieldset>
+                                <span class='error-message' id='error-span'>{!currentErrorMessage}</span>
+                                <legend class='visuallyhidden'>Please select who you will sign on behalf</legend>
+                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                    <label class="block-label" for="radio-{!director.officer.Id}">
+                                        <input class="radioButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatoryBehalf}" onchange="changeValue(this);">{!director.officerTXT}</input>
+                                    </label>
+                                </apex:repeat>
+                            </fieldset>
+                        </apex:outputPanel>
+                    </div>
+                    <div class='form-group'>
+                        <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        <br />
+                        <br />
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    </div>
+                    <apex:actionFunction status="status" action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
+                        <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
+                        <apex:param name="paramPresentervalue" value="" id="t" assignTo="{!valueRadio}" />
+                    </apex:actionFunction>
+                    <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                    <script type="text/javascript">
+                    function changeValue(out) {
+                        var radioClicked = document.getElementById(out.id);
+                        if (radioClicked.checked == true) {
+                            updateSelectedPresenter(radioClicked.name, 'true');
+                        } else if (radioClicked.checked == false) {
+                            updateSelectedPresenter(radioClicked.name,'false');
+                        }
 
-         <div class="form-group">
-         <h1 class="heading-xlarge"><apex:outputText value="{!headerBox1}"></apex:outputText></h1>
+                    }
+                    </script>
+                </apex:outputPanel>
+                <script>
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        BehalfWhichSignatoryController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
 
-         <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
-         
-         <apex:outputPanel id="emptyPanel"/>
+                    }
+                  }
 
-        <apex:outputPanel id="divDirector">
-            <div>
-            <fieldset>
-	            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-	            <label class="block-label" for="radio-{!director.officer.Id}">
-	               <input class="radioButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isPresenter}" onchange="changeValue(this);">{!director.officerTXT}</input>
-              </label><br/>
-	            </apex:repeat>
-	         </fieldset>
-            </div>
-            </apex:outputPanel>
-         </div>
-         <br /><br />
-           <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="error" /><br />
-		 <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
 
-     <apex:actionFunction action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
-			<apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
-		 </apex:actionFunction>
-        <script type="text/javascript">
-         $j = jQuery.noConflict();
-		 	function changeValue(out) 
-		     {
-		     	
-		       var radioClicked = document.getElementById(out.id);
-
-
-		       updateSelectedPresenter(radioClicked.name);
-
-		       $('.radioButtonRepeat').each(function(){
-				   if(this.name == radioClicked.name)
-				   {
-				   		this.checked = true;
-				   }
-				   else{
-				   		this.checked = false;
-				   }
-				   	
-				   
-				});
-		     }
-		</script>
-      </apex:form>  
-      </apex:define>
-   </apex:composition>
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
 </apex:page>

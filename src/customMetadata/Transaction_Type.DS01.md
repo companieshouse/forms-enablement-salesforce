@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>DS01 - Dissolution</label>
+    <protected>true</protected>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +12,7 @@
     </values>
     <values>
         <field>Below_Button_Text4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Below_Button_Text5__c</field>
@@ -23,7 +24,12 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
+Other ways to close a company
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -32,6 +38,64 @@
     <values>
         <field>Below_Button_Title__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>CompanySearchedBody1__c</field>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Review the information below and confirm that this is the correct company.&lt;/p&gt;</value>
+    </values>
+    <values>
+        <field>CompanySearchedHeader1__c</field>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Confirm Searched Company&lt;/h1&gt;</value>
+    </values>
+    <values>
+        <field>CompanySearchedPreviousButton__c</field>
+        <value xsi:type="xsd:string">Not the company you want to close?</value>
+    </values>
+    <values>
+        <field>Company_Page_Body_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_Body_4__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT1__c</field>
+        <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
+&lt;details&gt;
+&lt;summary&gt;
+&lt;span class=&quot;summary&quot;&gt;Help with company number&lt;/span&gt;
+&lt;/summary&gt;
+&lt;div class=&quot;panel panel-border-narrow&quot;&gt;
+&lt;p&gt;
+A company number is a unique number issued by Companies House whe</value>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT2__c</field>
+        <value xsi:type="xsd:string">n a limited company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+    </values>
+    <values>
+        <field>Company_Page_HiddenT3__c</field>
+        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;/div&gt;</value>
+    </values>
+    <values>
+        <field>Company_Page_Title__c</field>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Tell us which company you want to close
+&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Expiry_Date_Length__c</field>
@@ -51,69 +115,85 @@
     </values>
     <values>
         <field>GuidanceWarningText__c</field>
-        <value xsi:type="xsd:string">The company understands that it is responsible for notifying all interested parties</value>
+        <value xsi:type="xsd:string">The directors understand that they are responsible for ensuring all interested parties are notified.</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Understanding the company&apos;s responsibilities&lt;/h1&gt;&lt;h3 class=&quot;heading-medium&quot;&gt;Who to tell about your company closing&lt;/h3&gt;&lt;p&gt;A company must inform all interested parties that it is going to close</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Who to tell about the company&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">. All interested parties must be informed within 7 days of the application being submitted.&lt;br/&gt;Interested parties may include:&lt;/p&gt;&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Read the</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
-        <value xsi:type="xsd:string">full list of &lt;a href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration-gp4#how-to-apply-for-strike-off-and-who-to-tell&quot;&gt;who to tell&lt;span class=&quot;visuallyhidden&quot;&gt; about yo</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+The Director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">ur company closing&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;span class=&quot;visuallyhidden&quot;&gt;Warning&lt;/span&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+Interested parties include:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">It is an offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;who to tell.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;div class=&quot;notice&quot; style=&quot;margin-bottom: 1.5em;&quot;&gt;&lt;i class=&quot;icon icon-important&quot;&gt;&lt;/i&gt;&lt;strong class=&quot;bold-small&quot;&gt;It is a criminal offence not to tell all interested parties&lt;/strong&gt;&lt;/div&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">Before you start</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;
+Before you start
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+You must:
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;te</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You must:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;tell any director(s) of the company or any partner(s) of the partnership about this request&lt;/li&gt;
-&lt;li&gt;read the guidance on closing a company or partnership&lt;/li&gt;
-&lt;/ul&gt; It costs £8 to submit a request to close a</value>
+        <value xsi:type="xsd:string">ll all director(s) of the company about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a company&lt;/li&gt;&lt;/ul&gt;
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
+It costs £8.00 to submit a re</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">company or partnership (paid by debit or credit card or PayPal account). 
-
+        <value xsi:type="xsd:string">quest to close a company (paid by debit or credit card, PayPal account or Companies House account).
+&lt;/p&gt;
+&lt;p class=&quot;lede&quot;&gt;
 You&apos;ll need:
-&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;the company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director&lt;/li&gt;&lt;li&gt;a credit or debit ca</value>
+&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;th</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">rd or PayPal account.
-
-Your request will need to be approved by the sole director if there&apos;s only 1, by both if there are 2, or by the majority if there are more than 2. It will appear on the public register.</value>
+        <value xsi:type="xsd:string">e company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director&lt;/li&gt;&lt;li&gt;a credit or debit card, PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt;
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+Your request will need to be approved by the sole director if there&apos;s only 1, by both if there are 2, or by the majority if there are more than 2.
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">You can use this service to:
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+You can use this service to:
 &lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;request to strike off a limited company&lt;/li&gt;
-&lt;li&gt;request to strike off a limited liability partnership (LLP)&lt;/li&gt;
-&lt;/ul&gt;</value>
+&lt;/ul&gt;
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">Closing a limited company or limited liability partnership</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+Closing a limited company
+&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Product_Code__c</field>

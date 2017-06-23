@@ -7,7 +7,7 @@
  * 
  * Author: eliot.stock@methods.co.uk
  */
-public class SmartPayUrl {
+public with sharing class SmartPayUrl {
     
     @TestVisible
     private static final String ENV_TEST = 'TEST';
@@ -150,6 +150,49 @@ public class SmartPayUrl {
         return url;
     }
     
+    public Boolean checkSigningString(String authResultParam, String pspReferenceParam, String merchantReferenceParam, String skinCodeParam, String paymentMethodParam, String shopperLocalParam, String merchantSig)
+    {
+        //String combination5 = 'authResult:merchantReference:merchantReturnData:shopperLocale:skinCode:CANCELLED:a0J4E000000wLTxUAM:a0J4E000000wLTxUAM:en_GB:rDzAns5W';
+        //authResult:merchantReference:merchantReturnData:paymentMethod:pspReference:shopperLocale:skinCode:AUTHORISED:SKINTEST-test:YourMerchantReturnData:visa:7914447419663319:en_GB:314lwMhy
+
+        SmartPay_Settings__c settings = getSettings();
+
+        String signingStringStart = 'authResult:merchantReference:merchantReturnData:';
+        String signingStringEnd = 'shopperLocale:skinCode:';
+
+        String valuesStringStart = authResultParam + ':' + merchantReferenceParam + ':' + merchantReferenceParam + ':';
+        String valuesStringEnd =  shopperLocalParam +':' + skinCodeParam;
+        
+        if(paymentMethodParam != '')
+        {
+            signingStringStart += 'paymentMethod:';
+            valuesStringStart += paymentMethodParam +':';
+        }
+
+        if(pspReferenceParam != '')
+        {
+            signingStringStart += 'pspReference:';
+            valuesStringStart += pspReferenceParam +':';
+        }
+
+        String signingString = signingStringStart + signingStringEnd + valuesStringStart + valuesStringEnd;
+
+        System.debug('Signing String' + signingString);
+
+        String hmacKey = settings.HMAC_key__c;
+
+        Blob sig = Crypto.generateMac('HmacSHA256', Blob.valueOf(signingString),EncodingUtil.convertFromHex(hmacKey));
+
+        String sigEncoded = EncodingUtil.base64Encode(sig);
+
+        System.debug('Encoded answer: ' + sigEncoded + ' and result:' + merchantSig);
+
+        if(merchantSig == sigEncoded)
+            return true;
+
+        return false;
+    }
+
     /**
      * Generate the URL to which SmartPay will pass the user back after they've paid. Should be
      * on the same hostname as we are now. No need to URL encode it.
@@ -187,7 +230,7 @@ public class SmartPayUrl {
 		
 	}
     
-    public class Builder {
+    public with sharing class Builder {
         
         private SmartPayUrl url;
         

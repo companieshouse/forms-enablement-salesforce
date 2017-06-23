@@ -3,6 +3,7 @@
     <fields>
         <fullName>Below_Button_Text2__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Text2</label>
         <required>false</required>
         <type>TextArea</type>
@@ -10,6 +11,7 @@
     <fields>
         <fullName>Below_Button_Text3__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Text3</label>
         <required>false</required>
         <type>TextArea</type>
@@ -17,6 +19,7 @@
     <fields>
         <fullName>Below_Button_Text4__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Text4</label>
         <required>false</required>
         <type>TextArea</type>
@@ -24,6 +27,7 @@
     <fields>
         <fullName>Below_Button_Text5__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Text5</label>
         <required>false</required>
         <type>TextArea</type>
@@ -31,6 +35,7 @@
     <fields>
         <fullName>Below_Button_Text6__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Text6</label>
         <required>false</required>
         <type>TextArea</type>
@@ -38,6 +43,7 @@
     <fields>
         <fullName>Below_Button_Text__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Text</label>
         <required>false</required>
         <type>TextArea</type>
@@ -45,6 +51,7 @@
     <fields>
         <fullName>Below_Button_Title2__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Title2</label>
         <required>false</required>
         <type>TextArea</type>
@@ -52,13 +59,105 @@
     <fields>
         <fullName>Below_Button_Title__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Below Button Title</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanySearchedBody1__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Searched Body 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanySearchedHeader1__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Searched Header 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanySearchedPreviousButton__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Searched Previous Button</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_1__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page Body 1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_2__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page Body 2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_3__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page Body 3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Body_4__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page Body 4</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_HiddenT1__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page HiddenT1</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_HiddenT2__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page HiddenT2</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_HiddenT3__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page HiddenT3</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_Page_Title__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Company Page Title</label>
         <required>false</required>
         <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Expiry_Date_Length__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Expiry Date Length</label>
         <precision>18</precision>
         <required>false</required>
@@ -69,6 +168,7 @@
     <fields>
         <fullName>Family__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Family</label>
         <picklist>
             <picklistValues>
@@ -78,12 +178,14 @@
             <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
+        <required>false</required>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>FeeFastTrack__c</fullName>
         <description>This field represents the cost of the form for the fast track payment.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please input the amount for an user to pay if they want the fast track option for the transaction</inlineHelpText>
         <label>Fee Fast-track</label>
         <precision>9</precision>
@@ -95,6 +197,7 @@
     <fields>
         <fullName>Fee__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Fee</label>
         <precision>9</precision>
         <required>false</required>
@@ -106,6 +209,7 @@
         <fullName>GuidanceWarningText__c</fullName>
         <description>Field used to display dynamic text against the checkbox item from the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Text that will appear against the checkbox of the guidance page</inlineHelpText>
         <label>Guidance Warning Text</label>
         <required>false</required>
@@ -115,6 +219,7 @@
         <fullName>Guidance_Text_1__c</fullName>
         <description>This field is used to build the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
         <label>Guidance Text 1</label>
         <required>false</required>
@@ -124,6 +229,7 @@
         <fullName>Guidance_Text_2__c</fullName>
         <description>This field is used to build the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
         <label>Guidance Text 2</label>
         <required>false</required>
@@ -133,6 +239,7 @@
         <fullName>Guidance_Text_3__c</fullName>
         <description>This field is used to build the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
         <label>Guidance Text 3</label>
         <required>false</required>
@@ -142,6 +249,7 @@
         <fullName>Guidance_Text_4__c</fullName>
         <description>This field is used to build the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
         <label>Guidance Text 4</label>
         <required>false</required>
@@ -151,6 +259,7 @@
         <fullName>Guidance_Text_5__c</fullName>
         <description>This field is used to build the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
         <label>Guidance Text 5</label>
         <required>false</required>
@@ -160,6 +269,7 @@
         <fullName>Guidance_Text_6__c</fullName>
         <description>This field is used to build the guidance page</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Populate this field to build the Guidance page from HTML code</inlineHelpText>
         <label>Guidance Text 6</label>
         <required>false</required>
@@ -168,6 +278,7 @@
     <fields>
         <fullName>Landing_Page_Text2__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Text2</label>
         <required>false</required>
         <type>TextArea</type>
@@ -175,6 +286,7 @@
     <fields>
         <fullName>Landing_Page_Text3__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Text3</label>
         <required>false</required>
         <type>TextArea</type>
@@ -182,6 +294,7 @@
     <fields>
         <fullName>Landing_Page_Text4__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Text4</label>
         <required>false</required>
         <type>TextArea</type>
@@ -189,6 +302,7 @@
     <fields>
         <fullName>Landing_Page_Text5__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Text5</label>
         <required>false</required>
         <type>TextArea</type>
@@ -196,6 +310,7 @@
     <fields>
         <fullName>Landing_Page_Text6__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Text6</label>
         <required>false</required>
         <type>TextArea</type>
@@ -203,6 +318,7 @@
     <fields>
         <fullName>Landing_Page_Text__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Text</label>
         <required>true</required>
         <type>TextArea</type>
@@ -210,6 +326,7 @@
     <fields>
         <fullName>Landing_Page_Title__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Landing Page Title</label>
         <required>true</required>
         <type>TextArea</type>
@@ -218,6 +335,7 @@
         <fullName>Product_Code__c</fullName>
         <description>Product code as defined by finance for this transaction. Will only need a product code if a payment is required.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Product Code</label>
         <precision>8</precision>
         <required>false</required>
@@ -228,6 +346,7 @@
     <fields>
         <fullName>Serialisation_Class_Name__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Serialisation Class Name</label>
         <length>80</length>
         <required>false</required>
@@ -239,12 +358,14 @@
         <defaultValue>false</defaultValue>
         <description>Denotes if the Guidance page has a standard view (DS01)</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>StandardGuidanceView</label>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>above_button_text__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>above button text</label>
         <required>false</required>
         <type>TextArea</type>
@@ -252,6 +373,7 @@
     <fields>
         <fullName>companySearchPageText__c</fullName>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>companySearchPageText</label>
         <length>255</length>
         <required>false</required>
@@ -263,6 +385,7 @@
         <defaultValue>false</defaultValue>
         <description>Denotes a custom view (e.g. Share capital, unprescribed forms, etc.)</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <label>customGuidanceView</label>
         <type>Checkbox</type>
     </fields>
@@ -271,6 +394,7 @@
         <defaultValue>false</defaultValue>
         <description>This field is used to notify is the form contains a guidance or not.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please select this field if the form contains a guidance page</inlineHelpText>
         <label>has Guidance Page?</label>
         <type>Checkbox</type>
@@ -280,6 +404,7 @@
         <defaultValue>false</defaultValue>
         <description>This field will configure the payment page to allow the user to pay by using account.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please select this field if your form is going to allow account payment by the user.</inlineHelpText>
         <label>is account payment allowed?</label>
         <type>Checkbox</type>
@@ -289,6 +414,7 @@
         <defaultValue>false</defaultValue>
         <description>This field will configure the payment page to allow the user to pay by using Card.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please select this field if your form is going to allow card payment by the user.</inlineHelpText>
         <label>is card for payment allowed?</label>
         <type>Checkbox</type>
@@ -298,6 +424,7 @@
         <defaultValue>false</defaultValue>
         <description>This field show if the form need to be signed digitally</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>This field show if the form need to be signed digitally</inlineHelpText>
         <label>is digital signature needed?</label>
         <type>Checkbox</type>
@@ -307,6 +434,7 @@
         <defaultValue>false</defaultValue>
         <description>Please select this option if you want the Directors Email screen to be validated with the majority rule</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please select this option if you want the Directors Email screen to be validated with the majority rule</inlineHelpText>
         <label>isMajorityForm?</label>
         <type>Checkbox</type>
@@ -316,6 +444,7 @@
         <defaultValue>false</defaultValue>
         <description>This field notify if the transaction will need a to load the payment page or not</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please indicate if the Form required a payment, make sure to populate fee of the form.</inlineHelpText>
         <label>is payment required?</label>
         <type>Checkbox</type>
@@ -325,6 +454,7 @@
         <defaultValue>false</defaultValue>
         <description>This field will configure the payment page to allow the user to pay by using Paypal.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please select this field if your form is going to allow paypal payment by the user.</inlineHelpText>
         <label>is paypal for payment allowed?</label>
         <type>Checkbox</type>
@@ -334,6 +464,7 @@
         <defaultValue>false</defaultValue>
         <description>This field will configure the payment page to allow the user to pay by using same day payment.</description>
         <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
         <inlineHelpText>Please select this field if your form is going to allow same day payment by the user.</inlineHelpText>
         <label>is same day payment allowed?</label>
         <type>Checkbox</type>

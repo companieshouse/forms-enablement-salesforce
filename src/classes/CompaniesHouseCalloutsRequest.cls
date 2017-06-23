@@ -13,7 +13,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
     private string endpoint;
     private string authenticationToken;
     private string endpointCompanyNumber;
-    public boolean success;
+    public Boolean success {get; set;}
     private static final Integer SUCCESS_CODE = 200;
   
     //WSCalloutsRequest Constructor
@@ -140,6 +140,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         HttpRequest req = new HttpRequest();
         req.setEndpoint(hitURL);
         req.setMethod('GET');
+        req.setTimeout(120000);
         
         Blob headerValue = Blob.valueOf(this.authenticationToken + ':');
         String authorizationHeader = 'Basic ' + EncodingUtil.base64Encode(headerValue);
@@ -154,11 +155,12 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         } catch (CalloutException e) {
                 return e.getMessage();
         }
-        if (res.getStatusCode() != SUCCESS_CODE)
-            success = false;
-        else
+        System.debug('STATUS CODE REQUEST:' + res.getStatusCode() );
+        
+        if (res.getStatusCode() == SUCCESS_CODE || res.getStatusCode() == 404)
             success = true;
-
+        else
+            success = false;
         return res.getBody(); 
     
     }

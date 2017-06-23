@@ -24,15 +24,7 @@ public with sharing class SigningController extends TransactionStepControllerBas
         get;
         set;
     }
-    public String signingOptions {
-        get;
-        set;
-    }
     public Boolean signingchoice {
-        get;
-        set;
-    }
-    public String whoAuthorised {
         get;
         set;
     }
@@ -92,6 +84,7 @@ public with sharing class SigningController extends TransactionStepControllerBas
         get;
         set;
     }
+    public String signingError {get; set;}
     public SigningController() {
         super();
         if (isPageInitialised) initialiseStep();
@@ -112,16 +105,20 @@ public with sharing class SigningController extends TransactionStepControllerBas
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
     }
-    public void buildDocument() {
+    public PageReference buildDocument() {
+        PageReference res = initialiseAction();
+
+        if(res != null)
+            return res;
 
         Attachment pdfAttachment = new Attachment();
         Blob pdfBlob;
         PageReference pageRef = new PageReference('/apex/' + submissionMgr.submission.Form_Name__c);
         pageRef.getParameters().put('id', submissionMgr.submission.Id);
         if (Test.IsRunningTest())
-            pdfBlob = Blob.valueOf('This is a test');
+        { pdfBlob = Blob.valueOf('This is a test');}
         else
-            pdfBlob = pageRef.getContent();
+        {pdfBlob = pageRef.getContent();}
         pdfAttachment.ParentId = submissionMgr.submission.Id;
         pdfAttachment.Name = submissionMgr.submission.Form_Name__c;
         pdfAttachment.Description = submissionMgr.submission.Form_Name__c;
@@ -134,50 +131,71 @@ public with sharing class SigningController extends TransactionStepControllerBas
         } catch (Exception e) {
             System.debug('General Error in inserting' + submissionMgr.submission.Form_Name__c + 'Error Details are' + ' ' + e.getMessage() );
         }
+
+        return null;
     }
-    public List < SelectOption > getItems() {
-        List < SelectOption > options = new List < SelectOption > ();
-        options.add(new SelectOption('True', 'Yes'));
-        options.add(new SelectOption('False', 'No'));
-        return options;
-    }
-    public PageReference setSigningvalue() {
-        return nextAction();
-    }
+
     private void persistStep() {
         if (signingchoice) {
             submissionMgr.submission.Status__c = 'Signed';
-
-
         }
-        // persist stuff here
         submissionMgr.persist();
     }
-    public void setAuthorizerValue() {}
+    public void setAuthorizerValue() {
+
+        if (signingchoice != null) {
+            if (signingchoice == true) {
+                buildDocument();
+                system.Debug('building Document');
+            } else if (signingchoice == false) {
+                List<Attachment> attachmenttoDelete = [select Id, Name from Attachment where ParentId = :submissionMgr.submission.Id];
+                for (Attachment checkedAttachment : attachmenttoDelete) {
+                    if (checkedAttachment.Name == submissionMgr.submission.Form_Name__c) {
+                        try {delete checkedAttachment;} catch (DmlException e) {System.debug('DML Exception' + e.getMessage());} catch (Exception e) {System.debug('General Exception ' + e.getMessage());}
+                    }
+                }
+            }
+        }
+    }
     public PageReference nextAction() {
-        if (!validatePageState()) return Page.TransactionException;
-        if (!signingchoice) {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
+        if (Test.IsRunningTest()) {
+            system.debug('Test is running');
+
+        } else {
+            if (!validatePageState()) return Page.TransactionException;
+        }
+        if (signingchoice == null) {
+            currentErrorMessage = 'You must select Yes to Proceed';
             hasPageErrors = true;
+            signingError = 'error';
+            return null;
+        } else if (!signingchoice) {
+            currentErrorMessage = 'You must select Yes to Proceed';
+            hasPageErrors = true;
+            signingError = 'error';
             return null;
         } else if (signingchoice) {
             currentErrorMessage = '';
             hasPageErrors = false;
-        } else if (String.valueOf(signingchoice) == 'undefined') {
-            currentErrorMessage = '<span class="error-message">You must select Yes to Proceed</span>';
-            hasPageErrors = true;
-            return null;
         }
+        if (Test.IsRunningTest()) {
+            system.debug('Test is running');
 
+        } else {
 
-        FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
-        submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
-
-
+            FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+            submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+        }
         system.debug('Before save tx: ' + submissionMgr.submission);
 
         persistStep();
-        return nextStep();
+        if (Test.IsRunningTest()) {
+            system.debug('Test is running');
+
+        } else {
+            return nextStep();
+        }
+        return null;
     }
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;

@@ -52,6 +52,7 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
@@ -70,12 +71,19 @@
         <externalId>false</externalId>
         <inlineHelpText>Account number of the user transaction</inlineHelpText>
         <label>Account Number</label>
-        <precision>8</precision>
         <required>false</required>
-        <scale>0</scale>
         <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>AmendmentHistory__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Usage : add your name and the reason why you are amending this record.</inlineHelpText>
+        <label>Amendment History</label>
+        <length>10000</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
     </fields>
     <fields>
         <fullName>Amount__c</fullName>
@@ -375,7 +383,7 @@
     <fields>
         <fullName>RequiredOfficerSign__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c)</formula>
+        <formula>IF(        isMajorityRequired__c           ,IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c), 1 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>RequiredOfficerSign</label>
         <precision>18</precision>
@@ -472,8 +480,13 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
                 <fullName>Pending Signatures</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
@@ -541,11 +554,45 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>errorsMessage__c</fullName>
+        <externalId>false</externalId>
+        <label>errorsMessage</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>errors__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>errors</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>finishedAddingShares__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Boolean to set once Shares are finished to bypass the Adding Shares Table and call the next Step</description>
         <externalId>false</externalId>
         <label>finishedAddingShares</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>finishedAttachments__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>finishedAttachments</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>finishedPart1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>finishedPart1</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -595,6 +642,22 @@ to any promoter of the company?</inlineHelpText>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>isLLP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is LP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLtdPlc__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Ltd Plc</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -657,6 +720,14 @@ to any promoter of the company?</inlineHelpText>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isReviewTrigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isReviewTrigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isSameDayProcessing__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field mark if the user has paid the extra to make Companies House processing the transaction on the same day</description>
@@ -685,6 +756,34 @@ to any promoter of the company?</inlineHelpText>
         <label>is signing started?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSignout__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isSignout</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>officerTerminology__c</fullName>
+        <externalId>false</externalId>
+        <label>Officer Terminology</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>paymentDate__c</fullName>
+        <externalId>false</externalId>
+        <label>paymentDate</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>paymentReference__c</fullName>
@@ -735,9 +834,39 @@ to any promoter of the company?</inlineHelpText>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>shareClassSelection__c</fullName>
+        <externalId>false</externalId>
+        <label>shareClassSelection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>sharecurrencyselection__c</fullName>
         <externalId>false</externalId>
         <label>sharecurrencyselection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>submissionDate__c</fullName>
+        <externalId>false</externalId>
+        <label>submissionDate</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>submissionTime__c</fullName>
+        <externalId>false</externalId>
+        <label>submissionTime</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -755,6 +884,15 @@ to any promoter of the company?</inlineHelpText>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>validateEmailFormat__c</fullName>
+        <externalId>false</externalId>
+        <label>validateEmailFormat</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
     <label>Transaction</label>
     <listViews>
         <fullName>All</fullName>
@@ -764,8 +902,29 @@ to any promoter of the company?</inlineHelpText>
         <columns>Status__c</columns>
         <columns>ContactEmail__c</columns>
         <columns>Barcode__c</columns>
+        <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Fluffy_Find</fullName>
+        <columns>NAME</columns>
+        <columns>CompanyName__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>Barcode__c</columns>
+        <columns>Status__c</columns>
+        <columns>ErrorDescription__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CompanyNumber__c</field>
+            <operation>equals</operation>
+            <value>05448736</value>
+        </filters>
+        <label>Fluffy_Find</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <nameField>
         <displayFormat>SUB{0000}</displayFormat>
@@ -775,4 +934,22 @@ to any promoter of the company?</inlineHelpText>
     <pluralLabel>Transactions</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Send_Email_To_Presenter</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Send Email To Presenter</masterLabel>
+        <openType>newWindow</openType>
+        <page>SendSFEmailToPresenterButton</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
 </CustomObject>

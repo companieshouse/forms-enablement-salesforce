@@ -16,7 +16,7 @@ History
 Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-05-27  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Confirmation_Page}" 
+<apex:page cache="true" title="{!$Label.UI_Text_Confirmation_Page}" 
     showHeader="false" 
     sidebar="false" 
     standardStylesheets="false"
@@ -34,16 +34,33 @@ Ver. Author         Date        Detail
                 <strong class="heading-medium">{!submissionId}</strong>  
                 </p>-->
              </div>
-             <h2 class="heading-medium">{!displayText2}</h2>
-             <apex:outputtext value="{!displayText3}" escape="false"/>
+              <p class="lede">{!displayText1}</p>
             
-            <br/> 
-            <br/>
-            <apex:commandButton styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Submit}" rendered="{!NOT(isLastPage)}" />
+            
+            <apex:commandButton status="status" styleClass="button" value="{!$Label.UI_Text_Submit}" onclick="SubmitOnClick(this); return false;" rendered="{!NOT(isLastPage)}" />
 
-            <br/>
+            <apex:actionFunction name="doSubmit" action="{!nextAction}" />
+                      
+            </apex:form>
+          
+            <script language="Javascript">
+
+            function SubmitOnClick (objSubmitBtn) {
+              objSubmitBtn.disabled = true;
+              objSubmitBtn.value ='Submitted';
+              doSubmit();
+            }
+
+            // function disableBack() {
+            //   window.history.forward();
+            // }
             
-          </apex:form>
+            // window.onload = disableBack();
+
+            </script>
+
+
+          
        </apex:define>
     </apex:composition>
 

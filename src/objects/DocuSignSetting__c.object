@@ -22,6 +22,16 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>BrandId__c</fullName>
+        <externalId>false</externalId>
+        <label>BrandId</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>IntegratorKey__c</fullName>
         <externalId>false</externalId>
         <label>Integrator Key</label>

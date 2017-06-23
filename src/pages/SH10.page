@@ -1,4 +1,4 @@
-<apex:page standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
+<apex:page cache="false" standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
     <!-- note standard controller will change -->
     <!--  Page to render SH10 pdf -->
     <html>
@@ -136,7 +136,7 @@
         <div style="container">
             <header>
                 <div class="primary_header">
-                    <p><img src="{!$Resource.Logo}" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong class="headerText">{!Transaction__c.Form_Name__c}</strong><strong class="HeaderText2">(ef)</strong></p>
+                    <p><img src="{!$Resource.Logo}" />&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<strong class="headerText">{!Transaction__c.Form_Name__c}</strong><strong class="HeaderText2">(ef)</strong></p>
                 </div>
                 <div id="test" class="PDFBody">
                     <div id="rectangle">

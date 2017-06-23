@@ -11,7 +11,7 @@
  **/
 
 @isTest(SeeAllData=false)
-public class OfficersQueryAction_Test {
+public with sharing class OfficersQueryAction_Test {
 
 
 

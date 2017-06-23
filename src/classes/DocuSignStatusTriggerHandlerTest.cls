@@ -10,11 +10,12 @@
  * lb - updated rejected status test
  **/
 @isTest
-public class DocuSignStatusTriggerHandlerTest {
+public with sharing class DocuSignStatusTriggerHandlerTest {
 
 
 	static Transaction__c createTransaction(){
 		Transaction__c tx = CompaniesHouseTestData.getInstance().tx;
+        tx.Valid_Step_Ids__c = CompaniesHouseTestData.getInstance().testStep1.Id +'|'+CompaniesHouseTestData.getInstance().testStep2.Id;
 		insert tx;
 		
 		return tx;

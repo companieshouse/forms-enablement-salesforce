@@ -17,10 +17,7 @@ Ver. Author        Date        Detail
 1.1  Leo Bitoye&    2016-22-07  Removal of SH05 and SH07 capability.
 */
 public with sharing class cancelShares extends TransactionStepControllerBase {
-    public Date cancellationDate {
-        get;
-        set;
-    }
+
     public String companyName {
         get;
         set;
@@ -38,10 +35,6 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         set;
     }
     public Boolean hasPageErrors {
-        get;
-        set;
-    }
-    public String currentErrorMessage {
         get;
         set;
     }
@@ -85,18 +78,28 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         get;
         set;
     }
-    public List < Shares__c > allShares {
-        get;
-        set;
-    }
     public String previousButtonText {
         get;
         set;
     }
-    public String dayVal {get; set;}
-    public String monthVal {get; set;}
-    public String yearVal {get; set;}
-
+    public Date shareCancelDate {
+        get;
+        set;
+    }
+    public Integer varDay {
+        get;
+        set;
+    }
+    public Integer varYear {
+        get;
+        set;
+    }
+    public Integer varMonth {
+        get;
+        set;
+    }
+    public String errorVal1 {get; set;}
+    public String errormessage1 {get; set;}
 
     public cancelShares() {
         super();
@@ -119,9 +122,15 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         currentShares = new List < Shares__c > ();
         checkSharestoCancel();
     }
+    public PageReference goForward() {
+        if (submissionMgr.submission.finishedPart1__c == true) {
+            return nextStep();
+        }
+        return null;
+    }
     public void checkSharestoCancel() {
         for (Shares__c previouslycancelledshares : submissionMgr.submission.Shares__r) {
-            if (previouslycancelledshares.SHARETYPE__c == 'SH06') {
+            if (previouslycancelledshares.SHARETYPE__c == 'CANCELLEDSHARES') {
                 currentShares.add(previouslycancelledshares);
             }
         }
@@ -130,9 +139,53 @@ public with sharing class cancelShares extends TransactionStepControllerBase {
         }
     }
     private void persistStep() {
+        submissionMgr.submission.finishedPart1__c = true;
         submissionMgr.persist();
     }
     public PageReference nextAction() {
+        if (varDay == null || varDay == 0 || varDay > 31) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct day';
+            return null;
+        }
+        if (varMonth == null || varMonth == 0 || varMonth > 12) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct Month';
+            return null;
+        }
+        if (varYear == null || String.valueOf(varyear).length() < 4 ) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Year is too short';
+            return null;
+        }
+        if (varYear < 1700 ) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Please enter the correct Year after 1700';
+            return null;
+        }
+        shareCancelDate = Date.newInstance(varYear, varMonth, varDay);
+        //Date savedDate = shareCancelDate.date();
+
+        //shareCancelDate.format('dd MMMMM yyyy');
+        if (shareCancelDate > Date.Today()) {
+            hasPageErrors = true;
+            errorVal1 = 'error';
+            errormessage1 = 'Date must not be in the future';
+            return null;
+        }
+        List<shares__c> sharestoSave = new List<Shares__c>();
+        for (Shares__c sharestoAddDatesto : submissionMgr.submission.Shares__r) {
+            if (sharestoAddDatesto.SHARETYPE__c == 'CANCELLEDSHARES') {
+                sharestoAddDatesto.Date__c = shareCancelDate;
+                sharestoSave.add(sharestoAddDatesto);
+            }
+        }
+        update sharestoSave;
+        // persist and save if validaiton passes
         if (!validatePageState()) return Page.TransactionException;
         persistStep();
         return nextStep();

@@ -7,7 +7,7 @@
  * LB: May 9 2016 - Updated Trigger handler for rejected statuses
  * SP: June 30 2016 - Removed useless query and change the code to be more readable
  **/
-public class DocuSignStatusTriggerHandler{
+public with sharing class DocuSignStatusTriggerHandler{
 
     public static void beforeUpdate(List<dsfs__DocuSign_Status__c> newList){
         

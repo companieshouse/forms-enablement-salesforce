@@ -1,4 +1,4 @@
-<apex:page title="{!$Label.UI_Text_Error_Page}" 
+<apex:page cache="false" title="{!$Label.UI_Text_Error_Page}" 
     showHeader="false" 
     sidebar="false" 
     standardStylesheets="false">
@@ -13,12 +13,10 @@
 		    	</h1>
 		
 		    	<p>
-		      		Optional description of the errors and how to correct them
+		      		Please restart the process again.
 		    	</p>
 		
-		    	<ul class="error-summary-list">
-		      		<li><a href="#example-personal-details">Descriptive link to the question with an error</a></li>
-		    	</ul>
+		    	
 		
 		  	</div>
 

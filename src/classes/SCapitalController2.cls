@@ -69,15 +69,29 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 		set;
 	}
 	public String  currencyHidden {get; set;}
+	public String  aggHidden {get; set;}
+
 	public String prescribedParticular {get; set;}
 	public String shareClassType {get; set;}
 	public String currencyType {get; set;}
 	public Decimal numberofshares {get; set;}
 	public Decimal nominalvalue {get; set;}
 	public Boolean hasPageErrors {get; set;}
-	public String currentErrorMessage {get; set;}
 	public Decimal aggUnpaid {get; set;}
 	public Boolean showCurrency {get; set;}
+	public Boolean otherAgg {get; set;}
+	//errors
+	public String numberError {get; set;}
+	public String paidError {get; set;}
+	public String aggnomError {get; set;}
+	public String shareclassError {get; set;}
+	public String currencyError {get; set;}
+	public String paidErrormessage {get; set;}
+	public String aggnomErrormessage {get; set;}
+	public String shareclassErrormessage {get; set;}
+	public String currencyErrormessage {get; set;}
+	public String numberErrorMessage {get; set;}
+
 	public SCapitalController2() {
 		super();
 		if (isPageInitialised) initialiseStep();
@@ -113,10 +127,14 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 	private void persistStep() {
 		submissionMgr.persist();
 	}
+	public void showOtherAgg() {
+		aggUnpaid = null;
+		otherAgg = true;
+	}
 	public void showCurrencyOther() {
 
 		//if (currencyHidden == 'js-hidden') {
-		currencyHidden = '';
+		//currencyHidden = '';
 		showCurrency = true;
 
 		//} else if (currencyHidden == '') {
@@ -127,27 +145,60 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 	public PageReference addnewShares() {
 		if (currencyType == null || currencyType.length() == 0) {
 			hasPageErrors = true;
-			currentErrorMessage = 'Must add the share currency';
+			currencyError = 'error';
+			aggnomError = '';
+			numberError = '';
+			paidError = '';
+			shareclassError = '';
+			currencyErrormessage = 'Must add the share currency';
+			numberErrorMessage = '';
 			return null;
 		}
-		if (numberofshares == 0 || numberofshares == null) {
+		if (numberofshares == null || numberofshares == 0) {
 			hasPageErrors = true;
-			currentErrorMessage = 'Must add the number of shares';
+			numberError = 'error';
+			currencyError = '';
+			aggnomError = '';
+			paidError = '';
+			shareclassError = '';
+			numberErrorMessage = 'Must add the number of shares';
 			return null;
 		}
 		//throw new Form_CustomException('agg nominal value is ' + nominalvalue);
-		if (nominalvalue == 0 || nominalvalue == null) {
+		if (nominalvalue == null || nominalvalue == 0) {
 			hasPageErrors = true;
-			currentErrorMessage = 'Aggregate nominal value must be greater than 0';
+			aggnomError = 'error';
+			numberError = '';
+			currencyError = '';
+			paidError = '';
+			shareclassError = '';
+			paidErrormessage = '';
+			shareclassErrormessage = '';
+			aggnomErrormessage = 'Aggregate nominal value must be greater than 0';
 			return null;
 		}
-		if (aggUnpaid == 0) {
+		if (aggUnpaid  == null) {
+			hasPageErrors = true;
+			paidError = 'error';
+			aggnomError = '';
+			numberError = '';
+			currencyError = '';
+			shareclassError = '';
+			paidErrormessage = 'Please select whether the shares have been paid in full';
+			return null;
+		}
+		if (aggUnpaid == 0) {// check here?
 			hasPageErrors = false;
-			currentErrorMessage = 'Aggregate unpaid is 0';
+			paidErrormessage = 'Aggregate unpaid is 0';
 		}
 		if (shareClassType.length() < 1) {
 			hasPageErrors = true;
-			currentErrorMessage = 'You are missing the Share Class Type';
+			shareclassError = 'error';
+			paidError = '';
+			aggnomError = '';
+			numberError = '';
+			currencyError = '';
+			shareclassErrormessage = 'You are missing the Share Class Type';
 			return null;
 		}
 
@@ -345,7 +396,7 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 	}
 
 	public void grabCurrencyType () {
-		currencyHidden = 'js-hidden';
+		//currencyHidden = 'js-hidden';
 		showCurrency = false;
 		//throw new Form_CustomException('here is the currency type'+ currencyType);
 	}
@@ -358,7 +409,13 @@ public with sharing class SCapitalController2 extends TransactionStepControllerB
 
 	}
 	public void grabAggUnpaid () {
-		//throw new Form_CustomException('here is the agg unpaid '+ aggUnpaid);
+		if (aggUnpaid == 0) {
+			otherAgg = false;
+		} else if (aggUnpaid != 0) {
+			otherAgg = true;
+		}
+	}
+	public void grabAggUnpaidNon0Value() {
 
 	}
 

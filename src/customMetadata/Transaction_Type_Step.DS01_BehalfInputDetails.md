@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>DS01 - Behalf Input Details</label>
+    <protected>true</protected>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -19,25 +20,25 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium closer&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
 Name of person approving
-&lt;/h3&gt;
-&lt;p class=&quot;form-hint&quot;&gt;For example, John Smith&lt;/p&gt;</value>
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium closer&quot;&gt;
-Email of person approving
-&lt;/h3&gt;
-&lt;p class=&quot;form-hint&quot;&gt;For example, john.smith@example.co.uk&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
+Email address of person approving
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h3 class=&quot;heading-medium&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/h3&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
+Confirm the email address of person approving
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -53,7 +54,7 @@ Email of person approving
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Approving on behalf of DIRECTORNAME</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Who is approving for &lt;br/&gt;DIRECTORNAME?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -61,6 +62,10 @@ Email of person approving
     </values>
     <values>
         <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

@@ -27,44 +27,32 @@ public with sharing class AccountsAuthCallbackController {
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
     private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
 
-    private String nonce;
-    private String authCode;
+    @TestVisible private String nonce;
+    @TestVisible private String authCode;
 
-    private AccountsAPIHelper.Token accessTokenApiResponse;
-    private AccountsAPIHelper.UserProfile userProfileApiResponse;
+    @TestVisible private AccountsAPIHelper.Token accessTokenApiResponse;
+    @TestVisible private AccountsAPIHelper.UserProfile userProfileApiResponse;
 
-    private User_Authorisation__c userAuth;
-    private Company_Authorisation__c companyAuth;
+    @TestVisible private User_Authorisation__c userAuth;
+    @TestVisible private Company_Authorisation__c companyAuth;
 
-    Sobject presenterInfo;
-    String transactionType;
-    Id presenterID;
-    String presenterEmail;
-    Sobject companyNumberId;
+    @TestVisible Sobject presenterInfo;
+    @TestVisible String transactionType;
+    @TestVisible Id presenterID;
+    @TestVisible String presenterEmail;
+    @TestVisible Sobject companyNumberId;
 
     public AppConstants constants;
 
-    private AccountsAPIHelper h {
-        get;
-        set;
-    }
+    @TestVisible private AccountsAPIHelper h {get;set;}
 
-    private TrackUserClass u {
-        get;
-        set;
-    }
+    @TestVisible private TrackUserClass u {get;set;}
 
-    private SubmissionManager submissionMgr {
-        get;
-        set;
-    }
+    @TestVisible private SubmissionManager submissionMgr {get;set;}
 
-    private TransactionManager transactionMgr {
-        get;
-        set;
-    }
+    @TestVisible private TransactionManager transactionMgr {get;set;}
 
-    public class AccountsAuthCallbackException extends Exception {}
+    public with sharing class AccountsAuthCallbackException extends Exception {}
 
     // Constructors.
     public AccountsAuthCallbackController() {
@@ -99,10 +87,9 @@ public with sharing class AccountsAuthCallbackController {
 
         accessTokenApiResponse = h.getAccessToken(authCode);
 
-        System.debug('api response is ' + accessTokenApiResponse);
-
         //System.debug('access token is  ' + accessTokenApiResponse);
         // Call out again to get the user profile using the access token. If the authorisation was for a user.
+
         if (userAuth != null)
             userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
@@ -117,15 +104,12 @@ public with sharing class AccountsAuthCallbackController {
             // 5. Update the user authorisation record, possibly in a @Future, only after we're done calling out.
             // 6. Drop a cookie (user_auth) - value equal to the encrypted value of the User Auth record Id.
             // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
+            
             String userProfileName = userProfileApiResponse.email;
+            
             System.debug(LoggingLevel.ERROR,'Cookies Saving:' + userProfileName);
             u.getCurrentUser(userProfileName); ///=> useless code as there is no usage of the return... setting the cookies...
-            // throw new AccountsAuthCallbackException('presenter info' + userProfileName);
-            /*        public String surname;
-        public String forename;
-        public String email;
-        public String id;
-        public String locale;*/
+            
             RecordType personAccountRecordType =  [SELECT Id FROM RecordType WHERE Name = 'Person Account' and SObjectType = 'Account'];
             
             Account newPersonAccount = new Account();
@@ -138,13 +122,14 @@ public with sharing class AccountsAuthCallbackController {
             Schema.SObjectField f = Account.Fields.userIDChips__c;
             Database.UpsertResult cr = Database.upsert(newPersonAccount,f,false);
 
-
+            
             transactionType = u.getUserDocument();
 
             System.debug('transaction type is ' + transactionType);
             String hostname = ApexPages.currentPage().getHeaders().get('Host');
             String startjourneyURL = 'https://' + hostname + '/company?t=' + transactionType;
             PageReference startjourney = new PageReference(startjourneyURL);
+            SecurityManager.createSessionValidityCookie(userProfileApiResponse.email);
             System.debug('redirect is = ' + startjourney);
             // redirect to the framework once userprofile is given
             // note this presenter information is minimal (e.g. locale, email address, etc.)
@@ -182,7 +167,15 @@ public with sharing class AccountsAuthCallbackController {
 
             companyNumberId = u.returnCurrentCompanyObject(); //will get from cookie
 
+            Boolean resultVerify = h.verifyToken(accessTokenApiResponse.access_token,(String) companyNumberId.get('CompanyNumber__c'));
 
+            //Check if we have access if not error page
+            if(!resultVerify)
+            {
+                PageReference pg = new PageReference('/InMaintenance');
+                pg.setRedirect(true);
+                return pg;
+            }
             Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyNumberId, transactionMgr.td);
             System.debug('submission  is  ' + submissionMgr.submission);
             System.debug('transactiontype  is  ' + transactionType);
@@ -191,7 +184,10 @@ public with sharing class AccountsAuthCallbackController {
             System.debug('companyNumberId  is  ' + companyNumberId);
             System.debug('transactionMgr.td  is  ' + transactionMgr.td);
 
-            if (submissionMgr.submission.Valid_Step_Ids__c != null) {
+            if (submissionMgr.submission.Valid_Step_Ids__c != null)
+            {
+                SecurityManager.createSessionValidityCookie(presenterEmail);
+
                 String split = submissionMgr.submission.Valid_Step_Ids__c;
 
                 String[] res = split.split(AppConstants.ID_DELIM_SPLIT_CHAR);
@@ -205,28 +201,17 @@ public with sharing class AccountsAuthCallbackController {
                 return transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
 
             }
-            //PageReference transactioninformation =  TransactionManager.firstStep(submissionId); // firstStep(submissionId);
-            // System.debug('transaction information ' + transactioninformation);
-            //PageReference pr = getNextStepPageReference(0,submissionId);
-
-            //return pr;
-
         }
-        // TODO (Company Auth)
-        // 1. Find the existing Company Account record by the company number, if it exists.
-        // 2. Create one if not.
-        // 3. Put the company name on it (from where?)
-        // 4. Upsert it, possibly in a @Future, only after we're done calling out.
-        // 5. Update the company authorisation record, possibly in a @Future, only after we're done calling out.
-        // 6. Drop a cookie (company_auth) - value equal to the encrypted value of the Company Auth record Id.
-        // 7. Create a Submission record for the user/company/transaction type if required
-        // 8. Drop a cookie (submission) - value equal to the encrypted value of the Transaction_Submission__c record Id.
-        // 9. Redirect to the first step for the transaction type as held on the company auth record (using encrypted 'c' querystring parameter).
-
         return null;
     }
 
-    private void parseQueryString() {
+    Public PageReference CallPageRedirect() {
+        PageReference unauthorised = new PageReference('/unauthorized');
+        unauthorised.setRedirect(true);
+        return unauthorised;
+    }
+
+    @TestVisible private void parseQueryString() {
         // Expect a nonce on the query string under the param "state".
         nonce = ApexPages.currentPage().getParameters().get(QUERY_STRING_PARAM_NONCE);
         if (String.isBlank(nonce)) {
@@ -239,7 +224,7 @@ public with sharing class AccountsAuthCallbackController {
         }
     }
 
-    private void findUserAuthByNonce() {
+    @TestVisible private void findUserAuthByNonce() {
         try {
 
             List < User_Authorisation__c > userAuthorisations = [select Id from User_Authorisation__c where Nonce__c = : nonce];
@@ -254,7 +239,7 @@ public with sharing class AccountsAuthCallbackController {
         }
     }
 
-    private void findCompanyAuthByNonce() {
+    @TestVisible private void findCompanyAuthByNonce() {
         try {
 
             List < Company_Authorisation__c > companyAuthorisations = [select Id from Company_Authorisation__c where Nonce__c = : nonce];
@@ -266,9 +251,6 @@ public with sharing class AccountsAuthCallbackController {
             throw new AccountsAuthCallbackException('Invalid state ' + nonce);
         }
     }
-
-
-
 
     // End Instance methods.
 }

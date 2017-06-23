@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>DS01 - Review</label>
+    <protected>true</protected>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -11,7 +12,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Continue to payment</value>
+        <value xsi:type="xsd:string">Confirm</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -19,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Review the information entered for the application to close your company.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -47,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Review your application</value>
+        <value xsi:type="xsd:string">Do you still want to close COMPANYNAME?</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -55,6 +56,10 @@
     </values>
     <values>
         <field>Header_Text_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Header_Text_4__c</field>
         <value xsi:nil="true"/>
     </values>
     <values>

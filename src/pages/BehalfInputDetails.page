@@ -16,47 +16,115 @@
    Ver. Author        Date        Detail
    1.0  SylvainP      2016-06-19  Initial development.
    -->
-<apex:page title="{!$Label.UI_Text_Behalf_Input_Details}" controller="BehalfInputDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page cache="false" title="{!$Label.UI_Text_Behalf_Input_Details}" controller="BehalfInputDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <div class="form-group">
+                <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="emptyPanel" />
-                    <h1 class="heading-xlarge">
-                        <apex:outputText value="{!headerBox1}"></apex:outputText>
-                    </h1>
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                        <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                     <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
-                    <div class="form-group">
+                    <div class="form-group {!nameErrorVal}">
                         <label for="inputName">
+                            <span class='error-message'>
+                                <apex:outputText rendered="{!nameError}" id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                            </span>
                             <!-- Full name -->
-                            <apex:input styleclass="form-control" id="inputName" type="text" value="{!nameAuthorized}" />
+                            <apex:inputText styleclass="form-control" id="inputName" value="{!nameAuthorized}" />
                         </label>
                     </div>
-                    <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
-                    <div class="form-group">
+                    <div class="form-group {!emailErrorVal}">
+                        <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
                         <label for="inputEmail">
+                            <span class='error-message'>
+                                <apex:outputText rendered="{!emailError}" styleClass="error-mesage" id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                            </span>
                             <!-- Email -->
-                            <apex:input styleclass="form-control" id="inputEmail" type="email" value="{!emailDirector}" />
+                            <apex:inputText styleclass="form-control" id="inputEmail" value="{!emailDirector}" />
+                        </label>
+                        <apex:outputText escape="false" value="{!textBox4}"></apex:outputText>
+                        <label for="comfirmEmal">
+                            <span class='error-message'>
+                                <apex:outputText rendered="{!emailConfirmError}" styleClass="error-mesage" id="comfirmEmal-emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                            </span>
+                            <!-- Email -->
+                            <apex:inputText styleclass="form-control" id="comfirmEmal" value="{!emailConfirmDirector}" />
                         </label>
                     </div>
-                </div>
-                <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
-                <div class="form-group">
-                    <label class="block-label" for="radio-1">
-                        <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney to act on behalf of the director
-                    </label>
-                    <label class="block-label" for="radio-3">
-                        <input id="radio-3" onchange="updateSelectedBehalf(3);" type="radio" name="radio-group" value="3" /> They have authority to sign as the Corporate Entity
-                    </label>
-                </div>
-                <br />
-                <br />
-                <apex:commandButton id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                <br />
-                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
-                <apex:actionFunction action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
-                    <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
+                    <span class='error-message'>
+                        <apex:outputText escape="false" value="{!textBox3}"></apex:outputText>
+                    </span>
+                    <div class="form-group {!behalfSelectionerrorVal}">
+                        <apex:outputText rendered="{!behalfError}" style="color:#b10e1e;font-weight: bold;" id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        <label class="block-label" for="radio-1">
+                            <input id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" /> They have Power of Attorney
+                        </label>
+                        <label class="block-label" for="radio-3">
+                            <input id="radio-3" onchange="updateSelectedBehalf(2);" type="radio" name="radio-group" value="2" /> They have authority to sign as the Corporate Entity
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                        <br />
+                        <br />
+                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    </div>
+                    <apex:actionFunction status="status" action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+                        <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
+                    </apex:actionFunction>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        BehalfInputDetailsController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
             </apex:form>
         </apex:define>
     </apex:composition>

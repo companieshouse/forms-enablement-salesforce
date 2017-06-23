@@ -19,10 +19,10 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
+<apex:page cache="false" id="CompPage" title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="CompanyController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="apex-form">
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -30,45 +30,33 @@ Ver. Author        Date        Detail
                         </h1>
                         <ul class="error-summary-list">
                             <li>
-                                <a>{!currentErrorMessage}</a>
+                                <a href="#CompPage:TempPage:apex-form:text-input">{!currentErrorMessage}</a>
                             </li>
                         </ul>
                     </div>
                 </apex:outputPanel>
-                <h1 class="heading-xlarge">
-                    <!--{!companySearchHeader}-->Which company do you wish to file for?
-                </h1>
+                <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                
+                <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+
                 <div class="form-group {!currentError}">
-                    <label class="form-label" for="text-input">What is the company registration number?
-                        <span class="form-hint">This is the 8-character identification code on your certificate of incorporation.</span>
+                    <apex:outputLabel styleClass="form-label" for="text-input">What's the company number?
+                        <span class="form-hint">This is an 8-digit number issued by Companies House when the company was set up.</span>
                         <apex:outputPanel rendered="{!hasPageErrors}">
                             <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
                             </span>
                         </apex:outputPanel>
-                    </label>
-                    <apex:inputText styleClass="form-control" value="{!companyNumber}" id="text-input" />
-                    <!-- </div>   -->
+                    </apex:outputLabel>
+                    <apex:inputText maxlength="8" size="8" styleClass="form-control" value="{!companyNumber}" id="text-input" html-autofocus="true"/>
                     <br/>
                 </div>
-                <div class="form-group">
-                    <details>
-                        <summary>
-                            <span class="summary">How do I know what my company number is?</span>
-                        </summary>
-                        <div class="panel panel-border-narrow">
-                            <p>
-                                A company registration number is a unique number issued by Companies House when a limited company or Limited Liability Partnership (LLP) is set up. It's usually abbreviated as CRN and sometimes referred to as a Companies House Number. Your CRN consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this on the company's certificate of incorporation or by using the
-                                <a href="http://beta.companieshouse.gov.uk" target="_blank">WebCheck</a> Service.
-                            </p>
-                        </div>
-                    </details>
-                </div>
-                <br/> &nbsp;
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Confirm my company details" />
+
+                 <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
+
+                <br/> 
+                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Confirm my details" />
                 <br/>
-                <!--
-                &nbsp;<apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton"/> 
-                &nbsp; -->
+               
             </apex:form>
         </apex:define>
     </apex:composition>

@@ -1,4 +1,4 @@
-<apex:page title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="showClassCHangeController" docType="html-5.0">
+<apex:page cache="false" title="Change Shares" showHeader="false" sidebar="false" standardStylesheets="false" controller="showClassCHangeController" docType="html-5.0">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
@@ -10,14 +10,14 @@
                             </h1>
                             <ul class="error-summary-list">
                                 <li>
-                                    <span class="error-message">{!currentErrorMessage}</span>
+                                    <a>{!errormessage1}</a>
                                 </li>
                             </ul>
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="changeClassName">
                         <h1 class="heading-xlarge">
-                            {!headerText1}
+                            Changing classes of shares
                         </h1>
                         <apex:outputPanel rendered="{!showTable}" id="BuildTable">
                             <div class="form-group">
@@ -46,16 +46,40 @@
                                     </tbody>
                                 </table>
                             </div>
+                             <apex:commandLink action="{!previousAction}" value="Change more classes of shares" id="changemoreshares" />
                             <apex:actionFunction action="{!deleteShare}" name="deleteShare" reRender="masterpanel">
                                 <apex:param name="shareID" value="" id="MNO" assignTo="{!shareID}" />
                             </apex:actionFunction>
                         </apex:outputPanel>
+
+                        <fieldset class="form-group {!errorVal1}">
+                        <h2 class="heading-large">Date of assignment</h2>
+                        <legend class="visuallyhidden">Date of assignment</legend>
+                        <div class="form-date">
+                            <p class="form-hint">For example, 31 01 2016</p>
+                             <span class="error-message" id='shareclass-errors'>
+                                        {!errormessage1}</span>
+                            <div class="form-group form-group-day">
+                                <label for="day">Day</label>
+                                <apex:inputText Styleclass="form-control" id="day" value="{!varDay}"  />
+                            </div>
+                            <div class="form-group form-group-month">
+                                <label for="month">Month</label>
+                                <apex:inputText value="{!varMonth}" Styleclass="form-control" id="month"  />
+                            </div>
+                            <div class="form-group form-group-year">
+                                <label for="year">Year</label>
+
+                                <apex:inputText value="{!varYear}" Styleclass="form-control" id="year" />
+                            </div>
+                        </div>
+                    </fieldset>
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="changemoreshares" /> &nbsp;</div>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
-                <br/> &nbsp;
+                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" />
+               </div>
+                
             </apex:form>
         </apex:define>
     </apex:composition>

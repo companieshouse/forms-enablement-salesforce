@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
+        <fullName>Collect_Errors</fullName>
+        <ccEmails>aharvard@companieshouse.gov.uk</ccEmails>
+        <description>Collect_Errors</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>callen@companieshouse.gov.uk.coredevbeta</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>fess@companieshouse.gov.uk.coredevbeta</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jmetherell@companieshouse.gov.uk</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Carls_template</template>
+    </alerts>
+    <alerts>
         <fullName>ContactPresenteronDecline</fullName>
         <description>ContactPresenteronDecline</description>
         <protected>false</protected>
@@ -10,6 +30,17 @@
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CH_Director_Decline</template>
+    </alerts>
+    <alerts>
+        <fullName>Contact_DS02_or_LLDS02_for_approved_transaction</fullName>
+        <description>Contact DS02 or LLDS02 for approved transaction</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS02_Approved_Transaction</template>
     </alerts>
     <alerts>
         <fullName>Contact_Presenter_On_CH_Approval</fullName>
@@ -34,14 +65,14 @@
         <template>unfiled$public/CH_Rejected_Transaction</template>
     </alerts>
     <alerts>
-        <fullName>DocumentDownloadLink</fullName>
-        <description>DocumentDownloadLink</description>
+        <fullName>DS01_Submission_email_alert</fullName>
+        <description>DS01 Submission email alert</description>
         <protected>false</protected>
         <recipients>
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <alerts>
@@ -52,19 +83,105 @@
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderType>DefaultWorkflowUser</senderType>
         <template>unfiled$public/CHExpired_Transaction</template>
     </alerts>
     <alerts>
-        <fullName>Notify_presenter_that_documents_are_signed_and_awaiting_review_redirect_to_the_r</fullName>
-        <description>Notify presenter that documents are signed and awaiting review - redirect to the review page</description>
+        <fullName>Salesforce_Errors</fullName>
+        <ccEmails>aharvard@companieshouse.gov.uk</ccEmails>
+        <description>Salesforce_Errors</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>callen@companieshouse.gov.uk.coredevbeta</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>fess@companieshouse.gov.uk.coredevbeta</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jmetherell@companieshouse.gov.uk</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Carls_template</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Approved_email_to_LLDS01</fullName>
+        <description>Send Approved email to LLDS01</description>
         <protected>false</protected>
         <recipients>
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
         <senderType>DefaultWorkflowUser</senderType>
-        <template>unfiled$public/CHReviewStatus</template>
+        <template>unfiled$public/CH_Approved_Transaction_LLDS01</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_LLDS01</fullName>
+        <description>Send Email LLDS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CHLLDS01_Submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Rejected_email_to_presenter_DS02_and_LLDS02</fullName>
+        <description>Send Rejected email to presenter DS02 and LLDS02</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS02_Rejected_Transaction</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Review_Email_DS01</fullName>
+        <description>Send Review Email DS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS01_Review_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Review_Email_LLDS01</fullName>
+        <description>Send Review Email LLDS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_LLDS01_Review_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Signing_Status_email</fullName>
+        <description>Send Signing Status email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_LLDS01Signing_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Signing_Status_email_DS01</fullName>
+        <description>Send Signing Status email DS01</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_DS01_Signing_Status</template>
     </alerts>
     <alerts>
         <fullName>Send_Submission_Confirmation</fullName>
@@ -78,15 +195,45 @@
         <template>unfiled$public/CHDS01_Submission</template>
     </alerts>
     <alerts>
-        <fullName>SigningStatusScreen</fullName>
-        <description>SigningStatusScreen</description>
+        <fullName>Send_Submission_Confirmation_LLDS01</fullName>
+        <description>Send Submission Confirmation (LLDS01)</description>
         <protected>false</protected>
         <recipients>
             <field>ContactEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/CH_Signing_Status</template>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CHLLDS01_Submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_email_to_Support</fullName>
+        <ccEmails>678104@gmail.com</ccEmails>
+        <description>Send email to Support</description>
+        <protected>false</protected>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/ErrorEmail</template>
+    </alerts>
+    <alerts>
+        <fullName>Submission_Email_for_DS02</fullName>
+        <description>Submission Email for DS02</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CHDS02_Submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Transaction_inactive_deleted</fullName>
+        <description>Transaction inactive/deleted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/CH_Application_Deleted</template>
     </alerts>
     <fieldUpdates>
         <fullName>TransactionPathBuilder</fullName>
@@ -145,7 +292,7 @@
         <protected>false</protected>
     </fieldUpdates>
     <rules>
-        <fullName>CH Approval notification</fullName>
+        <fullName>CH Approval notification DS01</fullName>
         <actions>
             <name>Contact_Presenter_On_CH_Approval</name>
             <type>Alert</type>
@@ -156,11 +303,56 @@
             <operation>equals</operation>
             <value>Approved</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>CH Rejection notification</fullName>
+        <fullName>CH Approval notification DS02 and LLDS02</fullName>
+        <actions>
+            <name>Contact_DS02_or_LLDS02_for_approved_transaction</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS02</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Approval notification LLDS01</fullName>
+        <actions>
+            <name>Send_Approved_email_to_LLDS01</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Approved&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Rejection notification DS01 and LLDS01</fullName>
         <actions>
             <name>Contact_Presenter_On_CH_Rejection</name>
             <type>Alert</type>
@@ -171,8 +363,55 @@
             <operation>equals</operation>
             <value>Rejected</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS01</value>
+        </criteriaItems>
         <description>Notify the presenter when Transaction Status is update with &apos;Rejected&apos;.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CH Rejection notification DS02 and LLDS02</fullName>
+        <actions>
+            <name>Send_Rejected_email_to_presenter_DS02_and_LLDS02</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS02</value>
+        </criteriaItems>
+        <description>Notify the presenter when Transaction Status is update with &apos;Rejected&apos;.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Collect_Errors</fullName>
+        <actions>
+            <name>Salesforce_Errors</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Draft,Signed,Payment pending,Paid,Submission pending,Submitted,Accepted,Approved,Rejected,Declined,Pending Signatures</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Collect_Errors</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>12</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>Decline notification</fullName>
@@ -184,7 +423,7 @@
             <name>TransactionPathBuilder</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Transaction__c.Status__c</field>
             <operation>equals</operation>
@@ -192,6 +431,16 @@
         </criteriaItems>
         <description>Notify presenter when Transaction Status is update with &apos;Declined&apos;.
 Email should contain a URL to start a new journey</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>DeclineforDirectors</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Declined</value>
+        </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -225,58 +474,9 @@ Email should contain a URL to start a new journey</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>ReviewTransaction</fullName>
+        <fullName>Send CH Signing Status email DS01</fullName>
         <actions>
-            <name>Notify_presenter_that_documents_are_signed_and_awaiting_review_redirect_to_the_r</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>sentreviewurlupdate</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>true</active>
-        <criteriaItems>
-            <field>Transaction__c.ReviewRedirect__c</field>
-            <operation>contains</operation>
-            <value>http</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.Status__c</field>
-            <operation>equals</operation>
-            <value>Signed</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.SentreviewURL__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>SigningCeremony</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Transaction__c.SignerStatus__c</field>
-            <operation>contains</operation>
-            <value>http</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.MultipleDirectors__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Transaction__c.InActiveTransaction__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>SigningStatusTransaction</fullName>
-        <actions>
-            <name>SigningStatusScreen</name>
+            <name>Send_Signing_Status_email_DS01</name>
             <type>Alert</type>
         </actions>
         <actions>
@@ -299,13 +499,141 @@ Email should contain a URL to start a new journey</description>
             <operation>notEqual</operation>
             <value>True</value>
         </criteriaItems>
-        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the review page</description>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to signing status page</description>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
-        <fullName>SubmissionDownloadLink</fullName>
+        <fullName>Send CH Signing Status email LLDS01</fullName>
         <actions>
-            <name>DocumentDownloadLink</name>
+            <name>Send_Signing_Status_email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>sentsignertrue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.SignerStatus__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.MultipleDirectors__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.sentsignerstatus__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have started their documents and redirects the presenter back to the status page</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send CH review email DS01</fullName>
+        <actions>
+            <name>Send_Review_Email_DS01</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>sentreviewurlupdate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.ReviewRedirect__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.SentreviewURL__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.isReviewTrigger__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send CH review email LLDS01</fullName>
+        <actions>
+            <name>Send_Review_Email_LLDS01</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>sentreviewurlupdate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.ReviewRedirect__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.SentreviewURL__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.isReviewTrigger__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
+        </criteriaItems>
+        <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Email for Error</fullName>
+        <actions>
+            <name>Send_email_to_Support</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow will send an email when a transaction is set for error.</description>
+        <formula>isChanged(Status__c) &amp;&amp; Text(Status__c) = &apos;Error&apos;</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Submission Email DS01</fullName>
+        <actions>
+            <name>DS01_Submission_email_alert</name>
             <type>Alert</type>
         </actions>
         <active>true</active>
@@ -319,6 +647,74 @@ Email should contain a URL to start a new journey</description>
             <operation>equals</operation>
             <value>Submitted</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Submission Email DS02 And LLDS02</fullName>
+        <actions>
+            <name>Submission_Email_for_DS02</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>contains</operation>
+            <value>DS02</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Submission Email LLDS01</fullName>
+        <actions>
+            <name>Send_Email_LLDS01</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.DownloadLink__c</field>
+            <operation>contains</operation>
+            <value>http</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Transaction__c.Form_Name__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>applicationDeleted</fullName>
+        <actions>
+            <name>Transaction_inactive_deleted</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.InActiveTransaction__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
