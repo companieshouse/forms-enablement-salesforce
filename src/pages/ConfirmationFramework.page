@@ -100,6 +100,7 @@ Ver. Author        Date        Detail
                         <h1 class="bold-large">{!pageTitle}</h1>
                         <p>
                             <apex:outputText escape="false" value="{!pageTitle2}"/>
+                            <apex:outputText escape="false" value="{!pageTitle3}"/>   
                         </p>
                     </div>
                     <h2 class="heading-medium">What happens next</h2>

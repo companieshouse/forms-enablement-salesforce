@@ -333,7 +333,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
                         isPLCLTDCompany = true;
                         officerTerm = 'director';
 
-                    } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'llp-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
+                    } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'corporate-llp-member' || officer.officer_role == 'llp-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                         addOff = true;
                         isLLPCompany = true;
                         isPLCLTDCompany = false;

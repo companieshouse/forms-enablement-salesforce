@@ -19,12 +19,31 @@ Ver. Author            Date        Detail
 1.0  Antonio Bravo     2016-04-29  Initial development.
 */
 public with sharing class FormAPISubmissionManager {
- 	String output;
+    String output;
     
     public with sharing class Barcode {
         public string barcode;
     }
 
+    //This methods logs API submittion call inside the Transaction
+    public Transaction__c addIntegrationLog(String resultIntegration, Transaction__c currentTransaction )
+    {
+
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + currentTransaction.Id;
+        log += '<br/> Barcode: ' + currentTransaction.Barcode__c;
+        log += '<br/> Company Number: ' + currentTransaction.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + currentTransaction.Transaction_Type__c;
+        log += '<br/> Result Integration (Result of the call): ' + resultIntegration;
+        log += '<br/>-----------------------------------------------------------------------------------';
+        if(currentTransaction.AmendmentHistory__c == null)
+            currentTransaction.AmendmentHistory__c = log;
+        else
+            currentTransaction.AmendmentHistory__c += log;
+
+        return currentTransaction;
+    }
 
     
     public Transaction__c sendForm(Transaction__c tx){
@@ -37,7 +56,7 @@ public with sharing class FormAPISubmissionManager {
 
             //try {
                 FormsApiClient client = new FormsApiClient();
-                HTTPResponse response = client.requestBarcode();    
+                HTTPResponse response = client.requestBarcode(tx);    
                 output = response.getStatusCode() + ': ' + response.getStatus() + '\n\n' + response.getBody();
                 
                 if(response.getStatusCode() == 200) {
@@ -46,9 +65,12 @@ public with sharing class FormAPISubmissionManager {
                     tx.Barcode__c =  b.barcode;
                     tx.ErrorDescription__c = '';
 
+                    tx = addIntegrationLog('Barcode Success', tx);
+
                 } else {
                     tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
                     tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output) ;
+                    tx = addIntegrationLog('Barcode failed', tx);
                 }
 
            // }
@@ -75,9 +97,11 @@ public with sharing class FormAPISubmissionManager {
             if(response.getStatusCode() == 202){
                 tx.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
                 tx.ErrorDescription__c = '';
+                tx = addIntegrationLog('SendForm Success', tx);
             } else {
                 tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
                 tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output);
+                tx = addIntegrationLog('SendForm Failed', tx);
             }
                 
         //}

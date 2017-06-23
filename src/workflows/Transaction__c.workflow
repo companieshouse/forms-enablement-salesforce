@@ -166,6 +166,14 @@
         <template>unfiled$public/CHLLDS01_Submission</template>
     </alerts>
     <alerts>
+        <fullName>Send_email_to_Support</fullName>
+        <ccEmails>678104@gmail.com</ccEmails>
+        <description>Send email to Support</description>
+        <protected>false</protected>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/ErrorEmail</template>
+    </alerts>
+    <alerts>
         <fullName>Submission_Email_for_DS02</fullName>
         <description>Submission Email for DS02</description>
         <protected>false</protected>
@@ -548,6 +556,17 @@ Email should contain a URL to start a new journey</description>
         </criteriaItems>
         <description>Notifies presenter when multiple directors have finished signing their documents and redirects the presenter back to the review page</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Email for Error</fullName>
+        <actions>
+            <name>Send_email_to_Support</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow will send an email when a transaction is set for error.</description>
+        <formula>isChanged(Status__c) &amp;&amp; Text(Status__c) = &apos;Error&apos;</formula>
+        <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>Submission Email DS01</fullName>

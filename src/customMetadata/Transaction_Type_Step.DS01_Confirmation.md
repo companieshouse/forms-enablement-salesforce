@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>DS01 - Confirmation</label>
+    <protected>true</protected>
     <values>
         <field>Apex_Class_Name__c</field>
         <value xsi:nil="true"/>
@@ -57,7 +58,7 @@ You&apos;ll need to quote this if you contact us about your request.</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Your  payment reference for this transaction was PAYNUMB.</value>
     </values>
     <values>
         <field>Header_Text_4__c</field>

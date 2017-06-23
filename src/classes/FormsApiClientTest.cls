@@ -68,7 +68,7 @@ public with sharing class FormsApiClientTest {
         
         // Going for coverage only at this stage. No assertions.
         FormsApiClient client = new FormsApiClient();
-        HTTPResponse response = client.requestBarcode();
+        HTTPResponse response = client.requestBarcode(new Transaction__c());
         
         Test.stopTest();
     }

@@ -6,29 +6,44 @@
  */
 public with sharing class PaymentController extends TransactionStepControllerBase {
     //Payment properties
+    @TestVisible
     private static final String QUERY_STRING_PARAM_MERCHANT_REFERENCE = 'merchantReference';
+    @TestVisible
     private static final String QUERY_STRING_PARAM_MERCHANT_SIG = 'merchantSig';
+    @TestVisible
     private static final String QUERY_STRING_PARAM_AUTH_RESULT = 'authResult';
+    @TestVisible
     private static final String QUERY_STRING_PARAM_PSP_REFERENCE = 'pspReference';
+    @TestVisible
     private static final String QUERY_STRING_PARAM_SKIN_CODE = 'skinCode';
+    @TestVisible
     private static final String QUERY_STRING_PARAM_PAYMENT_METHOD = 'paymentMethod';
+    @TestVisible
     private static final String QUERY_STRING_PARAM_SHOPPER_LOCAL = 'shopperLocale';
     // AUTHORISED: Authorisation was successfully completed.
+    @TestVisible
     private static final String AUTH_RESULT_AUTHORISED = 'AUTHORISED';
     // REFUSED: Authorisation was unsuccessful, Declined by issuer.
+    @TestVisible
     private static final String AUTH_RESULT_REFUSED = 'REFUSED';
     // CANCELLED: Shopper cancelled payment or used back button on initial page to
     // return to merchants website.
+    @TestVisible
     private static final String AUTH_RESULT_CANCELLED = 'CANCELLED';
     // PENDING: Final status of the payment could not be established at the time,
     // this can be due to the payment method (e.g PayPal) or requiring the shopper
     // to take further action.
+    @TestVisible
     private static final String AUTH_RESULT_PENDING = 'PENDING';
     // ERROR: An error occurred during the payment process.
+    @TestVisible
     private static final String AUTH_RESULT_ERROR = 'ERROR';
+    @TestVisible
     private String merchantReference;
     public Boolean hasBeenRedirected {get; set;}
+    @TestVisible
     private String merchantSig;
+    @TestVisible
     private String authResult;
     // Public properties.
     public String externalURL {
@@ -256,7 +271,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             submissionMgr.submission.Status__c = 'Paid';
             submissionMgr.submission.hasPaid__c = true;
         }
-        if (String.isBlank(paymentReference)) {
+        if (String.isBlank(paymentReference) && !hasPaid ) {
             paymentReference = submissionMgr.submission.Id;
         }
         if (isAccountSelected) {
@@ -265,14 +280,18 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             paymentReference = accountNumber;
             submissionMgr.submission.isPaymentPaypal__c = false;
             submissionMgr.submission.isPaymentCard__c = false;
-            submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode;
+            submissionMgr.submission.AccountAuthorisationCode__c = accountAuthCode.toUpperCase();
         }
-        if (isPaypalSelected) {
+        if (isPaypalSelected ) {
             submissionMgr.submission.isPaymentPaypal__c = true;
+            submissionMgr.submission.AccountNumber__c = '';
+            submissionMgr.submission.AccountAuthorisationCode__c = '';
             submissionMgr.submission.isPaymentAccount__c = false;
             submissionMgr.submission.isPaymentCard__c = false;
         }
         if (isCardSelected) {
+            submissionMgr.submission.AccountNumber__c = '';
+            submissionMgr.submission.AccountAuthorisationCode__c = '';
             submissionMgr.submission.isPaymentCard__c = true;
             submissionMgr.submission.isPaymentPaypal__c = false;
             submissionMgr.submission.isPaymentAccount__c = false;
@@ -282,8 +301,12 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 submissionMgr.submission.isSameDayProcessing__c = true;
             }
         if (submissionMgr.submission.Amount__c == null) submissionMgr.submission.Amount__c = (isSameDaySelected == true ? fastTrackFee : normalFee);
-        submissionMgr.submission.paymentReference__c = paymentReference;
-        submissionMgr.submission.paymentDate__c = String.valueOf(system.today().format());
+
+        if(!hasPaid)
+        {
+            submissionMgr.submission.paymentReference__c = paymentReference;
+            submissionMgr.submission.paymentDate__c = String.valueOf(system.today().format());
+        }
 
         submissionMgr.persist();
     }
@@ -336,8 +359,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
         if(isAccountSelected)
         {
-            
-            persistStep();
+            if(!(submissionMgr.submission.Status__c == 'Approved' || submissionMgr.submission.Status__c == 'Rejected' || submissionMgr.submission.Status__c == 'Submitted'))
+                persistStep();
             PageReference pg = new PageReference('/Payment');
 
             pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
@@ -347,8 +370,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
                
         }
+        if(!(submissionMgr.submission.Status__c == 'Approved' || submissionMgr.submission.Status__c == 'Rejected' || submissionMgr.submission.Status__c == 'Submitted'))
+            persistStep();
 
-        persistStep();
         if (isCardSelected || isPaypalSelected) {
             submit();
             PageReference pg = new PageReference(externalURL);
@@ -483,7 +507,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         {
             //Make the API Call
             FormsApiClient client = new FormsApiClient();
-            HTTPResponse response = client.requestPresenterAPI(submissionMgr.submission.AccountNumber__c, submissionMgr.submission.AccountAuthorisationCode__c); 
+            HTTPResponse response = client.requestPresenterAPI(submissionMgr.submission.AccountNumber__c, submissionMgr.submission.AccountAuthorisationCode__c.toUpperCase()); 
             if(response != null)
             {
                 if(response.getStatusCode() == 200)

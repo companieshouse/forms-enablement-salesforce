@@ -177,4 +177,117 @@ private class BehalfInputDetailsControllerTest {
 
 	}
 
+	@isTest static void test2() {
+
+		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
+
+		Transaction_Type__mdt testDS01 = CompaniesHouseTestData.getInstance().testDS01;
+
+		Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
+		Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+
+		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+
+		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
+		insert testPresenter;
+
+		insert testCompany;
+		Transaction__c transac = testData.tx;
+		transac.Transaction_Type__c = 'DS01';
+		transac.Company__c = testCompany.Id;
+		transac.Valid_Step_Ids__c = testStep1.Id;
+		transac.CompanyNumber__c = '05448736';
+		transac.finishedAttachments__c = true;
+		transac.finishedAddingShares__c = true;
+		transac.isDigitalSignatureNeeded__c = true;
+		transac.isSigningFinished__c = false;
+		transac.SoleDirectorPresenter__c = false;
+		transac.isMajorityRequired__c = true;
+		transac.isPresenterMultipleDirectors__c = true;
+		transac.isBehalfSignatoryEnable__c = true;
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0;
+		transac.OfficerCount__c = 1;
+		insert transac;
+
+		testContact.Transaction__c = transac.id;
+		insert testContact;
+
+		Officer__c testoff = new Officer__c();
+		testoff.name = 'test2firstname';
+		testoff.Surname__c = 'test2surname';
+		testoff.Forename__c = 'test2forename';
+		testoff.Middlenames__c = 'test2middlename';
+		testoff.Email__c = 'testEmail2@testemail.com';
+		testoff.IsPresenter__c = false;
+		testoff.Transaction__c = transac.Id;
+		testoff.Contact__c = testContact.id;
+		testoff.isSignatoryBehalf__c = true;
+		testoff.isSignatory__c = true;
+		testoff.hasInputBehalfDetails__c = false;
+		testoff.IsPresenter__c = false;
+		insert testoff;
+
+		PageReference behalfInputPage = Page.BehalfInputDetails;
+		behalfInputPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(behalfInputPage);
+		BehalfInputDetailsController.refreshBoolean(EncodingUtil.urlEncode(SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR),'UTF-8'));
+
+	}
+
+	@isTest static void test3() {
+
+		CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
+
+		Transaction_Type__mdt testDS01 = CompaniesHouseTestData.getInstance().testDS01;
+
+		Transaction_Type_Step__mdt testStep1 = CompaniesHouseTestData.getInstance().testStep1;
+		Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+
+		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+
+		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
+		insert testPresenter;
+
+		insert testCompany;
+		Transaction__c transac = testData.tx;
+		transac.Transaction_Type__c = 'DS01';
+		transac.Company__c = testCompany.Id;
+		transac.Valid_Step_Ids__c = testStep1.Id;
+		transac.CompanyNumber__c = '05448736';
+		transac.finishedAttachments__c = true;
+		transac.finishedAddingShares__c = true;
+		transac.isDigitalSignatureNeeded__c = true;
+		transac.isSigningFinished__c = false;
+		transac.SoleDirectorPresenter__c = false;
+		transac.isMajorityRequired__c = true;
+		transac.isPresenterMultipleDirectors__c = true;
+		transac.isBehalfSignatoryEnable__c = true;
+		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0;
+		transac.OfficerCount__c = 1;
+		insert transac;
+
+		testContact.Transaction__c = transac.id;
+		insert testContact;
+
+		Officer__c testoff = new Officer__c();
+		testoff.name = 'test2firstname';
+		testoff.Surname__c = 'test2surname';
+		testoff.Forename__c = 'test2forename';
+		testoff.Middlenames__c = 'test2middlename';
+		testoff.Email__c = 'testEmail2@testemail.com';
+		testoff.IsPresenter__c = false;
+		testoff.Transaction__c = transac.Id;
+		testoff.Contact__c = testContact.id;
+		testoff.isSignatoryBehalf__c = true;
+		testoff.isSignatory__c = true;
+		testoff.hasInputBehalfDetails__c = false;
+		testoff.IsPresenter__c = false;
+		insert testoff;
+
+		PageReference behalfInputPage = Page.BehalfInputDetails;
+		behalfInputPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+		Test.setCurrentPage(behalfInputPage);
+		BehalfInputDetailsController test1controller = new BehalfInputDetailsController();
+		test1controller.redirectUser();
+	}
 }

@@ -17,7 +17,35 @@
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Forms_Enablement</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Account.CompanyNumber__c</members>
+        <members>Account.userIDChips__c</members>
+        <members>Contact.AuthorizedSigner__c</members>
+        <members>Contact.DateSigned__c</members>
+        <members>Contact.DocusignName__c</members>
+        <members>Contact.IsPresenterTEXT__c</members>
+        <members>Contact.IsPresenter__c</members>
+        <members>Contact.Middlenames__c</members>
+        <members>Contact.RecipientId__c</members>
+        <members>Contact.RecipientStatus__c</members>
+        <members>Contact.Transaction__c</members>
+        <members>Contact.hasInputBehalfDetailsTEXT__c</members>
+        <members>Contact.hasInputBehalfDetails__c</members>
+        <members>Contact.isCorporateDirectorTEXT__c</members>
+        <members>Contact.isCorporateDirector__c</members>
+        <members>Contact.isPowerOfAttorneyTEXT__c</members>
+        <members>Contact.isPowerOfAttorney__c</members>
+        <members>Contact.isSignatoryBehalfTEXT__c</members>
+        <members>Contact.isSignatoryBehalf__c</members>
+        <members>Contact.isSignatoryTEXT__c</members>
+        <members>Contact.isSignatory__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
         <name>CustomLabels</name>
     </types>
     <types>
@@ -26,10 +54,8 @@
     </types>
     <types>
         <members>API_Org_Settings__c</members>
-        <members>Account</members>
         <members>Account_API_Settings__c</members>
         <members>Company_Authorisation__c</members>
-        <members>Contact</members>
         <members>CryptoSettings__c</members>
         <members>DocuSignSetting__c</members>
         <members>Environment_Variables_Hierarchy__c</members>
@@ -42,6 +68,10 @@
         <members>Transaction__c</members>
         <members>User_Authorisation__c</members>
         <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</name>
     </types>
     <types>
         <members>unfiled$public/CHDS01_Submission</members>
@@ -63,7 +93,25 @@
         <members>unfiled$public/CH_LLDS01_Review_Status</members>
         <members>unfiled$public/CH_Rejected_Transaction</members>
         <members>unfiled$public/Carls_template</members>
+        <members>unfiled$public/ErrorEmail</members>
         <name>EmailTemplate</name>
+    </types>
+    <types>
+        <members>Account-Account Layout</members>
+        <members>Company_Authorisation__c-Company Authorisation Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>Officer__c-Officer Layout</members>
+        <members>Shares__c-Share Layout</members>
+        <members>Transaction_Type_Step__mdt-Transaction Type Step Layout</members>
+        <members>Transaction_Type__mdt-Transaction Type Layout</members>
+        <members>Transaction__c-Transaction Layout</members>
+        <members>User_Authorisation__c-User Authorisation Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <members>Send Mail</members>
+        <name>Profile</name>
     </types>
     <types>
         <members>*</members>
@@ -80,5 +128,5 @@
         <members>Transaction__c</members>
         <name>Workflow</name>
     </types>
-    <version>34.0</version>
+    <version>36.0</version>
 </Package>

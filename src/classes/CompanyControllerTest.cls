@@ -58,4 +58,94 @@ private class CompanyControllerTest {
 		controller.nextAction();
 
 	}
+
+	@isTest static void test_Test() {
+		PageReference companyTestPage = Page.Company;
+		companyTestPage.getParameters().put('t', 'DS02');
+
+		Test.setCurrentPage(companyTestPage);
+				SecurityManager.createSessionValidityCookie('test@test.com');
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockSuccessTokenAuth());
+		CompanyController controller = new CompanyController();
+		controller.validateStep();
+
+		controller.companyNumber = 'TestTestTest';
+		controller.validateStep();		
+		controller.companyNumber = 'TestTest';
+		controller.validateStep();		
+		controller.companyNumber = 'stTest';
+		controller.validateStep();			
+		Test.stopTest();
+	}
+
+	@isTest static void test_Test2() {
+		PageReference companyTestPage = Page.Company;
+		companyTestPage.getParameters().put('t', 'DS02');
+
+		Test.setCurrentPage(companyTestPage);
+				SecurityManager.createSessionValidityCookie('test@test.com');
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockSuccessTokenAuth());
+		CompanyController controller = new CompanyController();
+		
+		controller.companyNumber = '05448736';
+		controller.transactionType = 'LLDS01';
+		controller.validateStep();		
+		Test.stopTest();
+	}
+
+		@isTest static void test_Test3() {
+		PageReference companyTestPage = Page.Company;
+		companyTestPage.getParameters().put('t', 'DS02');
+
+		Test.setCurrentPage(companyTestPage);
+				SecurityManager.createSessionValidityCookie('test@test.com');
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockSuccessTokenAuthLLP());
+		CompanyController controller = new CompanyController();
+		
+		controller.companyNumber = '05448736';
+		controller.transactionType = 'DS01';
+		controller.validateStep();		
+		Test.stopTest();
+	}
+
+	@isTest static void test_Test4() {
+		PageReference companyTestPage = Page.Company;
+		companyTestPage.getParameters().put('t', 'DS02');
+
+		Test.setCurrentPage(companyTestPage);
+				SecurityManager.createSessionValidityCookie('test@test.com');
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockSuccessTokenAuthERRORCOMPANY());
+		CompanyController controller = new CompanyController();
+		
+		controller.companyNumber = '05448736';
+		controller.transactionType = 'DS01';
+		controller.validateStep();		
+		Test.stopTest();
+	}
+
+		@isTest static void test_Test5() {
+		PageReference companyTestPage = Page.Company;
+		companyTestPage.getParameters().put('t', 'DS02');
+
+		Test.setCurrentPage(companyTestPage);
+				SecurityManager.createSessionValidityCookie('test@test.com');
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockSuccessTokenAuth());
+		CompanyController controller = new CompanyController();
+		
+		controller.companyNumber = '05448736';
+		controller.transactionType = 'DS01';
+		controller.nextAction();		
+		controller.previousAction();
+		Test.stopTest();
+	}
 }

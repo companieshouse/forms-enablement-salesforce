@@ -113,7 +113,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         // Submission state.
         String submissionId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[0];
         String stepId = paramValue.split(AppConstants.ID_DELIM_SPLIT_CHAR)[1];
-        
+
         List<Transaction__c> transac = [Select Id, Historical_Valid_Step_Ids__c From Transaction__c Where Id = :submissionId Limit 1];
         if( transac.size() == 0)
             return false;

@@ -44,25 +44,13 @@ public with sharing class AccountsAuthCallbackController {
 
     public AppConstants constants;
 
-    @TestVisible private AccountsAPIHelper h {
-        get;
-        set;
-    }
+    @TestVisible private AccountsAPIHelper h {get;set;}
 
-    @TestVisible private TrackUserClass u {
-        get;
-        set;
-    }
+    @TestVisible private TrackUserClass u {get;set;}
 
-    @TestVisible private SubmissionManager submissionMgr {
-        get;
-        set;
-    }
+    @TestVisible private SubmissionManager submissionMgr {get;set;}
 
-    @TestVisible private TransactionManager transactionMgr {
-        get;
-        set;
-    }
+    @TestVisible private TransactionManager transactionMgr {get;set;}
 
     public with sharing class AccountsAuthCallbackException extends Exception {}
 
@@ -97,14 +85,13 @@ public with sharing class AccountsAuthCallbackController {
         // Call out to account.companieshouse.gov.uk to swap our auth code for an access token.
         System.debug('authcode should b e ' + authcode);
 
-        if(!Test.isRunningTest())
-            accessTokenApiResponse = h.getAccessToken(authCode);
+        accessTokenApiResponse = h.getAccessToken(authCode);
 
         //System.debug('access token is  ' + accessTokenApiResponse);
         // Call out again to get the user profile using the access token. If the authorisation was for a user.
+
         if (userAuth != null)
-            if(!Test.isRunningTest())
-                userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
+            userProfileApiResponse = h.getUserProfile(accessTokenApiResponse.access_token); //System.debug('profile is -- ' + userProfileApiResponse);
         // need better error handling/redirection on failure to pull profile/token
 
         if (userProfileApiResponse != null) {
@@ -119,57 +106,10 @@ public with sharing class AccountsAuthCallbackController {
             // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
             
             String userProfileName = userProfileApiResponse.email;
-            Map<String, String> PrivateBeta_Accesslist = new Map<String, String>();
-            
-             /*remove whitelist           
-            PrivateBeta_Accesslist.put('clarejady@hulljady.co.uk', 'Clare Jady');
-            PrivateBeta_Accesslist.put('sophie@taxexpert.co.uk', 'Sophie Dickinson');
-            PrivateBeta_Accesslist.put('catherine@mcmillanaccountants.com', 'Cathy Wolff');
-            PrivateBeta_Accesslist.put('barneyq@cueandco.eu', 'Bernard Cue');
-            PrivateBeta_Accesslist.put('esoussi@jordanstrustcompany.com', 'Evia Soussi');
-            PrivateBeta_Accesslist.put('brenda.bardwell@morrisowen.com', 'Brenda Bardwell');
-            PrivateBeta_Accesslist.put('fiona.sweeting@osborneclarke.com', 'Fiona Sweeting');
-            PrivateBeta_Accesslist.put('karen.vickery@osborneclarke.com', 'Karen Vickery');
-            PrivateBeta_Accesslist.put('tom.shaw@radius.com', 'Tom Shaw');
-            PrivateBeta_Accesslist.put('ann.williams@carillionplc.com', 'Ann Williams');
-            PrivateBeta_Accesslist.put('pevans@liffordhall.co.uk', 'Paul Evans');
-            PrivateBeta_Accesslist.put('marks@luckmans.com', 'Mark Spafford');
-            PrivateBeta_Accesslist.put('claireselman@ormerodrutter.co.uk', 'Claire Selman');
-            PrivateBeta_Accesslist.put('wendy.wilkes@squirepb.com', 'Wendy Wilkes');
-            PrivateBeta_Accesslist.put('lynette.bridgens@squirepb.com', 'Lynette Bridgens');
-            PrivateBeta_Accesslist.put('sandram@amterson.com', 'Sandra Murphy');
-            PrivateBeta_Accesslist.put('stewart.halton@argentsaccountants.co.uk', 'Stewart Halton');
-            PrivateBeta_Accesslist.put('chris.stubbins@mapartners.co.uk', 'Chris Stubbins');
-            PrivateBeta_Accesslist.put('fiona.bradford@mills-reeve.com', 'Fiona Bradford');
-            PrivateBeta_Accesslist.put('rachel.collins@mills-reeve.com', 'Rachel Collins');
-            PrivateBeta_Accesslist.put('julie.marquiss@externalservices.com', 'Julie Marquiss');
-            PrivateBeta_Accesslist.put('sylvain.picory@methodsdigital.co.uk', 'Sylvain Picory');
-            PrivateBeta_Accesslist.put('jake@fluffylogic.com', 'jake');
-            PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
-            PrivateBeta_Accesslist.put('mistercalvin@gmail.com','calvin1');
-            PrivateBeta_Accesslist.put('calvin.chong@consultspark.co.uk','calvin2');
-            PrivateBeta_Accesslist.put('ciara.maccooey@googlemail.com','ciara');
-            PrivateBeta_Accesslist.put('ceri.counter@companyregistrations.co.uk','CHPRESENTERTESTER'); 
-            remove whitelist */
-            
-            PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
-            Boolean AccessGranted = PrivateBeta_Accesslist.containsKey(userProfileName);
-            Boolean chUser = PrivateBeta_Accesslist.containsKey('@'+userProfileName.subStringAfter('@'));
-            
-            if(Test.isRunningTest())   {                      
-                If (AccessGranted == false && chUser == false) {            
-                    return CallPageRedirect();   
-                }
-            }
             
             System.debug(LoggingLevel.ERROR,'Cookies Saving:' + userProfileName);
             u.getCurrentUser(userProfileName); ///=> useless code as there is no usage of the return... setting the cookies...
-            // throw new AccountsAuthCallbackException('presenter info' + userProfileName);
-            /*        public String surname;
-        public String forename;
-        public String email;
-        public String id;
-        public String locale;*/
+            
             RecordType personAccountRecordType =  [SELECT Id FROM RecordType WHERE Name = 'Person Account' and SObjectType = 'Account'];
             
             Account newPersonAccount = new Account();
@@ -227,7 +167,15 @@ public with sharing class AccountsAuthCallbackController {
 
             companyNumberId = u.returnCurrentCompanyObject(); //will get from cookie
 
+            Boolean resultVerify = h.verifyToken(accessTokenApiResponse.access_token,(String) companyNumberId.get('CompanyNumber__c'));
 
+            //Check if we have access if not error page
+            if(!resultVerify)
+            {
+                PageReference pg = new PageReference('/InMaintenance');
+                pg.setRedirect(true);
+                return pg;
+            }
             Id submissionId = submissionMgr.initialise(transactionType, presenterID, presenterEmail, companyNumberId, transactionMgr.td);
             System.debug('submission  is  ' + submissionMgr.submission);
             System.debug('transactiontype  is  ' + transactionType);
@@ -253,24 +201,7 @@ public with sharing class AccountsAuthCallbackController {
                 return transactionMgr == null ? null : transactionMgr.firstStep(submissionId);
 
             }
-            //PageReference transactioninformation =  TransactionManager.firstStep(submissionId); // firstStep(submissionId);
-            // System.debug('transaction information ' + transactioninformation);
-            //PageReference pr = getNextStepPageReference(0,submissionId);
-
-            //return pr;
-
         }
-        // TODO (Company Auth)
-        // 1. Find the existing Company Account record by the company number, if it exists.
-        // 2. Create one if not.
-        // 3. Put the company name on it (from where?)
-        // 4. Upsert it, possibly in a @Future, only after we're done calling out.
-        // 5. Update the company authorisation record, possibly in a @Future, only after we're done calling out.
-        // 6. Drop a cookie (company_auth) - value equal to the encrypted value of the Company Auth record Id.
-        // 7. Create a Submission record for the user/company/transaction type if required
-        // 8. Drop a cookie (submission) - value equal to the encrypted value of the Transaction_Submission__c record Id.
-        // 9. Redirect to the first step for the transaction type as held on the company auth record (using encrypted 'c' querystring parameter).
-
         return null;
     }
 
@@ -320,9 +251,6 @@ public with sharing class AccountsAuthCallbackController {
             throw new AccountsAuthCallbackException('Invalid state ' + nonce);
         }
     }
-
-
-
 
     // End Instance methods.
 }

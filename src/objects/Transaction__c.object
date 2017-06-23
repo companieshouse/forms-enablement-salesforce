@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -48,6 +52,7 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
@@ -69,6 +74,16 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>AmendmentHistory__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Usage : add your name and the reason why you are amending this record.</inlineHelpText>
+        <label>Amendment History</label>
+        <length>10000</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
     </fields>
     <fields>
         <fullName>Amount__c</fullName>
@@ -879,12 +894,61 @@ to any promoter of the company?</inlineHelpText>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>Transaction_Type__c</columns>
+        <columns>CompanyNumber__c</columns>
         <columns>CompanyName__c</columns>
         <columns>Status__c</columns>
         <columns>ContactEmail__c</columns>
         <columns>Barcode__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>submissionTime__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Errors_and_Rejects</fullName>
+        <columns>NAME</columns>
+        <columns>SubmissionId__c</columns>
+        <columns>Status__c</columns>
+        <columns>submissionDate__c</columns>
+        <columns>submissionTime__c</columns>
+        <columns>ErrorDescription__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notContain</operation>
+            <value>Signed,Payment pending,Paid,Submission pending,Submitted,Approved,Pending,Draft</value>
+        </filters>
+        <label>Errors and Rejects</label>
+    </listViews>
+    <listViews>
+        <fullName>OneCompanyView</fullName>
+        <columns>NAME</columns>
+        <columns>OBJECT_ID</columns>
+        <columns>CompanyName__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>Barcode__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CompanyNumber__c</field>
+            <operation>startsWith</operation>
+            <value>08123351</value>
+        </filters>
+        <label>OneCompanyView</label>
+    </listViews>
+    <listViews>
+        <fullName>barcode</fullName>
+        <columns>NAME</columns>
+        <columns>Barcode__c</columns>
+        <columns>CompanyName__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>SubmissionId__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Barcode__c</field>
+            <operation>equals</operation>
+            <value>X66PO4SA</value>
+        </filters>
+        <label>barcode</label>
     </listViews>
     <nameField>
         <displayFormat>SUB{0000}</displayFormat>

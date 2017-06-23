@@ -264,4 +264,36 @@ private class DocusignLibraryTest {
 		System.assertEquals(expectedResult.Recipients.Recipient[0].RequireIDLookup, DocusignLibrary.addRecipients(result, expectedResultD).Recipients.Recipient[0].RequireIDLookup);
 		System.assertEquals(expectedResult.Recipients.Recipient[0].CustomFields.CustomField[0], DocusignLibrary.addRecipients(result, expectedResultD).Recipients.Recipient[0].CustomFields.CustomField[0]);
     }
+
+    @isTest static void test2(){
+    	String accountId = 'SylvainAcc';
+		String subject = 'SylvainSubject';
+		String emailBlurb = 'Blurb';
+		String brandId = '001';
+		Integer id = 1;
+		String type = 'type';
+		Integer routingOrder = 1;
+		String email = 'email@email.com';
+		String userName = 'username';
+		DocuSignAPI.RecipientCaptiveInfo repCapInfo = DocusignLibrary.getCaptiveInfo('info');
+		Boolean requireIDLookup = false;
+		
+		DocuSignAPI.ArrayOfString1 arrayOfString = new DocuSignAPI.ArrayOfString1();
+        arrayOfString.CustomField = new String[1];
+        arrayOfString.CustomField[0] = 'ArrayOfString1';
+		
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocusignLibrary.initRecipients(expectedResult, 10);
+
+		DocuSignAPI.Recipient expectedResultD = DocusignLibrary.getRecipient(id, type, routingOrder, email, username, repCapInfo, requireIDLookup, arrayOfString);
+
+		expectedResult.Recipients.Recipient[0] = expectedResultD;
+
+
+		Test.startTest();
+		Test.setMock(WebServiceMock.class, new MockWebServiceResponseGenerator());
+		DocusignLibrary.sendEnvelope('D', DocusignLibrary.buildHTTPHeaders('authString'), expectedResult, 'adwaw');
+		Test.stopTest();
+
+    }
 }

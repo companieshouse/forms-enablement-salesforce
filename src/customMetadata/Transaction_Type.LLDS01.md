@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <label>LLDS01 - Dissolution</label>
+    <protected>true</protected>
     <values>
         <field>Below_Button_Text2__c</field>
         <value xsi:nil="true"/>

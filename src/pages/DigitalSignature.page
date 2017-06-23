@@ -95,6 +95,15 @@ Ver. Author        Date        Detail
                     <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton2" />
                 </apex:outputPanel>
             </apex:form>
+            <script language="Javascript">
+
+            function disableBack() {
+              window.history.forward();
+            }
+            
+            window.onload = disableBack();
+
+            </script>
         </apex:define>
     </apex:composition>
 </apex:page>

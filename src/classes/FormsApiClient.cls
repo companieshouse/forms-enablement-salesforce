@@ -21,17 +21,33 @@ public with sharing class FormsApiClient {
     private String BARCODE_ENDPOINT = '/barcode';
     private String PRESENTERAPI = '/presenterauth';
 
-
+    //Added for log purpose
+    public static Integer numberOfTimeCalled {get; set;} 
 
     /**
     * Request Barcode from FormsAPI
     */
-    public HttpResponse requestBarcode() {
+    public HttpResponse requestBarcode(Transaction__c tx) {
 
         //  Don't forget to add a Remote Site record for the server as well as the custom setting
         //  record.
         Forms_API_Service__c connection = getConnection();
 
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + tx.Id;
+        log += '<br/> Barcode: ' + tx.Barcode__c;
+        log += '<br/> Company Number: ' + tx.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
+        log += '<br/> Integration Requesting Barcode Initiated';
+        log += '<br/>-----------------------------------------------------------------------------------';
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
+
+
+        FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
 
         // Create Http request
         HttpRequest request = new HttpRequest();
@@ -44,6 +60,7 @@ public with sharing class FormsApiClient {
 
         // Get request body
         String requestBody = getBarcodeBody();
+        request.setTimeout(120000);
         request.setBody(requestBody);
 
         // Debug request
@@ -75,7 +92,7 @@ public with sharing class FormsApiClient {
         request.setHeader('Content-Type', 'application/json');
         request.setHeader('Accept', '*/*');
         request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
-
+        request.setTimeout(120000);
         
 
         // Debug request
@@ -109,6 +126,20 @@ public with sharing class FormsApiClient {
         // record.
         Forms_API_Service__c connection = getConnection();
 
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + tx.Id;
+        log += '<br/> Barcode: ' + tx.Barcode__c;
+        log += '<br/> Company Number: ' + tx.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
+        log += '<br/> Integration Sending Form Initiated';
+        log += '<br/>-----------------------------------------------------------------------------------';
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
+
+        FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
 
         // Create Http request
         HttpRequest request = new HttpRequest();
@@ -118,6 +149,7 @@ public with sharing class FormsApiClient {
         request.setHeader('Content-Type', 'multipart/form-data; boundary=' + BOUNDARY);
         request.setHeader('Accept', '*/*');
         request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+        request.setTimeout(120000);
 
         // Get request body
         String requestBody = getBody(txList);

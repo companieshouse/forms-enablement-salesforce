@@ -198,6 +198,14 @@
                     <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous_Payment}" />
                 </div>
                 </apex:outputPanel>
+
+            <!--<script language="Javascript">
+             function disableBack() {
+              window.history.forward();
+            }
+            window.onload = disableBack();
+
+            </script>-->
             </apex:form>
         </apex:define>
     </apex:composition>

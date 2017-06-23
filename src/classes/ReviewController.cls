@@ -604,41 +604,45 @@ public with sharing class ReviewController extends TransactionStepControllerBase
                     // 6. Redirect to the Company page (passing transaction type as 't' querystring parameter).
                     String userProfileName = userProfileApiResponse.email;
                     Map<String, String> PrivateBeta_Accesslist = new Map<String, String>();
-                    PrivateBeta_Accesslist.put('clarejady@hulljady.co.uk', 'Clare Jady');
-                    PrivateBeta_Accesslist.put('sophie@taxexpert.co.uk', 'Sophie Dickinson');
-                    PrivateBeta_Accesslist.put('catherine@mcmillanaccountants.com', 'Cathy Wolff');
-                    PrivateBeta_Accesslist.put('barneyq@cueandco.eu', 'Bernard Cue');
-                    PrivateBeta_Accesslist.put('esoussi@jordanstrustcompany.com', 'Evia Soussi');
-                    PrivateBeta_Accesslist.put('brenda.bardwell@morrisowen.com', 'Brenda Bardwell');
-                    PrivateBeta_Accesslist.put('fiona.sweeting@osborneclarke.com', 'Fiona Sweeting');
-                    PrivateBeta_Accesslist.put('karen.vickery@osborneclarke.com', 'Karen Vickery');
-                    PrivateBeta_Accesslist.put('ton.shaw@radius.com', 'Tom Shaw');
-                    PrivateBeta_Accesslist.put('ann.williams@carillionplc.com', 'Ann Williams');
-                    PrivateBeta_Accesslist.put('pevans@liffordhall.co.uk', 'Paul Evans');
-                    PrivateBeta_Accesslist.put('marks@luckmans.com', 'Mark Spafford');
-                    PrivateBeta_Accesslist.put('claireselman@ormerodrutter.co.uk', 'Claire Selman');
-                    PrivateBeta_Accesslist.put('wendy.wilkes@squirepb.com', 'Wendy Wilkes');
-                    PrivateBeta_Accesslist.put('lynette.bridgens@squirepb.com', 'Lynette Bridgens');
-                    PrivateBeta_Accesslist.put('sandram@amterson.com', 'Sandra Murphy');
-                    PrivateBeta_Accesslist.put('stewart.halton@argentsaccountants.co.uk', 'Stewart Halton');
-                    PrivateBeta_Accesslist.put('chris.stubbins@mapartners.co.uk', 'Chris Stubbins');
-                    PrivateBeta_Accesslist.put('fiona.bradford@mills-reeve.com', 'Fiona Bradford');
-                    PrivateBeta_Accesslist.put('rachel.collins@mills-reeve.com', 'Rachel Collins');
-                    PrivateBeta_Accesslist.put('julie.marquiss@externalservices.com', 'Julie Marquiss');
-                    PrivateBeta_Accesslist.put('sylvain.picory@methodsdigital.co.uk', 'Sylvain Picory');
-                    PrivateBeta_Accesslist.put('lbitoy@gmail.com', 'Leo Bitoy');
-                    PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
-                    PrivateBeta_Accesslist.put('@methodsdigital.co.uk','Methds');
-                    PrivateBeta_Accesslist.put('@methods.co.uk','Methods');
-                    PrivateBeta_Accesslist.put('01testdocu@gmail.com','STEST');
-                    PrivateBeta_Accesslist.put('ceri.counter@companyregistrations.co.uk','CHPRESENTERTESTER'); 
+                    //PrivateBeta_Accesslist.put('clarejady@hulljady.co.uk', 'Clare Jady');
+                    //PrivateBeta_Accesslist.put('sophie@taxexpert.co.uk', 'Sophie Dickinson');
+                    //PrivateBeta_Accesslist.put('catherine@mcmillanaccountants.com', 'Cathy Wolff');
+                    //PrivateBeta_Accesslist.put('barneyq@cueandco.eu', 'Bernard Cue');
+                    //PrivateBeta_Accesslist.put('esoussi@jordanstrustcompany.com', 'Evia Soussi');
+                    //PrivateBeta_Accesslist.put('brenda.bardwell@morrisowen.com', 'Brenda Bardwell');
+                    //PrivateBeta_Accesslist.put('fiona.sweeting@osborneclarke.com', 'Fiona Sweeting');
+                    //PrivateBeta_Accesslist.put('karen.vickery@osborneclarke.com', 'Karen Vickery');
+                    //PrivateBeta_Accesslist.put('ton.shaw@radius.com', 'Tom Shaw');
+                    //PrivateBeta_Accesslist.put('ann.williams@carillionplc.com', 'Ann Williams');
+                    //PrivateBeta_Accesslist.put('pevans@liffordhall.co.uk', 'Paul Evans');
+                    //PrivateBeta_Accesslist.put('marks@luckmans.com', 'Mark Spafford');
+                    //PrivateBeta_Accesslist.put('claireselman@ormerodrutter.co.uk', 'Claire Selman');
+                    //PrivateBeta_Accesslist.put('wendy.wilkes@squirepb.com', 'Wendy Wilkes');
+                    //PrivateBeta_Accesslist.put('lynette.bridgens@squirepb.com', 'Lynette Bridgens');
+                    //PrivateBeta_Accesslist.put('sandram@amterson.com', 'Sandra Murphy');
+                    //PrivateBeta_Accesslist.put('stewart.halton@argentsaccountants.co.uk', 'Stewart Halton');
+                    //PrivateBeta_Accesslist.put('chris.stubbins@mapartners.co.uk', 'Chris Stubbins');
+                    //PrivateBeta_Accesslist.put('fiona.bradford@mills-reeve.com', 'Fiona Bradford');
+                    //PrivateBeta_Accesslist.put('rachel.collins@mills-reeve.com', 'Rachel Collins');
+                    //PrivateBeta_Accesslist.put('julie.marquiss@externalservices.com', 'Julie Marquiss');
+                    //PrivateBeta_Accesslist.put('sylvain.picory@methodsdigital.co.uk', 'Sylvain Picory');
+                    //PrivateBeta_Accesslist.put('lbitoy@gmail.com', 'Leo Bitoy');
+                    //PrivateBeta_Accesslist.put('@companieshouse.gov.uk','CH');
+                    //PrivateBeta_Accesslist.put('@methodsdigital.co.uk','Methds');
+                    //PrivateBeta_Accesslist.put('@methods.co.uk','Methods');
+                    //PrivateBeta_Accesslist.put('01testdocu@gmail.com','STEST');
+                    //PrivateBeta_Accesslist.put('ceri.counter@companyregistrations.co.uk','CHPRESENTERTESTER'); 
                     Boolean AccessGranted = PrivateBeta_Accesslist.containsKey(userProfileName);
                     Boolean chUser = PrivateBeta_Accesslist.containsKey('@'+userProfileName.subStringAfter('@'));
-                    If (AccessGranted == false && chUser == false) {
-                        PageReference unauthorised = new PageReference('/unauthorized');
-                        unauthorised.setRedirect(true);
-                        return unauthorised;
+                    
+                    if(Test.isRunningTest())   { 
+                        If (AccessGranted == false && chUser == false) {
+                            PageReference unauthorised = new PageReference('/unauthorized');
+                            unauthorised.setRedirect(true);
+                            return unauthorised;
+                        }
                     }
+                                                     
 
                     //Put back the c parameter from the cookies
                     Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey('c');

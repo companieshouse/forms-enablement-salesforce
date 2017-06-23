@@ -45,18 +45,21 @@ public with sharing class IntegrationErrorController extends TransactionStepCont
     }
 
     public PageReference startAgain(){
-		if (Test.isRunningTest()) {
+        if (Test.isRunningTest()) {
             system.debug('test is running');
         } else {
-    	FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+        FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
         submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
-		}
-
+        }
+        submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+        submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (Integration Page Fail): ' + FormsApiClient.numberOfTimeCalled;
+        submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+        
         persistStep();
 
         if(submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
         {
-        	PageReference pg = new PageReference('/IntegrationError');
+            PageReference pg = new PageReference('/IntegrationError');
 
             pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
             pg.setRedirect(true);

@@ -325,6 +325,56 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         }
     }
     
+    //This methods verify the access token from requestion the auth code: We check the company number and user id
+    public Boolean verifyToken(String accessToken, String companyNumber)
+    {
+        //Do the HTTP Request
+        Account_Api_Settings__c settings = getSettings();
+        
+        System.debug('settings =  ' + settings);
+
+        HttpRequest request = new HttpRequest();
+        String endpoint = 'https://' + settings.Host__c + '/oauth2/verify?' + 'access_token=' + accessToken;
+        request.setEndpoint(endpoint);
+
+        request.setMethod('GET');
+
+        request.setTimeout(120000);
+ 
+        Http http = new Http();
+        
+        // Send the request. This will get us a mock response under the unit test.
+        HTTPResponse response = http.send(request);
+
+        System.debug('response  =  ' + response);
+
+        System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
+        System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
+        
+        //If we get a valid answer we check the result with what we have
+        if (response.getStatusCode() == 200) {
+
+            AccountsApiHelper.VerifyToken answer = (AccountsApiHelper.VerifyToken)JSON.deserializeStrict(response.getBody(),AccountsApiHelper.VerifyToken.class);
+
+            system.debug('The answer is: ' + answer);
+            system.debug('The company number is: ' + companyNumber);
+
+            //Check the user id and the company number inside the scope (Format: Http://xxxxx/company/CompanyNumber)
+            if(answer.scope.contains(companyNumber))
+                return true;
+        }
+        
+        return false;
+        
+    }
+
+    public class VerifyToken{
+        public Integer expires_in {get; set;}
+        public String application {get; set;}
+        public String scope {get; set;}
+        public String user_id {get; set;}
+    }
+
     public AccountsApiHelper.UserProfile getUserProfile(String accessToken) {
         Account_Api_Settings__c settings = getSettings();
 

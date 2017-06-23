@@ -42,8 +42,6 @@ public with sharing class CompanyDetailsController extends TransactionStepContro
     public String companyLocality {get; set;}
     public Boolean showprevious {get; set;}
 
-    public Map<String, String> companyType {get; set;}
-
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
 
@@ -79,37 +77,10 @@ public with sharing class CompanyDetailsController extends TransactionStepContro
         previousButtonText = transactionMgr.currentStep.previousButtonText__c == null ? '' : transactionMgr.currentStep.previousButtonText__c;
 
         companyNumber = submissionMgr.submission.CompanyNumber__c;
-        companyType = new Map<String, String>();
 
         stepValidator = isPageAlreadyValidStep;
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
-        companyType.put('private-unlimited', 'Private Unlimited Company'); //Company
-        companyType.put('ltd', 'Private Limited Company'); //Company
-        companyType.put('plc', 'Public Limited Company'); //Company
-        companyType.put('old-public-company', 'Old Public Company');//Company
-        companyType.put('private-limited-guarant-nsc-limited-exemption', 'Private Limited Company by guarantee without share capital, use of \'Limited\'exemption');//Company
-        companyType.put('limited-partnership', 'Limited Partnership');//member
-        companyType.put('private-limited-guarant-nsc', 'Private Limited by guarantee without share capital');//Company
-        companyType.put('converted-or-closed', 'Converted / Closed');//Company
-        companyType.put('private-unlimited-nsc', 'Private Unlimited Company without share capital');//Company
-        companyType.put('private-limited-shares-section-30-exemption', 'Private Limited Company, use of \'Limited\'exemption');//Company
-        companyType.put('assurance-company', 'Assurance Company');//Company
-        companyType.put('oversea-company', 'Overseas Company');//Company
-        companyType.put('eeig', 'European Economic Interest Grouping (EEIG)');//Ignore 
-        companyType.put('icvc-securities', 'Investment Company with variable capital');//Company
-        companyType.put('icvc-warrant', 'Investment Company with variable capital');//Company
-        companyType.put('icvc-umbrella', 'Investment Company with variable capital');//Company
-        companyType.put('industrial-and-provident-society', 'Industrial and provident society');//Company
-        companyType.put('northern-ireland', 'Northern Ireland Company');//Company
-        companyType.put('northern-ireland-other', 'Credit Union (Northern Ireland)');//Company
-        companyType.put('llp', 'Limited Liability Partnership');//member
-        companyType.put('royal-charter', 'Royal Charter Company');//Company
-        companyType.put('investment-company-with-variable-capital', 'Investment Company with variable capital');//Company
-        companyType.put('unregistered-company', 'Unregistered Company');//Company
-        companyType.put('other', 'Other Company type');//Company
-        companyType.put('european-public-limited-liability-company-se', 'European Public Limited Liability Company (SE)');//member
-        companyType.put('uk-establishment', 'UK Establishment Company');//Company
 
         if (Test.isRunningTest()) {
             system.debug('test is running now');
@@ -127,7 +98,7 @@ public with sharing class CompanyDetailsController extends TransactionStepContro
             companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
 
             companyName = compProf.company_name;
-            companyTypeText = companyType.get(compProf.type);
+            companyTypeText = AppConstants.formatedCompanyType.get(compProf.type);
         }
         showprevious = true;
 

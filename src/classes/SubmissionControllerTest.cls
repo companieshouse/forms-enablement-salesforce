@@ -19,13 +19,14 @@ private class SubmissionControllerTest {
 		insert testCompany;
 		Transaction__c transac = testData.tx;
 		transac.OfficerCount__c = 2;
-		transac.Status__c = 'Submission pending';
+		transac.Status__c = 'Paid';
 		transac.Transaction_Type__c = 'DS01';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
 		transac.finishedAttachments__c = true;
 		transac.finishedAddingShares__c = true;
+		transac.Barcode__c = '';
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
 		transac.SoleDirectorPresenter__c = true;
@@ -91,6 +92,7 @@ private class SubmissionControllerTest {
 		Transaction__c transac = testData.tx;
 		transac.OfficerCount__c = 2;
 		transac.Status__c = 'Error';
+		transac.Barcode__c = '';
 		transac.Transaction_Type__c = 'DS01';
 		transac.Company__c = testCompany.Id;
 		transac.isPaymentAccount__c = true;

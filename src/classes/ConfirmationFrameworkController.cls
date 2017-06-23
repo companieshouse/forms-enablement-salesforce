@@ -97,11 +97,18 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         get;
         set;
     }
+    //added payment reference
+    public String paymentReference {
+        get;
+        set;
+    }
+
     public Boolean isDS01 {get; set;}
     public Boolean isDS02 {get; set;}
 
     public String pageTitle {get; set;}
     public String pageTitle2 {get; set;}
+    public String pageTitle3 {get; set;}
 
     public String pageBody {get; set;}
     public String pageBody1 {get; set;}
@@ -127,21 +134,24 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 customView = transactionMgr.currentStep.CustomView__c;
             }
             if (standardView) {
-                if (submissionMgr.submission.SubmissionId__c == null) {
+                if (submissionMgr.submission.SubmissionId__c == null || submissionMgr.submission.Barcode__c == null) {
                     // we need to submit the transaction to chips..... or change the status
                     // we need to change the submissionID__c to be our internal ID: SF ConfirmationID
                     // the SubmissionID__c will generated from CHIPS and passed back to us eventually
 
-                    submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
-                    submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
+                    //SP 13/06/17: Code changed to point to integration page error if we end up on the confirmation page with no valid barcode
+                    //submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
+                    //submissionMgr.submission.Status__c = AppConstant.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
                 }
                 formName = submissionMgr.submission.Form_Name__c;
                 submissionId = submissionMgr.submission.SubmissionId__c;
-                companyName = submissionMgr.submission.CompanyName__c;
+                companyName = submissionMgr.submission.CompanyName__c;           
+                // added payment reference to info on last page
+                paymentReference = submissionMgr.submission.PaymentReference__c;
                 companyNameText = transactionMgr.currentStep.CompanyNameText__c;
                 pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
                 pageTitle2 = transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c;
-                pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+                pageTitle3 = transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c;                pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
                 pageBody1 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
                 pageBody1 += transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
                 pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
@@ -156,8 +166,9 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
 
                 }
                 
-
+                // Added payment reference to last page
                 pageTitle2 = pageTitle2.replace('REFNUMB',  submissionMgr.submission.SubmissionId__c);
+                pageTitle3 = pageTitle3.replace('PAYNUMB',  submissionMgr.submission.PaymentReference__c);
 
                 if (submissionMgr.submission.attachments != null) {
                     if (submissionMgr.submission.attachments.size() > 0) {
@@ -204,6 +215,8 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 }
                 submissionId = submissionMgr.submission.SubmissionId__c;
                 companyName = submissionMgr.submission.CompanyName__c;
+                // added payment reference
+                paymentReference = submissionMgr.submission.PaymentReference__c;
                 companyNameText = transactionMgr.currentStep.CompanyNameText__c;
                 confirmationHeading1 = transactionMgr.currentStep.Header_Text_1__c;
                 confirmationContent1 = transactionMgr.currentStep.Display_Text_1__c;
@@ -281,7 +294,15 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
             return pg;
         }
         
+        if(submissionMgr.submission.Barcode__c == null)
+        {
+            PageReference pg = new PageReference('/IntegrationError');
 
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }        
+        
         persistStep();
 
         return null;

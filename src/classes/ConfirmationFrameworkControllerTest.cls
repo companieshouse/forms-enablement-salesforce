@@ -21,9 +21,11 @@ private class ConfirmationFrameworkControllerTest {
 		transac.OfficerCount__c = 2;
 		transac.Transaction_Type__c = 'DS01';
 		transac.Company__c = testCompany.Id;
+		transac.SubmissionId__c = '2424242';
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
 		transac.finishedAttachments__c = true;
+		transac.paymentReference__c = '22424';
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
@@ -97,6 +99,7 @@ private class ConfirmationFrameworkControllerTest {
 		insert testCompany;
 		Transaction__c transac = testData.tx;
 		transac.OfficerCount__c = 2;
+		transac.paymentReference__c = '22424';
 		transac.Transaction_Type__c = 'LLDS02';
 		transac.Form_Name__c = 'LLDS02';
 		transac.Company__c = testCompany.Id;
@@ -105,6 +108,7 @@ private class ConfirmationFrameworkControllerTest {
 		transac.finishedAttachments__c = true;
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
+		transac.SubmissionId__c = '24242';
 		transac.isSigningFinished__c = false;
 		transac.SoleDirectorPresenter__c = true;
 		transac.isPresenterMultipleDirectors__c = true;
@@ -167,6 +171,9 @@ private class ConfirmationFrameworkControllerTest {
 		test1controller.standardView = true;
 		test1controller.customView = false;
 		test1controller.initialiseStep();
+
+		test1controller.submissionMgr.submission.Barcode__c = null;
+		test1controller.saveTransaction();
 	}
 
 	@isTest static void test_method_three() {
@@ -187,11 +194,13 @@ private class ConfirmationFrameworkControllerTest {
 		insert testCompany;
 		Transaction__c transac = testData.tx;
 		transac.OfficerCount__c = 2;
+		transac.paymentReference__c = '22424';
 		transac.Transaction_Type__c = 'DS02';
 		transac.Form_Name__c = 'DS02';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
+		transac.SubmissionId__c = '24242';
 		transac.finishedAttachments__c = true;
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
@@ -260,6 +269,20 @@ private class ConfirmationFrameworkControllerTest {
 
 		test1controller.standardView = true;
 		test1controller.customView = false;
+		test1controller.paymentReference = 'sdgfdf';
+		test1controller.todayThreeMonths = 'blah';
+		test1controller.companyName = 'blah';
+		test1controller.displayText3 = 'blah';
+		test1controller.confirmationHeading1 = 'blah';
+		test1controller.confirmationContent1 = 'blah';
+		test1controller.confirmationContent2 = 'blah';
+		test1controller.confirmationContent3 = 'blah';
+		test1controller.confirmationNextStepContent = 'blah';
+		test1controller.confirmationWarningTitle = 'blah';
+		test1controller.confirmationWarningContent1 = 'blah';
+		test1controller.confirmationHeading2 = 'blah';
+		test1controller.confiratmionWarningContent2 = 'blah';
+		test1controller.companyNameText = 'blah';
 		test1controller.initialiseStep();
 		test1controller.redirectDS02();
 		test1controller.saveTransaction();
@@ -268,5 +291,10 @@ private class ConfirmationFrameworkControllerTest {
 		test1controller.standardView = false;
 		test1controller.customView = true;
 		test1controller.initialiseStep();
+
+		test1controller.submissionMgr.submission.isSignout__c = true;
+		test1controller.saveTransaction();
 	}
+
+	
 }
