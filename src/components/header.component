@@ -3,16 +3,14 @@
         <div class="header-wrapper">
             <div class="header-global">
                 <div class="header-logo">
-                    <a href="/" title="" class="content" id="logo">
-                        Companies House
-                    </a>
+                    <a href="https://www.gov.uk/government/organisations/companies-house" title="" class="content" id="logo">Companies House</a>
                 </div>
             </div>
-            <div class="header-global" style="margin-top: 0.6%;">
+            <!-- <div class="header-global" style="margin-top: 0.6%;">
                 <div class="header-logo">
                     <span id="service_name" class="header-text service_name">Forms Service</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </header>
 </apex:component>

@@ -3,6 +3,7 @@ public with sharing class CH_SearchControllerByOfficerListClass {
     public String resultDisplay {get;set;}  
     public String CH_searchTextNumber{get;set;}
     public String results{get;set;}
+    public Integer active_count {get; set;}
     
     public List<CompaniesHouse.OfficerDetails> itemsToDisplay {get;set;}
     public CompaniesHouse.OfficerList itemsToDisplayTopLevel {get;set;}
@@ -29,16 +30,14 @@ public with sharing class CH_SearchControllerByOfficerListClass {
         resultDisplay = req.getRequestOfficersList(CH_searchTextNumber);
         jsonData = res.getResponseOfficerList(resultDisplay);
         system.debug('JsonData before IF : ' + jsonData);
-        system.debug('JsonData Total Results before IF : ' + jsonData.total_results);
         
         if(jsonData.total_results == null) {
         
             results = 'No records found';  
         
         }else{
-        
-            results = 'Record(s) found';
-            
+            system.debug('JsonData Total Results before IF : ' + jsonData.total_results);
+            this.active_count = jsonData.active_count;
             itemsToDisplay = jsonData.items;
             itemsToDisplayTopLevel = jsonData;
             itemsToDisplayAddress  = jsonData.items;

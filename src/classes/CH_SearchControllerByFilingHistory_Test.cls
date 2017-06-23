@@ -2,7 +2,7 @@
  * Author: Sameer
  * Reviewer: eliot.stock@methodsdigital.co.uk
  */
-@isTest(SeeAllData=true)
+@isTest(SeeAllData=false)
 public with sharing class CH_SearchControllerByFilingHistory_Test {
     
     // Number / Transaction ID

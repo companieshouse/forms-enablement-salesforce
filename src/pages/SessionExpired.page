@@ -1,0 +1,27 @@
+<!-- 
+Name: SessionExpired.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+This page is used when the user do not a valid session in the org.
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Sylvain P    2016-08-30   Initial development.
+-->
+<apex:page cache="false" title="Expired session" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="heading-xlarge">
+                   Session expired.
+                </h1>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

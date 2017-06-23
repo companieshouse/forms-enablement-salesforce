@@ -44,80 +44,47 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <fieldSets>
-        <fullName>DS01_Persist</fullName>
-        <description>DS01 User Flow VF Pages</description>
-        <displayedFields>
-            <field>Text_1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS01 Persist</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS01_Query</fullName>
-        <description>DS01 User Flow VF Pages</description>
-        <displayedFields>
-            <field>Text_1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Number_1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS01 Query</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS01_Query_Dynamic2</fullName>
-        <description>DS01 User Flow VF Pages Dynamic 2</description>
-        <displayedFields>
-            <field>Text_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Status__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS01_Query_Dynamic2</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS02_Persist</fullName>
-        <description>DS02 User Flow VF Pages</description>
-        <label>DS02 Persist</label>
-    </fieldSets>
-    <fieldSets>
-        <fullName>DS02_Query</fullName>
-        <description>DS02 User Flow Dynamic VF Pages</description>
-        <displayedFields>
-            <field>Text_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Number_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Date_2__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <label>DS02 Query</label>
-    </fieldSets>
+    <fields>
+        <fullName>AccountAuthorisationCode__c</fullName>
+        <description>This field contains the auth code to reconcile if the Account number input by the presenter is authorised.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Authorisation code of the presenter to pay by Account</inlineHelpText>
+        <label>Account authorisation code for presenter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>AccountNumber__c</fullName>
+        <description>This field store the account number if the user pay against an account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account number of the user transaction</inlineHelpText>
+        <label>Account Number</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>AmendmentHistory__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Usage : add your name and the reason why you are amending this record.</inlineHelpText>
+        <label>Amendment History</label>
+        <length>10000</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
     <fields>
         <fullName>Amount__c</fullName>
         <externalId>false</externalId>
@@ -129,6 +96,22 @@
         <type>Currency</type>
     </fields>
     <fields>
+        <fullName>ApplicationBaseURL__c</fullName>
+        <externalId>false</externalId>
+        <label>ApplicationBaseURL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>ApplicationDate__c</fullName>
+        <externalId>false</externalId>
+        <label>ApplicationDate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Barcode__c</fullName>
         <description>Represents the barcode of the transaction received from CHIPS</description>
         <externalId>false</externalId>
@@ -138,6 +121,51 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyAddress1__c</fullName>
+        <description>Represents the company Address 1 from CHIPS</description>
+        <externalId>false</externalId>
+        <label>Company Address 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyAddress2__c</fullName>
+        <description>Represents the company Address 2 from CHIPS</description>
+        <externalId>false</externalId>
+        <label>Company Address 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyCountry__c</fullName>
+        <description>Represents the Country of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Country</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyIncorporationDate__c</fullName>
+        <description>This represents the date of incorporation of the company</description>
+        <externalId>false</externalId>
+        <label>Company Incorporation Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyLocality__c</fullName>
+        <description>Represents the Company locality</description>
+        <externalId>false</externalId>
+        <label>Company Locality</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>CompanyName__c</fullName>
@@ -160,6 +188,42 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>CompanyPostCode__c</fullName>
+        <description>Represents the Postcode of a Company</description>
+        <externalId>false</externalId>
+        <label>Company PostCode</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyRegion__c</fullName>
+        <description>Represents the Region of a Company</description>
+        <externalId>false</externalId>
+        <label>Company Region</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyStatus__c</fullName>
+        <description>This represents the status of the Company</description>
+        <externalId>false</externalId>
+        <label>Company Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CompanyType__c</fullName>
+        <description>This represents the type of the company.</description>
+        <externalId>false</externalId>
+        <label>Company Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Company__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -175,36 +239,30 @@
         <fullName>ContactEmail__c</fullName>
         <description>Presenter Contact information for notifications</description>
         <externalId>false</externalId>
-        <label>ContactEmail</label>
+        <label>Contact Email</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Email</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Date_1__c</fullName>
+        <fullName>DownloadLink__c</fullName>
+        <description>Link to download your attachment with authentication</description>
         <externalId>false</externalId>
-        <label>Date 1</label>
+        <label>DownloadLink</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>Date</type>
-    </fields>
-    <fields>
-        <fullName>Date_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Date 2</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
+        <type>Url</type>
     </fields>
     <fields>
         <fullName>ErrorDescription__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>API call errors will be presented here</inlineHelpText>
         <label>Error Description</label>
-        <required>false</required>
+        <length>10000</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <fields>
         <fullName>ExpiryDate__c</fullName>
@@ -272,28 +330,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>Number_1__c</fullName>
-        <externalId>false</externalId>
-        <label>Number 1</label>
-        <precision>6</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Number_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Number 2</label>
-        <precision>6</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>OfficerCount__c</fullName>
         <externalId>false</externalId>
         <label>OfficerCount</label>
@@ -333,9 +369,21 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Product_Code__c</fullName>
+        <description>For the finance reconciliation report</description>
+        <externalId>false</externalId>
+        <label>Product Code</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>RequiredOfficerSign__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c)</formula>
+        <formula>IF(        isMajorityRequired__c           ,IF(OfficerCount__c &gt; 2, ((IF(MOD(OfficerCount__c,2)=0, OfficerCount__c, OfficerCount__c-1)/2)+1), OfficerCount__c), 1 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>RequiredOfficerSign</label>
         <precision>18</precision>
@@ -356,6 +404,32 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SentreviewURL__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>SentreviewURL</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SignerStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>SignerStatus</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>SoleDirectorPresenter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to control the flow if the presenter is a sole director.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH USED IN THE BACK END</inlineHelpText>
+        <label>SoleDirectorPresenter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
@@ -391,15 +465,24 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Rejected</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>DeclinedSig</fullName>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Signatures</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
@@ -415,30 +498,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>Text_1__c</fullName>
+        <fullName>TransactionPath__c</fullName>
+        <description>Path Back to beginning of Transaction with Transaction Type</description>
         <externalId>false</externalId>
-        <label>Text 1</label>
-        <length>100</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Text_2__c</fullName>
-        <externalId>false</externalId>
-        <label>Text 2</label>
-        <length>100</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>TransactionState__c</fullName>
-        <description>Keeps track of encrypted state value for parsing after multiple directors have signed</description>
-        <externalId>false</externalId>
-        <label>TransactionState</label>
+        <label>TransactionPath</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -478,10 +541,119 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Warning_Confirmation_Flag__c</fullName>
+        <fullName>containsPackage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes that a particular transactions contains multiple transactions as attachments to be turned into packages upon submission</description>
+        <externalId>false</externalId>
+        <label>containsPackage</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>errorsMessage__c</fullName>
+        <externalId>false</externalId>
+        <label>errorsMessage</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>errors__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>Warning Confirmation Flag</label>
+        <label>errors</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>finishedAddingShares__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Boolean to set once Shares are finished to bypass the Adding Shares Table and call the next Step</description>
+        <externalId>false</externalId>
+        <label>finishedAddingShares</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>finishedAttachments__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>finishedAttachments</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>finishedPart1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>finishedPart1</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>hasPaid__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to notify the transaction has been paid.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD. FIELD USED BY CODE</inlineHelpText>
+        <label>Has paid?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>hasPromoter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If selected  the user will fill out the promoter page in the next step</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Has any amount or benefit been paid or given or is intended to be paid or given
+to any promoter of the company?</inlineHelpText>
+        <label>hasPromoter</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isBehalfSignatoryEnable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to control if we will display the flow of behalf signature selection and input screen</description>
+        <externalId>false</externalId>
+        <inlineHelpText>TO NO TOUCH THIS FIELD BACK END FIELD ONLY</inlineHelpText>
+        <label>is behalf signatory enable?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isDigitalSignatureNeeded__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field show if the form contains a digital signature</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Property checked if the form - transaction need to be signed digitally</inlineHelpText>
+        <label>is digital signature needed?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLLP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isLLP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is LP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLtdPlc__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>is Ltd Plc</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -493,21 +665,290 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
+    <fields>
+        <fullName>isPaymentAccount__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark is the transaction will require to load the account through the JSON</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY CODE TO CONTROL ACCOUNT PAYMENT</inlineHelpText>
+        <label>is paying against an Account?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentCard__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This value of this field represents if the user has paid using card</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD BACK END ONLY</inlineHelpText>
+        <label>is paying against an Card?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentPaypal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark if the transaction will require to load the paypal through the JSON</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY CODE TO CONTROL PAYPAL PAYMENT</inlineHelpText>
+        <label>is paying against an Paypal?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPaymentRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox is used to acknowledge if a payment is required.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Populated automatically by code. DO NOT TOUCH</inlineHelpText>
+        <label>is payment required?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isPresenterMultipleDirectors__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to mark the transaction if the user answer to the question are you a director and if there is more than 1 director</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, BACK END ONLY</inlineHelpText>
+        <label>is Presenter Multiple Director?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isReviewTrigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isReviewTrigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSameDayProcessing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field mark if the user has paid the extra to make Companies House processing the transaction on the same day</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, USED BY THE CODE IN THE APPLICATION.</inlineHelpText>
+        <label>is same day processing?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSigningFinished__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows if the transaction has finished with signing</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked then signing process is finished</inlineHelpText>
+        <label>is signing finished</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSigningStarted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows if the transaction has started a signing ceremony</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Property showing if the transaction is awaiting signature</inlineHelpText>
+        <label>is signing started?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSignout__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isSignout</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>officerTerminology__c</fullName>
+        <externalId>false</externalId>
+        <label>Officer Terminology</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>paymentDate__c</fullName>
+        <externalId>false</externalId>
+        <label>paymentDate</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>paymentReference__c</fullName>
+        <externalId>true</externalId>
+        <label>payment reference</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>prescribedParticular__c</fullName>
+        <externalId>false</externalId>
+        <label>prescribedParticular</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>selectShareType__c</fullName>
+        <externalId>false</externalId>
+        <label>selectShareType</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>sentsignerstatus__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>sentsignerstatus</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>shareChangeSelection__c</fullName>
+        <externalId>false</externalId>
+        <label>shareChangeSelection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>shareClassSelection__c</fullName>
+        <externalId>false</externalId>
+        <label>shareClassSelection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>sharecurrencyselection__c</fullName>
+        <externalId>false</externalId>
+        <label>sharecurrencyselection</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>submissionDate__c</fullName>
+        <externalId>false</externalId>
+        <label>submissionDate</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>submissionTime__c</fullName>
+        <externalId>false</externalId>
+        <label>submissionTime</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>trueTransactionName__c</fullName>
+        <description>Transaction Name for group transaction processes (e.g. SH05_6_7 need to be submitted as standalone SH05 or SH06, etc. This value will be used on submission for the transaction type. If no value is given then the transaction type will not be changed.</description>
+        <externalId>false</externalId>
+        <label>trueTransactionName</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>validateEmailFormat__c</fullName>
+        <externalId>false</externalId>
+        <label>validateEmailFormat</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
     <label>Transaction</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
-        <columns>CompanyName__c</columns>
-        <columns>CompanyNumber__c</columns>
-        <columns>Status__c</columns>
         <columns>Transaction_Type__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>CompanyName__c</columns>
+        <columns>Status__c</columns>
+        <columns>ContactEmail__c</columns>
+        <columns>Barcode__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>submissionTime__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <listViews>
-        <fullName>All1</fullName>
+        <fullName>Errors_and_Rejects</fullName>
+        <columns>NAME</columns>
+        <columns>SubmissionId__c</columns>
+        <columns>Status__c</columns>
+        <columns>submissionDate__c</columns>
+        <columns>submissionTime__c</columns>
+        <columns>ErrorDescription__c</columns>
         <filterScope>Everything</filterScope>
-        <label>All</label>
+        <filters>
+            <field>Status__c</field>
+            <operation>notContain</operation>
+            <value>Signed,Payment pending,Paid,Submission pending,Submitted,Approved,Pending,Draft</value>
+        </filters>
+        <label>Errors and Rejects</label>
+    </listViews>
+    <listViews>
+        <fullName>OneCompanyView</fullName>
+        <columns>NAME</columns>
+        <columns>OBJECT_ID</columns>
+        <columns>CompanyName__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>Barcode__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CompanyNumber__c</field>
+            <operation>startsWith</operation>
+            <value>08123351</value>
+        </filters>
+        <label>OneCompanyView</label>
+    </listViews>
+    <listViews>
+        <fullName>barcode</fullName>
+        <columns>NAME</columns>
+        <columns>Barcode__c</columns>
+        <columns>CompanyName__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>SubmissionId__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Barcode__c</field>
+            <operation>equals</operation>
+            <value>X66PO4SA</value>
+        </filters>
+        <label>barcode</label>
     </listViews>
     <nameField>
         <displayFormat>SUB{0000}</displayFormat>
@@ -518,47 +959,21 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
     <webLinks>
-        <fullName>Create_PDF</fullName>
+        <fullName>Send_Email_To_Presenter</fullName>
         <availability>online</availability>
         <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
         <height>600</height>
+        <isResizable>true</isResizable>
         <linkType>page</linkType>
-        <masterLabel>Create PDF</masterLabel>
-        <openType>sidebar</openType>
-        <page>PDFGeneration</page>
+        <masterLabel>Send Email To Presenter</masterLabel>
+        <openType>newWindow</openType>
+        <page>SendSFEmailToPresenterButton</page>
+        <position>none</position>
         <protected>false</protected>
-    </webLinks>
-    <webLinks>
-        <fullName>Send_pdf</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <height>600</height>
-        <linkType>page</linkType>
-        <masterLabel>Send pdf</masterLabel>
-        <openType>sidebar</openType>
-        <page>PaymentPage</page>
-        <protected>false</protected>
-    </webLinks>
-    <webLinks>
-        <fullName>Send_with_DocuSign</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <linkType>javascript</linkType>
-        <masterLabel>Send with DocuSign</masterLabel>
-        <openType>onClickJavaScript</openType>
-        <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/apex/dsfs__DocuSign_JavaScript&quot;)}
-DocuSign_CreateEnvelope();</url>
-    </webLinks>
-    <webLinks>
-        <fullName>Sign_Here</fullName>
-        <availability>online</availability>
-        <displayType>button</displayType>
-        <height>600</height>
-        <linkType>page</linkType>
-        <masterLabel>Sign Here</masterLabel>
-        <openType>sidebar</openType>
-        <page>EmbedDocuSign</page>
-        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
     </webLinks>
 </CustomObject>

@@ -1,0 +1,113 @@
+<!-- 
+   Name: BehalfDecision.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+      
+   1. This page will design if the flow need to redirect the user to the selection of who will
+   be signed on behalf for the company
+
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  SylvainP      2016-06-17  Initial development.
+   -->
+<apex:page cache="false" title="{!$Label.UI_Text_Behalf_Decision}" controller="BehalfDecisionController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!currentErrorMessage}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="choicePanel">
+                        <div class="form-group">
+                            
+                                <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                           
+                            <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+                            <fieldset class="inline">
+                                <div class="form-group {!errorVal}">
+                                    <legend class='visuallyhidden'>{!textBox1}</legend>
+                                    <span class="error-message">{!currentErrorMessage}</span>
+                                    <label class="block-label" for="radio-inline-1">
+                                        <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"> Yes
+                                        </input>
+                                    </label>
+                                    <label class="block-label" for="radio-inline-2">
+                                        <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"> No
+                                        </input>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                            <br />
+                            <br />
+                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                        </div>
+                    </apex:outputPanel>
+                    <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+                        <apex:param name="paramBoolean" value="" id="x" assignTo="{!behalfValidation}" />
+                    </apex:actionFunction>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        BehalfDecisionController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

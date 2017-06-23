@@ -23,23 +23,25 @@ public with sharing class TransactionManager {
     public Transaction_Type_Step__mdt currentStep { get; private set; }
     
     // Private class members.
-    private Map<Id, Transaction_Type_Step__mdt> stepsById;
-    private String transactionType;
-    private Integer stepCount=0; 
+    public Map<Id, Transaction_Type_Step__mdt> stepsById {get; set;}
+    public String transactionType {get; set;}
+    public Integer stepCount {get; set;} 
     
     // Constructors.
     private TransactionManager(){}
     
     public TransactionManager(String transactionType){
+    	    	//throw new Form_CustomException('transaction type is ' + transactionType);
+    	stepCount = 0;
     	this.transactionType=transactionType;
 		retrieveTransactionType(transactionType);
     }
     
     public TransactionManager(Id stepId){    	
     	// query the transaction type Id from the stepId then load the transaction def.
+    	stepCount = 0;
     	transactionType = [select Transaction_Type__c from Transaction_Type_Step__mdt where Id=:stepId].Transaction_Type__c;
     	this.transactionType=transactionType;
-    	
 		retrieveTransactionType(transactionType);
 		
 		stepCount = stepsById.size();
@@ -50,19 +52,22 @@ public with sharing class TransactionManager {
 				break;
 			}
 		}
-		if (currentStep==null) {} // todo - error handling.
+		if (currentStep==null) {
+
+
+		} // todo - error handling.
     }    
     // End Constructors.
     
     // Instance methods.
     private void retrieveTransactionType(String transactionType){
 
-		List<Transaction_Type__mdt> recs = [select Id,isMajorityForm__c,Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
+		List<Transaction_Type__mdt> recs = [select Id,CompanySearchedPreviousButton__c,CompanySearchedHeader1__c,CompanySearchedBody1__c,Company_Page_HiddenT3__c,Company_Page_HiddenT2__c,Company_Page_HiddenT1__c,Company_Page_Body_4__c,Company_Page_Body_3__c,Company_Page_Body_2__c,Company_Page_Body_1__c,Company_Page_Title__c,Product_Code__c, customGuidanceView__c, StandardGuidanceView__c ,companySearchPageText__c,isDigitalSignatureNeeded__c ,FeeFastTrack__c,isPaypalAllowed__c,isPaymentRequired__c,Below_Button_Title2__c,Below_Button_Text4__c,Below_Button_Text5__c,Below_Button_Text6__c,isSameDayPayment__c,isCardAllowed__c,isAccountPayment__c,Expiry_Date_Length__c ,Guidance_Text_1__c,Guidance_Text_2__c,Guidance_Text_3__c,Guidance_Text_4__c,Guidance_Text_5__c,Guidance_Text_6__c,GuidanceWarningText__c,hasGuidancePage__c,isMajorityForm__c, Below_Button_Title__c, Landing_Page_Text2__c,Landing_Page_Text3__c, Landing_Page_Text4__c, Landing_Page_Text5__c, Landing_Page_Text6__c,  above_button_text__c, Below_Button_Text3__c,Below_Button_Text2__c,Below_Button_Text__c,  DeveloperName, Landing_Page_Title__c, Landing_Page_Text__c, Fee__c, Family__c from Transaction_Type__mdt where DeveloperName=:transactionType];
 		if (recs.size()==1){
 			
 			td = recs[0];
 			
-			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
+			stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select  Header_Text_4__c,CustomView__c, StandardView__c, CompanyNameText__c, Header_Text_2__c, Header_Text_3__c, previousButtonText__c, ContinueButtonText__c,Display_Text_4__c,Display_Text_6__c,Display_Text_5__c,Id, DeveloperName, Step_Number__c, Step_Type__c, Visualforce_Page_Name__c, Apex_Class_Name__c, Query_FieldSet_1_Name__c, Persist_FieldSet_1_Name__c, 
 																		Header_Text_1__c, Display_Text_1__c,Display_Text_2__c,Display_Text_3__c, Is_Active__c, Document_Template_Name__c, SObject_Type__c 
 																	from Transaction_Type_Step__mdt 
 																	where Transaction_Type__c=:td.DeveloperName and Is_Active__c=true order by Step_Number__c asc]);
@@ -70,6 +75,13 @@ public with sharing class TransactionManager {
 		} else {
 			// todo - error handling.
 		}
+    }    
+    public PageReference getCurrentStep(Id submissionId){    	
+		PageReference pr = getNextStepPageReference(Integer.valueOf(currentStep.Step_Number__c)-1, submissionId);  
+		
+		//pr.setCookies(new List<Cookie> { new Cookie('submission', SecurityManager.encryptText(submissionId), null, 600, true) } );
+		pr.setRedirect(true);
+		return pr;		
     }        
        
     public PageReference firstStep(Id submissionId){    	
@@ -81,6 +93,7 @@ public with sharing class TransactionManager {
     }    
     
     public PageReference nextStep(Id submissionId){
+
 		if (currentStep.Step_Number__c>=stepCount) return null; 
 		
 		PageReference pr = getNextStepPageReference(Integer.valueOf(currentStep.Step_Number__c), submissionId);     	
@@ -190,7 +203,7 @@ public with sharing class TransactionManager {
 		//return null;
 	} 
 	
-	private Id getNextStepIdByApex(String navigableClassName, Id submissionId){
+	public Id getNextStepIdByApex(String navigableClassName, Id submissionId){
 		
 		// todo - validate the input
 		System.debug(LoggingLevel.ERROR,'in getNextStepIdByApex:'+navigableClassName+':'+submissionId);

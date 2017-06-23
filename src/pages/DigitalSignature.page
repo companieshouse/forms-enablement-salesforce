@@ -1,0 +1,109 @@
+<!--
+Name:  DigitalSignature
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+
+Page DigitalSignature which control the signing process
+
+======================================================
+======================================================
+History
+
+Ver. Author        Date        Detail
+1.0  Sylvain Picory&    2016-07-04  Initial development.
+-->
+<apex:page cache="false" title="{!$Label.UI_Text_DocuSign}" controller="DigitalSignatureController" docType="html-5.0" showHeader="false" action="{!initSignature}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <script>
+    if (window.frameElement) {
+        parent.location.href = window.location;
+        console.log("found iframe and reloading")
+    } else {
+        console.log('not finding iframe probably on mobile');
+    }
+    </script>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="pendingPage" rendered="{!pendingPage}">
+                    <!-- <apex:outputPanel id="test" >
+                    {!waitTime} {!pollServer}
+                    </apex:outputPanel> -->
+                    <apex:actionPoller enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5"  />
+                    <apex:outputText escape="false" value="{!pageTitle}" />
+                    <apex:outputText escape="false" value="{!pageBody}"/>
+                    <apex:outputPanel id="directorTable" rendered="{!multipleDirectors}">
+                        <apex:outputText escape="false" value="{!pageBody2}" />
+                        <table class="table-spacing">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col" class="director-email">Email address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                    <tr>
+                                        <td>{!director.name}</td>
+                                        <td>{!director.email}</td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <apex:commandLink action="{!signoutAction}" value="{!$Label.UI_Text_SignOut_Page}" id="theSignOutButton" />
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel id="failureContact" rendered="{!successSigning}">
+                    <apex:outputText escape="false" value="{!pageTitle2}" />
+                    <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                    <br/>
+                    <br/>
+                    <!--<apex:commandLink action="{!resetTransaction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> removed prodct owner decision 9/9/16  Start again link-->
+                </apex:outputPanel>
+                <apex:outputPanel id="succesSign" rendered="{!failureEmail}">
+                    <apex:outputText escape="false" value="{!pageTitle4}" />
+                    <apex:outputText escape="false" value="{!pageBodyFailureContact}" />
+                    <table class="table-spacing">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col" class="director-email">Email address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat2">
+                                <tr>
+                                    <td>{!director.name}</td>
+                                    <td>{!director.email}</td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                     <apex:commandButton action="{!resetTransaction}" styleClass="button"
+                     value="{!$Label.UI_Text_Previous}" />
+                </apex:outputPanel>
+                <apex:outputPanel id="failureSign" rendered="{!failureSigning}">
+                    <apex:outputText escape="false" value="{!pageTitle3}" />
+                    <apex:outputText escape="false" value="{!pageBodyFailure}" />
+                    <br/>
+                    <br/>
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton2" />
+                </apex:outputPanel>
+            </apex:form>
+            <script language="Javascript">
+
+            function disableBack() {
+              window.history.forward();
+            }
+            
+            window.onload = disableBack();
+
+            </script>
+        </apex:define>
+    </apex:composition>
+</apex:page>

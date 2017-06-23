@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Expired Transaction</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>CH Expired Transaction</name>
+    <style>none</style>
+    <subject>Application to close final warning for {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) Ref: FE{!Transaction__c.Id}</subject>
+    <textOnly>Companies House Final Warning Expiry
+
+Request  to close {!Transaction__c.CompanyName__c}
+
+Your request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) whose registered office address is {!Transaction__c.CompanyAddress1__c}  {!Transaction__c.CompanyPostCode__c}  has not been completed and will be deleted on {!Today()+1}. Your reference number for any future enquiries is FE{!Transaction__c.Id}.
+
+View the directors signing status
+
+What happens next:
+
+To avoid the request being deleted, it&apos;s important that you ask those who have not approved to approve this request before midnight  tomorrow ( {!Today()+1)}.
+
+Contact Centre tel +44 (0)303 1234 500
+or email enquiries@companieshouse.gov.uk.
+
+This email was sent from a notification-only email address which cannot accept incoming mail. Please do not reply directly to this message.</textOnly>
+    <type>custom</type>
+</EmailTemplate>

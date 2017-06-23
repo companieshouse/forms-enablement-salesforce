@@ -19,18 +19,19 @@ which the user must reauthenticate.
 History
 ------- 
 Ver. Author        Date        Detail
-1.0  Mark Cane&    2016-04-09  Initial conversion of Eliot Stock code.
+1.0  Mark Cane&    2016-04-09  Initial conversion of Eliot Stock code .
 */
 public with sharing class AccountsAPIHelper {
 	
         SecurityManager securityMgr;
 
-         private TrackUserClass userTracker {
+        private TrackUserClass userTracker {
         get;
         set;
     }
+    
 
-    public class AccountsApiException extends Exception {}	
+    public with sharing class AccountsApiException extends Exception {}	
 
     public String getRedirectUrl() {
         String hostname = ApexPages.currentPage().getHeaders().get('Host');
@@ -39,9 +40,29 @@ public with sharing class AccountsAPIHelper {
         System.debug('hostname is  ' + hostname); 
                return redirectUrl;
     }	
-	
 
-	public String getUserAuthUrl(String nonce){
+    public String getDownloadRedirectUrl() {
+        String hostname = ApexPages.currentPage().getHeaders().get('Host');
+        String downloadredirectUrl = 'https://' + hostname + '/Documents';
+        System.debug('hostname is  ' + hostname); 
+               return downloadredirectUrl;
+    }   
+	
+    public String getDocumentStatusRedirectUrl() {
+        String hostname = ApexPages.currentPage().getHeaders().get('Host');
+        String docstatusredirectUrl = 'https://' + hostname + '/Status';
+        System.debug('hostname is  ' + hostname); 
+               return docstatusredirectUrl;
+    } 
+
+    public String getReviewStatusRedirectUrl() {
+        String hostname = ApexPages.currentPage().getHeaders().get('Host');
+        String docstatusredirectUrl = 'https://' + hostname + '/Review';
+        System.debug('hostname is  ' + hostname); 
+               return docstatusredirectUrl;
+    }   
+
+	public String getUserAuthUrl(String nonce, String redirectURL){
 
 		Account_Api_Settings__c settings = getSettings();
 		
@@ -64,10 +85,19 @@ public with sharing class AccountsAPIHelper {
         //lb changed the sequence....really shouldn't matter
         authUrl+='&state='+nonce;
 
+        //Force the param always
+        //authUrl+='&reauthenticate=force';
+        
         // Redirect URL.
-        String redirectUrl = EncodingUtil.urlEncode(getRedirectUrl(), 'UTF-8');        
 
-		 authUrl += '&redirect_uri='+redirectUrl;
+        String redirectUrlParam = EncodingUtil.urlEncode(getRedirectUrl(), 'UTF-8');        
+
+        if(!String.isBlank(redirectUrl))
+        {
+            redirectUrlParam = redirectUrl;
+        }
+
+		 authUrl += '&redirect_uri='+redirectUrlParam;
 
          return authUrl;
     }
@@ -106,27 +136,111 @@ public with sharing class AccountsAPIHelper {
     	return authUrl;
     }
 
-    /*
-    // keep this in the security manager for user and company authentication
-    private String getNonce() {
-    	
-    	final Integer NONCE_LENGTH = 16;
-    	
-        final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+
+    public String getCompanyDownloadAuthUrl(String companyNumber, String transactionType, String nonce){
         
-        String nonce = '';
+        final String SCOPE_PREFIX = 'http://api.companieshouse.gov.uk/company/';
+
+        Account_Api_Settings__c settings = getSettings();
+
+
+      
+             // always insert new company auth when this is called so we can track user and company searched
+        insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nonce, Transaction_Type__c=transactionType);
+
+        String authUrl = 'https://'+settings.Host__c+'/oauth2/authorise' + '?';
         
-        while (nonce.length() < NONCE_LENGTH) {
-           Integer i = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
-           nonce += chars.substring(i, i + 1);
-        }
+        // Response type is always "code"
+        authUrl+='response_type=code';
         
-        return nonce; 
-    } 
-    */
+        // Client ID identifies us to the server and is not secret
+        authUrl+='&client_id='+settings.Client_Id__c;
+        
+         // Chris Smith's instructions: It is mandatory to pass a state parameter, containing a nonce
+        // value. This will be returned to the supplied redirect_ui along with the authorisation
+        // code, and must be checked to ensure it is still valid.
+        //lb changed the sequence....really shouldn't matter
+        authUrl+='&state='+nonce;
+        
+        // Redirect URL.
+        String redirectUrl = EncodingUtil.urlEncode(getDownloadRedirectUrl(), 'UTF-8'); //  EncodingUtil.urlEncode(settings.Callback_Url__c, 'UTF-8');      
+
+        authUrl+='&redirect_uri='+ redirectUrl;  
+        authUrl+='&scope='+SCOPE_PREFIX+companyNumber;      
+        
+        return authUrl;
+    }
+
+public String getDocumentStatusURL(String companyNumber, String transactionType, String nonce){
+        
+        final String SCOPE_PREFIX = 'http://api.companieshouse.gov.uk/company/';
+
+        Account_Api_Settings__c settings = getSettings();
+
+
+      
+             // always insert new company auth when this is called so we can track user and company searched
+        insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nonce, Transaction_Type__c=transactionType);
+
+        String authUrl = 'https://'+settings.Host__c+'/oauth2/authorise' + '?';
+        
+        // Response type is always "code"
+        authUrl+='response_type=code';
+        
+        // Client ID identifies us to the server and is not secret
+        authUrl+='&client_id='+settings.Client_Id__c;
+        
+         // Chris Smith's instructions: It is mandatory to pass a state parameter, containing a nonce
+        // value. This will be returned to the supplied redirect_ui along with the authorisation
+        // code, and must be checked to ensure it is still valid.
+        //lb changed the sequence....really shouldn't matter
+        authUrl+='&state='+nonce;
+        
+        // Redirect URL.
+        String redirectUrl = EncodingUtil.urlEncode(getDocumentStatusRedirectUrl(), 'UTF-8'); //  EncodingUtil.urlEncode(settings.Callback_Url__c, 'UTF-8');      
+
+        authUrl+='&redirect_uri='+ redirectUrl;  
+        authUrl+='&scope='+SCOPE_PREFIX+companyNumber;      
+        
+        return authUrl;
+    }
     
+    public String getReviewStatusURL(String companyNumber, String transactionType, String nonce){
+        
+        final String SCOPE_PREFIX = 'http://api.companieshouse.gov.uk/company/';
+
+        Account_Api_Settings__c settings = getSettings();
+
+
+      
+             // always insert new company auth when this is called so we can track user and company searched
+        insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nonce, Transaction_Type__c=transactionType);
+
+        String authUrl = 'https://'+settings.Host__c+'/oauth2/authorise' + '?';
+        
+        // Response type is always "code"
+        authUrl+='response_type=code';
+        
+        // Client ID identifies us to the server and is not secret
+        authUrl+='&client_id='+settings.Client_Id__c;
+        
+         // Chris Smith's instructions: It is mandatory to pass a state parameter, containing a nonce
+        // value. This will be returned to the supplied redirect_ui along with the authorisation
+        // code, and must be checked to ensure it is still valid.
+        //lb changed the sequence....really shouldn't matter
+        authUrl+='&state='+nonce;
+        
+        // Redirect URL.
+        String redirectUrl = EncodingUtil.urlEncode(getReviewStatusRedirectUrl(), 'UTF-8'); //  EncodingUtil.urlEncode(settings.Callback_Url__c, 'UTF-8');      
+
+        authUrl+='&redirect_uri='+ redirectUrl;  
+        authUrl+='&scope='+SCOPE_PREFIX+companyNumber;      
+        
+        return authUrl;
+    }
+
     // Look for a custom setting record with the credentials for the server.
-    private static Account_Api_Settings__c getSettings() {
+    public static Account_Api_Settings__c getSettings() {
         // Return the first active one found.
         for (Account_Api_Settings__c s : Account_Api_Settings__c.getAll().values()) {
             if (s.Is_Active__c) { 
@@ -174,6 +288,7 @@ public with sharing class AccountsAPIHelper {
         System.debug(LoggingLevel.INFO, 'Get access token POST to ' + endpoint + ', request body: ' + body);
         
         request.setBody(body);
+        request.setTimeout(120000);
  
         Http http = new Http();
         
@@ -196,6 +311,8 @@ public with sharing class AccountsAPIHelper {
         }
         
         if (response.getBody().startsWith('<!DOCTYPE html>')) {
+                     //   throw new AccountsApiException('body ======' + response);
+
             throw new AccountsApiException('HTML response. Expected JSON. Probably an error page. Check the logs for a span tag with id="error-description".');
         }
         
@@ -208,6 +325,56 @@ public with sharing class AccountsAPIHelper {
         }
     }
     
+    //This methods verify the access token from requestion the auth code: We check the company number and user id
+    public Boolean verifyToken(String accessToken, String companyNumber)
+    {
+        //Do the HTTP Request
+        Account_Api_Settings__c settings = getSettings();
+        
+        System.debug('settings =  ' + settings);
+
+        HttpRequest request = new HttpRequest();
+        String endpoint = 'https://' + settings.Host__c + '/oauth2/verify?' + 'access_token=' + accessToken;
+        request.setEndpoint(endpoint);
+
+        request.setMethod('GET');
+
+        request.setTimeout(120000);
+ 
+        Http http = new Http();
+        
+        // Send the request. This will get us a mock response under the unit test.
+        HTTPResponse response = http.send(request);
+
+        System.debug('response  =  ' + response);
+
+        System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
+        System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
+        
+        //If we get a valid answer we check the result with what we have
+        if (response.getStatusCode() == 200) {
+
+            AccountsApiHelper.VerifyToken answer = (AccountsApiHelper.VerifyToken)JSON.deserializeStrict(response.getBody(),AccountsApiHelper.VerifyToken.class);
+
+            system.debug('The answer is: ' + answer);
+            system.debug('The company number is: ' + companyNumber);
+
+            //Check the user id and the company number inside the scope (Format: Http://xxxxx/company/CompanyNumber)
+            if(answer.scope.contains(companyNumber))
+                return true;
+        }
+        
+        return false;
+        
+    }
+
+    public class VerifyToken{
+        public Integer expires_in {get; set;}
+        public String application {get; set;}
+        public String scope {get; set;}
+        public String user_id {get; set;}
+    }
+
     public AccountsApiHelper.UserProfile getUserProfile(String accessToken) {
         Account_Api_Settings__c settings = getSettings();
 
@@ -249,15 +416,16 @@ public with sharing class AccountsAPIHelper {
         return profile;
     }
     
-	public class UserProfile {
+	public with sharing class UserProfile {
         public String surname;
         public String forename;
         public String email;
         public String id;
         public String locale;
+        public String scope;
     } 
     
-    public class Token {
+    public with sharing class Token {
         public String access_token;
         // TODO: Consider using an Integer here if this comes across without quotes.
         public String expires_in;

@@ -18,47 +18,22 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page title="{!$Label.UI_Text_Start}" showHeader="false" sidebar="false" standardStylesheets="false" controller="StartFrameworkController" action="{!initialiseAction}">
+<apex:page title="{!$Label.UI_Text_Start}" cache="false" showHeader="false" sidebar="false" standardStylesheets="false" controller="StartFrameworkController" action="{!initialiseAction}">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <style>
-            /*                  ul {
-                    margin-left: .9em;
-                    padding-left: 0;
-                    */
-            }
-                </style>
-                 <h1 class="heading-xlarge">
-                    {!pageTitle}
-                </h1>
-                <!--
-                <div class="grid-row">
-                    <div class="column-two-thirds">
-                       -->
-                        <p class="lede">
-                            {!pageText}
-                        </p>
-                        <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
-
-                         <apex:outputText escape="false" value="{!pageText3}"></apex:outputText>
-
-                         <apex:outputText escape="false" value="{!pageText4}"></apex:outputText>
-
-                        <p>{!abovebuttontext}</p>
-                        &nbsp;
-                        <p>
-                            <apex:commandButton styleClass="button button-start" action="{!startAction}" value="{!$Label.UI_Text_Start}" />
-                        </p>
-                        <apex:outputText escape="false" value="{!belowbuttontext}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!belowbuttontext2}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!belowbuttontext3}"></apex:outputText>
-                        <h1 class="heading-large">{!belowbuttontitle}</h1>
-                        <!--
-                    </div>
-                </div>
-                -->
-
+                
+                <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                
+                <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+            
+                <p>
+                <apex:commandButton styleClass="button button-start" action="{!startAction}" value="Start now" />
+                </p>
+             
+                <apex:outputText escape="false" value="{!pageTextAfterButton}"></apex:outputText>
+                <apex:outputText escape="false" value="{!pageTextAfterButton2}"></apex:outputText>
+                
             </apex:form>
         </apex:define>
     </apex:composition>

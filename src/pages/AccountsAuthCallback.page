@@ -16,7 +16,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
-<apex:page showHeader="false"
+<apex:page cache="false" showHeader="false"
     sidebar="false"
     standardStylesheets="false"
     controller="AccountsAuthCallbackController"

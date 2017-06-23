@@ -1,0 +1,56 @@
+<!-- Authenticated Page for Document Approval Statuses -->
+<!--  Author: Leo Bitoy -->
+<apex:page cache="false" title="Consult the status of the requested approvals" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="{!initialiseController}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="govuk-box-highlight">
+                    <h1 class="bold-large">{!companyName}</h1>
+                    <p class="lede">
+                        <b>{!companyNumber}</b> - Incorporated on {!companyDateOfCreation}
+                    </p>
+                    <p class="lede">
+                        <apex:outputText escape="false" value="{!companyAddress}"/>
+                        <!-- information here {!informationstuff} -->
+                    </p>
+                </div>
+                <h2 class="heading-large">Requested Approvals</h2>
+                <p> Emails are <i>Sent</i> from Companies House requesting an approval signature, <i>Delivered</i> to the directors and then once signed and approved shown as <i>Completed</i>. </p>
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div  role="group" aria-labelledby="error-summary-heading-1" tabindex="-1">
+                        <p>
+                            {!statusErrors}
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!NOT(hasPageErrors)}">
+                    <div class="form-group">
+                        <table class="check-your-answers">
+                            <thead>
+                                <tr>
+                                    <th scope="row">Director Name</th>
+                                    <th scope="row">Email</th>
+                                    <th scope="row">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!listofOfficers}" var="officer" id="theRepeat">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{!officer.Name}" id="theOfficerName" />
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{!officer.dsfs__DocuSign_Recipient_Email__c}" id="theCompany" />
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{!officer.dsfs__Recipient_Status__c}" id="theStatus" /> </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

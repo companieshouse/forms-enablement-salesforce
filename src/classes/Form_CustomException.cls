@@ -3,7 +3,7 @@
  *
  * Author: sylvain.picory@methodsdigital.co.uk
  */
-public class Form_CustomException extends Exception {
+public with sharing class Form_CustomException extends Exception {
 
 	public String message {get {return this.getMessage();} set {this.setMessage(value);}}
 

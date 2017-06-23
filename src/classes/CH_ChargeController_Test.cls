@@ -2,7 +2,7 @@
  * Author: Sameer
  * Reviewer: eliot.stock@methodsdigital.co.uk
  */
-@isTest(SeeAllData=true)
+@isTest(SeeAllData=false)
 public with sharing class CH_ChargeController_Test {
     
     public static testMethod void testmethod_CH_GetChargeController(){     

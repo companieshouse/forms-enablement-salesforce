@@ -1,0 +1,28 @@
+<apex:page cache="false" title="Please sign the form" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+            	<h1 class="heading-xlarge">
+                        Provide your signature
+                </h1>
+                <p class="lede">As a {!officerTerm} of {!compName}, you need to provide your signature to strike the company off the register and dissolve it. <br/>Notifications will be sent by email. Please remember to check your email and junk folders.</p>
+                <div id="doculoader"></div>
+                <script>
+                // window.open('{!externalURL}','_self'); 
+
+                var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
+
+                if (screen != null && screen.length > 1) {
+                    window.open('{!externalURL}', '_self');
+                    console.log('mobile');
+
+                } else {
+                        document.getElementById("doculoader").innerHTML = '<iframe height="650" width="950" id="999" src="{!externalURL}" ></iframe>';
+                        console.log('not mobile');
+                    
+                }
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,109 @@
+<!-- 
+   Name: DirectorDetails.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+    Presenter chooses Emails of directors
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Leo Bitoy&    2016-06-16  Initial development.
+   -->
+<apex:page cache="false" title="Please input the details of the selected persons" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <ul class="error-summary-list">
+                                <li>
+                                    <a>{!emailErrors}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </apex:outputPanel>
+                    
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        
+                        <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+
+                        <apex:outputText escape="false" value="{!emailMessage}"></apex:outputText>
+                        
+                    <div class="form-group {!errorVal}">
+                        <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
+                            <label for="email" class="heading-medium closer">{!director.off.Name}
+                            <span class="error-message">{!director.validationErrors}
+                            <apex:outputLabel styleClass="form-label" for="email">
+                                Email Address<br/>
+                            <apex:inputText styleClass="form-control" value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                            </apex:outputLabel>
+                            </span>
+                            </label>
+                            <span class="error-message">{!director.validationErrors}
+                            <apex:outputLabel styleClass="form-label" for="confirmationemail">
+                                Confirm Email Address<br/>
+                            <apex:inputText styleClass="form-control" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
+                            </apex:outputLabel>
+                            </span>
+                            <br/>
+                            <br/>
+                        </apex:repeat>
+                    </div>
+                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                    <br/>
+                    <br/>
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    console.log('The value of boolean is:'+{!stepValidator} );
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        DirectorDetails.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                    console.log('The value of boolean is:'+ resultBooo);
+                        if (resultBooo == true) 
+                        {
+                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                console.log('wrong state starting redirection');
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                                console.log('correct state no redirection');
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -243,7 +243,7 @@ global with sharing class CompaniesHouse {
         public String insolvency_case {get;set;}
     }    
    /* 
-public class OfficerZ {
+public with sharing class OfficerZ {
     public String appointments{get;set;}
 }
 */
@@ -320,7 +320,7 @@ public class OfficerZ {
         public String assets_ceased_released {get;set;}
         public String charge_code {get;set;}
         public Integer charge_number {get;set;}
-        public Classification classification {get;set;}
+        public classification classification {get;set;}
         public Date covering_instrument_date {get;set;}
         public Date created_on {get;set;}
         public Date delivered_on {get;set;}

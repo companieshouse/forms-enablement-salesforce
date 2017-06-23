@@ -1,0 +1,29 @@
+<!-- 
+Name: Documents.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+Visual Force Page for Authenticated Attachment Downloads
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Leo Bitoy   2016-04-11  Initial development.
+-->
+<apex:page cache="false" title="{!$Label.UI_Text_Company}" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocumentController" action="{!initialiseController}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="heading-xlarge">
+                	Retrieve your document
+                </h1>
+                <p>Download the Document:
+                    <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a>PDF, {!size}B
+                </p>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

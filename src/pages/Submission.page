@@ -1,0 +1,67 @@
+<!-- 
+Name: Submission.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Submission page - Legal requirement to allow users to 
+submit a request 
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author         Date        Detail
+1.0  Antonio Bravo  2016-05-27  Initial development.
+-->
+<apex:page cache="true" title="{!$Label.UI_Text_Confirmation_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="SubmissionController"
+    action="{!initialiseAction}">
+        
+    <apex:composition template="TransactionPageTemplate">
+       <apex:define name="content">
+          <apex:form >
+             <div class="govuk-box-highlight">
+                <h1 class="bold-large">{!displayHeader}</h1>
+                
+                  <!-- <p>
+                   {!displayText1}
+                <strong class="heading-medium">{!submissionId}</strong>  
+                </p>-->
+             </div>
+              <p class="lede">{!displayText1}</p>
+            
+            
+            <apex:commandButton status="status" styleClass="button" value="{!$Label.UI_Text_Submit}" onclick="SubmitOnClick(this); return false;" rendered="{!NOT(isLastPage)}" />
+
+            <apex:actionFunction name="doSubmit" action="{!nextAction}" />
+                      
+            </apex:form>
+          
+            <script language="Javascript">
+
+            function SubmitOnClick (objSubmitBtn) {
+              objSubmitBtn.disabled = true;
+              objSubmitBtn.value ='Submitted';
+              doSubmit();
+            }
+
+            // function disableBack() {
+            //   window.history.forward();
+            // }
+            
+            // window.onload = disableBack();
+
+            </script>
+
+
+          
+       </apex:define>
+    </apex:composition>
+
+</apex:page>

@@ -14,7 +14,7 @@
  * Author: antonio.bravo@gollico.co.uk 
  **/
 @isTest
-public class FormsApiClientTest {
+public with sharing class FormsApiClientTest {
     //Create Data
     //Create Transaction
     static Transaction__c createTransaction() {
@@ -35,7 +35,6 @@ public class FormsApiClientTest {
         return att;
     }
 
-
     @isTest(seeAllData=false)
     public static void sendPackageTest() {
         
@@ -46,17 +45,15 @@ public class FormsApiClientTest {
         Attachment att = createAttachment(tx.Id);
 
 
-        List<Transaction__c> txList = new List<Transaction__c>();
-        txList.add(tx);
-
         Test.startTest();
         
         // Unit tests shouldn't call out. Use a mock to give them an HTTP response.
         Test.setMock(HttpCalloutMock.class, new FormsApiMock());
         
         // Going for coverage only at this stage. No assertions.
+        //In the future sendForm() will receive a package
         FormsApiClient client = new FormsApiClient();
-        HTTPResponse response = client.sendForm(txList);
+        HTTPResponse response = client.sendForm(tx);
         
         Test.stopTest();
     }
@@ -71,8 +68,39 @@ public class FormsApiClientTest {
         
         // Going for coverage only at this stage. No assertions.
         FormsApiClient client = new FormsApiClient();
-        HTTPResponse response = client.requestBarcode();
+        HTTPResponse response = client.requestBarcode(new Transaction__c());
         
         Test.stopTest();
-    }   
+    }
+
+    @isTest(seeAllData=false)
+    public static void getJsonPackageNoPresenterTest() {
+
+        String expectedJson = '{ "packageIdentifier": "12345","count": 1 }';
+
+        Test.startTest();
+        
+        FormsApiClient client = new FormsApiClient();
+        String jsonPackage = client.getJsonPackage('12345', 1, null, null);
+        
+        System.assertEquals(expectedJson, jsonPackage);
+
+        Test.stopTest();
+    } 
+
+    @isTest(seeAllData=false)
+    public static void getJsonPackageWithPresenterTest() {
+
+        String expectedJson = '{ "packageIdentifier": "12345","count": 1,"presenterId": "01234567891","presenterAuth": "01234567891x" }';
+
+        Test.startTest();
+        
+        FormsApiClient client = new FormsApiClient();
+        String jsonPackage = client.getJsonPackage('12345', 1, '01234567891', '01234567891x');
+        
+        System.assertEquals(expectedJson, jsonPackage);
+
+        Test.stopTest();
+    }  
+
 }

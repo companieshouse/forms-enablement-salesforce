@@ -1,0 +1,32 @@
+<!-- 
+Name: IntegrationError.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+This page is used when the user did meet an error on submit to CHIPS
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Sylvain P    2016-06-16   Initial development.
+-->
+<apex:page cache="false" title="Error during the submit process, submit again?" showHeader="false" sidebar="false" standardStylesheets="false" controller="IntegrationErrorController" action="{!initialiseAction}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="heading-xlarge">
+                   {!title} 
+                </h1>
+                <p class="lede">
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                </p>
+
+                <apex:commandLink action="{!startAgain}" value="Try again" id="thePreviousButton" />
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -44,6 +44,7 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
@@ -51,12 +52,46 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>AuthorizedSigner__c</fullName>
         <externalId>false</externalId>
         <label>Authorized Signer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Officers</relationshipLabel>
+        <relationshipName>Officers</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>DateSigned__c</fullName>
+        <description>This field represents when an officer has signed with Docusign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when the officer has signed a docusign document</inlineHelpText>
+        <label>Date Signed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DocusignName__c</fullName>
+        <externalId>false</externalId>
+        <label>Docusign Name</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -73,6 +108,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Forename__c</fullName>
+        <description>This field describe the forename of an officer</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Forename of the officer</inlineHelpText>
+        <label>Forename</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>IsPresenter__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -81,14 +126,42 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>RecipientId__c</fullName>
+        <fullName>Middlenames__c</fullName>
+        <description>This field describe middlenames of an officer</description>
         <externalId>false</externalId>
-        <label>Recipient Id</label>
-        <length>5</length>
+        <inlineHelpText>Middle names of the officer</inlineHelpText>
+        <label>Middlenames</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>RecipientId__c</fullName>
+        <displayFormat>{0}</displayFormat>
+        <externalId>true</externalId>
+        <label>Recipient Id</label>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Surname__c</fullName>
+        <description>This field describe the Surname of an officer</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The surname of the officer</inlineHelpText>
+        <label>Surname</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <description>This field describe the title of the director</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the officer</inlineHelpText>
+        <label>Title</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Transaction__c</fullName>
@@ -103,18 +176,20 @@
         <type>Lookup</type>
     </fields>
     <fields>
-        <fullName>isCorporateDirector__c</fullName>
+        <fullName>hasInputBehalfDetails__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>This field will notify to the behalf input details page if the director has been cover or not.</description>
         <externalId>false</externalId>
-        <label>is Corporate Director?</label>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD, BACK END FIELD</inlineHelpText>
+        <label>has input behalf signatory details?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>isDeceased__c</fullName>
+        <fullName>isCorporateDirector__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>is Deceased?</label>
+        <label>is Corporate Director?</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -127,6 +202,16 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>isSignatoryBehalf__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to mark which officer has been selected by the user.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DO NOT TOUCH THIS FIELD USED BY BACK END</inlineHelpText>
+        <label>is Signatory on behalf?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>isSignatory__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -135,11 +220,16 @@
         <type>Checkbox</type>
     </fields>
     <label>Officer</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <label>Officer Name</label>
         <type>Text</type>
     </nameField>
     <pluralLabel>Officers</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>
