@@ -178,7 +178,7 @@ public with sharing class SecurityManager {
         Long milliseconds = Datetime.now().getTime() - Long.valueOf(valueDecrypt[1]);
         Long seconds = milliseconds / 1000;
         Long minutes = seconds / 60;
-        if(minutes > 8)
+        if(minutes > 12)
         {
           return false;
         }
@@ -193,7 +193,7 @@ public with sharing class SecurityManager {
   public static void createSessionValidityCookie(String emailPresenter)
   {
     //Create the cookie
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 480, true);
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 720, true);
 
     ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
 
