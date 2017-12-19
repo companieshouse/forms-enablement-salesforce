@@ -78,7 +78,7 @@ public with sharing class SubmissionController extends TransactionStepController
 
     public PageReference nextAction() {
         //Refresh the transaction record
-        submissionMgr.submission = [select SentreviewURL__c,isSignout__c,AccountAuthorisationCode__c ,shareChangeSelection__c, shareClassSelection__c, errors__c, errorsMessage__c, finishedPart1__c, finishedAttachments__c, prescribedParticular__c, selectShareType__c, Transaction_Type__c, CompanyType__c, Company__r.CompanyNumber__c, CompanyStatus__c, CompanyIncorporationDate__c, officerTerminology__c, isLtdPlc__c, isLP__c, submissionDate__c, submissionTime__c, paymentDate__c, containsPackage__c, Product_Code__c, paymentReference__c, isPaymentAccount__c, isPaymentCard__c, isPaymentPaypal__c, AccountNumber__c, hasPromoter__c, Version_Form__c, Presenter__r.PersonEmail, Company__c, Company__r.Name, Company__r.Id, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c, isDigitalSignatureNeeded__c, isSigningStarted__c, sharecurrencyselection__c, Barcode__c, isBehalfSignatoryEnable__c, isPresenterMultipleDirectors__c, SoleDirectorPresenter__c, OfficerCount__c, hasPaid__c, isPaymentRequired__c, CompanyLocality__c, CompanyCountry__c, CompanyPostCode__c, CompanyRegion__c, CompanyAddress1__c, CompanyAddress2__c, Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
+        submissionMgr.submission = [select AmendmentHistory__c, SentreviewURL__c,isSignout__c,AccountAuthorisationCode__c ,shareChangeSelection__c, shareClassSelection__c, errors__c, errorsMessage__c, finishedPart1__c, finishedAttachments__c, prescribedParticular__c, selectShareType__c, Transaction_Type__c, CompanyType__c, Company__r.CompanyNumber__c, CompanyStatus__c, CompanyIncorporationDate__c, officerTerminology__c, isLtdPlc__c, isLP__c, submissionDate__c, submissionTime__c, paymentDate__c, containsPackage__c, Product_Code__c, paymentReference__c, isPaymentAccount__c, isPaymentCard__c, isPaymentPaypal__c, AccountNumber__c, hasPromoter__c, Version_Form__c, Presenter__r.PersonEmail, Company__c, Company__r.Name, Company__r.Id, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c, isDigitalSignatureNeeded__c, isSigningStarted__c, sharecurrencyselection__c, Barcode__c, isBehalfSignatoryEnable__c, isPresenterMultipleDirectors__c, SoleDirectorPresenter__c, OfficerCount__c, hasPaid__c, isPaymentRequired__c, CompanyLocality__c, CompanyCountry__c, CompanyPostCode__c, CompanyRegion__c, CompanyAddress1__c, CompanyAddress2__c, Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
                                      PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
                                      MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, finishedAddingShares__c,
                                      Status__c, CompanyName__c, SubmissionId__c, Valid_Step_Ids__c, Amount__c, isLLP__c,
@@ -90,6 +90,11 @@ public with sharing class SubmissionController extends TransactionStepController
                                       AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, LastName, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
                                      from Transaction__c where Id = :submissionMgr.submission.Id];
+
+        PageReference result = authenticatedSessionLog();
+        
+        if(result != null)
+            return result;
                                      
         submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
 
@@ -106,9 +111,20 @@ public with sharing class SubmissionController extends TransactionStepController
         else
         {
             //Fix: We do want as there is a barcode overide the status to be submitted
-            if(submissionMgr.submission.Status__c != 'Approved' || submissionMgr.submission.Status__c != 'Rejected')
+            if(submissionMgr.submission.Status__c != 'Approved' || submissionMgr.submission.Status__c != 'Rejected' )
             {
-                submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+                //In this case we have either the duplicatee barcode issue hence we want to proceed to the next page or
+                //We just expired from previous session and in this case we didn't submit on success as the status aren't approved or reject
+                //BUT we don't want the user to get an email when there is no barcode so we adjust the status to be on error
+                //And the confirmation will redirect the user automatically to the error page as there is no barcode...
+                if(submissionMgr.submission.Barcode__c != null)
+                {
+                    submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+                }
+
+                else{
+                    submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                }   
             }
             persistStep();
             return nextStep();

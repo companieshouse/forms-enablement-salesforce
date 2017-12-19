@@ -126,7 +126,8 @@ public virtual class TransactionStepControllerBase {
     }
 
     public PageReference initialiseAction() {
-        return authenticatedSession();
+
+        return authenticatedSessionLog();
         //return null;
     }
 
@@ -137,6 +138,76 @@ public virtual class TransactionStepControllerBase {
             return false;
         }
         return true;
+    }
+
+    /**
+    * This method contains code duplicate in order to prove the authenticatedSession() method which validate the session
+    * If the result is not null then this mean either the cookie got deleted or expired or the time saved within the cookie
+    * is bigger than 12 minutes. All those informations will be reflect within the log.
+    */
+    protected PageReference authenticatedSessionLog()
+    {
+        PageReference resultSession = authenticatedSession();
+
+        String log = null;
+
+        if(resultSession != null)
+        {
+            Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey(SecurityManager.DEFAULT_SF_CHS_COOKIE_NAME);
+
+            Long milliseconds = 0;
+            Long minutes = 0;
+            Long timeSavedMilli = 0;
+            Long timeNow = Datetime.now().getTime();
+            String emailSaved = null;
+
+            if(containsCookie)
+            {
+                //Get the cookie
+                Cookie sessionValidity = ApexPages.currentPage().getCookies().get(SecurityManager.DEFAULT_SF_CHS_COOKIE_NAME);
+
+                //Decrypt the value
+                String result = SecurityManager.decryptText(sessionValidity.getValue());
+
+                //Split the result
+                String[] valueDecrypt = result.split(AppConstants.ID_DELIM_SPLIT_CHAR);
+
+                emailSaved = valueDecrypt[0];
+
+                timeSavedMilli = Long.valueOf(valueDecrypt[1]);
+                milliseconds = timeNow - timeSavedMilli;
+                Long seconds = milliseconds / 1000;
+                minutes = seconds / 60;
+            }
+            
+            log = '<br/>-----------------------------------------------------------------------------------';
+            log += '<br/> Session Expiry Transaction Details: ';
+            log += '<br/> Log Time Date Time: ' + System.now();
+            log += '<br/> Transaction Id: ' + submissionId;
+            log += '<br/> Company Number: ' + submissionMgr.submission.CompanyNumber__c;
+            log += '<br/>-----------------------------------------------------------------------------------';
+            log += '<br/> Session Expiry Cookie Details: ';
+            log += '<br/> Cookie System Existence: ' + containsCookie;
+            log += '<br/> Time Millisecond Saved: ' + timeSavedMilli;
+            log += '<br/> Time Millisecond Now: ' + timeNow;
+            log += '<br/> Time Difference Millisecond: ' + milliseconds;
+            log += '<br/> Time Difference Minutes: ' + minutes;
+            log += '<br/> Presenter Email Saved: ' + emailSaved;
+            log += '<br/> Presenter Email Now: ' + submissionMgr.submission.ContactEmail__c;
+            log += '<br/>-----------------------------------------------------------------------------------';
+        }
+
+        if(!String.isBlank(log))
+        {
+            if(String.isBlank(submissionMgr.submission.AmendmentHistory__c))
+                submissionMgr.submission.AmendmentHistory__c = log;
+            else
+                submissionMgr.submission.AmendmentHistory__c += log;
+
+            update submissionMgr.submission;
+        }
+
+        return resultSession;
     }
 
     protected PageReference authenticatedSession(){
