@@ -194,6 +194,7 @@ public virtual class TransactionStepControllerBase {
             log += '<br/> Time Difference Minutes: ' + minutes;
             log += '<br/> Presenter Email Saved: ' + emailSaved;
             log += '<br/> Presenter Email Now: ' + submissionMgr.submission.ContactEmail__c;
+            log += '<br/> Step Triggering the expired session: ' + transactionMgr.currentStep.Id + ' Number: ' +transactionMgr.currentStep.Step_Number__c;
             log += '<br/>-----------------------------------------------------------------------------------';
         }
 

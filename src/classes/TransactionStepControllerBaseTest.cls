@@ -45,7 +45,8 @@ private class TransactionStepControllerBaseTest {
     /* **/
     static testMethod void singleTestCase1() {
         // Test case 1 : 
-        
+        Cookie sessionValidity = new Cookie(SecurityManager.DEFAULT_SF_CHS_COOKIE_NAME, SecurityManager.encryptText('jsmith@methods.digital.testing' + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().addDays(-1).getTime())), '', 720, true);
+
         String tt = getActiveTransactionType();
         System.debug(LoggingLevel.ERROR, 'tt:'+tt);  
         
@@ -86,6 +87,8 @@ private class TransactionStepControllerBaseTest {
         System.assert(pr!=null, 'Next step should be returned.');
         
         Test.setCurrentPageReference(pr);
+
+        pr.setCookies(new Cookie[]{sessionValidity});
             
         testController c = new testController();
         

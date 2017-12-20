@@ -207,14 +207,76 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     
 
     public PageReference checkPaymentResult() {
-        parseQueryString();
+        parseQueryString();        
+
         if(hasBeenRedirected)
             SecurityManager.createSessionValidityCookie(submissionMgr.submission.ContactEmail__c);
             
         PageReference res = initialiseAction();
 
         if(res != null)
+        {
+            //Loging test code for payment page only:
+            String log = null;
+
+            
+            Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey(SecurityManager.DEFAULT_SF_CHS_COOKIE_NAME);
+
+            Long milliseconds = 0;
+            Long minutes = 0;
+            Long timeSavedMilli = 0;
+            Long timeNow = Datetime.now().getTime();
+            String emailSaved = null;
+
+            if(containsCookie)
+            {
+                //Get the cookie
+                Cookie sessionValidity = ApexPages.currentPage().getCookies().get(SecurityManager.DEFAULT_SF_CHS_COOKIE_NAME);
+
+                //Decrypt the value
+                String result = SecurityManager.decryptText(sessionValidity.getValue());
+
+                //Split the result
+                String[] valueDecrypt = result.split(AppConstants.ID_DELIM_SPLIT_CHAR);
+
+                emailSaved = valueDecrypt[0];
+
+                timeSavedMilli = Long.valueOf(valueDecrypt[1]);
+                milliseconds = timeNow - timeSavedMilli;
+                Long seconds = milliseconds / 1000;
+                minutes = seconds / 60;
+            }
+            
+            log = '<br/>-----------------------------------------------------------------------------------';
+            log += '<br/> Session Expiry Transaction Details (PAYMENT RETURN TEMP LOG): ';
+            log += '<br/> Log Time Date Time: ' + System.now();
+            log += '<br/> Transaction Id: ' + submissionId;
+            log += '<br/> Company Number: ' + submissionMgr.submission.CompanyNumber__c;
+            log += '<br/>-----------------------------------------------------------------------------------';
+            log += '<br/> Session Expiry Cookie Details: ';
+            log += '<br/> Cookie System Existence: ' + containsCookie;
+            log += '<br/> Time Millisecond Saved: ' + timeSavedMilli;
+            log += '<br/> Time Millisecond Now: ' + timeNow;
+            log += '<br/> Time Difference Millisecond: ' + milliseconds;
+            log += '<br/> Time Difference Minutes: ' + minutes;
+            log += '<br/> Presenter Email Saved: ' + emailSaved;
+            log += '<br/> Presenter Email Now: ' + submissionMgr.submission.ContactEmail__c;
+            log += '<br/> Step Triggering the expired session: ' + transactionMgr.currentStep.Id + ' Number: ' +transactionMgr.currentStep.Step_Number__c;
+            log += '<br/> URL FROM PAYMENT: ' + ApexPages.currentPage().getUrl();
+            log += '<br/>-----------------------------------------------------------------------------------';
+
+            if(!String.isBlank(log))
+            {
+                if(String.isBlank(submissionMgr.submission.AmendmentHistory__c))
+                    submissionMgr.submission.AmendmentHistory__c = log;
+                else
+                    submissionMgr.submission.AmendmentHistory__c += log;
+
+                update submissionMgr.submission;
+            }
+            
             return res;
+        }
 
         if(hasBeenHacked)
         {
