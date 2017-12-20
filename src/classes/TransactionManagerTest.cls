@@ -140,13 +140,15 @@ private class TransactionManagerTest {
         System.debug(LoggingLevel.ERROR, [select Id,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c from Transaction__c where Id=:submissionId ] );
 
         tm = new TransactionManager(thirdStepId);
+        System.debug(LoggingLevel.ERROR,tm.currentStep);    
         pr = tm.previousStep(submissionId); // to step 2.
+        System.debug(LoggingLevel.ERROR,tm.currentStep);    
         System.assert(pr!=null, 'Previous step should be returned.');
         
         System.debug(LoggingLevel.ERROR, [select Id,Valid_Step_Ids__c,Historical_Valid_Step_Ids__c from Transaction__c where Id=:submissionId ] );
 
         System.assert(!tm.isLastPage(), 'Step should not be the last in the sequence.');
-        
+
         Test.stopTest();        
     }
     /* */  
@@ -236,7 +238,7 @@ private class TransactionManagerTest {
     private static String getActiveTransactionType(){
         // returns the first active transaction type found with more than two active steps.
         
-        Map<Id, Transaction_Type_Step__mdt> stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select Id, Transaction_Type__c from Transaction_Type_Step__mdt where Is_Active__c=true order by Transaction_Type__c, Step_Number__c asc] );
+        Map<Id, Transaction_Type_Step__mdt> stepsById = new Map<Id, Transaction_Type_Step__mdt>( [select Id, Transaction_Type__c from Transaction_Type_Step__mdt where (NOT DeveloperName Like '%TestStep%') And Is_Active__c=true order by Transaction_Type__c, Step_Number__c asc] );
         
         System.debug(LoggingLevel.ERROR, 'stepsById:'+stepsById);
         System.assert(!stepsById.isEmpty(), 'No active Transaction Steps defined.');
