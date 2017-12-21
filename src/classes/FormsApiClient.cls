@@ -41,7 +41,7 @@ public with sharing class FormsApiClient {
         log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
         log += '<br/> Integration Requesting Barcode Initiated';
         log += '<br/>-----------------------------------------------------------------------------------';
-        if(tx.AmendmentHistory__c == null)
+        if(String.isBlank(tx.AmendmentHistory__c))
             tx.AmendmentHistory__c = log;
         else
             tx.AmendmentHistory__c += log;

@@ -37,7 +37,7 @@ public with sharing class FormAPISubmissionManager {
         log += '<br/> Doc Type: ' + currentTransaction.Transaction_Type__c;
         log += '<br/> Result Integration (Result of the call): ' + resultIntegration;
         log += '<br/>-----------------------------------------------------------------------------------';
-        if(currentTransaction.AmendmentHistory__c == null)
+        if(String.isBlank(currentTransaction.AmendmentHistory__c))
             currentTransaction.AmendmentHistory__c = log;
         else
             currentTransaction.AmendmentHistory__c += log;
