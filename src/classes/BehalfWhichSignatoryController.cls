@@ -89,6 +89,33 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             errorVal = 'error';
             return null;
         }
+
+        List<String> directorsToBeSigned = new List<String>();
+
+        //Test
+        //Iterate officers
+        for (officerContainer off : listOfDirectors) {
+            if (off.officer.isSignatory__c && !off.officer.IsPresenter__c && (off.officer.Name.containsIgnoreCase('ltd') || off.officer.Name.containsIgnoreCase('plc') || off.officer.Name.containsIgnoreCase('llp') || off.officer.Name.containsIgnoreCase('limited')) && !off.isSignatoryBehalf) {
+                directorsToBeSigned.add(off.officer.Name); 
+            }
+        }
+
+        if(!directorsToBeSigned.isEmpty())
+        {
+            for (officerContainer off : listOfDirectors) {
+                if (off.officer.isSignatory__c && !off.officer.IsPresenter__c && (off.officer.Name.containsIgnoreCase('ltd') || off.officer.Name.containsIgnoreCase('plc') || off.officer.Name.containsIgnoreCase('llp') || off.officer.Name.containsIgnoreCase('limited')) && off.isSignatoryBehalf) {
+                    directorsToBeSigned.add(off.officer.Name); 
+                }
+            }
+
+            hasPageErrors = true;
+            currentErrorMessage = 'You must select the following directors: <li> ';
+            currentErrorMessage += directorsToBeSigned;
+            currentErrorMessage += '</li> ';
+            errorVal = 'error';
+            return null;
+        }
+
         //throw new Form_CustomException('the selectedID is ' + selectedId);
         if (!validatePageState()) return Page.TransactionException;
         persistStep();

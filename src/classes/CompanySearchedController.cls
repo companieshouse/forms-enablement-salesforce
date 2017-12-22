@@ -100,7 +100,7 @@ public with sharing class CompanySearchedController {
 
         String emailD = ApexPages.currentPage().getCookies().containsKey('user_Email') ? SecurityManager.decryptText(userEmail.getValue()) : '';
         //return SecurityManager.checkSessionValidityCookie();
-        return SecurityManager.checkSessionValidityCookie(emailD);
+        return SecurityManager.checkSessionValidityCookie(emailD, null, null, 'Company Search Controller');
     }
 
 

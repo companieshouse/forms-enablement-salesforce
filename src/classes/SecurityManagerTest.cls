@@ -15,8 +15,8 @@ private class SecurityManagerTest {
 		secManagerControllerTester.getDownloadAuthRedirect('05448736', 'DS01');
 		secManagerControllerTester.getDocumentStatusAuthRedirect('05448736', 'DS01');
 		SecurityManager.createSessionValidityCookie('Email');
-		SecurityManager.checkSessionValidityCookie('Email');
+		SecurityManager.checkSessionValidityCookie('Email', null, null, null);
 		SecurityManager.removeSessionValidityCookie();
-		SecurityManager.checkSessionValidityCookie('Email');
+		SecurityManager.checkSessionValidityCookie('Email', null, null, null);
 	}
 }

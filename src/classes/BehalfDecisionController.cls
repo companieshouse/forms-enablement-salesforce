@@ -74,6 +74,29 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
             errorVal = 'error';
             return null;
         }
+
+        Integer corpDirectors = 0;
+
+        //Test
+        if(behalfValidation == false)
+        {
+            //Iterate officers
+            for (Officer__c off : submissionMgr.submission.Officers__r) {
+                if (off.isSignatory__c && !off.IsPresenter__c && (off.Name.containsIgnoreCase('ltd') || off.Name.containsIgnoreCase('plc') || off.Name.containsIgnoreCase('llp') || off.Name.containsIgnoreCase('limited'))) {
+                    corpDirectors++; 
+                }
+            }
+
+            if(corpDirectors > 0)
+            {
+                hasPageErrors = true;
+                currentErrorMessage = 'You must select Yes as you have selected Corporate whatevers to be signed!!!!';
+                errorVal = 'error';
+                return null;
+            }
+        }
+
+        
         if (!validatePageState()) return Page.TransactionException;
 
         persistStep();

@@ -197,7 +197,7 @@ public with sharing class CompanyController {
         Cookie userEmail = ApexPages.currentPage().getCookies().get('user_Email');
 
         //return SecurityManager.checkSessionValidityCookie();
-        return SecurityManager.checkSessionValidityCookie(SecurityManager.decryptText(userEmail.getValue()));
+        return SecurityManager.checkSessionValidityCookie(SecurityManager.decryptText(userEmail.getValue()), null, null, 'Company Controller' );
     }
 
     public PageReference nextAction() {
