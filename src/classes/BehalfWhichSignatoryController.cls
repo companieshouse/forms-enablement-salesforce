@@ -109,9 +109,9 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             }
 
             hasPageErrors = true;
-            currentErrorMessage = 'You must select the following directors: <li> ';
+            currentErrorMessage = 'You must select the following directors:';
             currentErrorMessage += directorsToBeSigned;
-            currentErrorMessage += '</li> ';
+            currentErrorMessage += '.';
             errorVal = 'error';
             return null;
         }
