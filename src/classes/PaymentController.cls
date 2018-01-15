@@ -154,6 +154,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         set;
     }
 
+    public String pageLog {get; set;}
+
     public String accountAuthCode {get; set;}
     public Boolean accountFailure {get; set;}
     public Boolean accountSuccess {get; set;}
@@ -174,6 +176,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         return false;
     }
     public void initialiseStep() {
+
+        pageLog = '';
         hasPaid = false;
         hasBeenRedirected = false;
         hasPaymentSuccess = false;
@@ -211,8 +215,10 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
         if(hasBeenRedirected)
             SecurityManager.createSessionValidityCookie(submissionMgr.submission.ContactEmail__c, submissionMgr.submission, transactionMgr, 'CheckPaymentResult Method (Return from Payment)');
-            
+        
         PageReference res = initialiseAction();
+
+        pageLog += LogSessionManager.log;
 
         if(res != null)
         {
@@ -316,6 +322,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
+        LogSessionManager.initLog();
+        LogSessionManager.log = pageLog;
         if (!hasPaid() && valuePaymentUI == null && accountSuccess == false) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
