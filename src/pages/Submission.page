@@ -26,7 +26,9 @@ Ver. Author         Date        Detail
     <apex:composition template="TransactionPageTemplate">
        <apex:define name="content">
           <apex:form >
+          <apex:outputPanel>
              <div >
+
                 <h1 class="heading-xlarge">{!displayHeader}</h1>
                 
                   <!-- <p>
@@ -34,13 +36,43 @@ Ver. Author         Date        Detail
                 <strong class="heading-medium">{!submissionId}</strong>  
                 </p>-->
              </div>
-              <p class="lede">{!displayText1}</p>
-            
-            
+            <p class="lede">{!displayText1}</p>  
+            <p>{!displayText2}</p>
+             <apex:outputPanel  >
+                <table class="check-your-answers">
+                    <tbody>
+                        <tr>
+                            <th>Company name</th>
+                            <td>{!companyName}</td>
+                        </tr>
+                        <tr>
+                            <th>Company number</th>
+                            <td>{!companyNumber}</td>
+                        </tr>
+                        <tr>
+                            <th>Registered Office Address</th>
+                            <td>
+                                <apex:outputText escape="false" value="{!companyAddress}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Authorised by</th>
+                            <td>
+                                <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
+                                    <apex:outputText value="{!Director.Name}" id="theValue" />
+                                    <br/>
+                                </apex:repeat>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </apex:outputPanel>
+              
+             <p class="lede"></p>
             <apex:commandButton status="status" styleClass="button" value="{!$Label.UI_Text_Submit}" onclick="SubmitOnClick(this); return false;" rendered="{!NOT(isLastPage)}" />
 
+            </apex:outputPanel>          
             <apex:actionFunction name="doSubmit" action="{!nextAction}" />
-                      
             </apex:form>
           
             <script language="Javascript">
