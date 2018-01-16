@@ -90,7 +90,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
             if(corpDirectors > 0)
             {
                 hasPageErrors = true;
-                currentErrorMessage = 'You must select Yes as you have selected Corporate whatevers to be signed!!!!';
+                currentErrorMessage = 'You must select Yes as you have selected Corporate Officers';
                 errorVal = 'error';
                 return null;
             }

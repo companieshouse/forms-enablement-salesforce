@@ -109,8 +109,8 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             }
 
             hasPageErrors = true;
-            currentErrorMessage = 'You must select the following directors:';
-            currentErrorMessage += directorsToBeSigned;
+            currentErrorMessage = 'You must select the following officers: ';
+            currentErrorMessage += String.valueOf(directorsToBeSigned).remove('(').remove(')');
             currentErrorMessage += '.';
             errorVal = 'error';
             return null;

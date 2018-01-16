@@ -259,6 +259,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         //    return previousAction();
         //}
         //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
+
+        if(hasPaymentSuccess)
+            return nextAction();
         return null;
     }
     public PageReference updateLink() {
