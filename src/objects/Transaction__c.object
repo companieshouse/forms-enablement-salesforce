@@ -414,6 +414,17 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Session_Log__c</fullName>
+        <description>Field used for the session log creation expiration</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field used for the session log creation expiration</inlineHelpText>
+        <label>Session Log</label>
+        <length>130000</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
         <fullName>SignerStatus__c</fullName>
         <externalId>false</externalId>
         <label>SignerStatus</label>
@@ -900,6 +911,7 @@ to any promoter of the company?</inlineHelpText>
         <columns>ContactEmail__c</columns>
         <columns>Barcode__c</columns>
         <columns>CREATED_DATE</columns>
+        <columns>submissionDate__c</columns>
         <columns>submissionTime__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
@@ -930,8 +942,8 @@ to any promoter of the company?</inlineHelpText>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CompanyNumber__c</field>
-            <operation>startsWith</operation>
-            <value>08123351</value>
+            <operation>contains</operation>
+            <value>09632622</value>
         </filters>
         <label>OneCompanyView</label>
     </listViews>
@@ -946,9 +958,65 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>Barcode__c</field>
             <operation>equals</operation>
-            <value>X66PO4SA</value>
+            <value>X68P3HAZ</value>
         </filters>
         <label>barcode</label>
+    </listViews>
+    <listViews>
+        <fullName>submittedtoday</fullName>
+        <booleanFilter>(1 AND 2) OR (3 AND 4) OR (5 AND 6) OR (7 AND 8)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Transaction_Type__c</columns>
+        <columns>CompanyNumber__c</columns>
+        <columns>CompanyName__c</columns>
+        <columns>Status__c</columns>
+        <columns>ContactEmail__c</columns>
+        <columns>Barcode__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>submissionDate__c</columns>
+        <columns>submissionTime__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </filters>
+        <filters>
+            <field>submissionDate__c</field>
+            <operation>equals</operation>
+            <value>15/01/2018</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Error</value>
+        </filters>
+        <filters>
+            <field>submissionDate__c</field>
+            <operation>equals</operation>
+            <value>15/01/2018</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </filters>
+        <filters>
+            <field>submissionDate__c</field>
+            <operation>equals</operation>
+            <value>15/01/2018</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </filters>
+        <filters>
+            <field>submissionDate__c</field>
+            <operation>equals</operation>
+            <value>15/01/2018</value>
+        </filters>
+        <label>submittedtoday</label>
     </listViews>
     <nameField>
         <displayFormat>SUB{0000}</displayFormat>

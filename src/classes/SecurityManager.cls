@@ -135,21 +135,48 @@ public with sharing class SecurityManager {
 
   //This methods will control the session validity from SF for each page displayed based on a cookie
   //
-  public static PageReference checkSessionValidityCookie(String emailPresenter){
+  public static PageReference checkSessionValidityCookie(String emailPresenter, Transaction__c submission, TransactionManager transactionMgr, String infos){
     //Check for the cookie existence
     //
-    system.debug('COOKIE:' + ApexPages.currentPage().getCookies());
+    Boolean sessionValidity = false;
+
+    
+    LogSessionManager.addLog('<br/> Entering method: checkSessionValidityCookie: ');
+    LogSessionManager.addLog('<br/> Printing caller Infos: ' + infos);
+    LogSessionManager.addLog('<br/> Transaction Id: ' + (submission != null ? ('' + submission.Id) : ('No Transaction Id')));
+    LogSessionManager.addLog('<br/> Company Number: ' + (submission != null ?  ('' + submission.CompanyNumber__c) : 'No Company Number'));
+    LogSessionManager.addLog('<br/> Step Triggering: ' + (transactionMgr != null ? ('' +transactionMgr.currentStep.Id) : 'No Transaction Manager') + ' Number: ' + (transactionMgr != null ? ('' + transactionMgr.currentStep.Step_Number__c) : 'No Transaction Manager'));
+    LogSessionManager.addLog('<br/> URL Triggering: ' + ApexPages.currentPage().getUrl());
+    LogSessionManager.addLog('<br/> ------ Check if the cookie exist: Starting ' + System.now());
     Boolean containsCookie = ApexPages.currentPage().getCookies().containsKey(DEFAULT_SF_CHS_COOKIE_NAME);
+    LogSessionManager.addLog('<br/> ------ Check if the cookie exist: Result: containsCookie: ' + containsCookie);
+    
 
     if(containsCookie)
     {
+      LogSessionManager.addLog('<br/> ------ ------ Check the session validity: Starting ' + System.now());
+      sessionValidity = validateSession(emailPresenter);
+      LogSessionManager.addLog('<br/> ------ ------ Check the session validity: Result: sessionValidity: ' + sessionValidity);
+      
+
       //Refresh the cookie
-      if(validateSession(emailPresenter))
+      if(sessionValidity)
       {
-        createSessionValidityCookie(emailPresenter);
-        return null;
+          LogSessionManager.addLog('<br/> ------ ------ ------ Refresh the session validity: Starting ' + System.now());
+          createSessionValidityCookie(emailPresenter, submission, transactionMgr, infos, true);
+          LogSessionManager.addLog('<br/> ------ ------ ------ Refresh the session validity: Finished ' + System.now());
+        
       }
+      LogSessionManager.addLog('<br/> ------ ------ Check the session validity: Finished ' + System.now());
     }
+    LogSessionManager.addLog('<br/> ------ Check if the cookie exist: Finished ' + System.now());
+
+    if(sessionValidity)
+      return null;
+
+
+    LogSessionManager.commitChangeToTransaction(submission, transactionMgr);
+
     PageReference pg = new PageReference('/SessionExpired');
     pg.setRedirect(true);
     return pg;
@@ -161,51 +188,135 @@ public with sharing class SecurityManager {
   public static Boolean validateSession(String emailPresenter)
   {
     //Get the cookie
+    LogSessionManager.addLog('<br/> ------ Entering method: validateSession: ');
+    LogSessionManager.addLog('<br/> ------ Getting the Cookie: Starting ' + System.now());
     Cookie sessionValidity = ApexPages.currentPage().getCookies().get(DEFAULT_SF_CHS_COOKIE_NAME);
+    LogSessionManager.addLog('<br/> ------ Getting the Cookie: Result: sessionValidity: ' + sessionValidity);
+    LogSessionManager.addLog('<br/> ------ Getting the Cookie: Finished ' + System.now());
 
     //Decrypt the value
+    LogSessionManager.addLog('<br/> ------ Decrypting Result: Starting ' + System.now());
     String result = SecurityManager.decryptText(sessionValidity.getValue());
+    LogSessionManager.addLog('<br/> ------ Decrypting Result: Result: ' + result);
+    LogSessionManager.addLog('<br/> ------ Decrypting Result: Finished ' + System.now());
 
     //Split the result
+    LogSessionManager.addLog('<br/> ------ Spliting Result (No results displayed): Starting ' + System.now());
     String[] valueDecrypt = result.split(AppConstants.ID_DELIM_SPLIT_CHAR);
+    LogSessionManager.addLog('<br/> ------ Spliting Result: Finished ' + System.now());
 
-    system.debug(valueDecrypt[0] + ' Validate against:' + emailPresenter);
-
+    LogSessionManager.addLog('<br/> ------ Email Presenter equality: Starting ' + System.now());
+    LogSessionManager.addLog('<br/> ------ Email Presenter equality: Result: ' + emailPresenter.equals(valueDecrypt[0]));
     if(emailPresenter.equals(valueDecrypt[0]))
     {
-
+      
+      LogSessionManager.addLog('<br/> ------ Value Saved Against must be in past: Starting ' + System.now());
+      LogSessionManager.addLog('<br/> ------ Value Saved Against must be in past: Result: ' + (Datetime.now().getTime() > Long.valueOf(valueDecrypt[1])));
       if(Datetime.now().getTime() > Long.valueOf(valueDecrypt[1]))
       {
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Milliseconds: Starting ' + System.now());
         Long milliseconds = Datetime.now().getTime() - Long.valueOf(valueDecrypt[1]);
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Milliseconds: Result: milliseconds: ' + milliseconds);
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Milliseconds: Finished ' + System.now());
+
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Starting ' + System.now());
         Long seconds = milliseconds / 1000;
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Result: seconds:' + seconds);
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Finished ' + System.now());
+
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Minutes: Starting ' + System.now());
         Long minutes = seconds / 60;
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Result: minutes: ' + minutes);
+        LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Finished ' + System.now());
+
+        LogSessionManager.addLog('<br/> ------ Does 12 minutes have passed?: Starting ' + System.now());
+        LogSessionManager.addLog('<br/> ------ Does 12 minutes have passed?: Result: ' + (minutes > 12));
         if(minutes > 12)
         {
+          LogSessionManager.addLog('<br/> ------ INVALID SESSION False Returned ' + System.now());
+
           return false;
         }
+        LogSessionManager.addLog('<br/> ------ Does 12 minutes have passed?: Finished ' + System.now());
+
+        LogSessionManager.addLog('<br/> ------ VALID SESSION True Returned ' + System.now());
+
         return true;
       }
+      LogSessionManager.addLog('<br/> ------ Value Saved Against must be in past: Finished ' + System.now());
     }
+    LogSessionManager.addLog('<br/> ------ Email Presenter equality: Finished ' + System.now());
+
+    LogSessionManager.addLog('<br/> ------ INVALID SESSION False Returned ' + System.now());
 
     return false;
   }
 
-  //This methods will create a cookie for the session validity
   public static void createSessionValidityCookie(String emailPresenter)
   {
-    //Create the cookie
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 720, true);
-
-    ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
-
+    createSessionValidityCookie(emailPresenter, null, null, null);
   }
 
+  public static void createSessionValidityCookie(String emailPresenter, Transaction__c submission, TransactionManager transactionMgr, String infos)
+  {
+    createSessionValidityCookie(emailPresenter, submission, transactionMgr, infos, false);
+  }
+
+  //This methods will create a cookie for the session validity
+  public static void createSessionValidityCookie(String emailPresenter, Transaction__c submission, TransactionManager transactionMgr, String infos, Boolean isPartOfValidation)
+  {
+    LogSessionManager.addLog('<br/> ------ ------ Entering method: createSessionValidityCookie: ');
+    //Create the cookie
+    LogSessionManager.addLog('<br/> ------ ------ Printing caller Infos: ' + infos);
+    LogSessionManager.addLog('<br/> Transaction Id: ' + (submission != null ? ('' + submission.Id) : ('No Transaction Id')));
+    LogSessionManager.addLog('<br/> Company Number: ' + (submission != null ?  ('' + submission.CompanyNumber__c) : 'No Company Number'));
+    LogSessionManager.addLog('<br/> Step Triggering: ' + (transactionMgr != null ? ('' +transactionMgr.currentStep.Id) : 'No Transaction Manager') + ' Number: ' + (transactionMgr != null ? ('' + transactionMgr.currentStep.Step_Number__c) : 'No Transaction Manager'));
+    LogSessionManager.addLog('<br/> URL Triggering: ' + ApexPages.currentPage().getUrl());
+    LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Starting ' + System.now());
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 720, true);
+    LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Result: sessionValidity: ' + sessionValidity);
+    LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Finished ' + System.now());
+
+    LogSessionManager.addLog('<br/> ------ ------ Adding the Cookie to the page: Starting ' + System.now());
+    ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
+    LogSessionManager.addLog('<br/> ------ ------ Adding the Cookie to the page: Finished ' + System.now());
+
+
+    if(!isPartOfValidation)
+    {
+      LogSessionManager.commitChangeToTransaction(submission, transactionMgr);
+    }
+
+  }
   public static void removeSessionValidityCookie()
   {
-    //Create the cookie
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(String.valueOf(DateTime.now().getTime())), '', 0, true);
+    removeSessionValidityCookie( null, null, null, false);
+  }
 
+  public static void removeSessionValidityCookie( Transaction__c submission, TransactionManager transactionMgr, String infos, Boolean isPartOfValidation)
+  {
+    LogSessionManager.addLog('<br/> ------ ------ Entering method: removeSessionValidityCookie: ');
+    //Create the cookie
+    LogSessionManager.addLog('<br/> ------ ------ Printing caller Infos: ' + infos);
+    LogSessionManager.addLog('<br/> Transaction Id: ' + (submission != null ? ('' + submission.Id) : ('No Transaction Id')));
+    LogSessionManager.addLog('<br/> Company Number: ' + (submission != null ?  ('' + submission.CompanyNumber__c) : 'No Company Number'));
+    LogSessionManager.addLog('<br/> Step Triggering: ' + (transactionMgr != null ? ('' +transactionMgr.currentStep.Id) : 'No Transaction Manager') + ' Number: ' + (transactionMgr != null ? ('' + transactionMgr.currentStep.Step_Number__c) : 'No Transaction Manager'));
+    LogSessionManager.addLog('<br/> URL Triggering: ' + ApexPages.currentPage().getUrl());
+    //Create the cookie
+    LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie with an expiry date at 0: Starting ' + System.now());
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(String.valueOf(DateTime.now().getTime())), '', 0, true);
+    LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Result: sessionValidity: ' + sessionValidity);
+    LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Finished ' + System.now());
+
+    LogSessionManager.addLog('<br/> ------ ------ Adding the Cookie to the page: Starting ' + System.now());
     ApexPages.currentPage().setCookies(new Cookie[]{sessionValidity});
+
+    LogSessionManager.addLog('<br/> ------ ------ Adding the Cookie to the page: Finished ' + System.now());
+
+    if(!isPartOfValidation)
+    {
+      LogSessionManager.commitChangeToTransaction(submission, transactionMgr);
+    }
   }
   // End Static methods.
 }
