@@ -46,6 +46,7 @@ private class TransactionRecordsDeletionBatchTest {
         transac.isPresenterMultipleDirectors__c = true;
         transac.isBehalfSignatoryEnable__c = true;
         transac.OfficerCount__c = 1;
+        transac.Presenter__c = testPresenter.Id;
         transac.CreatedDateUnitTest__c = system.today().addMonths(-13);
         insert transac;
 
@@ -99,7 +100,11 @@ private class TransactionRecordsDeletionBatchTest {
 
         system.assertEquals(0, count);
 
-        count = (Decimal)[Select count(Id) total From Account ][0].get('total');
+        count = (Decimal)[Select count(Id) total From Account where isPersonAccount = true][0].get('total');
+
+        system.assertEquals(0, count);
+
+        count = (Decimal)[Select count(Id) total From Account where isPersonAccount = false][0].get('total');
 
         system.assertEquals(0, count);
 
@@ -138,6 +143,7 @@ private class TransactionRecordsDeletionBatchTest {
         transac.isPresenterMultipleDirectors__c = true;
         transac.isBehalfSignatoryEnable__c = true;
         transac.OfficerCount__c = 1;
+        transac.Presenter__c = testPresenter.Id;
         transac.CreatedDateUnitTest__c = system.today().addMonths(-13);
         insert transac;
 
@@ -191,7 +197,11 @@ private class TransactionRecordsDeletionBatchTest {
 
         system.assertEquals(0, count);
 
-        count = (Decimal)[Select count(Id) total From Account ][0].get('total');
+        count = (Decimal)[Select count(Id) total From Account where isPersonAccount = true][0].get('total');
+
+        system.assertEquals(0, count);
+
+        count = (Decimal)[Select count(Id) total From Account where isPersonAccount = false][0].get('total');
 
         system.assertEquals(0, count);
 
@@ -211,9 +221,30 @@ private class TransactionRecordsDeletionBatchTest {
         Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
 
         Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
-
+        testCompany.CreatedDateUnitTest__c = system.today();
         Contact testContact = CompaniesHouseTestData.getInstance().contact1;
+        testPresenter.CreatedDateUnitTest__c = system.today();
         insert testPresenter;
+
+        Account testCompany2 = CompaniesHouseTestData.getInstance().companyAccount.clone(true,true,true);
+        testCompany2.Id = null;
+        testCompany2.CreatedDateUnitTest__c = system.today().addDays(-1);
+        insert testCompany2;
+
+        Account testCompany3 = CompaniesHouseTestData.getInstance().companyAccount.clone(true,true,true);
+        testCompany3.Id = null;
+        testCompany3.CreatedDateUnitTest__c = system.today();
+        insert testCompany3;
+
+        Account testPresenter2 = CompaniesHouseTestData.getInstance().presenterAccount.clone(true,true,true);
+        testPresenter2.Id = null;
+        testPresenter2.CreatedDateUnitTest__c = system.today().addDays(-1);
+        insert testPresenter2;
+
+        Account testPresenter3 = CompaniesHouseTestData.getInstance().presenterAccount.clone(true,true,true);
+        testPresenter3.Id = null;
+        testPresenter3.CreatedDateUnitTest__c = system.today();
+        insert testPresenter3;
 
         insert testCompany;
         Transaction__c transac = testData.tx;
@@ -230,6 +261,7 @@ private class TransactionRecordsDeletionBatchTest {
         transac.isPresenterMultipleDirectors__c = true;
         transac.isBehalfSignatoryEnable__c = true;
         transac.OfficerCount__c = 1;
+        transac.Presenter__c = testPresenter.Id;
         transac.CreatedDateUnitTest__c = system.today().addMonths(-2);
         insert transac;
 
@@ -281,11 +313,15 @@ private class TransactionRecordsDeletionBatchTest {
 
         count = (Decimal)[Select count(Id) total From Contact ][0].get('total');
 
-        system.assertEquals(1, count);
+        system.assertEquals(3, count);
 
-        count = (Decimal)[Select count(Id) total From Account ][0].get('total');
+        count = (Decimal)[Select count(Id) total From Account where isPersonAccount = true][0].get('total');
 
-        system.assertEquals(1, count);
+        system.assertEquals(2, count);
+
+        count = (Decimal)[Select count(Id) total From Account where isPersonAccount = false][0].get('total');
+
+        system.assertEquals(2, count);
 
     }
 }
