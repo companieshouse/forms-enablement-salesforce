@@ -25,7 +25,39 @@ public with sharing class SubmissionController extends TransactionStepController
 
     //public Id attachmentId {get; private set;}
 
-    
+    public String companyAddress {
+        get;
+        set;
+    }
+    public String companyAddress1 {
+        get;
+        set;
+    }
+    public String companyAddress2 {
+        get;
+        set;
+    }
+    public String companyregion {
+        get;
+        set;
+    }
+    public String companypostcode {
+        get;
+        set;
+    }
+    public String companyCountry {
+        get;
+        set;
+    }
+    public String companyLocality {
+        get;
+        set;
+    }
+
+    public String companyNumber {
+        get;
+        set;
+    }
 
     public String submissionId {get; private set;}
     public String companyName {get; set;}
@@ -34,6 +66,7 @@ public with sharing class SubmissionController extends TransactionStepController
     public String displayHeader {get; set;}
     public String displayText1 {get; set;}
     public String displayText2 {get; set;}
+    public List<Officer__c> companyDirectors {get; set;}
     //public String subDate {get; set;}
     //public String subTime {get; set;}
 
@@ -58,9 +91,30 @@ public with sharing class SubmissionController extends TransactionStepController
 
             submissionId = submissionMgr.submission.SubmissionId__c == null ? '' : submissionMgr.submission.SubmissionId__c;
             companyName = submissionMgr.submission.CompanyName__c == null ? '' : submissionMgr.submission.CompanyName__c;
+
+            companyNumber = submissionMgr.submission.CompanyNumber__c;
+
+            companyDirectors = new List<Officer__c>();
+            for (Officer__c off : submissionMgr.submission.Officers__r) {
+                if (off.isSignatory__c) {
+                    companyDirectors.add(off);
+                }
+            }
+
+            companyAddress1 = submissionMgr.submission.CompanyAddress1__c;
+            companyAddress2 = submissionMgr.submission.CompanyAddress2__c;
+            companyregion = submissionMgr.submission.CompanyRegion__c;
+            companypostcode = submissionMgr.submission.CompanyPostCode__c;
+            companyCountry = submissionMgr.submission.CompanyCountry__c;
+            companyLocality = submissionMgr.submission.CompanyLocality__c;
+            companyAddress = (companyAddress1 == null ? '' : companyAddress1 + '<br/>') + (companyAddress2 == null ? '' : companyAddress2 + '<br/>') + (companyregion == null ? '' : companyregion + '<br/>') + (companyLocality == null ? '' : companyLocality + '<br/>') + (companypostcode == null ? '' : companypostcode + '<br/>') + (companyCountry == null ? '' : companyCountry);
+
             displayHeader = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
                         
             displayText1 = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+            displayText1 = displayText1.replace('COMPANYNAME', companyName);
+            
+            displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
 
         } catch (Exception e) { return; }
 

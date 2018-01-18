@@ -333,7 +333,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Submit</shortDescription>
-        <value>Submit</value>
+        <value>Submit application</value>
     </labels>
     <labels>
         <fullName>UI_Text_Summary_Page</fullName>

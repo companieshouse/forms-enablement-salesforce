@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">The application can now be submitted.</value>
+        <value xsi:type="xsd:string">Your application to close COMPANYNAME is ready to be submitted</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Review the information below and submit your application.</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Submit your application</value>
+        <value xsi:type="xsd:string">Review your application</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

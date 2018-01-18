@@ -140,9 +140,18 @@ public with sharing class SecurityManager {
     //
     Boolean sessionValidity = false;
 
+    Map<String, String> headersInfo = new Map<String, String>();
+    headersInfo = ApexPages.currentPage().getHeaders();
     
     LogSessionManager.addLog('<br/> Entering method: checkSessionValidityCookie: ');
     LogSessionManager.addLog('<br/> Printing caller Infos: ' + infos);
+    
+    for(String key :headersInfo.keySet())
+    {
+      LogSessionManager.addLog('<br/> Printing User Tech Infos: Key => ' + key);
+      LogSessionManager.addLog('<br/> Printing User Tech Infos: Value => ' + headersInfo.get(key));
+    }
+    
     LogSessionManager.addLog('<br/> Transaction Id: ' + (submission != null ? ('' + submission.Id) : ('No Transaction Id')));
     LogSessionManager.addLog('<br/> Company Number: ' + (submission != null ?  ('' + submission.CompanyNumber__c) : 'No Company Number'));
     LogSessionManager.addLog('<br/> Step Triggering: ' + (transactionMgr != null ? ('' +transactionMgr.currentStep.Id) : 'No Transaction Manager') + ' Number: ' + (transactionMgr != null ? ('' + transactionMgr.currentStep.Step_Number__c) : 'No Transaction Manager'));

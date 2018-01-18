@@ -154,6 +154,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         set;
     }
 
+    public String pageLog {get; set;}
+
     public String accountAuthCode {get; set;}
     public Boolean accountFailure {get; set;}
     public Boolean accountSuccess {get; set;}
@@ -166,6 +168,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
+
     }
     public Boolean hasPaid() {
         if (submissionMgr.submission.hasPaid__c) {
@@ -174,6 +177,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         return false;
     }
     public void initialiseStep() {
+
+        pageLog = '';
         hasPaid = false;
         hasBeenRedirected = false;
         hasPaymentSuccess = false;
@@ -211,8 +216,10 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
         if(hasBeenRedirected)
             SecurityManager.createSessionValidityCookie(submissionMgr.submission.ContactEmail__c, submissionMgr.submission, transactionMgr, 'CheckPaymentResult Method (Return from Payment)');
-            
+        
         PageReference res = initialiseAction();
+
+        pageLog += LogSessionManager.log;
 
         if(res != null)
         {
@@ -253,6 +260,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         //    return previousAction();
         //}
         //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
+
+        if(hasPaymentSuccess)
+            return nextAction();
         return null;
     }
     public PageReference updateLink() {
@@ -316,6 +326,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     // End Instance methods.
     // Action methods.
     public PageReference nextAction() {
+        LogSessionManager.initLog();
+        LogSessionManager.log = pageLog;
         if (!hasPaid() && valuePaymentUI == null && accountSuccess == false) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
@@ -342,6 +354,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 return null;
             }
         }
+
         if (transactionMgr.td.isSameDayPayment__c == true) {
 
             if (isSameDaySelected == null) {
@@ -356,9 +369,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             }
         }
 
-
         if (!validatePageState()) return Page.TransactionException;
-
 
         if(isAccountSelected)
         {
@@ -373,6 +384,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
                
         }
+
         if(!(submissionMgr.submission.Status__c == 'Approved' || submissionMgr.submission.Status__c == 'Rejected' || submissionMgr.submission.Status__c == 'Submitted'))
             persistStep();
 
@@ -382,7 +394,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             pg.setRedirect(true);
             return pg;
         }
+
         if (!hasPaid()) return null;
+
         return nextStep();
     }
     public PageReference previousAction() {
@@ -409,7 +423,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     }
     // End Action methods.
     public void updatePayment() {
+
         if (valuePaymentUI == null) return;
+
         if (valuePaymentUI == 1) {
             isCardSelected = true;
             isAccountSelected = false;
@@ -423,6 +439,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             isAccountSelected = false;
             isPaypalSelected = true;
         }
+
     }
     public void updateSameDay() {}
     /**

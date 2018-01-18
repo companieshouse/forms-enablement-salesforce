@@ -246,6 +246,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>CreatedDateUnitTest__c</fullName>
+        <description>This field is used only for unit testing the TransactionRecordsDeletionBatch</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used only for unit testing the TransactionRecordsDeletionBatch</inlineHelpText>
+        <label>CreatedDateUnitTest</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>DownloadLink__c</fullName>
         <description>Link to download your attachment with authentication</description>
         <externalId>false</externalId>
@@ -943,7 +953,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>CompanyNumber__c</field>
             <operation>contains</operation>
-            <value>09632622</value>
+            <value>10923510</value>
         </filters>
         <label>OneCompanyView</label>
     </listViews>
@@ -984,7 +994,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>15/01/2018</value>
+            <value>17/01/2018</value>
         </filters>
         <filters>
             <field>Status__c</field>
@@ -994,7 +1004,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>15/01/2018</value>
+            <value>17/01/2018</value>
         </filters>
         <filters>
             <field>Status__c</field>
@@ -1004,7 +1014,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>15/01/2018</value>
+            <value>17/01/2018</value>
         </filters>
         <filters>
             <field>Status__c</field>
@@ -1014,7 +1024,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>15/01/2018</value>
+            <value>17/01/2018</value>
         </filters>
         <label>submittedtoday</label>
     </listViews>

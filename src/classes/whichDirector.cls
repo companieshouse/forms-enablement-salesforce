@@ -78,7 +78,20 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
         officerUpdater = new List < Officer__c > ();
         officerUpdaterMap = new Map < String, Officer__c > ();
         companyName = submissionMgr.submission.CompanyName__c;
-        companyDirectors = submissionMgr.submission.Officers__r;
+        companyDirectors = new List<Officer__c>();
+        
+        //We do now control the output list and remove any corporate officer
+        if (submissionMgr.submission.Officers__r != null) {
+            if (submissionMgr.submission.Officers__r.size() > 0) {
+                for (Officer__c off : submissionMgr.submission.Officers__r) {
+                    if(!off.Name.containsIgnoreCase('ltd') && !off.Name.containsIgnoreCase('plc') && !off.Name.containsIgnoreCase('llp') && !off.Name.containsIgnoreCase('limited'))
+                    {
+                        companyDirectors.add(off);
+                    }
+                }
+            }
+        }
+
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
         pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 

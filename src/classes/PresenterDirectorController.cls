@@ -201,9 +201,18 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         if (submissionMgr.submission.Officers__r != null) {
             if (submissionMgr.submission.Officers__r.size() > 0) {
                 for (Officer__c off : submissionMgr.submission.Officers__r) {
-                    listOfDirectors.add(new officerContainer(off));
+                    if(!off.Name.containsIgnoreCase('ltd') && !off.Name.containsIgnoreCase('plc') && !off.Name.containsIgnoreCase('llp') && !off.Name.containsIgnoreCase('limited'))
+                    {
+                        listOfDirectors.add(new officerContainer(off));
+                    }
                 }
             }
+        }
+
+        if (listOfDirectors.isEmpty()){
+            //Simulate a no with empty details
+            directorPresenter = false;
+            return nextAction();
         }
         return null;
     }
@@ -214,7 +223,9 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             errorVal = '';
             errorValBottom = '';
             errorValBottom2 = '';
-        } else if (!directorPresenter) {
+        }
+        
+        if (!directorPresenter) {
             showMorePresenterInfo = true;
         }
         return null;
