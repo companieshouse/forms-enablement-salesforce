@@ -375,6 +375,10 @@
                 <behavior>Edit</behavior>
                 <field>AmendmentHistory__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Session_Log__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>

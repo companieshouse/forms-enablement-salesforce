@@ -246,6 +246,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>CreatedDateUnitTest__c</fullName>
+        <description>This field is used only for unit testing the TransactionRecordsDeletionBatch</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used only for unit testing the TransactionRecordsDeletionBatch</inlineHelpText>
+        <label>CreatedDateUnitTest</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>DownloadLink__c</fullName>
         <description>Link to download your attachment with authentication</description>
         <externalId>false</externalId>
@@ -412,6 +422,17 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
         <label>SentreviewURL</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Session_Log__c</fullName>
+        <description>Field used for the session log creation expiration</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field used for the session log creation expiration</inlineHelpText>
+        <label>Session Log</label>
+        <length>130000</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
     </fields>
     <fields>
         <fullName>SignerStatus__c</fullName>
@@ -903,6 +924,8 @@ to any promoter of the company?</inlineHelpText>
         <columns>ContactEmail__c</columns>
         <columns>Barcode__c</columns>
         <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>LAST_ACTIVITY</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -914,12 +937,13 @@ to any promoter of the company?</inlineHelpText>
         <columns>Barcode__c</columns>
         <columns>Status__c</columns>
         <columns>ErrorDescription__c</columns>
+        <columns>ContactEmail__c</columns>
         <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CompanyNumber__c</field>
             <operation>equals</operation>
-            <value>05448736</value>
+            <value>08778602</value>
         </filters>
         <label>Fluffy_Find</label>
         <sharedTo>
