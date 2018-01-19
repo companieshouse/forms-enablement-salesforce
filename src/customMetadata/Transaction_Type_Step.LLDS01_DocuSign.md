@@ -20,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Your signature is being processed. &lt;br/&gt; Please wait for a few moments until this has completed.&lt;br/&gt; &lt;/p&gt;</value>
+        <value xsi:type="xsd:string">This may take a few moments, we&apos;ll let you know when we&apos;re ready to continue.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -36,7 +36,7 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Your signature is being processed. &lt;br/&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">This may take a few moments, we&apos;ll let you know when we&apos;re ready to continue.</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;What happens next&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">We are registering your approval to close COMPANYNAME</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

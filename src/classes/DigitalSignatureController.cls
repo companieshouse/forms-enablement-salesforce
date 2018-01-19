@@ -71,6 +71,7 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
         }
         
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageTitle = pageTitle.replace('COMPANYNAME', compName);
         pageTitle2 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
         pageTitle3 = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
         pageTitle4 = (transactionMgr.currentStep.Header_Text_4__c == null ? '' : transactionMgr.currentStep.Header_Text_4__c);

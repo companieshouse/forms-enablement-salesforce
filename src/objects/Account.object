@@ -12,6 +12,16 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>CreatedDateUnitTest__c</fullName>
+        <description>This field is used only for unit test purpose</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used only for unit test purpose</inlineHelpText>
+        <label>CreatedDateUnitTest</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>userIDChips__c</fullName>
         <caseSensitive>true</caseSensitive>
         <description>Fields shows the user ID from Companies House API</description>
