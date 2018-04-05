@@ -56,6 +56,16 @@
     <enableSharing>false</enableSharing>
     <enableStreamingApi>false</enableStreamingApi>
     <fields>
+        <fullName>CreatedDateUnitTest__c</fullName>
+        <description>This field is used only for unit testing the UserAuthenticationRecordsDeletionBatch</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used only for unit testing the UserAuthenticationRecordsDeletionBatch</inlineHelpText>
+        <label>CreatedDateUnitTest</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>Expiry_Time__c</fullName>
         <externalId>false</externalId>
         <label>Expiry Time</label>
