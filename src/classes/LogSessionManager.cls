@@ -54,6 +54,8 @@ public with sharing class LogSessionManager {
 
     public static void updateTransactionLog(Transaction__c submission)
     {
+        system.debug('TEST LOG' + log);
+
         if(isSystemEnable == null || !isSystemEnable) return;
 
         if(!String.isBlank(log) && submission != null && submission.Id != null)
@@ -68,14 +70,14 @@ public with sharing class LogSessionManager {
             }
 
         }
-
+        system.debug('submission.Session_Log__c' + submission.Session_Log__c);
         initLog();
     }
 
     public static void commitChangeToTransaction(Transaction__c submission, TransactionManager transactionMgr)
     {
         if(isSystemEnable == null || !isSystemEnable) return;
-
+        
         if(transactionMgr != null && transactionMgr.currentStep != null && transactionMgr.currentStep.Step_Number__c > 10  && !String.isBlank(log) && submission != null && submission.Id != null)
         {
             if(String.isBlank(submission.Session_Log__c))

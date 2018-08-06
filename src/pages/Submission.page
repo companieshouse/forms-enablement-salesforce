@@ -26,7 +26,7 @@ Ver. Author         Date        Detail
     <apex:composition template="TransactionPageTemplate">
        <apex:define name="content">
           <apex:form >
-          <apex:outputPanel>
+          <apex:outputPanel >
              <div >
 
                 <h1 class="heading-xlarge">{!displayHeader}</h1>
@@ -37,8 +37,7 @@ Ver. Author         Date        Detail
                 </p>-->
              </div>
             <p class="lede">{!displayText1}</p>  
-            <p>{!displayText2}</p>
-             <apex:outputPanel  >
+             <apex:outputPanel >
                 <table class="check-your-answers">
                     <tbody>
                         <tr>
@@ -50,7 +49,7 @@ Ver. Author         Date        Detail
                             <td>{!companyNumber}</td>
                         </tr>
                         <tr>
-                            <th>Registered Office Address</th>
+                            <th style="vertical-align: top;">Registered Office Address</th>
                             <td>
                                 <apex:outputText escape="false" value="{!companyAddress}" />
                             </td>

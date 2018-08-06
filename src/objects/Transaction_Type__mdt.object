@@ -170,16 +170,19 @@
         <externalId>false</externalId>
         <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Family</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Dissolution</fullName>
-                <default>true</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Dissolution</fullName>
+                    <default>true</default>
+                    <label>Dissolution</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>FeeFastTrack__c</fullName>

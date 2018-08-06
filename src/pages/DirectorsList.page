@@ -24,8 +24,43 @@
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterPanel">
-                    <apex:outputPanel id="OfficersPanel" rendered="{!IF(noOfficers == true || toMuchOfficer == true, false,true)}">
+                    <apex:outputPanel id="singleOfficersPanel" rendered="{!singleOfficer}">
+                    <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButtonSingleOfficer" styleClass="link-back" />
                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        <div class="form-group {!errorVal}">
+                            <fieldset class="inline">
+                                <legend class="heading-medium">Is 
+                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeatSingleOfficer">
+                                    {!director}
+                                </apex:repeat>
+                                the only director of {!companyName}?</legend>
+                                <apex:outputPanel id="errorSingleOfficer">
+                                    <apex:outputPanel rendered="{!hasPageErrors}">
+                                        <span class="error-message" id="error-message-full-name">Please select one of the options below</span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <label class="block-label" for="radio-inline-1">
+                                    <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"> Yes
+                                    </input>
+                                </label>
+                                <label class="block-label" for="radio-inline-2">
+                                    <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"> No
+                                    </input>
+                                </label>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <apex:commandButton status="status" id="buttonNextSingleOfficer" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        </div>
+
+                        <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+                            <apex:param name="paramBoolean" value="" id="xSingleOfficer" assignTo="{!validationDirector}" />
+                        </apex:actionFunction>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="multipleOfficersPanel" rendered="{!!singleOfficer}">
+                        <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" styleClass="link-back" />
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        
                         <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
                         <div class="form-group {!errorVal}">
                             <ul class="list list-bullet">
@@ -53,9 +88,6 @@
                         <br />
                         <br />
                         <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
-                        <br />
-                        <br />
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                         <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
                             <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
                         </apex:actionFunction>

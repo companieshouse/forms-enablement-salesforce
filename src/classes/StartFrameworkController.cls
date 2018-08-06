@@ -24,6 +24,18 @@ public with sharing class StartFrameworkController {
         get;
         set;
     }
+    public String pageText2 {
+        get;
+        set;
+    }
+    public String pageText3 {
+        get;
+        set;
+    }
+    public String pageText4 {
+        get;
+        set;
+    }
     public String pageTextAfterButton {
         get;
         set;
@@ -61,10 +73,11 @@ public with sharing class StartFrameworkController {
             //pageTitle = (transactionMgr.td.Landing_Page_Title3__c == null ? '' : transactionMgr.td.Landing_Page_Title3__c);
             pageText = transactionMgr.td.Landing_Page_Text__c == null ? '' : transactionMgr.td.Landing_Page_Text__c;
             pageText += transactionMgr.td.Landing_Page_Text2__c == null ? '' : transactionMgr.td.Landing_Page_Text2__c;
-            pageText += transactionMgr.td.Landing_Page_Text3__c == null ? '' : transactionMgr.td.Landing_Page_Text3__c;
-            pageText += transactionMgr.td.Landing_Page_Text4__c == null ? '' : transactionMgr.td.Landing_Page_Text4__c;
-            pageText += transactionMgr.td.Landing_Page_Text5__c == null ? '' : transactionMgr.td.Landing_Page_Text5__c;
-            pageText += transactionMgr.td.Landing_Page_Text6__c == null ? '' : transactionMgr.td.Landing_Page_Text6__c;
+            //pageText += transactionMgr.td.Landing_Page_Text3__c == null ? '' : transactionMgr.td.Landing_Page_Text3__c;
+            pageText4 = transactionMgr.td.Landing_Page_Text4__c == null ? '' : transactionMgr.td.Landing_Page_Text4__c;
+            pageText4 += transactionMgr.td.Landing_Page_Text5__c == null ? '' : transactionMgr.td.Landing_Page_Text5__c;
+            pageText2 = transactionMgr.td.Landing_Page_Text6__c == null ? '' : transactionMgr.td.Landing_Page_Text6__c;
+            pageText3 = transactionMgr.td.Landing_Page_Text3__c == null ? '' : transactionMgr.td.Landing_Page_Text3__c;
             //pageText = transactionMgr.td.Landing_Page_Text7__c == null ? '' : transactionMgr.td.Landing_Page_Text7__c;
             //pageText = transactionMgr.td.Landing_Page_Text8__c == null ? '' : transactionMgr.td.Landing_Page_Text8__c;
             //pageText = transactionMgr.td.Landing_Page_Text9__c == null ? '' : transactionMgr.td.Landing_Page_Text9__c;

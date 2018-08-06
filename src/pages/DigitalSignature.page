@@ -33,16 +33,22 @@ Ver. Author        Date        Detail
                     </apex:outputPanel> -->
                     <apex:actionPoller enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5"  />
                     
-                   
+                   <apex:outputPanel id="SpinnerCondition" rendered="{!!multipleDirectors}">
                       <h1 class="heading-large" align="center">{!pageTitle}</h1>
                       <p class="lede" align="center">
                         {!pageBody}
                       </p>
+                      
                       <div class="spinner" align="center">
                         <img src="{!$Resource.SpinnerDocuSign}" alt=""/>
                       </div>
+                      </apex:outputPanel>
                         
                     <apex:outputPanel id="directorTable" rendered="{!multipleDirectors}">
+                        <h1 class="heading-large">{!pageTitle}</h1>
+                        <p class="lede">
+                            {!pageBody}
+                        </p>
                         <apex:outputText escape="false" value="{!pageBody2}" />
                         <table class="table-spacing">
                             <thead>
@@ -66,7 +72,7 @@ Ver. Author        Date        Detail
                 </apex:outputPanel>
                 <apex:outputPanel id="failureContact" rendered="{!successSigning}">
                     <apex:outputText escape="false" value="{!pageTitle2}" />
-                    <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                    <apex:commandButton action="{!nextAction}" styleClass="button" id="continueBtn" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     <br/>
                     <br/>
                     <!--<apex:commandLink action="{!resetTransaction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> removed prodct owner decision 9/9/16  Start again link-->

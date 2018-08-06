@@ -12,7 +12,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Continue</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -20,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Confirm that this is the correct company to close.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Review the details below and confirm that this is the company you want to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -49,7 +49,7 @@
     <values>
         <field>Header_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Confirm company details&lt;/h1&gt;</value>
+Confirm the company&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -101,6 +101,6 @@ Confirm company details&lt;/h1&gt;</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:type="xsd:string">Not the company you want to close?</value>
+        <value xsi:type="xsd:string">Back</value>
     </values>
 </CustomMetadata>

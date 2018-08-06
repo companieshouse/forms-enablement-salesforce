@@ -91,7 +91,7 @@ public with sharing class SubmissionController extends TransactionStepController
 
             submissionId = submissionMgr.submission.SubmissionId__c == null ? '' : submissionMgr.submission.SubmissionId__c;
             companyName = submissionMgr.submission.CompanyName__c == null ? '' : submissionMgr.submission.CompanyName__c;
-
+            
             companyNumber = submissionMgr.submission.CompanyNumber__c;
 
             companyDirectors = new List<Officer__c>();
@@ -115,7 +115,7 @@ public with sharing class SubmissionController extends TransactionStepController
             displayText1 = displayText1.replace('COMPANYNAME', companyName);
             
             displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-
+            
         } catch (Exception e) { return; }
 
 

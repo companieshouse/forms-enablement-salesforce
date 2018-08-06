@@ -14,4 +14,5 @@ Check following errors {!Transaction__c.Status}({!Transaction__c.CompanyNumber__
 
 FE{!Transaction__c.Id}.</textOnly>
     <type>custom</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

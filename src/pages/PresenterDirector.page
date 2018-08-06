@@ -25,6 +25,7 @@
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterPanel">
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="link-back" id="thePreviousButton" />
                     <apex:outputPanel id="emptyPanel"></apex:outputPanel>
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -44,18 +45,15 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>    
-                    <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
-                    <div class="form-group {!errorVal}">
+                        
+                    <div class="form-group">
+                    <div class="{!errorVal}">
                       <span class="error-message" id="error-message-full-name">{!currentPageError}</span>
-                        <ul class="list list-bullet">
-                            <apex:repeat value="{!listOfDirectors}" var="director" id="directorslistID">
-                                <li>{!director.officerTXT}</li>
-                            </apex:repeat>
-                        </ul>
-                        <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
                         <fieldset class="inline">
-                            <div id="presenterSelection" class="form-group">
+                            <legend>
+                                <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                            </legend>
+                            <div id="presenterSelection">
                                 <label class="block-label" for="radio-indent-1">
                                     <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"> Yes
                                     </input>
@@ -86,15 +84,13 @@
                             </div>
                         </apex:outputPanel>
                     </apex:outputPanel>
+                    </div>
                     <apex:actionFunction status="status" action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
                         <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
                     </apex:actionFunction>
-                    <br />
-                    <br /> 
-                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
-                    <br />
-                    <br />
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    <div class="form-group">
+                        <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    </div>
                 </apex:outputPanel>
                 <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>

@@ -22,7 +22,7 @@ Ver. Author             Date        Detail
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="empty" />
                     <apex:outputPanel id="standardGuidanceView" rendered="{!standardGuidanceView}">
-                        <div class="form-group">
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" styleClass="link-back" />
                             <div id="errorList" class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1" hidden="hidden">
                                 <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                                     An error has occurred.
@@ -32,19 +32,21 @@ Ver. Author             Date        Detail
                                     </li>
                                 </ul>
                             </div>
+                            
                             <apex:outputText escape="false" value="{!displayText0}" />
                             <fieldset>
-                                <div class='form-group' id='checkboxArea'>
+                            <div class='form-group'>
+                                <div id='checkboxArea'>
                                     <span id='errorHint' style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
                                     <label class="block-label" for="agree">
                                         <input id="agree" name="agree" type="checkbox" value="true" /> {!checkboxText0}
                                     </label>
                                 </div>
+                            </div>
                             </fieldset>
                             <apex:actionFunction status="status" action="{!setAgreeValue}" name="setAgreeValue" reRender="content">
                                 <apex:param name="agreeboxparam" value="" id="cde" assignTo="{!agreeBoxChoice}" />
                             </apex:actionFunction>
-                        </div>
                         <script>
                         function updateField(selection) {
 
@@ -70,7 +72,7 @@ Ver. Author             Date        Detail
                         <input type="button" class="button" id="nextButton" value="{!$Label.UI_Text_Continue}" onclick="updateField()" />
                         <br/>
                         <br/>
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+                        
                     </apex:outputPanel>
                     <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
                         <apex:outputText escape="false" value="{!guidanceTitle}"></apex:outputText>
@@ -80,10 +82,7 @@ Ver. Author             Date        Detail
                         <apex:outputText escape="false" value="{!guidanceText4}"></apex:outputText>
                         <apex:outputText escape="false" value="{!guidanceText5}"></apex:outputText>
                         <div class="form-group">
-                            <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
-                            <br />
-                            <br/>
-                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" />
+                            <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />                            
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>

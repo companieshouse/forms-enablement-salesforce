@@ -22,6 +22,7 @@
     </types>
     <types>
         <members>Account.CompanyNumber__c</members>
+        <members>Account.CreatedDateUnitTest__c</members>
         <members>Account.locale__c</members>
         <members>Account.userIDChips__c</members>
         <members>Contact.AuthorizedSigner__c</members>
@@ -118,6 +119,7 @@
     </types>
     <types>
         <members>FORMS</members>
+        <members>SpinnerDocuSign</members>
         <members>jQueryv1102</members>
         <name>StaticResource</name>
     </types>
@@ -126,5 +128,5 @@
         <members>Transaction__c</members>
         <name>Workflow</name>
     </types>
-    <version>36.0</version>
+    <version>43.0</version>
 </Package>

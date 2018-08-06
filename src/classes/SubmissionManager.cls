@@ -112,6 +112,7 @@ public with sharing class SubmissionManager {
 
     public void persist() {
         try {
+            system.debug('LOG' + LogSessionManager.log);
             LogSessionManager.updateTransactionLog(submission);
             Database.update(submission.Attachments);
             Database.update(submission.Shares__r);

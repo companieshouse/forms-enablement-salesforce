@@ -38,13 +38,15 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
     public Boolean toMuchOfficer {get; set;}
+    public string previousButtonText {get; set;}
+    public Integer totalOfficers {get; set;}
+    public Boolean singleOfficer {get; set;}
     public DirectorsListController() {
         super();
         System.debug(LoggingLevel.ERROR, 'After Super Call:' + isPageInitialised);
         hasAlreadyLoadedOfficers = false;
         toMuchOfficer= false;
         if (isPageInitialised) initialiseStep();
-
     }
 
 
@@ -64,14 +66,19 @@ public with sharing class DirectorsListController extends TransactionStepControl
         isLPCompany = false;
         officerTerm = '';
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        previousButtonText = (transactionMgr.currentStep.previousButtonText__c == null ? '' : transactionMgr.currentStep.previousButtonText__c);
+        
+        // Set totalOfficers for pageview
+        totalOfficers = submissionMgr.submission.Officers__r.size();
+        
         if(submissionMgr.submission.Officers__r.size() == 1)
         {
             pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
-
+            singleOfficer = true;
         }
         else{
             pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-
+            singleOfficer = false;
         }
 
         pageText = pageText.replace('COMPANYNAME', companyName);
@@ -323,8 +330,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             List<Officer__c> officerList = new List<Officer__c>();
             List<Contact> contactList = new List<Contact>();
+            Integer countOfficer = 0;
             if(directorDetailsList != null)
-                for (CompaniesHouse.OfficerDetails officer : directorDetailsList) {
+                for (CompaniesHouse.OfficerDetails officer : directorDetailsList) 
+                {
+                    countOfficer++;
+                    if(officerList.size() >= 51)
+                        continue;
+
                     Boolean addOff = false;
                     if ( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                         addOff = true;
@@ -375,6 +388,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             if(nbOfOfficers > 1)
             {
+                singleOfficer = false;
                 officerTerm += 's';
             }
             //Insert the contact
@@ -403,10 +417,12 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             if(nbOfOfficers == 1)
             {
+                singleOfficer = true;
                 pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 
             }
             else{
+                singleOfficer = false;
                 pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
 
             }
@@ -416,10 +432,10 @@ public with sharing class DirectorsListController extends TransactionStepControl
             pageTitle = pageTitle.replace('directors', officerTerm);
             pageText = pageText.replace('COMPANYNAME', companyName);
 
-            submissionMgr.submission.OfficerCount__c = nbOfOfficers;
+            submissionMgr.submission.OfficerCount__c = countOfficer;
             update submissionMgr.submission;
 
-            if( OfficersQueryAction.active_count >= 35)
+            if( officerList.size() > 51)
             {
                 toMuchOfficer = true;
                 pageText = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;

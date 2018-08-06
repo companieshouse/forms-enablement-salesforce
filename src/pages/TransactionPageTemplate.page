@@ -64,8 +64,9 @@ Ver. Author        Date        Detail
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/govuk/selection-buttons.js')}"></script>
     <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/application.js')}"></script>
     <!-- Piwik -->
-    
+ 
     <script type="text/javascript">
+    console.log(document.location.origin + document.location.pathname)
       var _paq = _paq || [];
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);

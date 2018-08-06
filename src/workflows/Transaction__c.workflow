@@ -207,7 +207,8 @@
     </alerts>
     <alerts>
         <fullName>Send_email_to_Support</fullName>
-        <ccEmails>678104@gmail.com</ccEmails>
+        <ccEmails>aharvard@companieshouse.gov.uk</ccEmails>
+        <ccEmails>sreadman@companieshouse.gov.uk</ccEmails>
         <description>Send email to Support</description>
         <protected>false</protected>
         <senderType>DefaultWorkflowUser</senderType>

@@ -82,11 +82,12 @@ public with sharing class CompanyController {
     @TestVisible
     private Boolean validateStep() {
         if (String.isBlank(companyNumber)) {
-            currentErrorMessage = 'Field is blank. Please enter a company number';
+            currentErrorMessage = 'You must enter the company number';
             hasPageErrors = true;
             currentError = 'error';
             return false;
         }
+        
 
         companyNumber = companyNumber.deleteWhitespace();
 
@@ -117,7 +118,7 @@ public with sharing class CompanyController {
 
         prefix = prefix.toUpperCase();
         companyNumber = prefix + postfix;
-	    CompaniesHouse.CompanyProfile compProf = new CompaniesHouse.CompanyProfile();
+        CompaniesHouse.CompanyProfile compProf = new CompaniesHouse.CompanyProfile();
 
         try{
             
@@ -210,8 +211,8 @@ public with sharing class CompanyController {
         trackuser = new TrackUserClass();
 
         //Merged From Leo 03 May 2016
-		trackuser.getSearchedCompany(companyNumber);
-    	//return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+        trackuser.getSearchedCompany(companyNumber);
+        //return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
         PageReference pg = new PageReference('/CompanySearched');
         pg.setRedirect(true);
         pg.getParameters().put('t', transactionType);

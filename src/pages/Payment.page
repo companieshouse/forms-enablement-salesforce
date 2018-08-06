@@ -33,18 +33,18 @@
                             <div class='form-group {!errorVal}'>
                                 <fieldset>
                                     <legend class="visuallyhidden">Select a payment method:</legend>
-                                    <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
-                                        <div class='form-group'>
-                                            <label class="block-label" for="radio-indent-3">
-                                                <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"> Paypal
-                                                </input>
-                                            </label>
-                                        </div>
-                                    </apex:outputPanel>
                                     <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
                                         <div class='form-group'>
                                             <label class="block-label" for="radio-indent-1">
                                                 <input class="card" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"> Credit or debit card
+                                                </input>
+                                            </label>
+                                        </div>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
+                                        <div class='form-group'>
+                                            <label class="block-label" for="radio-indent-3">
+                                                <input class="paypal" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"> Paypal
                                                 </input>
                                             </label>
                                         </div>
@@ -71,7 +71,7 @@
                                                 <apex:inputText styleclass="form-control" value="{!presenterId}" id="presenterID" />
                                                 <br/>
                                                 <br/> -->
-                                                <label class="form-label" for="accouthAuthCode">Presenter Authentication code:</label>
+                                                <label class="form-label" for="accouthAuthCode">Presenter authentication code:</label>
                                                 <apex:inputText styleclass="form-control" value="{!accountAuthCode}" id="accouthAuthCode" />
                                             </div>
                                         </div>
@@ -192,7 +192,7 @@
                     </div>
                 </apex:outputPanel>
                 <div class="form-group">
-                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="Save and continue" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="button" value="Continue" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
                     <br/>
                     <br/>
                     <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous_Payment}" />

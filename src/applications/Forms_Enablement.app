@@ -2,10 +2,13 @@
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultLandingTab>standard-home</defaultLandingTab>
     <description>Salesforce UI for the Forms Enablement</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Forms Enablement</label>
     <logo>SharedDocuments/CH_Logo_transparent.png</logo>
-    <tab>standard-Account</tab>
-    <tab>standard-Contact</tab>
-    <tab>Transaction__c</tab>
-    <tab>standard-report</tab>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Transaction__c</tabs>
+    <tabs>standard-report</tabs>
 </CustomApplication>

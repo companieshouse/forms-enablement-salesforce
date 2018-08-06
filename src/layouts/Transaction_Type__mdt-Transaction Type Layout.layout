@@ -78,6 +78,22 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>CompanySearchedHeader1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>CompanySearchedBody1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>companySearchPageText__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>CompanySearchedPreviousButton__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Company_Page_HiddenT1__c</field>
             </layoutItems>
             <layoutItems>
@@ -87,10 +103,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Company_Page_HiddenT3__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>companySearchPageText__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

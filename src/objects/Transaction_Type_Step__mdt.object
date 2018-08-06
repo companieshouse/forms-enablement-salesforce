@@ -199,20 +199,24 @@
         <externalId>false</externalId>
         <fieldManageability>DeveloperControlled</fieldManageability>
         <label>Step Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>VF Page</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Apex Code</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>VF Page</fullName>
+                    <default>true</default>
+                    <label>VF Page</label>
+                </value>
+                <value>
+                    <fullName>Apex Code</fullName>
+                    <default>false</default>
+                    <label>Apex Code</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Transaction_Type__c</fullName>
@@ -247,6 +251,57 @@
         <unique>false</unique>
     </fields>
     <label>Transaction Type Step</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>Step_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>DS01</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>Step_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Transaction_Type__c</field>
+            <operation>equals</operation>
+            <value>DS01</value>
+        </filters>
+        <label>DS01</label>
+    </listViews>
+    <listViews>
+        <fullName>DS02</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>Step_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Transaction_Type__c</field>
+            <operation>equals</operation>
+            <value>DS02</value>
+        </filters>
+        <label>DS02</label>
+    </listViews>
+    <listViews>
+        <fullName>LLDS01</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>Step_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Transaction_Type__c</field>
+            <operation>equals</operation>
+            <value>LLDS01</value>
+        </filters>
+        <label>LLDS01</label>
+    </listViews>
     <pluralLabel>Transaction Type Steps</pluralLabel>
     <visibility>Protected</visibility>
 </CustomObject>

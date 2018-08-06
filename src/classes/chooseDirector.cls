@@ -123,7 +123,7 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
     public void buildDirectorsList() {
         for (Officer__c chosenOfficer : companyDirectors) {
             if (chosenOfficer.isPresenter__c == False) {
-                builtDirectors.add(chosenOfficer);
+                    builtDirectors.add(chosenOfficer);
             } 
         }
     }

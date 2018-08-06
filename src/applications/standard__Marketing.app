@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultLandingTab>standard-home</defaultLandingTab>
-    <tab>standard-Contact</tab>
-    <tab>standard-Account</tab>
-    <tab>standard-Lead</tab>
-    <tab>standard-Campaign</tab>
-    <tab>standard-report</tab>
-    <tab>standard-Dashboard</tab>
-    <tab>standard-Chatter</tab>
-    <tab>Transaction__c</tab>
-    <tab>Company_Authorisation__c</tab>
-    <tab>User_Authorisation__c</tab>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>standard-Campaign</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-Chatter</tabs>
+    <tabs>Transaction__c</tabs>
+    <tabs>Company_Authorisation__c</tabs>
+    <tabs>User_Authorisation__c</tabs>
 </CustomApplication>

@@ -29,7 +29,7 @@ public with sharing class SignOutController extends TransactionStepControllerBas
     public PageReference signOut() {
 
         //Remove session cookie
-        SecurityManager.removeSessionValidityCookie(submissionMgr.submission, transactionMgr, 'Signing out', false);
+        SecurityManager.removeSessionValidityCookie();
 
         return null;
     }

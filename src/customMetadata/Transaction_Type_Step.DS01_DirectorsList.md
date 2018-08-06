@@ -53,7 +53,7 @@ The directors listed on the public register for COMPANYNAME are:
     <values>
         <field>Header_Text_1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Is this directors list correct?&lt;/h1&gt;</value>
+Confirm the company directors&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -107,6 +107,6 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Back</value>
     </values>
 </CustomMetadata>

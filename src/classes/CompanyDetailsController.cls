@@ -63,10 +63,10 @@ public with sharing class CompanyDetailsController extends TransactionStepContro
 
         buttonDS01 = submissionMgr.submission.Form_Name__c.contains('DS01') ? true : false;
 
-        textButtonDS01 = 'Close the company';
+        textButtonDS01 = 'Continue';
         if(submissionMgr.submission.Form_Name__c.contains('LL'))
         {
-            textButtonDS01 = 'Close the LLP';
+            textButtonDS01 = 'Continue';
         }
         textButtonOther = 'Continue';
 

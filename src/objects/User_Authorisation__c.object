@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -49,12 +45,23 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>false</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>false</enableSharing>
     <enableStreamingApi>false</enableStreamingApi>
+    <fields>
+        <fullName>CreatedDateUnitTest__c</fullName>
+        <description>This field is used only for unit testing the UserAuthenticationRecordsDeletionBatch</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used only for unit testing the UserAuthenticationRecordsDeletionBatch</inlineHelpText>
+        <label>CreatedDateUnitTest</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
     <fields>
         <fullName>Expiry_Time__c</fullName>
         <externalId>false</externalId>
@@ -107,4 +114,5 @@
     <pluralLabel>User Authorisations</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

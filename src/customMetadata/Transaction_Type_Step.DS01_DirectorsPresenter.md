@@ -44,8 +44,9 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-You do not have to give any contact information, but if you do it will help Companies House if there is a query on the request.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;
+If we have a question about your application, you can choose to tell us who to contact. We will contact the company if you choose not to provide this information
+&lt;/p&gt;</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>

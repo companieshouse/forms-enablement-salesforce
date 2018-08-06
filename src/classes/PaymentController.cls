@@ -155,6 +155,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     }
 
     public String pageLog {get; set;}
+    public String companyName {get; set;}
 
     public String accountAuthCode {get; set;}
     public Boolean accountFailure {get; set;}
@@ -168,6 +169,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     public PaymentController() {
         super();
         if (isPageInitialised) initialiseStep();
+
     }
     public Boolean hasPaid() {
         if (submissionMgr.submission.hasPaid__c) {
@@ -178,6 +180,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     public void initialiseStep() {
 
         pageLog = '';
+        companyName = submissionMgr.submission.CompanyName__c;
         hasPaid = false;
         hasBeenRedirected = false;
         hasPaymentSuccess = false;
@@ -200,6 +203,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         fastTrackFee = (transactionMgr.td.FeeFastTrack__c == null ? 0 : transactionMgr.td.FeeFastTrack__c);
         textBox1NormalFee = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        headerBox1 = headerBox1.replace('COMPNAME', companyName);
         textBox1FastTrackFee = textBox1NormalFee.replace('FEE', fastTrackFee + '');
         textBox1NormalFee = textBox1NormalFee.replace('FEE', normalFee + '');
         isCardSelected = false;
@@ -353,6 +357,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 return null;
             }
         }
+
         if (transactionMgr.td.isSameDayPayment__c == true) {
 
             if (isSameDaySelected == null) {
@@ -367,9 +372,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             }
         }
 
-
         if (!validatePageState()) return Page.TransactionException;
-
 
         if(isAccountSelected)
         {
@@ -384,6 +387,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
                
         }
+
         if(!(submissionMgr.submission.Status__c == 'Approved' || submissionMgr.submission.Status__c == 'Rejected' || submissionMgr.submission.Status__c == 'Submitted'))
             persistStep();
 
@@ -393,7 +397,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             pg.setRedirect(true);
             return pg;
         }
+
         if (!hasPaid()) return null;
+
         return nextStep();
     }
     public PageReference previousAction() {
@@ -420,7 +426,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     }
     // End Action methods.
     public void updatePayment() {
+
         if (valuePaymentUI == null) return;
+
         if (valuePaymentUI == 1) {
             isCardSelected = true;
             isAccountSelected = false;
@@ -434,6 +442,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             isAccountSelected = false;
             isPaypalSelected = true;
         }
+
     }
     public void updateSameDay() {}
     /**

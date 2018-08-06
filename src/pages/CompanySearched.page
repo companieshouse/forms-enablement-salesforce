@@ -2,29 +2,30 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
+                <apex:commandLink action="{!previousAction}" styleClass="link-back" value="{!previousButtonText}" id="thePreviousButton" />
                 <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
                 <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
                 <p class="heading-large">{!companyName}</p>
                 <table class="check-your-answers" >
                     <tbody>
                         <tr>
-                            <td>Company number</td>
+                            <th scope="row">Company number</th>
                             <td>{!companyNumber}</td>
                         </tr>
                         <tr>
-                            <td>Status</td>
+                            <th scope="row">Status</th>
                             <td>{!companyStatus}</td>
                         </tr>
                         <tr>
-                            <td>Incorporation date</td>
+                            <th scope="row">Incorporation date</th>
                             <td>{!companyDateOfCreation}</td>
                         </tr>
                         <tr>
-                            <td>Company type</td>
+                            <th scope="row">Company type</th>
                             <td>{!companyTypeText}</td>
                         </tr>
                         <tr>
-                            <td>Registered office address</td>
+                            <th scope="row" style="vertical-align: top;">Registered office address</th>
                             <td>
                                 <apex:outputText escape="false" value="{!companyAddress}" />
                             </td>
@@ -33,9 +34,6 @@
                 </table>
                 <br/>
                 <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
-                <br/>
-                <br/>
-                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
             </apex:form>
         </apex:define>
     </apex:composition>

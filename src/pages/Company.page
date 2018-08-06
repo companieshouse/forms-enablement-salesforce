@@ -23,6 +23,7 @@ Ver. Author        Date        Detail
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="apex-form">
+            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" styleClass="link-back" />
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                         <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
@@ -54,7 +55,7 @@ Ver. Author        Date        Detail
                  <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
 
                 <br/> 
-                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Confirm my details" />
+                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Continue" />
                 <br/>
                
             </apex:form>

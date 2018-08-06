@@ -28,6 +28,7 @@ public with sharing class CH_SearchControllerByOfficerListClass {
         CompaniesHouse.OfficerList jsonData = new CompaniesHouse.OfficerList ();
         
         resultDisplay = req.getRequestOfficersList(CH_searchTextNumber);
+        
         jsonData = res.getResponseOfficerList(resultDisplay);
         system.debug('JsonData before IF : ' + jsonData);
         
@@ -36,6 +37,7 @@ public with sharing class CH_SearchControllerByOfficerListClass {
             results = 'No records found';  
         
         }else{
+
             system.debug('JsonData Total Results before IF : ' + jsonData.total_results);
             this.active_count = jsonData.active_count;
             itemsToDisplay = jsonData.items;
