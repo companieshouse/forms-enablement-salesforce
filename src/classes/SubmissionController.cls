@@ -16,7 +16,26 @@ Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-05-27  Initial development.
 */
 public with sharing class SubmissionController extends TransactionStepControllerBase {
-
+    public String title {
+        get;
+        private set;
+    }
+    public String size {
+        get;
+        private set;
+    }
+    public String todayThreeMonths {
+        get; 
+        set;
+    }
+    public Id attachmentId {
+        get;
+        private set;
+    }
+    public Boolean showDoc {
+            get;
+            private set;
+        }
     // Public properties.
 
     //public String title {get; private set;}
@@ -115,7 +134,29 @@ public with sharing class SubmissionController extends TransactionStepController
             displayText1 = displayText1.replace('COMPANYNAME', companyName);
             
             displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-            
+            if (submissionMgr.submission.attachments != null) {
+                if (submissionMgr.submission.attachments.size() > 0) {
+                    showDoc = true;
+                    attachmentId = submissionMgr.submission.attachments[0].Id;
+                    title = 'View the application';
+                    Integer sizeInt = submissionMgr.submission.attachments[0].BodyLength;
+                    String tempSize = String.valueOf(sizeInt);
+                    size = tempSize.left(3);
+                    //MB
+                    if (tempSize.length() >= 9) {
+                        size += 'M';
+                    }
+                    //KB
+                    else if (tempSize.length() >= 6 && tempSize.length() < 9) {
+                        size += 'K';
+                    }
+                }
+            } else {
+                title = 'NA';
+                size = 'NA';
+                attachmentId = null;
+            }
+            todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' + system.today().year();
         } catch (Exception e) { return; }
 
 

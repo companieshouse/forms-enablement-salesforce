@@ -71,7 +71,7 @@
                             <a href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/400527/Checklist_guidance_for_SH02.pdf">changes you can make.</a>
                         </p>
                         <div class='form-group'>
-                            <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Continue" />
+                            <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="Continue" />
                             <apex:actionFunction status="status" action="{!setSelectedClass}" name="grabShareType" reRender="emptyPanel">
                                 <apex:param name="shareclasstype" value="" id="z" assignTo="{!selectedShareClass}" />
                             </apex:actionFunction>

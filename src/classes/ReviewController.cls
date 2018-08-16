@@ -18,6 +18,27 @@ public with sharing class ReviewController extends TransactionStepControllerBase
     private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
     public String authCode {get; set;}
+
+    public String title {
+        get;
+        private set;
+    }
+    public String size {
+        get;
+        private set;
+    }
+    public String todayThreeMonths {
+        get; 
+        set;
+    }
+    public Id attachmentId {
+        get;
+        private set;
+    }
+    public Boolean showDoc {
+            get;
+            private set;
+        }
     
     @TestVisible private AccountsAPIHelper.Token accessTokenApiResponse;
     @TestVisible private AccountsAPIHelper.UserProfile userProfileApiResponse;
@@ -515,6 +536,30 @@ public with sharing class ReviewController extends TransactionStepControllerBase
         viewSHares = submissionMgr.submission.Shares__r;
         buildVal();
         shareRouter();
+
+        if (submissionMgr.submission.attachments != null) {
+            if (submissionMgr.submission.attachments.size() > 0) {
+                showDoc = true;
+                attachmentId = submissionMgr.submission.attachments[0].Id;
+                title = 'View the application';
+                Integer sizeInt = submissionMgr.submission.attachments[0].BodyLength;
+                String tempSize = String.valueOf(sizeInt);
+                size = tempSize.left(3);
+                //MB
+                if (tempSize.length() >= 9) {
+                    size += 'M';
+                }
+                //KB
+                else if (tempSize.length() >= 6 && tempSize.length() < 9) {
+                    size += 'K';
+                }
+            }
+        } else {
+            title = 'NA';
+            size = 'NA';
+            attachmentId = null;
+        }
+        todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' + system.today().year();
         return;
     }
 
@@ -1157,7 +1202,7 @@ public with sharing class ReviewController extends TransactionStepControllerBase
     }
     public PageReference nextAction() {
         if (!confirmationVal) {
-            showError = 'error';
+            showError = 'govuk-form-group--error';
             hasPageErrors = true;
             currentErrorMessage = 'You must confirm to continue';
             return null;

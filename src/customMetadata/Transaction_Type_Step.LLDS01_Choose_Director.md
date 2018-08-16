@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;A majority of members need to approve your request to close the LLP before you can proceed.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;A majority of members need to approve your request to close the LLP before you can proceed.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-large&quot;&gt;Select at least X directors&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-l&quot;&gt;Select at least X directors&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -40,7 +40,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;error-message&quot;&gt;You must select at least X directors&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-error-message&quot;&gt;You must select at least X directors&lt;/p&gt;</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Which directors will approve your request to close the LLP?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;Which directors will approve your request to close the LLP?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -84,7 +84,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">5.0</value>
+        <value xsi:type="xsd:double">4.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

@@ -334,26 +334,26 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         if (!hasPaid() && valuePaymentUI == null && accountSuccess == false) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
         if (!hasPaid() && valuePaymentUI == 2 && accountSuccess == false) {
             if (accountNumber.length() == 0) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number or select another method of payment';
-                accounterrorVal = 'error';
+                accounterrorVal = 'govuk-form-group--error';
                 return null;
             }
             if (!accountNumber.isNumeric()) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number containing only numbers';
-                accounterrorVal = 'error';
+                accounterrorVal = 'govuk-form-group--error';
                 return null;
             }
             if (String.isEmpty(accountAuthCode)) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an authentication code if you want to pay using your account';
-                accounterrorVal = 'error';
+                accounterrorVal = 'govuk-form-group--error';
                 return null;
             }
         }
@@ -367,7 +367,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 currentErrorMessage = '';
                 errorVal = '';
                 accounterrorVal = '';
-                samedayError = 'error';
+                samedayError = 'govuk-form-group--error';
                 return null;
             }
         }

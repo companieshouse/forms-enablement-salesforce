@@ -20,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;Approve and submit the cancel request&lt;/p&gt;&lt;p&gt; You must agree to the conditions below before you can submit the cancellation of the request to close  COMPANYNAME.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;Approve and submit the cancel request&lt;/p&gt;&lt;p class=&quot;govuk-body&quot;&gt; You must agree to the conditions below before you can submit the cancellation of the request to close  COMPANYNAME.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Approving and Submitting your request&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;Approving and Submitting your request&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

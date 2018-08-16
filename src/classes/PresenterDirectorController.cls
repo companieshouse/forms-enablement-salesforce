@@ -101,13 +101,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         companyNumber = submissionMgr.submission.CompanyNumber__c;
         listOfDirectors = new List < officerContainer > ();
         pageTitle = transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c;
-        if(submissionMgr.submission.Officers__r.size() == 1)
-        {
-            pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
-        }
-        else{
-            pageBody = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-        }
+        pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        
         pageBody = pageBody.replace('COMPANYNAME', companyName);
         pageHiddenText = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
         pageBody2 = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
@@ -138,7 +133,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
     public PageReference nextAction() {
         if (directorPresenter == null) {
             hasPageErrors = true;
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             currentPageError = 'Please make a selection to continue';
             return null;
         }
@@ -151,7 +146,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                 {
                     hasError = true;
                     hasPageErrors = true;
-                    errorValBottom = 'error';
+                    errorValBottom = 'govuk-form-group--error';
                     currentPageErrorTop = 'The name is too long (maximum number of characters allowed is 255).';
                 }
                 else{
@@ -168,7 +163,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                 {
                     hasError = true;
                     hasPageErrors = true;
-                    errorValBottom2 = 'error';
+                    errorValBottom2 = 'govuk-form-group--error';
                     currentPageErrorBot = 'The phone number is too long (maximum number of characters allowed is 255).';
                 }else{
                     errorValBottom2 = '';

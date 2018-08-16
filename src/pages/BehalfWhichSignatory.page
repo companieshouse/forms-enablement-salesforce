@@ -18,42 +18,55 @@
    -->
 <apex:page cache="false" title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>{!currentErrorMessage}</a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a>{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
-                    <div class="form-group {!errorVal}">
-                        <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
+                    <div class="govuk-form-group {!errorVal}">
                         <apex:outputPanel id="divDirector">
-                            <fieldset>
-                                <span class='error-message' id='error-span'>{!currentErrorMessage}</span>
-                                <legend class='visuallyhidden'>Please select who you will sign on behalf</legend>
-                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-                                    <label class="block-label" for="radio-{!director.officer.Id}">
-                                        <input class="radioButtonRepeat" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatoryBehalf}" onchange="changeValue(this);">{!director.officerTXT}</input>
-                                    </label>
-                                </apex:repeat>
+                            <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                                    <h1 class="govuk-fieldset__heading">
+                                         {!headerBox1}
+                                    </h1>
+
+                                </legend>
+                                <span id="hintD" class="govuk-hint">{!textBox1}</span>
+                                <span class='govuk-error-message' id='error-span'>{!currentErrorMessage}</span>
+                                
+                                    <div class="govuk-checkboxes">
+                                        <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                            <div class="govuk-checkboxes__item">
+                                                <input class="govuk-checkboxes__input" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatoryBehalf}" onchange="changeValue(this);"></input>
+                                                <label class="govuk-label govuk-checkboxes__label" for="radio-{!director.officer.Id}">{!director.officerTXT}</label>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
                             </fieldset>
                         </apex:outputPanel>
                     </div>
-                    <div class='form-group'>
-                        <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
-                        <br />
-                        <br />
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    <div class='govuk-form-group'>
+                        <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
                     </div>
                     <apex:actionFunction status="status" action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
                         <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />

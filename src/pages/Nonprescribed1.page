@@ -20,7 +20,7 @@
                     </fieldset>
                 </div>
                 <div class='form-group'>
-                    <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" />
+                    <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="Continue" />
                     <br/>
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="Previous" />

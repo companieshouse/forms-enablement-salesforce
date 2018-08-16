@@ -6,13 +6,14 @@
   <apex:composition template="TransactionPageTemplate">
   
     <apex:define name="content">
-        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-    
-          <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-              Unauthorised access has been logged. 
-              <br/>Session terminated.
-          </h1>
-    
+        
+
+        <div id="errorList" class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1" hidden="hidden">
+          <h2 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+             Unauthorised access has been logged.
+            <br/>Session terminated.
+          </h2>
+        
         </div>
 
         </apex:define>

@@ -6,14 +6,14 @@
                 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
                 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                 <apex:outputPanel id="masterPanel">
-                    <apex:outputPanel id="errorpanel" rendered="{!hasPageErrors}">
+                    <apex:outputPanel id="errorpanel">
                         <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
                             <ul class="error-summary-list">
                                 <li>
-                                    <span class="error-message">{!currentErrorMessage}</span>
+                                    <span class="error-message"></span>
                                 </li>
                             </ul>
                         </div>
@@ -269,7 +269,7 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="previousButton" /> &nbsp;
             </apex:form>

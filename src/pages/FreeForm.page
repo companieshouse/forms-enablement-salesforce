@@ -28,7 +28,7 @@
                         <apex:inputTextArea richText="false" rows="8" cols="40" value="{!freeFormData}" id="freeFormData" />
                     </fieldset>
                 </div>
-                <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="govuk-button" value="{!continueButtonText}" />
                 <br/>
                 <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" /> &nbsp;
             </apex:form>

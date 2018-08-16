@@ -1,118 +1,142 @@
 <apex:page cache="false" title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!startReviewProcesses}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!resetTransaction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="masterHeader" rendered="{!showMasterHeader}">
-                        <h1 class="heading-xlarge">Review your application</h1>
-                        <p class="lede">
+                        <h1 class="govuk-heading-xl">Review your application</h1>
+                        <p class="govuk-body-l">
                             Please confirm that the information you've provided us for {!companyName} is correct
                         </p>
                     </apex:outputPanel>
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
                             <p>
                             </p>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a href="#">{!currentErrorMessage}</a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="#">{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="standardPanel" rendered="{!standardPanelView}">
-                        <h1 class="heading-xlarge">
+                        <h1 class="govuk-heading-xl">
                             {!headerText1}
                         </h1>
-                        <p class="lede">{!displayText1}
+                        <p class="govuk-body-l">{!displayText1}
                         </p>
-                        <table class="check-your-answers">
-                            <thead>
-                                <tr>
-                                    <th colspan="3">
-                                        <h2 class="heading-medium">Request details</h2>
+                        <table class="govuk-table">
+                            <thead class="govuk-table__head">
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" colspan="3">
+                                        <h2 class="govuk-heading-m">Request details</h2>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Company name</td>
-                                    <td>{!companyName}</td>
+                            <tbody class="govuk-table__body">
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__header" scope="row">Company name</td>
+                                    <td class="govuk-table__cell ">{!companyName}</td>
                                 </tr>
-                                <tr>
-                                    <td>Company number</td>
-                                    <td>{!companyNumber}</td>
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__header" scope="row">Company number</td>
+                                    <td class="govuk-table__cell ">{!companyNumber}</td>
                                 </tr>
-                                <tr>
-                                    <td>Registered Office Address</td>
-                                    <td>
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__header" scope="row">Registered Office Address</td>
+                                    <td class="govuk-table__cell ">
                                         <apex:outputText escape="false" value="{!companyAddress}" />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Approved by</td>
-                                    <td>
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__header" scope="row">Approved by</td>
+                                    <td class="govuk-table__cell ">
                                         <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
                                             <apex:outputText value="{!Director.Name}" id="theValue" />
                                             <br/>
                                         </apex:repeat>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Presenter details</td>
-                                    <td>{!presenterEmail}
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__header" scope="row">Presenter details</td>
+                                    <td class="govuk-table__cell ">{!presenterEmail}
                                         <br/>{!presenterName}
                                         <br/> {!presenterPhone}
+                                    </td>
+                                </tr>
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__header" scope="row">Application</td>
+                                    <td class="govuk-table__cell ">
+                                        <section class="attachment embedded" id="attachment_1365490">
+                                            <div style="display:{!IF(showDoc," block ","none ")};" >
+                                                <p class="govuk-body">
+                                                    <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> (PDF, {!size}B)
+                                                </p>
+                                            </div>
+                                            <div style="display:{!IF(showDoc," none ","block ")};" >
+                                                <p class="govuk-body">No Documents founds.
+                                                </p>
+                                            </div>
+                                        </section>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <apex:outputPanel id="standardPanel-h2" rendered="{!displayText2}">
-                            <h2 class="heading-medium">{!displayText2}</h2>
+                            <h2 class="govuk-heading-m">{!displayText2}</h2>
                         </apex:outputPanel>
-                        <p class="text">
+                        <p class="govuk-body">
                             {!displayText3}
                         </p>
                     </apex:outputPanel>
 
                     <apex:outputPanel id="innerCancelPanel" rendered="{!showCancelledShares}">
                         <apex:outputPanel id="customcancelPanel" rendered="{!showCancelledShares}">
-                        <h2 class="heading-xlarge">Review your application</h2>
-                        <p class="lede">Please confirm that the information you've provided us for {!companyName} share capital is correct</p>
-                            <div class="form-group">
+                        <h2 class="govuk-heading-xl">Review your application</h2>
+                        <p class="govuk-body-l">Please confirm that the information you've provided us for {!companyName} share capital is correct</p>
+                            <div class="govuk-form-group">
                                 <h2 class="heading-large">Shares cancelled</h2>
                                 <p>Date of cancellation:
                                     <apex:repeat rows="1" value="{!sharesforCancelling}" var="date">
-                                        <span class="heading-small">
+                                        <span class="govuk-heading-s">
                                             <apex:outputText value="{!date.Date__c}" id="cancelDate" />
                                         </span>
                                     </apex:repeat>
                                 </p>
-                                <table class="check-your-answers">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Class of shares</th>
-                                            <th scope="col" class="numeric">Shares cancelled</th>
-                                            <th scope="col" class="numeric">Nominal value per share</th>
-                                            <th></th>
+                                <table class="govuk-form-group">
+                                    <thead class="govuk-table__head">
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">Class of shares</th>
+                                            <th class="govuk-table__header govuk-table__header--numeric" scope="col">Shares cancelled</th>
+                                            <th class="govuk-table__header govuk-table__header--numeric" scope="col">Nominal value per share</th>
+                                            <th class="govuk-table__header govuk-table__header--numeric"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="govuk-table__body">
                                         <apex:repeat value="{!sharesforCancelling}" var="CP">
-                                            <tr>
-                                                <td>
+                                            <tr class="govuk-table__row">
+                                                <td class="govuk-table__cell ">
                                                     <apex:outputText value="{!CP.Class_of_Shares__c}" id="cancelclass" />
                                                 </td>
-                                                <td class="numeric">
+                                                <td class="govuk-table__cell govuk-table__cell--numeric">
                                                     <apex:outputText value="{!CP.Number_of_Shares__c}" id="numcancelled" />
                                                 </td>
-                                                <td class="numeric">
+                                                <td class="govuk-table__cell govuk-table__cell--numeric">
                                                     <apex:outputText value="{!CP.Aggregate_nominal_value__c}" id="nomvalue" />
                                                 </td>
-                                                <td class="numeric">
+                                                <td class="govuk-table__cell govuk-table__cell--numeric">
                                                     <a href="">Change
                                                         <span class="visually-hidden">ordinary shares being cancelled</span>
                                                     </a>
@@ -174,8 +198,8 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <apex:outputPanel id="CompanyObjects" rendered="{!showCC04}">
-                        <h1 class="heading-xlarge">Company's objects</h1>
-                        <div class="form-group">
+                        <h1 class="govuk-heading-xl">Company's objects</h1>
+                        <div class="govuk-form-group">
                             <apex:repeat rows="1" value="{!cC04}" var="cObjects">
                                 <fieldset>
                                     <h2 class="heading-medium">What changes are you making to the company objects?</h2>
@@ -193,8 +217,8 @@
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="sh02" rendered="{!showSH02}">
-                        <h2 class="heading-xlarge">Review your changes</h2>
-                        <p class="lede">Please confirm that the information you've provided us for {!companyName} share capital is correct</p>
+                        <h2 class="govuk-heading-xl">Review your changes</h2>
+                        <p class="govuk-body-l">Please confirm that the information you've provided us for {!companyName} share capital is correct</p>
                         <apex:outputPanel rendered="{!showSubdivision}" id="subdivision-BuildTable">
                             <div class="form-group">
                                 <apex:repeat value="{!viewkeysSUB}" var="key">
@@ -206,7 +230,7 @@
                                             </span>
                                         </p>
                                     </apex:repeat>
-                                    <div class='form-group'>
+                                    <div class='govuk-form-group'>
                                         <table class="check-your-answers">
                                             <thead>
                                                 <tr>
@@ -257,7 +281,7 @@
                             </apex:actionFunction>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!showConsolidation}" id="consolidation-BuildTable">
-                            <div class="form-group">
+                            <div class="govuk-form-group">
                                 <apex:repeat value="{!viewkeysSH02}" var="key">
                                     <h2 class="heading-large">{!viewkeysSH02[key]}</h2>
                                     <apex:repeat value="{!viewmapSH02[key]}" var="prp" rows="1">
@@ -267,7 +291,7 @@
                                             </span>
                                         </p>
                                     </apex:repeat>
-                                    <div class='form-group'>
+                                    <div class='govuk-form-group'>
                                         <table class="check-your-answers">
                                             <thead>
                                                 <tr>
@@ -318,7 +342,7 @@
                             </apex:actionFunction>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!showRedemption}" id="redemption-BuildTable">
-                                     <div class="form-group">
+                                     <div class="govuk-form-group">
                                 <apex:repeat value="{!viewkeysREd}" var="key">
                                     <h2 class="heading-large">{!viewkeysREd[key]}</h2>
                                     <apex:repeat value="{!viewmapSH02[key]}" var="prp" rows="1">
@@ -328,7 +352,7 @@
                                             </span>
                                         </p>
                                     </apex:repeat>
-                                    <div class='form-group'>
+                                    <div class='govuk-form-group'>
                                         <table class="check-your-answers">
                                             <thead>
                                                 <tr>
@@ -371,7 +395,7 @@
                             </apex:actionFunction>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!showreConversion}" id="conversion-BuildTable">
-                                     <div class="form-group">
+                                     <div class="govuk-form-group">
                                 <apex:repeat value="{!viewkeysCon}" var="key">
                                     <h2 class="heading-large">{!viewkeysCon[key]}</h2>
                                     <apex:repeat value="{!viewmapCon[key]}" var="prp" rows="1">
@@ -381,7 +405,7 @@
                                             </span>
                                         </p>
                                     </apex:repeat>
-                                    <div class='form-group'>
+                                    <div class='govuk-form-group'>
                                         <table class="check-your-answers">
                                             <thead>
                                                 <tr>
@@ -426,7 +450,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel" rendered="{!custompanelView}">
                         <apex:outputPanel id="show-statementPanel" rendered="{!showStatementofCapital}">
-                            <div class="form-group">
+                            <div class="govuk-form-group">
                                 <h2 class="heading-large">Updated share capital</h2>
                                 <apex:repeat value="{!viewkeys}" var="key">
                                     <h2 class="heading-large">{!viewkeys[key]}</h2>
@@ -435,7 +459,7 @@
                                             <apex:outputText value="{!prp.Prescribed_Particulars__c}" id="shareclass" />
                                         </p>
                                     </apex:repeat>
-                                    <div class='form-group'>
+                                    <div class='govuk-form-group'>
                                         <table class="check-your-answers">
                                             <thead>
                                                 <tr>
@@ -501,7 +525,7 @@
                                 <apex:param name="changeValue" value="" id="zzz" assignTo="{!shareID}" />
                             </apex:actionFunction>
                             <apex:outputPanel id="totalamountunpaid" rendered="{!showtotalunpaid}">
-                                <div class="form-group">
+                                <div class="govuk-form-group">
                                     <h2 class="heading-large">Total amount unpaid</h2>
                                     <p>This is the total amount unpaid for each currency across all the classes of shares.</p>
                                     <table class="check-your-answers">
@@ -647,7 +671,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel-particulars" rendered="{!custompanelView}">
                         <apex:outputPanel rendered="{!showParticulars}">
-                            <div class="form-group">
+                            <div class="govuk-form-group">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
@@ -685,14 +709,14 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                     <apex:outputPanel id="customPanel-variationNotice" rendered="{!variationNotice}">
-                        <h1 class="heading-xlarge">Review your variation of rights</h1>
-                        <p class="lede text">Please confirm that the information you have provided for {!CompanyName} share capital is correct.</p>
-                        <h2 class="heading-large">Variation of rights</h2>
+                        <h1 class="govuk-heading-xl">Review your variation of rights</h1>
+                        <p class="govuk-body-l text">Please confirm that the information you have provided for {!CompanyName} share capital is correct.</p>
+                        <h2 class="govuk-heading-l">Variation of rights</h2>
                         <apex:repeat value="{!variations}" var="sp" id="variations-particulars">
                             <p>Date of variation of rights:
                                 <span class="heading-small">{!sp.Date__c}</span>
                             </p>
-                            <div class="form-group ">
+                            <div class="govuk-form-group ">
                                 <label class="visually-hidden" for="">Details of variation of rights attached to shares</label>
                                 <apex:inputTextArea readonly="true" richText="false" rows="8" cols="40" value="{!sp.varationField__c}" id="variationInfoId" />
                             </div>
@@ -726,28 +750,28 @@
                                     </tbody>
                                 </table>
                             </div> -->
-                            <div class="form-group">
-                                <h2 class="heading-large">Supporting documents</h2>
-                                <table class="check-your-answers">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Document</th>
-                                            <th scope="col">File name</th>
-                                            <th></th>
+                            <div class="govuk-form-group">
+                                <h2 class="govuk-heading-l">Supporting documents</h2>
+                                <table class="govuk-table">
+                                    <thead class="govuk-table__head">
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">Document</th>
+                                            <th class="govuk-table__header" scope="col">File name</th>
+                                            <th class="govuk-table__header govuk-table__header--numeric"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="govuk-table__body">
                                         <apex:repeat value="{!reviewAttachments}" var="sp" id="shareRepeat-attachments">
-                                            <tr>
-                                                <td>
+                                            <tr class="govuk-table__row">
+                                                <td class="govuk-table__cell ">
                                                     <apex:outputText value="{!sp.Description}" id="attachments-description" />
                                                 </td>
-                                                <td>
+                                                <td class="govuk-table__cell ">
                                                   
 
                                                       <apex:outputText value="{!sp.Name}" id="attachments-name" />
                                                 </td>
-                                                <td class='numeric'>
+                                                <td class="govuk-table__cell govuk-table__cell--numeric">
                                                     <a href='#' onclick='changeAtt("{!sp.Id}", "{!sp.Name}")'>Change</a>
 
 
@@ -766,16 +790,16 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="sh08" rendered="{!custompanelView}">
                         <apex:outputPanel id="SH08Tables" rendered="{!showSh08}">
-                            <h1 class="heading-xlarge">
+                            <h1 class="govuk-heading-xl">
                                 TEST</h1>
-                            <p class="lede">{!displayText1}</p>
+                            <p class="govuk-body-l">{!displayText1}</p>
                             <h2 class="heading-large">{!headerText2}</h2>
                             <apex:repeat value="{!sh08Family}" rows="1" var="datevar" id="SH08-date">
                                 <p>Date of assignment:
                                     <span class="heading-small">{!datevar.Date__c}</span>
                                 </p>
                             </apex:repeat>
-                            <div class="form-group">
+                            <div class="govuk-form-group">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
@@ -814,7 +838,7 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="promoters" rendered="{!custompanelView}">
                         <apex:outputPanel rendered="{!showPromoters}" id="promoters-BuildTable">
-                            <div class="form-group entire-wrapper">
+                            <div class="govuk-form-group entire-wrapper">
                                 <table class="check-your-answers">
                                     <thead>
                                         <tr>
@@ -848,13 +872,17 @@
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!custompanelView}">
                             <apex:outputPanel id="confirmation-statementPanel">
-                                <div class="form-group {!showError}">
-                                    <fieldset>
-                                        <legend class="visuallyhidden"></legend>
-                                        <span class="error-message" id='confirmation-errors'>{!currentErrorMessage}</span>
-                                        <apex:outputLabel styleClass="block-label text" value="{!confirmationTextPanel}" for="thecheckbox">
-                                            <apex:inputCheckbox id="thecheckbox" required="true" value="{!confirmationVal}" />
-                                        </apex:outputLabel>
+                                <div class="govuk-form-group {!showError}">
+                                    <fieldset class="govuk-fieldset">
+                                        <legend class="govuk-fieldset__legend">
+                                            <span class="govuk-error-message" id='confirmation-errors'>{!currentErrorMessage}</span>
+                                            <div class="govuk-checkboxes">
+                                                <div class="govuk-checkboxes__item">
+                                                    <apex:inputCheckbox styleClass="govuk-checkboxes__input" id="thecheckbox" required="true" value="{!confirmationVal}" />
+                                                    <apex:outputLabel styleClass="govuk-label govuk-checkboxes__label" value="{!confirmationTextPanel}" for="thecheckbox"></apex:outputLabel>
+                                                </div>
+                                            </div>
+                                        </legend>
                                     </fieldset>
                                 </div>
                                 <apex:actionFunction action="{!confirmReviewPage}" name="confirmReviewPage" reRender="emptyPanel">
@@ -863,11 +891,8 @@
                             </apex:outputPanel>
                         </apex:outputPanel>
                     </apex:outputPanel>
-                    <div class='form-group'>
-                        <apex:commandButton styleClass="button" action="{!nextAction}" value="{!continueButtonText}" />
-                        <br/>
-                        <br/>
-                    <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous}" />
+                    <div class='govuk-form-group'>
+                        <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="{!continueButtonText}" />
                     </div>
                 </apex:outputPanel>
             </apex:form>

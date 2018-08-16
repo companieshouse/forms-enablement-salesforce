@@ -32,7 +32,7 @@
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Interested parties include:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;Interested parties include:&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -52,7 +52,7 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;heading-medium&quot;&gt;
+        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;govuk-heading-m&quot;&gt;
 REFNUMB &lt;/strong&gt;&lt;br/&gt;
 You&apos;ll need to quote this if you contact us about your request.</value>
     </values>
@@ -86,7 +86,7 @@ You&apos;ll need to quote this if you contact us about your request.</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">14.0</value>
+        <value xsi:type="xsd:double">13.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

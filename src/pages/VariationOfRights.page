@@ -118,7 +118,7 @@
                     </apex:outputPanel>
                 </apex:outputPanel>
                 -->
-                <apex:commandButton styleClass="button" action="{!addShare}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="govuk-button" action="{!addShare}" value="{!continueButtonText}" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
             </apex:form>
         </apex:define>

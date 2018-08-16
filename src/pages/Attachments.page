@@ -54,7 +54,7 @@
                         color: #2e8aca;
                     }
                     </style>
-                    <div class="form-group {!errorVal}">
+                    <div class="govuk-form-group {!errorVal}">
                         <span class='error-message'>{!currentErrorMessage}</span>
                         <table>
                             <thead>
@@ -116,7 +116,7 @@
                     }
                     </script>
                 </apex:outputPanel>
-                <div class="form-group">
+                <div class="govuk-form-group">
                     <apex:outputPanel id="SH19Panel" rendered="{!formType == 'SH19'}">
                         <p>You must also file a directors’ statement of compliance within 15 days of the date of the resolution. You must file this document on paper.</p>
                     </apex:outputPanel>
@@ -124,7 +124,7 @@
                 </div>
                 <apex:actionregion >
 
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
                 </apex:actionregion>
                 <br />
                 <br/>&nbsp;

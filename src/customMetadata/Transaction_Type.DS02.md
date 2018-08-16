@@ -36,11 +36,11 @@
     </values>
     <values>
         <field>CompanySearchedBody1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;Review the information below and confirm that this is the correct company.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;Review the information below and confirm that this is the correct company.&lt;/p&gt;</value>
     </values>
     <values>
         <field>CompanySearchedHeader1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt; 
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt; 
 Confirm Searched Company&lt;/h1&gt;</value>
     </values>
     <values>
@@ -65,30 +65,25 @@ Confirm Searched Company&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Company_Page_HiddenT1__c</field>
-        <value xsi:type="xsd:string">&lt;div class=&quot;form-group&quot;&gt;
-&lt;details&gt;
-&lt;summary&gt;
-&lt;span class=&quot;summary&quot;&gt;Help with company number&lt;/span&gt;
-&lt;/summary&gt;
-&lt;div class=&quot;panel panel-border-narrow&quot;&gt;
-&lt;p&gt;
-A company number is a unique number issued by Companies House whe</value>
+        <value xsi:type="xsd:string">&lt;details class=&quot;govuk-details&quot;&gt;
+&lt;summary class=&quot;govuk-details__summary&quot;&gt;
+&lt;span class=&quot;class=&quot;govuk-details__summary-text&quot;&gt;Help with company number&lt;/span&gt;
+&lt;/summary&gt;</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">n a limited company is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+        <value xsi:type="xsd:string">&lt;div class=&quot;govuk-details__text&quot;&gt;
+A company number is a unique number issued by Companies House when a company is set up. Your company number is 8 numbers, or 2 letters followed by 6 numbers. You can find it using th</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
-&lt;/p&gt;
+        <value xsi:type="xsd:string">e &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/div&gt;
-&lt;/details&gt;
-&lt;/div&gt;</value>
+&lt;/details&gt;</value>
     </values>
     <values>
         <field>Company_Page_Title__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
 Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
@@ -113,13 +108,13 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
  How to withdraw your application to close a company
 &lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;In certain circumstances defined in section 1009 of the 2006 Companies Act, it is possible to cancel a request to close before the closure process has completed. See the online guidance for more information&lt;/br&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;In certain circumstances defined in section 1009 of the 2006 Companies Act, it is possible to cancel a request to close before the closure process has completed. See the online guidance for more information&lt;/br&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_3__c</field>
@@ -131,7 +126,7 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
  &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;Read the online guide.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
@@ -140,15 +135,15 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You will need:&lt;/p&gt;
-      &lt;ul class=&quot;list list-bullet&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;You will need:&lt;/p&gt;
+      &lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;
         &lt;li&gt;the company number&lt;/li&gt;
         &lt;li&gt;the company authentication code&lt;/li&gt;
       &lt;/ul&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;It normally takes 5 minutes to complete this process.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;It normally takes 5 minutes to complete this process.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
@@ -164,13 +159,13 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
         This service is used to withdraw a company&apos;s application to close.&lt;/p&gt;
       &lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
 Cancel your application to close a company
 &lt;/h1&gt;</value>
     </values>

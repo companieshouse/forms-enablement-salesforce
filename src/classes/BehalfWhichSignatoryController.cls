@@ -86,7 +86,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         if (!validateOfficer()) {
             hasPageErrors = true;
             currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
 
@@ -112,7 +112,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             currentErrorMessage = 'You must select the following officers: ';
             currentErrorMessage += String.valueOf(directorsToBeSigned).remove('(').remove(')');
             currentErrorMessage += '.';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
 

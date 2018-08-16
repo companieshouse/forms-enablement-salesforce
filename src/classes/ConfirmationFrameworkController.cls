@@ -126,7 +126,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
     // Instance methods.
     @TestVisible
     private void initialiseStep() {
-        try {
+         try {
             if (Test.isRunningTest()) {
                 system.debug('test is running now');
             } else {
@@ -165,10 +165,9 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                     isDS01 = false;
 
                 }
-                
                 // Added payment reference to last page
-                pageTitle2 = pageTitle2.replace('REFNUMB',  submissionMgr.submission.SubmissionId__c);
-                pageTitle3 = pageTitle3.replace('PAYNUMB',  submissionMgr.submission.PaymentReference__c);
+                pageTitle2 = pageTitle2.replace('REFNUMB',  String.isBlank(submissionMgr.submission.SubmissionId__c) ? '' : submissionMgr.submission.SubmissionId__c);
+                pageTitle3 = pageTitle3.replace('PAYNUMB',  String.isBlank(submissionMgr.submission.PaymentReference__c) ? '' : submissionMgr.submission.PaymentReference__c);
 
                 if (submissionMgr.submission.attachments != null) {
                     if (submissionMgr.submission.attachments.size() > 0) {
@@ -244,6 +243,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
         }
         return;
     }
+
     public PageReference redirectDS02() {
         if(submissionMgr.submission.Form_Name__c.contains('LL'))
         {

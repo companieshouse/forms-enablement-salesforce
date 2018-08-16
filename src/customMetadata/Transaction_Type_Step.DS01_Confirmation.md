@@ -52,12 +52,12 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Application reference: &lt;strong class=&quot;heading-medium&quot;&gt;
+        <value xsi:type="xsd:string">Application reference: &lt;strong class=&quot;govuk-heading-m&quot;&gt;
 REFNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">Payment reference: &lt;strong class=&quot;heading-medium&quot;&gt;PAYNUMB &lt;/strong&gt;</value>
+        <value xsi:type="xsd:string">Payment reference: &lt;strong class=&quot;govuk-heading-m&quot;&gt;PAYNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Header_Text_4__c</field>
@@ -85,7 +85,7 @@ REFNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">14.0</value>
+        <value xsi:type="xsd:double">13.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

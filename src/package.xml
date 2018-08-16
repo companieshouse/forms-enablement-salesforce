@@ -118,7 +118,7 @@
         <name>RemoteSiteSetting</name>
     </types>
     <types>
-        <members>FORMS</members>
+        <members>GovUkFrontEndStyle</members>
         <members>SpinnerDocuSign</members>
         <members>jQueryv1102</members>
         <name>StaticResource</name>

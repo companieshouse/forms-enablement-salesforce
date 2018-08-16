@@ -19,41 +19,46 @@
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterpanel">
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="link-back" id="thePreviousButton" />
+                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="govuk-back-link" id="thePreviousButton" />
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>{!currentErrorMessage}</a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a>{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="directorsList">
                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
                         <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
-                        <div class="form-group {!errorVal}">
+                        <div class="govuk-form-group {!errorVal}">
                             <apex:outputPanel rendered="{!hasPageErrors}">
-                                <span class="error-message" id="error-message-text-input"> {!currentErrorMessage}
+                                <span class="govuk-error-message" id="error-message-text-input"> {!currentErrorMessage}
                                 </span>
                             </apex:outputPanel>
-                            <fieldset>
-                                <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
-                                    <label class="block-label" for="radio-{!director}">
-                                        <input id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}" /> {!director.Name}
-                                    </label>
-                                </apex:repeat>
+                            <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend">
+                                    <div class="govuk-radios">
+                                        <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
+                                            <div class="govuk-radios__item">
+                                                <input class="govuk-radios__input" id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}" />
+                                                <label class="govuk-label govuk-radios__label" for="radio-{!director}"> {!director.Name}</label>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
+                                </legend>
                             </fieldset>
                             <apex:actionFunction status="status" name="selectPresenter" action="{!selectPresenter}" reRender="none">
                                 <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
                             </apex:actionFunction>
                         </div>
-                        <div class="form-group">
-                            <apex:commandButton status="status" reRender="masterpanel" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                        </div>
+                            <apex:commandButton status="status" reRender="masterpanel" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">

@@ -20,15 +20,17 @@
             <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>{!emailErrors}</a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a>{!emailErrors}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
                     
@@ -36,32 +38,42 @@
                         
                         <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
 
-                        <apex:outputText escape="false" value="{!emailMessage}"></apex:outputText>
-                        
-                    <div class="form-group {!errorVal}">
+                        <!--<apex:outputText escape="false" value="{!emailMessage}"></apex:outputText>-->
+                        <br/>
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
-                            <label for="email" class="heading-medium closer">{!director.off.Name}
-                            <span class="error-message">{!director.validationErrors}
-                            <apex:outputLabel styleClass="form-label" for="email">
-                                Email Address<br/>
-                            <apex:inputText styleClass="form-control" value="{!director.email}" id="email" html-name="email"></apex:inputText>
-                            </apex:outputLabel>
-                            </span>
-                            </label>
-                            <span class="error-message">{!director.validationErrors}
-                            <apex:outputLabel styleClass="form-label" for="confirmationemail">
-                                Confirm Email Address<br/>
-                            <apex:inputText styleClass="form-control" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
-                            </apex:outputLabel>
-                            </span>
-                            <br/>
-                            <br/>
+                            <div class="govuk-form-group">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class='govuk-fieldset__legend'>
+                                        <label for="email" class="govuk-body govuk-!-font-weight-bold govuk-!-font-size-24">{!director.off.Name}</label>
+                                    </legend>
+                                </fieldset>
+                            </div>
+                            <div class="govuk-form-group {!errorVal}">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class='govuk-fieldset__legend'>
+                                        <label for="email" class="govuk-label">Email Address</label>
+                                        <span class="govuk-error-message">{!director.validationErrors}</span>
+                                        <apex:inputText styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                                    </legend>
+                                </fieldset>
+                            </div>
+                            <!-- <div class="govuk-form-group {!errorVal2}">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class='govuk-fieldset__legend'>
+                                        
+                                        <span class="govuk-error-message">{!director.confirmationErrors}</span>
+                                        <label for="confirmationemail" class="govuk-label">Confirm Email Address</label>
+                                        <apex:inputText styleClass="govuk-input" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
+                                        <br/>
+                                        <br/>
+                                    </legend>
+                                </fieldset>
+                            </div> -->
                         </apex:repeat>
-                    </div>
-                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                    <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     <br/>
                     <br/>
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    <apex:commandLink action="{!previousAction}" styleClass="govuk-back-link" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
                 </apex:outputPanel>
                 <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>

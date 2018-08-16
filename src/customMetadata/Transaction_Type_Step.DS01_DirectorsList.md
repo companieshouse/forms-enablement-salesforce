@@ -20,23 +20,23 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
 The directors listed on the public register for COMPANYNAME is:
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
 The directors listed on the public register for COMPANYNAME are:
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;There are no current directors for this company according to our records. You must register the appointments before requesting to close the company.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;There are no current directors for this company according to our records. You must register the appointments before requesting to close the company.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The number of directors exceeds the maximum that this private beta permits. Please contact Companies House for advice.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;The number of directors exceeds the maximum that this private beta permits. Please contact Companies House for advice.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -52,17 +52,17 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
 Confirm the company directors&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
 Appoint company directors&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
 Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
@@ -91,7 +91,7 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">2.0</value>
+        <value xsi:type="xsd:double">1.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

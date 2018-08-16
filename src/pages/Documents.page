@@ -17,10 +17,10 @@ Ver. Author        Date        Detail
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <h1 class="heading-xlarge">
+                <h1 class="govuk-heading-xl">
                 	Retrieve your document
                 </h1>
-                <p>Download the Document:
+                <p class="govuk-body-l">Download the Document:
                     <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a>PDF, {!size}B
                 </p>
             </apex:form>

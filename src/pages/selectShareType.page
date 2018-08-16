@@ -76,7 +76,7 @@
                             </fieldset>
                         </div>
                         <div class="form-group">
-                            <apex:commandButton action="{!addnewShares}" id="selectShareType" reRender="masterpanel" styleClass="button" value="{!continueButtonText}" />
+                            <apex:commandButton action="{!addnewShares}" id="selectShareType" reRender="masterpanel" styleClass="govuk-button" value="{!continueButtonText}" />
                         </div>
                         <apex:actionFunction action="{!grabShareType}" name="grabShareType" reRender="emptyPanel">
                             <apex:param name="shareclasstype" value="" id="z" assignTo="{!shareClassType}" />

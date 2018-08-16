@@ -78,7 +78,7 @@ Ver. Author         Date        Detail
                     <apex:actionFunction status="status" action="{!saveAddValue}" name="addfunction" reRender="none">
                         <apex:param name="addObjectsParam" value="" id="ghi" assignTo="{!addObjects}" />
                     </apex:actionFunction>
-                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                    <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
                 </div>
                 <script>
                 function sendconfirm() {

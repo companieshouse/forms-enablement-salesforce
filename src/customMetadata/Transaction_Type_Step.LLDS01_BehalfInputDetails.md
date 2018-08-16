@@ -20,23 +20,23 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;
 Name of person approving
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;
 Email address of person approving
 &lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium closer&quot;&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;
 Confirm the email address of person approving
 &lt;/p&gt;</value>
     </values>
@@ -54,7 +54,7 @@ Confirm the email address of person approving
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;Who is approving for &lt;br/&gt;DIRECTORNAME?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;Who is approving for &lt;br/&gt;DIRECTORNAME?&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -90,7 +90,7 @@ Confirm the email address of person approving
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">8.0</value>
+        <value xsi:type="xsd:double">7.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

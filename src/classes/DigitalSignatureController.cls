@@ -177,7 +177,9 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
             if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_SIGNED) {
                 pollServer = false;
                 successSigning = true;
-                return null;
+
+                //Change to skip success screen after polling
+                return nextAction();
             } else if (submissionMgr.submission.Status__c == AppConstants.DOCUSIGN_STATUS_REJECTED) {
                 pollServer = false;
                 failureSigning = true;

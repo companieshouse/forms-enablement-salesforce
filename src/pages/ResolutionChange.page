@@ -31,7 +31,7 @@
                         </apex:outputPanel>
                     </apex:outputPanel>
                 </div>
-                <apex:commandButton rerender="none" styleClass="button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton rerender="none" styleClass="govuk-button" action="{!nextAction}" value="Continue" rendered="{!NOT(isLastPage)}" />
                 <br/> &nbsp;
                 <apex:commandLink action="{!previousAction}" value="{!previousButton}" id="thePreviousButton" /> &nbsp;
             </apex:form>

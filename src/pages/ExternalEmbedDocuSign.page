@@ -2,10 +2,10 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <h1 class="heading-xlarge">
+                <h1 class="govuk-heading-xl">
                         Add your signature
                 </h1>
-                <p class="lede">As a {!officerTerm} you need to sign this application to close {!compName}.</p>
+                <p class="govuk-body-l">As a {!officerTerm} you need to sign this application to close {!compName}.</p>
                 <div id="doculoader"></div>
                 <script>
                 // window.open('{!externalURL}','_self'); 

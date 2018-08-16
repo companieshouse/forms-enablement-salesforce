@@ -77,7 +77,7 @@
                     </apex:outputPanel>
                 </apex:outputPanel>
                 <div class="form-group">
-                <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" />
+                <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="Continue" />
                </div>
                 
             </apex:form>

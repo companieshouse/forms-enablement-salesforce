@@ -6,19 +6,16 @@
 	<apex:composition template="TransactionPageTemplate">
   
 		<apex:define name="content">
-		  	<div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+			<div id="errorList" class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1" hidden="hidden">
+				<h2 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+					 An error has occurred.
+					<br/>Session terminated.
+				</h2>
+				<div class="govuk-error-summary__body">
+				 Please restart the process again.
+					</div>
+			</div>
 		
-		    	<h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
-		      		An error has occurred.
-		    	</h1>
-		
-		    	<p>
-		      		Please restart the process again.
-		    	</p>
-		
-		    	
-		
-		  	</div>
 
       	</apex:define>
 

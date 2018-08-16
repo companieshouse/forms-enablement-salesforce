@@ -21,148 +21,152 @@ Ver. Author        Date        Detail
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel rendered="{!customView}">
-                    <apex:outputPanel id="SHVIEW" rendered="{!showSHVIEW}">
-                        <div class="govuk-box-highlight">
-                            <h1 class="bold-large">Submission complete</h1>
+                        <!-- NOT IN USE-->
+                        <apex:outputPanel id="SHVIEW" rendered="{!showSHVIEW}">
+                            <div class="govuk-box-highlight">
+                                <h1 class="bold-large">Submission complete</h1>
+                                <p>
+                                    Your reference number is
+                                    <br/>
+                                    <strong class="heading-medium">{!submissionId}</strong>
+                                </p>
+                            </div>
+                            <h2 class="heading-medium">What happens now?</h2>
+                            <p>We will send you an email to confirm that your submission has been received and it will include the relevant reference numbers.</p>
+                            <div class="form-group">
+                                <section class="attachment embedded" id="attachment_1365490">
+                                    <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
+                                        <p>Download a copy of your {!formName}:
+                                            <ul>
+                                                <apex:repeat value="{!downloadDocs}" var="conAttachments">
+                                                    <li>
+                                                        <a href="/servlet/servlet.FileDownload?file={!conAttachments.Id}" rel="external">{!conAttachments.Name}, size:{!conAttachments.BodyLength} Bytes</a>
+                                                    </li>
+                                                </apex:repeat>
+                                            </ul>
+                                        </p>
+                                    </div>
+                            
+                                    <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                                        <p>No Documents founds.
+                                        </p>
+                                    </div>
+                                </section>
+                            </div>
+                            <p>When your {!formName} has been processed, we will send you another email to inform you whether your documents have been accepted or rejected. If any document has been rejected, we will explain the reasons why.</p>
+                        </apex:outputPanel>
+                        <!-- /NOT IN USE-->
+                        <!-- NOT IN USE-->
+                        <apex:outputPanel rendered="false">
+                            <div class="govuk-box-highlight">
+                                <h1 class="bold-large">You have submitted your statement</h1>
+                                <p>
+                                    Your reference number is
+                                    <strong class="heading-medium">{!submissionId}</strong>
+                                </p>
+                            </div>
+                            <h2 class="heading-medium">{!confirmationHeading1}</h2>
+                            <apex:outputtext value="{!companyNameText}" escape="false" />
                             <p>
-                                Your reference number is
-                                <br/>
-                                <strong class="heading-medium">{!submissionId}</strong>
+                                <apex:outputText escape="false" value="{!confirmationContent1}" />
                             </p>
-                        </div>
-                        <h2 class="heading-medium">What happens now?</h2>
-                        <p>We will send you an email to confirm that your submission has been received and it will include the relevant reference numbers.</p>
-                        <div class="form-group">
-                            <section class="attachment embedded" id="attachment_1365490">
-                                <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
-                                    <p>Download a copy of your {!formName}:
-                                        <ul>
-                                            <apex:repeat value="{!downloadDocs}" var="conAttachments">
-                                                <li>
-                                                    <a href="/servlet/servlet.FileDownload?file={!conAttachments.Id}" rel="external">{!conAttachments.Name}, size:{!conAttachments.BodyLength} Bytes</a>
-                                                </li>
-                                            </apex:repeat>
-                                        </ul>
-                                    </p>
-                                </div>
-                          
-                                <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
-                                    <p>No Documents founds.
-                                    </p>
-                                </div>
-                            </section>
-                        </div>
-                        <p>When your {!formName} has been processed, we will send you another email to inform you whether your documents have been accepted or rejected. If any document has been rejected, we will explain the reasons why.</p>
-                    </apex:outputPanel>
-                    <apex:outputPanel rendered="false">
-                        <div class="govuk-box-highlight">
-                            <h1 class="bold-large">You have submitted your statement</h1>
                             <p>
-                                Your reference number is
-                                <strong class="heading-medium">{!submissionId}</strong>
+                                <apex:outputText escape="false" value="{!confirmationContent2}" />
                             </p>
-                        </div>
-                        <h2 class="heading-medium">{!confirmationHeading1}</h2>
-                        <apex:outputtext value="{!companyNameText}" escape="false" />
-                        <p>
-                            <apex:outputText escape="false" value="{!confirmationContent1}" />
-                        </p>
-                        <p>
-                            <apex:outputText escape="false" value="{!confirmationContent2}" />
-                        </p>
-                        <p>{!confirmationContent3}</p>
-                        <h2 class="heading-medium">What happens next?</h2>
-                        <p>
-                            <apex:outputText escape="false" value="{!confirmationNextStepContent}" />
-                        </p>
-                        <div class="notice">
-                            <i class="icon icon-important">
-                                <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
-                            </i>
-                            <strong class="bold-small">
-                                <apex:outputText escape="false" value="{!confirmationWarningContent1}" />
-                            </strong>
-                        </div>
-                        <h2 class="heading-medium">{!confirmationHeading2}</h2>
-                        <p>
-                            <apex:outputText escape="false" value="{!confiratmionWarningContent2}" />
-                        </p>
-                        <h2 class="heading-medium">How did we do?</h2>
-                        <p>
-                            Your feedback will help us make this service better for all our users. It only takes 30 seconds to
-                            <a href="#" target="_blank">tell us what you thought of this service</a>.
-                        </p>
-                    </apex:outputPanel>
+                            <p>{!confirmationContent3}</p>
+                            <h2 class="heading-medium">What happens next?</h2>
+                            <p>
+                                <apex:outputText escape="false" value="{!confirmationNextStepContent}" />
+                            </p>
+                            <div class="notice">
+                                <i class="icon icon-important">
+                                    <span class="visuallyhidden">{!ConfirmationWarningTitle}</span>
+                                </i>
+                                <strong class="bold-small">
+                                    <apex:outputText escape="false" value="{!confirmationWarningContent1}" />
+                                </strong>
+                            </div>
+                            <h2 class="heading-medium">{!confirmationHeading2}</h2>
+                            <p>
+                                <apex:outputText escape="false" value="{!confiratmionWarningContent2}" />
+                            </p>
+                            <h2 class="heading-medium">How did we do?</h2>
+                            <p>
+                                Your feedback will help us make this service better for all our users. It only takes 30 seconds to
+                                <a href="#" target="_blank">tell us what you thought of this service</a>.
+                            </p>
+                        </apex:outputPanel>
+                        <!-- /NOT IN USE-->
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!standardView}">
                      <apex:outputPanel rendered="{!isDS01}">
-                    <div class="govuk-box-highlight">
-                        <h1 class="bold-large">{!pageTitle}</h1>
-                        <p>
-                            <apex:outputText escape="false" value="{!pageTitle2}"/> <br/>
-                            <apex:outputText escape="false" value="{!pageTitle3}"/> 
-                        </p>
+                    <div class="govuk-panel govuk-panel--confirmation">
+                        <h1 class="govuk-panel__title">{!pageTitle}</h1>
+                        <div class="govuk-panel__body">
+                            <apex:outputText styleClass="govuk-panel__body" escape="false" value="{!pageTitle2}"/> <br/>
+                            <apex:outputText styleClass="govuk-panel__body" escape="false" value="{!pageTitle3}"/> 
+                        </div>
                     </div>
-                    <h2 class="heading-medium">What happens next</h2>
+                    <h2 class="govuk-heading-m">What happens next</h2>
                     
-                    <p>
+                    <p class="govuk-body">
                     <apex:outputtext value="{!pageBody}" escape="false" />
                     </p>
                    
-                        <p class="heading-medium">Download the application</p>
+                        <p class="govuk-heading-m">Download the application</p>
                         <section class="attachment embedded" id="attachment_1365490">
-                            <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
-                                <p>
-                                    <a href="/servlet/servlet.FileDownload?file={!attachmentId}">{!title}</a> PDF, {!size}B
+                            <div style="display:{!IF(showDoc," block ","none ")};" class="govuk-details__text">
+                                <p class="govuk-body">
+                                    <a class="govuk-link" href="/servlet/servlet.FileDownload?file={!attachmentId}">{!title}</a> PDF, {!size}B
                                 </p>
                             </div>
-                            <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
+                            <div style="display:{!IF(showDoc," none ","block ")};" class="govuk-details__text">
                                 <p>No Documents founds.
                                 </p>
                             </div>
                         </section>
-                    <h2 class="heading-medium">Your next steps</h2>
-                    <p>
+                        <br/>
+                    <h2 class="govuk-heading-m">Your next steps</h2>
+                    <p class="govuk-body">
 
                         <apex:outputText escape="false" value="{!pageBody2}"/>
                         Read the full list of 
-                        <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration#who-to-tell-about-the-strike-off-application" target="_blank">who to tell.
+                        <a class="govuk-link" href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration#who-to-tell-about-the-strike-off-application" target="_blank">who to tell.
                         </a>
                     </p>
-                    <div class="notice">
-                        <i class="icon icon-important">
-                            <span class="visuallyhidden">Warning</span>
-                        </i>
-                        <strong class="bold-small">
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-warning-text__assistive">Warning</span>
                            {!warningText}
                         </strong>
                     </div>
-                    <h2 class="heading-medium">Cancel an application</h2>
-                    <p><apex:commandLink action="{!redirectDS02}" target="_blank">Cancel your application</apex:commandLink> to close {!companyName}.</p>
+                    <h2 class="govuk-heading-m">Cancel an application</h2>
+                    <p class="govuk-body"><apex:commandLink styleClass="govuk-link" action="{!redirectDS02}" target="_blank">Cancel your application</apex:commandLink> to close {!companyName}.</p>
                     </apex:outputPanel>
                     <apex:outputPanel rendered="{!isDS02}">
-                        <div class="govuk-box-highlight">
-                        <h1 class="bold-large">{!pageTitle}</h1>
-                        <p>
+                        <div class="govuk-panel govuk-panel--confirmation">
+                        <h1 class="govuk-panel__title">{!pageTitle}</h1>
+                        <div class="govuk-panel__body">
                             <apex:outputText escape="false" value="{!pageTitle2}"/>
-                        </p>
+                        </div>
                     </div>
-                    <h2 class="heading-medium">What happens next</h2>
+                    <h2 class="govuk-heading-m">What happens next</h2>
                     
-                    <p>
+                    <p class="govuk-body">
                     <apex:outputtext value="{!pageBody}" escape="false" />
                     </p>
                     
-                    <p><apex:outputText escape="false" value="{!pageBody1}"/></p>
-                        <p class="heading-medium">Documents</p>
+                    <p class="govuk-body"><apex:outputText escape="false" value="{!pageBody1}"/></p>
+                        <p class="govuk-heading-m">Documents</p>
                         <section class="attachment embedded" id="attachment_1365490">
-                            <div style="display:{!IF(showDoc," block ","none ")};" class="panel panel-border-wide">
-                                <p>Download the Document:
-                                    <a href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
+                            <div style="display:{!IF(showDoc," block ","none ")};" class="govuk-details__text">
+                                <p class="govuk-body">Download the Document:
+                                    <a class="govuk-link" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> PDF, {!size}B
                                 </p>
                             </div>
-                            <div style="display:{!IF(showDoc," none ","block ")};" class="panel panel-border-wide">
-                                <p>No Documents founds.
+                            <div style="display:{!IF(showDoc," none ","block ")};" class="govuk-details__text">
+                                <p class="govuk-body">No Documents founds.
                                 </p>
                             </div>
                         </section>
@@ -175,7 +179,7 @@ Ver. Author        Date        Detail
         <div style="text-align: right;" id="global-nav">
             <br/>
             <apex:form >
-                <apex:commandLink style="text-align:right;" rendered="true" action="{!signoutAction}" value="Signout" id="signoutLink" />
+                <apex:commandLink styleClass="govuk-link" style="text-align:right;" rendered="true" action="{!signoutAction}" value="Signout" id="signoutLink" />
             </apex:form>           
         </div>
     </apex:define>

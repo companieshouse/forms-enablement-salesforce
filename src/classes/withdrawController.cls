@@ -88,7 +88,7 @@ public with sharing class withdrawController extends TransactionStepControllerBa
 
 	public PageReference nextAction() {
 		if (confirmationVal == null || confirmationVal == false) {
-			errorVal = 'error';
+			errorVal = 'govuk-form-group--error';
 			hasPageErrors = true;
 			currentErrorMessage = 'You must confirm to continue';
 			return null;

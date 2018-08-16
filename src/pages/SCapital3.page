@@ -103,7 +103,7 @@
                                 }
                             }
                             </script>
-                            <apex:commandButton styleClass="button" action="{!nextAction}" value="Continue" id="continueButton" /> &nbsp;
+                            <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="Continue" id="continueButton" /> &nbsp;
                             <br/>
                         </div>
                     </apex:outputPanel>

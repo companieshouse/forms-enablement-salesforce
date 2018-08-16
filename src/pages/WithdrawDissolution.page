@@ -4,34 +4,40 @@
             <apex:form >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>{!currentErrorMessage}</a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a>{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="formPanel">
                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
                 
                         <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
-                        <div class="form-group {errorVal}">
-                            <fieldset>
-                                <legend class="visuallyhidden">Confirm you understand</legend>
-                                <span class="error-message" id='confirmation-errors'>
+                        <div class="govuk-form-group {errorVal}">
+                            <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">Confirm you understand
+                                <span class="govuk-error-message" id='confirmation-errors'>
                                             {!currentErrorMessage}</span>
-                                <apex:outputLabel styleClass="block-label text" value="{!textCheckbox}" for="thecheckbox">
-                                    <apex:inputCheckbox html-autofocus="true" id="thecheckbox" required="true" value="{!confirmationVal}"/>
-                                </apex:outputLabel>
+                                    <div class="govuk-checkboxes">
+                                        <div class="govuk-checkboxes__item">
+                                            <apex:inputCheckbox styleClass="govuk-checkboxes__input" html-autofocus="true" id="thecheckbox" required="true" value="{!confirmationVal}"/>
+                                            <apex:outputLabel styleClass="govuk-label govuk-checkboxes__label" value="{!textCheckbox}" for="thecheckbox"></apex:outputLabel>
+                                        </div>
+                                    </div>
+                                </legend>
                             </fieldset>
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>
-                <apex:commandButton styleClass="button" reRender="masterPanel" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
+                <apex:commandButton styleClass="govuk-button" reRender="masterPanel" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
             </apex:form>
         </apex:define>
     </apex:composition>

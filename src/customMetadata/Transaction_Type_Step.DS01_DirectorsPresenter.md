@@ -20,19 +20,15 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-The directors listed on the public register for COMPANYNAME is:
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">Are you a directors?</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;
-The directors listed on the public register for COMPANYNAME are:
-&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;heading-medium&quot;&gt;Are you on this list?&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -44,7 +40,7 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;
+        <value xsi:type="xsd:string">&lt;p class&quot;govuk-body-l&quot;&gt;
 If we have a question about your application, you can choose to tell us who to contact. We will contact the company if you choose not to provide this information
 &lt;/p&gt;</value>
     </values>
@@ -54,9 +50,7 @@ If we have a question about your application, you can choose to tell us who to c
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt;
-Are you a director?
-&lt;/h1&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -92,7 +86,7 @@ Are you a director?
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">3.0</value>
+        <value xsi:type="xsd:double">2.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

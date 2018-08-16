@@ -275,20 +275,6 @@
         <label>DS01</label>
     </listViews>
     <listViews>
-        <fullName>DS02</fullName>
-        <columns>MasterLabel</columns>
-        <columns>DeveloperName</columns>
-        <columns>NamespacePrefix</columns>
-        <columns>Step_Number__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>Transaction_Type__c</field>
-            <operation>equals</operation>
-            <value>DS02</value>
-        </filters>
-        <label>DS02</label>
-    </listViews>
-    <listViews>
         <fullName>LLDS01</fullName>
         <columns>MasterLabel</columns>
         <columns>DeveloperName</columns>
@@ -301,6 +287,20 @@
             <value>LLDS01</value>
         </filters>
         <label>LLDS01</label>
+    </listViews>
+    <listViews>
+        <fullName>LLDS02S</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>Step_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Transaction_Type__c</field>
+            <operation>equals</operation>
+            <value>LLDS02</value>
+        </filters>
+        <label>LLDS02S</label>
     </listViews>
     <pluralLabel>Transaction Type Steps</pluralLabel>
     <visibility>Protected</visibility>

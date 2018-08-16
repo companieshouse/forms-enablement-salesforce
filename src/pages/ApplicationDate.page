@@ -14,7 +14,7 @@
                             </ul>
                         </div>
                     </apex:outputPanel>
-                    <div class="form-group">
+                    <div class="govuk-form-group">
                         <h1 class="heading-xlarge">
                        {!headerText1} 
                         </h1>
@@ -28,7 +28,7 @@
                         <apex:input type="date" styleClass="form-control" value="{!applicationDate}" id="applicationDate" />
                         </fieldset>
                     </div>
-                    <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="button" value="{!continueButtonText}" />
+                    <apex:commandButton action="{!nextAction}" id="datePageButton" reRender="none" styleClass="govuk-button" value="{!continueButtonText}" />
                     <br/>
                     <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
             </apex:form>

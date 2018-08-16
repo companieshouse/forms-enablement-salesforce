@@ -36,7 +36,7 @@
                             <apex:param name="setAuthorizerValue" value="" id="authValue" assignTo="{!signingchoice}" />
                         </apex:actionFunction>
                     <div class='form-group'>
-                        <apex:commandButton id="SignButton" styleClass="button" reRender="masterPanel" action="{!nextAction}" value="{!continueButtonText}" />
+                        <apex:commandButton id="SignButton" styleClass="govuk-button" reRender="masterPanel" action="{!nextAction}" value="{!continueButtonText}" />
                         <br/>
                         <br/> &nbsp;
                         <apex:commandLink action="{!previousAction}" value="Previous" id="thePreviousButton" /> &nbsp;
