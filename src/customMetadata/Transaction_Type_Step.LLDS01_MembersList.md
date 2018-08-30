@@ -52,17 +52,17 @@ The directors listed on the public register for COMPANYNAME are:
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-x&quot;&gt;
-Is this directors list correct?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
+Confirm the LLP directors&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-x&quot;&gt; 
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt; 
 Appoint company members&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;heading-xlarge&quot;&gt; 
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt; 
 Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
@@ -71,7 +71,7 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -91,7 +91,7 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">1.0</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Step_Type__c</field>
@@ -107,6 +107,6 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>previousButtonText__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Back</value>
     </values>
 </CustomMetadata>

@@ -36,7 +36,7 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>{!currentErrorMessage}</a>
+                                        <a href="{!divForErrorLink}">{!currentErrorMessage}</a>
                                     </li>
                                 </ul>
                             </div>

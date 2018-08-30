@@ -37,7 +37,7 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>{!currentErrorMessage}</a>
+                                        <a href="#radio-inline-1">{!currentErrorMessage}</a>
                                     </li>
                                 </ul>
                             </div>

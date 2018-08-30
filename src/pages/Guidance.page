@@ -37,7 +37,7 @@ Ver. Author             Date        Detail
                                 <div class="govuk-error-summary__body">
                                     <ul class="govuk-list govuk-error-summary__list">
                                         <li>
-                                            You must agree to proceed
+                                            <a href="#GuidancePage:TempPage:form:agree">You must agree to proceed</a>
                                         </li>
                                     </ul>
                                 </div>

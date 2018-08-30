@@ -40,7 +40,7 @@ Ver. Author        Date        Detail
                                             <ul>
                                                 <apex:repeat value="{!downloadDocs}" var="conAttachments">
                                                     <li>
-                                                        <a href="/servlet/servlet.FileDownload?file={!conAttachments.Id}" rel="external">{!conAttachments.Name}, size:{!conAttachments.BodyLength} Bytes</a>
+                                                        <a class="govuk-link" href="/servlet/servlet.FileDownload?file={!conAttachments.Id}" rel="external">{!conAttachments.Name}, size:{!conAttachments.BodyLength} Bytes</a>
                                                     </li>
                                                 </apex:repeat>
                                             </ul>
@@ -93,7 +93,7 @@ Ver. Author        Date        Detail
                             <h2 class="heading-medium">How did we do?</h2>
                             <p>
                                 Your feedback will help us make this service better for all our users. It only takes 30 seconds to
-                                <a href="#" target="_blank">tell us what you thought of this service</a>.
+                                <a class="govuk-link" href="#" target="_blank">tell us what you thought of this service</a>.
                             </p>
                         </apex:outputPanel>
                         <!-- /NOT IN USE-->

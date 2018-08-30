@@ -14,7 +14,7 @@
     
           <p>
               Wait a few moments and try again.<br/>
-              <a href="https://www.gov.uk/government/organisations/companies-house">Companies House services</a>
+              <a class="govuk-link" href="https://www.gov.uk/government/organisations/companies-house">Companies House services</a>
           </p>
     
           

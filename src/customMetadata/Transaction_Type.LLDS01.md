@@ -24,11 +24,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-xl&quot;&gt;
-Other ways to close a LLP
-&lt;/p&gt;
-&lt;p class=&quot;govuk-body-l&quot;&gt;
-You can also &lt;a href=&quot;https://www.gov.uk/government/publications/limited-liability-partnership-strike-off-dissolution-and-restoration&quot;&gt;close a LLP by post.&lt;/a&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;You can also &lt;a class=&quot;govuk-link&quot; href=&quot;https://www.gov.uk/government/publications/limited-liability-partnership-strike-off-dissolution-and-restoration&quot;&gt;close a LLP by post.&lt;/a&gt; 
 &lt;/p&gt;</value>
     </values>
     <values>
@@ -41,16 +37,16 @@ You can also &lt;a href=&quot;https://www.gov.uk/government/publications/limited
     </values>
     <values>
         <field>CompanySearchedBody1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;Review the information below and confirm that this is the correct LLP.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;Review the details below and confirm that this is the LLP you want to close.&lt;/p&gt;</value>
     </values>
     <values>
         <field>CompanySearchedHeader1__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt; 
-Confirm Searched LLP&lt;/h1&gt;</value>
+Confirm the LLP&lt;/h1&gt;</value>
     </values>
     <values>
         <field>CompanySearchedPreviousButton__c</field>
-        <value xsi:type="xsd:string">Not the right LLP?</value>
+        <value xsi:type="xsd:string">Back</value>
     </values>
     <values>
         <field>Company_Page_Body_1__c</field>
@@ -72,17 +68,16 @@ Confirm Searched LLP&lt;/h1&gt;</value>
         <field>Company_Page_HiddenT1__c</field>
         <value xsi:type="xsd:string">&lt;details class=&quot;govuk-details&quot;&gt; 
 &lt;summary class=&quot;govuk-details__summary&quot;&gt; 
-&lt;span class=&quot;class=&quot;govuk-details__summary-text&quot;&gt;Help with company number&lt;/span&gt; 
-&lt;/summary&gt;
-&lt;div class=&quot;govuk-details__text&quot;&gt;</value>
+&lt;span class=&quot;govuk-details__summary-text&quot;&gt;Help with LLP number&lt;/span&gt; 
+&lt;/summary&gt;</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">A company number is a unique number issued by Companies House when a limited liability partnership (LLP) is set up. Your company number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using the</value>
+        <value xsi:type="xsd:string">&lt;div class=&quot;govuk-details__text&quot;&gt;A LLP number is a unique number issued by Companies House when a limited liability partnership (LLP) is set up. Your LLP number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using th</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">&lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
+        <value xsi:type="xsd:string">e &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/div&gt; 
 &lt;/details&gt;</value>
     </values>
@@ -146,51 +141,37 @@ Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-xl&quot;&gt;
-Before you start
-&lt;/p&gt;
-&lt;p class=&quot;govuk-body-l&quot;&gt;
-You must:
-&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;te</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;Read the guidance on &lt;a class=&quot;govuk-link&quot; href=&quot;https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/542058/GPLLP3_LLP_Strike_Off_Dissolution_Restoration_v3_5__1_.pdf&quot;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">ll all members of the LLP about this request&lt;/li&gt;&lt;li&gt;read the guidance on closing a LLP&lt;/li&gt;&lt;/ul&gt;
-&lt;/p&gt;
-&lt;p class=&quot;govuk-body-l&quot;&gt;
-It costs £8.00 to submit a re</value>
+        <value xsi:type="xsd:string">title=&quot;Guidance on closing a LLP&quot;&gt;closing a LLP&lt;/a&gt;.&lt;/p&gt;&lt;p class=&quot;govuk-body-l&quot;&gt;Use this service to close a LLP.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>
-        <value xsi:type="xsd:string">quest to close a LLP (paid by debit or credit card, PayPal account or Companies House account).
-&lt;/p&gt;
-&lt;p class=&quot;govuk-body-l&quot;&gt;
-You&apos;ll need:
-&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;th</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt; 
+It costs £8 to close a LLP and you&apos;ll need: 
+&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;the L</value>
     </values>
     <values>
         <field>Landing_Page_Text5__c</field>
-        <value xsi:type="xsd:string">e company number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each members&lt;/li&gt;&lt;li&gt;a credit or debit card, PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt;
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">LP number&lt;/li&gt;&lt;li&gt;the company authentication code&lt;/li&gt;&lt;li&gt;an email address for each director&lt;/li&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text6__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
-Your request will need to be approved by both members if there are 2, or by the majority if there are more than 2.
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;li&gt;a credit or debit card, PayPal account or Companies House account &lt;/li&gt;&lt;/ul&gt; 
+&lt;/p&gt; &lt;p class=&quot;govuk-body&quot;&gt;It normally takes 10 minutes to complete this process.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
-You can use this service to:
-&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;request to strike off a LLP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;h2 class=&quot;govuk-heading-l&quot;&gt; 
+Before you start 
+&lt;/h2&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
-Closing a limited liability partnership (LLP)
+Close a limited liability partnership (LLP)
 &lt;/h1&gt;</value>
     </values>
     <values>

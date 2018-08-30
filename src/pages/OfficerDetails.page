@@ -14,10 +14,15 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page cache="false" title="Please input the details of the selected persons" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+<apex:page id="OfficerDetailsPage" cache="false" title="Please input the details of the selected persons" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
+    <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" styleClass="govuk-back-link" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="mainForm" >
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -27,7 +32,7 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>{!emailErrors}</a>
+                                        <a href="#OfficerDetailsPage:TempPage:mainForm:theRepeat:0:email">{!emailErrors}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -70,10 +75,7 @@
                                 </fieldset>
                             </div> -->
                         </apex:repeat>
-                    <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                    <br/>
-                    <br/>
-                    <apex:commandLink action="{!previousAction}" styleClass="govuk-back-link" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />                    
                 </apex:outputPanel>
                 <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>

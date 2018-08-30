@@ -146,6 +146,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         get;
         set;
     }
+
+    public String divForErrorLink {get; set;}
     public String samedayError {get; set;}
     public String sameDayErrorMessage {get; set;}
     public String accountcurrentErrorMessage {get; set;}
@@ -342,18 +344,21 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number or select another method of payment';
                 accounterrorVal = 'govuk-form-group--error';
+                divForErrorLink = '#PaymentPage:TempPage:mainForm:accountnumberinput';
                 return null;
             }
             if (!accountNumber.isNumeric()) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number containing only numbers';
                 accounterrorVal = 'govuk-form-group--error';
+                divForErrorLink = '#PaymentPage:TempPage:mainForm:accountnumberinput';
                 return null;
             }
             if (String.isEmpty(accountAuthCode)) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an authentication code if you want to pay using your account';
                 accounterrorVal = 'govuk-form-group--error';
+                divForErrorLink = '#PaymentPage:TempPage:mainForm:accouthAuthCode';
                 return null;
             }
         }

@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;You can also &lt;a class=&quot;govuk-link&quot; href=&quot;https://www.gov.uk/government/publications/strike-off-a-company-from-the-register-ds01&quot;&gt;close a company by post.&lt;/a&gt;
 &lt;/p&gt;</value>
     </values>
     <values>
@@ -78,7 +78,7 @@ A company number is a unique number issued by Companies House when a company is 
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">e &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
+        <value xsi:type="xsd:string">e &lt;a class=&quot;govuk-link&quot; href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/div&gt;
 &lt;/details&gt;</value>
     </values>
@@ -120,12 +120,13 @@ Who to tell about the company closing&lt;/h1&gt;</value>
     <values>
         <field>Guidance_Text_3__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
-The director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;</value>
+The director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.&lt;/p&gt;
+&lt;p class=&quot;govuk-body&quot;&gt;
+Read the full list o</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;
-Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration#who-to-tell-about-the-strike-off-application&quot;</value>
+        <value xsi:type="xsd:string">f &lt;a class=&quot;govuk-link&quot; target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration#who-to-tell-about-the-strike-off-application&quot;</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>
@@ -143,15 +144,11 @@ Read the full list of &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov
     </values>
     <values>
         <field>Landing_Page_Text2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;
-Read the guidance on &lt;a href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration&quot; title=&quot;Guidance on closing a company&quot;&gt;closing a company&lt;/a&gt;.
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body&quot;&gt;Read the guidance on &lt;a class=&quot;govuk-link&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration/strike-off-dissolution-and-restoration&quot;</value>
     </values>
     <values>
         <field>Landing_Page_Text3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
-Use this service to close a company.
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">title=&quot;Guidance on closing a company&quot;&gt;closing a company&lt;/a&gt;.&lt;/p&gt;&lt;p class=&quot;govuk-body-l&quot;&gt;Use this service to close a company.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Landing_Page_Text4__c</field>

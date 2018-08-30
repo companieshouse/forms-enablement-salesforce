@@ -16,6 +16,8 @@ Ver. Author        Date        Detail
 */
 public with sharing class whichDirector extends TransactionStepControllerBase {
     // Public properties.
+    public String divForErrorLink {get; set;}
+
     public Boolean hasPageErrors {
         get;
         set;
@@ -178,6 +180,7 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
             hasPageErrors = true;
             currentErrorMessage = 'You must select an officer';
             errorVal = 'govuk-form-group--error';
+            divForErrorLink = '#radio-' + companyDirectors[0].Id;
             return null;
         }
         if (!validatePageState()) return Page.TransactionException;

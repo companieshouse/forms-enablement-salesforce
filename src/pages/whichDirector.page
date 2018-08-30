@@ -16,10 +16,15 @@
    -->
 <apex:page cache="false" title="Please select which director you are" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="govuk-back-link" id="thePreviousButton"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="masterpanel">
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="govuk-back-link" id="thePreviousButton" />
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
@@ -28,7 +33,7 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>{!currentErrorMessage}</a>
+                                        <a href="{!divForErrorLink}">{!currentErrorMessage}</a>
                                     </li>
                                 </ul>
                             </div>

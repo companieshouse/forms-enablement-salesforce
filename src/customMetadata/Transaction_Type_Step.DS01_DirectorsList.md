@@ -71,7 +71,7 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Is_Active__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>Persist_FieldSet_1_Name__c</field>
@@ -91,7 +91,7 @@ Limit exceeded&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">1.0</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Step_Type__c</field>

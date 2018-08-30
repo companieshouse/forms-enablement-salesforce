@@ -20,25 +20,19 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;
-Name of person approving
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">Name of person approving</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;
-Email address of person approving
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">Email address of person approving</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;How are they acting on behalf of DIRECTORNAME?&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">How are they acting on behalf of DIRECTORNAME?</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-heading-m&quot;&gt;
-Confirm the email address of person approving
-&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">Confirm the email address of person approving</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -90,7 +84,7 @@ Confirm the email address of person approving
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">7.0</value>
+        <value xsi:type="xsd:double">6.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

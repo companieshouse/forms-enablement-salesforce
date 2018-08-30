@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Are you a directors?</value>
+        <value xsi:type="xsd:string">Are you NAME?</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Are you a director of COMPANYNAME?</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -41,7 +41,7 @@
     <values>
         <field>Display_Text_6__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
-You do not have to give any contact information, but if you do it will help Companies House if there is a query on the request.&lt;/p&gt;</value>
+If we have a question about your application, you can choose to tell us who to contact. We will contact the LLP if you choose not to provide this information&lt;/p&gt;</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>
@@ -85,7 +85,7 @@ You do not have to give any contact information, but if you do it will help Comp
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">2.0</value>
+        <value xsi:type="xsd:double">1.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

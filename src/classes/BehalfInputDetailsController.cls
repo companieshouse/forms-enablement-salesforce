@@ -17,6 +17,7 @@ Ver. Author        Date        Detail
 */
 public with sharing class BehalfInputDetailsController extends TransactionStepControllerBase {
 
+    public String divForErrorLink {get; set;}
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}
     public String currentErrorMessage {get; set;}
@@ -93,6 +94,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             hasPageErrors = true;
             currentErrorMessage = 'Please provide the name of person approving';
             nameErrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputName';
             nameError = true;
             emailError = false;
             behalfError = false;
@@ -104,6 +106,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             hasPageErrors = true;
             currentErrorMessage = 'Please provide the email of the person approving';
             emailErrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
             nameError = false;
             behalfError = false;
@@ -121,6 +124,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             hasPageErrors = true;
             currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
             emailErrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
             emailConfirmError = false;
             nameError = false;
@@ -181,6 +185,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             hasPageErrors = true;
             currentErrorMessage = 'Please select how are they acting on behalf of' + ' ' + currentOfficer.Name;
             behalfSelectionerrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#radio-1';
             behalfError = true;
             emailConfirmError = false;
             emailError = false;

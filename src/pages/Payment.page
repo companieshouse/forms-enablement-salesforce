@@ -1,7 +1,7 @@
-<apex:page cache="false" title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page id="PaymentPage" cache="false" title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="mainForm">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -11,10 +11,10 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>{!currentErrorMessage}</a>
+                                        <a href="#radio-indent-1">{!currentErrorMessage}</a>
                                     </li>
                                     <li>
-                                        <a>{!accountcurrentErrorMessage}</a>
+                                        <a href="{!divForErrorLink}">{!accountcurrentErrorMessage}</a>
                                     </li>
                                     <li>
                                         <a>{!sameDayErrorMessage}</a>
@@ -131,7 +131,7 @@
                                 </h1>
                         <p class="govuk-body">
                             The payment has been rejected.
-                            Do you want to <a onclick="updateLink();" href="#">return to payment page</a>?
+                            Do you want to <a onclick="updateLink();" class="govuk-link" href="#">return to payment page</a>?
                         </p>
                     </div>
                 </apex:outputPanel>
@@ -161,7 +161,7 @@
                         <p class="govuk-body">
                             An error occurred during the payment process.
                             Do you want to try again (It might not work)?
-                            <a onclick="updateLink();" href="#">Try again?</a> Or come back later by loging with the same user.
+                            <a onclick="updateLink();" class="govuk-link" href="#">Try again?</a> Or come back later by loging with the same user.
                         </p>
                     </div>
                     </apex:outputPanel>

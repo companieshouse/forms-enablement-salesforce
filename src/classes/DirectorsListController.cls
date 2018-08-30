@@ -136,7 +136,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
     }
 
-    private void persistStep() {
+    public void persistStep() {
         System.debug(LoggingLevel.ERROR, 'Start of Persist Step');
         submissionMgr.submission.CompanyStatus__c = companyStatus;
         submissionMgr.submission.CompanyIncorporationDate__c = companyDateOfCreation;

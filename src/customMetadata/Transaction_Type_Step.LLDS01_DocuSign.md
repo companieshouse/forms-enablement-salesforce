@@ -28,7 +28,7 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;You will receive an email once the directors listed below have approved the application and this will allow you to check and complete the submisison.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;You will receive an email once the directors listed below have approved the application. You will then be able to review and submit your application.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
@@ -36,7 +36,7 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:type="xsd:string">This may take a few moments, we&apos;ll let you know when we&apos;re ready to continue.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">We are registering your approval to close COMPANYNAME</value>
+        <value xsi:type="xsd:string">Requesting approval to close COMPANYNAME</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -84,7 +84,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">9.0</value>
+        <value xsi:type="xsd:double">8.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

@@ -14,7 +14,7 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page cache="false" title="Please select the person who sign the application" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+<apex:page id="ChooseDirectorPage" cache="false" title="Please select the person who sign the application" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content3">
             <apex:form id="form2">
@@ -23,7 +23,7 @@
             </apex:form>
         </apex:define>
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="mainForm">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -33,7 +33,7 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>
+                                        <a href="#ChooseDirectorPage:TempPage:mainForm:theRepeat:0:checkboxItem">
                                             <apex:outputText escape="false" value="{!errorMsg1}"></apex:outputText>
                                         </a>
                                     </li>
@@ -57,7 +57,7 @@
                                 <div class="govuk-checkboxes">
                                     <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
                                         <div class="govuk-checkboxes__item">
-                                                <apex:inputCheckbox styleClass="govuk-checkboxes__input" value="{!director.selected}"></apex:inputCheckbox>
+                                                <apex:inputCheckbox id="checkboxItem" styleClass="govuk-checkboxes__input" value="{!director.selected}"></apex:inputCheckbox>
                                                 <label class="govuk-label govuk-checkboxes__label">{!director.off.Name}</label>
                                         </div>
                                     </apex:repeat>

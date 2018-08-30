@@ -39,7 +39,7 @@
                         <div class="govuk-error-summary__body">
                             <ul class="govuk-list govuk-error-summary__list">
                                 <li>
-                                     Please select one of the options below
+                                     <a href="#radio-inline-1">Please select one of the options below</a>
                                 </li>
                             </ul>
                         </div>
@@ -91,7 +91,7 @@
                                 <div class="govuk-error-summary__body">
                                     <ul class="govuk-list govuk-error-summary__list">
                                         <li>
-                                            Please select one of the options below
+                                            <a href="#radio-inline-1">Please select one of the options below</a>
                                         </li>
                                     </ul>
                                 </div>

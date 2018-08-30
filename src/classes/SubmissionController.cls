@@ -192,7 +192,6 @@ public with sharing class SubmissionController extends TransactionStepController
             return result;
                                      
         submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
-
         if (submissionMgr.submission.Status__c == 'Paid' && submissionMgr.submission.Barcode__c == null) {
             if (Test.isRunningTest()) {
                 system.debug('test is running now');
@@ -216,9 +215,14 @@ public with sharing class SubmissionController extends TransactionStepController
                 {
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
                 }
-
                 else{
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                    persistStep();
+                    PageReference pg = new PageReference('/IntegrationError');
+
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
                 }   
             }
             persistStep();

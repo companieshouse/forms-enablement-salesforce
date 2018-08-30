@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>Below_Button_Text__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a href=&quot;https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p&gt;You can also &lt;a class=&quot;govuk-link&quot; href=&quot;https://www.gov.uk/government/publications/withdraw-a-striking-off-application-by-company-ds02&quot;&gt;withdraw an application by post.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Below_Button_Title2__c</field>
@@ -45,7 +45,7 @@ Confirm Searched Company&lt;/h1&gt;</value>
     </values>
     <values>
         <field>CompanySearchedPreviousButton__c</field>
-        <value xsi:type="xsd:string">Not the right company?</value>
+        <value xsi:type="xsd:string">Back</value>
     </values>
     <values>
         <field>Company_Page_Body_1__c</field>
@@ -77,7 +77,7 @@ A company number is a unique number issued by Companies House when a company is 
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">e &lt;a href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
+        <value xsi:type="xsd:string">e &lt;a class=&quot;govuk-link&quot; href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
 &lt;/div&gt;
 &lt;/details&gt;</value>
     </values>
@@ -127,7 +127,7 @@ Tell us which company you want to cancel closing&lt;/h1&gt;</value>
     <values>
         <field>Guidance_Text_5__c</field>
         <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;
- &lt;a target=&quot;_blank&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;Read the online guide.&lt;/a&gt;&lt;/p&gt;</value>
+ &lt;a target=&quot;_blank&quot; class=&quot;govuk-link&quot; href=&quot;https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration&quot;&gt;Read the online guide.&lt;/a&gt;&lt;/p&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_6__c</field>

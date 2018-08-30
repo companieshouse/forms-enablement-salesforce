@@ -37,7 +37,7 @@ Ver. Author        Date        Detail
                         <div class="govuk-error-summary__body">
                             <ul class="govuk-list govuk-error-summary__list">
                                 <li>
-                                    <a href="#CompPage:TempPage:apex-form:text-input">{!currentErrorMessage}</a>
+                                    <a class="govuk-link" href="#CompPage:TempPage:apex-form:text-input">{!currentErrorMessage}</a>
                                 </li>
                             </ul>
                         </div>

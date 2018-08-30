@@ -19,7 +19,7 @@
    Ver. Author        Date        Detail
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
-<apex:page cache="false" title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page id="presentorPage" cache="false" title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
 <apex:outputPanel id="testEmpty"/>
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content3">
@@ -29,7 +29,7 @@
             </apex:form>
         </apex:define>
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="form">
                 <apex:outputPanel id="masterPanel">   
                     <apex:outputPanel id="emptyPanel"></apex:outputPanel>
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -40,11 +40,11 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a>{!currentPageError}</a>
-                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a>"/>
+                                        <a href="{!divForErrorLink}">{!currentPageError}</a>
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a href={!divForErrorLink}>"/>
                                         {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
                                         <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
-                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a>"/>
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a href={!divForErrorLink}>"/>
                                         {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
                                         <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
                                     </li>
