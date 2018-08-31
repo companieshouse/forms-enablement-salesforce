@@ -63,7 +63,6 @@
         <members>Environment_Variables_Hierarchy__c</members>
         <members>Forms_API_Service__c</members>
         <members>Officer__c</members>
-        <members>Shares__c</members>
         <members>SmartPay_Settings__c</members>
         <members>Transaction_Type_Step__mdt</members>
         <members>Transaction_Type__mdt</members>
@@ -102,7 +101,6 @@
         <members>Account-Account Layout</members>
         <members>Contact-Contact Layout</members>
         <members>Officer__c-Officer Layout</members>
-        <members>Shares__c-Share Layout</members>
         <members>Transaction_Type_Step__mdt-Transaction Type Step Layout</members>
         <members>Transaction_Type__mdt-Transaction Type Layout</members>
         <members>Transaction__c-Transaction Layout</members>
