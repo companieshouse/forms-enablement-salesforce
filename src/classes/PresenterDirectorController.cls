@@ -183,7 +183,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
         return;
     }
-    private void persistStep() {
+    public void persistStep() {
         if (directorPresenter) {
             if (submissionMgr.submission.Officers__r.size() == 1) {
                 submissionMgr.submission.SoleDirectorPresenter__c = true;
@@ -500,24 +500,16 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
 
         loadStepSubmissionState();
 
-        System.debug('E' + pageBody);        
         if(submissionMgr.submission.Officers__r.size() == 1)
         {
             pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
-            System.debug('E' + pageBody);
             pageBody = pageBody.replace('NAME', submissionMgr.submission.Officers__r[0].Name);
         }
         else{
             pageBody = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-            System.debug('F' + pageBody);
-            pageBody = pageBody.replace('COMPANYNAME', companyName);
+            pageBody = pageBody.replace('COMPANYNAME', (String.isBlank(companyName)? '' : companyName));
         }
         
-        
-        System.debug('E' + pageBody);
-        System.debug('E' + submissionMgr.submission.Officers__r.size());
-        System.debug('E' + submissionMgr.submission.Officers__r[0].Name);
-
         PageReference res = initialiseAction();
         
         if(res != null)
@@ -617,7 +609,6 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
             else
                 isPageAlreadyValidStep = false;
 
-            System.debug('TESTD' + isPageAlreadyValidStep);
             return isPageAlreadyValidStep;
     }
 

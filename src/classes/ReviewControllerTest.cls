@@ -14,7 +14,7 @@ public with sharing class ReviewControllerTest {
 
         Contact testContact2 = CompaniesHouseTestData.getInstance().contact2;
         insert testPresenter;
-
+        
         insert testCompany;
         Transaction__c transac = testData.tx;
         transac.OfficerCount__c = 2;
@@ -46,6 +46,16 @@ public with sharing class ReviewControllerTest {
 
         insert testoff;
 
+        Blob testpdfBlob;
+		testpdfBlob = Blob.valueOf('This is a test');
+		Attachment testAttachment = new Attachment();
+		testAttachment.ParentId = transac.Id;
+		testAttachment.Description = 'testdescription';
+		testAttachment.Name = 'DS01';
+		testAttachment.Body = testpdfBlob;
+
+        insert testAttachment;
+
         Officer__c testoff2 = new Officer__c();
         testoff2.Surname__c = 'testsurname2';
         testoff2.Forename__c = 'testforename2';
@@ -58,14 +68,6 @@ public with sharing class ReviewControllerTest {
 
         insert testoff2;
 
-        Blob testpdfBlob;
-        testpdfBlob = Blob.valueOf('This is a test');
-        Attachment testAttachment = new Attachment();
-        testAttachment.ParentId = transac.Id;
-        testAttachment.Description = 'testdescription';
-        testAttachment.Name = 'Resolution';
-        testAttachment.Body = testpdfBlob;
-
         PageReference reviewTestPage = Page.Review;
         reviewTestPage.getParameters().put('c', SecurityManager.encryptText(transac.Id + AppConstants.ID_DELIM_CHAR + testStep1.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
         Test.setCurrentPage(reviewTestPage);
@@ -74,10 +76,21 @@ public with sharing class ReviewControllerTest {
         reviewTestPage.setCookies(new Cookie[]{sessionValidity});
         ReviewController test1controller = new ReviewController();
 
+        test1controller.buildPDF();
         test1controller.nextAction();
         test1controller.previousAction();
         test1controller.startReviewProcesses();
+        test1controller.confirmationVal = false;
+        test1controller.nextAction();
         test1controller.resetTransaction();
 
+        Cookie sessionValidity2 = new Cookie('auth', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        Cookie sessionValidity3 = new Cookie('c', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
+        reviewTestPage.setCookies(new Cookie[]{sessionValidity});
+        reviewTestPage.setCookies(new Cookie[]{sessionValidity2});
+        reviewTestPage.setCookies(new Cookie[]{sessionValidity3});
+        test1controller.parseQueryString();
+        test1controller.findCompanyAuthByNonce();
+        test1controller.startReviewProcesses();
     }
 }

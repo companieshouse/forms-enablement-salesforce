@@ -68,17 +68,18 @@ private class PresenterDirectorControllerTest {
 		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0 + AppConstants.DELIM_HISTORICAL_STEP;
 
 		update transac;
-
+		controller.getListOfficer();
 		controller.redirectUser();
 		controller.nextAction();
 		controller.directorPresenter = false;
-
+		controller.persistStep();
 		controller.previousAction();
 		controller.updatePresenter();
 
 		controller.nextAction();
 
 		controller.directorPresenter = true;
+		controller.persistStep();
 		controller.nextAction();
 		controller.updatePresenter();
 
