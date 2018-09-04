@@ -161,10 +161,6 @@ public with sharing class ReviewController extends TransactionStepControllerBase
         get;
         set;
     }
-    public Boolean confirmationVal {
-        get;
-        set;
-    }
     public String showError {
         get;
         set;
@@ -225,7 +221,6 @@ public with sharing class ReviewController extends TransactionStepControllerBase
         if (submissionMgr.submission.Officers__r.size() > 1) {
             showprevious = true;
         }
-        buildVal();
 
         if (submissionMgr.submission.attachments != null) {
             if (submissionMgr.submission.attachments.size() > 0) {
@@ -491,14 +486,7 @@ public with sharing class ReviewController extends TransactionStepControllerBase
             System.debug('General Error in inserting' + pageName + 'Error Details are' + ' ' + e.getMessage());
         }
     }
-    
-    public void buildVal() {
-        if (submissionMgr.submission.Form_Name__c.contains('DS01')) {
-            confirmationVal = true;
-        } else {
-            confirmationVal = false;
-        }
-    }
+
     
     private void persistStep() {
 
@@ -507,22 +495,83 @@ public with sharing class ReviewController extends TransactionStepControllerBase
     }
     
     public PageReference nextAction() {
-        if (!confirmationVal) {
-            showError = 'govuk-form-group--error';
-            hasPageErrors = true;
-            currentErrorMessage = 'You must confirm to continue';
-            return null;
+        submissionMgr.submission = [select Session_Log__c, PrePaymentIntegrationStatus__c, AmendmentHistory__c, SentreviewURL__c,isSignout__c,AccountAuthorisationCode__c ,shareChangeSelection__c, shareClassSelection__c, errors__c, errorsMessage__c, finishedPart1__c, finishedAttachments__c, prescribedParticular__c, selectShareType__c, Transaction_Type__c, CompanyType__c, Company__r.CompanyNumber__c, CompanyStatus__c, CompanyIncorporationDate__c, officerTerminology__c, isLtdPlc__c, isLP__c, submissionDate__c, submissionTime__c, paymentDate__c, containsPackage__c, Product_Code__c, paymentReference__c, isPaymentAccount__c, isPaymentCard__c, isPaymentPaypal__c, AccountNumber__c, hasPromoter__c, Version_Form__c, Presenter__r.PersonEmail, Company__c, Company__r.Name, Company__r.Id, ApplicationDate__c, trueTransactionName__c, isSigningFinished__c, isDigitalSignatureNeeded__c, isSigningStarted__c, sharecurrencyselection__c, Barcode__c, isBehalfSignatoryEnable__c, isPresenterMultipleDirectors__c, SoleDirectorPresenter__c, OfficerCount__c, hasPaid__c, isPaymentRequired__c, CompanyLocality__c, CompanyCountry__c, CompanyPostCode__c, CompanyRegion__c, CompanyAddress1__c, CompanyAddress2__c, Id, Form_Name__c, Presenter__c, ExpiryDate__c, Presenter__r.Name, isMajorityRequired__c, Expiry_Date_Length__c,
+                                     PresenterName__c, PresenterPhoneNumber__c, RequiredOfficerSign__c, ContactEmail__c,
+                                     MultipleDirectors__c, Name, Historical_Valid_Step_Ids__c, CompanyNumber__c, finishedAddingShares__c,
+                                     Status__c, CompanyName__c, SubmissionId__c, Valid_Step_Ids__c, Amount__c, isLLP__c,
+                                     (Select Id, Name, Email__c, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
+                                      AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
+                                      From Officers__r),
+                                     (SELECT Id, BodyLength, Description, Name FROM Attachments),
+                                     (Select Id, Name, Email, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
+                                      AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, LastName, isPowerOfAttorney__c, isCorporateDirector__c
+                                      From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
+                                     from Transaction__c where Id = :submissionMgr.submission.Id];
+
+        PageReference result = authenticatedSession();
+        
+        if(result != null)
+            return result;
+                                     
+        submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
+        if (submissionMgr.submission.Status__c == 'Signed' && submissionMgr.submission.Barcode__c == null) {
+            if (Test.isRunningTest()) {
+                system.debug('test is running now');
+
+
+            } else {
+                //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+                //Turned off at the moment waiting for the new API
+                //submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+
+                submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+                submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (Integration From Review Page): ' + FormsApiClient.numberOfTimeCalled;
+                submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+            }
         }
-        if (Test.IsRunningTest()) {
-            system.debug('Test is running');
+        else
+        {
+            //Fix: We do want as there is a barcode overide the status to be submitted
+            if(submissionMgr.submission.Status__c != 'Approved' || submissionMgr.submission.Status__c != 'Rejected' )
+            {
+                //In this case we have either the duplicatee barcode issue hence we want to proceed to the next page or
+                //We just expired from previous session and in this case we didn't submit on success as the status aren't approved or reject
+                //BUT we don't want the user to get an email when there is no barcode so we adjust the status to be on error
+                //And the confirmation will redirect the user automatically to the error page as there is no barcode...
+                if(submissionMgr.submission.Barcode__c != null)
+                {
+                    submissionMgr.submission.PrePaymentIntegrationStatus__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+                }
+                else{
+                    submissionMgr.submission.PrePaymentIntegrationStatus__c = AppConstants.REQUEST_STATUS_ERROR;
+                    
+                }   
+            }
+            persistStep();
+            return nextStep();
+        }
+
+        system.debug('Before save tx: ' + submissionMgr.submission);
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+
+            // test error in test mode;
+            submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+        }
+        submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+        submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (Submit Page): ' + FormsApiClient.numberOfTimeCalled;
+        submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+        persistStep();
+
+        // if(!validatePageState() || submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR)
+        //   return Page.TransactionException;
+
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
 
         } else {
-            if (!validatePageState()) return Page.TransactionException;
-        }
-        persistStep();
-        if (submissionMgr.submission.Form_Name__c.contains('DS01') || submissionMgr.submission.Form_Name__c.contains('DS02')) {
             return nextStep();
-        } 
+        }
         return null;
     }
 

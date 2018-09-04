@@ -301,6 +301,10 @@
                 <behavior>Edit</behavior>
                 <field>containsPackage__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PrePaymentIntegrationStatus__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
