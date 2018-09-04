@@ -48,6 +48,7 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
     public String pageTitle {get; set;}
 
     public String pageBody {get; set;}
+    public String pageBody2 {get; set;}
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
@@ -91,7 +92,7 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
 
         pageTitle = pageTitle.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
  //*       pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageBody += pageBodyTemp;
+        pageBody2 = pageBodyTemp;
         return;
     }
 
@@ -123,7 +124,7 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
     public void buildDirectorsList() {
         for (Officer__c chosenOfficer : companyDirectors) {
             if (chosenOfficer.isPresenter__c == False) {
-                builtDirectors.add(chosenOfficer);
+                    builtDirectors.add(chosenOfficer);
             } 
         }
     }
@@ -146,7 +147,7 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
 
             } else if (!isSignatureNumberOK()) {
                 hasPageErrors = true;
-                errorVal = 'error';
+                errorVal = 'govuk-form-group--error';
                 return null;
             }
        // }

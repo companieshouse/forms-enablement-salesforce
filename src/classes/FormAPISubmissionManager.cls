@@ -100,6 +100,7 @@ public with sharing class FormAPISubmissionManager {
                 tx = addIntegrationLog('SendForm Success', tx);
             } else {
                 tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                tx.Barcode__c = '';
                 tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output);
                 tx = addIntegrationLog('SendForm Failed<br/> Reason: ' + tx.ErrorDescription__c , tx);
             }

@@ -29,5 +29,5 @@ private class CompanyAuthenticationDeletionBatchTest {
 
         system.assertEquals(1, count);
     }
-
+  
 }

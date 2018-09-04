@@ -134,10 +134,7 @@ public with sharing class FormsApiClient {
         log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
         log += '<br/> Integration Sending Form Initiated';
         log += '<br/>-----------------------------------------------------------------------------------';
-        if(tx.AmendmentHistory__c == null)
-            tx.AmendmentHistory__c = log;
-        else
-            tx.AmendmentHistory__c += log;
+        
 
         FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
 
@@ -153,6 +150,17 @@ public with sharing class FormsApiClient {
 
         // Get request body
         String requestBody = getBody(txList);
+
+        if(requestBody.contains('Transaction must have a form attached.'))
+        {
+            HTTPResponse response = new HttpResponse();
+            response.setStatusCode(400);
+            response.setStatus('Pre-Integration Error: No PDF Found.');
+            response.setBody('Request has not been sent to Gateway.');
+
+            return response;
+        }
+
         request.setBody(requestBody);
 
         // Debug request
@@ -167,6 +175,11 @@ public with sharing class FormsApiClient {
         // Debug response
         System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
         System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
+
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
 
         return response;
     }
@@ -251,6 +264,11 @@ public with sharing class FormsApiClient {
 
         //call TransactionSerialiser to get JSON
         String jsonPartBody = TransactionSerialiser.transactionToJSON(tx);
+
+        if(jsonPartBody.equals('Transaction must have a form attached.'))
+        {
+            return jsonPartBody;
+        }
         if (tx.Form_Name__c.contains('DS01')) {
             jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
             jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');

@@ -19,21 +19,21 @@ Ver. Author        Date        Detail
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <h1 class="heading-xlarge">
+                <h1 class="govuk-heading-xl">
                    {!title} 
                 </h1>
                 <apex:outputPanel rendered="{!!isLLPf}">
-                <p class="lede">
+                <p class="govuk-body-l">
                     <apex:outputText escape="false" value="{!body}"></apex:outputText>
-                    <a href="https://www.gov.uk/government/collections/change-director-details-on-your-limited-company">
+                    <a class="govuk-link" href="https://www.gov.uk/government/collections/change-director-details-on-your-limited-company">
                         <apex:outputText escape="false" value="{!link}"></apex:outputText>
                     </a>
                 </p>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!isLLPf}">
-                    <p class="lede">
+                    <p class="govuk-body-l">
                     <apex:outputText escape="false" value="{!body}"></apex:outputText>
-                    <a href="https://www.gov.uk/government/collections/change-member-details-on-your-limited-liability-partnership-llp">
+                    <a class="govuk-link" href="https://www.gov.uk/government/collections/change-member-details-on-your-limited-liability-partnership-llp">
                         <apex:outputText escape="false" value="{!link}"></apex:outputText>
                     </a>
                 </p>

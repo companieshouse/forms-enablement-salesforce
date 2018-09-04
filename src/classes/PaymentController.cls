@@ -146,6 +146,8 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         get;
         set;
     }
+
+    public String divForErrorLink {get; set;}
     public String samedayError {get; set;}
     public String sameDayErrorMessage {get; set;}
     public String accountcurrentErrorMessage {get; set;}
@@ -155,6 +157,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     }
 
     public String pageLog {get; set;}
+    public String companyName {get; set;}
 
     public String accountAuthCode {get; set;}
     public Boolean accountFailure {get; set;}
@@ -179,6 +182,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     public void initialiseStep() {
 
         pageLog = '';
+        companyName = submissionMgr.submission.CompanyName__c;
         hasPaid = false;
         hasBeenRedirected = false;
         hasPaymentSuccess = false;
@@ -201,6 +205,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         fastTrackFee = (transactionMgr.td.FeeFastTrack__c == null ? 0 : transactionMgr.td.FeeFastTrack__c);
         textBox1NormalFee = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        headerBox1 = headerBox1.replace('COMPNAME', companyName);
         textBox1FastTrackFee = textBox1NormalFee.replace('FEE', fastTrackFee + '');
         textBox1NormalFee = textBox1NormalFee.replace('FEE', normalFee + '');
         isCardSelected = false;
@@ -331,26 +336,29 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         if (!hasPaid() && valuePaymentUI == null && accountSuccess == false) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide a method of payment';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
         if (!hasPaid() && valuePaymentUI == 2 && accountSuccess == false) {
             if (accountNumber.length() == 0) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number or select another method of payment';
-                accounterrorVal = 'error';
+                accounterrorVal = 'govuk-form-group--error';
+                divForErrorLink = '#PaymentPage:TempPage:mainForm:accountnumberinput';
                 return null;
             }
             if (!accountNumber.isNumeric()) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an account number containing only numbers';
-                accounterrorVal = 'error';
+                accounterrorVal = 'govuk-form-group--error';
+                divForErrorLink = '#PaymentPage:TempPage:mainForm:accountnumberinput';
                 return null;
             }
             if (String.isEmpty(accountAuthCode)) {
                 hasPageErrors = true;
                 accountcurrentErrorMessage = 'Please provide an authentication code if you want to pay using your account';
-                accounterrorVal = 'error';
+                accounterrorVal = 'govuk-form-group--error';
+                divForErrorLink = '#PaymentPage:TempPage:mainForm:accouthAuthCode';
                 return null;
             }
         }
@@ -364,7 +372,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
                 currentErrorMessage = '';
                 errorVal = '';
                 accounterrorVal = '';
-                samedayError = 'error';
+                samedayError = 'govuk-form-group--error';
                 return null;
             }
         }

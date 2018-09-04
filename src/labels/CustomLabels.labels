@@ -228,9 +228,9 @@
         <fullName>UI_Text_Next</fullName>
         <categories>UI Text</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>UI Text Next</shortDescription>
-        <value>Save and continue</value>
+        <value>Continue</value>
     </labels>
     <labels>
         <fullName>UI_Text_Not_Your_Company</fullName>
@@ -270,7 +270,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Previous</shortDescription>
-        <value>Start again</value>
+        <value>Back</value>
     </labels>
     <labels>
         <fullName>UI_Text_Previous_B</fullName>
@@ -278,7 +278,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>UI Text Previous B</shortDescription>
-        <value>Previous</value>
+        <value>Back</value>
     </labels>
     <labels>
         <fullName>UI_Text_Previous_Payment</fullName>

@@ -16,6 +16,8 @@ Ver. Author        Date        Detail
 */
 public with sharing class whichDirector extends TransactionStepControllerBase {
     // Public properties.
+    public String divForErrorLink {get; set;}
+
     public Boolean hasPageErrors {
         get;
         set;
@@ -96,6 +98,7 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
         pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 
         pageTitle = pageTitle.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
+
         return;
     }
     public void selectPresenter() {
@@ -128,6 +131,36 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
             Boolean isSolePresenterDetected = submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c;
             Boolean isPresenterDetected = SubmissionMgr.submission.isPresenterMultipleDirectors__c == null ? false : submissionMgr.submission.isPresenterMultipleDirectors__c;
             if (isPresenterDetected || isSolePresenterDetected) {
+                
+                List<Officer__c> localCompanyDirectors = new List<Officer__c>();
+
+                //We do now control the output list and remove any corporate officer
+                if (submissionMgr.submission.Officers__r != null) {
+                    if (submissionMgr.submission.Officers__r.size() > 0) {
+                        for (Officer__c off : submissionMgr.submission.Officers__r) {
+                            if(!off.Name.containsIgnoreCase('ltd') && !off.Name.containsIgnoreCase('plc') && !off.Name.containsIgnoreCase('llp') && !off.Name.containsIgnoreCase('limited'))
+                            {
+                                localCompanyDirectors.add(off);
+                            }
+                        }
+                    }
+                }
+
+                if(localCompanyDirectors.size() == 1)
+                {
+                    Officer__c off1 = localCompanyDirectors[0];
+
+                    if(off1.IsPresenter__c && off1.isSignatory__c)
+                    {
+                        off1.Email__c = submissionMgr.submission.Presenter__r.PersonEmail;
+                    }
+
+                    update off1;
+
+                    return nextStep();
+                }
+
+
                 return null;
             }
             return nextStep();
@@ -146,7 +179,8 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
         if (selectedid == null) {
             hasPageErrors = true;
             currentErrorMessage = 'You must select an officer';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
+            divForErrorLink = '#radio-' + companyDirectors[0].Id;
             return null;
         }
         if (!validatePageState()) return Page.TransactionException;

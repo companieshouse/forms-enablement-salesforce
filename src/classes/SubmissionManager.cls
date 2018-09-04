@@ -34,7 +34,7 @@ public with sharing class SubmissionManager {
                                      (Select Id, Name, Email__c, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
                                       AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Officers__r),
-                                     (SELECT Id, BodyLength, Description, Name FROM Attachments), (SELECT removeObjects__c, addingObjects__c, alterObjects__c, FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
+                                     (SELECT Id, BodyLength, Description, Name FROM Attachments),
                                      (Select Id, Name, Email, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
                                       AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, LastName, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
@@ -46,7 +46,7 @@ public with sharing class SubmissionManager {
 
     public SubmissionManager(Id submissionId, String SObjectType, String fieldSetName) {
 
-        String q = 'select Session_Log__c,AmendmentHistory__c,SentreviewURL__c,Transaction_Type__c,Company__r.CompanyNumber__c,CompanyType__c,CompanyStatus__c,CompanyIncorporationDate__c,Id,officerTerminology__c,Product_Code__c, isLP__c ,containsPackage__c,Company__r.Name,Company__r.Id, Name,(SELECT Id,BodyLength, Description, Name FROM Attachments), (SELECT Aggregate_nominal_value_New__c, AssignmentDate__c,redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c,totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),(Select Id,Name, Email,DocusignName__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c From Contacts__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r)';
+        String q = 'select Session_Log__c,AmendmentHistory__c,SentreviewURL__c,Transaction_Type__c,Company__r.CompanyNumber__c,CompanyType__c,CompanyStatus__c,CompanyIncorporationDate__c,Id,officerTerminology__c,Product_Code__c, isLP__c ,containsPackage__c,Company__r.Name,Company__r.Id, Name,(SELECT Id,BodyLength, Description, Name FROM Attachments),(Select Id,Name, Email,DocusignName__c,hasInputBehalfDetails__c,isSignatoryBehalf__c,isPresenter__c,isSignatory__c, RecipientId__c,AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c From Contacts__r), (SELECT Name,dsfs__DocuSign_Envelope_ID__c,dsfs__Envelope_Link__c,dsfs__Envelope_Status__c,dsfs__Sender__c,dsfs__Sender_Email__c,dsfs__Subject__c FROM DocuSign_Status__r)';
 
         Schema.DescribeSObjectResult d = Schema.getGlobalDescribe().get(SObjectType).getDescribe();
         //if (!d.isAccessible()) continue; //& todo add object access/fls security checks.
@@ -79,7 +79,7 @@ public with sharing class SubmissionManager {
                                      (Select Id, Name, Email__c, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
                                       AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Officers__r),
-                                     (SELECT Id, BodyLength, Description, Name FROM Attachments), (SELECT removeObjects__c, addingObjects__c, alterObjects__c, FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c,  Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
+                                     (SELECT Id, BodyLength, Description, Name FROM Attachments),
                                      (Select Id, Name, LastName, Email, DocusignName__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
                                       AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, hasInputBehalfDetails__c,  isPowerOfAttorney__c, isCorporateDirector__c
                                       From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
@@ -112,9 +112,9 @@ public with sharing class SubmissionManager {
 
     public void persist() {
         try {
+            system.debug('LOG' + LogSessionManager.log);
             LogSessionManager.updateTransactionLog(submission);
             Database.update(submission.Attachments);
-            Database.update(submission.Shares__r);
             Database.update(submission.Officers__r);
             Database.update(submission);
         } catch (DmlException e) {

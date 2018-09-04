@@ -30,7 +30,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
     // web service call method-Search Company by Name API Function
     Global string getRequestCompanyName(String searchString){
     
-    	String hitURL;
+        String hitURL;
         String encodedUrl = EncodingUtil.urlEncode(searchString, 'UTF-8');
         // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
         hitURL = endpoint + '?q=' + encodedUrl+'&items_per_page=1000';
@@ -68,7 +68,9 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         String encodedUrl = EncodingUtil.urlEncode(searchString, 'UTF-8');
         // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
        
-        hitURL = endpointCompanyNumber + '/' + encodedUrl + '/officers';
+        //hitURL = endpointCompanyNumber + '/' + encodedUrl + '/officers';
+        
+        hitURL = endpointCompanyNumber + '/' + encodedUrl + '/officers?items_per_page=120';
         return doCallout(hitURL);     
     }
     
@@ -141,6 +143,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
         req.setEndpoint(hitURL);
         req.setMethod('GET');
         req.setTimeout(120000);
+
         
         Blob headerValue = Blob.valueOf(this.authenticationToken + ':');
         String authorizationHeader = 'Basic ' + EncodingUtil.base64Encode(headerValue);
@@ -156,7 +159,7 @@ Global with sharing class CompaniesHouseCalloutsRequest {
                 return e.getMessage();
         }
         System.debug('STATUS CODE REQUEST:' + res.getStatusCode() );
-        
+
         if (res.getStatusCode() == SUCCESS_CODE || res.getStatusCode() == 404)
             success = true;
         else

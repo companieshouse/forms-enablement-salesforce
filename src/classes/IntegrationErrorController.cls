@@ -32,7 +32,7 @@ public with sharing class IntegrationErrorController extends TransactionStepCont
     // Instance methods.
     private void initialiseStep() {
         title = 'Sorry, we\'re experiencing technical problems.';
-        body = 'Your return may not have been filed, but your responses so far have been saved.<br/><br/> <a href="https://www.gov.uk/contact-companies-house" >Call the helpdesk for further assistance</a>.';
+        body = 'Your return may not have been filed, but your responses so far have been saved.<br/><br/> <a class="govuk-link" href="https://www.gov.uk/contact-companies-house" >Call the helpdesk for further assistance</a>.';
 
      
         return;

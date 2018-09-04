@@ -1,49 +1,6 @@
 <apex:component layout="none">
     <script type="text/javascript">
     document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    
-    // $(document).ready(function() {
-    //     // Look for classes that Flow uses on form elements and apply classes from gov.uk elements.
-    //     // Flow classes: https://developer.salesforce.com/docs/atlas.en-us.pages.meta/pages/pages_flows_customize_runtime_ui.htm
-    //     // gov.uk Elements: http://govuk-elements.herokuapp.com/
-    //     $(".FlowNextBtn").addClass("button");
-    //     $(".FlowCancelBtn").addClass("button");
-    //     $(".FlowPauseBtn").addClass("button");
-    //     $(".FlowPreviousBtn").addClass("button");
-    //     $(".FlowNextBtn").addClass("button");
-    //     $(".FlowFinishBtn").addClass("button");
-        
-    //     $(":text").addClass("form-control");
-        
-    //     // Adding form-group would be nice but doesn't work well with tables. Instead just copy some of its style.
-    //     // $("table.detailList tr").addClass("form-group");
-    //     $(":text").css("margin-bottom", "30px");
-        
-    //     // gov.uk elements has this at 50%, which is too small for us.
-    //     $(":text").css("width", "70%");
-        
-    //     // Why this has a border I have no idea.
-    //     $(".interviewFormHeaderCell").css("border", "none");
-        
-    //     $(".interviewDisplayTextRow").addClass("font-xsmall");
-        
-    //     // It would be nice to apply block-label to only those labels that go with checkboxes, but again,
-    //     // too messy.
-    //     // $("label.FlowText").addClass("block-label");
-        
-    //     // Flow puts labels tags for radio buttons next to them whereas gov.uk elements requires the label
-    //     // *around* the radio button. We can instead add block-label to the div above the label, which is
-    //     // generally below something of class interviewFormChoicesWithHelp. The :has() bit is not CSS, it's
-    //     // a JQuery way to select tags that have children of the given type.
-    //     $(".interviewFormChoicesWithHelp > div:has(input)").addClass("block-label");
-        
-    //     // Checkboxes are nowhere near their label. They're also impossible to put something of class
-    //     // block-label around, since it's just a td, then the input and we can't put blokc-label on the td.
-    //     // Doesn't work: $("td:has(:checkbox)").addClass("block-label");
-        
-    //     // For some reason, our ALPHA phase banner has the wrong background. Perhaps uk.gov Elements has
-    //     // moved on since the generated CSS went onto the CDN.
-    //     $(".phase-tag").css("background-color", "#d53880");
-    // });
     </script>
+    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 </apex:component>

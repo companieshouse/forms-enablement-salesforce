@@ -4,45 +4,42 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <div class="govuk-box-highlight">
-                    <h1 class="bold-large">{!companyName}</h1>
-                    <p class="lede">
+                <div class="govuk-panel govuk-panel--confirmation">
+                    <h1 class="govuk-panel__title">{!companyName}</h1>
+                    <p class="govuk-panel__body">
                         <b>{!companyNumber}</b> - Incorporated on {!companyDateOfCreation}
                     </p>
-                    <p class="lede">
+                    <p class="govuk-panel__body">
                         <apex:outputText escape="false" value="{!companyAddress}"/>
                         <!-- information here {!informationstuff} -->
                     </p>
                 </div>
-                <h2 class="heading-large">Requested Approvals</h2>
-                <p> Emails are <i>Sent</i> from Companies House requesting an approval signature, <i>Delivered</i> to the directors and then once signed and approved shown as <i>Completed</i>. </p>
+                <h2 class="govuk-heading-l">Requested Approvals</h2>
+                <p class="govuk-body-l"> Emails are <i>Sent</i> from Companies House requesting an approval signature, <i>Delivered</i> to the directors and then once signed and approved shown as <i>Completed</i>. </p>
                 <apex:outputPanel rendered="{!hasPageErrors}">
-                    <div  role="group" aria-labelledby="error-summary-heading-1" tabindex="-1">
-                        <p>
-                            {!statusErrors}
-                        </p>
-                    </div>
+                    <span class="govuk-error-message" id="error-message-text-input"> {!statusErrors}
+                    </span>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!NOT(hasPageErrors)}">
-                    <div class="form-group">
-                        <table class="check-your-answers">
-                            <thead>
-                                <tr>
-                                    <th scope="row">Director Name</th>
-                                    <th scope="row">Email</th>
-                                    <th scope="row">Status</th>
+                    <div class="govuk-form-group">
+                        <table class="govuk-table">
+                            <thead class="govuk-table__head">
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Director Name</th>
+                                    <th class="govuk-table__header" scope="row">Email</th>
+                                    <th class="govuk-table__header" scope="row">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="govuk-table__body">
                                 <apex:repeat value="{!listofOfficers}" var="officer" id="theRepeat">
-                                    <tr>
-                                        <td>
+                                    <tr class="govuk-table__row">
+                                        <td class="govuk-table__cell ">
                                             <apex:outputText value="{!officer.Name}" id="theOfficerName" />
                                         </td>
-                                        <td>
+                                        <td class="govuk-table__cell ">
                                             <apex:outputText value="{!officer.dsfs__DocuSign_Recipient_Email__c}" id="theCompany" />
                                         </td>
-                                        <td>
+                                        <td class="govuk-table__cell ">
                                             <apex:outputText value="{!officer.dsfs__Recipient_Status__c}" id="theStatus" /> </td>
                                     </tr>
                                 </apex:repeat>

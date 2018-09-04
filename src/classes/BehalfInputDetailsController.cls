@@ -17,11 +17,13 @@ Ver. Author        Date        Detail
 */
 public with sharing class BehalfInputDetailsController extends TransactionStepControllerBase {
 
+    public String divForErrorLink {get; set;}
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}
     public String currentErrorMessage {get; set;}
     public String nameErrorVal {get; set;}
     public String emailErrorVal {get; set;}
+    public String emailErrorValConfirm {get; set;}
     public String behalfSelectionerrorVal {get; set;}
     public Boolean behalfValidation {get; set;}
     public Boolean emailConfirmError {get; set;}
@@ -91,7 +93,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         if (nameAuthorized.length() == 0) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide the name of person approving';
-            nameErrorVal = 'error';
+            nameErrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputName';
             nameError = true;
             emailError = false;
             behalfError = false;
@@ -99,10 +102,11 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
             emailErrorVal = '';
             return null;
         }
-        if (emailDirector == null) {
+        if (String.isBlank(emailDirector)) {
             hasPageErrors = true;
             currentErrorMessage = 'Please provide the email of the person approving';
-            emailErrorVal = 'error';
+            emailErrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
             nameError = false;
             behalfError = false;
@@ -119,7 +123,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         {
             hasPageErrors = true;
             currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
-            emailErrorVal = 'error';
+            emailErrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
             emailConfirmError = false;
             nameError = false;
@@ -130,56 +135,59 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
 
         }
 
-        if (emailConfirmDirector == null) {
-            hasPageErrors = true;
-            currentErrorMessage = 'Please provide the email of the person approving';
-            emailErrorVal = 'error';
-            emailError = false;
-            emailConfirmError = true;
-            nameError = false;
-            behalfError = false;
-            nameErrorVal = '';
-            behalfSelectionerrorVal = '';
-            return null;
-        }
+        // if (emailConfirmDirector == null) {
+        //     hasPageErrors = true;
+        //     currentErrorMessage = 'Please provide the email of the person approving';
+        //     emailErrorValConfirm = 'govuk-form-group--error';
+        //     emailError = false;
+        //     emailConfirmError = true;
+        //     nameError = false;
+        //     behalfError = false;
+        //     nameErrorVal = '';
+        //     behalfSelectionerrorVal = '';
+        //     return null;
+        // }
         
-        try{
-            submissionMgr.submission.validateEmailFormat__c = emailConfirmDirector;
-            update submissionMgr.submission;
-        }
-        catch(DMLException e)
-        {
-            hasPageErrors = true;
-            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
-            emailErrorVal = 'error';
-            emailError = false;
-            emailConfirmError = true;
-            nameError = false;
-            behalfError = false;
-            nameErrorVal = '';
-            behalfSelectionerrorVal = '';
-            return null;
+        // try{
+        //     submissionMgr.submission.validateEmailFormat__c = emailConfirmDirector;
+        //     update submissionMgr.submission;
+        // }
+        // catch(DMLException e)
+        // {
+        //     hasPageErrors = true;
+        //     currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
+        //     emailErrorValConfirm = 'govuk-form-group--error';
+        //     emailError = false;
+        //     emailConfirmError = true;
+        //     nameError = false;
+        //     behalfError = false;
+        //     nameErrorVal = '';
+        //     behalfSelectionerrorVal = '';
+        //     return null;
 
-        }
+        // }
 
-        if(emailDirector != emailConfirmDirector)
-        {
-            hasPageErrors = true;
-            currentErrorMessage = 'Email Addresses' + ' ' + emailDirector + ' ' + 'does not match' + ' ' + emailConfirmDirector + ' ' + 'for' + ' ' + currentOfficer.Name;
-            emailErrorVal = 'error';
-            emailError = true;
-            emailConfirmError = true;
-            nameError = false;
-            behalfError = false;
-            nameErrorVal = '';
-            behalfSelectionerrorVal = '';
-            return null;
-        }
+        // if(emailDirector != emailConfirmDirector)
+        // {
+        //     hasPageErrors = true;
+        //     currentErrorMessage = 'Email Addresses' + ' ' + emailDirector + ' ' + 'does not match' + ' ' + emailConfirmDirector + ' ' + 'for' + ' ' + currentOfficer.Name;
+        //     emailErrorVal = 'govuk-form-group--error';
+        //     emailErrorValConfirm = 'govuk-form-group--error';
+        //     emailError = true;
+        //     emailConfirmError = true;
+        //     nameError = false;
+        //     behalfError = false;
+        //     nameErrorVal = '';
+        //     behalfSelectionerrorVal = '';
+        //     return null;
+        // }
         if (behalfSelection == null) {
             hasPageErrors = true;
             currentErrorMessage = 'Please select how are they acting on behalf of' + ' ' + currentOfficer.Name;
-            behalfSelectionerrorVal = 'error';
+            behalfSelectionerrorVal = 'govuk-form-group--error';
+            divForErrorLink = '#radio-1';
             behalfError = true;
+            emailConfirmError = false;
             emailError = false;
             nameError = false;
             nameErrorVal = '';

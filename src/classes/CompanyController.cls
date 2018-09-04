@@ -82,18 +82,19 @@ public with sharing class CompanyController {
     @TestVisible
     private Boolean validateStep() {
         if (String.isBlank(companyNumber)) {
-            currentErrorMessage = 'Field is blank. Please enter a company number';
+            currentErrorMessage = 'You must enter the company number';
             hasPageErrors = true;
-            currentError = 'error';
+            currentError = 'govuk-form-group--error';
             return false;
         }
+        
 
         companyNumber = companyNumber.deleteWhitespace();
 
         if (companyNumber.length() > 8) {
             currentErrorMessage = 'Please enter only 8 alphanumeric characters';
             hasPageErrors = true;
-            currentError = 'error';
+            currentError = 'govuk-form-group--error';
             return false;
         }
 
@@ -117,7 +118,7 @@ public with sharing class CompanyController {
 
         prefix = prefix.toUpperCase();
         companyNumber = prefix + postfix;
-	    CompaniesHouse.CompanyProfile compProf = new CompaniesHouse.CompanyProfile();
+        CompaniesHouse.CompanyProfile compProf = new CompaniesHouse.CompanyProfile();
 
         try{
             
@@ -128,7 +129,7 @@ public with sharing class CompanyController {
             {
                 currentErrorMessage = 'Company data currently unavailable. Try again.';
                 hasPageErrors = true;
-                currentError = 'error';
+                currentError = 'govuk-form-group--error';
                 return false;
             }
             
@@ -136,14 +137,14 @@ public with sharing class CompanyController {
         {
             currentErrorMessage = 'Company number does not exist or incorrect.';
             hasPageErrors = true;
-            currentError = 'error';
+            currentError = 'govuk-form-group--error';
             return false;
         }    
 
         if (compProf.company_name == null) {
             currentErrorMessage = 'Company number does not exist or incorrect.';
             hasPageErrors = true;
-            currentError = 'error';
+            currentError = 'govuk-form-group--error';
 
             //CSBEGINMOD: Carl 10/08/2016 : we were returning null instead of Boolean
             return false;
@@ -156,7 +157,7 @@ public with sharing class CompanyController {
         {
             currentErrorMessage = 'This company type is not accepted by the system.';
             hasPageErrors = true;
-            currentError = 'error';
+            currentError = 'govuk-form-group--error';
             return false;
         }
 
@@ -168,7 +169,7 @@ public with sharing class CompanyController {
                 {
                     currentErrorMessage = 'You cannot close this company type using this service.';
                     hasPageErrors = true;
-                    currentError = 'error';
+                    currentError = 'govuk-form-group--error';
 
                     return false;
                 }
@@ -179,7 +180,7 @@ public with sharing class CompanyController {
                 {
                     currentErrorMessage = 'You cannot close this company type using this service.';
                     hasPageErrors = true;
-                    currentError = 'error';
+                    currentError = 'govuk-form-group--error';
 
                     return false;
                 }
@@ -203,15 +204,15 @@ public with sharing class CompanyController {
     public PageReference nextAction() {
         hasPageErrors = !validateStep();
         if (hasPageErrors) {
-            currentError = 'error';
+            currentError = 'govuk-form-group--error';
             return null;
         }       
 
         trackuser = new TrackUserClass();
 
         //Merged From Leo 03 May 2016
-		trackuser.getSearchedCompany(companyNumber);
-    	//return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
+        trackuser.getSearchedCompany(companyNumber);
+        //return securityMgr.getCompanyAuthRedirect(companyNumber, transactionType);
         PageReference pg = new PageReference('/CompanySearched');
         pg.setRedirect(true);
         pg.getParameters().put('t', transactionType);

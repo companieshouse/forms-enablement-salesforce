@@ -2,10 +2,10 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-            	<h1 class="heading-xlarge">
-                        Provide your signature
+                <h1 class="govuk-heading-xl">
+                        Add your signature
                 </h1>
-                <p class="lede">As a {!officerTerm} of {!compName}, you need to provide your signature to strike the company off the register and dissolve it. <br/>Notifications will be sent by email. Please remember to check your email and junk folders.</p>
+                <p class="govuk-body-l">As a {!officerTerm} you need to sign this application to close {!compName}.</p>
                 <div id="doculoader"></div>
                 <script>
                 // window.open('{!externalURL}','_self'); 
@@ -17,7 +17,7 @@
                     console.log('mobile');
 
                 } else {
-                        document.getElementById("doculoader").innerHTML = '<iframe height="650" width="950" id="999" src="{!externalURL}" ></iframe>';
+                        document.getElementById("doculoader").innerHTML = '<iframe height="1490" width="940" id="999" src="{!externalURL}" ></iframe>';
                         console.log('not mobile');
                     
                 }

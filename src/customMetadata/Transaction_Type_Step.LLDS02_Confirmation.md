@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;The process to cancel the application to close has now started.&lt;/p&gt;&lt;p class=&quot;lede&quot;&gt;You will receive an email notifying you if the cancellation request has been accepted or rejected.</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;The process to cancel the application to close has now started.&lt;/p&gt;&lt;p class=&quot;govuk-body-l&quot;&gt;You will receive an email notifying you if the cancellation request has been accepted or rejected.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;If the cancellation request is accepted, the LLP will not be closed and will remain on the register.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;If the cancellation request is accepted, the LLP will not be closed and will remain on the register.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -36,7 +36,7 @@
     </values>
     <values>
         <field>Display_Text_5__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;lede&quot;&gt;If the cancellation request is rejected, the LLP will be closed and  removed from the register after two months of the closure notice being published in the relevant Gazette.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;If the cancellation request is rejected, the LLP will be closed and  removed from the register after two months of the closure notice being published in the relevant Gazette.&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_6__c</field>
@@ -52,7 +52,7 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;heading-medium&quot;&gt;
+        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;govuk-heading-m&quot;&gt;
 REFNUMB &lt;/strong&gt;&lt;br/&gt;</value>
     </values>
     <values>

@@ -48,6 +48,11 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
         set;
     }
 
+    public String errorVal2 {
+        get;
+        set;
+    }
+
     public String pageTitle {get; set;}
     public String pageBody {get; set;}
     public String emailMessage {get; set;}
@@ -132,21 +137,26 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
                 if (off.Id == directorstoUPDATE.off.Id) {
                     if (!emailValidation(directorstoUPDATE.email, directorstoUPDATE.off.Name)) {
                         directorstoUPDATE.validationErrors = emailErrors;
-                        errorVal = 'error';
+                        errorVal = 'govuk-form-group--error';
+                        errorVal2 = '';
                         return null;
                     }
-                    if (!emailValidation(directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name)) {
-                        directorstoUPDATE.confirmationErrors = emailErrors;
-                        directorstoUPDATE.validationErrors = ' ';
-                        errorVal = 'error';
-                        return null;
-                    }
-                    if (!emailComparison(directorstoUPDATE.email, directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name)) {
-                        directorstoUPDATE.validationErrors = emailErrors;
-                        directorstoUPDATE.confirmationErrors = emailErrors;
-                        errorVal = 'error';
-                        return null;
-                    }
+                    // if (!emailValidation(directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name)) {
+                    //     directorstoUPDATE.confirmationErrors = emailErrors;
+                    //     directorstoUPDATE.validationErrors = ' ';
+                    //     errorVal2 = 'govuk-form-group--error';
+                    //     errorVal = '';
+                    //     return null;
+                    // }
+                    // if (!emailComparison(directorstoUPDATE.email, directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name)) {
+                    //     directorstoUPDATE.validationErrors = emailErrors;
+                    //     directorstoUPDATE.confirmationErrors = emailErrors;
+                    //     errorVal = 'govuk-form-group--error';
+                    //     errorVal2 = 'govuk-form-group--error';
+                    //     return null;
+                    // }
+                    errorVal2 = '';
+                    errorVal = '';
                     directorstoUPDATE.validationErrors = '';
                     directorstoUPDATE.confirmationErrors = '';
                     off.Email__c = directorstoUPDATE.email;

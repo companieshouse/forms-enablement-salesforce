@@ -771,6 +771,10 @@ public with sharing class TransactionSerialiser {
 			if (attRec == null) {
 				return JSON.serialize('Transaction must have a form attached.');
 			}
+			if(attRec.isEmpty())
+			{
+				return JSON.serialize('Transaction must have a form attached.');
+			}
 			List < attachments > lAtt = new List < attachments > ();
 			for (Attachment att : attRec) {
 				lAtt.add(new attachments(TransactionSerialiser.MIMETYPESTRING, TransactionSerialiser.CATEGORYSTRING, EncodingUtil.base64Encode(att.Body)));

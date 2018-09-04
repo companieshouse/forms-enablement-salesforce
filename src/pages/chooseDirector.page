@@ -14,41 +14,59 @@
    Ver. Author        Date        Detail
    1.0  Leo Bitoy&    2016-06-16  Initial development.
    -->
-<apex:page cache="false" title="Please select the person who sign the application" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+<apex:page id="ChooseDirectorPage" cache="false" title="Please select the person who sign the application" controller="chooseDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
-            <apex:form >
+            <apex:form id="mainForm">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>
-                                        <apex:outputText escape="false" value="{!errorMsg1}"></apex:outputText>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="#ChooseDirectorPage:TempPage:mainForm:theRepeat:0:checkboxItem">
+                                            <apex:outputText escape="false" value="{!errorMsg1}"></apex:outputText>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>  
-                    <div class="form-group {!errorVal}">
-                            <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
-                            <apex:outputText rendered="{!hasPageErrors}" escape="false" value="{!errorMsg1}"></apex:outputText>
-                        <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
-                            <label class="block-label">
-                                <apex:inputCheckbox value="{!director.selected}">{!director.off.Name}</apex:inputCheckbox>
-                            </label>
-                        </apex:repeat>
+                    <div class="govuk-form-group {!errorVal}">
+                        <fieldset class="govuk-fieldset" aria-describedby="waste-hint">
+                            <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
+                                <h1 class="govuk-fieldset__heading">
+                                     {!pageBody2}
+                                </h1>
+                            </legend>
+                            <span id="hintD" class="govuk-hint">
+                                {!pageBody}
+                            </span>
+                                <apex:outputPanel rendered="{!hasPageErrors}">
+                                    <span class="govuk-error-message" id="error-message-full-name">{!errorMsg1}</span>
+                                </apex:outputPanel>
+                                <div class="govuk-checkboxes">
+                                    <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
+                                        <div class="govuk-checkboxes__item">
+                                                <apex:inputCheckbox id="checkboxItem" styleClass="govuk-checkboxes__input" value="{!director.selected}"></apex:inputCheckbox>
+                                                <label class="govuk-label govuk-checkboxes__label">{!director.off.Name}</label>
+                                        </div>
+                                    </apex:repeat>
+                                </div>
+                        </fieldset>
                     </div>
                     <br />
                     <br /> 
-                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
-                    <br /> 
-                    <br />
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> 
+                    <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                 </apex:outputPanel>
                 <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>

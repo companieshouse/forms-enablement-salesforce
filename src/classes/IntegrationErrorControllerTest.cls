@@ -13,19 +13,17 @@ private class IntegrationErrorControllerTest {
 		Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
 
 		Contact testContact = CompaniesHouseTestData.getInstance().contact1;
-		Shares__c testShare1 = new Shares__c();
 
 		insert testPresenter;
 
 		insert testCompany;
 		Transaction__c transac = testData.tx;
-		transac.Transaction_Type__c = 'SH13';
-		transac.Form_Name__c = 'SH13';
+		transac.Transaction_Type__c = 'DS01';
+		transac.Form_Name__c = 'DS01';
 		transac.Company__c = testCompany.Id;
 		transac.Valid_Step_Ids__c = testStep1.Id;
 		transac.CompanyNumber__c = '05448736';
 		transac.finishedAttachments__c = true;
-		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
 		transac.SoleDirectorPresenter__c = false;
@@ -36,17 +34,13 @@ private class IntegrationErrorControllerTest {
 		transac.Status__c = 'Error';
 		insert transac;
 
-		testShare1.Transaction__c = transac.id;
-		testShare1.SHARETYPE__c = 'SH13';
-		testshare1.ActiveData__c = true;
-		insert testshare1;
 
 		Attachment testAttachment = new Attachment();
 		Blob testpdfBlob;
 		testpdfBlob = Blob.valueOf('This is a test');
 		testAttachment.parentId = transac.id;
 		testAttachment.description = 'testDescription';
-		testAttachment.Name = 'SH13';
+		testAttachment.Name = 'DS01';
 		testAttachment.body = testpdfBlob;
 		insert testAttachment;
 

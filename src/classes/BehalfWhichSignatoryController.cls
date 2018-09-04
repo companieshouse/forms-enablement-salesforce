@@ -17,6 +17,7 @@ Ver. Author        Date        Detail
 */
 public with sharing class BehalfWhichSignatoryController extends TransactionStepControllerBase {
 
+    public String divForErrorLink {get; set;}
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}
     public String currentErrorMessage {get; set;}
@@ -86,7 +87,8 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
         if (!validateOfficer()) {
             hasPageErrors = true;
             currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
+            divForErrorLink = '#radio-' + listOfDirectors[0].officer.Id;
             return null;
         }
 
@@ -112,7 +114,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             currentErrorMessage = 'You must select the following officers: ';
             currentErrorMessage += String.valueOf(directorsToBeSigned).remove('(').remove(')');
             currentErrorMessage += '.';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
 

@@ -19,48 +19,54 @@
    -->
 <apex:page cache="false" title="{!$Label.UI_Text_Behalf_Decision}" controller="BehalfDecisionController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
-        <apex:define name="content">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
+         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="aler" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>{!currentErrorMessage}</a>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="#radio-inline-1">{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
                     <apex:outputPanel id="choicePanel">
-                        <div class="form-group">
-                            
-                                <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
-                           
+                        <div class="govuk-form-group">
+                            <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                             <apex:outputText escape="false" value="{!textBox1}"></apex:outputText>
-                            <fieldset class="inline">
-                                <div class="form-group {!errorVal}">
-                                    <legend class='visuallyhidden'>{!textBox1}</legend>
-                                    <span class="error-message">{!currentErrorMessage}</span>
-                                    <label class="block-label" for="radio-inline-1">
-                                        <input onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"> Yes
-                                        </input>
-                                    </label>
-                                    <label class="block-label" for="radio-inline-2">
-                                        <input onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"> No
-                                        </input>
-                                    </label>
-                                </div>
-                            </fieldset>
+                            <div class="govuk-form-group {!errorVal}">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class='govuk-fieldset__legend'></legend>
+                                    <span class="govuk-error-message">{!currentErrorMessage}</span>
+                                    <div class="govuk-radios govuk-radios--inline">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-inline-1"> Yes</label>
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"></input> 
+                                            <label class="govuk-label govuk-radios__label" for="radio-inline-2"> No</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <apex:commandButton status="status" id="buttonNext" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
-                            <br />
-                            <br />
-                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                        <div class="govuk-form-group">
+                            <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                            
                         </div>
                     </apex:outputPanel>
                     <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">

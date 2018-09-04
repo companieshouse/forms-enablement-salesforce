@@ -18,6 +18,7 @@ Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-04-25  Add DocuSign Pages.
 */
 global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
+    public String DS01 = '/ds01';
     public String START = '/start';
     public String COMPANY = '/company';
     public String COMPANYSEARCHED = '/companySearched';
@@ -75,6 +76,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
     public String SESSIONEXPIRED = '/expired';
 
     ///// VF Strings
+    public String VF_PAGE_DS01         = '/jaketest';
     public String VF_PAGE_START         = '/StartFramework';
     public String VF_PAGE_COMPANYSEARCH       = '/CompanySearched';
     public String VF_PAGE_COMPANY       = '/Company';
@@ -201,6 +203,7 @@ global class TransactionSiteUrlRewriter implements Site.UrlRewriter {
         else if (url.equals(SIGNOUT)) { pr = new PageReference(VF_PAGE_SIGNOUT); }
         else if (url.equals(SESSIONEXPIRED)) { pr = new PageReference(VF_PAGE_SESSIONEXPIRED); }
         else if (url.equals(DOCUMENT)) { pr = new PageReference(VF_PAGE_DOCUMENT); }
+        else if (url.equals(DS01)) { pr = new PageReference(VF_PAGE_DS01); }
 
         if (pr != null) pr.getParameters().putAll(friendlyUrl.getParameters());
         return pr;

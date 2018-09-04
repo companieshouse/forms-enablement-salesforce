@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Review the information below and submit your application.</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Review your application</value>
+        <value xsi:type="xsd:string">Review and submit your application</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
@@ -84,7 +84,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">13.0</value>
+        <value xsi:type="xsd:double">11.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

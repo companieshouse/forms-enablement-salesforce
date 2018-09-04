@@ -25,5 +25,5 @@ private class UserAuthenticationDeletionBatchTest {
 
         system.assertEquals(1, count);
     }
-
+  
 }

@@ -16,7 +16,26 @@ Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-05-27  Initial development.
 */
 public with sharing class SubmissionController extends TransactionStepControllerBase {
-
+    public String title {
+        get;
+        private set;
+    }
+    public String size {
+        get;
+        private set;
+    }
+    public String todayThreeMonths {
+        get; 
+        set;
+    }
+    public Id attachmentId {
+        get;
+        private set;
+    }
+    public Boolean showDoc {
+            get;
+            private set;
+        }
     // Public properties.
 
     //public String title {get; private set;}
@@ -91,7 +110,7 @@ public with sharing class SubmissionController extends TransactionStepController
 
             submissionId = submissionMgr.submission.SubmissionId__c == null ? '' : submissionMgr.submission.SubmissionId__c;
             companyName = submissionMgr.submission.CompanyName__c == null ? '' : submissionMgr.submission.CompanyName__c;
-
+            
             companyNumber = submissionMgr.submission.CompanyNumber__c;
 
             companyDirectors = new List<Officer__c>();
@@ -115,7 +134,29 @@ public with sharing class SubmissionController extends TransactionStepController
             displayText1 = displayText1.replace('COMPANYNAME', companyName);
             
             displayText2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-
+            if (submissionMgr.submission.attachments != null) {
+                if (submissionMgr.submission.attachments.size() > 0) {
+                    showDoc = true;
+                    attachmentId = submissionMgr.submission.attachments[0].Id;
+                    title = 'View the application';
+                    Integer sizeInt = submissionMgr.submission.attachments[0].BodyLength;
+                    String tempSize = String.valueOf(sizeInt);
+                    size = tempSize.left(3);
+                    //MB
+                    if (tempSize.length() >= 9) {
+                        size += 'M';
+                    }
+                    //KB
+                    else if (tempSize.length() >= 6 && tempSize.length() < 9) {
+                        size += 'K';
+                    }
+                }
+            } else {
+                title = 'NA';
+                size = 'NA';
+                attachmentId = null;
+            }
+            todayThreeMonths = system.today().day() + '-' + system.today().addMonths(3).month() + '-' + system.today().year();
         } catch (Exception e) { return; }
 
 
@@ -139,7 +180,7 @@ public with sharing class SubmissionController extends TransactionStepController
                                      (Select Id, Name, Email__c, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
                                       AuthorizedSigner__c, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Officers__r),
-                                     (SELECT Id, BodyLength, Description, Name FROM Attachments), (SELECT removeObjects__c, addingObjects__c, alterObjects__c, FreeForm__c, OldNominalValue__c, oldNumSharesIssued__c, NewNominalValu__c, newNumSharesIssued__c, valOfStock__c, Aggregate_nominal_value_New__c, AssignmentDate__c, redenominateDate__c, reduceCapitalDate__c, considerationGiven__c, benefitGiven__c, amountPaidUp__c, SHARETYPE__c, Total_aggregate_amount_paid__c, AggValueLessAuthMin__c, PrelimExpense__c, Signatory__c, varationField__c, Class_of_Share_new__c, Date__c, cancelled_shares__c, totalNumAggregate__c, totalNumofShares__c , ActiveData__c, Aggregate_nominal_value__c, Class_of_Shares__c, Company_Name__c, CreatedById, CreatedDate, Currency__c, IsDeleted, Number_of_Shares__c, Prescribed_Particulars__c, Id, Name, Total_aggregate_amount_unpaid__c, Transaction__c FROM Shares__r),
+                                     (SELECT Id, BodyLength, Description, Name FROM Attachments),
                                      (Select Id, Name, Email, DocusignName__c, hasInputBehalfDetails__c, isSignatoryBehalf__c, isPresenter__c, isSignatory__c, RecipientId__c,
                                       AuthorizedSigner__c,RecipientStatus__c, Title, Middlenames__c, FirstName, LastName, isPowerOfAttorney__c, isCorporateDirector__c
                                       From Contacts__r), (SELECT Name, dsfs__DocuSign_Envelope_ID__c, dsfs__Envelope_Link__c, dsfs__Envelope_Status__c, dsfs__Sender__c, dsfs__Sender_Email__c, dsfs__Subject__c FROM DocuSign_Status__r)
@@ -151,7 +192,6 @@ public with sharing class SubmissionController extends TransactionStepController
             return result;
                                      
         submissionMgr.submission.SubmissionId__c =  'FE' + submissionMgr.submission.Id;
-
         if (submissionMgr.submission.Status__c == 'Paid' && submissionMgr.submission.Barcode__c == null) {
             if (Test.isRunningTest()) {
                 system.debug('test is running now');
@@ -175,9 +215,14 @@ public with sharing class SubmissionController extends TransactionStepController
                 {
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
                 }
-
                 else{
                     submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                    persistStep();
+                    PageReference pg = new PageReference('/IntegrationError');
+
+                    pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                    pg.setRedirect(true);
+                    return pg;
                 }   
             }
             persistStep();

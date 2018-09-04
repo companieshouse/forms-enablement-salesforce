@@ -28,10 +28,6 @@
                 <behavior>Required</behavior>
                 <field>NamespacePrefix</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Expiry_Date_Length__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -82,6 +78,22 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>CompanySearchedHeader1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>CompanySearchedBody1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>companySearchPageText__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>CompanySearchedPreviousButton__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Company_Page_HiddenT1__c</field>
             </layoutItems>
             <layoutItems>
@@ -91,10 +103,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Company_Page_HiddenT3__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>companySearchPageText__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -196,6 +204,14 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>customGuidanceView__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>StandardGuidanceView__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>hasGuidancePage__c</field>
             </layoutItems>
             <layoutItems>
@@ -261,7 +277,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h58000001UtmI</masterLabel>
+        <masterLabel>00h4E000000ElRU</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

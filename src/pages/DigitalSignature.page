@@ -33,29 +33,35 @@ Ver. Author        Date        Detail
                     </apex:outputPanel> -->
                     <apex:actionPoller enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5"  />
                     
-                   
-                      <h1 class="heading-large" align="center">{!pageTitle}</h1>
-                      <p class="lede" align="center">
+                   <apex:outputPanel id="SpinnerCondition" rendered="{!!multipleDirectors}">
+                      <h1 class="govuk-heading-l" align="center">{!pageTitle}</h1>
+                      <p class="govuk-body-l" align="center">
                         {!pageBody}
                       </p>
+                      
                       <div class="spinner" align="center">
                         <img src="{!$Resource.SpinnerDocuSign}" alt=""/>
                       </div>
+                      </apex:outputPanel>
                         
                     <apex:outputPanel id="directorTable" rendered="{!multipleDirectors}">
+                        <h1 class="govuk-heading-l">{!pageTitle}</h1>
+                        <p class="govuk-body-l">
+                            {!pageBody}
+                        </p>
                         <apex:outputText escape="false" value="{!pageBody2}" />
-                        <table class="table-spacing">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col" class="director-email">Email address</th>
+                        <table class="govuk-table">
+                            <thead class="govuk-table__head">
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="col">Name</th>
+                                    <th scope="col" class="govuk-table__header">Email address</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="govuk-table__body">
                                 <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
-                                    <tr>
-                                        <td>{!director.name}</td>
-                                        <td>{!director.email}</td>
+                                    <tr class="govuk-table__row">
+                                        <td class="govuk-table__cell ">{!director.name}</td>
+                                        <td class="govuk-table__cell ">{!director.email}</td>
                                     </tr>
                                 </apex:repeat>
                             </tbody>
@@ -66,7 +72,7 @@ Ver. Author        Date        Detail
                 </apex:outputPanel>
                 <apex:outputPanel id="failureContact" rendered="{!successSigning}">
                     <apex:outputText escape="false" value="{!pageTitle2}" />
-                    <apex:commandButton action="{!nextAction}" styleClass="button" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                    <apex:commandButton action="{!nextAction}" styleClass="govuk-button" id="continueBtn" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
                     <br/>
                     <br/>
                     <!--<apex:commandLink action="{!resetTransaction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" /> removed prodct owner decision 9/9/16  Start again link-->
@@ -74,25 +80,25 @@ Ver. Author        Date        Detail
                 <apex:outputPanel id="succesSign" rendered="{!failureEmail}">
                     <apex:outputText escape="false" value="{!pageTitle4}" />
                     <apex:outputText escape="false" value="{!pageBodyFailureContact}" />
-                    <table class="table-spacing">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col" class="director-email">Email address</th>
+                    <table class="govuk-table">
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Name</th>
+                                <th class="govuk-table__header" scope="col">Email address</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="govuk-table__body">
                             <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat2">
-                                <tr>
-                                    <td>{!director.name}</td>
-                                    <td>{!director.email}</td>
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__cell ">{!director.name}</td>
+                                    <td class="govuk-table__cell ">{!director.email}</td>
                                 </tr>
                             </apex:repeat>
                         </tbody>
                     </table>
                     <br/>
                     <br/>
-                     <apex:commandButton action="{!resetTransaction}" styleClass="button"
+                     <apex:commandButton action="{!resetTransaction}" styleClass="govuk-button"
                      value="{!$Label.UI_Text_Previous}" />
                 </apex:outputPanel>
                 <apex:outputPanel id="failureSign" rendered="{!failureSigning}">

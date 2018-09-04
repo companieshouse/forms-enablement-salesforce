@@ -19,82 +19,94 @@
    Ver. Author        Date        Detail
    1.0  Mark Cane&    2016-04-11  Initial development.
    -->
-<apex:page cache="false" title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:page id="presentorPage" cache="false" title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
 <apex:outputPanel id="testEmpty"/>
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="govuk-back-link" id="thePreviousButton"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
-            <apex:form >
-                <apex:outputPanel id="masterPanel">
+            <apex:form id="form">
+                <apex:outputPanel id="masterPanel">   
                     <apex:outputPanel id="emptyPanel"></apex:outputPanel>
                     <apex:outputPanel rendered="{!hasPageErrors}">
-                        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
-                            <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
                                 An error has occurred.
                             </h1>
-                            <ul class="error-summary-list">
-                                <li>
-                                    <a>{!currentPageError}</a>
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a>"/>
-                                    {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a>"/>
-                                    {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
-                                    <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
-                                </li>
-                            </ul>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="{!divForErrorLink}">{!currentPageError}</a>
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a href={!divForErrorLink}>"/>
+                                        {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a href={!divForErrorLink}>"/>
+                                        {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>    
-                    <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
-                    <div class="form-group {!errorVal}">
-                      <span class="error-message" id="error-message-full-name">{!currentPageError}</span>
-                        <ul class="list list-bullet">
-                            <apex:repeat value="{!listOfDirectors}" var="director" id="directorslistID">
-                                <li>{!director.officerTXT}</li>
-                            </apex:repeat>
-                        </ul>
-                        <apex:outputText escape="false" value="{!pageBody2}"></apex:outputText>
-                        <fieldset class="inline">
-                            <div id="presenterSelection" class="form-group">
-                                <label class="block-label" for="radio-indent-1">
-                                    <input class="presenterYES" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"> Yes
-                                    </input>
-                                </label>
-                                <label class="block-label" for="radio-indent-2">
-                                    <input class="presenterNO" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"> No
-                                    </input>
-                                </label>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <apex:outputPanel id="SecondDiv">
-                        <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
-                            <div class="form-group">
-                                <div aria-hidden="false" class="panel panel-border-narrow">
-                                    <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
-                                    <div class="form-group {!errorValBottom}">
-                                        <span class="error-message" id="error-message-full-name">{!currentPageErrorTop}</span>
-                                        <apex:outputLabel styleClass="form-label" for="directors-name">Your full name (optional)</apex:outputLabel>
-                                        <apex:input styleclass="form-control" value="{!presenterName}" type="text" id="directors-name" />
-                                    </div>
-                                    <div class="form-group {!errorValBottom2}">
-                                        <span class="error-message" id="error-message-full-name">{!currentPageErrorBot}</span>
-                                        <apex:outputLabel styleClass="form-label" for="directors-confirm-phone">Phone number (optional)</apex:outputLabel>
-                                        <apex:input styleclass="form-control" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                        
+                        <fieldset class="govuk-fieldset">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                                <h1 class="govuk-fieldset__heading">
+                                    {!pageBody}
+                                </h1>
+                            </legend>
+                            <div class="govuk-form-group {!errorVal}">
+                                <span class="govuk-error-message" id="error-message-full-name">{!currentPageError}</span>
+                                <div id="presenterSelection"> 
+                                    <div class="govuk-radios govuk-radios--inline">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-indent-1"> Yes</label>                
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-indent-2"> No</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </fieldset>
+                    
+
+                    <apex:outputPanel id="SecondDiv">
+                        <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
+                            <div class="govuk-form-group {!errorVal}">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class="govuk-fieldset__legend">
+                                        <div aria-hidden="false" class="govuk-details__text">
+                                            <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
+                                            <div class="govuk-form-group {!errorValBottom}">
+                                                <span class="govuk-error-message" id="error-message-full-name">{!currentPageErrorTop}</span>
+                                                <apex:outputLabel styleClass="govuk-label" for="directors-name">Your full name (optional)</apex:outputLabel>
+                                                <apex:input styleclass="govuk-input" value="{!presenterName}" type="text" id="directors-name" />
+                                            </div>
+                                            <div class="govuk-form-group {!errorValBottom2}">
+                                                <span class="govuk-error-message" id="error-message-full-name">{!currentPageErrorBot}</span>
+                                                <apex:outputLabel styleClass="govuk-label" for="directors-confirm-phone">Phone number (optional)</apex:outputLabel>
+                                                <apex:input styleclass="govuk-input" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                                            </div>
+                                        </div>
+                                    </legend>
+                                </fieldset>
+                            </div>
                         </apex:outputPanel>
                     </apex:outputPanel>
+
                     <apex:actionFunction status="status" action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
                         <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
                     </apex:actionFunction>
-                    <br />
-                    <br /> 
-                    <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
-                    <br />
-                    <br />
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+                    <div class="form-group">
+                        <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    </div>
                 </apex:outputPanel>
                 <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
                 </apex:actionFunction>

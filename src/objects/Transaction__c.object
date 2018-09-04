@@ -501,6 +501,10 @@ Developer note: This is the encrypted C value parameter to be added as a merged 
                 <fullName>Pending Signatures</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -915,14 +919,13 @@ to any promoter of the company?</inlineHelpText>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>Transaction_Type__c</columns>
-        <columns>CompanyNumber__c</columns>
         <columns>CompanyName__c</columns>
         <columns>Status__c</columns>
         <columns>ContactEmail__c</columns>
         <columns>Barcode__c</columns>
         <columns>CREATED_DATE</columns>
-        <columns>submissionDate__c</columns>
-        <columns>submissionTime__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>LAST_ACTIVITY</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -943,19 +946,25 @@ to any promoter of the company?</inlineHelpText>
         <label>Errors and Rejects</label>
     </listViews>
     <listViews>
-        <fullName>OneCompanyView</fullName>
+        <fullName>Fluffy_Find</fullName>
         <columns>NAME</columns>
-        <columns>OBJECT_ID</columns>
         <columns>CompanyName__c</columns>
         <columns>CompanyNumber__c</columns>
         <columns>Barcode__c</columns>
+        <columns>Status__c</columns>
+        <columns>ErrorDescription__c</columns>
+        <columns>ContactEmail__c</columns>
+        <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CompanyNumber__c</field>
-            <operation>contains</operation>
-            <value>10484136</value>
+            <operation>equals</operation>
+            <value>08778602</value>
         </filters>
-        <label>OneCompanyView</label>
+        <label>Fluffy_Find</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>barcode</fullName>
@@ -974,7 +983,7 @@ to any promoter of the company?</inlineHelpText>
     </listViews>
     <listViews>
         <fullName>submittedtoday</fullName>
-        <booleanFilter>(1 AND 2) OR (3 AND 4) OR (5 AND 6) OR (7 AND 8)</booleanFilter>
+        <booleanFilter>(1 AND 2) OR (3 AND 4) OR (5 AND 6) OR (7 AND 8 )</booleanFilter>
         <columns>NAME</columns>
         <columns>Transaction_Type__c</columns>
         <columns>CompanyNumber__c</columns>
@@ -994,7 +1003,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>19/01/2018</value>
+            <value>31/08/2018</value>
         </filters>
         <filters>
             <field>Status__c</field>
@@ -1004,7 +1013,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>19/01/2018</value>
+            <value>31/08/2018</value>
         </filters>
         <filters>
             <field>Status__c</field>
@@ -1014,7 +1023,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>19/01/2018</value>
+            <value>31/08/2018</value>
         </filters>
         <filters>
             <field>Status__c</field>
@@ -1024,7 +1033,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>submissionDate__c</field>
             <operation>equals</operation>
-            <value>19/01/2018</value>
+            <value>31/08/2018</value>
         </filters>
         <label>submittedtoday</label>
     </listViews>

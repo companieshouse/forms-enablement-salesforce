@@ -16,6 +16,18 @@ Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-02-04  Initial development.
 */
 public with sharing class DirectorsListController extends TransactionStepControllerBase {
+    //Company Details Transition
+    public String companyAddress {get; set;}
+    public String companyAddress1 {get; set;}
+    public String companyAddress2 {get; set;}
+    public String companyregion {get; set;}
+    public String companypostcode {get; set;}
+    public String companyCountry {get; set;}
+    public String companyLocality {get; set;}
+    public String companyStatus {get; set;}
+    public String companyDateOfCreation {get; set;}
+    public String companyTypeText {get; set;}
+
 
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}
@@ -38,13 +50,15 @@ public with sharing class DirectorsListController extends TransactionStepControl
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
     public Boolean toMuchOfficer {get; set;}
+    public string previousButtonText {get; set;}
+    public Integer totalOfficers {get; set;}
+    public Boolean singleOfficer {get; set;}
     public DirectorsListController() {
         super();
         System.debug(LoggingLevel.ERROR, 'After Super Call:' + isPageInitialised);
         hasAlreadyLoadedOfficers = false;
         toMuchOfficer= false;
         if (isPageInitialised) initialiseStep();
-
     }
 
 
@@ -57,6 +71,30 @@ public with sharing class DirectorsListController extends TransactionStepControl
         signingFinished = submissionMgr.submission.isSigningFinished__c;
         companyName = submissionMgr.submission.CompanyName__c;
         companyNumber = submissionMgr.submission.CompanyNumber__c;
+
+
+        //COMPANY DETAILS 
+        if (Test.isRunningTest()) {
+            system.debug('test is running now');
+        } else {
+            CompaniesHouse.CompanyProfile compProf = CompanyQueryAction.getCompanyInfo(companyNumber);
+            companyAddress1 = compProf.registered_office_address.address_line_1;
+            companyAddress2 = compProf.registered_office_address.address_line_2;
+            companyregion = compProf.registered_office_address.region;
+            companypostcode = compProf.registered_office_address.postal_code ;
+            companyCountry = compProf.registered_office_address.country;
+            companyLocality = compProf.registered_office_address.locality;
+            companyStatus = compProf.company_status.capitalize();
+            String[] split = compProf.date_of_creation.split('-');
+            Datetime tempDate = Datetime.newInstance(Integer.valueOf(split[0]), Integer.valueOf(split[1]), Integer.valueOf(split[2]));
+            companyDateOfCreation = tempDate.format('dd MMMMM yyyy');
+
+            companyName = compProf.company_name;
+            companyTypeText = AppConstants.formatedCompanyType.get(compProf.type);
+        }
+
+
+
         listOfDirectors = new List<String>();
         showNoError = false;
         isLLPCompany = submissionMgr.submission.isLLP__c;
@@ -64,14 +102,19 @@ public with sharing class DirectorsListController extends TransactionStepControl
         isLPCompany = false;
         officerTerm = '';
         pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        previousButtonText = (transactionMgr.currentStep.previousButtonText__c == null ? '' : transactionMgr.currentStep.previousButtonText__c);
+        
+        // Set totalOfficers for pageview
+        totalOfficers = submissionMgr.submission.Officers__r.size();
+        
         if(submissionMgr.submission.Officers__r.size() == 1)
         {
             pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
-
+            singleOfficer = true;
         }
         else{
             pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-
+            singleOfficer = false;
         }
 
         pageText = pageText.replace('COMPANYNAME', companyName);
@@ -93,9 +136,17 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
     }
 
-    private void persistStep() {
+    public void persistStep() {
         System.debug(LoggingLevel.ERROR, 'Start of Persist Step');
-
+        submissionMgr.submission.CompanyStatus__c = companyStatus;
+        submissionMgr.submission.CompanyIncorporationDate__c = companyDateOfCreation;
+        submissionMgr.submission.CompanyType__c = companyTypeText;
+        submissionMgr.submission.CompanyAddress1__c = companyAddress1;
+        submissionMgr.submission.CompanyAddress2__c = companyAddress2;
+        submissionMgr.submission.CompanyCountry__c = companyCountry;
+        submissionMgr.submission.CompanyLocality__c = companyLocality;
+        submissionMgr.submission.CompanyPostCode__c = companypostcode;
+        submissionMgr.submission.CompanyRegion__c = companyregion;
         submissionMgr.submission.CompanyName__c = companyName;
         submissionMgr.submission.OfficerCount__c = nbOfOfficers;
         submissionMgr.persist();
@@ -110,7 +161,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
         if (validationDirector == null) {
             hasPageErrors = true;
             currentErrorMessage = 'Please select one of the options below';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
         if (Test.isRunningTest()) {
@@ -162,7 +213,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
         } else {
             if (!validatePageState()) return Page.TransactionException;
 
-            return previousStep();
+            PageReference pg = new PageReference('/Company');
+
+            pg.getParameters().put('t', submissionMgr.submission.Form_Name__c);
+            pg.setRedirect(true);
+            if(submissionMgr.submission.Contacts__r != null && !submissionMgr.submission.Contacts__r.isEmpty())
+                delete submissionMgr.submission.Contacts__r;
+            delete submissionMgr.submission;
+            return pg;
         }
         return null;
     }
@@ -323,8 +381,14 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             List<Officer__c> officerList = new List<Officer__c>();
             List<Contact> contactList = new List<Contact>();
+            Integer countOfficer = 0;
             if(directorDetailsList != null)
-                for (CompaniesHouse.OfficerDetails officer : directorDetailsList) {
+                for (CompaniesHouse.OfficerDetails officer : directorDetailsList) 
+                {
+                    countOfficer++;
+                    if(officerList.size() >= 51)
+                        continue;
+
                     Boolean addOff = false;
                     if ( (officer.officer_role == 'director' || officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' || officer.officer_role == 'judicial-factor' ) && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                         addOff = true;
@@ -375,6 +439,7 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             if(nbOfOfficers > 1)
             {
+                singleOfficer = false;
                 officerTerm += 's';
             }
             //Insert the contact
@@ -403,10 +468,12 @@ public with sharing class DirectorsListController extends TransactionStepControl
 
             if(nbOfOfficers == 1)
             {
+                singleOfficer = true;
                 pageText = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
 
             }
             else{
+                singleOfficer = false;
                 pageText = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
 
             }
@@ -416,10 +483,10 @@ public with sharing class DirectorsListController extends TransactionStepControl
             pageTitle = pageTitle.replace('directors', officerTerm);
             pageText = pageText.replace('COMPANYNAME', companyName);
 
-            submissionMgr.submission.OfficerCount__c = nbOfOfficers;
+            submissionMgr.submission.OfficerCount__c = countOfficer;
             update submissionMgr.submission;
 
-            if( OfficersQueryAction.active_count >= 35)
+            if( officerList.size() > 51)
             {
                 toMuchOfficer = true;
                 pageText = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;

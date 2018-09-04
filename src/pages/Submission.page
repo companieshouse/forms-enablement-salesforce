@@ -29,53 +29,68 @@ Ver. Author         Date        Detail
           <apex:outputPanel >
              <div >
 
-                <h1 class="heading-xlarge">{!displayHeader}</h1>
+                <h1 class="govuk-heading-xl">{!displayHeader}</h1>
                 
                   <!-- <p>
                    {!displayText1}
                 <strong class="heading-medium">{!submissionId}</strong>  
                 </p>-->
              </div>
-            <p class="lede">{!displayText1}</p>  
-            <p>{!displayText2}</p>
+            <p class="govuk-body-l">{!displayText1}</p>  
              <apex:outputPanel >
-                <table class="check-your-answers">
-                    <tbody>
-                        <tr>
-                            <th>Company name</th>
-                            <td>{!companyName}</td>
+                <table class="govuk-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" >Company name</th>
+                            <td class="govuk-table__cell ">{!companyName}</td>
                         </tr>
-                        <tr>
-                            <th>Company number</th>
-                            <td>{!companyNumber}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" >Company number</th>
+                            <td class="govuk-table__cell ">{!companyNumber}</td>
                         </tr>
-                        <tr>
-                            <th>Registered Office Address</th>
-                            <td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" style="vertical-align: top;">Registered Office Address</th>
+                            <td class="govuk-table__cell ">
                                 <apex:outputText escape="false" value="{!companyAddress}" />
                             </td>
                         </tr>
-                        <tr>
-                            <th>Authorised by</th>
-                            <td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header " scope="row">Authorised by</th>
+                            <td class="govuk-table__cell ">
                                 <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
                                     <apex:outputText value="{!Director.Name}" id="theValue" />
                                     <br/>
                                 </apex:repeat>
                             </td>
                         </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__header" scope="row">Application</td>
+                            <td class="govuk-table__cell ">
+                                <section class="attachment embedded" id="attachment_1365490">
+                                    <div style="display:{!IF(showDoc," block ","none ")};">
+                                        <p class="govuk-body">
+                                            <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> (PDF, {!size}B)
+                                        </p>
+                                    </div>
+                                    <div style="display:{!IF(showDoc," none ","block ")};">
+                                        <p class="govuk-body">No Documents founds.
+                                        </p>
+                                    </div>
+                                </section>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
               </apex:outputPanel>
               
-             <p class="lede"></p>
-            <apex:commandButton status="status" styleClass="button" value="{!$Label.UI_Text_Submit}" onclick="SubmitOnClick(this); return false;" rendered="{!NOT(isLastPage)}" />
+             <p class="govuk-body-l"></p>
+            <apex:commandButton status="status" styleClass="govuk-button" value="{!$Label.UI_Text_Submit}" onclick="SubmitOnClick(this); return false;" rendered="{!NOT(isLastPage)}" />
 
             </apex:outputPanel>          
             <apex:actionFunction name="doSubmit" action="{!nextAction}" />
             </apex:form>
           
-            <script language="Javascript">
+            <script language="Javascript"> 
 
             function SubmitOnClick (objSubmitBtn) {
               objSubmitBtn.disabled = true;

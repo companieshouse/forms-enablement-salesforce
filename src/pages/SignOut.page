@@ -20,15 +20,14 @@ Ver. Author            Date        Detail
         <apex:define name="content">
             <apex:form >
                 <apex:outputPanel >
-                    
-                        <div class="govuk-box-highlight">
-                            <h1 class="bold-large">Sign out</h1>
-                            <p>
-                                You have now signed out
-                                <br/>
-                            </p>
+                        <div class="govuk-panel govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">
+                                Sign out
+                            </h1>
+                            <div class="govuk-panel__body">
+                                 You have now signed out
+                            </div>
                         </div>
-                        
                     
                 </apex:outputPanel>
             </apex:form>

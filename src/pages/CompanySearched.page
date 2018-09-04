@@ -1,41 +1,45 @@
 <apex:page cache="false" title="{!$Label.UI_Text_Company_Details}" controller="CompanySearchedController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initialiseAction}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" styleClass="govuk-back-link" value="{!previousButtonText}" id="thePreviousButton"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
             <apex:form >
                 <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
                 <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
-                <p class="heading-large">{!companyName}</p>
-                <table class="check-your-answers" >
-                    <tbody>
-                        <tr>
-                            <td>Company number</td>
-                            <td>{!companyNumber}</td>
+                <h2 class="govuk-heading-l">{!companyName}</h2>
+                <table class="govuk-table" >
+                    <caption class="govuk-table__caption">Company information</caption>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Company number</th>
+                            <td class="govuk-table__cell ">{!companyNumber}</td>
                         </tr>
-                        <tr>
-                            <td>Status</td>
-                            <td>{!companyStatus}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Status</th>
+                            <td class="govuk-table__cell ">{!companyStatus}</td>
                         </tr>
-                        <tr>
-                            <td>Incorporation date</td>
-                            <td>{!companyDateOfCreation}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Incorporation date</th>
+                            <td class="govuk-table__cell ">{!companyDateOfCreation}</td>
                         </tr>
-                        <tr>
-                            <td>Company type</td>
-                            <td>{!companyTypeText}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Company type</th>
+                            <td class="govuk-table__cell ">{!companyTypeText}</td>
                         </tr>
-                        <tr>
-                            <td>Registered office address</td>
-                            <td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" style="vertical-align: top;">Registered office address</th>
+                            <td class="govuk-table__cell ">
                                 <apex:outputText escape="false" value="{!companyAddress}" />
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <br/>
-                <apex:commandButton status="status" styleClass="button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
-                <br/>
-                <br/>
-                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButton" />
+                <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
             </apex:form>
         </apex:define>
     </apex:composition>

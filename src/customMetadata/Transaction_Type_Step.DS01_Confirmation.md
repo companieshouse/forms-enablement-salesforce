@@ -20,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">You’ll get an email from Companies House to let you know if you’ve filled in the form correctly. If you have, your request for the company to be struck off will be published as a notice in your local &lt;a href=&quot;https://www.thegazette.co.uk/&quot; &gt;Gazette.&lt;/a&gt;</value>
+        <value xsi:type="xsd:string">We will email you within 2 working days to confirm acceptance or rejection of this application.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -28,11 +28,11 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:type="xsd:string">The Director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.</value>
+        <value xsi:type="xsd:string">The director(s) must give a copy of the application to all interested parties within 7 days of it being submitted.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:type="xsd:string">&lt;p&gt;Interested parties include:&lt;ul class=&quot;list list-bullet&quot;&gt;&lt;li&gt;members, usually shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -48,17 +48,16 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Your submission has been received.</value>
+        <value xsi:type="xsd:string">We&apos;ve received your application</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;heading-medium&quot;&gt;
-REFNUMB &lt;/strong&gt;&lt;br/&gt;
-You&apos;ll need to quote this if you contact us about your request.</value>
+        <value xsi:type="xsd:string">Application reference: &lt;strong class=&quot;govuk-heading-m&quot;&gt;
+REFNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">Your  payment reference for this transaction was PAYNUMB.</value>
+        <value xsi:type="xsd:string">Payment reference: &lt;strong class=&quot;govuk-heading-m&quot;&gt;PAYNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Header_Text_4__c</field>
@@ -86,7 +85,7 @@ You&apos;ll need to quote this if you contact us about your request.</value>
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">14.0</value>
+        <value xsi:type="xsd:double">12.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

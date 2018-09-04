@@ -1,56 +1,31 @@
 <apex:component layout="none">
     
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-
+    <meta charset="utf-8" />
     <title>Companies House</title>
 
-        <script type="text/javascript">
-      (function(){if(navigator.userAgent.match(/IEMobile\/10\.0/)){var d=document,c="appendChild",a=d.createElement("style");a[c](d.createTextNode("@-ms-viewport{width:auto!important}"));d.getElementsByTagName("head")[0][c](a);}})();
-    </script>
+    <!--[if gt IE 8]><!-->
+    <link href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-1.2.0.min.css')}" media="screen" rel="stylesheet"
+      type="text/css" />
+    <!--<![endif]-->
 
-    <!--[if gt IE 8]><!--><link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/govuk-template.css')}" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
-    <!--[if IE 6]><link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/govuk-template-ie6.css')}" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
-    <!--[if IE 7]><link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/govuk-template-ie7.css')}" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
-    <!--[if IE 8]><link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/govuk-template-ie8.css')}" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
-
-
-     <link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/govuk-template-print.css')}" media="print" rel="stylesheet" type="text/css" />
-
-        <!--[if IE 8]>
-        <script type="text/javascript">
-          (function(){if(window.opera){return;}
-           setTimeout(function(){var a=document,g,b={families:(g=
-           ["nta"]),urls:["/public/stylesheets/fonts-ie8.css?0.16.4"]},
-           c="/public/javascripts/vendor/goog/webfont-debug.js?0.16.4",d="script",
-           e=a.createElement(d),f=a.getElementsByTagName(d)[0],h=g.length;WebFontConfig
-           ={custom:b},e.src=c,f.parentNode.insertBefore(e,f);for(;h=h-1;a.documentElement
-           .className+=' wf-'+g[h].replace(/\s/g,'').toLowerCase()+'-n4-loading');},0)
-          })()
-        </script>
-        <![endif]-->
-        <!--[if gte IE 9]><!-->
-          <link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/fonts.css')}" media="all" rel="stylesheet" type="text/css" />
-        <!--<![endif]-->
-
-
-        <!--[if lt IE 9]>
-      <script src="{!URLFOR($Resource.FORMS, 'FORMS/APP/javascripts/ie.js')}" type="text/javascript"></script>
-    <![endif]-->
-
-    <link rel="shortcut icon" href="{!URLFOR($Resource.FORMS, 'FORMS/APP/images/favicon.ico')}" type="image/x-icon" />
-
-    <!-- Size for iPad and iPad mini (high resolution) -->
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{!URLFOR($Resource.FORMS, 'FORMS/APP/images/apple-touch-icon-152x152.png')}"/>
-    <!-- Size for iPhone and iPod touch (high resolution) -->
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{!URLFOR($Resource.FORMS, 'FORMS/APP/images/apple-touch-icon-120x120.png')}"/>
-    <!-- Size for iPad 2 and iPad mini (standard resolution) -->
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{!URLFOR($Resource.FORMS, 'FORMS/APP/images/apple-touch-icon-76x76.png')}"/>
-    <!-- Default non-defined size, also used for Android 2.1+ devices -->
-    <link rel="apple-touch-icon-precomposed" href="{!URLFOR($Resource.FORMS, 'FORMS/APP/images/apple-touch-icon-60x60.png')}"/>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:image" content="{!URLFOR($Resource.FORMS, 'FORMS/APP/images/opengraph-image.png')}"/>
-
-    <link href="{!URLFOR($Resource.FORMS, 'FORMS/APP/stylesheets/application.css')}" media="screen" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 8]><link href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-ie8-1.2.0.min.css')}" media="print" rel="stylesheet"
+      type="text/css" /><![endif]-->        
+          
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="theme-color" content="#0b0c0c" />
+        
+        
+        <link rel="shortcut icon" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/favicon.ico')}" type="image/x-icon" />
+        <link rel="mask-icon" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-mask-icon.svg')}" color="#0b0c0c"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon-180x180.png')}"/>
+        <link rel="apple-touch-icon" sizes="167x167" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon-167x167.png')}"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon-152x152.png')}"/>
+        <link rel="apple-touch-icon" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon.png')}"/>
+        
+        
+        
+        <meta name="description" content="Use the GOV.UK Prototype Kit to quickly make realistic HTML prototypes of GOV.UK services."/>
+              
+        <meta property="og:image" content="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-opengraph-image.png')}"/>
 
 </apex:component>

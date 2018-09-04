@@ -71,7 +71,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         if (behalfValidation == null) {
             hasPageErrors = true;
             currentErrorMessage = 'Please make a selection to continue';
-            errorVal = 'error';
+            errorVal = 'govuk-form-group--error';
             return null;
         }
 
@@ -91,7 +91,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
             {
                 hasPageErrors = true;
                 currentErrorMessage = 'You must select Yes as you have selected Corporate Officers';
-                errorVal = 'error';
+                errorVal = 'govuk-form-group--error';
                 return null;
             }
         }

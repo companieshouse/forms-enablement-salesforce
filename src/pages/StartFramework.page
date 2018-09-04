@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Name: Start.page
 Copyright © 2016  Methods Digital
 ======================================================
@@ -7,14 +7,14 @@ Purpose:
 -------
 
 Renders the display text defined for the transaction type
-defined by the QueryString parameter t. 
+defined by the QueryString parameter t.
 
 e.g. /?t=DS01.
 
 ======================================================
 ======================================================
 History
-------- 
+-------
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-11  Initial development.
 -->
@@ -22,18 +22,24 @@ Ver. Author        Date        Detail
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                
+
                 <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
-                
-                <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
-            
+
+                <apex:outputText escape="false" value="{!pageText3}"></apex:outputText>
+
+                <apex:outputText escape="false" value="{!pageText4}"></apex:outputText>
+
+                <apex:outputText escape="false" value="{!pageText2}"></apex:outputText>
+
                 <p>
-                <apex:commandButton styleClass="button button-start" action="{!startAction}" value="Start now" />
+                <apex:commandButton styleClass="govuk-button govuk-button--start" action="{!startAction}" value="Start now" />
                 </p>
-             
+
+                <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+
                 <apex:outputText escape="false" value="{!pageTextAfterButton}"></apex:outputText>
                 <apex:outputText escape="false" value="{!pageTextAfterButton2}"></apex:outputText>
-                
+
             </apex:form>
         </apex:define>
     </apex:composition>

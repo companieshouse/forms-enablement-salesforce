@@ -15,75 +15,59 @@ History
 Ver. Author             Date        Detail
 1.0  Sylvain Picory     2016-05-28  Initial development.
 -->
-<apex:page cache="false" title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="GuidanceController">
+<apex:page id="GuidancePage" cache="false" title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" sidebar="false" standardStylesheets="false"
+    controller="GuidanceController">
     <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
         <apex:define name="content">
             <apex:form id="form">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="empty" />
                     <apex:outputPanel id="standardGuidanceView" rendered="{!standardGuidanceView}">
-                        <div class="form-group">
-                            <div id="errorList" class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1" hidden="hidden">
-                                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                        <apex:outputPanel rendered="{!hasPageErrors}">
+                            <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
+                                <h1 class="govuk-error-summary__title" id="error-summary-title">
                                     An error has occurred.
                                 </h1>
-                                <ul class="error-summary-list">
-                                    <li id="errorLI">
-                                    </li>
-                                </ul>
-                            </div>
-                            <apex:outputText escape="false" value="{!displayText0}" />
-                            <fieldset>
-                                <div class='form-group' id='checkboxArea'>
-                                    <span id='errorHint' style='color:#b10e1e;font-weight: bold;'>{!currentErrorMessage}</span>
-                                    <label class="block-label" for="agree">
-                                        <input id="agree" name="agree" type="checkbox" value="true" /> {!checkboxText0}
-                                    </label>
+                                <div class="govuk-error-summary__body">
+                                    <ul class="govuk-list govuk-error-summary__list">
+                                        <li>
+                                            <a href="#GuidancePage:TempPage:form:agree">You must agree to proceed</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </fieldset>
-                            <apex:actionFunction status="status" action="{!setAgreeValue}" name="setAgreeValue" reRender="content">
-                                <apex:param name="agreeboxparam" value="" id="cde" assignTo="{!agreeBoxChoice}" />
-                            </apex:actionFunction>
-                        </div>
-                        <script>
-                        function updateField(selection) {
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputText escape="false" value="{!displayText0}" />
+                        <fieldset class="govuk-fieldset">
+                            <div id='checkboxArea' class='govuk-form-group {!errorVal}'>
+                                <span id='errorHint' class="govuk-error-message"></span>
+                                <div class="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <apex:inputCheckbox id="agree" styleClass="govuk-checkboxes__input" value="{!agreeBoxChoice}"></apex:inputCheckbox>
+                                        <label class="govuk-label govuk-checkboxes__label" for="GuidancePage:TempPage:form:agree">{!checkboxText0}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>   
 
-                            var statuses = document.getElementsByName('agree');
-                            for (var i = 0, length = statuses.length; i < length; i++) {
-
-                                // console.log(statuses[i].checked);
-
-                                if (statuses[i].checked == true) {
-                                    document.getElementById('errorHint').innerHTML = '';
-                                    document.getElementById('errorList').setAttribute('hidden', true);
-                                    document.getElementById('checkboxArea').removeAttribute('class', 'error');
-                                    setAgreeValue(statuses[i].value);
-                                } else if (statuses[i].checked == false) {
-                                    document.getElementById('errorList').removeAttribute('hidden');
-                                    document.getElementById('errorLI').innerHTML = 'You must agree to proceed';
-                                    document.getElementById('errorHint').innerHTML = 'You must agree to proceed';
-                                    document.getElementById('checkboxArea').setAttribute('class', 'form-group error');
-                                }
-                            }
-                        };
-                        </script>
-                        <input type="button" class="button" id="nextButton" value="{!$Label.UI_Text_Continue}" onclick="updateField()" />
-                        <br/>
-                        <br/>
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+                        <apex:commandButton status="status" reRender="masterPanel" styleClass="govuk-button" action="{!nextAction}" value="Continue"
+                            id="NextButtonStandard" />
                     </apex:outputPanel>
                     <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
                         <apex:outputText escape="false" value="{!guidanceTitle}"></apex:outputText>
                         <apex:outputText escape="false" value="{!guidanceText1}"></apex:outputText>
-                        <apex:outputText escape="false" value="{!guidanceText2}"></apex:outputText>
                         <apex:outputText escape="false" value="{!guidanceText3}"></apex:outputText>
                         <apex:outputText escape="false" value="{!guidanceText4}"></apex:outputText>
                         <apex:outputText escape="false" value="{!guidanceText5}"></apex:outputText>
                         <div class="form-group">
-                            <apex:commandButton status="status" reRender="content" styleClass="button" action="{!nextAction}" value="Continue" id="NextButton" />
-                            <br />
-                            <br/>
-                            <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" />
+                            <apex:commandButton status="status" reRender="masterPanel" styleClass="govuk-button" action="{!nextAction}" value="Continue"
+                                id="NextButton" />
                         </div>
                     </apex:outputPanel>
                 </apex:outputPanel>

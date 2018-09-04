@@ -51,6 +51,8 @@ public with sharing class GuidanceController {
     public String guidanceText4 {get; set;}
     public String guidanceText5 {get; set;}
 
+    public String errorVal {get; set;}
+
     public Boolean standardGuidanceView {get; set;}
     public Boolean customGuidanceView {get; set;}
     Boolean isPageInitialised = false;
@@ -64,6 +66,7 @@ public with sharing class GuidanceController {
     public void initialiseStep() {
         securityMgr = new SecurityManager();
         userTracker = new TrackUserClass();
+        hasPageErrors = false;
         // userTracker.getUserDocument();
         try {
             if (!ApexPages.currentPage().getParameters().containsKey('t') || String.isBlank(ApexPages.currentPage().getParameters().get('t')) || !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
@@ -100,25 +103,26 @@ public with sharing class GuidanceController {
         }
         return;
     }
+    
+// End Instance methods.
+// Action methods.
+    public PageReference nextAction() {
 
-    public PageReference setAgreeValue() {
         if (agreeBoxChoice == null || String.valueOf(agreeBoxChoice) == 'undefined') {
-            currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
+            currentErrorMessage = 'You must agree to continue';
             hasPageErrors = true;
+            errorVal = 'govuk-form-group--error';
             return null;
         } else if (!agreeBoxChoice) {
-            currentErrorMessage = '<span class="error-message">You must agree to Proceed</span>';
+            currentErrorMessage = 'You must agree to continue';
             hasPageErrors = true;
+            errorVal = 'govuk-form-group--error';
             return null;
         } else if (agreeBoxChoice) {
             currentErrorMessage = '';
             hasPageErrors = false;
+            errorVal = '';
         }
-        return nextAction();
-    }
-// End Instance methods.
-// Action methods.
-    public PageReference nextAction() {
         //We don't redirect to the next step but to the auth
         userTracker = new TrackUserClass();
         //userTracker.setBooleanGuidanceAgreeBox(warningAgreeBox);
