@@ -20,7 +20,7 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;We will use this email address to request the approval.&lt;/p&gt;</value>
+        <value xsi:type="xsd:string">&lt;p class=&quot;govuk-body-l&quot;&gt;Tell us NAME email address so we can request their approval&lt;/p&gt;</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;What is the directors email address?&lt;/h1&gt;</value>
+        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;NAME needs to approve this application&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

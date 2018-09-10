@@ -520,9 +520,9 @@ public with sharing class ReviewController extends TransactionStepControllerBase
 
 
             } else {
-                //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+                FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
                 //Turned off at the moment waiting for the new API
-                //submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+                submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
 
                 submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
                 submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (Integration From Review Page): ' + FormsApiClient.numberOfTimeCalled;
@@ -532,7 +532,7 @@ public with sharing class ReviewController extends TransactionStepControllerBase
         else
         {
             //Fix: We do want as there is a barcode overide the status to be submitted
-            if(submissionMgr.submission.Status__c != 'Approved' || submissionMgr.submission.Status__c != 'Rejected' )
+            if(submissionMgr.submission.PrePaymentIntegrationStatus__c != 'Approved' || submissionMgr.submission.PrePaymentIntegrationStatus__c != 'Rejected' )
             {
                 //In this case we have either the duplicatee barcode issue hence we want to proceed to the next page or
                 //We just expired from previous session and in this case we didn't submit on success as the status aren't approved or reject
@@ -556,7 +556,7 @@ public with sharing class ReviewController extends TransactionStepControllerBase
             system.debug('test is running now');
 
             // test error in test mode;
-            submissionMgr.submission.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+            submissionMgr.submission.PrePaymentIntegrationStatus__c = AppConstants.REQUEST_STATUS_ERROR;
         }
         submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
         submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (Submit Page): ' + FormsApiClient.numberOfTimeCalled;

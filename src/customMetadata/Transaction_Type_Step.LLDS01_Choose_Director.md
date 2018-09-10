@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">A majority of members need to approve your request to close the LLP before you can proceed.</value>
+        <value xsi:type="xsd:string">Choose at least X more directors to approve this application.</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Select at least X directors</value>
+        <value xsi:type="xsd:string">Who else will approve this application?</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;Which directors will approve your request to close the LLP?&lt;/h1&gt;</value>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Header_Text_2__c</field>

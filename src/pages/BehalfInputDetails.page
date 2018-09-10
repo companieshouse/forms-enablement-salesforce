@@ -65,7 +65,7 @@
                                 </span>
                                 <!-- Email -->
                                 <label class="govuk-label" for="inputEmail"></label>
-                                <apex:inputText styleclass="govuk-input" id="inputEmail" value="{!emailDirector}" />
+                                <apex:inputText maxlength="256" size="256" styleclass="govuk-input" id="inputEmail" value="{!emailDirector}" />
                             </legend>
                         </fieldset>
                     </div>

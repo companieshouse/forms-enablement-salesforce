@@ -78,15 +78,15 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
         String pageBodyTemp = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
         errorMsg1 = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
         buildDirectorsList();
-        pageBodyTemp = pageBodyTemp.replace('X', String.valueOf(majoritytosign));
+        pageBody = pageBody.replace('X', String.valueOf(majoritytosign));
         errorMsg1 = errorMsg1.replace('X', String.valueOf(majoritytosign));
 
         if(builtDirectors.size() == 1){
-            pageBodyTemp = pageBodyTemp.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
+            pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
             errorMsg1 = errorMsg1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s', '')));
         }
         else{
-            pageBodyTemp = pageBodyTemp.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+            pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
             errorMsg1 = errorMsg1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         }
 
@@ -102,21 +102,28 @@ public with sharing class chooseDirector extends TransactionStepControllerBase {
         if(res != null)
             return res;
 
-        Boolean skip = false;
         if(submissionMgr.submission.RequiredOfficerSign__c == 1)
         {
             for(Officer__c off :submissionMgr.submission.Officers__r)
             {
-                if(off.isSignatory__c)
-                {
-                    skip = true;
-                }
+                off.isSignatory__c = true;
             }
+            submissionMgr.persist();
+
+            return nextStep();
+        }       
+
+        if(submissionMgr.submission.RequiredOfficerSign__c == 2 && submissionMgr.submission.Officers__r.size() == 2)     
+        {
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                off.isSignatory__c = true;
+            }
+            submissionMgr.persist();
+
+            return nextStep();
         }
-        
-        if(skip)
-            return nextAction();
-        
+
         return null;
     }
 

@@ -23,18 +23,25 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
     public Boolean failureSigning {get; set;}
     public Boolean skipPage {get; set;}
     public Boolean presenterSigning {get; set;}
-    public Boolean multipleDirectors {get; set;}
-    public String pageTitle {get; set;}
-    public String pageTitle2 {get; set;}
-    public String pageTitle3 {get; set;}
-    public String pageTitle4 {get; set;}
-    public String pageBody {get; set;}
-    public String pageBody2 {get; set;}
-    public String pageBodyFailure {get; set;}
-    public String pageBodyFailureContact {get; set;}
     public Boolean pollServer {get; set;}
     public Integer waittime {get; set;}
     public Boolean failureEmail {get; set;}
+    public Boolean singlePresentorSigningDirector{get; set;}
+    public String pageTitleSinglePresentorSigningDirector {get; set;}
+    public String pageBodySinglePresentorSigningDirector {get; set;}
+
+    public Boolean singleDirectorNotPresentorWaitingSigning {get; set;}
+    public String pageTitleSingleNotPresentorSigningDirector {get; set;}
+    public String pageBodySingleNotPresentorSigningDirector {get; set;}
+
+    public Boolean multipleDirectorWaitingSigning {get; set;}
+    public String pageTitlemultipleDirectorWaitingSigning {get; set;}
+    public String pageBodymultipleDirectorWaitingSigning {get; set;}
+
+    public String pageTitleFailureEmail {get; set;}
+    public String pageBodyFailureEmail {get; set;}
+    public String pageTitleFailureSigning {get; set;}
+    public String pageBodyFailureSigning {get; set;}
 
     public DigitalSignatureController() {
         super();
@@ -51,58 +58,112 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
         pollServer =true;
         skipPage = false;
         presenterSigning = false;
-        multipleDirectors = false;
         compName = submissionMgr.submission.CompanyName__c;
         Integer i = 0;
         listOfDirectors = new List<wrapperDirector>();
-
+        String offName = '';
         for (Contact off : submissionMgr.submission.Contacts__r) {
-            if (off.isSignatory__c) {
+            if (off.isSignatory__c && !off.IsPresenter__c) {
                 i++;
-                listOfDirectors.add(new wrapperDirector(off.Name, off.Email));
+                listOfDirectors.add(new wrapperDirector(off.Name, off.Email, off.RecipientStatus__c));
             }
             if (off.IsPresenter__c) {
                 presenterSigning = true;
             }
         }
-        
-        if ((listOfDirectors.size() >= 1 && !presenterSigning) || listOfDirectors.size() > 1) {
-            multipleDirectors = true;
-        }
-        
-        pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
-        pageTitle = pageTitle.replace('COMPANYNAME', compName);
-        pageTitle2 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
-        pageTitle3 = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
-        pageTitle4 = (transactionMgr.currentStep.Header_Text_4__c == null ? '' : transactionMgr.currentStep.Header_Text_4__c);
-        
-        if (presenterSigning == true) {
-            if (listOfDirectors.size() > 1) {
-                pageBody = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
-            } else {
-                pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+
+        if(submissionMgr.submission.Contacts__r.size() == 2)
+        {
+            if(submissionMgr.submission.Contacts__r[0].IsPresenter__c)
+            {
+                offName = submissionMgr.submission.Contacts__r[1].Name;
             }
-        } else {
-            pageBody = '';
+            else{
+                offName = submissionMgr.submission.Contacts__r[0].Name;
+            }
         }
-        
-        pageBody = pageBody.replace('COMPANYNAME', compName);
-        pageBody2 = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
-        pageBody2 += transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
-        pageBody2 = pageBody2.replace('COMPANYNAME', compName);
-        pageBodyFailure = transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c;
-        pageBodyFailureContact = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
 
-        pageTitle3 = pageTitle3.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+        multipleDirectorWaitingSigning = false;
+        singleDirectorNotPresentorWaitingSigning = false;
+        singlePresentorSigningDirector = false;
 
-        pageBody = pageBody.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageBody2 = pageBody2.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        //Cover each screen case
+        //There are more than 1 directors
+        if(submissionMgr.submission.Contacts__r.size() > 1)
+        {
+            //2 or more director without presenter => multiple screen
+            if(!presenterSigning)
+            {
+                multipleDirectorWaitingSigning = true;
+            }
+            else{
+                //If there are 2 directors we go on single not presenter
+                if(submissionMgr.submission.Contacts__r.size() == 2)
+                {
+                    singleDirectorNotPresentorWaitingSigning = true;
+                }
+                else if(submissionMgr.submission.Contacts__r.size() == 3 && submissionMgr.submission.isPresenterMultipleDirectors__c)
+                {
+                    Integer indexCounter = 0;
 
-        pageBodyFailure = pageBodyFailure.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        pageBodyFailureContact = pageBodyFailureContact.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
-        
+                    for(Officer__c ct :submissionMgr.submission.Officers__r)
+                    {
+                        if(ct.isSignatory__c && !ct.IsPresenter__c)
+                        {
+                            indexCounter++;
+                            offName = ct.Name;
+                        }
+                    }
 
+                    if(indexCounter == 1)
+                    {
+                        singleDirectorNotPresentorWaitingSigning = true;
+                    }
+                    else{
+                        multipleDirectorWaitingSigning = true;
+                    }
+
+                }
+                else{
+                    multipleDirectorWaitingSigning = true;
+                }
+            }
+            
+        }        
+        else{
+            offName = submissionMgr.submission.Contacts__r[0].Name;
+            if(presenterSigning)
+            {
+                singlePresentorSigningDirector = true;
+            }
+            else{
+                singleDirectorNotPresentorWaitingSigning = true;
+            }
+        }
+        //Load the text
+
+        //Title to separate
+        String headerText3 = (transactionMgr.currentStep.Header_Text_3__c == null ? '' : transactionMgr.currentStep.Header_Text_3__c);
+        String[] splitedHeaderText3 = headerText3.split('SEPARATOR');
+
+        pageTitleFailureSigning = (String.isBlank(splitedHeaderText3[0]) ? '' : splitedHeaderText3[0]);
+        pageTitleFailureSigning = pageTitleFailureSigning.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize()));
+        pageTitleFailureEmail = (splitedHeaderText3.size() > 1 ? splitedHeaderText3[1] : '');
+        pageTitleSinglePresentorSigningDirector = (splitedHeaderText3.size() > 2 ? splitedHeaderText3[2] : '');
+        pageBodySinglePresentorSigningDirector = transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c;
+
+        pageTitleSingleNotPresentorSigningDirector = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
+        pageBodySingleNotPresentorSigningDirector = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+        pageTitleSingleNotPresentorSigningDirector = pageTitleSingleNotPresentorSigningDirector.replace('NAME', offName);
+        pageBodySingleNotPresentorSigningDirector = pageBodySingleNotPresentorSigningDirector.replace('NAME', offName);
+
+        pageTitlemultipleDirectorWaitingSigning = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
+        pageBodymultipleDirectorWaitingSigning = transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c;
+
+        pageBodyFailureEmail = transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c;
+        pageBodyFailureSigning = transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c;
         emailPresenter = submissionMgr.submission.Presenter__r.PersonEmail;
+
     }
 
     public PageReference resetTransaction(){
@@ -162,7 +223,7 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
             for (Contact off : submissionMgr.submission.Contacts__r) {
                 if(off.RecipientStatus__c == 'AutoResponded')
                 {
-                    listOfDirectors.add(new wrapperDirector(off.Name, off.Email));
+                    listOfDirectors.add(new wrapperDirector(off.Name, off.Email, off.RecipientStatus__c));
                 }
             }
 
@@ -199,15 +260,11 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
             return null;
         }
 
-
-
         return nextAction();
 
     }
 
-
     public PageReference pollMethods(){
-
         List<Contact> lCont = [Select Id,DateSigned__c,RecipientStatus__c,Email, isPresenter__c  From Contact Where Transaction__c = :submissionMgr.submission.Id];
 
         Boolean hasSigned = false;
@@ -375,7 +432,7 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
             submissionMgr.submission.isSigningFinished__c = true;
         }
 
-        if (listOfDirectors.size() > 1) {
+        if (submissionMgr.submission.Contacts__r.size() > 1) {
             submissionMgr.submission.MultipleDirectors__c = true;
         }
 
@@ -410,10 +467,12 @@ public with sharing class DigitalSignatureController extends TransactionStepCont
     public with sharing class wrapperDirector {
         public String name {get; set;}
         public String email {get; set;}
+        public String status {get; set;}
 
-        public wrapperDirector(String name, String email) {
+        public wrapperDirector(String name, String email, String status) {
             this.name = name;
             this.email = email;
+            this.status = status;
         }
     }
 

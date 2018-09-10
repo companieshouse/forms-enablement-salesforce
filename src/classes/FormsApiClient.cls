@@ -20,9 +20,54 @@ public with sharing class FormsApiClient {
     private String SUBMISSION_ENDPOINT = '/submission';
     private String BARCODE_ENDPOINT = '/barcode';
     private String PRESENTERAPI = '/presenterauth';
+    private String confirmationPaymentEndPoint = '/confirmpaid';
 
     //Added for log purpose
     public static Integer numberOfTimeCalled {get; set;} 
+
+    /**
+    * Update the payment confirmation within the gateway
+    */
+    public HttpResponse updatePayment(Transaction__c tx){
+        Forms_API_Service__c connection = getConnection();
+
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + tx.Id;
+        log += '<br/> Barcode: ' + tx.Barcode__c;
+        log += '<br/> Company Number: ' + tx.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
+        log += '<br/> Integration Updating payment on gateway';
+        log += '<br/>-----------------------------------------------------------------------------------';
+
+        FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
+
+        // Create Http request
+        HttpRequest request = new HttpRequest();
+
+        request.setEndpoint(connection.URL__c + confirmationPaymentEndPoint);
+        request.setMethod('POST');
+        request.setHeader('Content-Type', 'application/json');
+        request.setHeader('Accept', '*/*');
+        request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+
+        String requestBody = TransactionSerialiser.getPaymentBody(tx);
+
+        request.setTimeout(120000);
+        request.setBody(requestBody);
+
+        // Send the request
+        Http http = new Http();
+        HTTPResponse response = http.send(request);
+
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
+
+        return response;
+
+    }
 
     /**
     * Request Barcode from FormsAPI

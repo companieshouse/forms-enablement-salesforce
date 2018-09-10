@@ -59,12 +59,14 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
     public Boolean stepValidator {get; set;}
     public Boolean sigNeeded {get; set;}
     public Boolean signingFinished {get; set;}
+    public Boolean isSingleDirectorOnScreen {get; set;}
     public DirectorDetails() {
         super();
         if (isPageInitialised) initialiseStep();
     }
     public void initialiseStep() {
         stepValidator = isPageAlreadyValidStep;
+        isSingleDirectorOnScreen = false;
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
         companyName = submissionMgr.submission.CompanyName__c;
@@ -75,6 +77,9 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
         {
             pageTitle = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c);
             pageBody = transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c;
+            pageTitle = pageTitle.replace('NAME', builtDirectors[0].Name);
+            pageBody = pageBody.replace('NAME', builtDirectors[0].Name);
+            isSingleDirectorOnScreen = true;
          }
         else{
             pageTitle = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c);
