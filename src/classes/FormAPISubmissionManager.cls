@@ -52,7 +52,7 @@ public with sharing class FormAPISubmissionManager {
 
         output = response.getStatusCode() + ': ' + response.getStatus() + '\n\n' + response.getBody();
 
-        if(response.getStatusCode() == 202){
+        if(response.getStatusCode() == 200){
             tx.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
             tx.ErrorDescription__c = '';
             tx = addIntegrationLog('Update Payment Success', tx);

@@ -57,12 +57,21 @@ public with sharing class TransactionSerialiser {
 			set;
 		}
 
+		public String accountAuthCode {get; set;}
+
 		public payment() {}
 		public payment(String paymentMethod, String referenceNumber, String accountNumber) {
 			this.paymentMethod = paymentMethod;
 			this.referenceNumber = referenceNumber;
 			this.accountNumber = accountNumber;
 
+		}
+
+		public payment(String paymentMethod, String referenceNumber, String accountNumber, String accountAuthCode) {
+			this.paymentMethod = paymentMethod;
+			this.referenceNumber = referenceNumber;
+			this.accountNumber = accountNumber;
+			this.accountAuthCode = accountAuthCode;
 		}
 	}
 
@@ -227,7 +236,7 @@ public with sharing class TransactionSerialiser {
 		if (transact.Form_Name__c.contains('DS01')) {
 			payment pay = new payment();
 
-			pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''));
+			pay = new payment((transact.isPaymentAccount__c == true ? 'account' : (transact.isPaymentCard__c == true ? 'creditcard' : (transact.isPaymentPaypal__c == true ? 'creditcard' : '')) ), (transact.isPaymentAccount__c == true ? '' : transact.paymentReference__c), (transact.isPaymentAccount__c == true ? transact.AccountNumber__c : ''), (transact.isPaymentAccount__c == true ? transact.AccountAuthorisationCode__c : '') );
 
 			JSONGenerator gen = JSON.createGenerator(true);
 			gen.writeStartObject();
@@ -238,6 +247,7 @@ public with sharing class TransactionSerialiser {
 			gen.writeEndObject();
 			return gen.getAsString();
 		}
+		
 		String valtoReturn = 'NoFormtoSerializeFound';
 		return valtoReturn;
 	}
