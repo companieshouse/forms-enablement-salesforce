@@ -365,6 +365,7 @@ public with sharing class TransactionSerialiser {
 			gen.writeFieldName('attachments');
 			gen.writeObject(lAtt);
 			gen.writeEndObject();
+			
 			return gen.getAsString();
 		}
 		String valtoReturn = 'NoFormtoSerializeFound';

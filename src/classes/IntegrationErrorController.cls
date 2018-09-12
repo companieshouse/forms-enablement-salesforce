@@ -48,10 +48,17 @@ public with sharing class IntegrationErrorController extends TransactionStepCont
         if (Test.isRunningTest()) {
             system.debug('test is running');
         } else {
-        //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
-        //submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
         FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
-        submissionMgr.submission = submissionMgrAPI.updatePayment(submissionMgr.submission);
+        if(submissionMgr.submission.Form_Name__c.contains('DS02'))
+        {
+            submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+        }
+        else{
+            submissionMgr.submission = submissionMgrAPI.updatePayment(submissionMgr.submission);
+        }
+        //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+        //
+        
         }
         submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
         submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (Integration Page Fail): ' + FormsApiClient.numberOfTimeCalled;
