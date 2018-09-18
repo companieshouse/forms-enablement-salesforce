@@ -1970,6 +1970,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>ServiceNotAvailable</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>SessionExpired</apexPage>
         <enabled>true</enabled>
     </pageAccesses>

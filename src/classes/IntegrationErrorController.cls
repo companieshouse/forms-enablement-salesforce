@@ -54,7 +54,14 @@ public with sharing class IntegrationErrorController extends TransactionStepCont
             submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
         }
         else{
-            submissionMgr.submission = submissionMgrAPI.updatePayment(submissionMgr.submission);
+            if(submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_SUBMITTED)
+                submissionMgr.submission = submissionMgrAPI.updatePayment(submissionMgr.submission);
+            else if(submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_ERROR)
+            {
+                submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+                submissionMgr.submission = submissionMgrAPI.updatePayment(submissionMgr.submission);
+            }
+                
         }
         //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
         //

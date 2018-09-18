@@ -471,7 +471,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         }
 
         //Then we can prooceed to the new integration as the payment is complete
-        if(submissionMgr.submission.Status__c == 'Paid') //&& submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_SUBMITTED)
+        if(submissionMgr.submission.Status__c == 'Paid' && submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_SUBMITTED)
         {
             //TODO: new integration code 
             //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
@@ -488,6 +488,15 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
             //Check the status of the new Integration
             if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR) {
+                PageReference pg = new PageReference('/IntegrationError');
+
+                pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                pg.setRedirect(true);
+                return pg;
+            }
+        }
+        else{
+            if (submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_ERROR) {
                 PageReference pg = new PageReference('/IntegrationError');
 
                 pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));

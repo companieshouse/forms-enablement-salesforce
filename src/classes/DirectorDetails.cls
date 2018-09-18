@@ -23,6 +23,7 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
         get;
         set;
     }
+    public String divForErrorLink {get; set;}
     public List < Officer__c > companyDirectors {
         get;
         set;
@@ -136,12 +137,28 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
         if (submissionMgr.submission.Officers__r.size() == 1) {
             if (submissionMgr.submission.Officers__r[0].IsPresenter__c) return nextStep();
         }
-
-        for (Officer__c off : submissionMgr.submission.Officers__r) {
-            for (directorWrapper directorstoUPDATE : getWrappedDirectors()) {
-                if (off.Id == directorstoUPDATE.off.Id) {
+        
+        for (Officer__c off : submissionMgr.submission.Officers__r) 
+        {
+            Integer k = 0;
+            for (directorWrapper directorstoUPDATE : getWrappedDirectors()) 
+            {
+                if (off.Id == directorstoUPDATE.off.Id) 
+                {
                     if (!emailValidation(directorstoUPDATE.email, directorstoUPDATE.off.Name)) {
                         directorstoUPDATE.validationErrors = emailErrors;
+                        errorVal = 'govuk-form-group--error';
+                        errorVal2 = '';
+                        divForErrorLink = '#OfficerDetailsPage:TempPage:mainForm:theRepeat:'+ k + ':email';
+                        return null;
+                    }
+                    if(String.isBlank(directorstoUPDATE.nameCorpo) && directorstoUPDATE.isCorporate)
+                    {
+                        divForErrorLink = '#OfficerDetailsPage:TempPage:mainForm:theRepeat:' + k + ':nameCorpo';
+                        emailErrors = 'The name is required for Corporate Officer: ' + directorstoUPDATE.off.Name;
+                        directorstoUPDATE.validationErrors2 = emailErrors;
+                        hasPageErrors = true;
+                        showErrors = true;
                         errorVal = 'govuk-form-group--error';
                         errorVal2 = '';
                         return null;
@@ -162,10 +179,16 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
                     // }
                     errorVal2 = '';
                     errorVal = '';
+                    divForErrorLink = '';
+                    directorstoUPDATE.validationErrors2 = '';
                     directorstoUPDATE.validationErrors = '';
                     directorstoUPDATE.confirmationErrors = '';
                     off.Email__c = directorstoUPDATE.email;
+                    if(directorstoUPDATE.isCorporate)
+                        off.AuthorizedSigner__c = directorstoUPDATE.nameCorpo;
+                    
                 }
+              k++;  
             }
         }
         persistStep();
@@ -180,15 +203,21 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
             get;
             set;
         }
+        public Boolean isCorporate {get; set;}
         public String email {
             get;
             set;
         }
+        public String nameCorpo {get; set;}
         public String confirmationemail {
             get;
             set;
         }
         public String validationErrors {
+            get;
+            set;
+        }
+        public String validationErrors2 {
             get;
             set;
         }
@@ -201,14 +230,16 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
 
             validationErrors = '';
             off = wrappedofficer;
+            isCorporate = wrappedofficer.isCorporateDirector__c;
+            nameCorpo = '';
             if (Test.isRunningTest()) {
                 confirmationemail = wrappedofficer.Email__c;
                 email = wrappedofficer.Email__c;
             } else {
-                email = '';
+                email = wrappedofficer.Email__c;
 
                 confirmationemail = '';
-            }
+            } 
         }
     }
     public Boolean emailValidation(String emailAddress, String username) {
@@ -260,18 +291,6 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
             }
         }
         return directorWrapper;
-    }
-    public Void saveWrappedDirectorsSelection() {
-        for (Officer__c off : submissionMgr.submission.Officers__r) {
-            for (directorWrapper directorstoUPDATE : getWrappedDirectors()) {
-                if (off.Id == directorstoUPDATE.off.Id) {
-                    emailValidation(directorstoUPDATE.email, directorstoUPDATE.off.Name);
-                    emailValidation(directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name);
-                    emailComparison(directorstoUPDATE.email, directorstoUPDATE.confirmationemail, directorstoUPDATE.off.Name);
-                    off.Email__c = directorstoUPDATE.email;
-                }
-            }
-        }
     }
 
     @RemoteAction

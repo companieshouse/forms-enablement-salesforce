@@ -32,10 +32,10 @@
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a href="#OfficerDetailsPage:TempPage:mainForm:theRepeat:0:email">{!emailErrors}</a>
+                                        <a href="{!divForErrorLink}">{!emailErrors}</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> 
                         </div>
                     </apex:outputPanel>
                     
@@ -56,6 +56,15 @@
                                 </div>
                             </apex:outputPanel>
                             <div class="govuk-form-group {!errorVal}">
+                                <apex:outputPanel rendered="{!director.isCorporate}">
+                                    <fieldset class="govuk-fieldset">
+                                        <legend class='govuk-fieldset__legend'>
+                                            <label for="nameCorpo" class="govuk-label">Name Corpo:</label>
+                                            <span class="govuk-error-message">{!director.validationErrors2}</span>
+                                            <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.nameCorpo}" id="nameCorpo" html-name="nameCorpo"></apex:inputText>
+                                        </legend>
+                                    </fieldset>
+                                </apex:outputPanel>
                                 <fieldset class="govuk-fieldset">
                                     <legend class='govuk-fieldset__legend'>
                                         <label for="email" class="govuk-label">Email Address:</label>

@@ -82,7 +82,7 @@
                             </legend>
                         </fieldset>
                     </div> -->
-                    <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox3}"></apex:outputText>
+                    <!-- <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox3}"></apex:outputText>
                     <div class="govuk-form-group {!behalfSelectionerrorVal}">
                         <fieldset class="govuk-fieldset">
                             <legend class='govuk-fieldset__legend'>
@@ -94,15 +94,11 @@
                                         <input class="govuk-radios__input" id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" />
                                         <label class="govuk-label govuk-radios__label" for="radio-1"> They have Power of Attorney</label>
                                     </div>
-                                    <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input" id="radio-3" onchange="updateSelectedBehalf(2);" type="radio" name="radio-group" value="2" />
-                                        <label class="govuk-label govuk-radios__label" for="radio-3"> They have authority to sign as the Corporate Entity</label>
-                                    </div>
                                 </div>
                             </legend>
                         </fieldset>
                         
-                    </div>
+                    </div> -->
                     <div class="govuk-form-group">
                         <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                         

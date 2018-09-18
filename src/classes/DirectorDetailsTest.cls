@@ -82,7 +82,6 @@ public with sharing class DirectorDetailsTest {
 
 		test1controller.emailComparison('testemail@email.com', 'testErroremail@email.com', 'testpersonusername');
 		test1controller.emailComparison('testemail@email.com', 'testemail@email.com', 'testpersonusername');
-		test1controller.saveWrappedDirectorsSelection();
 		test1controller.isPageAlreadyValidStep = true;
 		test1controller.redirectUser();
 

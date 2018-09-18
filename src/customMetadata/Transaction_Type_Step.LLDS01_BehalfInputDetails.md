@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>Display_Text_1__c</field>
-        <value xsi:type="xsd:string">Name of person approving</value>
+        <value xsi:type="xsd:string">Name</value>
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Email address of person approving</value>
+        <value xsi:type="xsd:string">The approval request will be sent to the address below</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -84,7 +84,7 @@
     </values>
     <values>
         <field>Step_Number__c</field>
-        <value xsi:type="xsd:double">6.0</value>
+        <value xsi:type="xsd:double">7.0</value>
     </values>
     <values>
         <field>Step_Type__c</field>

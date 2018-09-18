@@ -391,6 +391,8 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         if(directorDetailsList != null)
             for (CompaniesHouse.OfficerDetails officer : directorDetailsList) 
             {
+                Boolean isCorporate = false;
+
                 countOfficer++;
                 if(officerList.size() >= 51)
                     continue;
@@ -402,6 +404,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                     isLPCompany = false;
                     isPLCLTDCompany = true;
                     officerTerm = 'director';
+                    isCorporate = officer.officer_role == 'corporate-director' || officer.officer_role == 'corporate-nominee-director' ? true : false; 
 
                 } else if ( (officer.officer_role == 'llp-designated-member' || officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'corporate-llp-member' || officer.officer_role == 'llp-member') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
@@ -409,6 +412,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                     isPLCLTDCompany = false;
                     isLPCompany = false;
                     officerTerm = 'member';
+                    isCorporate = officer.officer_role == 'corporate-llp-designated-member' || officer.officer_role == 'corporate-llp-member' ? true : false; 
 
                 } else if ( (officer.officer_role == 'general-partner-in-a-limited-partnership' ||  officer.officer_role == 'limited-partner-in-a-limited-partnership') && (officer.resigned_on == null || officer.resigned_on > date.today())) {
                     addOff = true;
@@ -424,7 +428,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                         contactList.add(new Contact(Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = 'testLastname'));
 
                     } else {
-                        contactList.add(new Contact(Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
+                        contactList.add(new Contact(isCorporateDirectorTEXT__c = (isCorporate? 'true' : 'false') ,Transaction__c = submissionMgr.submission.Id, AccountId = submissionMgr.submission.Company__c, LastName = officer.name));
                     }
                     String offFirstName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringBefore(' ')) : '');
                     String offLastName = (extractOfficerName(0, officer.name) == null ? officer.name : extractOfficerName(0, officer.name));
@@ -432,7 +436,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
                     String offMiddleName = (extractOfficerName(1, officer.name) != null ? (extractOfficerName(1, officer.name).substringAfter(' ').substringAfter(' ')) : '');
                     String offName = offTitle + (offTitle == '' ? '' : ' ') + offFirstName + (offFirstName == '' ? '' : ' ' ) + offLastName;
                     listOfDirectorsAPI.add(offName);
-                    officerList.add(new Officer__c(Name = offName, Title__c = offTitle,
+                    officerList.add(new Officer__c(isCorporateDirector__c = isCorporate ,Name = offName, Title__c = offTitle,
                                                     Forename__c  = offFirstName,
                                                     Middlenames__c = offMiddleName,
                                                     Surname__c =  offLastName, Transaction__c = submissionMgr.submission.Id ));
