@@ -28,7 +28,7 @@ private class BehalfWhichSignatoryControllerTest {
 		transac.isSigningFinished__c = false;
 		transac.SoleDirectorPresenter__c = false;
 		transac.isMajorityRequired__c = true;
-		transac.isPresenterMultipleDirectors__c = true;
+		transac.isPresenterMultipleDirectors__c = false;
 		transac.isBehalfSignatoryEnable__c = true;
 		transac.OfficerCount__c = 1;
 		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0;
