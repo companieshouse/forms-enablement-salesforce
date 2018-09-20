@@ -183,7 +183,7 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
 
         if (selectedid == null) {
             hasPageErrors = true;
-            currentErrorMessage = 'You must select an officer';
+            currentErrorMessage = 'Select your name';
             errorVal = 'govuk-form-group--error';
             divForErrorLink = '#radio-' + companyDirectors[0].Id;
             return null;

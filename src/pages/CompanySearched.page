@@ -12,7 +12,6 @@
                 <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
                 <h2 class="govuk-heading-l">{!companyName}</h2>
                 <table class="govuk-table" >
-                    <caption class="govuk-table__caption">Company information</caption>
                     <tbody class="govuk-table__body">
                         <tr class="govuk-table__row">
                             <th class="govuk-table__header" scope="row">Company number</th>

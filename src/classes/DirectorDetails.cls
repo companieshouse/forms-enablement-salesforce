@@ -251,7 +251,7 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
         }
         if (String.isBlank(email)) {
             //throw new Form_CustomException(' email is blank  for ' + ' ' + username);
-            emailErrors = 'Email Address for' + ' ' + username + ' ' + 'must not be blank';
+            emailErrors = 'Enter an email address for' + ' ' + username;
             hasPageErrors = true;
             showErrors = true;
             return false;

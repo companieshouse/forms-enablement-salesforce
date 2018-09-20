@@ -215,7 +215,7 @@ public with sharing class PresenterDirectorController extends TransactionStepCon
         if (directorPresenter == null) {
             hasPageErrors = true;
             errorVal = 'govuk-form-group--error';
-            currentPageError = 'Please make a selection to continue';
+            currentPageError = 'Select yes or no';
             divForErrorLink = '#radio-indent-1';
             return null;
         }

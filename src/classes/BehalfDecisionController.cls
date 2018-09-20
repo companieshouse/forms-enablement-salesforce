@@ -130,6 +130,11 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
                 }
 
             }
+            else if(submissionMgr.submission.Contacts__r.size() == 1)
+            {
+                singleDirectorNotPresentorWaitingSigning = true;
+                offName = submissionMgr.submission.Officers__r[0].Name;
+            }
             else{
                 multipleDirectorWaitingSigning = true;
             }
@@ -169,7 +174,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
     public PageReference nextAction() {
         if (behalfValidation == null) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please make a selection to continue';
+            currentErrorMessage = 'Select yes or no';
             errorVal = 'govuk-form-group--error';
             return null;
         }

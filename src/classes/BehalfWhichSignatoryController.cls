@@ -86,7 +86,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public PageReference nextAction() {
         if (!validateOfficer()) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
+            currentErrorMessage = 'Select a director';
             errorVal = 'govuk-form-group--error';
             divForErrorLink = '#radio-' + listOfDirectors[0].officer.Id;
             return null;
@@ -169,6 +169,14 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
 
                 return nextStep();
             }
+        }
+
+        if(!isPresenterDetected && !isSolePresenterDetected && submissionMgr.submission.Officers__r.size() ==1)
+        {
+            submissionMgr.submission.Officers__r[0].isSignatoryBehalf__c = true;
+            update submissionMgr.submission.Officers__r[0];
+
+            return nextStep();
         }
 
         listOfDirectors = new List<officerContainer>();

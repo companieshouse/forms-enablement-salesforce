@@ -27,7 +27,10 @@
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
-                                An error has occurred.
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!emailErrors}
                             </h1>
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
@@ -67,7 +70,7 @@
                                 </apex:outputPanel>
                                 <fieldset class="govuk-fieldset">
                                     <legend class='govuk-fieldset__legend'>
-                                        <label for="email" class="govuk-label">Email Address:</label>
+                                        <label for="email" class="govuk-label">Email address:</label>
                                         <span class="govuk-error-message">{!director.validationErrors}</span>
                                         <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
                                     </legend>

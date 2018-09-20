@@ -32,12 +32,15 @@ Ver. Author             Date        Detail
                         <apex:outputPanel rendered="{!hasPageErrors}">
                             <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
                                 <h1 class="govuk-error-summary__title" id="error-summary-title">
-                                    An error has occurred.
+                                    There is a problem
+                                    <br/>
+                                    <br/>
+                                    You must agree to continue
                                 </h1>
                                 <div class="govuk-error-summary__body">
                                     <ul class="govuk-list govuk-error-summary__list">
                                         <li>
-                                            <a href="#GuidancePage:TempPage:form:agree">You must agree to proceed</a>
+                                            <a href="#GuidancePage:TempPage:form:agree">You must agree to continue</a>
                                         </li>
                                     </ul>
                                 </div>

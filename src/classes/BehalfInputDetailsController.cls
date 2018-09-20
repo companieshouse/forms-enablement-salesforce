@@ -89,7 +89,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public PageReference nextAction() {
         if (nameAuthorized.length() == 0) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please provide the name of person approving';
+            currentErrorMessage = 'Enter the name of the person approving for ' + currentOfficer.Name;
             nameErrorVal = 'govuk-form-group--error';
             divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputName';
             nameError = true;
@@ -101,7 +101,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         }
         if (String.isBlank(emailDirector)) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please provide the email of the person approving';
+            currentErrorMessage = 'Enter the email of the person approving for ' + currentOfficer.Name;
             emailErrorVal = 'govuk-form-group--error';
             divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
@@ -119,7 +119,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         catch(DMLException e)
         {
             hasPageErrors = true;
-            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
+            currentErrorMessage = 'Email Address is not valid';
             emailErrorVal = 'govuk-form-group--error';
             divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;

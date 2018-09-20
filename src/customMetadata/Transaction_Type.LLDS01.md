@@ -73,7 +73,7 @@ Confirm the LLP&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Company_Page_HiddenT2__c</field>
-        <value xsi:type="xsd:string">&lt;div class=&quot;govuk-details__text&quot;&gt;A LLP number is a unique number issued by Companies House when a limited liability partnership (LLP) is set up. Your LLP number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using th</value>
+        <value xsi:type="xsd:string">&lt;div class=&quot;govuk-details__text&quot;&gt;Your LLP number consists of 8 numbers, or 2 letters followed by 6 numbers. You can find this by using th</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
@@ -84,7 +84,7 @@ Confirm the LLP&lt;/h1&gt;</value>
     <values>
         <field>Company_Page_Title__c</field>
         <value xsi:type="xsd:string">&lt;h1 class=&quot;govuk-heading-xl&quot;&gt;
-Tell us which LLP you want to close
+Which LLP do you want to close?
 &lt;/h1&gt;</value>
     </values>
     <values>

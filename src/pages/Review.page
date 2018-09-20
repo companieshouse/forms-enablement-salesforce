@@ -33,13 +33,6 @@
                         <p class="govuk-body-l">{!displayText1}
                         </p>
                         <table class="govuk-table">
-                            <thead class="govuk-table__head">
-                                <tr class="govuk-table__row">
-                                    <th class="govuk-table__header" colspan="3">
-                                        <h2 class="govuk-heading-m">Request details</h2>
-                                    </th>
-                                </tr>
-                            </thead>
                             <tbody class="govuk-table__body">
                                 <tr class="govuk-table__row">
                                     <td class="govuk-table__header" scope="row">Company name</td>
@@ -65,26 +58,10 @@
                                     </td>
                                 </tr>
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Presenter details</td>
+                                    <td class="govuk-table__header" scope="row">Email Address</td>
                                     <td class="govuk-table__cell ">{!presenterEmail}
                                         <br/>{!presenterName}
                                         <br/> {!presenterPhone}
-                                    </td>
-                                </tr>
-                                <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Application</td>
-                                    <td class="govuk-table__cell ">
-                                        <section class="attachment embedded" id="attachment_1365490">
-                                            <div style="display:{!IF(showDoc," block ","none ")};" >
-                                                <p class="govuk-body">
-                                                    <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> (PDF, {!size}B)
-                                                </p>
-                                            </div>
-                                            <div style="display:{!IF(showDoc," none ","block ")};" >
-                                                <p class="govuk-body">No Documents founds.
-                                                </p>
-                                            </div>
-                                        </section>
                                     </td>
                                 </tr>
                             </tbody>
