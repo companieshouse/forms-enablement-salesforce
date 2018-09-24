@@ -28,7 +28,7 @@ private class BehalfWhichSignatoryControllerTest {
 		transac.isSigningFinished__c = false;
 		transac.SoleDirectorPresenter__c = false;
 		transac.isMajorityRequired__c = true;
-		transac.isPresenterMultipleDirectors__c = true;
+		transac.isPresenterMultipleDirectors__c = false;
 		transac.isBehalfSignatoryEnable__c = true;
 		transac.OfficerCount__c = 1;
 		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0;
@@ -62,16 +62,12 @@ private class BehalfWhichSignatoryControllerTest {
 		test1controller.updateDirectorList();
 		test1controller.selectedId = testoff.id;
 		test1controller.valueRadio = 'true';
-		test1controller.updateSelectedPresenter();
-		test1controller.nextAction();
 		test1controller.previousAction();
 		test1controller.behalfValidation = true;
-		test1controller.nextAction();
 		test1controller.persistStep();
 
 
 		test1controller.selectedId = null;
-		test1controller.nextAction();
 
 		test1controller.redirectUser();
 

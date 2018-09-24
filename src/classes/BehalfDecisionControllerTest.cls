@@ -25,9 +25,9 @@ private class BehalfDecisionControllerTest {
 		transac.finishedAddingShares__c = true;
 		transac.isDigitalSignatureNeeded__c = true;
 		transac.isSigningFinished__c = false;
-		transac.SoleDirectorPresenter__c = true;
+		transac.SoleDirectorPresenter__c = false;
 		transac.isMajorityRequired__c = true;
-		transac.isPresenterMultipleDirectors__c = true;
+		transac.isPresenterMultipleDirectors__c = false;
 		transac.OfficerCount__c = 1;
 		transac.Historical_Valid_Step_Ids__c = testStep1.Id + AppConstants.DELIM_HISTORICAL_STEP + 0;
 		insert transac;
@@ -59,7 +59,6 @@ private class BehalfDecisionControllerTest {
 		test1controller.previousAction();
 		test1controller.behalfValidation = true;
 		test1controller.nextAction();
-		test1controller.initPage();
 		//test1controller.isPageAlreadyValidStep = true;
 		//test1controller.redirectUser();
 		test1controller.persistStep();

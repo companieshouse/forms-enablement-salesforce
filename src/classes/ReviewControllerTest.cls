@@ -80,7 +80,6 @@ public with sharing class ReviewControllerTest {
         test1controller.nextAction();
         test1controller.previousAction();
         test1controller.startReviewProcesses();
-        test1controller.confirmationVal = false;
         test1controller.nextAction();
         test1controller.resetTransaction();
 

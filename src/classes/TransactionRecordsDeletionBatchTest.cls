@@ -46,6 +46,7 @@ private class TransactionRecordsDeletionBatchTest {
         transac.isPresenterMultipleDirectors__c = true;
         transac.isBehalfSignatoryEnable__c = true;
         transac.OfficerCount__c = 1;
+        transac.ExpirySEnt__c = true;
         transac.Presenter__c = testPresenter.Id;
         transac.CreatedDateUnitTest__c = system.today().addMonths(-13);
         insert transac;
@@ -143,6 +144,7 @@ private class TransactionRecordsDeletionBatchTest {
         transac.isPresenterMultipleDirectors__c = true;
         transac.isBehalfSignatoryEnable__c = true;
         transac.OfficerCount__c = 1;
+        transac.ExpirySEnt__c = true;
         transac.Presenter__c = testPresenter.Id;
         transac.CreatedDateUnitTest__c = system.today().addMonths(-13);
         insert transac;
@@ -261,6 +263,7 @@ private class TransactionRecordsDeletionBatchTest {
         transac.isPresenterMultipleDirectors__c = true;
         transac.isBehalfSignatoryEnable__c = true;
         transac.OfficerCount__c = 1;
+        transac.ExpirySEnt__c = true;
         transac.Presenter__c = testPresenter.Id;
         transac.CreatedDateUnitTest__c = system.today().addMonths(-2);
         insert transac;

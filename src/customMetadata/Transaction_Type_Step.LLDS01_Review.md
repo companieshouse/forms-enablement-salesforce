@@ -12,7 +12,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Confirm</value>
+        <value xsi:type="xsd:string">Pay to submit</value>
     </values>
     <values>
         <field>CustomView__c</field>
@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Do you still want to close COMPANYNAME?</value>
+        <value xsi:type="xsd:string">Check before you Submit</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

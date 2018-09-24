@@ -6,7 +6,7 @@
 	<apex:composition template="TransactionPageTemplate">
   
 		<apex:define name="content">
-			<div id="errorList" class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1" hidden="hidden">
+			<div id="errorList" class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
 				<h2 class="govuk-error-summary__title" id="error-summary-heading-example-1">
 					 An error has occurred.
 					<br/>Session terminated.

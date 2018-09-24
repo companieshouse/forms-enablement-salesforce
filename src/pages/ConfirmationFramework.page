@@ -126,7 +126,6 @@ Ver. Author        Date        Detail
                             </div>
                         </section>
                         <br/>
-                    <h2 class="govuk-heading-m">Your next steps</h2>
                     <p class="govuk-body">
 
                         <apex:outputText escape="false" value="{!pageBody2}"/>

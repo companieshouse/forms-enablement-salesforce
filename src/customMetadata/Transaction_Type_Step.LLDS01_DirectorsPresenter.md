@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">Are you a director of COMPANYNAME?</value>
+        <value xsi:type="xsd:string">Are you a member of COMPANYNAME?</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>

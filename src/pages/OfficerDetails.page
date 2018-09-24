@@ -27,15 +27,18 @@
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
                             <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
-                                An error has occurred.
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!emailErrors}
                             </h1>
                             <div class="govuk-error-summary__body">
                                 <ul class="govuk-list govuk-error-summary__list">
                                     <li>
-                                        <a href="#OfficerDetailsPage:TempPage:mainForm:theRepeat:0:email">{!emailErrors}</a>
+                                        <a href="{!divForErrorLink}">{!emailErrors}</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> 
                         </div>
                     </apex:outputPanel>
                     
@@ -46,19 +49,30 @@
                         <!--<apex:outputText escape="false" value="{!emailMessage}"></apex:outputText>-->
                         <br/>
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
-                            <div class="govuk-form-group">
-                                <fieldset class="govuk-fieldset">
-                                    <legend class='govuk-fieldset__legend'>
-                                        <label for="email" class="govuk-body govuk-!-font-weight-bold govuk-!-font-size-24">{!director.off.Name}</label>
-                                    </legend>
-                                </fieldset>
-                            </div>
+                            <apex:outputPanel rendered="{!!isSingleDirectorOnScreen}">
+                                <div class="govuk-form-group">
+                                    <fieldset class="govuk-fieldset">
+                                        <legend class='govuk-fieldset__legend'>
+                                            <label for="email" class="govuk-body govuk-!-font-weight-bold govuk-!-font-size-24">{!director.off.Name}</label>
+                                        </legend>
+                                    </fieldset>
+                                </div>
+                            </apex:outputPanel>
                             <div class="govuk-form-group {!errorVal}">
+                                <apex:outputPanel rendered="{!director.isCorporate}">
+                                    <fieldset class="govuk-fieldset">
+                                        <legend class='govuk-fieldset__legend'>
+                                            <label for="nameCorpo" class="govuk-label">Name Corpo:</label>
+                                            <span class="govuk-error-message">{!director.validationErrors2}</span>
+                                            <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.nameCorpo}" id="nameCorpo" html-name="nameCorpo"></apex:inputText>
+                                        </legend>
+                                    </fieldset>
+                                </apex:outputPanel>
                                 <fieldset class="govuk-fieldset">
                                     <legend class='govuk-fieldset__legend'>
-                                        <label for="email" class="govuk-label">Email Address</label>
+                                        <label for="email" class="govuk-label">Email address:</label>
                                         <span class="govuk-error-message">{!director.validationErrors}</span>
-                                        <apex:inputText styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                                        <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
                                     </legend>
                                 </fieldset>
                             </div>

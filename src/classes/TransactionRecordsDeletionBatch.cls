@@ -41,7 +41,7 @@ public with sharing class TransactionRecordsDeletionBatch implements Database.Ba
 
         String whereCondition = ' CreatedDate <= :targetDate';
         //We want to query all the record at once then 
-        query = 'SELECT Id, (SELECT Id FROM DocuSign_Status__r), (SELECT Id FROM Attachments),  (SELECT Id FROM Contacts__r) FROM Transaction__c Where ';
+        query = 'SELECT Id, (SELECT Id FROM DocuSign_Status__r), (SELECT Id FROM Attachments),  (SELECT Id FROM Contacts__r) FROM Transaction__c Where ExpirySEnt__c = true AND ';
 
         if(Test.isRunningTest())
         {

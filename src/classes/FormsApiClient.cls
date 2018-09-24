@@ -20,9 +20,54 @@ public with sharing class FormsApiClient {
     private String SUBMISSION_ENDPOINT = '/submission';
     private String BARCODE_ENDPOINT = '/barcode';
     private String PRESENTERAPI = '/presenterauth';
+    private String confirmationPaymentEndPoint = '/confirmpaid';
 
     //Added for log purpose
     public static Integer numberOfTimeCalled {get; set;} 
+
+    /**
+    * Update the payment confirmation within the gateway
+    */
+    public HttpResponse updatePayment(Transaction__c tx){
+        Forms_API_Service__c connection = getConnection();
+
+        String log = '<br/>-----------------------------------------------------------------------------------';
+        log += '<br/> Integration Date Time: ' + System.now();
+        log += '<br/> Transaction Id: ' + tx.Id;
+        log += '<br/> Barcode: ' + tx.Barcode__c;
+        log += '<br/> Company Number: ' + tx.CompanyNumber__c;
+        log += '<br/> Doc Type: ' + tx.Transaction_Type__c;
+        log += '<br/> Integration Updating payment on gateway';
+        log += '<br/>-----------------------------------------------------------------------------------';
+
+        FormsApiClient.numberOfTimeCalled = FormsApiClient.numberOfTimeCalled == null ?  1 : FormsApiClient.numberOfTimeCalled+ 1;
+
+        // Create Http request
+        HttpRequest request = new HttpRequest();
+
+        request.setEndpoint(connection.URL__c + confirmationPaymentEndPoint);
+        request.setMethod('POST');
+        request.setHeader('Content-Type', 'application/json');
+        request.setHeader('Accept', '*/*');
+        request.setHeader('Authorization', 'Basic ' + getAuthentication(connection));
+
+        String requestBody = TransactionSerialiser.getPaymentBody(tx);
+
+        request.setTimeout(120000);
+        request.setBody(requestBody);
+
+        // Send the request
+        Http http = new Http();
+        HTTPResponse response = http.send(request);
+
+        if(tx.AmendmentHistory__c == null)
+            tx.AmendmentHistory__c = log;
+        else
+            tx.AmendmentHistory__c += log;
+
+        return response;
+
+    }
 
     /**
     * Request Barcode from FormsAPI
@@ -171,7 +216,6 @@ public with sharing class FormsApiClient {
         // Send the request
         Http http = new Http();
         HTTPResponse response = http.send(request);
-
         // Debug response
         System.debug(LoggingLevel.INFO, 'Response status code: ' + response.getStatusCode());
         System.debug(LoggingLevel.INFO, 'Response body: ' + response.getBody());
@@ -269,36 +313,21 @@ public with sharing class FormsApiClient {
         {
             return jsonPartBody;
         }
-        if (tx.Form_Name__c.contains('DS01')) {
-            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
-            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
-            jsonPartBody = jsonPartBody.remove('"shares" : null,');
-            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
-            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
-            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
-            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
-            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
-        }
+        
         if(tx.Form_Name__c.contains('DS02'))
         {//\n
             jsonPartBody = jsonPartBody.remove('"payment" : {');
             jsonPartBody = jsonPartBody.remove('"referenceNumber" : null,');
             jsonPartBody = jsonPartBody.remove('"paymentMethod" : null,');
-            jsonPartBody = jsonPartBody.remove('"accountNumber" : null\n      },');
-            jsonPartBody = jsonPartBody.remove('"subdividedClasses" : null,');
-            jsonPartBody = jsonPartBody.remove('"statementOfCapital" : null,');
-            jsonPartBody = jsonPartBody.remove('"shares" : null,');
-            jsonPartBody = jsonPartBody.remove('"shareAssignments" : null,');
-            jsonPartBody = jsonPartBody.remove('"redeemedClasses" : null,');
-            jsonPartBody = jsonPartBody.remove('"reconvertedClasses" : null,');
-            jsonPartBody = jsonPartBody.remove('"consolidatedClasses" : null');
-            jsonPartBody = jsonPartBody.remove('"detailsOfVariationOfRights" : null,');
+            jsonPartBody = jsonPartBody.remove('"accountNumber" : null,');
+            jsonPartBody = jsonPartBody.remove('"accountAuthCode" : null\n      },');
             jsonPartBody = jsonPartBody.remove('"officers" : {');
             jsonPartBody = jsonPartBody.remove('"officer" : [ ]\n      },');
         }
         jsonPartBody = jsonPartBody.replace('sNumber', 'number');
         jsonPartBody = jsonPartBody.replace('classValue', 'class');
         jsonPartBody = jsonPartBody.remove('"officers" : null,');
+
         system.debug(LoggingLevel.ERROR, 'Json ready to be sent:' + jsonPartBody);
         return jsonPartBody;
     }

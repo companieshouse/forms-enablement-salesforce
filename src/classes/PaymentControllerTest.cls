@@ -709,5 +709,47 @@ public with sharing class PaymentControllerTest {
 
 
     }
+
+    @IsTest
+    public static void testSubmit()
+    {
+        CompaniesHouseTestData testData = CompaniesHouseTestData.getInstance();
+
+        Transaction_Type__mdt testForm2 = CompaniesHouseTestData.getInstance().testForm2;
+
+        Transaction_Type_Step__mdt testStep4 = CompaniesHouseTestData.getInstance().testStep4;
+
+        Account testPresenter = CompaniesHouseTestData.getInstance().presenterAccount;
+
+        Account testCompany = CompaniesHouseTestData.getInstance().companyAccount;
+
+        insert testPresenter;
+
+        insert testCompany;
+
+        Transaction__c transac = testData.tx;
+
+        transac.Company__c = testCompany.Id;
+        transac.Valid_Step_Ids__c = testStep4.Id;
+        transac.Status__c = 'Paid';
+
+        insert transac;
+
+        Test.startTest();
+
+        PageReference pg = Page.Payment;
+        pg.getParameters().put('c', SecurityManager.encryptText(transac.Id+AppConstants.ID_DELIM_CHAR+testStep4.Id+AppConstants.ID_DELIM_CHAR+String.valueOf(DateTime.now().getTime())));
+        Test.setCurrentPage(pg);
+        Test.setMock(HttpCalloutMock.class, new FormsApiMock());
+        Cookie sessionValidity = new Cookie('SFCHS', SecurityManager.encryptText('test@test.com'+AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 120, true);
+
+        pg.setCookies(new Cookie[]{sessionValidity});
+
+        PaymentController pay = new PaymentController();
+
+        pay.getNextStep();
+
+        Test.stopTest();
+    }
     
 }

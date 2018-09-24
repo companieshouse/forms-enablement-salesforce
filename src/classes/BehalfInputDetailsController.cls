@@ -76,11 +76,8 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
                 off.AuthorizedSigner__c = nameAuthorized;
                 off.Email__c = emailDirector;
 
-                if (behalfSelection == 1) {
-                    off.isPowerOfAttorney__c = true;
-                } else if (behalfSelection == 2) {
-                    off.isCorporateDirector__c = true;
-                }
+                off.isPowerOfAttorney__c = true;
+                
             }
         }
 
@@ -92,7 +89,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
     public PageReference nextAction() {
         if (nameAuthorized.length() == 0) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please provide the name of person approving';
+            currentErrorMessage = 'Enter the name of the person approving for ' + currentOfficer.Name;
             nameErrorVal = 'govuk-form-group--error';
             divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputName';
             nameError = true;
@@ -104,7 +101,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         }
         if (String.isBlank(emailDirector)) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please provide the email of the person approving';
+            currentErrorMessage = 'Enter the email of the person approving for ' + currentOfficer.Name;
             emailErrorVal = 'govuk-form-group--error';
             divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
@@ -122,7 +119,7 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         catch(DMLException e)
         {
             hasPageErrors = true;
-            currentErrorMessage = 'Email Address for' + ' ' + nameAuthorized + ' ' + ' is not valid';
+            currentErrorMessage = 'Email Address is not valid';
             emailErrorVal = 'govuk-form-group--error';
             divForErrorLink = '#BehalfInputPage:TempPage:mainForm:inputEmail';
             emailError = true;
@@ -181,19 +178,19 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
         //     behalfSelectionerrorVal = '';
         //     return null;
         // }
-        if (behalfSelection == null) {
-            hasPageErrors = true;
-            currentErrorMessage = 'Please select how are they acting on behalf of' + ' ' + currentOfficer.Name;
-            behalfSelectionerrorVal = 'govuk-form-group--error';
-            divForErrorLink = '#radio-1';
-            behalfError = true;
-            emailConfirmError = false;
-            emailError = false;
-            nameError = false;
-            nameErrorVal = '';
-            emailErrorVal = '';
-            return null;
-        }
+        // if (behalfSelection == null) {
+        //     hasPageErrors = true;
+        //     currentErrorMessage = 'Please select how are they acting on behalf of' + ' ' + currentOfficer.Name;
+        //     behalfSelectionerrorVal = 'govuk-form-group--error';
+        //     divForErrorLink = '#radio-1';
+        //     behalfError = true;
+        //     emailConfirmError = false;
+        //     emailError = false;
+        //     nameError = false;
+        //     nameErrorVal = '';
+        //     emailErrorVal = '';
+        //     return null;
+        // }
         if (Test.isRunningTest()) {
             System.debug('test running');
         } else {
@@ -249,8 +246,9 @@ public with sharing class BehalfInputDetailsController extends TransactionStepCo
 
         //Initialise the current directors
         for (Officer__c off : submissionMgr.submission.Officers__r) {
-            if (!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c) {
+            if (!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c && !off.isCorporateDirector__c) {
                 currentOfficer = off;
+                emailDirector = currentOfficer.Email__c;
             }
         }
 

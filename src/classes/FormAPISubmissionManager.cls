@@ -45,6 +45,25 @@ public with sharing class FormAPISubmissionManager {
         return currentTransaction;
     }
 
+    public Transaction__c updatePayment(Transaction__c tx)
+    {
+        FormsApiClient client = new FormsApiClient();
+        HTTPResponse response = client.updatePayment(tx); 
+
+        output = response.getStatusCode() + ': ' + response.getStatus() + '\n\n' + response.getBody();
+
+        if(response.getStatusCode() == 200){
+            tx.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+            tx.ErrorDescription__c = '';
+            tx = addIntegrationLog('Update Payment Success', tx);
+        } else {
+            tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+            tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output);
+            tx = addIntegrationLog('Update Payment Failed<br/> Reason: ' + tx.ErrorDescription__c , tx);
+        }
+
+        return tx;
+    }
     
     public Transaction__c sendForm(Transaction__c tx){
         // - This function will receive a Package with multiple transactions
@@ -68,7 +87,13 @@ public with sharing class FormAPISubmissionManager {
                     tx = addIntegrationLog('Barcode Success', tx);
 
                 } else {
-                    tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                    if(tx.Form_Name__c.contains('DS02'))
+                    {
+                        tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                    }
+                    else {
+                        tx.PrePaymentIntegrationStatus__c = AppConstants.REQUEST_STATUS_ERROR;
+                    }
                     tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output) ;
                     tx = addIntegrationLog('Barcode failed.<br/> Reason: ' + tx.ErrorDescription__c , tx);
                 }
@@ -95,11 +120,23 @@ public with sharing class FormAPISubmissionManager {
 
             
             if(response.getStatusCode() == 202){
-                tx.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+                if(tx.Form_Name__c.contains('DS02'))
+                {
+                    tx.Status__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+                }
+                else {
+                    tx.PrePaymentIntegrationStatus__c = AppConstants.REQUEST_STATUS_SUBMITTED;
+                }
                 tx.ErrorDescription__c = '';
                 tx = addIntegrationLog('SendForm Success', tx);
             } else {
-                tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                if(tx.Form_Name__c.contains('DS02'))
+                {
+                    tx.Status__c = AppConstants.REQUEST_STATUS_ERROR;
+                }
+                else {
+                    tx.PrePaymentIntegrationStatus__c = AppConstants.REQUEST_STATUS_ERROR;
+                }
                 tx.Barcode__c = '';
                 tx.ErrorDescription__c = (output.length() > 10000 ? output.substring(0, 9999) : output);
                 tx = addIntegrationLog('SendForm Failed<br/> Reason: ' + tx.ErrorDescription__c , tx);

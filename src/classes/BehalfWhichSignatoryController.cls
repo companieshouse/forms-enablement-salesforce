@@ -86,7 +86,7 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
     public PageReference nextAction() {
         if (!validateOfficer()) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please select the officer(s) that someone will be approving on their behalf.';
+            currentErrorMessage = 'Select a director';
             errorVal = 'govuk-form-group--error';
             divForErrorLink = '#radio-' + listOfDirectors[0].officer.Id;
             return null;
@@ -145,22 +145,60 @@ public with sharing class BehalfWhichSignatoryController extends TransactionStep
             return nextStep();
         }
 
+        Boolean isSolePresenterDetected = submissionMgr.submission.SoleDirectorPresenter__c == null ? false : submissionMgr.submission.SoleDirectorPresenter__c;
+        Boolean isPresenterDetected = SubmissionMgr.submission.isPresenterMultipleDirectors__c == null ? false : submissionMgr.submission.isPresenterMultipleDirectors__c;
+        if (isPresenterDetected || isSolePresenterDetected) {
+            List<Officer__c> localCompanyDirectors = new List<Officer__c>();
+            if (submissionMgr.submission.Officers__r != null) {
+                if (submissionMgr.submission.Officers__r.size() > 0) {
+                    for (Officer__c off : submissionMgr.submission.Officers__r) {
+                        if(!off.isCorporateDirector__c && off.isSignatory__c && !off.IsPresenter__c)
+                        {
+                            localCompanyDirectors.add(off);
+                        }
+                    }
+                }
+            }
+            if(localCompanyDirectors.size() == 1)
+            {
+                Officer__c off1 = localCompanyDirectors[0];
+                //Here we need to check if the 1 director within the list is presenter
+                off1.isSignatoryBehalf__c = true;
+
+                update off1;
+
+                return nextStep();
+            }
+        }
+
+        if(!isPresenterDetected && !isSolePresenterDetected && submissionMgr.submission.Officers__r.size() ==1)
+        {
+            submissionMgr.submission.Officers__r[0].isSignatoryBehalf__c = true;
+            update submissionMgr.submission.Officers__r[0];
+
+            return nextStep();
+        }
+
         listOfDirectors = new List<officerContainer>();
         //Initialise the list of directors
         for (Officer__c off : submissionMgr.submission.Officers__r) {
-            if (off.isSignatory__c && !off.IsPresenter__c) {
+            if (off.isSignatory__c && !off.IsPresenter__c && !off.isCorporateDirector__c) {
                 listOfDirectors.add(new officerContainer(off));
             }
         }
+
+        if(listOfDirectors.isEmpty())
+        {
+            return nextStep();
+        }
+        
         textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
         if(listOfDirectors.size() == 1)
         {
             headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
-            headerBox1 = headerBox1.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.replace('s','')));
         }
         else{
             headerBox1 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c );
-            headerBox1 = headerBox1.replace('director', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
         }
                 
         return null;

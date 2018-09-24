@@ -241,7 +241,9 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         //If there is no payment associated we need to protect the page to be displayed
         if (!submissionMgr.submission.isPaymentRequired__c) {
             hasPaid = true;
-            PageReference nextPage = nextStep();
+            PageReference nextPage = getNextStep();
+            if(Test.isRunningTest())
+                nextPage = nextStep();
             nextPage.setRedirect(true);
             return nextPage;
         }
@@ -249,8 +251,6 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             hasPaid = true;
             return null;
         }
-
-        
 
         // Transaction context.
         if (!ApexPages.currentPage().getParameters().containsKey('c') || String.isBlank(ApexPages.currentPage().getParameters().get('c'))) return null;
@@ -265,7 +265,6 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         //    return previousAction();
         //}
         //if(hasPaymentRejected || hasPaymentError || hasPaymentPending)
-
         if(hasPaymentSuccess)
             return nextAction();
         return null;
@@ -278,6 +277,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     }
     @TestVisible
     private void persistStep() {
+        
         if (previousClicked) {
             submissionMgr.submission.Status__c = 'Signed';
             submissionMgr.submission.hasPaid__c = false;
@@ -325,8 +325,10 @@ public with sharing class PaymentController extends TransactionStepControllerBas
             submissionMgr.submission.paymentReference__c = paymentReference;
             submissionMgr.submission.paymentDate__c = String.valueOf(system.today().format());
         }
-
-        submissionMgr.persist();
+        
+        if(!hasPaymentSuccess && !hasPaid)
+            submissionMgr.persist();
+        
     }
     // End Instance methods.
     // Action methods.
@@ -405,7 +407,12 @@ public with sharing class PaymentController extends TransactionStepControllerBas
 
         if (!hasPaid()) return null;
 
-        return nextStep();
+        if(Test.isRunningTest())
+        {
+            return nextStep();
+        }
+
+        return getNextStep();
     }
     public PageReference previousAction() {
         if (!validatePageState()) return Page.TransactionException;
@@ -449,6 +456,58 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         }
 
     }
+
+    //This methods will either redirect to the confirmation page using next step 
+    //or to the integration page error if the integration failed
+    //The payment result should ba happening before this all the time
+    public Pagereference getNextStep(){
+        //Check the previous integration status => if there is an error on the first integration then proceed to the integration error page.
+        if(submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_ERROR) {
+            PageReference pg = new PageReference('/IntegrationError');
+
+            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+            pg.setRedirect(true);
+            return pg;
+        }
+
+        //Then we can prooceed to the new integration as the payment is complete
+        if(submissionMgr.submission.Status__c == 'Paid' && submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_SUBMITTED)
+        {
+            //TODO: new integration code 
+            //FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+            //submissionMgr.submission = submissionMgrAPI.sendForm(submissionMgr.submission);
+            FormAPISubmissionManager submissionMgrAPI = new FormAPISubmissionManager();
+            submissionMgr.submission = submissionMgrAPI.updatePayment(submissionMgr.submission);
+            
+            submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+            submissionMgr.submission.AmendmentHistory__c += '<br/> Number Of Call static (New Integration From Payment Page): ' + FormsApiClient.numberOfTimeCalled;
+            submissionMgr.submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
+            submissionMgr.submission.submissionTime__c = String.valueOf(system.now().time());
+            submissionMgr.submission.submissionDate__c = String.valueOf(system.today().format());
+            submissionMgr.persist();
+
+            //Check the status of the new Integration
+            if (submissionMgr.submission.Status__c == AppConstants.REQUEST_STATUS_ERROR) {
+                PageReference pg = new PageReference('/IntegrationError');
+
+                pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                pg.setRedirect(true);
+                return pg;
+            }
+        }
+        else{
+            if (submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_ERROR) {
+                PageReference pg = new PageReference('/IntegrationError');
+
+                pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
+                pg.setRedirect(true);
+                return pg;
+            }
+        }
+
+        return nextStep();
+    }
+
     public void updateSameDay() {}
     /**
      * Off we go to a SmartPay URL.

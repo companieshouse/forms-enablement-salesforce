@@ -22,7 +22,13 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
 
     public Boolean behalfValidation {get; set;}
 
+    public Boolean singleDirectorNotPresentorWaitingSigning {get; set;}
+    public Boolean multipleDirectorWaitingSigning {get; set;}
+    
+    public List<Officer__c> displayedListOfDirector {get; set;}
+
     public String textBox1 {get; set;}
+    public String textBox2 {get; set;}
     public String headerBox1 {get; set;}
     public String currentErrorMessage {get; set;}
     public String errorVal {get; set;}
@@ -40,23 +46,121 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         sigNeeded = submissionMgr.submission.isDigitalSignatureNeeded__c;
         signingFinished = submissionMgr.submission.isSigningFinished__c;
         showNoError = false;
-
-        textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
+        singleDirectorNotPresentorWaitingSigning = false;
+        multipleDirectorWaitingSigning = false;
+        displayedListOfDirector = new List<Officer__c>();
+        String offName = '';
+        textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
 
         //Header
-        if(submissionMgr.submission.Officers__r.size() == 1)
+        
+        //2 or more director without presenter => multiple screen
+        if(!submissionMgr.submission.SoleDirectorPresenter__c && submissionMgr.submission.Contacts__r.size() > 3)
+        {
+            List<Officer__c> tempListToCheckFinalNumber = new List<Officer__c>();
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                if(!off.isCorporateDirector__c && off.isSignatory__c && !off.IsPresenter__c)
+                { 
+                    tempListToCheckFinalNumber.add(off);
+                }
+            }
+
+            if(tempListToCheckFinalNumber.size() == 1)
+            {
+                singleDirectorNotPresentorWaitingSigning = true;
+            }
+            else{
+                multipleDirectorWaitingSigning = true;
+            }
+        }
+        else
+        {
+            //If there are 2 directors we go on single not presenter
+            if(submissionMgr.submission.Contacts__r.size() == 2 && submissionMgr.submission.MultipleDirectors__c)
+            {
+                singleDirectorNotPresentorWaitingSigning = true;
+                if(submissionMgr.submission.Officers__r[0].isPresenter__c)
+                {
+                    offName = submissionMgr.submission.Officers__r[1].Name;
+                }
+                else{
+                    offName = submissionMgr.submission.Officers__r[0].Name;
+                }
+            }
+            else if(submissionMgr.submission.Contacts__r.size() == 2 && !submissionMgr.submission.MultipleDirectors__c)
+            {
+                List<Officer__c> tempListToCheckFinalNumber = new List<Officer__c>();
+                for(Officer__c off :submissionMgr.submission.Officers__r)
+                {
+                    if(!off.isCorporateDirector__c && off.isSignatory__c && !off.IsPresenter__c)
+                    { 
+                        tempListToCheckFinalNumber.add(off);
+                    }
+                }
+
+                if(tempListToCheckFinalNumber.size() == 1)
+                {
+                    offName = tempListToCheckFinalNumber[0].Name;
+                    singleDirectorNotPresentorWaitingSigning = true;
+                }
+                else{
+                    multipleDirectorWaitingSigning = true;
+                }
+            }
+            else if(submissionMgr.submission.Contacts__r.size() == 3 && submissionMgr.submission.isPresenterMultipleDirectors__c)
+            {
+                Integer indexCounter = 0;
+
+                for(Officer__c ct :submissionMgr.submission.Officers__r)
+                {
+                    if(!ct.isCorporateDirector__c && ct.isSignatory__c && !ct.IsPresenter__c)
+                    {
+                        indexCounter++;
+                        offName = ct.Name;
+                    }
+                }
+
+                if(indexCounter == 1)
+                {
+                    singleDirectorNotPresentorWaitingSigning = true;
+                }
+                else{
+                    multipleDirectorWaitingSigning = true;
+                }
+
+            }
+            else if(submissionMgr.submission.Contacts__r.size() == 1)
+            {
+                singleDirectorNotPresentorWaitingSigning = true;
+                offName = submissionMgr.submission.Officers__r[0].Name;
+            }
+            else{
+                multipleDirectorWaitingSigning = true;
+            }
+        }
+        
+
+        if(singleDirectorNotPresentorWaitingSigning)
         {
             headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
-            //Added s at the officer term to match the content genericity of the sentence.
-            textBox1 = textBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize() + 's'));
+            headerBox1 = headerBox1.replace('NAME', offName);
+            textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
         }
-        else{
+        else if(multipleDirectorWaitingSigning)
+        {
             headerBox1 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c );
-            textBox1 = textBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c.capitalize() ));
+            textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
+            textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                if(!off.isCorporateDirector__c && off.isSignatory__c && !off.IsPresenter__c)
+                { 
+                    displayedListOfDirector.add(off);
+                }
+            }
         }
-
-        
-        headerBox1 = headerBox1.replace('directors', (submissionMgr.submission.officerTerminology__c == null ? '' : submissionMgr.submission.officerTerminology__c));
+        textBox2 = textBox2.replace('WARNING', 'Only someone who has power of attorney can approve this application');
 
         return;
     }
@@ -70,31 +174,31 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
     public PageReference nextAction() {
         if (behalfValidation == null) {
             hasPageErrors = true;
-            currentErrorMessage = 'Please make a selection to continue';
+            currentErrorMessage = 'Select yes or no';
             errorVal = 'govuk-form-group--error';
             return null;
         }
 
         Integer corpDirectors = 0;
 
-        //Test
-        if(behalfValidation == false)
-        {
-            //Iterate officers
-            for (Officer__c off : submissionMgr.submission.Officers__r) {
-                if (off.isSignatory__c && !off.IsPresenter__c && (off.Name.containsIgnoreCase('ltd') || off.Name.containsIgnoreCase('plc') || off.Name.containsIgnoreCase('llp') || off.Name.containsIgnoreCase('limited'))) {
-                    corpDirectors++; 
-                }
-            }
+        //Test No more needed as Corporate are part of officer detail page
+        // if(behalfValidation == false)
+        // {
+        //     //Iterate officers
+        //     for (Officer__c off : submissionMgr.submission.Officers__r) {
+        //         if (off.isSignatory__c && !off.IsPresenter__c && (off.Name.containsIgnoreCase('ltd') || off.Name.containsIgnoreCase('plc') || off.Name.containsIgnoreCase('llp') || off.Name.containsIgnoreCase('limited'))) {
+        //             corpDirectors++; 
+        //         }
+        //     }
 
-            if(corpDirectors > 0)
-            {
-                hasPageErrors = true;
-                currentErrorMessage = 'You must select Yes as you have selected Corporate Officers';
-                errorVal = 'govuk-form-group--error';
-                return null;
-            }
-        }
+        //     if(corpDirectors > 0)
+        //     {
+        //         hasPageErrors = true;
+        //         currentErrorMessage = 'You must select Yes as you have selected Corporate Officers';
+        //         errorVal = 'govuk-form-group--error';
+        //         return null;
+        //     }
+        // }
 
         
         if (!validatePageState()) return Page.TransactionException;
@@ -121,6 +225,21 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
             return res;
 
         if (submissionMgr.submission.SoleDirectorPresenter__c) {
+            return nextStep();
+        }
+
+        Boolean isOtherDirectorThanCorporate = false;
+
+        for(Officer__c off : submissionMgr.submission.Officers__r)
+        {
+            if(!off.isCorporateDirector__c && off.isSignatory__c && !off.isPresenter__c)
+            {
+                isOtherDirectorThanCorporate = true;
+            }
+        }
+
+        if(!isOtherDirectorThanCorporate)
+        {
             return nextStep();
         }
 

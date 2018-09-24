@@ -1,28 +1,51 @@
 <apex:page cache="false" title="Please sign the form" showHeader="false" sidebar="false" standardStylesheets="false" controller="ExternalEmbedDocuSignController" action="{!initSiging}" docType="html-5.0">
-    <apex:composition template="TransactionPageTemplate">
-        <apex:define name="content">
-            <apex:form >
-                <h1 class="govuk-heading-xl">
-                        Add your signature
-                </h1>
-                <p class="govuk-body-l">As a {!officerTerm} you need to sign this application to close {!compName}.</p>
-                <div id="doculoader"></div>
-                <script>
-                // window.open('{!externalURL}','_self'); 
+    <apex:outputPanel id="MainPanel">
+        <apex:outputPanel id="blueScreen" rendered="{!displayBlueScreenDocusign}">
+            <apex:composition template="DocusignBlueScreenTemplate">
+                <apex:define name="content">
+                    <apex:form id="mainFormBlueScreen">
+                        <p class="govuk-body">You’re one of {!numberOfDirectorsSigning} directors who must approve and sign this application.</p>
+                        <p class="govuk-body">We’ve sent an email to the other directors, asking them to also approve and sign.</p>
+                        <p class="govuk-body">You’ll get an email once they have.</p>
+                        <p class="govuk-body">Then you’ll be able to come back to finish this application</p>
+                        <apex:commandButton status="status" reRender="MainPanel" styleClass="govuk-button govuk-interrupt__button govuk-!-margin-top-5" action="{!reRenderDocusign}" value="Continue"
+                            id="NextButtonStandard" />
+                    </apex:form>
+                </apex:define> 
+            </apex:composition>
+        </apex:outputPanel>
+        <apex:outputPanel id="Docusign" rendered="{!!displayBlueScreenDocusign}">
+            <apex:composition template="TransactionPageTemplate">
+                <apex:define name="content">
+                    <apex:form id="mainForm">
+                        <apex:outputPanel >
+            
+                        </apex:outputPanel>
+                        <apex:outputPanel >
+                            <h1 class="govuk-heading-xl">
+                                Add your signature
+                            </h1>
+                            <p class="govuk-body-l">As a {!officerTerm} you need to sign this application to close {!compName}.</p>
+                            <div id="doculoader"></div>
+                            <script>
+                                // window.open('{!externalURL}','_self'); 
 
-                var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
+                                var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
 
-                if (screen != null && screen.length > 1) {
-                    window.open('{!externalURL}', '_self');
-                    console.log('mobile');
+                                if (screen != null && screen.length > 1) {
+                                    window.open('{!externalURL}', '_self');
+                                    console.log('mobile');
 
-                } else {
-                        document.getElementById("doculoader").innerHTML = '<iframe height="1490" width="940" id="999" src="{!externalURL}" ></iframe>';
-                        console.log('not mobile');
-                    
-                }
-                </script>
-            </apex:form>
-        </apex:define>
-    </apex:composition>
+                                } else {
+                                    document.getElementById("doculoader").innerHTML = '<iframe height="1490" width="940" id="999" src="{!externalURL}" ></iframe>';
+                                    console.log('not mobile');
+
+                                }
+                            </script>
+                        </apex:outputPanel>
+                    </apex:form>
+                </apex:define>
+            </apex:composition>
+        </apex:outputPanel>
+    </apex:outputPanel>
 </apex:page>

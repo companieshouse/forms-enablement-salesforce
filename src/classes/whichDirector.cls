@@ -145,12 +145,17 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
                         }
                     }
                 }
-
                 if(localCompanyDirectors.size() == 1)
                 {
                     Officer__c off1 = localCompanyDirectors[0];
-
-                    if(off1.IsPresenter__c && off1.isSignatory__c)
+                    //Here we need to check if the 1 director within the list is presenter
+                    if(submissionMgr.submission.isPresenterMultipleDirectors__c)
+                    {
+                        off1.Email__c = submissionMgr.submission.Presenter__r.PersonEmail;
+                        off1.IsPresenter__c = true;
+                        off1.isSignatory__c = true;
+                    }
+                    else if(off1.IsPresenter__c && off1.isSignatory__c)
                     {
                         off1.Email__c = submissionMgr.submission.Presenter__r.PersonEmail;
                     }
@@ -178,7 +183,7 @@ public with sharing class whichDirector extends TransactionStepControllerBase {
 
         if (selectedid == null) {
             hasPageErrors = true;
-            currentErrorMessage = 'You must select an officer';
+            currentErrorMessage = 'Select your name';
             errorVal = 'govuk-form-group--error';
             divForErrorLink = '#radio-' + companyDirectors[0].Id;
             return null;

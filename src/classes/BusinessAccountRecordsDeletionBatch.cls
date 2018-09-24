@@ -30,5 +30,6 @@ public with sharing class BusinessAccountRecordsDeletionBatch implements Databas
     
     public void finish(Database.BatchableContext BC) {
         //Run other batch in the finish
+        Database.executeBatch(new DocusignRecipientStatusDeletionBatch());
     }
 }
