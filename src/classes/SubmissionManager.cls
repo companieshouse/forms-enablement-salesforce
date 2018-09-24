@@ -105,7 +105,8 @@ public with sharing class SubmissionManager {
         if (isDigitalSigning)
             expiryDate = td.Expiry_Date_Length__c; // set the expiry date
 
-        submission = new Transaction__c(Product_Code__c = td.Product_Code__c, Version_Form__c = '1', Expiry_Date_Length__c = expiryDate, isDigitalSignatureNeeded__c = isDigitalSigning , Presenter__c = presenterId, ContactEmail__c = presenterEmail, isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName, isMajorityRequired__c = td.isMajorityForm__c, Company__c = ((Account)companyId).Id, CompanyNumber__c = ((Account)companyId).CompanyNumber__c, Transaction_Type__c = transactionType);
+        String urlToSave = URL.getSalesforceBaseUrl().toExternalForm() + '/StartFramework?t=' + transactionType;
+        submission = new Transaction__c(Product_Code__c = td.Product_Code__c, Version_Form__c = '1', Expiry_Date_Length__c = expiryDate, isDigitalSignatureNeeded__c = isDigitalSigning , Presenter__c = presenterId, ContactEmail__c = presenterEmail, isPaymentRequired__c = isPaymentNeeded, Form_Name__c = td.DeveloperName, isMajorityRequired__c = td.isMajorityForm__c, Company__c = ((Account)companyId).Id, CompanyNumber__c = ((Account)companyId).CompanyNumber__c, Transaction_Type__c = transactionType, TransactionPath__c = urlToSave);
         insert submission;
         return submission.Id;
     }

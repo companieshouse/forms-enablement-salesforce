@@ -595,6 +595,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TransactionRecordsDeletionBatchTemp</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TransactionRecordsDeletionBatchTempTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TransactionRecordsDeletionBatchTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1895,6 +1903,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Documents</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DocusignBlueScreenTemplate</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

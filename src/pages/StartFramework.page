@@ -38,7 +38,6 @@ Ver. Author        Date        Detail
                 <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
 
                 <apex:outputText escape="false" value="{!pageTextAfterButton}"></apex:outputText>
-                <apex:outputText escape="false" value="{!pageTextAfterButton2}"></apex:outputText>
 
             </apex:form>
         </apex:define>

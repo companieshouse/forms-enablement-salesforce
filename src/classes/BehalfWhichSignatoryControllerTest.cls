@@ -62,16 +62,12 @@ private class BehalfWhichSignatoryControllerTest {
 		test1controller.updateDirectorList();
 		test1controller.selectedId = testoff.id;
 		test1controller.valueRadio = 'true';
-		test1controller.updateSelectedPresenter();
-		test1controller.nextAction();
 		test1controller.previousAction();
 		test1controller.behalfValidation = true;
-		test1controller.nextAction();
 		test1controller.persistStep();
 
 
 		test1controller.selectedId = null;
-		test1controller.nextAction();
 
 		test1controller.redirectUser();
 

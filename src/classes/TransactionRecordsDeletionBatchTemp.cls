@@ -16,9 +16,9 @@ History
 Ver. Author            Date        Detail
 1.0  Sylvain Picory    2017-05-26  Initial draft of code.
 */
-public with sharing class TransactionRecordsDeletionBatch implements Database.Batchable<sObject> {
+public with sharing class TransactionRecordsDeletionBatchTemp implements Database.Batchable<sObject> {
 	
-    public TransactionRecordsDeletionBatch() {
+    public TransactionRecordsDeletionBatchTemp() {
 		
 	}
 
@@ -38,10 +38,10 @@ public with sharing class TransactionRecordsDeletionBatch implements Database.Ba
         }
 
         Datetime targetDate = System.today().addMonths(-period);
-
+ 
         String whereCondition = ' CreatedDate <= :targetDate';
         //We want to query all the record at once then 
-        query = 'SELECT Id, (SELECT Id FROM DocuSign_Status__r), (SELECT Id FROM Attachments),  (SELECT Id FROM Contacts__r) FROM Transaction__c Where ExpirySEnt__c = true AND ';
+        query = 'SELECT Id, (SELECT Id FROM DocuSign_Status__r), (SELECT Id FROM Attachments),  (SELECT Id FROM Contacts__r) FROM Transaction__c Where ';
 
         if(Test.isRunningTest())
         {
@@ -105,7 +105,5 @@ public with sharing class TransactionRecordsDeletionBatch implements Database.Ba
     }
     
     public void finish(Database.BatchableContext BC) {
-        //Run other batch in the finish
-        Database.executeBatch(new PersonAccountRecordsDeletionBatch());
     }
 }

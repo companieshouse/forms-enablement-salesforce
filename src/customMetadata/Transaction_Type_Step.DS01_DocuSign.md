@@ -24,7 +24,7 @@
     </values>
     <values>
         <field>Display_Text_2__c</field>
-        <value xsi:type="xsd:string">We&apos;ve sent an email to the directors to request their approval.</value>
+        <value xsi:type="xsd:string">The other directors need to approve this application before the company can be closed. You will get an email once they have all approved.</value>
     </values>
     <values>
         <field>Display_Text_3__c</field>
@@ -52,7 +52,7 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Wait for the directors to approve the application</value>
+        <value xsi:type="xsd:string">We&apos;ve sent an email to the other directors</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>

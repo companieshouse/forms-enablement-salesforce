@@ -705,18 +705,23 @@ Email should contain a URL to start a new journey</description>
     </rules>
     <rules>
         <fullName>applicationDeleted</fullName>
-        <actions>
-            <name>Transaction_inactive_deleted</name>
-            <type>Alert</type>
-        </actions>
         <active>true</active>
-        <criteriaItems>
-            <field>Transaction__c.InActiveTransaction__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
         <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
+        <formula>true</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Transaction_inactive_deleted</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>updateExpirySentField</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Transaction__c.CreatedDate</offsetFromField>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>expirydateupdater</fullName>

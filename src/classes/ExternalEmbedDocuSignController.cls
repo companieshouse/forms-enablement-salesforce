@@ -20,6 +20,8 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
     public String externalURL {get; set;}
     public String officerTerm {get; set;}
     public String compName {get; set;}
+    public Integer numberOfDirectorsSigning {get; set;}
+    public Boolean displayBlueScreenDocusign {get; set;}
 
     public ExternalEmbedDocuSignController() {
         super();
@@ -34,14 +36,35 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
 
 
     public PageReference initSiging() {
+
         PageReference res = initialiseAction();
 
         if(res != null)
             return res;
+        displayBlueScreenDocusign = false;
+        numberOfDirectorsSigning = 0;
+        if(submissionMgr.submission.isPresenterMultipleDirectors__c)
+        {
+            for(Officer__c off :submissionMgr.submission.Officers__r)
+            {
+                if(off.isSignatory__c)
+                    numberOfDirectorsSigning++;
+            }
+            //Display the correct div
+            displayBlueScreenDocusign = true;
 
-        externalURL = docusignSignature(submissionMgr, transactionMgr);
+            return null;
+        }
+
+        
 
         return null;
+    }
+
+    public void reRenderDocusign()
+    {
+        displayBlueScreenDocusign = false;
+        externalURL = docusignSignature(submissionMgr, transactionMgr);
     }
 
     public static String docusignSignature(SubmissionManager submissionMgrParam, TransactionManager transactionMgrParam) {
