@@ -55,6 +55,9 @@ public with sharing class ExternalEmbedDocuSignController extends TransactionSte
 
             return null;
         }
+        else{
+            externalURL = docusignSignature(submissionMgr, transactionMgr);
+        }
 
         
 

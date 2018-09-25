@@ -73,7 +73,7 @@ Check company details&lt;/h1&gt;</value>
     <values>
         <field>Company_Page_HiddenT2__c</field>
         <value xsi:type="xsd:string">&lt;div class=&quot;govuk-details__text&quot;&gt;
-Your company number is 8 numbers, or 2 letters followed by 6 numbers. You can find it using th</value>
+You can find it using th</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>

@@ -4,7 +4,7 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form >
-                <div class="govuk-panel govuk-panel--confirmation">
+                <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
                     <h1 class="govuk-panel__title">{!companyName}</h1>
                     <p class="govuk-panel__body">
                         <b>{!companyNumber}</b> - Incorporated on {!companyDateOfCreation}
