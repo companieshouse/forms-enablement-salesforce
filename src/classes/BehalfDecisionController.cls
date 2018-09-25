@@ -25,8 +25,6 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
     public Boolean singleDirectorNotPresentorWaitingSigning {get; set;}
     public Boolean multipleDirectorWaitingSigning {get; set;}
     
-    public List<Officer__c> displayedListOfDirector {get; set;}
-
     public String textBox1 {get; set;}
     public String textBox2 {get; set;}
     public String headerBox1 {get; set;}
@@ -48,7 +46,6 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         showNoError = false;
         singleDirectorNotPresentorWaitingSigning = false;
         multipleDirectorWaitingSigning = false;
-        displayedListOfDirector = new List<Officer__c>();
         String offName = '';
         textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
 
@@ -150,15 +147,7 @@ public with sharing class BehalfDecisionController extends TransactionStepContro
         else if(multipleDirectorWaitingSigning)
         {
             headerBox1 = (transactionMgr.currentStep.Header_Text_2__c == null ? '' : transactionMgr.currentStep.Header_Text_2__c );
-            textBox1 = (transactionMgr.currentStep.Display_Text_1__c == null ? '' : transactionMgr.currentStep.Display_Text_1__c);
             textBox2 = (transactionMgr.currentStep.Display_Text_2__c == null ? '' : transactionMgr.currentStep.Display_Text_2__c);
-            for(Officer__c off :submissionMgr.submission.Officers__r)
-            {
-                if(!off.isCorporateDirector__c && off.isSignatory__c && !off.IsPresenter__c)
-                { 
-                    displayedListOfDirector.add(off);
-                }
-            }
         }
         textBox2 = textBox2.replace('WARNING', 'Only someone who has power of attorney can approve this application');
 

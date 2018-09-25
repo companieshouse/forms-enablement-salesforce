@@ -49,16 +49,7 @@
                     <apex:outputPanel id="choicePanel">
                         <div class="govuk-form-group">
                             <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
-                            <apex:outputPanel rendered="{!multipleDirectorWaitingSigning}">
-                                <p class="govuk-body-l">
-                                    {!textBox1}
-                                    <ul class="govuk-list govuk-list--bullet">
-                                        <apex:repeat value="{!displayedListOfDirector}" var="director" id="theRepeat">
-                                            <li>{!director.Name}</li>
-                                        </apex:repeat>
-                                    </ul>
-                                </p>
-                            </apex:outputPanel>
+                            <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
                             <div class="govuk-form-group {!errorVal}">
                                 <fieldset class="govuk-fieldset">
                                     <legend class='govuk-fieldset__legend'></legend>
@@ -76,7 +67,7 @@
                                 </fieldset>
                             </div>
                         </div>
-                        <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
+                        
                         <div class="govuk-form-group">
                             <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
                             

@@ -34,7 +34,7 @@ Ver. Author        Date        Detail
                     <apex:actionPoller id="ThePoller" enabled="{!pollServer}" action="{!pollMethods}" status="status" interval="5"  />
                     
                     <apex:outputPanel id="SpinnerCondition" rendered="{!singlePresentorSigningDirector}">
-                    <div class="govuk-panel govuk-panel--confirmation">
+                    <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
                         <h1 class="govuk-panel__title">{!pageTitleSinglePresentorSigningDirector}</h1>
                     </div>
                       <p class="govuk-body-l" align="center">
@@ -47,7 +47,7 @@ Ver. Author        Date        Detail
                     </apex:outputPanel>
 
                     <apex:outputPanel id="singleNotPresenter" rendered="{!singleDirectorNotPresentorWaitingSigning}">
-                        <div class="govuk-panel govuk-panel--confirmation">
+                        <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
                             <h1 class="govuk-panel__title">{!pageTitleSingleNotPresentorSigningDirector}</h1>
                         </div>
                         <p class="govuk-body-l">
@@ -76,7 +76,7 @@ Ver. Author        Date        Detail
                     </apex:outputPanel> 
                         
                     <apex:outputPanel id="directorTable" rendered="{!multipleDirectorWaitingSigning}">
-                        <div class="govuk-panel govuk-panel--confirmation">
+                        <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
                             <h1 class="govuk-panel__title">{!pageTitlemultipleDirectorWaitingSigning}</h1>
                         </div>
                         <p class="govuk-body-l">
@@ -106,7 +106,7 @@ Ver. Author        Date        Detail
                 </apex:outputPanel>
                 
                 <apex:outputPanel id="succesSign" rendered="{!failureEmail}">
-                    <div class="govuk-panel govuk-panel--confirmation">
+                    <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
                         <h1 class="govuk-panel__title">{!pageTitleFailureEmail}</h1>
                     </div>
                     <p class="govuk-body-l">{!pageBodyFailureEmail}</p>
@@ -134,7 +134,7 @@ Ver. Author        Date        Detail
                      value="{!$Label.UI_Text_Previous}" />
                 </apex:outputPanel>
                 <apex:outputPanel id="failureSign" rendered="{!failureSigning}">
-                    <div class="govuk-panel govuk-panel--confirmation">
+                    <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
                         <h1 class="govuk-panel__title">{!pageTitleFailureSigning}</h1>
                     </div>
                     <p class="govuk-body-l">{!pageBodyFailureSigning}</p>
