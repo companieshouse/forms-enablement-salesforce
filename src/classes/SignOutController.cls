@@ -19,7 +19,6 @@ public with sharing class SignOutController extends TransactionStepControllerBas
 
     // Public properties.
 
-
     // Constructors.
     public SignOutController() {
         super();

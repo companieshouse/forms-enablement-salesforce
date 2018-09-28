@@ -1,7 +1,7 @@
 <apex:page cache="false" title="{!$Label.UI_Text_Error_Page}" 
     showHeader="false" 
     sidebar="false" 
-    standardStylesheets="false">
+    standardStylesheets="false" controller="SignOutController">
         
 	<apex:composition template="TransactionPageTemplate">
   
@@ -9,10 +9,10 @@
 			<div id="errorList" class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
 				<h2 class="govuk-error-summary__title" id="error-summary-heading-example-1">
 					 An error has occurred.
-					<br/>Session terminated.
+					<br/>Session has ended
 				</h2>
 				<div class="govuk-error-summary__body">
-				 Please restart the process again.
+				 Please <a href="https://www.gov.uk/government/collections/companies-house-forms-for-limited-companies#strike-off-and-dissolution" >restart</a> the process again.
 					</div>
 			</div>
 		

@@ -999,4 +999,15 @@ to any promoter of the company?</inlineHelpText>
         <showsLocation>false</showsLocation>
         <showsStatus>false</showsStatus>
     </webLinks>
+    <webLinks>
+        <fullName>Send_Transaction_Again</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Transaction Again</masterLabel>
+        <openType>sidebar</openType>
+        <page>SubmitTransactionFormButton</page>
+        <protected>false</protected>
+    </webLinks>
 </CustomObject>

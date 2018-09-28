@@ -5,7 +5,7 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>CH LLDS01 Submission</name>
     <style>none</style>
-    <subject>Request to close {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c}) has been submitted. Ref: FE{!Transaction__c.Id})</subject>
+    <subject>Your application has been submitted</subject>
     <textOnly>Companies House
 
 Request  to close {!Transaction__c.CompanyName__c}

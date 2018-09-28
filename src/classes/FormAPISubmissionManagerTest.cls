@@ -59,6 +59,31 @@ public with sharing class FormAPISubmissionManagerTest {
     }
 
     @isTest(seeAllData=false)
+    public static void sendPaymentTest() {
+        
+        //Create Transaction
+        Transaction__c tx = createTransaction();
+
+        //Create Attachment
+        Attachment att = createAttachment(tx.Id);
+
+
+        Test.startTest();
+        
+        // Unit tests shouldn't call out. Use a mock to give them an HTTP response.
+        Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockSuccess());
+        
+        // Going for coverage only at this stage. No assertions.
+        FormAPISubmissionManager formApiSM = new FormAPISubmissionManager();
+        Transaction__c txResponse = formApiSM.updatePayment(tx);
+        
+        Test.stopTest();
+
+        // To do update mock to return 200 or 202 depending on the endpoint
+        //System.assertEquals(AppConstants.REQUEST_STATUS_SUBMITTED, txResponse.Status__c);
+    }
+
+    @isTest(seeAllData=false)
     public static void sendFormTest4() {
         
         //Create Transaction
@@ -128,6 +153,31 @@ public with sharing class FormAPISubmissionManagerTest {
         // Going for coverage only at this stage. No assertions.
         FormAPISubmissionManager formApiSM = new FormAPISubmissionManager();
         Transaction__c txResponse = formApiSM.sendForm(tx);
+        
+        Test.stopTest();
+
+        // To do update mock to return 200 or 202 depending on the endpoint
+        //System.assertEquals(AppConstants.REQUEST_STATUS_SUBMITTED, txResponse.Status__c);
+    }
+
+    @isTest(seeAllData=false)
+    public static void sendPaymentErrorTest() {
+        
+        //Create Transaction
+        Transaction__c tx = createTransaction();
+
+        //Create Attachment
+        Attachment att = createAttachment(tx.Id);
+
+
+        Test.startTest();
+        
+        // Unit tests shouldn't call out. Use a mock to give them an HTTP response.
+        Test.setMock(HttpCalloutMock.class, new FormsApiMockBarcode.mockError());
+        
+        // Going for coverage only at this stage. No assertions.
+        FormAPISubmissionManager formApiSM = new FormAPISubmissionManager();
+        Transaction__c txResponse = formApiSM.updatePayment(tx);
         
         Test.stopTest();
 

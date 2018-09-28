@@ -122,7 +122,7 @@ Who to tell about the company closing&lt;/h1&gt;</value>
     </values>
     <values>
         <field>Guidance_Text_4__c</field>
-        <value xsi:type="xsd:string">uk-details__summary-text&quot;&gt;Read the full list of who to tell.&lt;/span&gt;&lt;/summary&gt;&lt;div class=&quot;govuk-details__text&quot;&gt;&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;li&gt;managers or trustees of any employee pensi</value>
+        <value xsi:type="xsd:string">uk-details__summary-text&quot;&gt;See the list of who to tell&lt;/span&gt;&lt;/summary&gt;&lt;div class=&quot;govuk-details__text&quot;&gt;&lt;ul class=&quot;govuk-list govuk-list--bullet&quot;&gt;&lt;li&gt;shareholders&lt;/li&gt;&lt;li&gt;creditors&lt;/li&gt;&lt;li&gt;employees&lt;/li&gt;&lt;li&gt;managers or trustees of any employee pensi</value>
     </values>
     <values>
         <field>Guidance_Text_5__c</field>

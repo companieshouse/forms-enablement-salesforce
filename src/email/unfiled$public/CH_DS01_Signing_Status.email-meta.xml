@@ -5,7 +5,7 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>CH DS01 Signing Status</name>
     <style>none</style>
-    <subject>Review the signing status for {!Transaction__c.CompanyName__c}({!Transaction__c.CompanyNumber__c})   Ref: FE{!Transaction__c.Id}</subject>
+    <subject>We&apos;ve emailed the other directors</subject>
     <textOnly>Companies House submission confirmation
 
 Companies House Signing Status
