@@ -12,7 +12,7 @@
     </values>
     <values>
         <field>ContinueButtonText__c</field>
-        <value xsi:type="xsd:string">Pay to submit</value>
+        <value xsi:type="xsd:string">Submit and pay</value>
     </values>
     <values>
         <field>CustomView__c</field>

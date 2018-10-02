@@ -148,7 +148,7 @@
                         <apex:commandButton action="{!resetTransaction}" styleClass="govuk-button" value="{!$Label.UI_Text_Previous}" />
                         <br/>
                         <br/>
-                        <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+                        <apex:commandLink styleClass="govuk-link" action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
 
                     </div>
                     </apex:outputPanel>
@@ -181,7 +181,7 @@
                     <apex:commandButton status="status" action="{!nextAction}" styleClass="govuk-button" value="Continue" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
                     <br/>
                     <br/>
-                    <apex:commandLink action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous_Payment}" />
+                    <apex:commandLink styleClass="govuk-link" action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous_Payment}" />
                 </div>
                 </apex:outputPanel>
 

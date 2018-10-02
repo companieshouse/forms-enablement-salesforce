@@ -35,21 +35,21 @@
                         <table class="govuk-table">
                             <tbody class="govuk-table__body">
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Company name</td>
+                                    <th class="govuk-table__header" scope="row">Company name</th>
                                     <td class="govuk-table__cell ">{!companyName}</td>
                                 </tr>
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Company number</td>
+                                    <th class="govuk-table__header" scope="row">Company number</th>
                                     <td class="govuk-table__cell ">{!companyNumber}</td>
                                 </tr>
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Registered office address</td>
+                                    <th class="govuk-table__header" scope="row">Registered office address</th>
                                     <td class="govuk-table__cell ">
                                         <apex:outputText escape="false" value="{!companyAddress}" />
                                     </td>
                                 </tr>
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Approved by</td>
+                                    <th class="govuk-table__header" scope="row">Approved by</th>
                                     <td class="govuk-table__cell ">
                                         <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
                                             <apex:outputText value="{!Director.Name}" id="theValue" />
@@ -58,10 +58,14 @@
                                     </td>
                                 </tr>
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__header" scope="row">Email address</td>
+                                    <th class="govuk-table__header" scope="row">Email address</th>
                                     <td class="govuk-table__cell ">{!presenterEmail}
-                                        <br/>{!presenterName}
-                                        <br/> {!presenterPhone}
+                                        <apex:outputPanel id="standardPanel1" rendered="{!isPresenterNotNullName}">
+                                            <br/>{!presenterName}
+                                        </apex:outputPanel>
+                                        <apex:outputPanel id="standardPanel2" rendered="{!isPresenterNotNullPhone}">
+                                            <br/> {!presenterPhone}
+                                        </apex:outputPanel>
                                     </td>
                                 </tr>
                             </tbody>

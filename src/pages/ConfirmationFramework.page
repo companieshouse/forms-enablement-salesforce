@@ -104,7 +104,6 @@ Ver. Author        Date        Detail
                         <h1 class="govuk-panel__title">{!pageTitle}</h1>
                         <div class="govuk-panel__body">
                             <apex:outputText styleClass="govuk-panel__body" escape="false" value="{!pageTitle2}"/> <br/>
-                            <apex:outputText styleClass="govuk-panel__body" escape="false" value="{!pageTitle3}"/> 
                         </div>
                     </div>
                     <h2 class="govuk-heading-m">What happens next</h2>
