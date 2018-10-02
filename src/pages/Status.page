@@ -14,8 +14,6 @@
                         <!-- information here {!informationstuff} -->
                     </p>
                 </div>
-                <h2 class="govuk-heading-l">Requested Approvals</h2>
-                <p class="govuk-body-l"> Emails are <i>Sent</i> from Companies House requesting an approval signature, <i>Delivered</i> to the directors and then once signed and approved shown as <i>Completed</i>. </p>
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <span class="govuk-error-message" id="error-message-text-input"> {!statusErrors}
                     </span>
@@ -25,7 +23,7 @@
                         <table class="govuk-table">
                             <thead class="govuk-table__head">
                                 <tr class="govuk-table__row">
-                                    <th class="govuk-table__header" scope="row">Director Name</th>
+                                    <th class="govuk-table__header" scope="row">Name</th>
                                     <th class="govuk-table__header" scope="row">Email</th>
                                     <th class="govuk-table__header" scope="row">Status</th>
                                 </tr>

@@ -5,9 +5,7 @@
                 <apex:define name="content">
                     <apex:form id="mainFormBlueScreen">
                         <p class="govuk-body">You’re one of {!numberOfDirectorsSigning} directors who must approve and sign this application.</p>
-                        <p class="govuk-body">We’ve sent an email to the other directors, asking them to also approve and sign.</p>
-                        <p class="govuk-body">You’ll get an email once they have.</p>
-                        <p class="govuk-body">Then you’ll be able to come back to finish this application</p>
+                        <p class="govuk-body">After the other directors have approved and signed, you’ll be able to return here to complete the application.</p>
                         <apex:commandButton status="status" reRender="MainPanel" styleClass="govuk-button govuk-interrupt__button govuk-!-margin-top-5" action="{!reRenderDocusign}" value="Continue"
                             id="NextButtonStandard" />
                     </apex:form>

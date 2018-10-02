@@ -48,7 +48,7 @@
     </values>
     <values>
         <field>Header_Text_1__c</field>
-        <value xsi:type="xsd:string">Check before you Submit</value>
+        <value xsi:type="xsd:string">Check before you submit</value>
     </values>
     <values>
         <field>Header_Text_2__c</field>

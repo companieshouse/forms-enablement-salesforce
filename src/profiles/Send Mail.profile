@@ -498,6 +498,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SubmitTransactionFormButton</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SubmitTransactionFormButtonTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TrackUserClass</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1945,6 +1953,10 @@
     <pageAccesses>
         <apexPage>Submission</apexPage>
         <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>SubmitTransactionFormButton</apexPage>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>TransactionException</apexPage>
