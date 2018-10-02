@@ -982,6 +982,17 @@ to any promoter of the company?</inlineHelpText>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
     <webLinks>
+        <fullName>Delete_transaction</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Delete transaction</masterLabel>
+        <openType>sidebar</openType>
+        <page>DeleteTransactionButton</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
         <fullName>Send_Email_To_Presenter</fullName>
         <availability>online</availability>
         <displayType>button</displayType>

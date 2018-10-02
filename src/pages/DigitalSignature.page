@@ -18,9 +18,7 @@ Ver. Author        Date        Detail
     <script>
     if (window.frameElement) {
         parent.location.href = window.location;
-        console.log("found iframe and reloading")
     } else {
-        console.log('not finding iframe probably on mobile');
     }
     </script>
     <apex:composition template="TransactionPageTemplate">

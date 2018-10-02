@@ -271,6 +271,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DeleteTransactionButton</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DigitalSignatureController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1907,6 +1911,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>DS02</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DeleteTransactionButton</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

@@ -463,6 +463,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
     public Pagereference getNextStep(){
         //Check the previous integration status => if there is an error on the first integration then proceed to the integration error page.
         if(submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_ERROR) {
+            submissionMgr.persist();
             PageReference pg = new PageReference('/IntegrationError');
 
             pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
@@ -497,6 +498,7 @@ public with sharing class PaymentController extends TransactionStepControllerBas
         }
         else{
             if (submissionMgr.submission.PrePaymentIntegrationStatus__c == AppConstants.REQUEST_STATUS_ERROR) {
+                submissionMgr.persist();
                 PageReference pg = new PageReference('/IntegrationError');
 
                 pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));

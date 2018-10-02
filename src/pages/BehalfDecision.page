@@ -81,7 +81,6 @@
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log('The value of boolean is:'+{!stepValidator} );
                     var resultBooo = false;
                     var a = location.search.split('?c=');
                     var paramfunction = a[1];
@@ -99,18 +98,14 @@
                   }
 
                   function afterWork(resultBooo){
-                    console.log('The value of boolean is:'+ resultBooo);
                         if (resultBooo == true) 
                         {
-                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
                             if ({!sigNeeded} == true && {!signingFinished} == false) 
                             {
-                                console.log('wrong state starting redirection');
                                 redirectUser();
                             } 
                             else 
                             {
-                                console.log('correct state no redirection');
                             }
                         }
                   }

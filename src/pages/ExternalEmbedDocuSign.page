@@ -32,11 +32,9 @@
 
                                 if (screen != null && screen.length > 1) {
                                     window.open('{!externalURL}', '_self');
-                                    console.log('mobile');
 
                                 } else {
-                                    document.getElementById("doculoader").innerHTML = '<iframe height="1490" width="940" id="999" src="{!externalURL}" ></iframe>';
-                                    console.log('not mobile');
+                                    document.getElementById("doculoader").innerHTML = '<iframe title="Add your signature to close the company" height="1490" width="940" id="999" src="{!externalURL}" ></iframe>';
 
                                 }
                             </script>

@@ -48,29 +48,21 @@
                     <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
                     <apex:outputText escape="false" styleClass="govuk-label" value="{!textBox1}"></apex:outputText>
                     <div class="govuk-form-group {!nameErrorVal}">
-                        <fieldset class="govuk-fieldset">
-                            <legend class='govuk-fieldset__legend'>
-                                <span class='govuk-error-message'>
-                                    <apex:outputText rendered="{!nameError}" id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
-                                </span>
-                                <!-- Full name -->
-                                <label class="govuk-label" for="inputName"></label>
-                                <apex:inputText styleclass="govuk-input" id="inputName" value="{!nameAuthorized}" />
-                            </legend>
-                        </fieldset>
+                        <span class='govuk-error-message'>
+                            <apex:outputText rendered="{!nameError}" id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        </span>
+                        <!-- Full name -->
+                        <label class="govuk-label" for="inputName"></label>
+                        <apex:inputText styleclass="govuk-input" id="inputName" value="{!nameAuthorized}" />
                     </div>
                     <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox2}"></apex:outputText>
                     <div class="govuk-form-group {!emailErrorVal}">
-                        <fieldset class="govuk-fieldset">
-                            <legend class='govuk-fieldset__legend'>
-                                <span class='govuk-error-message'>
-                                    <apex:outputText rendered="{!emailError}" styleClass="error-mesage" id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
-                                </span>
-                                <!-- Email -->
-                                <label class="govuk-label" for="inputEmail"></label>
-                                <apex:inputText maxlength="256" size="256" styleclass="govuk-input" id="inputEmail" value="{!emailDirector}" />
-                            </legend>
-                        </fieldset>
+                        <span class='govuk-error-message'>
+                            <apex:outputText rendered="{!emailError}" styleClass="error-mesage" id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        </span>
+                        <!-- Email -->
+                        <label class="govuk-label" for="inputEmail"></label>
+                        <apex:inputText maxlength="256" size="256" styleclass="govuk-input" id="inputEmail" value="{!emailDirector}" />
                     </div>
                     <!-- <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox4}"></apex:outputText>
                     <div class="govuk-form-group {!emailErrorValConfirm}">
@@ -114,7 +106,6 @@
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log('The value of boolean is:'+{!stepValidator} );
                     var resultBooo = false;
                     var a = location.search.split('?c=');
                     var paramfunction = a[1];
@@ -132,18 +123,14 @@
                   }
 
                   function afterWork(resultBooo){
-                    console.log('The value of boolean is:'+ resultBooo);
                         if (resultBooo == true) 
                         {
-                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
                             if ({!sigNeeded} == true && {!signingFinished} == false) 
                             {
-                                console.log('wrong state starting redirection');
                                 redirectUser();
                             } 
                             else 
                             {
-                                console.log('correct state no redirection');
                             }
                         }
                   }
