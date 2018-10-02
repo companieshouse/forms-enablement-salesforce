@@ -52,7 +52,7 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Your reference number is &lt;strong class=&quot;govuk-heading-m&quot;&gt;
+        <value xsi:type="xsd:string">Your reference number is &lt;br/&gt;&lt;strong class=&quot;govuk-!-font-size-24&quot;&gt;
 REFNUMB &lt;/strong&gt;&lt;br/&gt;</value>
     </values>
     <values>

@@ -18,9 +18,7 @@ Ver. Author        Date        Detail
     <script>
     if (window.frameElement) {
         parent.location.href = window.location;
-        console.log("found iframe and reloading")
     } else {
-        console.log('not finding iframe probably on mobile');
     }
     </script>
     <apex:composition template="TransactionPageTemplate">
@@ -72,7 +70,7 @@ Ver. Author        Date        Detail
                             </tbody>
                         </table>
                         <br/>
-                        <apex:commandLink action="{!signoutAction}" value="{!$Label.UI_Text_SignOut_Page}" id="theSignOutButtonSingleNotPresenter" />
+                        <apex:commandLink styleClass="govuk-link" action="{!signoutAction}" value="{!$Label.UI_Text_SignOut_Page}" id="theSignOutButtonSingleNotPresenter" />
                     </apex:outputPanel> 
                         
                     <apex:outputPanel id="directorTable" rendered="{!multipleDirectorWaitingSigning}">
@@ -101,7 +99,7 @@ Ver. Author        Date        Detail
                             </tbody>
                         </table>
                         <br/>
-                        <apex:commandLink action="{!signoutAction}" value="{!$Label.UI_Text_SignOut_Page}" id="theSignOutButton" />
+                        <apex:commandLink styleClass="govuk-link" action="{!signoutAction}" value="{!$Label.UI_Text_SignOut_Page}" id="theSignOutButton" />
                     </apex:outputPanel>
                 </apex:outputPanel>
                 
@@ -157,7 +155,7 @@ Ver. Author        Date        Detail
                             </apex:repeat>
                         </tbody>
                     </table>
-                    <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton2" />
+                    <apex:commandLink styleClass="govuk-link" action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton2" />
                 </apex:outputPanel>
             </apex:form>
             <script language="Javascript">

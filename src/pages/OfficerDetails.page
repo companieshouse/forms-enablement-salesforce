@@ -51,43 +51,22 @@
                         <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
                             <apex:outputPanel rendered="{!!isSingleDirectorOnScreen}">
                                 <div class="govuk-form-group">
-                                    <fieldset class="govuk-fieldset">
-                                        <legend class='govuk-fieldset__legend'>
-                                            <label for="email" class="govuk-body govuk-!-font-weight-bold govuk-!-font-size-24">{!director.off.Name}</label>
-                                        </legend>
-                                    </fieldset>
+                                    <label for="email" class="govuk-body govuk-!-font-weight-bold govuk-!-font-size-24">{!director.off.Name}</label>
                                 </div>
                             </apex:outputPanel>
                             <div class="govuk-form-group {!errorVal}">
                                 <apex:outputPanel rendered="{!director.isCorporate}">
-                                    <fieldset class="govuk-fieldset">
-                                        <legend class='govuk-fieldset__legend'>
-                                            <label for="nameCorpo" class="govuk-label">Name Corpo:</label>
-                                            <span class="govuk-error-message">{!director.validationErrors2}</span>
-                                            <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.nameCorpo}" id="nameCorpo" html-name="nameCorpo"></apex:inputText>
-                                        </legend>
-                                    </fieldset>
-                                </apex:outputPanel>
-                                <fieldset class="govuk-fieldset">
-                                    <legend class='govuk-fieldset__legend'>
-                                        <label for="email" class="govuk-label">Email address:</label>
-                                        <span class="govuk-error-message">{!director.validationErrors}</span>
-                                        <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
-                                    </legend>
-                                </fieldset>
-                            </div>
-                            <!-- <div class="govuk-form-group {!errorVal2}">
-                                <fieldset class="govuk-fieldset">
-                                    <legend class='govuk-fieldset__legend'>
+                                    
+                                    <label for="nameCorpo" class="govuk-label">Name Corpo:</label>
+                                    <span class="govuk-error-message">{!director.validationErrors2}</span>
+                                    <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.nameCorpo}" id="nameCorpo" html-name="nameCorpo"></apex:inputText>
                                         
-                                        <span class="govuk-error-message">{!director.confirmationErrors}</span>
-                                        <label for="confirmationemail" class="govuk-label">Confirm Email Address</label>
-                                        <apex:inputText styleClass="govuk-input" value="{!director.confirmationemail}" id="confirmationemail" html-name="confirmationemail"></apex:inputText>
-                                        <br/>
-                                        <br/>
-                                    </legend>
-                                </fieldset>
-                            </div> -->
+                                </apex:outputPanel>
+                                    <label for="email" class="govuk-label">Email address:</label>
+                                    <span class="govuk-error-message">{!director.validationErrors}</span>
+                                    <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                                    
+                            </div>
                         </apex:repeat>
                     <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />                    
                 </apex:outputPanel>
@@ -95,7 +74,6 @@
                 </apex:actionFunction>
                 <script>
                 function checkSteps() {
-                    console.log('The value of boolean is:'+{!stepValidator} );
                     var resultBooo = false;
                     var a = location.search.split('?c=');
                     var paramfunction = a[1];
@@ -113,18 +91,14 @@
                   }
 
                   function afterWork(resultBooo){
-                    console.log('The value of boolean is:'+ resultBooo);
                         if (resultBooo == true) 
                         {
-                            console.log('The value of both boolean are:' + {!sigNeeded} + '2:' +{!signingFinished});
                             if ({!sigNeeded} == true && {!signingFinished} == false) 
                             {
-                                console.log('wrong state starting redirection');
                                 redirectUser();
                             } 
                             else 
                             {
-                                console.log('correct state no redirection');
                             }
                         }
                   }

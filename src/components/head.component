@@ -1,7 +1,6 @@
 <apex:component layout="none">
     
     <meta charset="utf-8" />
-    <title>Companies House</title>
     
     <!--[if gt IE 8]><!-->
     <link href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-1.2.0.min.css')}" media="screen" rel="stylesheet"

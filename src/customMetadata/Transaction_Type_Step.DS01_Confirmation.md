@@ -52,12 +52,12 @@
     </values>
     <values>
         <field>Header_Text_2__c</field>
-        <value xsi:type="xsd:string">Application reference: &lt;strong class=&quot;govuk-heading-m&quot;&gt;
+        <value xsi:type="xsd:string">Application reference: &lt;br/&gt;&lt;strong class=&quot;govuk-!-font-size-24&quot;&gt;
 REFNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Header_Text_3__c</field>
-        <value xsi:type="xsd:string">Payment reference: &lt;strong class=&quot;govuk-heading-m&quot;&gt;PAYNUMB &lt;/strong&gt;</value>
+        <value xsi:type="xsd:string">Payment reference: &lt;strong class=&quot;govuk-!-font-size-24&quot;&gt;PAYNUMB &lt;/strong&gt;</value>
     </values>
     <values>
         <field>Header_Text_4__c</field>

@@ -15,6 +15,8 @@ Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
 public with sharing class ReviewController extends TransactionStepControllerBase {
+    public Boolean isPresenterNotNullName {get; set;}
+    public Boolean isPresenterNotNullPhone {get; set;}
     private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
     public String authCode {get; set;}
@@ -199,6 +201,8 @@ public with sharing class ReviewController extends TransactionStepControllerBase
         presenterEmail = submissionMgr.submission.Presenter__r.PersonEmail;
         presenterName = submissionMgr.submission.PresenterName__c;
         presenterPhone = submissionMgr.submission.PresenterPhoneNumber__c;
+        isPresenterNotNullPhone = String.isBlank(presenterPhone) ? false : true;
+        isPresenterNotNullName = String.isBlank(presenterName) ? false : true;
         continueButtonText = transactionMgr.currentStep.ContinueButtonText__c;
         previousButtonText = transactionMgr.currentStep.PreviousButtonText__c;
         companyDirectors = new List<Officer__c>();

@@ -65,7 +65,6 @@ Ver. Author        Date        Detail
     <!-- Piwik -->
  
     <script type="text/javascript">
-    console.log(document.location.origin + document.location.pathname)
       var _paq = _paq || [];
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);

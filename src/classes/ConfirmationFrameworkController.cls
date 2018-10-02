@@ -144,7 +144,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                     //submissionMgr.submission.Status__c = AppConstant.REQUEST_STATUS_PENDING_SUBMISSION; //  'Awaiting Submission';
                 }
                 formName = submissionMgr.submission.Form_Name__c;
-                submissionId = submissionMgr.submission.SubmissionId__c;
+                submissionId = submissionMgr.submission.CompanyNumber__c;
                 companyName = submissionMgr.submission.CompanyName__c;           
                 // added payment reference to info on last page
                 paymentReference = submissionMgr.submission.PaymentReference__c;
@@ -166,7 +166,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
 
                 }
                 // Added payment reference to last page
-                pageTitle2 = pageTitle2.replace('REFNUMB',  String.isBlank(submissionMgr.submission.SubmissionId__c) ? '' : submissionMgr.submission.SubmissionId__c);
+                pageTitle2 = pageTitle2.replace('REFNUMB',  String.isBlank(submissionMgr.submission.CompanyNumber__c) ? '' : submissionMgr.submission.CompanyNumber__c);
                 pageTitle3 = pageTitle3.replace('PAYNUMB',  String.isBlank(submissionMgr.submission.PaymentReference__c) ? '' : submissionMgr.submission.PaymentReference__c);
 
                 if (submissionMgr.submission.attachments != null) {
@@ -212,7 +212,7 @@ public with sharing class ConfirmationFrameworkController extends TransactionSte
                 } else {
                     formName = submissionMgr.submission.Form_Name__c;
                 }
-                submissionId = submissionMgr.submission.SubmissionId__c;
+                submissionId = submissionMgr.submission.CompanyNumber__c;
                 companyName = submissionMgr.submission.CompanyName__c;
                 // added payment reference
                 paymentReference = submissionMgr.submission.PaymentReference__c;

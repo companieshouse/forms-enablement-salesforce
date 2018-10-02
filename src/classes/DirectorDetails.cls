@@ -226,6 +226,7 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
             get;
             set;
         }
+
         public directorWrapper(Officer__c wrappedofficer) {
 
             validationErrors = '';
@@ -335,7 +336,6 @@ public with sharing class DirectorDetails extends TransactionStepControllerBase 
             else
                 isPageAlreadyValidStep = false;
 
-            System.debug('TESTD' + isPageAlreadyValidStep);
             return isPageAlreadyValidStep;
     }
     

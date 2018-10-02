@@ -25,7 +25,7 @@ Ver. Author        Date        Detail
                     <apex:outputText escape="false" value="{!body}"></apex:outputText>
                 </p>
 
-                <apex:commandLink action="{!startAgain}" value="Try again" id="thePreviousButton" />
+                <apex:commandLink styleClass="govuk-link" action="{!startAgain}" value="Try again" id="thePreviousButton" />
             </apex:form>
         </apex:define>
     </apex:composition>
