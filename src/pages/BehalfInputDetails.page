@@ -26,6 +26,7 @@
         </apex:define>
         <apex:define name="content">
             <apex:form id="mainForm">
+                <fieldset class="govuk-fieldset">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -45,7 +46,9 @@
                             </div>
                         </div>
                     </apex:outputPanel>
+                    <legend class='govuk-fieldset__legend'>
                     <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                    </legend>
                     <apex:outputText escape="false" styleClass="govuk-label" value="{!textBox1}"></apex:outputText>
                     <div class="govuk-form-group {!nameErrorVal}">
                         <span class='govuk-error-message'>
@@ -64,36 +67,6 @@
                         <label class="govuk-label" for="inputEmail"></label>
                         <apex:inputText maxlength="256" size="256" styleclass="govuk-input" id="inputEmail" value="{!emailDirector}" />
                     </div>
-                    <!-- <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox4}"></apex:outputText>
-                    <div class="govuk-form-group {!emailErrorValConfirm}">
-                        <fieldset class="govuk-fieldset">
-                            <legend class='govuk-fieldset__legend'>
-                                <span class='govuk-error-message'>
-                                    <apex:outputText rendered="{!emailConfirmError}" styleClass="error-mesage" id="comfirmEmal-emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
-                                </span>
-                                <!-- Email 
-                                <label class="govuk-label" for="comfirmEmal"></label>
-                                <apex:inputText styleclass="govuk-input" id="comfirmEmal" value="{!emailConfirmDirector}" />
-                            </legend>
-                        </fieldset>
-                    </div> -->
-                    <!-- <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox3}"></apex:outputText>
-                    <div class="govuk-form-group {!behalfSelectionerrorVal}">
-                        <fieldset class="govuk-fieldset">
-                            <legend class='govuk-fieldset__legend'>
-                                <span class='govuk-error-message'>
-                                    <apex:outputText rendered="{!behalfError}" id="behalferror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
-                                </span>
-                                <div class="govuk-radios">
-                                    <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input" id="radio-1" onchange="updateSelectedBehalf(1);" type="radio" name="radio-group" value="1" />
-                                        <label class="govuk-label govuk-radios__label" for="radio-1"> They have Power of Attorney</label>
-                                    </div>
-                                </div>
-                            </legend>
-                        </fieldset>
-                        
-                    </div> -->
                     <div class="govuk-form-group">
                         <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
                         
@@ -137,6 +110,7 @@
                                   checkSteps();
 
                 </script>
+                </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

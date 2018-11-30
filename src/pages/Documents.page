@@ -21,7 +21,7 @@ Ver. Author        Date        Detail
                 	Retrieve your document
                 </h1>
                 <p class="govuk-body-l">Download the Document:
-                    <a class="govuk-link" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a>PDF, {!size}B
+                    <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title} PDF, {!size}B</a>
                 </p>
             </apex:form>
         </apex:define>

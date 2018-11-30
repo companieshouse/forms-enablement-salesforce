@@ -30,6 +30,7 @@
         </apex:define>
         <apex:define name="content">
             <apex:form id="form">
+                <fieldset class="govuk-fieldset">
                 <apex:outputPanel id="masterPanel">   
                     <apex:outputPanel id="emptyPanel"></apex:outputPanel>
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -58,7 +59,6 @@
                         </div>
                     </apex:outputPanel>
                         
-                        <fieldset class="govuk-fieldset">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                                 <h1 class="govuk-fieldset__heading">
                                     {!pageBody}
@@ -79,14 +79,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </fieldset>
                     
 
                     <apex:outputPanel id="SecondDiv">
                         <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
                             <div class="govuk-form-group {!errorVal}">
-                                <fieldset class="govuk-fieldset">
-                                    <legend class="govuk-fieldset__legend">
                                         <div aria-hidden="false" class="govuk-details__text">
                                             <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
                                             <div class="govuk-form-group {!errorValBottom}">
@@ -100,8 +97,6 @@
                                                 <apex:input styleclass="govuk-input" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
                                             </div>
                                         </div>
-                                    </legend>
-                                </fieldset>
                             </div>
                         </apex:outputPanel>
                     </apex:outputPanel>
@@ -148,6 +143,8 @@
                                   checkSteps();
 
                 </script>
+            </fieldset>
+
             </apex:form>
         </apex:define>
     </apex:composition>

@@ -238,15 +238,15 @@ public with sharing class SecurityManager {
         LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Result: minutes: ' + minutes);
         LogSessionManager.addLog('<br/> ------ Getting Time Difference in Seconds: Finished ' + System.now());
 
-        LogSessionManager.addLog('<br/> ------ Does 12 minutes have passed?: Starting ' + System.now());
-        LogSessionManager.addLog('<br/> ------ Does 12 minutes have passed?: Result: ' + (minutes > 12));
-        if(minutes > 12)
+        LogSessionManager.addLog('<br/> ------ Does 20 minutes have passed?: Starting ' + System.now());
+        LogSessionManager.addLog('<br/> ------ Does 20 minutes have passed?: Result: ' + (minutes > 12));
+        if(minutes > 20)
         {
           LogSessionManager.addLog('<br/> ------ INVALID SESSION False Returned ' + System.now());
 
           return false;
         }
-        LogSessionManager.addLog('<br/> ------ Does 12 minutes have passed?: Finished ' + System.now());
+        LogSessionManager.addLog('<br/> ------ Does 20 minutes have passed?: Finished ' + System.now());
 
         LogSessionManager.addLog('<br/> ------ VALID SESSION True Returned ' + System.now());
 
@@ -282,7 +282,7 @@ public with sharing class SecurityManager {
     LogSessionManager.addLog('<br/> Step Triggering: ' + (transactionMgr != null ? ('' +transactionMgr.currentStep.Id) : 'No Transaction Manager') + ' Number: ' + (transactionMgr != null ? ('' + transactionMgr.currentStep.Step_Number__c) : 'No Transaction Manager'));
     LogSessionManager.addLog('<br/> URL Triggering: ' + ApexPages.currentPage().getUrl());
     LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Starting ' + System.now());
-    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 720, true);
+    Cookie sessionValidity = new Cookie(DEFAULT_SF_CHS_COOKIE_NAME, encryptText(emailPresenter + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())), '', 1200, true);
     LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Result: sessionValidity: ' + sessionValidity);
     LogSessionManager.addLog('<br/> ------ ------ Creating the Cookie: Finished ' + System.now());
 

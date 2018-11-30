@@ -24,6 +24,7 @@
         </apex:define>
         <apex:define name="content">
             <apex:form id="mainForm">
+                <fieldset class="govuk-fieldset">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -45,7 +46,7 @@
                         </div>
                     </apex:outputPanel>
                     <div class="govuk-form-group {!errorVal}">
-                        <fieldset class="govuk-fieldset" aria-describedby="waste-hint">
+                        
                             <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
                                 <h1 class="govuk-fieldset__heading">
                                      {!pageBody2}
@@ -65,7 +66,7 @@
                                         </div>
                                     </apex:repeat>
                                 </div>
-                        </fieldset>
+                        
                     </div>
                     <br />
                     <br /> 
@@ -106,6 +107,7 @@
                                   checkSteps();
 
                 </script>
+                </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

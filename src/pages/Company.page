@@ -29,6 +29,7 @@ Ver. Author        Date        Detail
         </apex:define>
         <apex:define name="content">
             <apex:form id="apex-form">
+                <fieldset class="govuk-fieldset">
                 <apex:outputPanel rendered="{!hasPageErrors}">
                     <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
                         <h1 class="govuk-error-summary__title" id="error-summary-title">
@@ -49,9 +50,11 @@ Ver. Author        Date        Detail
                 
                 
                 <div class="govuk-form-group {!currentError}">
+                    <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
                     <label class="govuk-label" for="text-input">
                         <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
                     </label>
+                    </legend>
                     
                     <span class="govuk-hint">Enter the company number</span>
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -59,7 +62,7 @@ Ver. Author        Date        Detail
                         </span>
                     </apex:outputPanel>
                     
-                    <apex:inputText maxlength="8" size="8" styleClass="govuk-input" value="{!companyNumber}" id="text-input" html-autofocus="true"/>
+                    <apex:inputText maxlength="8" size="8" styleClass="govuk-input" value="{!companyNumber}" id="text-input"/>
                     <br/>
                 </div>
 
@@ -68,7 +71,7 @@ Ver. Author        Date        Detail
                 <br/> 
                 <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="Continue" />
                 <br/>
-               
+            </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

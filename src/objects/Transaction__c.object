@@ -968,9 +968,9 @@ to any promoter of the company?</inlineHelpText>
         <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>CompanyNumber__c</field>
-            <operation>equals</operation>
-            <value>08778602</value>
+            <field>CompanyName__c</field>
+            <operation>startsWith</operation>
+            <value>BLACK</value>
         </filters>
         <label>Fluffy_Find</label>
         <sharedTo>
@@ -988,7 +988,7 @@ to any promoter of the company?</inlineHelpText>
         <filters>
             <field>Barcode__c</field>
             <operation>equals</operation>
-            <value>X68P3HAZ</value>
+            <value>X7CPCQNT</value>
         </filters>
         <label>barcode</label>
     </listViews>
