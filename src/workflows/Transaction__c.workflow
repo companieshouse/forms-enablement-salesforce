@@ -705,9 +705,13 @@ Email should contain a URL to start a new journey</description>
     </rules>
     <rules>
         <fullName>applicationDeleted</fullName>
-        <active>true</active>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Submitted,Accepted,Approved,Rejected,Declined,Error</value>
+        </criteriaItems>
         <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
-        <formula>true</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
@@ -719,9 +723,51 @@ Email should contain a URL to start a new journey</description>
                 <type>FieldUpdate</type>
             </actions>
             <offsetFromField>Transaction__c.CreatedDate</offsetFromField>
-            <timeLength>30</timeLength>
+            <timeLength>90</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>applicationDeletedOk</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted,Accepted,Approved,Rejected,Declined,Error</value>
+        </criteriaItems>
+        <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>updateExpirySentField</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Transaction__c.CreatedDate</offsetFromField>
+            <timeLength>90</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>applicationDeleted_SR</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Submitted,Accepted,Approved,Rejected,Declined,Error</value>
+        </criteriaItems>
+        <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>applicationDeleted_test</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Transaction__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Submitted,Accepted,Approved,Rejected,Declined,Error</value>
+        </criteriaItems>
+        <description>When a transaction is set to inactive an email is sent to the presenter stating that it has been deleted</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>expirydateupdater</fullName>

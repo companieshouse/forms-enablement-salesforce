@@ -69,7 +69,7 @@ Ver. Author             Date        Detail
                         <apex:outputText escape="false" value="{!guidanceText4}"></apex:outputText>
                         <apex:outputText escape="false" value="{!guidanceText5}"></apex:outputText>
                         <div class="form-group">
-                            <apex:commandButton status="status" reRender="masterPanel" styleClass="govuk-button" action="{!nextAction}" value="Continue"
+                            <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="Continue"
                                 id="NextButton" />
                         </div>
                     </apex:outputPanel>

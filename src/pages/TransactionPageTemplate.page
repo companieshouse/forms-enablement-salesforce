@@ -78,7 +78,6 @@ Ver. Author        Date        Detail
     </script>
     <noscript><p><img src="http://piwik.companieshouse.gov.uk/piwik.php?idsite=7" style="border:0;" alt="" /></p></noscript>
     <!-- End Piwik Code -->
-      <!-- GOV.UK Prototype kit v2.1.0 -->
     <c:footer />
    
         <script src="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-1.2.0.min.js')}" type="text/javascript"></script>

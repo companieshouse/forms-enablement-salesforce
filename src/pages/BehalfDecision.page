@@ -27,6 +27,7 @@
         </apex:define>
          <apex:define name="content">
             <apex:form >
+            <fieldset class="govuk-fieldset">
                 <apex:outputPanel id="emptyPanel" />
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -48,23 +49,23 @@
                     </apex:outputPanel>
                     <apex:outputPanel id="choicePanel">
                         <div class="govuk-form-group">
+                            <legend class='govuk-fieldset__legend'>
                             <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                            </legend>
                             <apex:outputText escape="false" value="{!textBox2}"></apex:outputText>
                             <div class="govuk-form-group {!errorVal}">
-                                <fieldset class="govuk-fieldset">
-                                    <legend class='govuk-fieldset__legend'></legend>
-                                    <span class="govuk-error-message">{!currentErrorMessage}</span>
-                                    <div class="govuk-radios govuk-radios--inline">
-                                        <div class="govuk-radios__item">
-                                            <input class="govuk-radios__input" onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"></input>
-                                            <label class="govuk-label govuk-radios__label" for="radio-inline-1"> Yes</label>
-                                        </div>
-                                        <div class="govuk-radios__item">
-                                            <input class="govuk-radios__input" onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"></input> 
-                                            <label class="govuk-label govuk-radios__label" for="radio-inline-2"> No</label>
-                                        </div>
+                               
+                                <span class="govuk-error-message">{!currentErrorMessage}</span>
+                                <div class="govuk-radios govuk-radios--inline">
+                                    <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input" onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"></input>
+                                        <label class="govuk-label govuk-radios__label" for="radio-inline-1"> Yes</label>
                                     </div>
-                                </fieldset>
+                                    <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input" onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"></input> 
+                                        <label class="govuk-label govuk-radios__label" for="radio-inline-2"> No</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -112,6 +113,7 @@
                                   checkSteps();
 
                 </script>
+            </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

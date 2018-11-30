@@ -28,11 +28,11 @@
     </values>
     <values>
         <field>Display_Text_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Choose at least X directors to approve this application.</value>
     </values>
     <values>
         <field>Display_Text_4__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Who will approve this application?</value>
     </values>
     <values>
         <field>Display_Text_5__c</field>
@@ -40,7 +40,7 @@
     </values>
     <values>
         <field>Display_Text_6__c</field>
-        <value xsi:type="xsd:string">You must select at least X directors</value>
+        <value xsi:type="xsd:string">You must choose at least X directors</value>
     </values>
     <values>
         <field>Document_Template_Name__c</field>

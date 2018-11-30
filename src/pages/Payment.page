@@ -2,6 +2,7 @@
     <apex:composition template="TransactionPageTemplate">
         <apex:define name="content">
             <apex:form id="mainForm">
+                <fieldset class="govuk-fieldset">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel rendered="{!hasPageErrors}">
                         <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -13,17 +14,18 @@
                                     <li>
                                         <a href="#radio-indent-1">{!currentErrorMessage}</a>
                                     </li>
-                                    <li>
-                                        <a href="{!divForErrorLink}">{!accountcurrentErrorMessage}</a>
-                                    </li>
-                                    <li>
-                                        <a>{!sameDayErrorMessage}</a>
-                                    </li>
+                                    <apex:outputPanel rendered="{!valuePaymentUI == 2}">
+                                        <li>
+                                            <a href="{!divForErrorLink}">{!accountcurrentErrorMessage}</a>
+                                        </li>
+                                    </apex:outputPanel>
                                 </ul>
                             </div>
                         </div>
                     </apex:outputPanel>
-                    <apex:outputText rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" value="{!headerBox1}" escape="false"></apex:outputText>
+                    <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
+                        <apex:outputText rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" value="{!headerBox1}" escape="false"></apex:outputText>
+                    </legend>
                     <apex:outputPanel id="emptyPanel" />
                     <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
                         <apex:outputPanel id="body">
@@ -33,8 +35,6 @@
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
                             <div class='govuk-form-group {!errorVal}'>
-                                <fieldset class="govuk-fieldset">
-                                    <legend class="govuk-fieldset">
                                         <div class="govuk-radios">
                                             <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
                                                 <div class="govuk-radios__item">
@@ -58,8 +58,6 @@
                                             </apex:outputPanel>
                                             <br/>
                                         </div>
-                                    </legend>
-                                </fieldset>
                                 <apex:outputPanel id="accountInput">
                                     <apex:outputPanel rendered="{!valuePaymentUI == 2}">
                                         <div aria-hidden="false" class="govuk-details__text">
@@ -192,6 +190,7 @@
             window.onload = disableBack();
 
             </script>-->
+            </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

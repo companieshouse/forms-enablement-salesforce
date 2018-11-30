@@ -77,7 +77,7 @@ Your company number is 8 numbers, or 2 letters followed by 6 numbers. You can fi
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">e &lt;a class=&quot;govuk-link&quot; href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
+        <value xsi:type="xsd:string">e &lt;a class=&quot;govuk-link&quot; href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;span class=”govuk-visually-hidden”&gt;: This link opens in a new window&lt;/span&gt;&lt;/a&gt;.
 &lt;/div&gt;
 &lt;/details&gt;</value>
     </values>

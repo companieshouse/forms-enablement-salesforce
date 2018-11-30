@@ -64,7 +64,7 @@ public with sharing class SubmitTransactionFormButton {
         }
         
         submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
-        submission.AmendmentHistory__c += '<br/> Number Of Call static (Integration Page Fail): ' + FormsApiClient.numberOfTimeCalled;
+        submission.AmendmentHistory__c += '<br/> Number Of Call static (YOU PRESSED THE BUTTON): ' + FormsApiClient.numberOfTimeCalled;
         submission.AmendmentHistory__c += '<br/>-----------------------------------------------------------------------------------';
         
 		submission.submissionTime__c = String.valueOf(system.now().time());

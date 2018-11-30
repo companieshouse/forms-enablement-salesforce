@@ -8,7 +8,10 @@
         </apex:define>
         <apex:define name="content">
             <apex:form >
-                <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
+                <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
+                    <apex:outputText escape="false" value="{!headerText1}"></apex:outputText>
+                </legend>
                 <apex:outputText escape="false" value="{!displayText1}"></apex:outputText>
                 <h2 class="govuk-heading-l">{!companyName}</h2>
                 <table class="govuk-table">
@@ -40,6 +43,7 @@
                 </table>
                 <br/>
                 <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Continue}" />
+                </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

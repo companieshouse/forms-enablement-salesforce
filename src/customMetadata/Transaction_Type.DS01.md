@@ -77,7 +77,7 @@ You can find it using th</value>
     </values>
     <values>
         <field>Company_Page_HiddenT3__c</field>
-        <value xsi:type="xsd:string">e &lt;a class=&quot;govuk-link&quot; href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;/a&gt;.
+        <value xsi:type="xsd:string">e &lt;a class=&quot;govuk-link&quot; href=&quot;http://beta.companieshouse.gov.uk&quot; target=&quot;_blank&quot;&gt; Companies House Service&lt;span class=”govuk-visually-hidden”&gt;: This link opens in a new window&lt;/span&gt;&lt;/a&gt;.
 &lt;/div&gt;
 &lt;/details&gt;</value>
     </values>

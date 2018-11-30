@@ -29,6 +29,7 @@
         </apex:define>
         <apex:define name="content">
             <apex:form >
+                <fieldset class="govuk-fieldset">
                 <apex:outputPanel id="masterPanel">
                     <apex:outputPanel id="singleOfficersPanel" rendered="{!singleOfficer}">
                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -46,7 +47,7 @@
                     </div>
                     </apex:outputPanel>  
                     <div class="govuk-form-group {!errorVal}">
-                            <fieldset class="govuk-fieldset">
+                            
                                 <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
                                     <h1 class="govuk-fieldset__heading">
                                         Is 
@@ -72,7 +73,6 @@
                                         </div>
                                     </div>
                                 
-                            </fieldset>
                         </div>
                         <div class="govuk-form-group">
                             <apex:commandButton status="status" id="buttonNextSingleOfficer" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
@@ -107,7 +107,6 @@
                                 </apex:repeat>
                             </ul>
                             <div class="govuk-form-group {!errorVal}">
-                            <fieldset class="govuk-fieldset">
                                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Is this correct?</legend>
                                 <apex:outputPanel id="error">
                                     <apex:outputPanel rendered="{!hasPageErrors}">
@@ -126,7 +125,6 @@
                                         <label class="govuk-label govuk-radios__label" for="radio-inline-2"> No</label>
                                     </div>
                                 </div>
-                            </fieldset>
                         </div>
                         <br />
                         <br />
@@ -178,6 +176,7 @@
                   }
                   checkSteps();
                 </script>
+            </fieldset>
             </apex:form>
         </apex:define>
     </apex:composition>

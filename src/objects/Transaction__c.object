@@ -949,7 +949,7 @@ to any promoter of the company?</inlineHelpText>
         <columns>LAST_UPDATE</columns>
         <columns>LAST_ACTIVITY</columns>
         <filterScope>Everything</filterScope>
-        <label>All</label>
+        <label>Company_NUMBER_VIEW</label>
     </listViews>
     <listViews>
         <fullName>Fluffy_Find</fullName>

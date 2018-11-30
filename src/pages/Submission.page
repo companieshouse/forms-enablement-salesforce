@@ -69,7 +69,7 @@ Ver. Author         Date        Detail
                                 <section class="attachment embedded" id="attachment_1365490">
                                     <div style="display:{!IF(showDoc," block ","none ")};">
                                         <p class="govuk-body">
-                                            <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title}</a> (PDF, {!size}B)
+                                            <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title} (PDF, {!size}B)</a> 
                                         </p>
                                     </div>
                                     <div style="display:{!IF(showDoc," none ","block ")};">
