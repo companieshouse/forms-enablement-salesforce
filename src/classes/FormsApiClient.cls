@@ -334,21 +334,10 @@ public with sharing class FormsApiClient {
 
     //Barcode body
     public String getBarcodeBody() {
-        String month;
+        Datetime dt = Datetime.now();
+        String formattedDate = dt.format('YYYYMMdd');
 
-        Date d = System.today();
-
-
-        if (d.month() < 10)
-            month = '0' + String.valueOf(d.month());
-        else
-            month = String.valueOf(d.month());
-
-
-        //e.g. '20160413';
-        String dateString = String.valueOf(d.year()) + month + String.valueOf(d.day());
-
-        return '{"datereceived":' + dateString + '}';
+        return '{"datereceived":' + formattedDate + '}';
     }
 
     // Aux for Authentication

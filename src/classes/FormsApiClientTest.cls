@@ -90,6 +90,22 @@ public with sharing class FormsApiClientTest {
         
         Test.stopTest();
     }
+    
+        
+    @isTest(seeAllData=false)
+    public static void getBarcodeBodyTest() {
+
+        Test.startTest();
+
+        FormsApiClient client = new FormsApiClient();
+        String barcodeBody = client.getBarcodeBody();
+        List<String> bodyParts = barcodeBody.split(':');
+        System.assertEquals('{"datereceived"', bodyParts.get(0));
+        System.assertEquals(9, bodyParts.get(1).length());
+        System.assertEquals(true, bodyParts.get(1).left(8).isNumeric());
+        
+        Test.stopTest();
+    }
 
     @isTest(seeAllData=false)
     public static void getJsonPackageNoPresenterTest() {
