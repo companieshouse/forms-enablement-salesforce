@@ -1,0 +1,117 @@
+<!-- 
+   Name: BehalfInputDetails.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+      
+   1. This page will design the input details of each directors selected to be signed on behalf
+
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  SylvainP      2016-06-19  Initial development.
+   -->
+<apex:page id="BehalfInputPage" cache="false" title="{!$Label.UI_Text_Behalf_Input_Details}" controller="BehalfInputDetailsController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form id="mainForm">
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="emptyPanel" />
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!currentErrorMessage}
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="{!divForErrorLink}" >{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <legend class='govuk-fieldset__legend'>
+                    <apex:outputText escape="false" value="{!headerBox1}"></apex:outputText>
+                    </legend>
+                    <apex:outputText escape="false" styleClass="govuk-label" value="{!textBox1}"></apex:outputText>
+                    <div class="govuk-form-group {!nameErrorVal}">
+                        <span class='govuk-error-message'>
+                            <apex:outputText rendered="{!nameError}" id="nameerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        </span>
+                        <!-- Full name -->
+                        <label class="govuk-label" for="inputName"></label>
+                        <apex:inputText styleclass="govuk-input" id="inputName" value="{!nameAuthorized}" />
+                    </div>
+                    <apex:outputText styleClass="govuk-label" escape="false" value="{!textBox2}"></apex:outputText>
+                    <div class="govuk-form-group {!emailErrorVal}">
+                        <span class='govuk-error-message'>
+                            <apex:outputText rendered="{!emailError}" styleClass="error-mesage" id="emailerror-message-text-input" value="{!currentErrorMessage}"></apex:outputText>
+                        </span>
+                        <!-- Email -->
+                        <label class="govuk-label" for="inputEmail"></label>
+                        <apex:inputText maxlength="256" size="256" styleclass="govuk-input" id="inputEmail" value="{!emailDirector}" />
+                    </div>
+                    <div class="govuk-form-group">
+                        <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                        
+                    </div>
+                    <apex:actionFunction status="status" action="{!updateSelectedBehalf}" name="updateSelectedBehalf" reRender="emptyPanel">
+                        <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!behalfSelection}" />
+                    </apex:actionFunction>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        BehalfInputDetailsController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                        if (resultBooo == true) 
+                        {
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+                </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,44 @@
+<apex:page cache="false" title="Cancelling your application" showHeader="false" sidebar="false" standardStylesheets="false" controller="withdrawController" action="{!buildDocument}" applyHtmlTag="false" docType="html-5.0">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a>{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="formPanel">
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                
+                        <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+                        <div class="govuk-form-group {errorVal}">
+                            <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">Confirm you understand
+                                <span class="govuk-error-message" id='confirmation-errors'>
+                                            {!currentErrorMessage}</span>
+                                    <div class="govuk-checkboxes">
+                                        <div class="govuk-checkboxes__item">
+                                            <apex:inputCheckbox styleClass="govuk-checkboxes__input" html-autofocus="true" id="thecheckbox" required="true" value="{!confirmationVal}"/>
+                                            <apex:outputLabel styleClass="govuk-label govuk-checkboxes__label" value="{!textCheckbox}" for="thecheckbox"></apex:outputLabel>
+                                        </div>
+                                    </div>
+                                </legend>
+                            </fieldset>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:commandButton styleClass="govuk-button" reRender="masterPanel" action="{!nextAction}" value="Submit" rendered="{!NOT(isLastPage)}" />
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

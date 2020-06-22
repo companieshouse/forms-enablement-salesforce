@@ -1,0 +1,128 @@
+<!-- 
+   Name: BehalfWhichSignatory.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+      
+   1. This page will design which directors will be selected to be signed on behalf of someone else.
+
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  SylvainP      2016-06-17  Initial development.
+   -->
+<apex:page cache="false" title="{!$Label.UI_Text_Behalf_Which_Signatory}" controller="BehalfWhichSignatoryController" docType="html-5.0" showHeader="false" sidebar="false" action="{!initPage}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form >
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="emptyPanel" />
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!currentErrorMessage}
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="{!divForErrorLink}">{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <div class="govuk-form-group {!errorVal}">
+                        <apex:outputPanel id="divDirector">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                                    <h1 class="govuk-fieldset__heading">
+                                         {!headerBox1}
+                                    </h1>
+
+                                </legend>
+                                <span id="hintD" class="govuk-hint">{!textBox1}</span>
+                                <span class='govuk-error-message' id='error-span'>{!currentErrorMessage}</span>
+                                
+                                    <div class="govuk-checkboxes">
+                                        <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                            <div class="govuk-checkboxes__item">
+                                                <input class="govuk-checkboxes__input" id="radio-{!director.officer.Id}" type="checkbox" name="{!director.officer.Id}" value="{!director.isSignatoryBehalf}" onchange="changeValue(this);"></input>
+                                                <label class="govuk-label govuk-checkboxes__label" for="radio-{!director.officer.Id}">{!director.officerTXT}</label>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
+                        </apex:outputPanel>
+                    </div>
+                    <div class='govuk-form-group'>
+                        <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                    </div>
+                    <apex:actionFunction status="status" action="{!updateSelectedPresenter}" name="updateSelectedPresenter" reRender="emptyPanel">
+                        <apex:param name="paramPresenterSelected" value="" id="y" assignTo="{!selectedId}" />
+                        <apex:param name="paramPresentervalue" value="" id="t" assignTo="{!valueRadio}" />
+                    </apex:actionFunction>
+                    <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                    <script type="text/javascript">
+                    function changeValue(out) {
+                        var radioClicked = document.getElementById(out.id);
+                        if (radioClicked.checked == true) {
+                            updateSelectedPresenter(radioClicked.name, 'true');
+                        } else if (radioClicked.checked == false) {
+                            updateSelectedPresenter(radioClicked.name,'false');
+                        }
+
+                    }
+                    </script>
+                </apex:outputPanel>
+                <script>
+                function checkSteps() {
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        BehalfWhichSignatoryController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                        if (resultBooo == true) 
+                        {
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+                </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

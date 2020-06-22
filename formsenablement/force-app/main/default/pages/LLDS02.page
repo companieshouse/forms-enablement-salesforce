@@ -1,0 +1,204 @@
+<apex:page cache="false" standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
+    <!--  Page to render LLDS02 pdf -->
+    <!--  Author: Leo Bitoy -->
+    <html>
+
+    <head>
+        <style>
+        @page {
+            size: A4;
+            margin: 25mm;
+            @bottom-right {
+                content: "Page: " counter(page);
+            }
+        }
+        
+        .page-break {
+            display: block;
+            page-break-inside: avoid;
+        }
+        
+        body {
+            font-family: Arial Unicode MS;
+            font-size: 14px;
+        }
+        
+        .warningText {
+            text-align: justify;
+        }
+        
+        .officer {
+            font-family: "Sans-Serif";
+            font-weight: bold;
+        }
+        
+        h3,
+        h4 {
+            font-family: "Sans-Serif";
+        }
+        
+        h1,
+        h2,
+        h4 {
+            margin: 0px;
+        }
+        
+        p {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .persoStyle {
+            font-weight: bold;
+            font-size: 20px;
+            position: top-right;
+        }
+        
+        .primary_header {
+            width: 100%;
+            height: 100% clear: left;
+        }
+        
+        .headerText {
+            font-family: "Sans-Serif";
+            font-weight: 700;
+            font-style: bold;
+            font-size: 60px;
+            margin-left: 60px;
+        }
+        
+        .HeaderText2 {
+            font-family: "Sans-Serif";
+            font-weight: 700;
+            font-style: bold;
+            font-size: 18px;
+        }
+        
+        #rectangle {
+            float: right;
+            width: 350px;
+            padding-left: 4px;
+            padding-top: 4px;
+            height: 104px;
+            background: black;
+        }
+        
+        .PDFBody {
+            font-family: "Sans-Serif";
+            overflow: auto;
+        }
+        
+        #rectangle2 {
+            width: 346px;
+            height: 100px;
+            padding-right: 0px;
+            padding-left: px;
+            background: white;
+        }
+        
+        .container {
+            background-color: #FFFFFF;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            border-bottom-width: 0px;
+            padding-left: 0px;
+            padding-top: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+        }
+        
+        .col1 {
+            width: 35%;
+        }
+        
+        .col2 {
+            width: 5%;
+        }
+        
+        .col3 {
+            width: 60%;
+        }
+        
+        .panelGrid {
+            margin-top: 30px;
+            page-break-inside: avoid;
+            table-layout: fixed;
+            width: 100%;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div style="container">
+            <header>
+                <div class="primary_header">
+                    <p><img src="{!$Resource.Logo}"/><strong class="headerText">LLDS02</strong><strong class="HeaderText2">(ef)</strong></p>
+                </div>
+                    <div id="test" class="PDFBody" >
+                        <div id="rectangle" >
+                            <div id="rectangle2" >
+                                <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Withdrawal of striking off application by Limited Liability Partnership (LLP)</p>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div>
+                    <!-- Company Details -->
+                    <apex:panelGrid columns="2" width="70%">
+                        <apex:outputLabel >LLP Name:</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyName__c}" />
+                        <apex:outputLabel >LLP Number:</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
+                    </apex:panelGrid>
+                    <br/>
+                        <apex:outputLabel >Received for filing in Electronic Format on the : &nbsp; </apex:outputLabel>
+                        <apex:outputText value="{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}" />
+                        <!-- TODO  {!DAY(TODAY())} {!MONTH(TODAY())} {!YEAR(TODAY())} -->
+                </div>
+                <br/>
+                <br/>
+                <!-- warning message -->
+                <div class="warningText">
+                    <br />
+                         <hr/>
+                    <p style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of member</p>
+                    <br />
+                    <p>The member hereby withdraws the application in which it was requested that 
+                        this LLP be struck off the Register.</p>
+                    <br />
+                    <h4>Authorising LLP Member:</h4>
+                    <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+                        <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
+                            <td class="col1" align="left">
+                                <div>{!off.Title__c} &nbsp; {!off.Forename__c} &nbsp; {!off.Surname__c}</div>
+                            </td>
+                            <td class="col2" >
+                            </td>
+                            <td class="col3">
+                                <!--  Signature -->
+                                <div style='float:center; margin-left: 10px'> Digitally Signed</div>
+                                <div style='float:center;'>___________________________________</div>
+                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney signed on behalf of the member</div>
+                                
+                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Signed on behalf of the corporate member</div>
+                                <!--  Signature date -->
+                                <div style='float:left;'>Signature Date: &nbsp; </div>
+                                <div style='float:left;'> {!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</div>
+                                <!-- I need a date variable or todays date to go in here -->
+                            </td>
+                        </apex:panelGrid>
+                    </apex:repeat>
+                    <hr/>
+                </div>    
+            </div>
+        </body>
+
+    </html>
+</apex:page>

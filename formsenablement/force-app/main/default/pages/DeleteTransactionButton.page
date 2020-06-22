@@ -1,0 +1,2 @@
+<apex:page standardController="Transaction__c" extensions="DeleteTransactionButton" action="{!initButton}">
+</apex:page>

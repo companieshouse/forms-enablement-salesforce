@@ -1,0 +1,114 @@
+<!-- 
+Name: Submission.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+Submission page - Legal requirement to allow users to 
+submit a request 
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author         Date        Detail
+1.0  Antonio Bravo  2016-05-27  Initial development.
+-->
+<apex:page cache="true" title="{!$Label.UI_Text_Confirmation_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false"
+    controller="SubmissionController"
+    action="{!initialiseAction}">
+        
+    <apex:composition template="TransactionPageTemplate">
+       <apex:define name="content">
+          <apex:form >
+          <apex:outputPanel >
+             <div >
+
+                <h1 class="govuk-heading-xl">{!displayHeader}</h1>
+                
+                  <!-- <p>
+                   {!displayText1}
+                <strong class="heading-medium">{!submissionId}</strong>  
+                </p>-->
+             </div>
+            <p class="govuk-body-l">{!displayText1}</p>  
+             <apex:outputPanel >
+                <table class="govuk-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" >Company name</th>
+                            <td class="govuk-table__cell ">{!companyName}</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" >Company number</th>
+                            <td class="govuk-table__cell ">{!companyNumber}</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row" style="vertical-align: top;">Registered Office Address</th>
+                            <td class="govuk-table__cell ">
+                                <apex:outputText escape="false" value="{!companyAddress}" />
+                            </td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header " scope="row">Authorised by</th>
+                            <td class="govuk-table__cell ">
+                                <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
+                                    <apex:outputText value="{!Director.Name}" id="theValue" />
+                                    <br/>
+                                </apex:repeat>
+                            </td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Application</th>
+                            <td class="govuk-table__cell ">
+                                <section class="attachment embedded" id="attachment_1365490">
+                                    <div style="display:{!IF(showDoc," block ","none ")};">
+                                        <p class="govuk-body">
+                                            <a class="govuk-link" target="_blank" href="/servlet/servlet.FileDownload?file={!attachmentId}" rel="external">{!title} (PDF, {!size}B)</a> 
+                                        </p>
+                                    </div>
+                                    <div style="display:{!IF(showDoc," none ","block ")};">
+                                        <p class="govuk-body">No Documents founds.
+                                        </p>
+                                    </div>
+                                </section>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </apex:outputPanel>
+              
+             <p class="govuk-body-l"></p>
+            <apex:commandButton status="status" styleClass="govuk-button" value="{!$Label.UI_Text_Submit}" onclick="SubmitOnClick(this); return false;" rendered="{!NOT(isLastPage)}" />
+
+            </apex:outputPanel>          
+            <apex:actionFunction name="doSubmit" action="{!nextAction}" />
+            </apex:form>
+          
+            <script language="Javascript"> 
+
+            function SubmitOnClick (objSubmitBtn) {
+              objSubmitBtn.disabled = true;
+              objSubmitBtn.value ='Submitted';
+              doSubmit();
+            }
+
+            // function disableBack() {
+            //   window.history.forward();
+            // }
+            
+            // window.onload = disableBack();
+
+            </script>
+
+
+          
+       </apex:define>
+    </apex:composition>
+
+</apex:page>

@@ -1,0 +1,183 @@
+<!-- 
+   Name: DirectorsList.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+   Todo : required functionality.
+   
+   1. Get Company Number from Transaction Submission
+   2. Make callout to the CHS API for Directors list (using an Apex Continuation to avoid synchronous limits)
+   3. Render Directors list for confirmation.
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Mark Cane&    2016-04-11  Initial development.
+   -->
+<apex:page cache="false" title="{!$Label.UI_Text_Directors}" controller="DirectorsListController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!previousButtonText}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form >
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="singleOfficersPanel" rendered="{!singleOfficer}">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                    <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
+                        <h1 class="govuk-error-summary__title" id="error-summary-title">
+                            An error has occurred.
+                        </h1>
+                        <div class="govuk-error-summary__body">
+                            <ul class="govuk-list govuk-error-summary__list">
+                                <li>
+                                     <a href="#radio-inline-1">Please select one of the options below</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </apex:outputPanel>  
+                    <div class="govuk-form-group {!errorVal}">
+                            
+                                <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
+                                    <h1 class="govuk-fieldset__heading">
+                                        Is 
+                                        <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeatSingleOfficer">
+                                            {!director}
+                                        </apex:repeat>
+                                        the only director of {!companyName}?
+                                    </h1>
+                                </legend>
+                                    <apex:outputPanel id="errorSingleOfficer">
+                                        <apex:outputPanel rendered="{!hasPageErrors}">
+                                            <span class="govuk-error-message" id="error-message-full-name">Please select one of the options below</span>
+                                        </apex:outputPanel>
+                                    </apex:outputPanel>
+                                    <div class="govuk-radios govuk-radios--inline">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-inline-1"> Yes</label>
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group" value="No"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-inline-2"> No</label>
+                                        </div>
+                                    </div>
+                                
+                        </div>
+                        <div class="govuk-form-group">
+                            <apex:commandButton status="status" id="buttonNextSingleOfficer" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        </div>
+
+                        <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+                            <apex:param name="paramBoolean" value="" id="xSingleOfficer" assignTo="{!validationDirector}" />
+                        </apex:actionFunction>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="multipleOfficersPanel" rendered="{!!singleOfficer}">
+                        <apex:outputPanel rendered="{!hasPageErrors}">
+                            <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
+                                <h1 class="govuk-error-summary__title" id="error-summary-title">
+                                    An error has occurred.
+                                </h1>
+                                <div class="govuk-error-summary__body">
+                                    <ul class="govuk-list govuk-error-summary__list">
+                                        <li>
+                                            <a href="#radio-inline-1">Please select one of the options below</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        
+                        <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+                        
+                            <ul class="govuk-list govuk-list--bullet">
+                                <apex:repeat value="{!listOfDirectors}" var="director" id="theRepeat">
+                                    <li>{!director}</li>
+                                </apex:repeat>
+                            </ul>
+                            <div class="govuk-form-group {!errorVal}">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Is this correct?</legend>
+                                <apex:outputPanel id="error">
+                                    <apex:outputPanel rendered="{!hasPageErrors}">
+                                        <span class="govuk-error-message" id="error-message-full-name">Please select one of the options below</span>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                                <div class="govuk-radios govuk-radios--inline">
+                                    <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input" onchange="updateDirectorList(true);" id="radio-inline-1" type="radio" name="radio-inline-group"
+                                            value="Yes"></input>
+                                        <label class="govuk-label govuk-radios__label" for="radio-inline-1"> Yes</label>
+                                    </div>
+                                    <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input" onchange="updateDirectorList(false);" id="radio-inline-2" type="radio" name="radio-inline-group"
+                                            value="No"></input>
+                                        <label class="govuk-label govuk-radios__label" for="radio-inline-2"> No</label>
+                                    </div>
+                                </div>
+                        </div>
+                        <br />
+                        <br />
+                        <apex:commandButton status="status" id="buttonNext" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" reRender="masterPanel" />
+                        <apex:actionFunction status="status" action="{!updateDirectorList}" name="updateDirectorList" reRender="buttonNext,error">
+                            <apex:param name="paramBoolean" value="" id="x" assignTo="{!validationDirector}" />
+                        </apex:actionFunction>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="NoOffPanel" rendered="{!noOfficers}">
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="tooManyOff" rendered="{!toMuchOfficer}">
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!pageText}"></apex:outputText>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        DirectorsListController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                        if (resultBooo == true) 
+                        {
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                            }
+                        }
+                  }
+                  checkSteps();
+                </script>
+            </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

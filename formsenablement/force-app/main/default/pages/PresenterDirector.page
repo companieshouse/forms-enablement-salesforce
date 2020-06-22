@@ -1,0 +1,152 @@
+<!-- 
+   Name: PresenterDirector.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+   Todo : required functionality.
+   
+   1. Get Company Number from Transaction Submission
+   2. Make callout to the CHS API for Directors list (using an Apex Continuation to avoid synchronous limits)
+   3. Render Directors list for confirmation.
+   
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Mark Cane&    2016-04-11  Initial development.
+   -->
+<apex:page id="presentorPage" cache="false" title="{!$Label.UI_Text_Directors}" controller="PresenterDirectorController" docType="html-5.0" showHeader="false" sidebar="false" action="{!populateDirectorList}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+<apex:outputPanel id="testEmpty"/>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="govuk-back-link" id="thePreviousButton"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form id="form">
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="masterPanel">   
+                    <apex:outputPanel id="emptyPanel"></apex:outputPanel>
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!IF(currentPageError != '', currentPageError, '')}
+                                {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
+                                {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="{!divForErrorLink}">{!currentPageError}</a>
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="<a href={!divForErrorLink}>"/>
+                                        {!IF(currentPageErrorTop != '', currentPageErrorTop, '')}
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorTop != '', true,false)}" value="</a><br/>"/>
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="<a href={!divForErrorLink}>"/>
+                                        {!IF(currentPageErrorBot != '', currentPageErrorBot, '')}
+                                        <apex:outputText escape="false" rendered="{!IF(currentPageErrorBot != '', true,false)}" value="</a>"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="choicePanel">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                                <h1 class="govuk-fieldset__heading">
+                                    {!pageBody}
+                                </h1>
+                            </legend>
+                            <div class="govuk-form-group {!errorVal}">
+                                <span class="govuk-error-message" id="error-message-full-name">{!currentPageError}</span>
+                                <div id="presenterSelection"> 
+                                    <div class="govuk-radios govuk-radios--inline">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="radio-indent-1" type="radio" name="presenter" value="Yes" onchange="updatePresenter(true);"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-indent-1"> Yes</label>                
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="radio-indent-2" type="radio" name="presenter" value="No" onchange="updatePresenter(false);"></input>
+                                            <label class="govuk-label govuk-radios__label" for="radio-indent-2"> No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                    
+                    <apex:outputPanel id="SecondDiv">
+                        <apex:outputPanel rendered="{!showMorePresenterInfo}" id="divPresenter">
+                            <div class="govuk-form-group {!errorVal}">
+                                        <div aria-hidden="false" class="govuk-details__text">
+                                            <apex:outputText escape="false"  value="{!pageHiddenText}"></apex:outputText>
+                                            <div class="govuk-form-group {!errorValBottom}">
+                                                <span class="govuk-error-message" id="error-message-full-name">{!currentPageErrorTop}</span>
+                                                <apex:outputLabel styleClass="govuk-label" for="directors-name">Your full name (optional)</apex:outputLabel>
+                                                <apex:input styleclass="govuk-input" value="{!presenterName}" type="text" id="directors-name" />
+                                            </div>
+                                            <div class="govuk-form-group {!errorValBottom2}">
+                                                <span class="govuk-error-message" id="error-message-full-name">{!currentPageErrorBot}</span>
+                                                <apex:outputLabel styleClass="govuk-label" for="directors-confirm-phone">Phone number (optional)</apex:outputLabel>
+                                                <apex:input styleclass="govuk-input" value="{!phoneNumber}" type="tel" id="directors-confirm-phone" />
+                                            </div>
+                                        </div>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+
+                    <apex:actionFunction status="status" action="{!updatePresenter}" name="updatePresenter" reRender="SecondDiv">
+                        <apex:param name="paramPresenter" value="" id="x" assignTo="{!directorPresenter}" />
+                    </apex:actionFunction>
+                    <div class="form-group">
+                        <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" reRender="masterPanel" rendered="{!NOT(isLastPage)}" />
+                    </div>
+                </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        PresenterDirectorController.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                        if (resultBooo == true) 
+                        {
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+            </fieldset>
+
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

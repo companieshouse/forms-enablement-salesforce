@@ -1,0 +1,130 @@
+<apex:page cache="false" controller="CH_SearchControllerByNumberClass" sidebar="false">
+    <apex:form >
+        
+          <apex:pageBlock mode="edit" id="block1">
+	         <apex:pageBlockSection >
+	            <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="searchTextNumber">Search Company by Number: </apex:outputLabel>
+	               <apex:panelGroup >
+	                  <apex:inputText id="CH_searchTextNumber" value="{!CH_searchTextNumber}"/>
+	                  <apex:commandButton value="Go!" action="{!CH_Search_functionByNumber}"
+	                                      rerender="block1,pageblock3"  status="loadStatus"/>
+	               </apex:panelGroup>
+	            </apex:pageBlockSectionItem>
+	        </apex:pageBlockSection>
+	      </apex:pageBlock> 
+    </apex:form>
+    
+    
+     <!-- SEARCH COMPANY BY NUMBER RESULTS -->
+    
+     <apex:pageBlock id="pageblock3"  >
+         
+            <apex:pageBlockSection title="JSON Deserealized Response" columns="1" >
+            <apex:pageBlockTable value="{!CH_companydetails}" var="x" id="pageblocktable">
+                <apex:column headerValue="Response"><apex:outputText escape="true">{!x}</apex:outputText></apex:column>
+   
+            </apex:pageBlockTable> 
+        </apex:pageBlockSection>
+         
+         
+           <apex:pageBlockSection title="Companies House - Company Details" columns="1" >
+           <apex:pageBlockTable value="{!CH_companydetails}" var="x" id="pageblocktable">
+               <apex:column headerValue="Company Name"><apex:outputText escape="true">{!x.company_name}</apex:outputText></apex:column>
+               <apex:column headerValue="Company Status"><apex:outputText escape="true">{!x.company_status}</apex:outputText></apex:column>
+               
+               <apex:column headerValue="Company Status"><apex:outputText escape="true">{!x.jurisdiction}</apex:outputText></apex:column>
+               <apex:column headerValue="Date of Creation"><apex:outputText escape="true">{!x.date_of_creation}</apex:outputText></apex:column>
+               <apex:column headerValue="Reg: Office Address"><apex:outputText escape="true">{!x.undeliverable_registered_office_address}</apex:outputText></apex:column>
+               <apex:column headerValue="Liquidated?"><apex:outputText escape="true">{!x.has_been_liquidated}</apex:outputText></apex:column>
+               <apex:column headerValue="SIC Codes"><apex:outputText escape="true">{!x.sic_codes}</apex:outputText></apex:column>
+               <apex:column headerValue="Company Number"><apex:outputText escape="true">{!x.company_number}</apex:outputText></apex:column>
+               <apex:column headerValue="Type"><apex:outputText escape="true">{!x.type}</apex:outputText></apex:column>
+               <apex:column headerValue="E-Tag"><apex:outputText escape="true">{!x.etag}</apex:outputText></apex:column>
+               
+               <apex:column headerValue="Insolvency History"><apex:outputText escape="true">{!x.has_insolvency_history}</apex:outputText></apex:column>
+               <apex:column headerValue="Has Charges?"><apex:outputText escape="true">{!x.has_charges}</apex:outputText></apex:column>
+               <apex:column headerValue="Can File?"><apex:outputText escape="true">{!x.can_file}</apex:outputText></apex:column>
+               <apex:column headerValue="Jurisdiction"><apex:outputText escape="true">{!x.jurisdiction}</apex:outputText></apex:column>
+               
+               
+               
+          </apex:pageBlockTable>
+       </apex:pageBlockSection>
+         
+         
+         
+       
+        <apex:pageBlockSection title="Companies House - Account Details" columns="1" >
+           <apex:pageBlockTable value="{!itemsToDisplay1}" var="z" id="pageblocktable">
+               <apex:column headerValue="Made Up To"><apex:outputText escape="true">{!z.Last_accounts.made_up_to}</apex:outputText></apex:column>
+               <apex:column headerValue="Next Due"><apex:outputText escape="true">{!z.next_due}</apex:outputText></apex:column>
+               <apex:column headerValue="Next Made Up To" ><apex:outputText escape="true">{!z.next_made_up_to}</apex:outputText></apex:column>
+               <apex:column headerValue="Accounting Reference Date" ><apex:outputText escape="true">Day: {!z.Accounting_reference_date.day} Month: {!z.Accounting_reference_date.month}</apex:outputText></apex:column>
+               <apex:column headerValue="Overdue"  ><apex:outputText escape="true">{!z.overdue}</apex:outputText></apex:column>
+
+          </apex:pageBlockTable>
+       </apex:pageBlockSection>
+         
+          
+       
+        <apex:pageBlockSection title="Companies House - Office Registered Details" columns="1" >
+           <apex:pageBlockTable value="{!CH_OfficeDetails}" var="a" id="pageblocktable">
+               <apex:column headerValue="Address Line 1" ><apex:outputText escape="true">{!a.address_line_1}</apex:outputText></apex:column>
+               <apex:column headerValue="Address Line 2" ><apex:outputText escape="true">{!a.address_line_2}</apex:outputText></apex:column>
+               <apex:column headerValue="Locality"><apex:outputText escape="true">{!a.locality}</apex:outputText></apex:column>
+               <apex:column headerValue="Postal Code" ><apex:outputText escape="true">{!a.postal_code}</apex:outputText></apex:column>
+               
+
+          </apex:pageBlockTable>
+         </apex:pageBlockSection>   
+        
+         
+         <apex:pageBlockSection title="Companies House - Annual Returns" columns="1" >
+             <apex:pageBlockTable value="{!CH_AnnualReturn}" var="y" id="pageblocktable">
+                 <apex:column headerValue="Last Made Up To"><apex:outputText escape="true">{!y.last_made_up_to}</apex:outputText></apex:column>
+                 <apex:column headerValue="Next Due" ><apex:outputText escape="true">{!y.next_due}</apex:outputText></apex:column>
+                 <apex:column headerValue="Next Made Up To" ><apex:outputText escape="true">{!y.next_made_up_to}</apex:outputText></apex:column>
+                 <apex:column headerValue="Overdue" ><apex:outputText escape="true">{!y.overdue}</apex:outputText></apex:column>
+                  
+              </apex:pageBlockTable>
+         </apex:pageBlockSection>  
+         
+         
+         <apex:pageBlockSection title="Companies House - Officer Summary" columns="1" >
+             <apex:pageBlockTable value="{!CH_OfficerSummary}" var="y" id="pageblocktable">
+                 <apex:column headerValue="Resigned Count" ><apex:outputText escape="true">{!y.resigned_count}</apex:outputText></apex:column>
+                 <apex:column headerValue="Active Count" ><apex:outputText escape="true">{!y.active_count}</apex:outputText></apex:column>
+                 
+                 <apex:column breakBefore="false" colspan="2"> 
+                     <apex:pageBlockSection title="Companies House - Officer's Details" columns="1" >
+                         <apex:pageBlockTable value="{!y.officers}" var="h" id="pageblocktable">
+                             <apex:column headerValue="Name" ><apex:outputText escape="true">{!h.name}</apex:outputText></apex:column>
+                             <apex:column headerValue="Appointed On" ><apex:outputText escape="true">{!h.appointed_on}</apex:outputText></apex:column>
+                             <apex:column headerValue="Officer Role" ><apex:outputText escape="true">{!h.officer_role}</apex:outputText></apex:column>
+                      
+                             	 <apex:column breakBefore="false" colspan="2"> 
+                                     <apex:pageBlockSection title="Companies House - Officer's Details" columns="1" >
+                                         <apex:pageBlockTable value="{!h.date_of_birth}" var="g" id="pageblocktable">
+                                             <apex:column headerValue="Day" ><apex:outputText escape="true">{!g.day}</apex:outputText></apex:column>
+                                             <apex:column headerValue="Month" ><apex:outputText escape="true">{!g.month}</apex:outputText></apex:column>
+                                             <apex:column headerValue="Year" ><apex:outputText escape="true">{!g.year}</apex:outputText></apex:column>
+                                         </apex:pageBlockTable>
+                                     </apex:pageBlockSection>  
+                             </apex:column>
+                             
+                             
+                             
+                         </apex:pageBlockTable>
+                     </apex:pageBlockSection>  
+                 </apex:column>
+                 
+           
+          </apex:pageBlockTable>
+       </apex:pageBlockSection>  
+     
+         
+          
+    </apex:pageBlock>
+ <c:LoadingBox />  
+</apex:page>

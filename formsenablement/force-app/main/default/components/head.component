@@ -1,0 +1,33 @@
+<apex:component layout="none">
+    
+    <meta charset="utf-8" />
+    
+    <!--[if gt IE 8]><!-->
+    <link href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-1.2.0.min.css')}" media="screen" rel="stylesheet"
+      type="text/css" />
+    <!--<![endif]-->
+
+    <!--[if lte IE 8]><link href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-ie8-1.2.0.min.css')}" media="print" rel="stylesheet"
+      type="text/css" /><![endif]-->        
+      
+      <link href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/application.css')}" media="screen" rel="stylesheet" type="text/css"
+      />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="theme-color" content="#0b0c0c" />
+        
+        
+        <link rel="shortcut icon" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/favicon.ico')}" type="image/x-icon" />
+        <link rel="mask-icon" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-mask-icon.svg')}" color="#0b0c0c"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon-180x180.png')}"/>
+        <link rel="apple-touch-icon" sizes="167x167" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon-167x167.png')}"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon-152x152.png')}"/>
+        <link rel="apple-touch-icon" href="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-apple-touch-icon.png')}"/>
+        
+        
+        
+        <meta name="description" content="Use the GOV.UK Prototype Kit to quickly make realistic HTML prototypes of GOV.UK services."/>
+              
+        <meta property="og:image" content="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/assets/images/govuk-opengraph-image.png')}"/>
+
+</apex:component>

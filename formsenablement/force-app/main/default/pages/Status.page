@@ -1,0 +1,51 @@
+<!-- Authenticated Page for Document Approval Statuses -->
+<!--  Author: Leo Bitoy -->
+<apex:page cache="false" title="Consult the status of the requested approvals" showHeader="false" sidebar="false" standardStylesheets="false" controller="DocStatusController" action="{!initialiseController}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
+                    <h1 class="govuk-panel__title">{!companyName}</h1>
+                    <p class="govuk-panel__body">
+                        <b>{!companyNumber}</b> - Incorporated on {!companyDateOfCreation}
+                    </p>
+                    <p class="govuk-panel__body">
+                        <apex:outputText escape="false" value="{!companyAddress}"/>
+                        <!-- information here {!informationstuff} -->
+                    </p>
+                </div>
+                <apex:outputPanel rendered="{!hasPageErrors}">
+                    <span class="govuk-error-message" id="error-message-text-input"> {!statusErrors}
+                    </span>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!NOT(hasPageErrors)}">
+                    <div class="govuk-form-group">
+                        <table class="govuk-table">
+                            <thead class="govuk-table__head">
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Name</th>
+                                    <th class="govuk-table__header" scope="row">Email</th>
+                                    <th class="govuk-table__header" scope="row">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="govuk-table__body">
+                                <apex:repeat value="{!listofOfficers}" var="officer" id="theRepeat">
+                                    <tr class="govuk-table__row">
+                                        <td class="govuk-table__cell ">
+                                            <apex:outputText value="{!officer.Name}" id="theOfficerName" />
+                                        </td>
+                                        <td class="govuk-table__cell ">
+                                            <apex:outputText value="{!officer.dsfs__DocuSign_Recipient_Email__c}" id="theCompany" />
+                                        </td>
+                                        <td class="govuk-table__cell ">
+                                            <apex:outputText value="{!officer.dsfs__Recipient_Status__c}" id="theStatus" /> </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

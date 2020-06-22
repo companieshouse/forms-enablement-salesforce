@@ -1,0 +1,197 @@
+<apex:page id="PaymentPage" cache="false" title="{!$Label.UI_Text_Payment}" controller="PaymentController" docType="html-5.0" showHeader="false" action="{!checkPaymentResult}" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form id="mainForm">
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="#radio-indent-1">{!currentErrorMessage}</a>
+                                    </li>
+                                    <apex:outputPanel rendered="{!valuePaymentUI == 2}">
+                                        <li>
+                                            <a href="{!divForErrorLink}">{!accountcurrentErrorMessage}</a>
+                                        </li>
+                                    </apex:outputPanel>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
+                        <apex:outputText rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" value="{!headerBox1}" escape="false"></apex:outputText>
+                    </legend>
+                    <apex:outputPanel id="emptyPanel" />
+                    <apex:outputPanel rendered="{!IF(hasPaid == true ||  hasPaymentSuccess == true || hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}">
+                        <apex:outputPanel id="body">
+                            <apex:outputText escape="false" rendered="{!isSameDaySelected}" value="{!textBox1FastTrackFee}" />
+                            <apex:outputText escape="false" rendered="{!!isSameDaySelected}" value="{!textBox1NormalFee}" />
+                            <span class="govuk-error-message" id="error-message-text-input">{!currentErrorMessage}</span>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!isPaypalPayment || !isCardPayment || isAccountPayment}">
+                            <div class='govuk-form-group {!errorVal}'>
+                                        <div class="govuk-radios">
+                                            <apex:outputPanel id="cardPanel" rendered="{!isCardPayment}">
+                                                <div class="govuk-radios__item">
+                                                    <input class="card govuk-radios__input" id="radio-indent-1" type="radio" name="paymentSelect" value="Card" onchange="updatePayment(1);"></input>
+                                                    <label class="govuk-label govuk-radios__label" for="radio-indent-1"> Credit or debit card</label>
+                                                </div>
+                                            </apex:outputPanel>
+                                            <br/>
+                                            <apex:outputPanel id="paypalPanel" rendered="{!isPaypalPayment}">
+                                                <div class="govuk-radios__item">
+                                                    <input class="paypal govuk-radios__input" id="radio-indent-3" type="radio" name="paymentSelect" value="Paypal" onchange="updatePayment(3);"></input>
+                                                    <label class="govuk-label govuk-radios__label" for="radio-indent-3"> Paypal</label>
+                                                </div>
+                                            </apex:outputPanel>
+                                            <br/>
+                                            <apex:outputPanel id="accountPanel" rendered="{!isAccountPayment}">
+                                                <div class="govuk-radios__item">
+                                                    <input class="account govuk-radios__input" id="radio-indent-2" type="radio" name="paymentSelect" value="Account" onchange="updatePayment(2);"></input>
+                                                    <label class="govuk-label govuk-radios__label" for="radio-indent-2"> Payment on account</label>
+                                                </div>
+                                            </apex:outputPanel>
+                                            <br/>
+                                        </div>
+                                <apex:outputPanel id="accountInput">
+                                    <apex:outputPanel rendered="{!valuePaymentUI == 2}">
+                                        <div aria-hidden="false" class="govuk-details__text">
+                                            <div class="govuk-form-group {!accounterrorVal}">
+                                                <span class='govuk-error-message'>{!accountcurrentErrorMessage}</span>
+                                                <label class="govuk-label" for="accountnumberinput">Presenter ID:</label>
+                                                <apex:inputText styleclass="govuk-input" value="{!accountNumber}" id="accountnumberinput" />
+                                                <br/>
+                                                <br/>
+                                                <!-- <label class="form-label" for="presenterID">Presenter ID:</label>
+                                                <apex:inputText styleclass="form-control" value="{!presenterId}" id="presenterID" />
+                                                <br/>
+                                                <br/> -->
+                                                <label class="govuk-label" for="accouthAuthCode">Presenter authentication code:</label>
+                                                <apex:inputText styleclass="govuk-input" value="{!accountAuthCode}" id="accouthAuthCode" />
+                                            </div>
+                                        </div>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                
+                <apex:actionFunction status="status" action="{!updatePayment}" name="updatePayment" reRender="emptyPanel,accountInput">
+                    <apex:param name="paramInt" value="" id="x" assignTo="{!valuePaymentUI}" />
+                </apex:actionFunction>
+                <apex:actionFunction status="status" action="{!updateSameDay}" name="updateSameDay" reRender="emptyPanel,body">
+                    <apex:param name="paramBool" value="" id="y" assignTo="{!isSameDaySelected}" />
+                </apex:actionFunction>
+                <apex:actionFunction status="status" action="{!updateLink}" name="updateLink" reRender="emptyPanel">
+                </apex:actionFunction>
+                <apex:outputPanel rendered="{!hasPaymentSuccess}">
+                    <apex:outputPanel rendered="{!accountSuccess}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <p class="govuk-body">
+                            {!accountSuccessMsg}
+                        </p>
+                    </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!!accountSuccess}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <p class="govuk-body">
+                            Your payment has been successful. Your payment reference number is: {!paymentReference}.
+                        </p>
+                    </div></apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaid}">
+                    <apex:outputPanel rendered="{!!accountSuccess}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <p class="govuk-body">
+                            You have already paid for this transaction.
+                        </p>
+                    </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentRejected}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <p class="govuk-body">
+                            The payment has been rejected.
+                            Do you want to <a onclick="updateLink();" class="govuk-link" href="#">return to payment page</a>?
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentError}">
+                    <apex:outputPanel rendered="{!accountFailure}">
+                        <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <br/>
+                        <p class="govuk-body">
+                            {!accountFailureMsg}
+                        </p>
+                        <apex:commandButton action="{!resetTransaction}" styleClass="govuk-button" value="{!$Label.UI_Text_Previous}" />
+                        <br/>
+                        <br/>
+                        <apex:commandLink styleClass="govuk-link" action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButton" />
+
+                    </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!!accountFailure}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <br/>
+                        <p class="govuk-body">
+                            An error occurred during the payment process.
+                            Do you want to try again (It might not work)?
+                            <a onclick="updateLink();" class="govuk-link" href="#">Try again?</a> Or come back later by loging with the same user.
+                        </p>
+                    </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!hasPaymentPending}">
+                    <div role="group" tabindex="-1">
+                        <h1 class="govuk-heading-xl">
+                                    Payment status
+                                </h1>
+                        <p class="govuk-body">
+                            The payment is pending.
+                            You might have to do further action to validate the payment.
+                        </p>
+                    </div>
+                </apex:outputPanel>
+                <div class="govuk-form-group">
+                    <apex:commandButton status="status" action="{!nextAction}" styleClass="govuk-button" value="Continue" reRender="masterPanel" rendered="{!IF( hasPaymentRejected == true || hasPaymentError == true || hasPaymentPending == true, false, true)}" />
+                    <br/>
+                    <br/>
+                    <apex:commandLink styleClass="govuk-link" action="{!resetTransaction}" Id="startagain" value="{!$Label.UI_Text_Previous_Payment}" />
+                </div>
+                </apex:outputPanel>
+
+            <!--<script language="Javascript">
+             function disableBack() {
+              window.history.forward();
+            }
+            window.onload = disableBack();
+
+            </script>-->
+            </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>
