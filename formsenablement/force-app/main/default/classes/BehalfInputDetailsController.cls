@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  SylvainP      2016-06-17  Initial development.
 */
-public class BehalfInputDetailsController extends TransactionStepControllerBase {
+public with sharing class BehalfInputDetailsController extends TransactionStepControllerBase {
 
     public String divForErrorLink {get; set;}
     public Boolean hasPageErrors { get; set; }
@@ -34,9 +34,6 @@ public class BehalfInputDetailsController extends TransactionStepControllerBase 
     public String textBox4 {get; set;}
 
     public String headerBox1 {get; set;}
-    
-    public String displayText5 {get; set;}
-    public String displayText6 {get; set;}
 
     public Officer__c currentOfficer {get; set;}
 
@@ -65,8 +62,6 @@ public class BehalfInputDetailsController extends TransactionStepControllerBase 
         textBox3 = (transactionMgr.currentStep.Display_Text_3__c == null ? '' : transactionMgr.currentStep.Display_Text_3__c);
         textBox4 = (transactionMgr.currentStep.Display_Text_4__c == null ? '' : transactionMgr.currentStep.Display_Text_4__c);
         headerBox1 = (transactionMgr.currentStep.Header_Text_1__c == null ? '' : transactionMgr.currentStep.Header_Text_1__c );
-        displayText5 = (transactionMgr.currentStep.Display_Text_5__c == null ? '' : transactionMgr.currentStep.Display_Text_5__c);
-        displayText6 = (transactionMgr.currentStep.Display_Text_6__c == null ? '' : transactionMgr.currentStep.Display_Text_6__c);
 
         return;
     }
@@ -80,6 +75,7 @@ public class BehalfInputDetailsController extends TransactionStepControllerBase 
                 off.hasInputBehalfDetails__c = true;
                 off.AuthorizedSigner__c = nameAuthorized;
                 off.Email__c = emailDirector;
+
                 off.isPowerOfAttorney__c = true;
                 
             }
@@ -252,7 +248,7 @@ public class BehalfInputDetailsController extends TransactionStepControllerBase 
         for (Officer__c off : submissionMgr.submission.Officers__r) {
             if (!off.hasInputBehalfDetails__c && !off.IsPresenter__c && off.isSignatoryBehalf__c && !off.isCorporateDirector__c) {
                 currentOfficer = off;
-                // emailDirector = currentOfficer.Email__c;
+                emailDirector = currentOfficer.Email__c;
             }
         }
 
@@ -260,8 +256,6 @@ public class BehalfInputDetailsController extends TransactionStepControllerBase 
             return nextStep();
 
         headerBox1 = headerBox1.replace('DIRECTORNAME', currentOfficer.Name);
-        displayText5 = displayText5.replace('DIRECTORNAME', currentOfficer.Name);
-        displayText6 = displayText6.replace('DIRECTORNAME', currentOfficer.Name);
 
         textBox3 = textBox3.replace('DIRECTORNAME', currentOfficer.Name);
 

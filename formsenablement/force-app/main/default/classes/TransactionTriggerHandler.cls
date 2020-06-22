@@ -11,8 +11,8 @@
  * and continue the process.
  *  This trigger handler builds the base url for all environments
  */
-public class TransactionTriggerHandler {
-    
+public with sharing class TransactionTriggerHandler {
+	
 
     public static void beforeUpdate(List <Transaction__c> transactionsList) {
 

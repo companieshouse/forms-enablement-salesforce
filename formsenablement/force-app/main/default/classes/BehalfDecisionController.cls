@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  SylvainP      2016-06-16  Initial development.
 */
-public class BehalfDecisionController extends TransactionStepControllerBase {
+public with sharing class BehalfDecisionController extends TransactionStepControllerBase {
 
     public Boolean hasPageErrors { get; set; }
     public Boolean showNoError {get; set;}

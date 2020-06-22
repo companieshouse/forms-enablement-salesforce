@@ -15,7 +15,7 @@ History
 Ver. Author         Date        Detail
 1.0  Antonio Bravo  2016-05-27  Initial development.
 */
-public class SubmissionController extends TransactionStepControllerBase {
+public with sharing class SubmissionController extends TransactionStepControllerBase {
     public String title {
         get;
         private set;

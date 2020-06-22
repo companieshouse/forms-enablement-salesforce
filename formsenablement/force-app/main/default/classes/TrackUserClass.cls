@@ -1,4 +1,4 @@
-public class TrackUserClass {
+public with sharing class TrackUserClass {
 
     // Public properties.
 
@@ -21,9 +21,8 @@ public class TrackUserClass {
         Cookie d_valueCookieStatus = new Cookie('d_valueCookieStatus', SecurityManager.encryptText('initial'), null, -1, true);
         List<Cookie> col = new List<Cookie>();
         
-        
-        col.add(t_value);
         col.add(d_valueCookieStatus);
+        col.add(t_value);
         //system.debug('SYLVAINBEFORE' + ApexPages.currentPage().getCookies());
         ApexPages.currentPage().setCookies(col);
         //system.debug('SYLVAINAFTER' + ApexPages.currentPage().getCookies());

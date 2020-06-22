@@ -21,7 +21,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-09  Initial conversion of Eliot Stock code .
 */
-public class AccountsAPIHelper {
+public with sharing class AccountsAPIHelper {
 
         SecurityManager securityMgr;
 
@@ -62,14 +62,14 @@ public class AccountsAPIHelper {
                return docstatusredirectUrl;
     }
 
-    public String getUserAuthUrl(String nonce, String redirectURL){
+	public String getUserAuthUrl(String nonce, String redirectURL){
 
-        Account_Api_Settings__c settings = getSettings();
+		Account_Api_Settings__c settings = getSettings();
 
 
         // System.debug('nonce is ' + nonce + ',  ' + ' settings are:  ' + settings );
 
-        insert new User_Authorisation__c(Nonce__c=nonce);
+		insert new User_Authorisation__c(Nonce__c=nonce);
 
         String authUrl = 'https://'+settings.Host__c+'/oauth2/authorise' + '?';
 
@@ -97,21 +97,21 @@ public class AccountsAPIHelper {
             redirectUrlParam = redirectUrl;
         }
 
-         authUrl += '&redirect_uri='+redirectUrlParam;
+		 authUrl += '&redirect_uri='+redirectUrlParam;
 
          return authUrl;
     }
 
     public String getCompanyAuthUrl(String companyNumber, String transactionType, String nonce){
 
-        final String SCOPE_PREFIX = 'http://api.companieshouse.gov.uk/company/';
+    	final String SCOPE_PREFIX = 'http://api.companieshouse.gov.uk/company/';
 
-        Account_Api_Settings__c settings = getSettings();
+		Account_Api_Settings__c settings = getSettings();
 
 
 
              // always insert new company auth when this is called so we can track user and company searched
-        insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nonce, Transaction_Type__c=transactionType);
+		insert new Company_Authorisation__c(Company_Number__c=companyNumber, Nonce__c=nonce, Transaction_Type__c=transactionType);
 
         String authUrl = 'https://'+settings.Host__c+'/oauth2/authorise' + '?';
 
@@ -130,10 +130,10 @@ public class AccountsAPIHelper {
         // Redirect URL.
         String redirectUrl = EncodingUtil.urlEncode(getRedirectUrl(), 'UTF-8'); //  EncodingUtil.urlEncode(settings.Callback_Url__c, 'UTF-8');
 
-        authUrl+='&redirect_uri='+ redirectUrl;
-        authUrl+='&scope='+SCOPE_PREFIX+companyNumber;
+		authUrl+='&redirect_uri='+ redirectUrl;
+		authUrl+='&scope='+SCOPE_PREFIX+companyNumber;
 
-        return authUrl;
+    	return authUrl;
     }
 
 
@@ -416,7 +416,7 @@ public String getDocumentStatusURL(String companyNumber, String transactionType,
         return profile;
     }
 
-    public with sharing class UserProfile {
+	public with sharing class UserProfile {
         public String surname;
         public String forename;
         public String email;

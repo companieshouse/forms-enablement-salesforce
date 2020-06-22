@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-06-16  Initial development.
 */
-public class whichDirector extends TransactionStepControllerBase {
+public with sharing class whichDirector extends TransactionStepControllerBase {
     // Public properties.
     public String divForErrorLink {get; set;}
 

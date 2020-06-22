@@ -11,7 +11,7 @@
  * Update 11/04/2016
  * Author: antonio.bravo@gollico.co.uk
  */
-public class FormsApiClient {
+public with sharing class FormsApiClient {
 
     // The multipart boundary can be any old string that's unlikely to exist in the parts
     // themselves. This is a random sequence of bytes.

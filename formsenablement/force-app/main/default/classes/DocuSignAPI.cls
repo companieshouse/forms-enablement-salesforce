@@ -5103,7 +5103,6 @@ public with sharing class DocuSignAPI {
         public Boolean Asynchronous;
         public String AccountId;
         public String EmailBlurb;
-        public String BrandId;
         public String Subject;
         public String SigningLocation;
         public DocuSignAPI.ArrayOfCustomField CustomFields;

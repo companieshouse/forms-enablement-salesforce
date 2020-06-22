@@ -13,7 +13,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-04  Initial development.
 */
-public class DigitalSignatureController extends TransactionStepControllerBase {
+public with sharing class DigitalSignatureController extends TransactionStepControllerBase {
 
     public Boolean pendingPage {get; set;}
     public String compName {get; set;}
@@ -252,19 +252,7 @@ public class DigitalSignatureController extends TransactionStepControllerBase {
             //Send to docusign as no presenter don t load the external embed page
             if (!submissionMgr.submission.isSigningStarted__c) {
                 if(!Test.isRunningTest())
-                {
-                    String result = ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
-
-                    if(result.equals('Error'))
-                    {
-                        PageReference pg = new PageReference('/IntegrationErrorDocusign');
-
-                        pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-                        pg.setRedirect(true);
-
-                        return pg;
-                    }
-                }
+                    ExternalEmbedDocuSignController.docusignSignature(submissionMgr, transactionMgr);
                 persistStep();
             }
             pendingPage = true;

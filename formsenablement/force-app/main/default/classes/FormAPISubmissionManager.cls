@@ -18,7 +18,7 @@ History
 Ver. Author            Date        Detail
 1.0  Antonio Bravo     2016-04-29  Initial development.
 */
-public class FormAPISubmissionManager {
+public with sharing class FormAPISubmissionManager {
     String output;
     
     public with sharing class Barcode {

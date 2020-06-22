@@ -29,18 +29,12 @@
                                 // window.open('{!externalURL}','_self'); 
 
                                 var screen = navigator.userAgent.match('/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/');
-                                var totalDirectors = {!numberOfDirectorsSigning};
-                                var iframeHeight = 1020;
-                                
-                                if (totalDirectors > 0) {
-                                    iframeHeight = 1020 + (150 * totalDirectors) - 150;
-                                }
-                                
+
                                 if (screen != null && screen.length > 1) {
                                     window.open('{!externalURL}', '_self');
 
                                 } else {
-                                    document.getElementById("doculoader").innerHTML = '<iframe title="Add your signature to close the company" height="' + iframeHeight + '" width="940" id="999" style="border: 1px solid #b1b4b6;" src="{!externalURL}" ></iframe>';
+                                    document.getElementById("doculoader").innerHTML = '<iframe title="Add your signature to close the company" height="1490" width="940" id="999" src="{!externalURL}" ></iframe>';
 
                                 }
                             </script>

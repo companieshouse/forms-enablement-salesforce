@@ -27,7 +27,7 @@ private class DocusignLibraryTest {
 	 
 	@isTest static void test_getCaptiveInfo(){
 		
-		DocusignResponsiveAPI.RecipientCaptiveInfo expectedResult = new DocusignResponsiveAPI.RecipientCaptiveInfo();
+		DocuSignAPI.RecipientCaptiveInfo expectedResult = new DocuSignAPI.RecipientCaptiveInfo();
 		expectedResult.ClientUserId = 'true';
 
 		system.assertEquals(expectedResult.ClientUserId, DocusignLibrary.getCaptiveInfo('true').ClientUserId);
@@ -35,7 +35,7 @@ private class DocusignLibraryTest {
 
 	@isTest static void test_getNotification(){
 		
-		DocusignResponsiveAPI.Notification expectedResult = new DocusignResponsiveAPI.Notification();
+		DocuSignAPI.Notification expectedResult = new DocuSignAPI.Notification();
 		expectedResult.UseAccountDefaults = true;
 
 		system.assertEquals(expectedResult.UseAccountDefaults, DocusignLibrary.getNotification(true).UseAccountDefaults);
@@ -47,14 +47,14 @@ private class DocusignLibraryTest {
 		String emailBlurb = 'Blurb';
 		String brandId = '001';
 
-		DocusignResponsiveAPI.Envelope expectedResult = new DocusignResponsiveAPI.Envelope();
+		DocuSignAPI.Envelope expectedResult = new DocuSignAPI.Envelope();
 
 		expectedResult.AccountId = accountId;
 		expectedResult.Subject = subject;
 		expectedResult.EmailBlurb = emailBlurb;
 		expectedResult.BrandId = brandId;
 
-		DocusignResponsiveAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		system.assertEquals(expectedResult.AccountId, result.AccountId);
 		system.assertEquals(expectedResult.Subject, result.Subject);
@@ -67,10 +67,10 @@ private class DocusignLibraryTest {
 		String subject = 'SylvainSubject';
 		String emailBlurb = 'Blurb';
 		String brandId = '001';
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		expectedResult.Notification = DocusignLibrary.getNotification(true);
 
-		DocusignResponsiveAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		System.assertEquals(expectedResult.Notification.UseAccountDefaults, (DocusignLibrary.addNotification(result,DocusignLibrary.getNotification(true))).Notification.UseAccountDefaults);
 	}
@@ -80,12 +80,12 @@ private class DocusignLibraryTest {
 		String value = 'ValueS';
 		String type = 'TypeS';
 
-		DocusignResponsiveAPI.CustomField expectedResult = new DocusignResponsiveAPI.CustomField();
+		DocuSignAPI.CustomField expectedResult = new DocuSignAPI.CustomField();
 		expectedResult.Name = name;
 		expectedResult.Value = value;
 		expectedResult.CustomFieldType = type;
 
-		DocusignResponsiveAPI.CustomField result = DocusignLibrary.getCustomField(name, value, type);
+		DocuSignAPI.CustomField result = DocusignLibrary.getCustomField(name, value, type);
 
 		system.assertEquals(expectedResult.Name, result.Name);
 		system.assertEquals(expectedResult.Value, result.Value);
@@ -101,14 +101,14 @@ private class DocusignLibraryTest {
 		String value = 'ValueS';
 		String type = 'TypeS';
 		
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		DocusignLibrary.initCustomFields(expectedResult, 10);
 
-		DocusignResponsiveAPI.CustomField expectedResultCF = DocusignLibrary.getCustomField(name, value, type);
+		DocuSignAPI.CustomField expectedResultCF = DocusignLibrary.getCustomField(name, value, type);
 
 		expectedResult.CustomFields.CustomField[0] = expectedResultCF;
 
-		DocusignResponsiveAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		
 		System.assertEquals(expectedResult.CustomFields.CustomField[0].Name, DocusignLibrary.addCustomFields(result, expectedResultCF).CustomFields.CustomField[0].Name);
 		System.assertEquals(expectedResult.CustomFields.CustomField[0].Value, DocusignLibrary.addCustomFields(result, expectedResultCF).CustomFields.CustomField[0].Value );
@@ -122,7 +122,7 @@ private class DocusignLibraryTest {
 		String brandId = '001';
 		Integer size = 100;
 
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		expectedResult = DocusignLibrary.initCustomFields(expectedResult, size);
 
@@ -138,7 +138,7 @@ private class DocusignLibraryTest {
 		String brandId = '001';
 		Integer size = 100;
 
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		expectedResult = DocusignLibrary.initTabs(expectedResult, size);
 
@@ -157,14 +157,14 @@ private class DocusignLibraryTest {
 		Integer documentId = 1;
 		String anchorTabString = 'anchorTabString';
 		
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		DocusignLibrary.initTabs(expectedResult, 10);
 
-		DocusignResponsiveAPI.Tab expectedResultT = DocusignLibrary.getTab(type, recipientId, documentId, DocusignLibrary.getAnchorTab(anchorTabString));
+		DocuSignAPI.Tab expectedResultT = DocusignLibrary.getTab(type, recipientId, documentId, DocusignLibrary.getAnchorTab(anchorTabString));
 
 		expectedResult.Tabs.Tab[0] = expectedResultT;
 
-		DocusignResponsiveAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		System.assertEquals(expectedResult.Tabs.Tab[0].Type_x, DocusignLibrary.addTabs(result, expectedResultT).Tabs.Tab[0].Type_x);
 		System.assertEquals(expectedResult.Tabs.Tab[0].RecipientID, DocusignLibrary.addTabs(result, expectedResultT).Tabs.Tab[0].RecipientID);
@@ -179,7 +179,7 @@ private class DocusignLibraryTest {
 		String brandId = '001';
 		Integer size = 100;
 
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		expectedResult = DocusignLibrary.initDocs(expectedResult, size);
 
@@ -198,14 +198,14 @@ private class DocusignLibraryTest {
 		String name = 'Doc'; 
 		String fileExtension = 'pdf';
 		
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		DocusignLibrary.initDocs(expectedResult, 10);
 
-		DocusignResponsiveAPI.Document expectedResultD = DocusignLibrary.getDocument(id, byteDocument, name, fileExtension);
+		DocuSignAPI.Document expectedResultD = DocusignLibrary.getDocument(id, byteDocument, name, fileExtension);
 
 		expectedResult.Documents.Document[0] = expectedResultD;
 
-		DocusignResponsiveAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		System.assertEquals(expectedResult.Documents.Document[0].ID, DocusignLibrary.addDocs(result, expectedResultD).Documents.Document[0].ID);
 		System.assertEquals(expectedResult.Documents.Document[0].pdfBytes, DocusignLibrary.addDocs(result, expectedResultD).Documents.Document[0].pdfBytes);
@@ -220,7 +220,7 @@ private class DocusignLibraryTest {
 		String brandId = '001';
 		Integer size = 100;
 
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		expectedResult = DocusignLibrary.initRecipients(expectedResult, size);
 
@@ -239,21 +239,21 @@ private class DocusignLibraryTest {
 		Integer routingOrder = 1;
 		String email = 'email@email.com';
 		String userName = 'username';
-		DocusignResponsiveAPI.RecipientCaptiveInfo repCapInfo = DocusignLibrary.getCaptiveInfo('info');
+		DocuSignAPI.RecipientCaptiveInfo repCapInfo = DocusignLibrary.getCaptiveInfo('info');
 		Boolean requireIDLookup = false;
 		
-		DocusignResponsiveAPI.ArrayOfString1 arrayOfString = new DocusignResponsiveAPI.ArrayOfString1();
+		DocuSignAPI.ArrayOfString1 arrayOfString = new DocuSignAPI.ArrayOfString1();
         arrayOfString.CustomField = new String[1];
         arrayOfString.CustomField[0] = 'ArrayOfString1';
 		
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		DocusignLibrary.initRecipients(expectedResult, 10);
 
-		DocusignResponsiveAPI.Recipient expectedResultD = DocusignLibrary.getRecipient(id, type, routingOrder, email, username, repCapInfo, requireIDLookup, arrayOfString);
+		DocuSignAPI.Recipient expectedResultD = DocusignLibrary.getRecipient(id, type, routingOrder, email, username, repCapInfo, requireIDLookup, arrayOfString);
 
 		expectedResult.Recipients.Recipient[0] = expectedResultD;
 
-		DocusignResponsiveAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope result = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 
 		System.assertEquals(expectedResult.Recipients.Recipient[0].Id, DocusignLibrary.addRecipients(result, expectedResultD).Recipients.Recipient[0].Id);
 		System.assertEquals(expectedResult.Recipients.Recipient[0].Type_x, DocusignLibrary.addRecipients(result, expectedResultD).Recipients.Recipient[0].Type_x);
@@ -275,17 +275,17 @@ private class DocusignLibraryTest {
 		Integer routingOrder = 1;
 		String email = 'email@email.com';
 		String userName = 'username';
-		DocusignResponsiveAPI.RecipientCaptiveInfo repCapInfo = DocusignLibrary.getCaptiveInfo('info');
+		DocuSignAPI.RecipientCaptiveInfo repCapInfo = DocusignLibrary.getCaptiveInfo('info');
 		Boolean requireIDLookup = false;
 		
-		DocusignResponsiveAPI.ArrayOfString1 arrayOfString = new DocusignResponsiveAPI.ArrayOfString1();
+		DocuSignAPI.ArrayOfString1 arrayOfString = new DocuSignAPI.ArrayOfString1();
         arrayOfString.CustomField = new String[1];
         arrayOfString.CustomField[0] = 'ArrayOfString1';
 		
-		DocusignResponsiveAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
+		DocuSignAPI.Envelope expectedResult = DocusignLibrary.getEnvelope(accountId, subject, emailBlurb, brandId);
 		DocusignLibrary.initRecipients(expectedResult, 10);
 
-		DocusignResponsiveAPI.Recipient expectedResultD = DocusignLibrary.getRecipient(id, type, routingOrder, email, username, repCapInfo, requireIDLookup, arrayOfString);
+		DocuSignAPI.Recipient expectedResultD = DocusignLibrary.getRecipient(id, type, routingOrder, email, username, repCapInfo, requireIDLookup, arrayOfString);
 
 		expectedResult.Recipients.Recipient[0] = expectedResultD;
 

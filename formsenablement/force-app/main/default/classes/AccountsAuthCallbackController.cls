@@ -21,7 +21,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-04-09  Initial conversion of Eliot Stock code.
 */
-public class AccountsAuthCallbackController {
+public with sharing class AccountsAuthCallbackController {
 
     // Private class members.
     private static final String QUERY_STRING_PARAM_NONCE = 'state';
@@ -122,8 +122,7 @@ public class AccountsAuthCallbackController {
             Schema.SObjectField f = Account.Fields.userIDChips__c;
             Database.UpsertResult cr = Database.upsert(newPersonAccount,f,false);
 
-            //system.debug('SYLVAINBEFORE' + ApexPages.currentPage().getCookies());
-
+            
             transactionType = u.getUserDocument();
 
             System.debug('transaction type is ' + transactionType);

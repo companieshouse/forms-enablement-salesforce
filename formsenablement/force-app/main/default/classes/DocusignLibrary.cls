@@ -39,16 +39,14 @@ public with sharing class DocusignLibrary {
     }
 
     //Return the token for embed signatury if captive is detected
-    public static String sendEnvelope(String endPoint, Map<String, String> httpHeaders, DocusignResponsiveAPI.Envelope envelope, String baseURL)
+    public static String sendEnvelope(String endPoint, Map<String, String> httpHeaders, DocuSignAPI.Envelope envelope, String baseURL)
     {
-        DocusignResponsiveAPI.APIServiceSoap soapService = new DocusignResponsiveAPI.APIServiceSoap();
+        DocuSignAPI.APIServiceSoap soapService = new DocuSignAPI.APIServiceSoap();
 
         soapService.endpoint_x = endPoint;
         soapService.inputHttpHeaders_x = httpHeaders;
 
-        DocusignResponsiveAPI.EnvelopeStatus resultEnv;
-
-        system.debug(LoggingLevel.ERROR, 'This is the envelope:' + envelope);
+        DocuSignAPI.EnvelopeStatus resultEnv;
 
         try {
             resultEnv = soapService.CreateAndSendEnvelope(envelope);
@@ -58,8 +56,8 @@ public with sharing class DocusignLibrary {
             return null;
         }
 
-        DocusignResponsiveAPI.Recipient embedRecipient;
-        for(DocusignResponsiveAPI.Recipient rec : envelope.Recipients.Recipient)
+        DocuSignAPI.Recipient embedRecipient;
+        for(DocuSignAPI.Recipient rec : envelope.Recipients.Recipient)
         {
             if(rec != null)
             {
@@ -83,24 +81,24 @@ public with sharing class DocusignLibrary {
         return result;
     }
 
-    public static DocusignResponsiveAPI.Notification getNotification(Boolean useAccountDefault)
+    public static DocuSignAPI.Notification getNotification(Boolean useAccountDefault)
     {
-        DocusignResponsiveAPI.Notification notif = new DocusignResponsiveAPI.Notification();
+        DocuSignAPI.Notification notif = new DocuSignAPI.Notification();
         notif.UseAccountDefaults = useAccountDefault;
 
         return notif;
     }
 
-    public static DocusignResponsiveAPI.Envelope addNotification(DocusignResponsiveAPI.Envelope env, DocusignResponsiveAPI.Notification notif)
+    public static DocuSignAPI.Envelope addNotification(DocuSignAPI.Envelope env, DocuSignAPI.Notification notif)
     {
         env.Notification = notif;
 
         return env;
     }
 
-	public static DocusignResponsiveAPI.CustomField getCustomField(String name, String value, String type)
+	public static DocuSignAPI.CustomField getCustomField(String name, String value, String type)
 	{
-		DocusignResponsiveAPI.CustomField custF = new DocusignResponsiveAPI.CustomField();
+		DocuSignAPI.CustomField custF = new DocuSignAPI.CustomField();
 		custF.Name = name;
         custF.Value = value; 
         custF.CustomFieldType = type;
@@ -108,21 +106,9 @@ public with sharing class DocusignLibrary {
         return custF;
 	}	
 
-    public static DocusignResponsiveAPI.EnvelopeInformation getEnvelopeInfo(String accountId, String subject, String emailBlurb, String brandId)
-    {
-        DocusignResponsiveAPI.EnvelopeInformation envelopeInfo = new DocusignResponsiveAPI.EnvelopeInformation();
-
-        envelopeInfo.AccountId = accountId;
-        envelopeInfo.Subject = subject;
-        envelopeInfo.EmailBlurb = emailBlurb;
-        envelopeInfo.BrandId = brandId;
-
-        return envelopeInfo;
-    }
-
-	public static DocusignResponsiveAPI.Envelope getEnvelope(String accountId, String subject, String emailBlurb, String brandId)
+	public static DocuSignAPI.Envelope getEnvelope(String accountId, String subject, String emailBlurb, String brandId)
 	{
-        DocusignResponsiveAPI.Envelope envelope = new DocusignResponsiveAPI.Envelope();
+        DocuSignAPI.Envelope envelope = new DocuSignAPI.Envelope();
 
         envelope.Subject = subject;
         envelope.EmailBlurb = emailBlurb;
@@ -134,18 +120,18 @@ public with sharing class DocusignLibrary {
 	}
 
     //back in the year where list to do not exist and we need to put a fixed value against this..
-    public static DocusignResponsiveAPI.Envelope initCustomFields(DocusignResponsiveAPI.Envelope envelope, Integer size){
+    public static DocuSignAPI.Envelope initCustomFields(DocuSignAPI.Envelope envelope, Integer size){
         if(envelope.CustomFields == null)
-            envelope.CustomFields = new DocusignResponsiveAPI.ArrayOfCustomField();
+            envelope.CustomFields = new DocuSignAPI.ArrayOfCustomField();
         if(envelope.CustomFields.CustomField == null)
-            envelope.CustomFields.CustomField = new DocusignResponsiveAPI.CustomField[size];
+            envelope.CustomFields.CustomField = new DocuSignAPI.CustomField[size];
 
         customFieldPos = 0;
 
         return envelope;
     }
 
-    public static DocusignResponsiveAPI.Envelope addCustomFields(DocusignResponsiveAPI.Envelope envelope, DocusignResponsiveAPI.CustomField custF)
+    public static DocuSignAPI.Envelope addCustomFields(DocuSignAPI.Envelope envelope, DocuSignAPI.CustomField custF)
     {
         //Default size of 10...
         if(envelope.CustomFields == null)
@@ -158,18 +144,18 @@ public with sharing class DocusignLibrary {
     }
 
     //back in the year where list to do not exist and we need to put a fixed value against this..
-    public static DocusignResponsiveAPI.Envelope initTabs(DocusignResponsiveAPI.Envelope envelope, Integer size){
+    public static DocuSignAPI.Envelope initTabs(DocuSignAPI.Envelope envelope, Integer size){
         if(envelope.Tabs == null)
-            envelope.Tabs = new DocusignResponsiveAPI.ArrayOfTab();
+            envelope.Tabs = new DocuSignAPI.ArrayOfTab();
         if(envelope.Tabs.Tab == null)
-            envelope.Tabs.Tab = new DocusignResponsiveAPI.Tab[size];
+            envelope.Tabs.Tab = new DocuSignAPI.Tab[size];
 
         tabPos = 0;
 
         return envelope;
     }
 
-    public static DocusignResponsiveAPI.Envelope addTabs(DocusignResponsiveAPI.Envelope envelope, DocusignResponsiveAPI.Tab custTab)
+    public static DocuSignAPI.Envelope addTabs(DocuSignAPI.Envelope envelope, DocuSignAPI.Tab custTab)
     {
         //Default size of 1000...
         if(envelope.Tabs == null)
@@ -182,18 +168,18 @@ public with sharing class DocusignLibrary {
     }
 
     //back in the year where list to do not exist and we need to put a fixed value against this..
-    public static DocusignResponsiveAPI.Envelope initDocs(DocusignResponsiveAPI.Envelope envelope, Integer size){
+    public static DocuSignAPI.Envelope initDocs(DocuSignAPI.Envelope envelope, Integer size){
         if(envelope.Documents == null)
-            envelope.Documents = new DocusignResponsiveAPI.ArrayOfDocument();
+            envelope.Documents = new DocuSignAPI.ArrayOfDocument();
         if(envelope.Documents.Document == null)
-            envelope.Documents.Document = new DocusignResponsiveAPI.Document[size];
+            envelope.Documents.Document = new DocuSignAPI.Document[size];
 
         docPos = 0;
 
         return envelope;
     }
 
-    public static DocusignResponsiveAPI.Envelope addDocs(DocusignResponsiveAPI.Envelope envelope, DocusignResponsiveAPI.Document custDoc)
+    public static DocuSignAPI.Envelope addDocs(DocuSignAPI.Envelope envelope, DocuSignAPI.Document custDoc)
     {
         //Default size of 10...
         if(envelope.Documents == null)
@@ -206,18 +192,18 @@ public with sharing class DocusignLibrary {
     }
 
     //back in the year where list to do not exist and we need to put a fixed value against this..
-    public static DocusignResponsiveAPI.Envelope initRecipients(DocusignResponsiveAPI.Envelope envelope, Integer size){
+    public static DocuSignAPI.Envelope initRecipients(DocuSignAPI.Envelope envelope, Integer size){
         if(envelope.Recipients == null)
-            envelope.Recipients = new DocusignResponsiveAPI.ArrayOfRecipient();
+            envelope.Recipients = new DocuSignAPI.ArrayOfRecipient();
         if(envelope.Recipients.Recipient == null)
-            envelope.Recipients.Recipient = new DocusignResponsiveAPI.Recipient[size];
+            envelope.Recipients.Recipient = new DocuSignAPI.Recipient[size];
 
         recPos = 0;
 
         return envelope;
     }
 
-    public static DocusignResponsiveAPI.Envelope addRecipients(DocusignResponsiveAPI.Envelope envelope, DocusignResponsiveAPI.Recipient custRec)
+    public static DocuSignAPI.Envelope addRecipients(DocuSignAPI.Envelope envelope, DocuSignAPI.Recipient custRec)
     {
         //Default size of 500...
         if(envelope.Recipients == null)
@@ -229,8 +215,8 @@ public with sharing class DocusignLibrary {
         return envelope;
     }
 
-	public static DocusignResponsiveAPI.Document getDocument(Integer id, String byteDocument, String name, String fileExtension ){
-		DocusignResponsiveAPI.Document document = new DocusignResponsiveAPI.Document();
+	public static DocuSignAPI.Document getDocument(Integer id, String byteDocument, String name, String fileExtension ){
+		DocuSignAPI.Document document = new DocuSignAPI.Document();
         document.ID = id;
         document.pdfBytes = byteDocument;
         document.Name = name;
@@ -239,23 +225,9 @@ public with sharing class DocusignLibrary {
         return document;
 	}
 
-    public static DocusignResponsiveAPI.Document getDocumentResponsive(Integer id, String htmlEncoded, String name, Integer maxScreenWidth, String fileExtension){
-		DocusignResponsiveAPI.Document document = new DocusignResponsiveAPI.Document();
-        document.ID = id;
-        document.Name = name;
-        document.FileExtension = fileExtension;
-        DocusignResponsiveAPI.HtmlDefinition htmlDef = new DocusignResponsiveAPI.HtmlDefinition();
-        htmlDef.MaxScreenWidth = maxScreenWidth;
-        htmlDef.Source = htmlEncoded;
-
-        document.HtmlDefinition = htmlDef;
-
-        return document;
-	}
-
-    public static DocusignResponsiveAPI.Recipient getRecipient(Integer id, String type, Integer routingOrder, String email, String userName, DocusignResponsiveAPI.RecipientCaptiveInfo repCapInfo, Boolean requireIDLookup,DocusignResponsiveAPI.ArrayOfString1 arrayOfString) {
+    public static DocuSignAPI.Recipient getRecipient(Integer id, String type, Integer routingOrder, String email, String userName, DocuSignAPI.RecipientCaptiveInfo repCapInfo, Boolean requireIDLookup,DocuSignAPI.ArrayOfString1 arrayOfString) {
         
-        DocusignResponsiveAPI.Recipient recipient = new DocusignResponsiveAPI.Recipient();
+        DocuSignAPI.Recipient recipient = new DocuSignAPI.Recipient();
         recipient.Id = id;
         recipient.Type_x = type;
         recipient.RoutingOrder = routingOrder;
@@ -267,16 +239,16 @@ public with sharing class DocusignLibrary {
         return recipient;
     }
 
-    public static DocusignResponsiveAPI.RecipientCaptiveInfo getCaptiveInfo(String clientUserId){
-        DocusignResponsiveAPI.RecipientCaptiveInfo capInfo = new DocusignResponsiveAPI.RecipientCaptiveInfo();
+    public static DocuSignAPI.RecipientCaptiveInfo getCaptiveInfo(String clientUserId){
+        DocuSignAPI.RecipientCaptiveInfo capInfo = new DocuSignAPI.RecipientCaptiveInfo();
         capInfo.ClientUserId = clientUserId;
 
         return capInfo;
     }
 
-    public static DocusignResponsiveAPI.Tab getTab(String type, Integer recipientId, Integer documentId, DocusignResponsiveAPI.AnchorTab anchor) {
+    public static DocuSignAPI.Tab getTab(String type, Integer recipientId, Integer documentId, DocuSignAPI.AnchorTab anchor) {
         
-        DocusignResponsiveAPI.Tab tab = new DocusignResponsiveAPI.Tab();
+        DocuSignAPI.Tab tab = new DocuSignAPI.Tab();
         tab.Type_x = type; 
         tab.RecipientID = recipientId;
         tab.DocumentID = documentId;
@@ -285,9 +257,9 @@ public with sharing class DocusignLibrary {
         return tab;
     }
 
-    public static DocusignResponsiveAPI.AnchorTab getAnchorTab(String anchorTabString)
+    public static DocuSignAPI.AnchorTab getAnchorTab(String anchorTabString)
     {
-        DocusignResponsiveAPI.AnchorTab anch = new DocusignResponsiveAPI.AnchorTab();
+        DocuSignAPI.AnchorTab anch = new DocuSignAPI.AnchorTab();
 
         anch.AnchorTabString = anchorTabString;
 
@@ -302,15 +274,15 @@ public with sharing class DocusignLibrary {
     *
     ***********************/
 
-    public static String getEmbedSignatureURL(DocusignResponsiveAPI.APIServiceSoap soapService, String baseURL, String envelopeId, DocusignResponsiveAPI.Recipient embedRecipient)
+    public static String getEmbedSignatureURL(DocuSignAPI.APIServiceSoap soapService, String baseURL, String envelopeId, DocuSignAPI.Recipient embedRecipient)
     {
-        DocusignResponsiveAPI.RequestRecipientTokenAuthenticationAssertion assert = new DocusignResponsiveAPI.RequestRecipientTokenAuthenticationAssertion();
+        DocuSignAPI.RequestRecipientTokenAuthenticationAssertion assert = new DocuSignAPI.RequestRecipientTokenAuthenticationAssertion();
         assert.AssertionID = 'Your AssertionID Here';
         assert.AuthenticationInstant = system.now();
         assert.AuthenticationMethod = 'Password';
         assert.SecurityDomain = 'YourApp.com';
 
-        DocusignResponsiveAPI.RequestRecipientTokenClientURLs clientURLs = new DocusignResponsiveAPI.RequestRecipientTokenClientURLs();
+        DocuSignAPI.RequestRecipientTokenClientURLs clientURLs = new DocuSignAPI.RequestRecipientTokenClientURLs();
         clientURLs.OnAccessCodeFailed   = baseURL + '&event=OnAccessCodeFailed&envelopeid='   + envelopeId;
         clientURLs.OnCancel             = baseURL + '&event=OnCancel&envelopeid='             + envelopeId;
         clientURLs.OnDecline            = baseURL + '&event=OnDecline&envelopeid='            + envelopeId;

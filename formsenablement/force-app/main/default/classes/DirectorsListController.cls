@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Mark Cane&    2016-02-04  Initial development.
 */
-public class DirectorsListController extends TransactionStepControllerBase {
+public with sharing class DirectorsListController extends TransactionStepControllerBase {
     //Company Details Transition
     public String companyAddress {get; set;}
     public String companyAddress1 {get; set;}

@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-27  Initial development.
 */
-public class DocStatusController {
+public with sharing class DocStatusController {
 
     private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
 

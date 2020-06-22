@@ -18,7 +18,7 @@ Ver. Author        Date        Detail
 1.1  Antonio Bravo 2016-04-26  Update Constants
 1.2  Antonio Bravo 2016-05-20  Update Query
 */
-public class SubmissionManager {
+public with sharing class SubmissionManager {
 
     // Public properties.
     public Transaction__c submission { get; set; }

@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  SylvainP      2016-06-17  Initial development.
 */
-public class BehalfWhichSignatoryController extends TransactionStepControllerBase {
+public with sharing class BehalfWhichSignatoryController extends TransactionStepControllerBase {
 
     public String divForErrorLink {get; set;}
     public Boolean hasPageErrors { get; set; }

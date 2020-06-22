@@ -43,9 +43,9 @@ global class MockWebServiceResponseGenerator implements WebServiceMock {
       String responseStatus;
       
       //Get Recipient Name
-      DocusignResponsiveAPI.CreateAndSendEnvelope_element element = (DocusignResponsiveAPI.CreateAndSendEnvelope_element)request;
-      DocusignResponsiveAPI.Envelope envelope = element.Envelope;
-      DocusignResponsiveAPI.Recipient recipient = envelope.Recipients.Recipient[0];
+      DocuSignAPI.CreateAndSendEnvelope_element element = (DocuSignAPI.CreateAndSendEnvelope_element)request;
+      DocuSignAPI.Envelope envelope = element.Envelope;
+      DocuSignAPI.Recipient recipient = envelope.Recipients.Recipient[0];
       String recipientName = recipient.UserName;
 
       system.debug('MockWebServiceResponseGenerator isSigningOnBehalf: ' + isSigningOnBehalf);
@@ -61,11 +61,11 @@ global class MockWebServiceResponseGenerator implements WebServiceMock {
       }
 
       //create envelopeStatus
-      DocusignResponsiveAPI.EnvelopeStatus envStatus = new DocusignResponsiveAPI.EnvelopeStatus();
+      DocuSignAPI.EnvelopeStatus envStatus = new DocuSignAPI.EnvelopeStatus();
       envStatus.EnvelopeID = responseStatus;
       
       //create element and add envelope status to response
-      DocusignResponsiveAPI.CreateAndSendEnvelopeResponse_element cseresp = new DocusignResponsiveAPI.CreateAndSendEnvelopeResponse_element();
+      DocuSignAPI.CreateAndSendEnvelopeResponse_element cseresp = new DocuSignAPI.CreateAndSendEnvelopeResponse_element();
       cseresp.CreateAndSendEnvelopeResult = envStatus;
       response.put('response_x', cseresp); 
 
@@ -74,7 +74,7 @@ global class MockWebServiceResponseGenerator implements WebServiceMock {
     // Request Recipient Token Response
     //////////////////////////////////////
     } else if(requestName == 'RequestRecipientToken') {      
-      DocusignResponsiveAPI.RequestRecipientTokenResponse_element rrtre = new DocusignResponsiveAPI.RequestRecipientTokenResponse_element();
+      DocuSignAPI.RequestRecipientTokenResponse_element rrtre = new DocuSignAPI.RequestRecipientTokenResponse_element();
       rrtre.RequestRecipientTokenResult = TOKEN_URL;
       response.put('response_x', rrtre); 
 

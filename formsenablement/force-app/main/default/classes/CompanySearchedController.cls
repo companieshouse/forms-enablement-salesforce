@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  S PIcory    2016-09-08  Initial development.
 */
-public class CompanySearchedController {
+public with sharing class CompanySearchedController {
 
 // Public properties.
 
@@ -51,14 +51,14 @@ public class CompanySearchedController {
 
     public CompanySearchedController() {
 
-        initialiseStep();
+    	initialiseStep();
 
     }
 
     public void initialiseStep() {
-        securityMgr = new SecurityManager();
+    	securityMgr = new SecurityManager();
 
-        if (!ApexPages.currentPage().getParameters().containsKey('t') ||
+		if (!ApexPages.currentPage().getParameters().containsKey('t') ||
                 String.isBlank(ApexPages.currentPage().getParameters().get('t')) ||
                 !TransactionManager.isValidTransactionType(ApexPages.currentPage().getParameters().get('t'))) return;
 
@@ -69,7 +69,7 @@ public class CompanySearchedController {
         headerText1 = transactionMgr.td.CompanySearchedHeader1__c == null ? '' : transactionMgr.td.CompanySearchedHeader1__c;
         previousButtonText = transactionMgr.td.CompanySearchedPreviousButton__c == null ? '' : transactionMgr.td.CompanySearchedPreviousButton__c;
         if(!ApexPages.currentPage().getCookies().containsKey('searched_company'))
-            return;
+        	return;
         companyNumber = SecurityManager.decryptText(ApexPages.currentPage().getCookies().get('searched_company').getValue());
     
         

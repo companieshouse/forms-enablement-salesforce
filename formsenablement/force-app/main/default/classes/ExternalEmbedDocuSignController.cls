@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-07-05  Initial development.
 */
-public class ExternalEmbedDocuSignController extends TransactionStepControllerBase {
+public with sharing class ExternalEmbedDocuSignController extends TransactionStepControllerBase {
 
     public String externalURL {get; set;}
     public String officerTerm {get; set;}
@@ -57,18 +57,9 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
         }
         else{
             externalURL = docusignSignature(submissionMgr, transactionMgr);
-            //externalURL = 'https://demo.docusign.net/Signing/MTRedeem/v1/cc14a092-ed72-4f39-b6cd-e92087a0fe40?slt=eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQUAAAABAAMABwCAa4bupm3XSAgAgMlWoadt10gYAAEAAAAAAAAAIQB5AwAAeyJUb2tlbklkIjoiYzMyZjkwZDAtOGYyMy00MzZhLWFlNTctN2Q1MDgxZGRkZjAxIiwiU3ViamVjdCI6bnVsbCwiU3ViamVjdFR5cGUiOm51bGwsIkV4cGlyYXRpb24iOiIyMDE5LTExLTIwVDEwOjUxOjQzKzAwOjAwIiwiSXNzdWVkQXQiOiIyMDE5LTExLTIwVDEwOjQ2OjQzLjUzMzY5NjgrMDA6MDAiLCJSZXNvdXJjZUlkIjoiMTFmZDdmNDktNGI3Zi00MGZhLWI3OGMtNWVlNTJiMDFiYjk1IiwiTGFiZWwiOm51bGwsIlNpdGVJZCI6bnVsbCwiUmVzb3VyY2VzIjoie1wiRW52ZWxvcGVJZFwiOlwiMTFmZDdmNDktNGI3Zi00MGZhLWI3OGMtNWVlNTJiMDFiYjk1XCIsXCJBY3RvclVzZXJJZFwiOlwiMThhMzFiYWYtYWVkOC00NTRhLTkzNWEtYTc0ODM4ODg3ZDcwXCIsXCJSZWNpcGllbnRJZFwiOlwiODA1MTczMzYtMTYyZi00M2ZlLTkxYTgtODMzOWNiMzQzNjgzXCIsXCJGYWtlUXVlcnlTdHJpbmdcIjpcInQ9NzAzOTIzOTgtYmFjNC00MjY0LTkwYjAtMzgyOThlMjNiZGNhXCJ9IiwiT0F1dGhTdGF0ZSI6bnVsbCwiVG9rZW5UeXBlIjoxLCJBbGxvd1JlY2lwaWVudFVzZXJzIjpmYWxzZSwiQXVkaWVuY2UiOiIyNWUwOTM5OC0wMzQ0LTQ5MGMtOGU1My0zYWIyY2E1NjI3YmYiLCJTY29wZXMiOm51bGwsIlJlZGlyZWN0VXJpIjoiaHR0cHM6Ly9kZW1vLmRvY3VzaWduLm5ldC9TaWduaW5nL1N0YXJ0SW5TZXNzaW9uLmFzcHgiLCJIYXNoQWxnb3JpdGhtIjowLCJIYXNoU2FsdCI6bnVsbCwiSGFzaFJvdW5kcyI6MCwiVG9rZW5TZWNyZXRIYXNoIjpudWxsLCJUb2tlblN0YXR1cyI6MCwiRXh0ZXJuYWxDbGFpbXNSZXF1ZXN0ZWQiOm51bGwsIlRyYW5zYWN0aW9uSWQiOm51bGwsIlRyYW5zYWN0aW9uRXZlbnRDYWxsYmFja1VybCI6bnVsbCwiSXNTaW5nbGVVc2UiOmZhbHNlfQ.UUeyEQ-CRm0XuBGG5jBKfatVob3hptlLzpOU5VHfeEnJYo5kIAnxViCNvA7qPp7pXGAqV8ziw_LIv4-1KMwKzc1cAeU_7W1avSfYL7a_sXsHbU1BE9hKOSRlqKNE8fZPGkYDMCQXXbs34nAeNNXwxhUTduS9kIUFh8WlJfSbQ2OHLDMAUhtGQtfKySZ90508YdOusFyqzyxKfbY424tntqmbUYrgrRtgy9qeYBJJW_LvKhLS5kckT1-8SwZ2OfSGVY8rGimKeKxILb5smmJ-aGiptcE7dPKKAjlsMOLU9egPF7VNiM6pn9GHvusAU1vSs5SNaXXvG2NJZzmdWQINFQ';
-            //system.debug('E' + externalURL);
         }
 
-        if(externalURL.equals('Error'))
-        {
-            PageReference pg = new PageReference('/IntegrationErrorDocusign');
-
-            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-            pg.setRedirect(true);
-            externalURL = pg.getUrl();
-        }
+        
 
         return null;
     }
@@ -77,15 +68,6 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
     {
         displayBlueScreenDocusign = false;
         externalURL = docusignSignature(submissionMgr, transactionMgr);
-
-        if(externalURL.equals('Error'))
-        {
-            PageReference pg = new PageReference('/IntegrationErrorDocusign');
-
-            pg.getParameters().put('c', SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())));
-            pg.setRedirect(true);
-            externalURL = pg.getUrl();
-        }
     }
 
     public static String docusignSignature(SubmissionManager submissionMgrParam, TransactionManager transactionMgrParam) {
@@ -101,7 +83,7 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
 
         //Logic to generate the right PDF for DS01
         String page = 'DS01';
-        String emailBlurb = '<tr><td width="100%" style="font-family: Helvetica, Arial, sans-serif;"><h1 class="email" style="font-weight: 700; font-size: 48px; line-height: 1.041666667; margin: 30px 0;">Request to close '+submissionMgr.submission.CompanyName__c+'</h1></td></tr><tr><td width="100%" style="font-family: Helvetica, Arial, sans-serif;"><p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">A request to close '+submissionMgr.submission.CompanyName__c + ' ('+submissionMgr.submission.CompanyNumber__c+') whose registered office address is '+submissionMgr.submission.CompanyAddress1__c+' '+  submissionMgr.submission.CompanyPostCode__c+' <b>needs your approval</b> before it can be submitted to Companies House for processing. </br> </br>The request will be deleted if it\'s not approved and completed by '+getDate(30)+'. Your reference number for any future enquiries is FE'+submissionMgr.submission.Id+'. </p><h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2><p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">Once the request has been approved by all individuals required, we will send an email to the person filing with instructions to review, complete and submit the request.</a> </p><p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">It is the responsibility of directors to ensure that copies of the request have been sent to all interested parties. This can include members (usually shareholders), creditors and employees, who must be notified within 7 days of submitting the completed request. The full list of who to tell can be found in the <a class="govuk-link" href=\'https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration\'>online guide.</a> </p></td></tr>';
+        String emailBlurb ='<tr><td width="100%" style="font-family: Helvetica, Arial, sans-serif;"><h1 class="email" style="font-weight: 700; font-size: 48px; line-height: 1.041666667; margin: 30px 0;">Request to close '+submissionMgr.submission.CompanyName__c+'</h1></td></tr><tr><td width="100%" style="font-family: Helvetica, Arial, sans-serif;"><p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">A request to close '+submissionMgr.submission.CompanyName__c + ' ('+submissionMgr.submission.CompanyNumber__c+') whose registered office address is '+submissionMgr.submission.CompanyAddress1__c+' '+  submissionMgr.submission.CompanyPostCode__c+' <b>needs your approval</b> before it can be submitted to Companies House for processing. </br> </br>The request will be deleted if it\'s not approved and completed by '+getDate(30)+'. Your reference number for any future enquiries is FE'+submissionMgr.submission.Id+'. </p><h2 style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">What happens next</h2><p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">Once the request has been approved by all individuals required, we will send an email to the person filing with instructions to review, complete and submit the request.</a> </p><p style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;">It is the responsibility of directors to ensure that copies of the request have been sent to all interested parties. This can include members (usually shareholders), creditors and employees, who must be notified within 7 days of submitting the completed request. The full list of who to tell can be found in the <a class="govuk-link" href=\'https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration\'>online guide.</a> </p></td></tr>';
 
         if(transactionMgr.transactionType.contains('LL'))
         {
@@ -121,75 +103,42 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
             pdfBlob = Blob.valueOf('This is a test');
         else
             pdfBlob = pageRef.getContent();
-
-        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got blob');
-
-        DocusignResponsiveRestAPI.Document doc;
-        DocusignResponsiveRestAPI.HtmlDefinition htmlDef;
-        DocusignRESTLibrary.EmbeddedEnvelopeSignerDetails signerDetails = new DocusignRESTLibrary.EmbeddedEnvelopeSignerDetails();
-
-        if(!transactionMgr.transactionType.contains('LL'))
-        {
             
-            String dsString = getDS01(submissionMgr.submission, false);
-        
-            system.debug('DISPLAY HTML');
-            system.debug(dsString);
-
-            //pdfBlob = Blob.valueOf(dsString);
-            //doc = DocusignLibrary.getDocumentResponsive(1,  dsString.escapeHtml4(), submissionMgr.submission.Form_Name__c + '_' + submissionMgr.submission.CompanyName__c + '_' + getDate(0), 1, 'html');
-            htmlDef = DocusignRESTLibrary.getHtmlDefinition(null, dsString);
-            doc = DocusignRESTLibrary.getDocument('1', submissionMgr.submission.Form_Name__c + '_' + submissionMgr.submission.CompanyName__c + '_' + getDate(0), htmlDef);
-        }
-        else {
-            //TODO: this will change to LLDS01
-            String dsString = getDS01(submissionMgr.submission, true);
-
-            htmlDef = DocusignRESTLibrary.getHtmlDefinition(null, dsString);
-            
-            doc = DocusignRESTLibrary.getDocument('1', submissionMgr.submission.Form_Name__c + 'LL_' + submissionMgr.submission.CompanyName__c + '_' + getDate(0), htmlDef);
-        }
-            
-
         System.debug(LoggingLevel.INFO, 'DocuSign Logging: got pdfBlob');
 
-        
+        DocuSignAPI.Document doc = DocusignLibrary.getDocument(1, EncodingUtil.base64Encode(pdfBlob), submissionMgr.submission.Form_Name__c + '_' + submissionMgr.submission.CompanyName__c + '_' + getDate(0), 'pdf');
 
         System.debug(LoggingLevel.INFO, 'DocuSign Logging: got doc');
         
-        DocusignResponsiveRestAPI.TextCustomField custF1 = DocusignRESTLibrary.getTextCustomField(submissionMgr.submission.Id + '~Transaction__c', 'DSFSSourceObjectId');
-        DocusignResponsiveRestAPI.TextCustomFields parentCustF1 = DocusignRESTLibrary.initTextCustomfields(new DocusignResponsiveRestAPI.TextCustomFields(), 1);
-        parentCustF1 = DocusignRESTLibrary.addTextCustomField(parentCustF1, custF1);
-        DocusignResponsiveRestAPI.Notification notif = DocusignRESTLibrary.getNotification('true');
+        DocuSignAPI.CustomField custF1 = DocusignLibrary.getCustomField( 'DSFSSourceObjectId', submissionMgr.submission.Id + '~Transaction__c', 'Text');
+        //DocuSignAPI.CustomField custF2 = DocusignLibrary.getCustomField( 'OfficerSigner1', submissionMgr.submission.Officers__r[0].Id + '~Officer__c', 'Text');
 
-        DocusignResponsiveRestAPI.Envelope env = DocusignRESTLibrary.getEnvelope('Approve application to close your company', 'sent', dsSetting.BrandId__c, emailBlurb, notif, parentCustF1);
-        //DocusignResponsiveAPI.Envelope env = DocusignLibrary.getEnvelope(dsSetting.AccountId__c, 'Approve application to close your company',  emailBlurb, dsSetting.BrandId__c);
+
+        //emailBlurb = '<h1 class="page-title-style-email">Request to close' + ' ' + submissionMgr.submission.CompanyName__c + ' ' + '</h1><p>A request to close' + ' ' + submissionMgr.submission.CompanyName__c + ' ' + 'needs your approval before it can be submitted to Companies House for processing. </p><table style="width: 50%;margin-right: auto;"> <thead><tr><th colspan="2" style="font-weight:bold"> <h2 class="page-title-style-email">' + submissionMgr.submission.CompanyName__c + '</h2> <tr> <th> </thead> <tr> <th style="border-bottom: 1px solid #ddd;font-weight:normal">Company number</th> <th style="border-bottom: 1px solid #ddd;font-weight:normal">' + submissionMgr.submission.CompanyNumber__c + '</th> </tr><tr> <th style="border-bottom: 1px solid #ddd;font-weight:normal">Status</th> <th style="border-bottom: 1px solid #ddd;font-weight:normal">' + submissionMgr.submission.CompanyStatus__c + '</th> </tr><tr> <th style="border-bottom: 1px solid #ddd;font-weight:normal">Incorporation date</th> <th style="border-bottom: 1px solid #ddd;font-weight:normal">' + submissionMgr.submission.CompanyIncorporationDate__c + '</th> </tr><tr> <th style="border-bottom: 1px solid #ddd;font-weight:normal">Company type</th> <th style="border-bottom: 1px solid #ddd;font-weight:normal">' + submissionMgr.submission.CompanyType__c + '</th> </tr><tr> <th style="font-weight:normal">Address</th> <th style="font-weight:normal">' + submissionMgr.submission.CompanyAddress1__c + '</th> </tr>' + (submissionMgr.submission.CompanyAddress2__c == null ? '' : ' <tr> <th></th> <th style="font-weight:normal">' + submissionMgr.submission.CompanyAddress2__c + '</th> </tr>') + (submissionMgr.submission.CompanyLocality__c == null ? '' : ' <tr> <th></th> <th style="font-weight:normal">' + submissionMgr.submission.CompanyLocality__c + '</th> </th>') + (submissionMgr.submission.CompanyRegion__c == null ? '' : ' <tr> <th></th> <th style="font-weight:normal">' + submissionMgr.submission.CompanyRegion__c + '</th> </tr>') + (submissionMgr.submission.CompanyPostCode__c == null ? '' : ' <tr> <th></th> <th style="font-weight:normal">' + submissionMgr.submission.CompanyPostCode__c + '</th> </tr>') + (submissionMgr.submission.CompanyCountry__c == null ? '' : ' <tr> <th></th> <th style="font-weight:normal">' + submissionMgr.submission.CompanyCountry__c + '</th> </tr>') + '</table><p class="paragraphs-regular"> You need to ensure that you have read and understood your responsibilities as a director in this process before approving the request. Guidance on the process of voluntarily closing a company can be found on the Companies House website using the following <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration">link</a>.</p><p>Your reference number is FE' + submissionMgr.submission.Id +'. You\'ll need to quote this if you contact us about the request.</p><h2 class="second-level-heading">What happens next</h2><p>Once the request has been submitted you will receive an email containing a link to the submitted request.</p><p>It\'s your responsibility as a director to ensure that copies of the request have been sent to all interested parties within 7 days of submitting the completed request. Interested parties can include </p><ul> <li>members, usually shareholders</li><li>creditors</li><li>employees</li></ul></p><p class="paragraphs-regular"> Read the full list of who to tell using the following <a href="https://www.gov.uk/government/publications/company-strike-off-dissolution-and-restoration">link. </a></p><p> Failure to notify interested parties is an offence. You\'re advised to obtain and retain some proof of delivery or posting of copies to interested parties.</p><p> If the request has not been approved by all individuals required by' + ' ' + System.today().addDays(90).format() + '' + ', the request will be cancelled. </p>';
+
+
+        DocuSignAPI.Envelope env = DocusignLibrary.getEnvelope(dsSetting.AccountId__c, 'Approve application to close your company',  emailBlurb, dsSetting.BrandId__c);
+
 
         System.debug(LoggingLevel.INFO, 'DocuSign Logging: got initial env');
         
         //Init size of each collection of the envelope
-        env = DocusignRESTLibrary.initDocuments(env, 1);
-        env = DocusignRESTLibrary.addDocument(env, doc);
+        env = DocusignLibrary.initDocs(env, 1);
+        env = DocusignLibrary.initCustomFields(env, 2);
 
-        Integer signersNumber = 0;
+        env = DocusignLibrary.initRecipients(env, submissionMgr.submission.Contacts__r.size());
 
-        for (Integer i = 0; i < submissionMgr.submission.Contacts__r.size(); i++) {
-            Contact off = submissionMgr.submission.Contacts__r[i];
+        env = DocusignLibrary.initTabs(env, submissionMgr.submission.Contacts__r.size() * 2);
+        env = DocusignLibrary.addDocs(env, doc);
 
+        env = DocusignLibrary.addCustomFields(env, custF1);
+        //env = DocusignLibrary.addCustomFields(env, custF2);
 
-            if (off.isSignatory__c ) {
-                signersNumber++;
-            }
-        }
+        DocuSignAPI.Notification notif = DocusignLibrary.getNotification(true);
 
-        DocusignResponsiveRestAPI.Recipient rec = DocusignRESTLibrary.initSigners(new DocusignResponsiveRestAPI.Recipient(), signersNumber);
+        env = DocusignLibrary.addNotification(env, notif);
 
         List<Officer__c> offToUpdate = new List<Officer__c>();
-        
-        
-        Boolean presenter = false;
-
-        Integer routingOrder = 2;
 
         for (Integer i = 0; i < submissionMgr.submission.Contacts__r.size(); i++) {
             Contact off = submissionMgr.submission.Contacts__r[i];
@@ -204,6 +153,12 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
                         offRec.Id = offRecord.Id;
                     }
                 }
+                DocuSignAPI.RecipientCaptiveInfo capInfo;
+
+                if (off.IsPresenter__c) {
+                    capInfo = DocusignLibrary.getCaptiveInfo(off.Email);
+                }
+
 
                 String offName = (off.Title != null ? off.Title + ' ': '' ) + (off.FirstName != null ? off.FirstName.capitalize() + ' ' : '')  +  off.LastName.toLowerCase().capitalize();
                 String recName = (off.isCorporateDirector__c == true ? off.AuthorizedSigner__c + ' pp ' + offName  : (off.isPowerOfAttorney__c == true ? off.AuthorizedSigner__c + ' pp ' + offName : offName));
@@ -214,74 +169,55 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
                     offToUpdate.add(offRec);
                 }
 
-                DocusignResponsiveRestAPI.Signer signer;
+                DocuSignAPI.ArrayOfString1 arrayOfString = new DocuSignAPI.ArrayOfString1();
 
-                signer = DocusignRESTLibrary.getSigner('' + Integer.valueOf(off.RecipientId__c), null, off.Email, recName, '' + ( off.IsPresenter__c ? 1 : routingOrder), new String[]{'##SFContact:' + off.Id + ':' + off.Name + ''});
+                arrayOfString.CustomField = new String[1];
 
-                if (off.IsPresenter__c) {
-                    presenter = true;
-                    signerDetails.AuthenticationMethod = 'Password';
-                    signerDetails.clientUserId = '' + Integer.valueOf(off.RecipientId__c);
-                    signerDetails.email = off.Email;
-                    signerDetails.userName = recName;
-                    signer.clientUserId = '' + Integer.valueOf(off.RecipientId__c);
-                }
+                arrayOfString.CustomField[0] = '##SFContact:' + off.Id + ':' + off.Name + '';
 
-                rec = DocusignRESTLibrary.addSigner(rec, signer);
-                routingOrder++;
+                DocuSignAPI.Recipient rec = DocusignLibrary.getRecipient(Integer.valueOf(off.RecipientId__c), 'Signer', 1, off.Email, recName, capInfo, false, arrayOfString);
+
+                DocuSignAPI.AnchorTab anch = DocusignLibrary.getAnchorTab('/s' + Integer.valueOf(off.RecipientId__c) + '/');
+
+                DocuSignAPI.Tab tabE = DocusignLibrary.getTab('SignHere', Integer.valueOf(off.RecipientId__c), 1, anch);
+
+                DocuSignAPI.AnchorTab anch2 = DocusignLibrary.getAnchorTab('/sd' + Integer.valueOf(off.RecipientId__c) + '/');
+
+                DocuSignAPI.Tab tabE2 = DocusignLibrary.getTab('DateSigned', Integer.valueOf(off.RecipientId__c), 1, anch2);
+
+                env = DocusignLibrary.addRecipients(env, rec);
+
+                env = DocusignLibrary.addTabs(env, tabE);
+                env = DocusignLibrary.addTabs(env, tabE2);
+
             }
         }
 
-        //Set the recipient
-        env.recipients = rec;
-
         System.debug(LoggingLevel.INFO, 'DocuSign Logging: got final env');
+
+        //Build httpHeader
+        String auth = DocusignLibrary.buildAuthString( dsSetting.Username__c, dsSetting.Password__c, dsSetting.IntegratorKey__c);
+        Map<String, String> httpHeader = DocusignLibrary.buildHTTPHeaders(auth);
+        
+        System.debug(LoggingLevel.INFO, 'DocuSign Logging: got header');
 
         String baseURL = Site.getBaseUrl() + '/DigitalSignature';
         
         //Here page URL contains Apex/Payment
         baseURL = baseURL + '?c=' + SecurityManager.encryptText(submissionMgr.submission.Id + AppConstants.ID_DELIM_CHAR + transactionMgr.currentStep.Id + AppConstants.ID_DELIM_CHAR + String.valueOf(DateTime.now().getTime())) ;
         
-        signerDetails.returnUrl = baseURL;
-        
         System.debug(LoggingLevel.INFO, 'DocuSign Logging: got baseURL=' + baseURL);
-
-        String result = 'SENT';
+        
+        String result = '';
 
         if(!Test.isRunningTest())
-        {
-            HttpResponse responseEnvelope = DocusignRESTLibrary.createAndSendEnvelope(env);
-            system.debug('RESPONSEA:' + responseEnvelope.getBody());
-            if(responseEnvelope.getStatusCode() == 201)
-            {
-                //We need to extract the envelope ID
-                DocusignRESTLibrary.EnvelopeResponse b = (DocusignRESTLibrary.EnvelopeResponse)JSON.deserialize(responseEnvelope.getBody(), DocusignRESTLibrary.EnvelopeResponse.class);
-
-                if(presenter)
-                {
-                    //Get the url
-                    HttpResponse responseURL = DocusignRESTLibrary.getEmbeddedURL(signerDetails, b.envelopeId);
-                    system.debug('RESPONSEB:' + responseURL.getBody());
-                    if(responseURL.getStatusCode() == 201)
-                    {
-                        DocusignRESTLibrary.URLResponse c = (DocusignRESTLibrary.URLResponse)JSON.deserialize(responseURL.getBody(), DocusignRESTLibrary.URLResponse.class);
-                        result = c.url;
-                    }
-                    else {
-                        result = 'Error';
-                    }
-                }
-            }
-            else {
-                result = 'Error';
-            }
-        }        
-        system.debug('RESULT:' + result);
+            result = DocusignLibrary.sendEnvelope(dsSetting.URL__c, httpHeader, env, baseURL);
+            
         System.debug(LoggingLevel.INFO, 'DocuSign Logging: sent envelope');
 
         //Update the sending name of each off
         update offToUpdate;
-        
+
         return result;
     }
 
@@ -327,71 +263,5 @@ public class ExternalEmbedDocuSignController extends TransactionStepControllerBa
                      + ' Settings. Can\'t connect to DocuSign.');
         return null;
     }
-    
-    public static String getDS01(Transaction__c submission, Boolean isLL)
-    {
-        system.debug('Entering getDS01..');
-        
-        Boolean moreThanOneDirectorSigning = false;
-        Integer nbOfD = 0;
-        for(Officer__c off : submission.Officers__r)
-        {
-            if(off.isSignatory__c)
-            {
-                nbOfD++;
-            }
-        }
-        if(nbOfD > 1)
-            moreThanOneDirectorSigning = true;
 
-        
-        String dsString = '<div style="padding: 20px; max-width: 960px; font-size: 19px; margin: 0 auto;">'
-            +'<img src="https://coredbeta-coredev.cs83.force.com/resource/1543573587000/SVGLogo" title="Companies House" style="margin-bottom: 20px; width: 260px;" />'
-            +'<h1 style="font-family: Arial, sans-serif; font-size: 48px; margin: 20px 0 50px 0;">Application to strike off</h1>'
-            +'<dl style="display: table; margin-bottom: 30px; width: 100%; font-size: 19px;">'
-            +'<div style="display: table-row;">'
-            +'<dt style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; font-weight: bold; display: table-cell; width: 30%; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6; word-wrap: break-word;">Document code</dt>' 
-            +'<dd style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; display: table-cell; width: 70%; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6; word-wrap: break-word;">' + (isLL ? 'LLDS-01-EF' : 'DS-01-EF') + '</dd>'
-            +'</div>'
-            +'<div style="display: table-row;">'
-            +'<dt style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; font-weight: bold; display: table-cell; width: 30%; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6; word-wrap: break-word;">' + (isLL ? 'LLP name: ' : 'Company name: ') + '</dt>' 
-            +'<dd style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; display: table-cell; width: 70%; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6; word-wrap: break-word;">' + submission.CompanyName__c + '</dd>'
-            +'</div>'
-            +'<div style="display: table-row;">'
-            +'<dt style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; font-weight: bold; display: table-cell; width: 30%; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6; word-wrap: break-word;">' + (isLL ? 'LLP number: ' : 'Company number: ') + '</dt>'
-            +'<dd style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; display: table-cell; width: 70%; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6; word-wrap: break-word;">' + submission.CompanyNumber__c + '</dd>'
-            +'</div>'
-            +'</dl>'
-            +'<h2 style="font-family: Arial, sans-serif; font-size: 36px; margin: 0 0 30px 0;">Important notice for all interested parties</h2>'
-            +'<p style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; margin-bottom: 30px; max-width: 38em;">This company has applied to be struck off and dissolved. The registrar will proceed unless there is reasonable cause not to, and on dissolution any assets remaining in the company will be passed to the Crown. Guidance is available on grounds for'
-            +' objection. If in doubt seek professional advice.</p>'
-            +'<h2 style="font-family: Arial, sans-serif; font-size: 36px; margin: 0 0 30px 0;">' + (moreThanOneDirectorSigning ? 'Declaration of '+ (isLL ? 'members' : 'directors') : 'Declaration of '+ (isLL ? 'members' : 'director')) + '</h2>'
-            +'<p style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; margin-bottom: 30px; max-width: 38em;">' + (moreThanOneDirectorSigning ? 'We as the majority of '+ (isLL ? 'members' : 'directors') +' apply for this company to be struck off the Register, and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006, (being circumstances in which the '+ (isLL ? 'members' : 'directors') +' would ': 'I as the '+ (isLL ? 'member' : 'director') +' apply for this company to be struck off the Register, and declare that none of the circumstances described in section 1004 and 1005 of the Companies Act 2006, (being circumstances in which the '+ (isLL ? 'member' : 'director') +' would')
-            +' otherwise be prohibited under those sections from making an application), exists in relation to the company.</p>'
-            +'<h3 style="font-family: Arial, sans-serif; font-size: 27px; margin: 0 0 20px 0;">' + (moreThanOneDirectorSigning ? 'Authorising company '+ (isLL ? 'members' : 'directors') : 'Authorising company '+ (isLL ? 'member' : 'director')) + '</h3>';
-        
-        for(Officer__c off : submission.Officers__r)
-        {
-            if(off.isSignatory__c)
-            {
-                dsString +='<div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; padding: 10px 20px 10px 0; border-bottom: 1px solid #b1b4b6">'
-                    +'<div style="flex-grow: 1; width: 30%;">'
-                    +'<p style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579;">' + (String.isBlank(off.Title__c) ? '' : off.Title__c +' ') + (String.isBlank(off.Forename__c) ? '' : off.Forename__c +' ') + ' ' + (String.isBlank(off.Surname__c) ? '' : off.Surname__c +' ') + '</p>'
-                    +'</div>'
-                    +'<div style="flex-grow: 1; width: 60%;">'
-                    +'<div style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579; margin-bottom: 10px; border-bottom: 2px solid #000; padding-bottom: 5px; min-height: 70px;">'
-                    +'<ds-signature  data-ds-recipient-id="' + off.RecipientId__c + '" />'
-                    +'</div>'
-                    +'<div style="font-family: Arial, sans-serif; font-size: 19px; line-height: 1.31579;">Signature date: '
-                    +'<ds-date-signed  data-ds-recipient-id="' + off.RecipientId__c + '" style="font-size: 19px;" />'
-                    +'</div>'
-                    +'</div>'
-                    +'</div>';
-            }
-        }
-        
-        dsString +='</div>';
-
-        return dsString;
-    }
 }

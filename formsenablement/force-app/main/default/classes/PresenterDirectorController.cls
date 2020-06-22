@@ -15,7 +15,7 @@ History
 Ver. Author        Date        Detail
 1.0  Sylvain Picory&    2016-02-04  Initial development.
 */
-public class PresenterDirectorController extends TransactionStepControllerBase {
+public with sharing class PresenterDirectorController extends TransactionStepControllerBase {
 
     public String companyAddress {get; set;}
     public String companyAddress1 {get; set;}

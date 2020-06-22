@@ -133,7 +133,6 @@ public with sharing class GuidanceController {
         //userTracker.getUserDocument();
         // todo - reinstate user authentication by returning the pagereference below instead of logging it out.
         return securityMgr.getUserAuthRedirect(null);
-        //return null;
     }
     public PageReference previousAction() {
         userTracker = new TrackUserClass();

@@ -14,7 +14,7 @@ History
 Ver. Author        Date        Detail
 1.0  Leo Bitoy    2016-05-19  Initial development.
 */
-public class ReviewController extends TransactionStepControllerBase {
+public with sharing class ReviewController extends TransactionStepControllerBase {
     public Boolean isPresenterNotNullName {get; set;}
     public Boolean isPresenterNotNullPhone {get; set;}
     private static final String QUERY_STRING_PARAM_AUTH_CODE = 'code';
