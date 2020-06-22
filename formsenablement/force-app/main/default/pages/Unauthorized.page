@@ -1,0 +1,28 @@
+<apex:page cache="false" title="{!$Label.UI_Text_Error_Page}" 
+    showHeader="false" 
+    sidebar="false" 
+    standardStylesheets="false">
+        
+  <apex:composition template="TransactionPageTemplate">
+  
+    <apex:define name="content">
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+    
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+              A system error has occured.
+          </h1>
+    
+          <p>
+              Wait a few moments and try again.<br/>
+              <a class="govuk-link" href="https://www.gov.uk/government/organisations/companies-house">Companies House services</a>
+          </p>
+    
+          
+    
+        </div>
+
+        </apex:define>
+
+  </apex:composition>
+
+</apex:page>

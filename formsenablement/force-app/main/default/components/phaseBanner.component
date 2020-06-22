@@ -1,0 +1,13 @@
+<apex:component >
+        <div class="govuk-phase-banner">
+            <p class="govuk-phase-banner__content">
+                <strong class="govuk-tag govuk-phase-banner__content__tag ">
+                    beta
+                </strong>
+                <span class="govuk-phase-banner__text">
+                This is a trial service — your <a class="govuk-link" target="_blank" href="https://www.surveymonkey.co.uk/r/closingacompany">feedback</a> will help us to improve it.
+                <!-- <a href="https://account.preprod.companieshouse.gov.uk/signout" style="text-align: right">Signout</a> -->
+                </span>
+            </p>
+        </div>
+</apex:component>

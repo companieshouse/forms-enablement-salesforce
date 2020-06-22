@@ -1,0 +1,37 @@
+<!-- 
+Name: IntegrationErrorDocusign.page
+Copyright © 2019  Ribbonfish
+======================================================
+======================================================
+Purpose:
+-------
+
+This page is used when the user did meet an error on trying to create envelope
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Sylvain P    2019-11-21   Initial development.
+-->
+<apex:page cache="false" title="Error communicating with Docusign" showHeader="false" sidebar="false" standardStylesheets="false" controller="IntegrationErrorDocusign" action="{!initialiseAction}">
+    <script>
+        if (window.frameElement) {
+            parent.location.href = window.location;
+        } else {
+        }
+    </script>
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="govuk-heading-xl">
+                   {!title} 
+                </h1>
+                <p class="govuk-body-l">
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                </p>
+
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

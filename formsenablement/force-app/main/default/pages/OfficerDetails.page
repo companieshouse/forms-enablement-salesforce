@@ -1,0 +1,113 @@
+<!-- 
+   Name: DirectorDetails.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+    Presenter chooses Emails of directors
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Leo Bitoy&    2016-06-16  Initial development.
+   -->
+<apex:page id="OfficerDetailsPage" cache="false" title="Please input the details of the selected persons" controller="DirectorDetails" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+    <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" styleClass="govuk-back-link" value="{!$Label.UI_Text_Previous}" id="thePreviousButton" />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form id="mainForm" >
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!emailErrors}
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="{!divForErrorLink}">{!emailErrors}</a>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </apex:outputPanel>
+                        <legend class="govuk-fieldset__legend  govuk-fieldset__legend--xl">
+                            <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        </legend>
+                        <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+
+                        <!--<apex:outputText escape="false" value="{!emailMessage}"></apex:outputText>-->
+                        <br/>
+                        <apex:repeat value="{!WrappedDirectors}" var="director" id="theRepeat">
+                            <apex:outputPanel rendered="{!!isSingleDirectorOnScreen}">
+                                <div class="govuk-form-group">
+                                    <label for="email" class="govuk-body govuk-!-font-weight-bold govuk-!-font-size-24">{!director.off.Name}</label>
+                                </div>
+                            </apex:outputPanel>
+                            <div class="govuk-form-group {!errorVal}">
+                                <apex:outputPanel rendered="{!director.isCorporate}">
+                                    
+                                    <label for="nameCorpo" class="govuk-label">Person signing for corporate officer:</label>
+                                    <span class="govuk-error-message">{!director.validationErrors2}</span>
+                                    <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.nameCorpo}" id="nameCorpo" html-name="nameCorpo"></apex:inputText>
+                                        
+                                </apex:outputPanel>
+                                    <label for="email" class="govuk-label">Email address:</label>
+                                    <span class="govuk-error-message">{!director.validationErrors}</span>
+                                    <apex:inputText maxlength="256" size="256" styleClass="govuk-input" value="{!director.email}" id="email" html-name="email"></apex:inputText>
+                                    
+                            </div>
+                        </apex:repeat>
+                    <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />                    
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        DirectorDetails.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                        if (resultBooo == true) 
+                        {
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+                </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

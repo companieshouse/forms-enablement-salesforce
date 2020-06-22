@@ -1,0 +1,111 @@
+<!-- 
+Name: TransactionPageTemplate.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+All form pages must use this composition via this template.
+
+Todo - 
+further refinement of markup.
+Move stylesheets/image assets etc. to Static Resource (named as per the current version of the GDS front end toolkit).
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Mark Cane&    2016-04-11  Initial development.
+2.0  SylvainP      2016-04-20  Extension to GDS/Gov style
+-->
+<apex:page cache="false" id="TempPageDocusign" standardStyleSheets="false">
+
+    <!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+    <!--[if gt IE 8]><!-->
+    <html lang="en" class="govuk-template">
+    <!--<![endif]-->
+
+
+    <head>
+
+
+        <c:head />
+    </head>
+
+    <body class="govuk-template__body">
+        <c:bodyScript />
+
+        <c:header />
+
+
+        <div class="govuk-width-container">
+            <c:phaseBanner />
+
+            <main class="govuk-main-wrapper " id="main-content" role="main">
+
+                <div class="govuk-grid-row">
+                    <div class="govuk-grid-column-full">
+                        <div class="govuk-interrupt">
+                            <div class="govuk-grid-row">
+                                <div class="govuk-grid-column-three-quarters">
+                                    <h1 class="govuk-interrupt__heading">
+                                        You’re about to sign the application digitally
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="govuk-grid-row">
+                                <div class="govuk-grid-column-two-thirds">
+                                    <c:statusComponent />
+                                    <apex:insert name="content" />
+                                </div>
+                            </div>
+                            <svg role="presentation" focusable="false" aria-hidden="true" class="govuk-interrupt__image" xmlns="http://www.w3.org/2000/svg"
+                                viewbox="0 0 358.24 339.33">
+                                <path class="sign" d="M157.3,35.86a23.9,23.9,0,0,0-5.57,8.73,32.14,32.14,0,0,0-1.91,11.33,28.57,28.57,0,0,0,1.91,10.63,22.9,22.9,0,0,0,5.49,8.21,25.15,25.15,0,0,0,8.72,5.34A33.47,33.47,0,0,0,177.62,82a53.44,53.44,0,0,0,10.79-1.06,35.62,35.62,0,0,0,8.53-2.7V56.85H185.49V71.34a16.1,16.1,0,0,1-2.73.66,21,21,0,0,1-3.42.27q-8.26,0-12.5-4.13t-4.25-12.22A23.24,23.24,0,0,1,163.8,48a14.31,14.31,0,0,1,3.43-5.45,13.49,13.49,0,0,1,5.33-3.15,22.47,22.47,0,0,1,7-1,37.92,37.92,0,0,1,14,2.65l1.71-9.6q-6.86-3.17-17-3.17a34.1,34.1,0,0,0-12.07,2A25,25,0,0,0,157.3,35.86ZM129,29.21V81.07h12.77V29.21Zm170.14,190H38.17V232.7H299.09ZM218.58,50.15,240,81.07h12.3V29.21H240V60.12L218.58,29.21h-12.3V81.07h12.3ZM88.93,53.23q3.5,3.71,11.13,6.58a22.63,22.63,0,0,1,6.66,3.39,4.64,4.64,0,0,1,1.83,3.54,4.17,4.17,0,0,1-2.1,3.93,10.62,10.62,0,0,1-5.37,1.21,26.92,26.92,0,0,1-7.4-1,37.47,37.47,0,0,1-6.15-2.3L85,78.34a34.42,34.42,0,0,0,7.94,2.73,40.21,40.21,0,0,0,8.56.93,25,25,0,0,0,8.34-1.28A19.22,19.22,0,0,0,116,77.21,15,15,0,0,0,120,72a15.33,15.33,0,0,0,1.36-6.43,13.33,13.33,0,0,0-1.2-5.84,15,15,0,0,0-3.31-4.44,22.5,22.5,0,0,0-5-3.42c-1.92-1-4-1.92-6.15-2.81-1.51-.62-2.75-1.16-3.74-1.63a11.16,11.16,0,0,1-2.3-1.4,3.85,3.85,0,0,1-1.12-1.48,5,5,0,0,1-.32-1.87A3.47,3.47,0,0,1,100,39.37a9.48,9.48,0,0,1,4.63-1,27.36,27.36,0,0,1,6.66.82,31.73,31.73,0,0,1,6,2.14l2.18-9.57a27.28,27.28,0,0,0-6.86-2.54,36.7,36.7,0,0,0-8.49-1q-8.72,0-13.66,4t-5,11.53A13.19,13.19,0,0,0,88.93,53.23ZM2.33,40.86a36.11,36.11,0,0,1,36-36h260.6a36.11,36.11,0,0,1,36,36V234.2a36.11,36.11,0,0,1-36,36H38.33a36.11,36.11,0,0,1-36-36Zm166.3,159.35,44.1-41.85H191.8V105.29H145.46v53.07H124.53Z"
+                                />
+                                <path d="M299.4,228v33.39a27.29,27.29,0,0,1-.69,6l-10.9,47.3a26.43,26.43,0,0,1-25.67,20.58H191.28a26.33,26.33,0,0,1-21.38-11.07l-43.6-61.21a26.79,26.79,0,0,1,5.78-37,26.05,26.05,0,0,1,24.68-3.53v-64a26.35,26.35,0,1,1,52.69,0v29.27a26.09,26.09,0,0,1,22.49,7.8,26.15,26.15,0,0,1,31.76,7.59C280.86,196.51,299.4,209.4,299.4,228Zm-19.09,33.39V228c0-10-14.53-10-14.53,0a6.35,6.35,0,0,1-6.36,6.35H256.7a6.36,6.36,0,0,1-6.37-6.35v-8.35c0-10-14.53-10-14.53,0V228a6.35,6.35,0,0,1-6.36,6.35h-2.73a6.35,6.35,0,0,1-6.35-6.35V214.1c0-10-14.54-10-14.54,0V228a6.35,6.35,0,0,1-6.36,6.35h-2.73a6.35,6.35,0,0,1-6.36-6.35V158.46c0-10-14.53-10-14.53,0v96a6.36,6.36,0,0,1-11.54,3.68L153.51,243c-5.72-8-17.41.95-11.68,9l43.61,61.21a7.19,7.19,0,0,0,5.84,3.06h70.86a7.31,7.31,0,0,0,7.07-5.79l10.9-47.3A7.4,7.4,0,0,0,280.31,261.41Z"
+                                />
+                                <path class="hand" d="M280.31,228v33.39a7.4,7.4,0,0,1-.2,1.75l-10.9,47.3a7.31,7.31,0,0,1-7.07,5.79H191.28a7.19,7.19,0,0,1-5.84-3.06L141.83,252c-5.73-8,6-17,11.68-9l10.79,15.13a6.36,6.36,0,0,0,11.54-3.68v-96c0-10,14.53-10,14.53,0V228a6.35,6.35,0,0,0,6.36,6.35h2.73a6.35,6.35,0,0,0,6.36-6.35V214.1c0-10,14.54-10,14.54,0V228a6.35,6.35,0,0,0,6.35,6.35h2.73A6.35,6.35,0,0,0,235.8,228v-8.35c0-10,14.53-10,14.53,0V228a6.36,6.36,0,0,0,6.37,6.35h2.72a6.35,6.35,0,0,0,6.36-6.35C265.78,218,280.31,218,280.31,228Z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+
+        <!-- Piwik -->
+
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function () {
+                var u = (("https:" == document.location.protocol) ? "https" : "http") + "://piwik.companieshouse.gov.uk/";
+                _paq.push(['setTrackerUrl', u + 'piwik.php']);
+                _paq.push(['setSiteId', 7]);
+                var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript';
+                g.defer = true; g.async = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
+            })();
+        </script>
+        <noscript>
+            <p>
+                <img src="http://piwik.companieshouse.gov.uk/piwik.php?idsite=7" style="border:0;" alt="" />
+            </p>
+        </noscript>
+        <!-- End Piwik Code -->
+        <!-- GOV.UK Prototype kit v2.1.0 -->
+        <c:footer />
+
+        <script src="{!URLFOR($Resource.GovUkFrontEndStyle, 'dist/govuk-frontend-1.2.0.min.js')}" type="text/javascript"></script>
+
+    </body>
+
+
+    </html>
+
+</apex:page>

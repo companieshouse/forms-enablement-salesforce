@@ -1,0 +1,80 @@
+<!--/*
+Name:  Guidance.cls
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+
+
+Page to be introduced in any form that needs a guidance page.
+
+======================================================
+======================================================
+History
+
+Ver. Author             Date        Detail
+1.0  Sylvain Picory     2016-05-28  Initial development.
+-->
+<apex:page id="GuidancePage" cache="false" title="{!$Label.UI_Text_Guidance_Page}" showHeader="false" sidebar="false" standardStylesheets="false"
+    controller="GuidanceController">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous_B}" id="thePreviousButtonCustom" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form id="form">
+                <apex:outputPanel id="masterPanel">
+                    <apex:outputPanel id="empty" />
+                    <apex:outputPanel id="standardGuidanceView" rendered="{!standardGuidanceView}">
+                        <apex:outputPanel rendered="{!hasPageErrors}">
+                            <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
+                                <h1 class="govuk-error-summary__title" id="error-summary-title">
+                                    There is a problem
+                                    <br/>
+                                    <br/>
+                                    You must agree to continue
+                                </h1>
+                                <div class="govuk-error-summary__body">
+                                    <ul class="govuk-list govuk-error-summary__list">
+                                        <li>
+                                            <a href="#GuidancePage:TempPage:form:agree">You must agree to continue</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputText escape="false" value="{!displayText0}" />
+                        <fieldset class="govuk-fieldset">
+                            <div id='checkboxArea' class='govuk-form-group {!errorVal}'>
+                                <span id='errorHint' class="govuk-error-message"></span>
+                                <div class="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <apex:inputCheckbox id="agree" styleClass="govuk-checkboxes__input" value="{!agreeBoxChoice}"></apex:inputCheckbox>
+                                        <label class="govuk-label govuk-checkboxes__label" for="GuidancePage:TempPage:form:agree">{!checkboxText0}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>   
+
+                        <apex:commandButton status="status" reRender="masterPanel" styleClass="govuk-button" action="{!nextAction}" value="Continue"
+                            id="NextButtonStandard" />
+                    </apex:outputPanel>
+                    <apex:outputPanel id="customGuidanceView" rendered="{!customGuidanceView}">
+                        <apex:outputText escape="false" value="{!guidanceTitle}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText1}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText3}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText4}"></apex:outputText>
+                        <apex:outputText escape="false" value="{!guidanceText5}"></apex:outputText>
+                        <div class="form-group">
+                            <apex:commandButton status="status" styleClass="govuk-button" action="{!nextAction}" value="Continue"
+                                id="NextButton" />
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,44 @@
+<!-- 
+Name: UpdateCompanyDirectors.page
+Copyright © 2016  Methods Digital
+======================================================
+======================================================
+Purpose:
+-------
+
+This page is used when the user do not have the correct 
+directors on the company detail page.
+======================================================
+======================================================
+History
+------- 
+Ver. Author        Date        Detail
+1.0  Sylvain P    2016-06-16   Initial development.
+-->
+<apex:page cache="false" title="{!$Label.UI_Text_Update_Company_Directors}" showHeader="false" sidebar="false" standardStylesheets="false" controller="UpdateCompanyDirectorsController" action="{!initialiseAction}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <h1 class="govuk-heading-xl">
+                   {!title} 
+                </h1>
+                <apex:outputPanel rendered="{!!isLLPf}">
+                <p class="govuk-body-l">
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                    <a class="govuk-link" href="https://www.gov.uk/government/collections/change-director-details-on-your-limited-company">
+                        <apex:outputText escape="false" value="{!link}"></apex:outputText>
+                    </a>
+                </p>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!isLLPf}">
+                    <p class="govuk-body-l">
+                    <apex:outputText escape="false" value="{!body}"></apex:outputText>
+                    <a class="govuk-link" href="https://www.gov.uk/government/collections/change-member-details-on-your-limited-liability-partnership-llp">
+                        <apex:outputText escape="false" value="{!link}"></apex:outputText>
+                    </a>
+                </p>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

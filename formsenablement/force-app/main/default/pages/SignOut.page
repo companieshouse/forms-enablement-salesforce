@@ -1,0 +1,36 @@
+<!-- 
+Name: SignOut.page
+Copyright © 2016  Companies House
+======================================================
+======================================================
+Purpose:
+-------
+
+SignOut page - displays sign out message
+
+======================================================
+======================================================
+History
+------- 
+Ver. Author            Date        Detail
+1.0  Jake Metherell    2016-08-30  Initial development.
+-->
+<apex:page cache="false" title="{!$Label.UI_Text_SignOut_Page}" showHeader="false" sidebar="false" standardStylesheets="false" controller="SignOutController" action="{!signOut}">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel >
+                        <div class="govuk-panel govuk-panel--blue govuk-panel--confirmation">
+                            <h1 class="govuk-panel__title">
+                                Sign out
+                            </h1>
+                            <div class="govuk-panel__body">
+                                 You have now signed out
+                            </div>
+                        </div>
+                    
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

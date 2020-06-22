@@ -1,0 +1,210 @@
+<apex:page cache="false" standardController="Transaction__c" showHeader="false" applyHtmlTag="false" docType="html-5.0" renderAs="pdf">
+    <!--  Page to render DS02 pdf -->
+    <!--  Author: Leo Bitoy -->
+    <html lang="en">
+
+    <head>
+        <title>DS02 - Application to withdraw of striking off {!Transaction__c.CompanyName__c} ({!Transaction__c.CompanyNumber__c})</title>
+        <style>
+            @page {
+                size: A4;
+                margin: 25mm;
+                @bottom-right {
+                    content: "Page: " counter(page);
+                }
+            }
+
+            .page-break {
+                display: block;
+                page-break-inside: avoid;
+            }
+
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 14px;
+            }
+
+            .warningText {
+                text-align: justify;
+            }
+
+            .officer {
+                font-family: "Sans-Serif";
+                font-weight: bold;
+            }
+
+            h3,
+            h4 {
+                font-family: "Sans-Serif";
+            }
+
+            h1,
+            h2,
+            h4 {
+                margin: 0px;
+            }
+
+            p {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .persoStyle {
+                font-weight: bold;
+                font-size: 20px;
+                position: top-right;
+            }
+
+            .primary_header {
+                width: 100%;
+                height: 100% clear: left;
+            }
+
+            .headerText {
+                font-family: "Sans-Serif";
+                font-weight: 700;
+                font-style: bold;
+                font-size: 60px
+            }
+
+            .HeaderText2 {
+                font-family: "Sans-Serif";
+                font-weight: 700;
+                font-style: bold;
+                font-size: 18px
+            }
+
+            #rectangle {
+                float: right;
+                width: 350px;
+                padding-left: 4px;
+                padding-top: 4px;
+                height: 80px;
+                background: black;
+            }
+
+            .PDFBody {
+                font-family: "Sans-Serif";
+                overflow: auto;
+            }
+
+            #rectangle2 {
+                width: 346px;
+                height: 76px;
+                padding-right: 0px;
+                padding-left: px;
+                background: white;
+            }
+
+            .container {
+                background-color: #FFFFFF;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                border-bottom-width: 0px;
+                padding-left: 0px;
+                padding-top: 0px;
+                padding-right: 0px;
+                padding-bottom: 0px;
+            }
+
+            .col1 {
+                width: 35%;
+            }
+
+            .col2 {
+                width: 5%;
+            }
+
+            .col3 {
+                width: 60%;
+            }
+
+            .panelGrid {
+                margin-top: 30px;
+                page-break-inside: avoid;
+                table-layout: fixed;
+                width: 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="container">
+            <header role="banner">
+                <div class="primary_header">
+                    <p>
+                        <img src="{!$Resource.Logo}" alt="" /> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                        &nbsp;&nbsp; &nbsp;
+                        <strong class="headerText">DS02</strong>
+                        <strong class="HeaderText2">(ef)</strong>
+                    </p>
+                </div>
+                <div id="test" class="PDFBody">
+                    <div id="rectangle">
+                        <div id="rectangle2">
+                            <p style=" padding-top: 10px; font-family:Sans-Serif; font-weight: 500; text-align:center; font-style:bold;font-size:25px;">Withdrawal of striking off application by company</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div role="main">
+                <div>
+                    <!-- Company Deatails -->
+                    <apex:panelGrid columns="2" width="70%">
+                        <apex:outputLabel >Company Name:</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyName__c}" />
+                        <apex:outputLabel >Company Number:</apex:outputLabel>
+                        <apex:outputText value="{!Transaction__c.CompanyNumber__c}" />
+                    </apex:panelGrid>
+                    <br/>
+                    <apex:outputLabel >Received for filing in Electronic Format on the : &nbsp; </apex:outputLabel>
+                    <apex:outputText value="{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}" />
+                    <!-- TODO  {!DAY(TODAY())} {!MONTH(TODAY())} {!YEAR(TODAY())} -->
+                </div>
+                <br/>
+                <br/>
+                <!-- warning message -->
+                <div class="warningText">
+                    <br />
+                    <hr/>
+                    <h2 style="text-align:center; font-weight: 300; font-size: 20px;">Declaration of director</h2>
+                    <br />
+                    <p>The director hereby withdraws the application in which it was requested that this company be struck off
+                        the Register.</p>
+                    <br />
+                    <h3>Authorising Company Director:</h3>
+                    <apex:repeat value="{!Transaction__c.Officers__r}" var="off">
+                        <apex:panelGrid columns="3" styleClass="panelGrid" rendered="{!off.isSignatory__c}">
+                            <td class="col1" align="left">
+                                <div>{!off.Title__c} &nbsp; {!off.Forename__c} &nbsp; {!off.Surname__c}</div>
+                            </td>
+                            <td class="col2">
+                            </td>
+                            <td class="col3">
+                                <!--  Signature -->
+                                <div style='float:center; margin-left: 10px'> Digitally Signed</div>
+                                <div style='float:center;'>___________________________________</div>
+                                <div style="{!IF(off.isPowerOfAttorney__c, 'display:block', 'display:none')}">*Power of Attorney sign on behalf of the director</div>
+
+                                <div style="{!IF(off.isCorporateDirector__c, 'display:block', 'display:none')}">*Sign on behalf of the corporate director</div>
+                                <!--  Signature date -->
+                                <div style='float:left;'>Signature Date: &nbsp; </div>
+                                <div style='float:left;'> {!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</div>
+                                <!-- I need a date variable or todays date to go in here -->
+                            </td>
+                        </apex:panelGrid>
+                    </apex:repeat>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    </html>
+</apex:page>

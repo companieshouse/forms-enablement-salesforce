@@ -1,0 +1,87 @@
+<apex:page cache="false" title="Review you application" controller="ReviewController" docType="html-5.0" showHeader="false" sidebar="false" action="{!startReviewProcesses}" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!resetTransaction}" value="{!$Label.UI_Text_Previous}" id="thePreviousButtonSingleOfficer" styleClass="govuk-back-link"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form >
+                <apex:outputPanel id="masterPanel">
+                    
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                An error has occurred.
+                            </h1> 
+                            <p>
+                            </p>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a class="govuk-link" href="#">{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="standardPanel" rendered="{!standardPanelView}">
+                        <h1 class="govuk-heading-xl">
+                            {!headerText1}
+                        </h1>
+                        <p class="govuk-body-l">{!displayText1}
+                        </p>
+                        <table class="govuk-table">
+                            <tbody class="govuk-table__body">
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Company name</th>
+                                    <td class="govuk-table__cell ">{!companyName}</td>
+                                </tr>
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Company number</th>
+                                    <td class="govuk-table__cell ">{!companyNumber}</td>
+                                </tr>
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Registered office address</th>
+                                    <td class="govuk-table__cell ">
+                                        <apex:outputText escape="false" value="{!companyAddress}" />
+                                    </td>
+                                </tr>
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Approved by</th>
+                                    <td class="govuk-table__cell ">
+                                        <apex:repeat value="{!companyDirectors}" var="Director" id="theRepeat">
+                                            <apex:outputText value="{!Director.Name}" id="theValue" />
+                                            <br/>
+                                        </apex:repeat>
+                                    </td>
+                                </tr>
+                                <tr class="govuk-table__row">
+                                    <th class="govuk-table__header" scope="row">Email address</th>
+                                    <td class="govuk-table__cell ">{!presenterEmail}
+                                        <apex:outputPanel id="standardPanel1" rendered="{!isPresenterNotNullName}">
+                                            <br/>{!presenterName}
+                                        </apex:outputPanel>
+                                        <apex:outputPanel id="standardPanel2" rendered="{!isPresenterNotNullPhone}">
+                                            <br/> {!presenterPhone}
+                                        </apex:outputPanel>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <apex:outputPanel id="standardPanel-h2" rendered="{!displayText2}">
+                            <h2 class="govuk-heading-m">{!displayText2}</h2>
+                        </apex:outputPanel>
+                        <p class="govuk-body">
+                            {!displayText3}
+                        </p>
+                    </apex:outputPanel>
+                    <div class='govuk-form-group'>
+                        <apex:commandButton styleClass="govuk-button" action="{!nextAction}" value="{!continueButtonText}" />
+                    </div>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

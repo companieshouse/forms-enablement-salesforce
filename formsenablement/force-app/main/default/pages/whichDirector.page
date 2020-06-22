@@ -1,0 +1,112 @@
+<!-- 
+   Name: whichDirector.page
+   Copyright © 2016  Methods Digital
+   ======================================================
+   ======================================================
+   Purpose:
+   -------
+   
+    Presenter selects which director they are
+   ======================================================
+   ======================================================
+   History
+   ------- 
+   Ver. Author        Date        Detail
+   1.0  Leo Bitoy&    2016-06-16  Initial development.
+   -->
+<apex:page cache="false" title="Please select which director you are" controller="whichDirector" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" action="{!checkDirectorStatus}" applyHtmlTag="false" applyBodyTag="false">
+    <apex:composition template="TransactionPageTemplate">
+        <apex:define name="content3">
+            <apex:form id="form2">
+                <apex:commandLink action="{!previousAction}" value="{!$Label.UI_Text_Previous}" styleClass="govuk-back-link" id="thePreviousButton"
+                />
+            </apex:form>
+        </apex:define>
+        <apex:define name="content">
+            <apex:form >
+                <fieldset class="govuk-fieldset">
+                <apex:outputPanel id="masterpanel">
+                    <apex:outputPanel rendered="{!hasPageErrors}">
+                        <div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                            <h1 class="govuk-error-summary__title" id="error-summary-heading-example-1">
+                                There is a problem
+                                <br/>
+                                <br/>
+                                {!currentErrorMessage}
+                            </h1>
+                            <div class="govuk-error-summary__body">
+                                <ul class="govuk-list govuk-error-summary__list">
+                                    <li>
+                                        <a href="{!divForErrorLink}">{!currentErrorMessage}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="directorsList">
+                        <legend class="govuk-fieldset__legend">
+                        <apex:outputText escape="false" value="{!pageTitle}"></apex:outputText>
+                        </legend>
+                        <apex:outputText escape="false" value="{!pageBody}"></apex:outputText>
+                        <div class="govuk-form-group {!errorVal}">
+                            <apex:outputPanel rendered="{!hasPageErrors}">
+                                <span class="govuk-error-message" id="error-message-text-input"> {!currentErrorMessage}
+                                </span>
+                            </apex:outputPanel>
+                            
+                                
+                                    <div class="govuk-radios">
+                                        <apex:repeat value="{!companyDirectors}" var="director" id="theRepeat">
+                                            <div class="govuk-radios__item">
+                                                <input class="govuk-radios__input" id="radio-{!director}" type="radio" name="radio-group" onclick="selectPresenter('{!director.Id}')" value="{!director.Id}" />
+                                                <label class="govuk-label govuk-radios__label" for="radio-{!director}"> {!director.Name}</label>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
+                            <apex:actionFunction status="status" name="selectPresenter" action="{!selectPresenter}" reRender="none">
+                                <apex:param name="selectorpresenterparam" id="y" value="" assignTo="{!selectedId}" />
+                            </apex:actionFunction>
+                        </div>
+                            <apex:commandButton status="status" reRender="masterpanel" styleClass="govuk-button" action="{!nextAction}" value="{!$Label.UI_Text_Next}" rendered="{!NOT(isLastPage)}" />
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUser" reRender="none" status="status">
+                </apex:actionFunction>
+                <script>
+                function checkSteps() {
+                    var resultBooo = false;
+                    var a = location.search.split('?c=');
+                    var paramfunction = a[1];
+                    if({!stepValidator} == false)
+                    {
+                        whichDirector.refreshBoolean(paramfunction,function(result, event){
+                        if(event.status) {
+                          resultBooo = result;
+                          afterWork(resultBooo);
+                          }
+                        });
+                    
+
+                    }
+                  }
+
+                  function afterWork(resultBooo){
+                        if (resultBooo == true) 
+                        {
+                            if ({!sigNeeded} == true && {!signingFinished} == false) 
+                            {
+                                redirectUser();
+                            } 
+                            else 
+                            {
+                            }
+                        }
+                  }
+                                  checkSteps();
+
+                </script>
+                </fieldset>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

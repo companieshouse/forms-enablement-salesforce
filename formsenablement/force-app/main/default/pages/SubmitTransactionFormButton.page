@@ -1,0 +1,2 @@
+<apex:page standardController="Transaction__c" extensions="SubmitTransactionFormButton" action="{!initButton}">
+</apex:page>

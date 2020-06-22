@@ -1,0 +1,8 @@
+<apex:page cache="false" contentType="text/plain" showHeader="false">
+
+<!-- allow crawling by search robots -->
+User-agent: *
+Allow: /
+<!-- Disallow: / -->
+
+</apex:page>
